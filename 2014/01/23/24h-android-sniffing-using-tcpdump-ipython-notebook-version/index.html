@@ -1748,7 +1748,7 @@ jQuery(document).ready(function($) {
 
 <ul class="main-navigation">
     <li><a href="/archives">Archives</a></li>
-      <li><a href="../../../../pages/about.html">About</a></li>
+      <li><a href="../../../../pages/about">About</a></li>
     <li class="active">
     <a href="../../../../category/blog">Blog</a>
     </li>
@@ -1762,105 +1762,226 @@ jQuery(document).ready(function($) {
       <p class="meta"><time datetime="2014-01-23T00:00:00" pubdate>Thu 23 January 2014</time></p>
 </header>
 
-  <div class="entry-content"><h1>Motivation</h1>
-<p>I've started this little project since I was mainly interested in the data my
-smartphone is sending all the time without my knowledge. I have a bunch of apps
-installed on my phone and I have absolutely no ideea which (kind of) data is
-beeing transfered to the Internet all day long. I thought I'd be a great ideea
-to monitor/sniff my data interface (3G, Edge etc. NOT Wifi) for 24h during my
-normal daily phone usage.</p>
-<blockquote>
-<p>Also check out the original <a href="/2014/01/23/24h-android-sniffing-using-tcpdump/">article</a></p>
-</blockquote>
-<!--more-->
+  <div class="entry-content"><p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Motivation">Motivation<a class="anchor-link" href="#Motivation">&#182;</a></h1>
+</div>
+</div>
+</div>
 
-<ul>
-<li toc="toc">Table of Contens</li>
-</ul>
-<h1>Sniff environment</h1>
-<p>I've used my Samsung Note 1 (GT N7000) as sniffing device. At the moment I use a
-customized ROM (slimbean) with root access. In order to be to use sniffing tools
-on my phone I had to work in a chrooted environment like "Debian on Android".
-This way I was given access to phones data interfaces and I was ready to go.</p>
-<div class="highlight"><pre><span class="n">u0_a99</span><span class="err">@</span><span class="n">android</span><span class="o">:/</span> <span class="err">$</span> <span class="n">deb</span>
-<span class="n">e2fsck</span> <span class="mf">1.41.11</span> <span class="p">(</span><span class="mi">14</span><span class="o">-</span><span class="n">Mar</span><span class="o">-</span><span class="mi">2010</span><span class="p">)</span>
-<span class="o">/</span><span class="n">storage</span><span class="o">/</span><span class="n">sdcard1</span><span class="o">/</span><span class="n">debian</span><span class="o">-</span><span class="n">kit</span><span class="o">/</span><span class="n">debian</span><span class="p">.</span><span class="n">img</span><span class="o">:</span> <span class="n">recovering</span> <span class="n">journal</span>
-<span class="o">/</span><span class="n">storage</span><span class="o">/</span><span class="n">sdcard1</span><span class="o">/</span><span class="n">debian</span><span class="o">-</span><span class="n">kit</span><span class="o">/</span><span class="n">debian</span><span class="p">.</span><span class="n">img</span><span class="o">:</span> <span class="n">clean</span><span class="p">,</span> <span class="mi">55210</span><span class="o">/</span><span class="mi">170752</span> <span class="n">files</span><span class="p">,</span>
-<span class="mi">426942</span><span class="o">/</span><span class="mi">512000</span> <span class="n">blocks</span>
-<span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="o">-</span><span class="n">on</span><span class="o">-</span><span class="n">android</span><span class="o">:/</span><span class="err">#</span> <span class="n">ifconfig</span> <span class="o">-</span><span class="n">a</span>
-<span class="p">...</span>
-<span class="n">rmnet0</span>    <span class="n">Link</span> <span class="n">encap</span><span class="o">:</span><span class="n">Point</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">Point</span> <span class="n">Protocol</span>
-      <span class="n">POINTOPOINT</span> <span class="n">NOARP</span> <span class="n">MULTICAST</span>  <span class="n">MTU</span><span class="o">:</span><span class="mi">1500</span>  <span class="n">Metric</span><span class="o">:</span><span class="mi">1</span>
-      <span class="n">RX</span> <span class="n">packets</span><span class="o">:</span><span class="mi">37490</span> <span class="n">errors</span><span class="o">:</span><span class="mi">0</span> <span class="n">dropped</span><span class="o">:</span><span class="mi">0</span> <span class="n">overruns</span><span class="o">:</span><span class="mi">0</span> <span class="n">frame</span><span class="o">:</span><span class="mi">0</span>
-      <span class="n">TX</span> <span class="n">packets</span><span class="o">:</span><span class="mi">30841</span> <span class="n">errors</span><span class="o">:</span><span class="mi">0</span> <span class="n">dropped</span><span class="o">:</span><span class="mi">0</span> <span class="n">overruns</span><span class="o">:</span><span class="mi">0</span> <span class="n">carrier</span><span class="o">:</span><span class="mi">0</span>
-      <span class="nl">collisions:</span><span class="mi">0</span> <span class="n">txqueuelen</span><span class="o">:</span><span class="mi">1000</span>
-      <span class="n">RX</span> <span class="n">bytes</span><span class="o">:</span><span class="mi">34233580</span> <span class="p">(</span><span class="mf">32.6</span> <span class="n">MiB</span><span class="p">)</span>  <span class="n">TX</span> <span class="n">bytes</span><span class="o">:</span><span class="mi">5906191</span> <span class="p">(</span><span class="mf">5.6</span> <span class="n">MiB</span><span class="p">)</span>
-</pre></div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I&#39;ve started this little project since I was mainly interested in the data my smartphone is sending all the time without my knowledge. I have a bunch of apps installed on my phone and I have absolutely no ideea which (kind of) data is beeing transfered to the Internet all day long. I thought I&#39;d be a great ideea to monitor/sniff my data interface (3G, Edge etc. NOT Wifi) for 24h during my normal daily phone usage.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Sniff-environment">Sniff environment<a class="anchor-link" href="#Sniff-environment">&#182;</a></h1>
+</div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I&#39;ve used my Samsung Note 1 (GT N7000) as sniffing device. At the moment I use a customized ROM (slimbean) with root access. In order to be to use sniffing tools on my phone I had to work in a chrooted environment like &quot;Debian on Android&quot;. This way I was given access to phones data interfaces and I was ready to go. </p>
+<pre><code>u0_a99@android:/ $ deb
+e2fsck 1.41.11 (14-Mar-2010)
+/storage/sdcard1/debian-kit/debian.img: recovering journal
+/storage/sdcard1/debian-kit/debian.img: clean, 55210/170752 files, 426942/512000 blocks
+root@debian-on-android:/# ifconfig -a
+...
+rmnet0    Link encap:Point-to-Point Protocol  
+      POINTOPOINT NOARP MULTICAST  MTU:1500  Metric:1
+      RX packets:37490 errors:0 dropped:0 overruns:0 frame:0
+      TX packets:30841 errors:0 dropped:0 overruns:0 carrier:0
+      collisions:0 txqueuelen:1000 
+      RX bytes:34233580 (32.6 MiB)  TX bytes:5906191 (5.6 MiB)
+</code></pre><p>Initially I wanted to use tshark for the sniffing part but it didn&#39;t work quite well. So I came back to old school tcpdump.
+Since my data interface was going done all the time I had to make sure that tcpdump was restarted as soon as the data interface was online again. I used the following script:</p>
+<pre><code>root@debian-on-android:~# cat monitor.sh 
+#!/bin/bash
 
-<p>Initially I wanted to use tshark for the sniffing part but it didn't work quite
-well. So I came back to old school tcpdump.
-Since my data interface was going done all the time I had to make sure that
-tcpdump was restarted as soon as the data interface was online again. I used the
-following script:</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="o">-</span><span class="n">on</span><span class="o">-</span><span class="n">android</span><span class="o">:~</span><span class="err">#</span> <span class="n">cat</span> <span class="n">monitor</span><span class="p">.</span><span class="n">sh</span>
-<span class="cp">#!/bin/bash</span>
+DATE=`date +&quot;%Y-%m-%d-%s&quot;`
 
-<span class="n">DATE</span><span class="o">=</span><span class="err">`</span><span class="n">date</span> <span class="o">+</span><span class="s">&quot;%Y-%m-%d-%s&quot;</span><span class="err">`</span>
+while true; 
+do 
+    tcpdump -i rmnet0 -np -w output-`date +&quot;%Y-%m-%d-%s&quot;`.pcap; sleep 10 
+done
+</code></pre><p>I&#39;ve fired up my script and after 24 hours I had these outputs:</p>
+<pre><code>root@debian-on-android:~# ls -l output-2014-01-1*
+-rw-r--r--. 1 root root    24907 Jan 18 12:53 output-2014-01-18-1390049466.pcap
+-rw-r--r--. 1 root root     2881 Jan 18 12:55 output-2014-01-18-1390049736.pcap
+-rw-r--r--. 1 root root 14963016 Jan 18 14:02 output-2014-01-18-1390049777.pcap
+-rw-r--r--. 1 root root 54695690 Jan 19 14:03 output-2014-01-18-1390053867.pcap
+-rw-r--r--. 1 root root 12492822 Jan 19 16:27 output-2014-01-19-1390140216.pcap
+root@debian-on-android:~# 
+</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Merge-pcap-files">Merge pcap files<a class="anchor-link" href="#Merge-pcap-files">&#182;</a></h1>
+</div>
+</div>
+</div>
 
-<span class="k">while</span> <span class="nb">true</span><span class="p">;</span>
-<span class="k">do</span>
-    <span class="n">tcpdump</span> <span class="o">-</span><span class="n">i</span> <span class="n">rmnet0</span> <span class="o">-</span><span class="n">np</span> <span class="o">-</span><span class="n">w</span> <span class="n">output</span><span class="o">-</span><span class="err">`</span><span class="n">date</span> <span class="o">+</span><span class="s">&quot;%Y-%m-%d-%s&quot;</span><span class="err">`</span><span class="p">.</span><span class="n">pcap</span><span class="p">;</span> <span class="n">sleep</span> <span class="mi">10</span>
-<span class="n">done</span>
-</pre></div>
+                $ mergecap -F libpcap -a output-* -w merged.pcap
+                
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Convert-pcap-to-SQLite3-DB">Convert pcap to SQLite3 DB<a class="anchor-link" href="#Convert-pcap-to-SQLite3-DB">&#182;</a></h1>
+</div>
+</div>
+</div>
 
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[2]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">PCAP_FILE</span> <span class="o">=</span> <span class="s">&quot;/home/victor/work/Projects/24h-Android-Monitoring/pcap/merged.pcap&quot;</span>
 
-<p>I've fired up my script and after 24 hours I had these outputs:</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="o">-</span><span class="n">on</span><span class="o">-</span><span class="n">android</span><span class="o">:~</span><span class="err">#</span> <span class="n">ls</span> <span class="o">-</span><span class="n">l</span> <span class="n">output</span><span class="o">-</span><span class="mi">2014</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span>
-<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span><span class="p">.</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>    <span class="mi">24907</span> <span class="n">Jan</span> <span class="mi">18</span> <span class="mi">12</span><span class="o">:</span><span class="mi">53</span> <span class="n">output</span><span class="o">-</span><span class="mi">2014</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">18</span><span class="o">-</span><span class="mf">1390049466.</span><span class="n">pcap</span>
-<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span><span class="p">.</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>     <span class="mi">2881</span> <span class="n">Jan</span> <span class="mi">18</span> <span class="mi">12</span><span class="o">:</span><span class="mi">55</span> <span class="n">output</span><span class="o">-</span><span class="mi">2014</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">18</span><span class="o">-</span><span class="mf">1390049736.</span><span class="n">pcap</span>
-<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span><span class="p">.</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span> <span class="mi">14963016</span> <span class="n">Jan</span> <span class="mi">18</span> <span class="mi">14</span><span class="o">:</span><span class="mo">02</span> <span class="n">output</span><span class="o">-</span><span class="mi">2014</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">18</span><span class="o">-</span><span class="mf">1390049777.</span><span class="n">pcap</span>
-<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span><span class="p">.</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span> <span class="mi">54695690</span> <span class="n">Jan</span> <span class="mi">19</span> <span class="mi">14</span><span class="o">:</span><span class="mo">03</span> <span class="n">output</span><span class="o">-</span><span class="mi">2014</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">18</span><span class="o">-</span><span class="mf">1390053867.</span><span class="n">pcap</span>
-<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span><span class="p">.</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span> <span class="mi">12492822</span> <span class="n">Jan</span> <span class="mi">19</span> <span class="mi">16</span><span class="o">:</span><span class="mi">27</span> <span class="n">output</span><span class="o">-</span><span class="mi">2014</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">19</span><span class="o">-</span><span class="mf">1390140216.</span><span class="n">pcap</span>
-<span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="o">-</span><span class="n">on</span><span class="o">-</span><span class="n">android</span><span class="o">:~</span><span class="err">#</span>
-</pre></div>
-
-
-<h1>Merge pcap files</h1>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">mergecap</span> <span class="o">-</span><span class="n">F</span> <span class="n">libpcap</span> <span class="o">-</span><span class="n">a</span> <span class="n">output</span><span class="o">-*</span> <span class="o">-</span><span class="n">w</span> <span class="n">merged</span><span class="p">.</span><span class="n">pcap</span>
-</pre></div>
-
-
-<h1>Convert pcap to SQLite3 DB</h1>
-<div class="highlight"><pre><span class="n">PCAP_FILE</span> <span class="o">=</span> <span class="s">&quot;/home/victor/work/Projects/24h-Android-Monitoring/pcap/merged.pcap&quot;</span>
-
-<span class="cp"># Tshark generated files</span>
+<span class="c"># Tshark generated files</span>
 <span class="n">DNS_QUERIES</span>  <span class="o">=</span> <span class="s">&quot;/home/victor/work/Projects/24h-Android-Monitoring/pcap/dns_queries.csv&quot;</span>
 <span class="n">CONNECTIONS</span>  <span class="o">=</span> <span class="s">&quot;/home/victor/work/Projects/24h-Android-Monitoring/pcap/connections.csv&quot;</span>
 <span class="n">HTTP_TRAFFIC</span> <span class="o">=</span> <span class="s">&quot;/home/victor/work/Projects/24h-Android-Monitoring/pcap/http_traffic.csv&quot;</span>
 </pre></div>
 
+</div>
+</div>
+</div>
 
-<h1>Extract valuable information from pcap file</h1>
-<div class="highlight"><pre><span class="n">dns_queries</span> <span class="o">=</span> <span class="err">!</span><span class="n">tshark</span> <span class="o">-</span><span class="n">r</span> <span class="err">$</span><span class="n">PCAP_FILE</span>  <span class="o">-</span><span class="n">R</span> <span class="s">&quot;dns.flags.response == 1&quot;</span>  <span class="o">-</span><span class="n">E</span> <span class="n">occurrence</span><span class="o">=</span><span class="n">f</span> <span class="o">-</span><span class="n">E</span> <span class="n">header</span><span class="o">=</span><span class="n">y</span> \
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb">
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Extract-valuable-information-from-pcap-file">Extract valuable information from pcap file<a class="anchor-link" href="#Extract-valuable-information-from-pcap-file">&#182;</a></h1>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[25]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">dns_queries</span> <span class="o">=</span> <span class="err">!</span><span class="n">tshark</span> <span class="o">-</span><span class="n">r</span> <span class="err">$</span><span class="n">PCAP_FILE</span>  <span class="o">-</span><span class="n">R</span> <span class="s">&quot;dns.flags.response == 1&quot;</span>  <span class="o">-</span><span class="n">E</span> <span class="n">occurrence</span><span class="o">=</span><span class="n">f</span> <span class="o">-</span><span class="n">E</span> <span class="n">header</span><span class="o">=</span><span class="n">y</span> \
               <span class="o">-</span><span class="n">T</span> <span class="n">fields</span>  <span class="o">-</span><span class="n">e</span> <span class="n">frame</span><span class="o">.</span><span class="n">number</span> <span class="o">-</span><span class="n">e</span> <span class="n">frame</span><span class="o">.</span><span class="n">time</span> <span class="o">-</span><span class="n">e</span> <span class="n">dns</span><span class="o">.</span><span class="n">qry</span><span class="o">.</span><span class="n">name</span> <span class="o">-</span><span class="n">e</span> <span class="n">dns</span><span class="o">.</span><span class="n">resp</span><span class="o">.</span><span class="n">addr</span> <span class="o">&gt;</span> <span class="err">$</span><span class="n">DNS_QUERIES</span>
-
+    
 <span class="n">connections</span> <span class="o">=</span> <span class="err">!</span><span class="n">tshark</span> <span class="o">-</span><span class="n">r</span> <span class="err">$</span><span class="n">PCAP_FILE</span> <span class="o">-</span><span class="n">E</span> <span class="n">header</span><span class="o">=</span><span class="n">y</span> <span class="o">-</span><span class="n">E</span> <span class="n">separator</span><span class="o">=</span>\<span class="p">;</span> <span class="o">-</span><span class="n">T</span> <span class="n">fields</span> <span class="o">-</span><span class="n">e</span> <span class="n">frame</span><span class="o">.</span><span class="n">number</span> \
               <span class="o">-</span><span class="n">e</span> <span class="n">frame</span><span class="o">.</span><span class="n">time</span> <span class="o">-</span><span class="n">e</span> <span class="n">ip</span><span class="o">.</span><span class="n">src</span> <span class="o">-</span><span class="n">e</span> <span class="n">ip</span><span class="o">.</span><span class="n">dst</span> <span class="o">-</span><span class="n">e</span> <span class="n">tcp</span><span class="o">.</span><span class="n">dstport</span> <span class="o">-</span><span class="n">e</span> <span class="n">frame</span><span class="o">.</span><span class="n">protocols</span> <span class="o">&gt;</span> <span class="err">$</span><span class="n">CONNECTIONS</span>
 
 <span class="n">http_traffic</span> <span class="o">=</span> <span class="err">!</span><span class="n">tshark</span> <span class="o">-</span><span class="n">r</span> <span class="err">$</span><span class="n">PCAP_FILE</span> <span class="o">-</span><span class="n">Y</span> <span class="s">&quot;http.request&quot;</span> <span class="o">-</span><span class="n">E</span> <span class="n">header</span><span class="o">=</span><span class="n">y</span> <span class="o">-</span><span class="n">T</span> <span class="n">fields</span> \
               <span class="o">-</span><span class="n">e</span> <span class="n">frame</span><span class="o">.</span><span class="n">number</span> <span class="o">-</span><span class="n">e</span> <span class="n">frame</span><span class="o">.</span><span class="n">time</span> <span class="o">-</span><span class="n">e</span> <span class="n">ip</span><span class="o">.</span><span class="n">dst</span> <span class="o">-</span><span class="n">e</span> <span class="n">http</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">-</span><span class="n">e</span> <span class="n">http</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">uri</span> <span class="o">-</span><span class="n">e</span> <span class="n">http</span><span class="o">.</span><span class="n">user_agent</span> \
               <span class="o">-</span><span class="n">e</span> <span class="n">http</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">code</span>  <span class="o">-</span><span class="n">e</span> <span class="n">http</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">phrase</span> <span class="o">-</span><span class="n">e</span> <span class="n">http</span><span class="o">.</span><span class="n">content_length</span> <span class="o">-</span><span class="n">e</span> <span class="n">data</span> <span class="o">-</span><span class="n">e</span> <span class="n">text</span> <span class="o">&gt;</span> <span class="err">$</span><span class="n">HTTP_TRAFFIC</span>
+</pre></div>
 
-<span class="kn">import</span> <span class="nn">sqlite3</span> <span class="kn">as</span> <span class="nn">sql</span>
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb">
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[26]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">sqlite3</span> <span class="kn">as</span> <span class="nn">sql</span>
 <span class="n">con</span> <span class="o">=</span> <span class="n">sql</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;:memory:&quot;</span><span class="p">)</span>
 <span class="n">cur</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+</pre></div>
 
-<span class="kn">import</span> <span class="nn">binascii</span>
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb">
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[27]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">binascii</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">pandas.io.sql</span> <span class="kn">as</span> <span class="nn">pdsql</span>
+<span class="kn">import</span> <span class="nn">pandas.io.sql</span> <span class="kn">as</span> <span class="nn">pdsql</span> 
 
 <span class="c"># Pandas settings</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">&#39;display.height&#39;</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
@@ -1875,7 +1996,7 @@ following script:</p>
         <span class="k">return</span> <span class="bp">None</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
-
+    
 <span class="c"># Import DNS queries</span>
 <span class="n">dns_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">DNS_QUERIES</span><span class="p">)</span>
 <span class="n">dns_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;frame_number&#39;</span><span class="p">,</span> <span class="s">&#39;frame_time&#39;</span><span class="p">,</span> <span class="s">&#39;dns_query&#39;</span><span class="p">,</span> <span class="s">&#39;dns_response&#39;</span><span class="p">]</span>
@@ -1909,8 +2030,19 @@ following script:</p>
 <span class="c">#unique_dns.sort([&#39;# DNS Queries&#39;], ascending=False).head(10)</span>
 </pre></div>
 
+</div>
+</div>
+</div>
 
-<div>
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[27]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1960,19 +2092,83 @@ following script:</p>
   </tbody>
 </table>
 </div>
+</div>
 
-<h1>Top DNS queries</h1>
-<div class="highlight"><pre><span class="n">p1</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">    SELECT COUNT(dns_response) AS &#39;# DNS Responses&#39;, dns_query AS &#39;DNS to lookup&#39;</span>
-<span class="s">    FROM dns GROUP BY dns_query</span>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb">
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb">
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Top-DNS-queries">Top DNS queries<a class="anchor-link" href="#Top-DNS-queries">&#182;</a></h1>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[191]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">p1</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">    SELECT COUNT(dns_response) AS &#39;# DNS Responses&#39;, dns_query AS &#39;DNS to lookup&#39; </span>
+<span class="s">    FROM dns GROUP BY dns_query </span>
 <span class="s">    ORDER by 1 DESC</span>
 <span class="s">&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
 <span class="c">#print(p1.head(100).to_string())</span>
 <span class="n">p1</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 
+</div>
+</div>
+</div>
 
-<div>
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[191]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2485,9 +2681,23 @@ following script:</p>
   </tbody>
 </table>
 </div>
+</div>
 
-<div class="highlight"><pre><span class="n">p_testing</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">    SELECT COUNT(c.dst),c.dst, c.dstport, c.frame_protocols FROM connection AS c</span>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[40]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">p_testing</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">&quot;&quot;&quot; </span>
+<span class="s">    SELECT COUNT(c.dst),c.dst, c.dstport, c.frame_protocols FROM connection AS c </span>
 <span class="s">    JOIN dns AS d ON c.dst=d.dns_response</span>
 <span class="s">    WHERE c.dst == &quot;173.194.70.95&quot; AND c.dst NOT LIKE &quot;10.%&quot;</span>
 <span class="s">    ORDER by 1 DESC</span>
@@ -2503,8 +2713,19 @@ following script:</p>
 <span class="n">p_testing</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 
+</div>
+</div>
+</div>
 
-<div>
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[40]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -3219,10 +3440,48 @@ following script:</p>
   </tbody>
 </table>
 </div>
+</div>
 
-<h1>Top connections</h1>
-<div class="highlight"><pre><span class="n">p2</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">    SELECT COUNT(c.dst), d.dns_query, c.dstport, c.frame_protocols FROM connection AS c</span>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb">
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Top-connections">Top connections<a class="anchor-link" href="#Top-connections">&#182;</a></h1>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[193]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">p2</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">&quot;&quot;&quot; </span>
+<span class="s">    SELECT COUNT(c.dst), d.dns_query, c.dstport, c.frame_protocols FROM connection AS c </span>
 <span class="s">    JOIN dns AS d ON c.dst=d.dns_response</span>
 <span class="s">    WHERE c.frame_protocols LIKE &quot;sll:ip:tcp:%&quot;</span>
 <span class="s">    GROUP by c.dst</span>
@@ -3231,8 +3490,19 @@ following script:</p>
 <span class="n">p2</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 
+</div>
+</div>
+</div>
 
-<div>
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[193]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -3947,8 +4217,37 @@ following script:</p>
   </tbody>
 </table>
 </div>
+</div>
 
-<div class="highlight"><pre><span class="n">p_testing</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb">
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[171]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">p_testing</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">&quot;&quot;&quot; </span>
 <span class="s">    SELECT  frame_number, frame_protocols</span>
 <span class="s">    FROM connection</span>
 <span class="s">    WHERE frame_protocols LIKE &#39;sll:ip:tcp</span><span class="si">%x</span><span class="s">ml%&#39;</span>
@@ -3959,8 +4258,19 @@ following script:</p>
 <span class="n">p_testing</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 
+</div>
+</div>
+</div>
 
-<div>
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[171]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -3993,9 +4303,47 @@ following script:</p>
   </tbody>
 </table>
 </div>
+</div>
 
-<h1>Used protocols</h1>
-<div class="highlight"><pre><span class="n">p_proto</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb">
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Used-protocols">Used protocols<a class="anchor-link" href="#Used-protocols">&#182;</a></h1>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[189]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">p_proto</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">&quot;&quot;&quot; </span>
 <span class="s">    SELECT COUNT(frame_protocols), frame_protocols</span>
 <span class="s">    FROM connection</span>
 <span class="s">    GROUP by frame_protocols</span>
@@ -4004,8 +4352,19 @@ following script:</p>
 <span class="n">p_proto</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 
+</div>
+</div>
+</div>
 
-<div>
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[189]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -4353,9 +4712,47 @@ following script:</p>
   </tbody>
 </table>
 </div>
+</div>
 
-<h1>Used destination ports</h1>
-<div class="highlight"><pre><span class="n">p_ports</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb">
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Used-destination-ports">Used destination ports<a class="anchor-link" href="#Used-destination-ports">&#182;</a></h1>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[186]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">p_ports</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">&quot;&quot;&quot; </span>
 <span class="s">    SELECT COUNT(c.dstport), c.dstport</span>
 <span class="s">    FROM connection AS c</span>
 <span class="s">    JOIN dns AS d ON c.dst = d.dns_response</span>
@@ -4366,8 +4763,19 @@ following script:</p>
 <span class="n">p_ports</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 
+</div>
+</div>
+</div>
 
-<div>
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[186]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -4430,10 +4838,57 @@ following script:</p>
   </tbody>
 </table>
 </div>
+</div>
 
-<h1>HTTP Connections</h1>
-<h2>HTTP Methods</h2>
-<div class="highlight"><pre><span class="n">p_http_methods</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb">
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="HTTP-Connections">HTTP Connections<a class="anchor-link" href="#HTTP-Connections">&#182;</a></h1>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="HTTP-Methods">HTTP Methods<a class="anchor-link" href="#HTTP-Methods">&#182;</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[132]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">p_http_methods</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">&quot;&quot;&quot; </span>
 <span class="s">    SELECT COUNT(request_method), request_method</span>
 <span class="s">    FROM http</span>
 <span class="s">    GROUP by request_method</span>
@@ -4443,8 +4898,19 @@ following script:</p>
 <span class="n">p_http_methods</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 
+</div>
+</div>
+</div>
 
-<div>
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[132]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -4467,9 +4933,32 @@ following script:</p>
   </tbody>
 </table>
 </div>
+</div>
 
-<h2>User Agents</h2>
-<div class="highlight"><pre><span class="n">p_user_agents</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="User-Agents">User Agents<a class="anchor-link" href="#User-Agents">&#182;</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[147]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">p_user_agents</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">&quot;&quot;&quot; </span>
 <span class="s">    SELECT COUNT(user_agent), user_agent</span>
 <span class="s">    FROM http</span>
 <span class="s">    GROUP by user_agent</span>
@@ -4479,8 +4968,19 @@ following script:</p>
 <span class="n">p_user_agents</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 
+</div>
+</div>
+</div>
 
-<div>
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[147]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -4598,21 +5098,59 @@ following script:</p>
   </tbody>
 </table>
 </div>
+</div>
 
-<h2>GET Requests</h2>
-<div class="highlight"><pre><span class="n">p3</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb">
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="GET-Requests">GET Requests<a class="anchor-link" href="#GET-Requests">&#182;</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[190]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">p3</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">&quot;&quot;&quot; </span>
 <span class="s">    SELECT h.frame_number, h.ip_dst, d.dns_query, h.request_method, h.request_uri, h.user_agent FROM http AS  h</span>
 <span class="s">    JOIN dns AS d ON h.ip_dst = d.dns_response</span>
 <span class="s">    WHERE lower(h.request_method) == &#39;get&#39; AND</span>
 <span class="s">        -- Filter all rubish</span>
-<span class="s">        (h.request_uri NOT LIKE &#39;%.gif&#39;  AND</span>
+<span class="s">        (h.request_uri NOT LIKE &#39;%.gif&#39;  AND </span>
 <span class="s">         h.request_uri NOT LIKE &#39;%.jpg&#39;  AND</span>
 <span class="s">         h.request_uri NOT LIKE &#39;%.jpeg&#39; AND</span>
 <span class="s">         h.request_uri NOT LIKE &#39;%.png&#39;  AND</span>
 <span class="s">         h.request_uri NOT LIKE &#39;%.gif&#39;  AND</span>
-<span class="s">         h.request_uri NOT LIKE &#39;%.css&#39;  AND</span>
+<span class="s">         h.request_uri NOT LIKE &#39;%.css&#39;  AND </span>
 <span class="s">         h.request_uri NOT LIKE &#39;%.html&#39; AND</span>
-<span class="s">         h.request_uri NOT LIKE &#39;%.js&#39;)</span>
+<span class="s">         h.request_uri NOT LIKE &#39;%.js&#39;) </span>
 <span class="s">    AND</span>
 <span class="s">        (d.dns_query NOT LIKE &#39;%amazon%&#39;   AND</span>
 <span class="s">         d.dns_query NOT LIKE &#39;</span><span class="si">%f</span><span class="s">ahrinfo%&#39; AND</span>
@@ -4620,15 +5158,26 @@ following script:</p>
 <span class="s">         d.dns_query NOT LIKE &#39;</span><span class="si">%he</span><span class="s">ute.de%&#39; AND</span>
 <span class="s">         d.dns_query NOT LIKE &#39;%twitter%&#39;  AND</span>
 <span class="s">         d.dns_query NOT LIKE &#39;</span><span class="si">%s</span><span class="s">ueddeutsche%&#39;)</span>
-
+<span class="s">    </span>
 <span class="s">    GROUP by h.request_uri</span>
 <span class="s">    ORDER by d.dns_query</span>
 <span class="s">&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
 <span class="n">p3</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
 </pre></div>
 
+</div>
+</div>
+</div>
 
-<div>
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[190]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -6562,19 +7111,83 @@ following script:</p>
   </tbody>
 </table>
 </div>
+</div>
 
-<h2>POST Requests</h2>
-<div class="highlight"><pre><span class="n">p3</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[130]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb">
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb">
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="POST-Requests">POST Requests<a class="anchor-link" href="#POST-Requests">&#182;</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[149]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">p3</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">&quot;&quot;&quot; </span>
 <span class="s">    SELECT h.frame_number, d.dns_query, h.request_uri, h.data, h.text FROM http AS  h</span>
 <span class="s">    JOIN dns AS d ON h.ip_dst = d.dns_response</span>
 <span class="s">    WHERE lower(h.request_method) == &#39;post&#39;</span>
-<span class="s">    ORDER by h.ip_dst</span>
+<span class="s">    ORDER by h.ip_dst    </span>
 <span class="s">&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
 <span class="n">p3</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
 </pre></div>
 
+</div>
+</div>
+</div>
 
-<div>
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[149]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -8125,7 +8738,30 @@ following script:</p>
     </tr>
   </tbody>
 </table>
-</div></div>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb">
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></p></div>
     <footer>
 <p class="meta">
   <span class="byline author vcard">
@@ -8136,6 +8772,7 @@ following script:</p>
     <a class="category" href="../../../../tag/hacking/">hacking</a>
     <a class="category" href="../../../../tag/network/">network</a>
     <a class="category" href="../../../../tag/security/">security</a>
+    <a class="category" href="../../../../tag/ipython/">ipython</a>
   </span>
 </p><div class="sharing">
   <a href="http://twitter.com/share" class="twitter-share-button" data-url="../../../../2014/01/23/24h-android-sniffing-using-tcpdump-ipython-notebook-version" data-via="victordorneanu" data-counturl="../../../../2014/01/23/24h-android-sniffing-using-tcpdump-ipython-notebook-version" >Tweet</a>
@@ -8179,7 +8816,7 @@ following script:</p>
 
   <section>
   <h1>Tags</h1>
-    <a href="../../../../tag/howto/">howto</a>,    <a href="../../../../tag/web/">web</a>,    <a href="../../../../tag/wargames/">wargames</a>,    <a href="../../../../tag/security/">security</a>,    <a href="../../../../tag//"></a>,    <a href="../../../../tag/pelican/">pelican</a>,    <a href="../../../../tag/low/">low</a>,    <a href="../../../../tag/coding/">coding</a>,    <a href="../../../../tag/octopress/">octopress</a>,    <a href="../../../../tag/misc/">misc</a>,    <a href="../../../../tag/hacking/">hacking</a>,    <a href="../../../../tag/python/">python</a>,    <a href="../../../../tag/blog/">blog</a>,    <a href="../../../../tag/network/">network</a>,    <a href="../../../../tag/virtualization/">virtualization</a>,    <a href="../../../../tag/wtf/">wtf</a>,    <a href="../../../../tag/ipython/">ipython</a>,    <a href="../../../../tag/android/">android</a>,    <a href="../../../../tag/events/">events</a>,    <a href="../../../../tag/uncategorized/">uncategorized</a>  </section>
+    <a href="../../../../tag/howto/">howto</a>,    <a href="../../../../tag/web/">web</a>,    <a href="../../../../tag/wargames/">wargames</a>,    <a href="../../../../tag/network/">network</a>,    <a href="../../../../tag//"></a>,    <a href="../../../../tag/pelican/">pelican</a>,    <a href="../../../../tag/low/">low</a>,    <a href="../../../../tag/coding/">coding</a>,    <a href="../../../../tag/octopress/">octopress</a>,    <a href="../../../../tag/misc/">misc</a>,    <a href="../../../../tag/hacking/">hacking</a>,    <a href="../../../../tag/events/">events</a>,    <a href="../../../../tag/blog/">blog</a>,    <a href="../../../../tag/python/">python</a>,    <a href="../../../../tag/virtualization/">virtualization</a>,    <a href="../../../../tag/wtf/">wtf</a>,    <a href="../../../../tag/ipython/">ipython</a>,    <a href="../../../../tag/android/">android</a>,    <a href="../../../../tag/security/">security</a>,    <a href="../../../../tag/uncategorized/">uncategorized</a>  </section>
 
 
 

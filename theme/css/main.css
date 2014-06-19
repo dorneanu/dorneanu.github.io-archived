@@ -361,7 +361,7 @@ clear:both
 
 body {
 -webkit-text-size-adjust:none;
-max-width:1200px;
+max-width:1400px;
 position:relative;
 margin:0 auto
 }
@@ -1926,13 +1926,13 @@ top:0;
 bottom:0;
 display:inline-block;
 text-decoration:none;
-color:#b4b4b4;
+color:#FD0000;
 width:9px;
 cursor:pointer
 }
 
 .toggle-sidebar:hover {
-background:#e9e9e9;
+background:#FD0000;
 background:-webkit-gradient(linear,0% 50%,100% 50%,color-stop(0%,rgba(224,224,224,0.5)),color-stop(100%,rgba(224,224,224,0)));
 background:-webkit-linear-gradient(left,rgba(224,224,224,0.5),rgba(224,224,224,0));
 background:-moz-linear-gradient(left,rgba(224,224,224,0.5),rgba(224,224,224,0));
