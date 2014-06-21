@@ -1739,7 +1739,7 @@ jQuery(document).ready(function($) {
 </ul>
 
 
-<form action="https://google.com/search" method="get">
+<form action="http://google.com/search" method="get">
   <fieldset role="search">
     <input type="hidden" name="q" value="site:." />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
@@ -1756,29 +1756,6 @@ jQuery(document).ready(function($) {
   <div id="main">
     <div id="content">
 <div class="blog-index">
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="./2011/04/02/block-facebook-with-iptables-on-openwrt">Block facebook with iptables on OpenWrt</a>
-      </h1>
-      <p class="meta"><time datetime="2011-04-02T00:00:00" pubdate>Sat 02 April 2011</time></p>
-</header>
-
-  <div class="entry-content"><p>Say <strong>NO</strong> to facebook and add these lines to <strong>/etc/firewall.user</strong></p>
-<pre class="brush:plain;"># This file is interpreted as shell script.
-# Put your custom $IPT rules here, they will
-# be executed with each firewall (re-)start.
-IPT=iptables
-NET_LAN=192.168.0.0/16
-
-...
-
-# facebook
-$IPT -I FORWARD -p tcp -m iprange ...</pre></div>
-  <footer>
-    <a rel="full-article" href="./2011/04/02/block-facebook-with-iptables-on-openwrt">Read On &crarr;</a>
-  </footer>
-  		</article>
   		<article>
 <header>
       <h1 class="entry-title">
@@ -1915,6 +1892,19 @@ Filesystem                Size      Used ...</pre></p></li></ul></!--break--></d
     <a rel="full-article" href="./2010/11/25/howto-snatip-masquerade-between-2-wlan-cards-on-linux">Read On &crarr;</a>
   </footer>
   		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="./2010/10/13/howto-build-your-own-wifi-wlan-hotspot-using-hostap">HowTo: Build your own Wifi WLAN hotspot using hostap</a>
+      </h1>
+      <p class="meta"><time datetime="2010-10-13T00:00:00" pubdate>Wed 13 October 2010</time></p>
+</header>
+
+  <div class="entry-content"><p>This time I&#8217;m going to show you how to build your own wi-fi hotspot in less than 10 minutes. There is no need of sophisticated software like FreeRadius or Chilispot. Using common tools you&#8217;ll be able to set up your WLAN AP (Access Point) and allow others to ...</p></div>
+  <footer>
+    <a rel="full-article" href="./2010/10/13/howto-build-your-own-wifi-wlan-hotspot-using-hostap">Read On &crarr;</a>
+  </footer>
+  		</article>
 <div class="pagination">
     <a class="prev" href="./index8.html">&larr; Older</a>
 
@@ -1938,7 +1928,7 @@ Filesystem                Size      Used ...</pre></p></li></ul></!--break--></d
           <a href="./2014/05/20/howto-write-pentest-reports-the-easy-way">HowTo: Write pentest reports the easy way</a>
       </li>
       <li class="post">
-          <a href="./2014/05/15/test2">Test2</a>
+          <a href="./2014/05/04/howto-create-docs-with-sphinx">HowTo: Create docs with sphinx</a>
       </li>
     </ul>
   </section>
