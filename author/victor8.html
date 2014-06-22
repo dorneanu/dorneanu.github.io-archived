@@ -1986,6 +1986,38 @@ rm -rf $tmp ...</pre></div>
     </section>
 
 <section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      var widgetId = '468295751982784514',
+          domId = 'tweets',
+          count = 5,
+          hyperlinkUrlsPlus = true,
+          showUserPhoto = false,
+          timeOfTweet = true,
+          dateFormat = 'default',
+          showRetweets = false,
+          customOutputFn = null,
+          showReplyRetweetButtons = false;
+
+      twitterFetcher.fetch(
+        widgetId,
+        domId,
+        count,
+        hyperlinkUrlsPlus,
+        showUserPhoto,
+        timeOfTweet,
+        dateFormat,
+        showRetweets,
+        customOutputFn,
+        showReplyRetweetButtons
+      );
+    });
+  </script>
+  <script src="/theme/js/twitter.js" type="text/javascript"> </script>
     <a href="http://twitter.com/victordorneanu" class="twitter-follow-button" data-show-count="true">Follow @victordorneanu</a>
 </section>
 </aside>    </div>
