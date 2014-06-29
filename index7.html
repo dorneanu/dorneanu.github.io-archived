@@ -1760,6 +1760,29 @@ jQuery(document).ready(function($) {
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="./2011/04/02/block-facebook-with-iptables-on-openwrt">Block facebook with iptables on OpenWrt</a>
+      </h1>
+      <p class="meta"><time datetime="2011-04-02T00:00:00" pubdate>Sat 02 April 2011</time></p>
+</header>
+
+  <div class="entry-content"><p>Say <strong>NO</strong> to facebook and add these lines to <strong>/etc/firewall.user</strong></p>
+<pre class="brush:plain;"># This file is interpreted as shell script.
+# Put your custom $IPT rules here, they will
+# be executed with each firewall (re-)start.
+IPT=iptables
+NET_LAN=192.168.0.0/16
+
+...
+
+# facebook
+$IPT -I FORWARD -p tcp -m iprange ...</pre></div>
+  <footer>
+    <a rel="full-article" href="./2011/04/02/block-facebook-with-iptables-on-openwrt">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="./2011/03/21/openbsd-freebsd-netbsd-i-do-love-beasts">OpenBSD, FreeBSD, NetBSD – I do love beasts!</a>
       </h1>
       <p class="meta"><time datetime="2011-03-21T00:00:00" pubdate>Mon 21 March 2011</time></p>
@@ -1893,19 +1916,6 @@ Filesystem                Size      Used ...</pre></p></li></ul></!--break--></d
     <a rel="full-article" href="./2010/11/25/howto-snatip-masquerade-between-2-wlan-cards-on-linux">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="./2010/10/13/howto-build-your-own-wifi-wlan-hotspot-using-hostap">HowTo: Build your own Wifi WLAN hotspot using hostap</a>
-      </h1>
-      <p class="meta"><time datetime="2010-10-13T00:00:00" pubdate>Wed 13 October 2010</time></p>
-</header>
-
-  <div class="entry-content"><p>This time I&#8217;m going to show you how to build your own wi-fi hotspot in less than 10 minutes. There is no need of sophisticated software like FreeRadius or Chilispot. Using common tools you&#8217;ll be able to set up your WLAN AP (Access Point) and allow others to ...</p></div>
-  <footer>
-    <a rel="full-article" href="./2010/10/13/howto-build-your-own-wifi-wlan-hotspot-using-hostap">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="./index8.html">&larr; Older</a>
 
@@ -1917,6 +1927,9 @@ Filesystem                Size      Used ...</pre></p></li></ul></!--break--></d
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="./2014/06/29/whatsapp-bot">WhatsApp bot</a>
+      </li>
+      <li class="post">
           <a href="./2014/06/18/migrate-this-blog-from-octopress-to-pelican">Migrate this blog from Octopress to Pelican</a>
       </li>
       <li class="post">
@@ -1927,9 +1940,6 @@ Filesystem                Size      Used ...</pre></p></li></ul></!--break--></d
       </li>
       <li class="post">
           <a href="./2014/05/20/howto-write-pentest-reports-the-easy-way">HowTo: Write pentest reports the easy way</a>
-      </li>
-      <li class="post">
-          <a href="./2014/05/04/howto-create-docs-with-sphinx">HowTo: Create docs with sphinx</a>
       </li>
     </ul>
   </section>
@@ -1944,7 +1954,7 @@ Filesystem                Size      Used ...</pre></p></li></ul></!--break--></d
 
   <section>
   <h1>Tags</h1>
-    <a href="./tag/howto/">howto</a>,    <a href="./tag/web/">web</a>,    <a href="./tag/wargames/">wargames</a>,    <a href="./tag/network/">network</a>,    <a href="./tag//"></a>,    <a href="./tag/pelican/">pelican</a>,    <a href="./tag/low/">low</a>,    <a href="./tag/coding/">coding</a>,    <a href="./tag/octopress/">octopress</a>,    <a href="./tag/misc/">misc</a>,    <a href="./tag/hacking/">hacking</a>,    <a href="./tag/events/">events</a>,    <a href="./tag/blog/">blog</a>,    <a href="./tag/python/">python</a>,    <a href="./tag/virtualization/">virtualization</a>,    <a href="./tag/wtf/">wtf</a>,    <a href="./tag/ipython/">ipython</a>,    <a href="./tag/android/">android</a>,    <a href="./tag/security/">security</a>,    <a href="./tag/uncategorized/">uncategorized</a>  </section>
+    <a href="./tag/howto/">howto</a>,    <a href="./tag/web/">web</a>,    <a href="./tag/wargames/">wargames</a>,    <a href="./tag/network/">network</a>,    <a href="./tag//"></a>,    <a href="./tag/pelican/">pelican</a>,    <a href="./tag/low/">low</a>,    <a href="./tag/coding/">coding</a>,    <a href="./tag/octopress/">octopress</a>,    <a href="./tag/misc/">misc</a>,    <a href="./tag/hacking/">hacking</a>,    <a href="./tag/events/">events</a>,    <a href="./tag/blog/">blog</a>,    <a href="./tag/python/">python</a>,    <a href="./tag/whatsapp/">whatsapp</a>,    <a href="./tag/virtualization/">virtualization</a>,    <a href="./tag/wtf/">wtf</a>,    <a href="./tag/ipython/">ipython</a>,    <a href="./tag/android/">android</a>,    <a href="./tag/security/">security</a>,    <a href="./tag/uncategorized/">uncategorized</a>  </section>
 
 
 
