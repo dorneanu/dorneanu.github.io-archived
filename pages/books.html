@@ -1759,6 +1759,18 @@ jQuery(document).ready(function($) {
 <div>
   <article role="article">
     <header>
+    
+    <div id="qr-code-pages/books" class="qr-code-image-block"></div>
+    <script src="../theme/js/qr.min.js" type="text/javascript"></script>
+    <script>
+        var img = qr.image({
+            value: '../pages/books',
+            level: 'L',
+            size: 4
+        });
+        document.getElementById('qr-code-pages/books').appendChild(img);
+    </script>
+<
       <h1 class="entry-title">Books</h1>
     </header>
     <style type="text/css" media="screen">

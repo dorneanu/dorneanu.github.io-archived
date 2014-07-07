@@ -2134,3 +2134,13 @@ font-weight:700
 border:solid #e0e0e0 1px;
 padding:2px
 }
+
+.qr-code-image-block {
+    position: relative;
+    float: right;
+    margin-top: -0.5em;
+}
+
+.qr-code-image-block img {
+    box-shadow: none;
+}

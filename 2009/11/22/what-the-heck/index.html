@@ -1759,6 +1759,17 @@ jQuery(document).ready(function($) {
 <div>
   <article class="hentry" role="article">
 <header>
+    
+    <div id="qr-code-2009/11/22/what-the-heck" class="qr-code-image-block"></div>
+    <script src="../../../../theme/js/qr.min.js" type="text/javascript"></script>
+    <script>
+        var img = qr.image({
+            value: '../../../../2009/11/22/what-the-heck',
+            level: 'L',
+            size: 4
+        });
+        document.getElementById('qr-code-2009/11/22/what-the-heck').appendChild(img);
+    </script>
       <h1 class="entry-title">What the heck?</h1>
       <p class="meta"><time datetime="2009-11-22T00:00:00" pubdate>Sun 22 November 2009</time></p>
 </header>
