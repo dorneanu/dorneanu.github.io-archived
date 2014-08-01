@@ -1719,22 +1719,23 @@ jQuery(document).ready(function($) {
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link href="http://blog.dornea.nu/favicon.png" rel="icon">
-  <link href="http://blog.dornea.nu/theme/css/main.css" media="screen, projection"
+  <link href="../../../../favicon.png" rel="icon">
+  <link href="../../../../theme/css/main.css" media="screen, projection"
         rel="stylesheet" type="text/css">
-  <script src="http://blog.dornea.nu/theme/js/modernizr-2.0.js"></script>
-  <script src="http://blog.dornea.nu/theme/js/ender.js"></script>
-  <script src="http://blog.dornea.nu/theme/js/octopress.js" type="text/javascript"></script>
+  <script src="../../../../theme/js/modernizr-2.0.js"></script>
+  <script src="../../../../theme/js/ender.js"></script>
+  <script src="../../../../theme/js/octopress.js" type="text/javascript"></script>
 
   <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
         rel="stylesheet" type="text/css">
   <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
         rel="stylesheet" type="text/css">
+
 </head>
 
 <body>
   <header role="banner"><hgroup>
-  <h1><a href="http://blog.dornea.nu/">blog.dornea.nu</a></h1>
+  <h1><a href="../../../../">blog.dornea.nu</a></h1>
     <h2>Hack, code and drink some țuică.</h2>
 </hgroup></header>
   <nav role="navigation"><ul class="subscription" data-subscription="rss">
@@ -1752,10 +1753,10 @@ jQuery(document).ready(function($) {
 
 <ul class="main-navigation">
     <li><a href="/archives">Archives</a></li>
-      <li><a href="http://blog.dornea.nu/pages/about">About</a></li>
-      <li><a href="http://blog.dornea.nu/pages/books">Books</a></li>
+      <li><a href="../../../../pages/about">About</a></li>
+      <li><a href="../../../../pages/books">Books</a></li>
     <li class="active">
-    <a href="http://blog.dornea.nu/category/blog">Blog</a>
+    <a href="../../../../category/blog">Blog</a>
     </li>
 </ul></nav>
   <div id="main">
@@ -1765,10 +1766,10 @@ jQuery(document).ready(function($) {
 <header>
     
     <div id="qr-code-2014/06/18/migrate-this-blog-from-octopress-to-pelican" class="qr-code-image-block"></div>
-    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
+    <script src="../../../../theme/js/qr.min.js" type="text/javascript"></script>
     <script>
         var img = qr.image({
-            value: 'http://blog.dornea.nu/2014/06/18/migrate-this-blog-from-octopress-to-pelican',
+            value: '../../../../2014/06/18/migrate-this-blog-from-octopress-to-pelican',
             level: 'L',
             size: 4
         });
@@ -1804,14 +1805,14 @@ jQuery(document).ready(function($) {
 <div class="prompt input_prompt">
 In&nbsp;[8]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cp</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">octopress</span><span class="o">/</span><span class="n">source</span><span class="o">/</span><span class="n">_posts</span><span class="o">/*.</span><span class="n">markdown</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">markdown</span><span class="o">/</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 </div>
@@ -1820,14 +1821,14 @@ In&nbsp;[8]:
 <div class="prompt input_prompt">
 In&nbsp;[9]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">ls</span> <span class="o">-</span><span class="n">c</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">markdown</span><span class="o">/</span> <span class="o">|</span> <span class="n">head</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -1835,9 +1836,8 @@ In&nbsp;[9]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-2014-05-27-berlinsides-0x05.markdown
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">2014-05-27-berlinsides-0x05.markdown
 2014-06-02-googles-xss-game-solutions.markdown
 2014-05-20-howto-write-pentest-reports-the-easy-way.markdown
 2014-05-15-test2.markdown
@@ -1847,7 +1847,6 @@ In&nbsp;[9]:
 2014-03-07-unfancy-dashboard-using-matplotlib.markdown
 2014-05-04-howto-create-docs-with-sphinx.markdown
 2014-01-23-24h-android-sniffing-using-tcpdump.markdown
-
 </pre>
 </div>
 </div>
@@ -1871,8 +1870,8 @@ In&nbsp;[9]:
 <div class="prompt input_prompt">
 In&nbsp;[21]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">writefile</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">transform</span><span class="o">.</span><span class="n">awk</span>
 <span class="p">{</span>
     <span class="c"># Date</span>
@@ -1937,7 +1936,7 @@ In&nbsp;[21]:
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -1945,10 +1944,8 @@ In&nbsp;[21]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-Overwriting /home/victor/work/blog/pelican/content/transform.awk
-
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">Overwriting /home/victor/work/blog/pelican/content/transform.awk
 </pre>
 </div>
 </div>
@@ -1972,8 +1969,8 @@ Overwriting /home/victor/work/blog/pelican/content/transform.awk
 <div class="prompt input_prompt">
 In&nbsp;[22]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">content</span><span class="o">/</span><span class="n">markdown</span><span class="o">/*.</span><span class="n">markdown</span><span class="p">;</span> <span class="n">do</span> 
@@ -1984,7 +1981,7 @@ In&nbsp;[22]:
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -1992,9 +1989,8 @@ In&nbsp;[22]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-content/markdown/blogging-with-the-ipython-notebook-example.markdown-meta
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">content/markdown/blogging-with-the-ipython-notebook-example.markdown-meta
 content/markdown/2014-06-02-googles-xss-game-solutions.markdown-meta
 content/markdown/2014-05-27-berlinsides-0x05.markdown-meta
 content/markdown/2014-05-20-howto-write-pentest-reports-the-easy-way.markdown-meta
@@ -2004,7 +2000,6 @@ content/markdown/2014-03-07-unfancy-dashboard-using-matplotlib.markdown-meta
 content/markdown/2014-02-14-links-of-the-week-27.markdown-meta
 content/markdown/2014-02-07-links-of-the-week-26.markdown-meta
 content/markdown/2014-01-31-links-of-the-week-25-2.markdown-meta
-
 </pre>
 </div>
 </div>
@@ -2028,14 +2023,14 @@ content/markdown/2014-01-31-links-of-the-week-25-2.markdown-meta
 <div class="prompt input_prompt">
 In&nbsp;[25]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">find</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">markdown</span><span class="o">/*-</span><span class="n">meta</span> <span class="o">-</span><span class="n">name</span> <span class="s">&quot;2014-05-*&quot;</span> <span class="o">-</span><span class="k">exec</span> <span class="n">cat</span> <span class="p">{}</span> \<span class="p">;</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -2043,9 +2038,8 @@ In&nbsp;[25]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-Title: HowTo: Create docs with sphinx
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">Title: HowTo: Create docs with sphinx
 Author: Victor
 Date: 2014-05-04
 Tags: coding, howto
@@ -2065,7 +2059,6 @@ Title: BerlinSides 0x05
 Date: 2014-05-27
 Tags: events, hacking, security
 Category: blog
-
 
 </pre>
 </div>
@@ -2090,8 +2083,8 @@ Category: blog
 <div class="prompt input_prompt">
 In&nbsp;[26]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">markdown</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="o">*.</span><span class="n">markdown</span><span class="p">;</span> <span class="n">do</span>
@@ -2100,7 +2093,7 @@ In&nbsp;[26]:
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 </div>
@@ -2119,8 +2112,8 @@ In&nbsp;[26]:
 <div class="prompt input_prompt">
 In&nbsp;[27]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">markdown</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="o">*.</span><span class="n">markdown</span><span class="p">;</span> <span class="n">do</span>
@@ -2129,7 +2122,7 @@ In&nbsp;[27]:
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 </div>
@@ -2148,15 +2141,15 @@ In&nbsp;[27]:
 <div class="prompt input_prompt">
 In&nbsp;[31]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">markdown</span>
 <span class="n">find</span> <span class="o">.</span> <span class="o">-</span><span class="n">name</span> <span class="s">&quot;2014-05*.markdown-final&quot;</span> <span class="o">-</span><span class="k">exec</span> <span class="n">head</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span> <span class="p">{}</span> \<span class="p">;</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -2164,9 +2157,8 @@ In&nbsp;[31]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-Title: Test2
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">Title: Test2
 Date: 2014-05-15
 Tags: 
 Category: blog
@@ -2206,7 +2198,6 @@ The [**BerlinSides**](http://berlinsides.org/) is a conference from hacker for h
 All my greetings go to:
 
 * [nullsecurity.net](http://nullsecurity.net)
-
 </pre>
 </div>
 </div>
@@ -2230,8 +2221,8 @@ All my greetings go to:
 <div class="prompt input_prompt">
 In&nbsp;[32]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">markdown</span>
 
@@ -2242,7 +2233,7 @@ In&nbsp;[32]:
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 </div>
@@ -2261,8 +2252,8 @@ In&nbsp;[32]:
 <div class="prompt input_prompt">
 In&nbsp;[33]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">markdown</span>
 <span class="n">rm</span> <span class="o">*.</span><span class="n">markdown</span><span class="o">-</span><span class="n">sed</span>
@@ -2275,7 +2266,7 @@ In&nbsp;[33]:
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 </div>
@@ -2303,8 +2294,8 @@ In&nbsp;[33]:
 <div class="prompt input_prompt">
 In&nbsp;[37]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span>
 
@@ -2313,7 +2304,7 @@ In&nbsp;[37]:
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -2321,14 +2312,12 @@ In&nbsp;[37]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-pelican /home/victor/work/blog/pelican/content -o /home/victor/work/blog/pelican/output -s /home/victor/work/blog/pelican/pelicanconf.py 
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">pelican /home/victor/work/blog/pelican/content -o /home/victor/work/blog/pelican/output -s /home/victor/work/blog/pelican/pelicanconf.py 
 
  ** Writing styles to _nb_header.html: this should be included in the theme. **
 
 Done: Processed 124 articles and 1 pages in 6.38 seconds.
-
 </pre>
 </div>
 </div>
@@ -2362,14 +2351,14 @@ Done: Processed 124 articles and 1 pages in 6.38 seconds.
     Posted by <span class="fn">Victor Dorneanu</span>
   </span>
 <time datetime="2014-06-18T00:00:00" pubdate>Wed 18 June 2014</time>  <span class="categories">
-    <a class="category" href="http://blog.dornea.nu/tag/blog/">blog</a>
-    <a class="category" href="http://blog.dornea.nu/tag/ipython/">ipython</a>
-    <a class="category" href="http://blog.dornea.nu/tag/python/">python</a>
-    <a class="category" href="http://blog.dornea.nu/tag/pelican/">pelican</a>
-    <a class="category" href="http://blog.dornea.nu/tag/octopress/">octopress</a>
+    <a class="category" href="../../../../tag/blog/">blog</a>
+    <a class="category" href="../../../../tag/ipython/">ipython</a>
+    <a class="category" href="../../../../tag/python/">python</a>
+    <a class="category" href="../../../../tag/pelican/">pelican</a>
+    <a class="category" href="../../../../tag/octopress/">octopress</a>
   </span>
 </p><div class="sharing">
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.dornea.nu/2014/06/18/migrate-this-blog-from-octopress-to-pelican" data-via="victordorneanu" data-counturl="http://blog.dornea.nu/2014/06/18/migrate-this-blog-from-octopress-to-pelican" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="../../../../2014/06/18/migrate-this-blog-from-octopress-to-pelican" data-via="victordorneanu" data-counturl="../../../../2014/06/18/migrate-this-blog-from-octopress-to-pelican" >Tweet</a>
 </div>    </footer>
   </article>
 
@@ -2383,19 +2372,19 @@ Done: Processed 124 articles and 1 pages in 6.38 seconds.
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
-          <a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a>
+          <a href="../../../../2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a>
       </li>
       <li class="post">
-          <a href="http://blog.dornea.nu/2014/07/01/on-java-openssl-crypto-blowfish-and-stuff">On Java, OpenSSL, Crypto, Blowfish and stuff</a>
+          <a href="../../../../2014/07/01/on-java-openssl-crypto-blowfish-and-stuff">On Java, OpenSSL, Crypto, Blowfish and stuff</a>
       </li>
       <li class="post">
-          <a href="http://blog.dornea.nu/2014/06/29/whatsapp-bot">WhatsApp bot</a>
+          <a href="../../../../2014/06/29/whatsapp-bot">WhatsApp bot</a>
       </li>
       <li class="post">
-          <a href="http://blog.dornea.nu/2014/06/18/migrate-this-blog-from-octopress-to-pelican">Migrate this blog from Octopress to Pelican</a>
+          <a href="../../../../2014/06/18/migrate-this-blog-from-octopress-to-pelican">Migrate this blog from Octopress to Pelican</a>
       </li>
       <li class="post">
-          <a href="http://blog.dornea.nu/2014/06/02/googles-xss-game-solutions">Googles XSS Game - Solutions</a>
+          <a href="../../../../2014/06/02/googles-xss-game-solutions">Googles XSS Game - Solutions</a>
       </li>
     </ul>
   </section>
@@ -2403,14 +2392,14 @@ Done: Processed 124 articles and 1 pages in 6.38 seconds.
       
     <h1>Categories</h1>
     <ul id="recent_posts">
-        <li><a href="http://blog.dornea.nu/category/blog">blog</a></li>
+        <li><a href="../../../../category/blog">blog</a></li>
     </ul>
   </section>
  
 
   <section>
   <h1>Tags</h1>
-    <a href="http://blog.dornea.nu/tag//"></a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
+    <a href="../../../../tag//"></a>,    <a href="../../../../tag/pelican/">pelican</a>,    <a href="../../../../tag/code/">code</a>,    <a href="../../../../tag/coding/">coding</a>,    <a href="../../../../tag/openssl/">openssl</a>,    <a href="../../../../tag/virtualization/">virtualization</a>,    <a href="../../../../tag/web/">web</a>,    <a href="../../../../tag/wargames/">wargames</a>,    <a href="../../../../tag/java/">java</a>,    <a href="../../../../tag/network/">network</a>,    <a href="../../../../tag/octopress/">octopress</a>,    <a href="../../../../tag/blog/">blog</a>,    <a href="../../../../tag/re/">re</a>,    <a href="../../../../tag/low/">low</a>,    <a href="../../../../tag/android/">android</a>,    <a href="../../../../tag/androguard/">androguard</a>,    <a href="../../../../tag/events/">events</a>,    <a href="../../../../tag/uncategorized/">uncategorized</a>,    <a href="../../../../tag/cryptography/">cryptography</a>,    <a href="../../../../tag/python/">python</a>,    <a href="../../../../tag/misc/">misc</a>,    <a href="../../../../tag/howto/">howto</a>,    <a href="../../../../tag/wtf/">wtf</a>,    <a href="../../../../tag/ipython/">ipython</a>,    <a href="../../../../tag/security/">security</a>,    <a href="../../../../tag/crypto/">crypto</a>,    <a href="../../../../tag/sca/">sca</a>,    <a href="../../../../tag/whatsapp/">whatsapp</a>,    <a href="../../../../tag/hacking/">hacking</a>  </section>
 
 
 
@@ -2424,7 +2413,7 @@ Done: Processed 124 articles and 1 pages in 6.38 seconds.
           if (!window.jXHR){
               var jxhr = document.createElement('script');
               jxhr.type = 'text/javascript';
-              jxhr.src = 'http://blog.dornea.nu/theme/js/jXHR.js';
+              jxhr.src = '../../../../theme/js/jXHR.js';
               var s = document.getElementsByTagName('script')[0];
               s.parentNode.insertBefore(jxhr, s);
           }
@@ -2437,7 +2426,7 @@ Done: Processed 124 articles and 1 pages in 6.38 seconds.
           });
       });
     </script>
-    <script src="http://blog.dornea.nu/theme/js/github.js" type="text/javascript"> </script>
+    <script src="../../../../theme/js/github.js" type="text/javascript"> </script>
   </section>
 
     <section>
@@ -2512,7 +2501,7 @@ Done: Processed 124 articles and 1 pages in 6.38 seconds.
 	<script type="text/javascript">
 	  var disqus_shortname = 'dorneanu';
           var disqus_identifier = '/2014/06/18/migrate-this-blog-from-octopress-to-pelican';
-          var disqus_url = 'http://blog.dornea.nu/2014/06/18/migrate-this-blog-from-octopress-to-pelican';
+          var disqus_url = '../../../../2014/06/18/migrate-this-blog-from-octopress-to-pelican';
           var disqus_title = 'Migrate this blog from Octopress to Pelican';
 	  (function() {
 	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

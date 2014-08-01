@@ -1719,22 +1719,23 @@ jQuery(document).ready(function($) {
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link href="http://blog.dornea.nu/favicon.png" rel="icon">
-  <link href="http://blog.dornea.nu/theme/css/main.css" media="screen, projection"
+  <link href="../../../../favicon.png" rel="icon">
+  <link href="../../../../theme/css/main.css" media="screen, projection"
         rel="stylesheet" type="text/css">
-  <script src="http://blog.dornea.nu/theme/js/modernizr-2.0.js"></script>
-  <script src="http://blog.dornea.nu/theme/js/ender.js"></script>
-  <script src="http://blog.dornea.nu/theme/js/octopress.js" type="text/javascript"></script>
+  <script src="../../../../theme/js/modernizr-2.0.js"></script>
+  <script src="../../../../theme/js/ender.js"></script>
+  <script src="../../../../theme/js/octopress.js" type="text/javascript"></script>
 
   <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
         rel="stylesheet" type="text/css">
   <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
         rel="stylesheet" type="text/css">
+
 </head>
 
 <body>
   <header role="banner"><hgroup>
-  <h1><a href="http://blog.dornea.nu/">blog.dornea.nu</a></h1>
+  <h1><a href="../../../../">blog.dornea.nu</a></h1>
     <h2>Hack, code and drink some țuică.</h2>
 </hgroup></header>
   <nav role="navigation"><ul class="subscription" data-subscription="rss">
@@ -1752,10 +1753,10 @@ jQuery(document).ready(function($) {
 
 <ul class="main-navigation">
     <li><a href="/archives">Archives</a></li>
-      <li><a href="http://blog.dornea.nu/pages/about">About</a></li>
-      <li><a href="http://blog.dornea.nu/pages/books">Books</a></li>
+      <li><a href="../../../../pages/about">About</a></li>
+      <li><a href="../../../../pages/books">Books</a></li>
     <li class="active">
-    <a href="http://blog.dornea.nu/category/blog">Blog</a>
+    <a href="../../../../category/blog">Blog</a>
     </li>
 </ul></nav>
   <div id="main">
@@ -1765,10 +1766,10 @@ jQuery(document).ready(function($) {
 <header>
     
     <div id="qr-code-2014/07/07/disect-android-apks-like-a-pro-static-code-analysis" class="qr-code-image-block"></div>
-    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
+    <script src="../../../../theme/js/qr.min.js" type="text/javascript"></script>
     <script>
         var img = qr.image({
-            value: 'http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis',
+            value: '../../../../2014/07/07/disect-android-apks-like-a-pro-static-code-analysis',
             level: 'L',
             size: 4
         });
@@ -1884,8 +1885,8 @@ permitted <span class="keyword">by</span> applicable law.
 <div class="prompt input_prompt">
 In&nbsp;[102]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
@@ -1902,7 +1903,7 @@ In&nbsp;[102]:
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 </div>
@@ -1921,8 +1922,8 @@ In&nbsp;[102]:
 <div class="prompt input_prompt">
 In&nbsp;[104]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">pylab</span> <span class="n">inline</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -1936,7 +1937,7 @@ In&nbsp;[104]:
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -1944,10 +1945,8 @@ In&nbsp;[104]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-Populating the interactive namespace from numpy and matplotlib
-
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">Populating the interactive namespace from numpy and matplotlib
 </pre>
 </div>
 </div>
@@ -2030,14 +2029,14 @@ p7zip <span class="constant">Version</span> <span class="number">9.20</span> (lo
 <div class="prompt input_prompt">
 In&nbsp;[105]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Change CWD</span>
 <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s">&quot;/root/work/apk/DroidBox/APK&quot;</span><span class="p">)</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 </div>
@@ -2056,14 +2055,14 @@ In&nbsp;[105]:
 <div class="prompt input_prompt">
 In&nbsp;[42]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="o">*</span><span class="p">;</span> <span class="n">do</span> <span class="nb">file</span> <span class="err">$</span><span class="n">i</span><span class="p">;</span> <span class="n">done</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -2071,12 +2070,10 @@ In&nbsp;[42]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-7276e76298c50d2ee78271cf5114a176: Zip archive data, at least v2.0 to extract
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">7276e76298c50d2ee78271cf5114a176: Zip archive data, at least v2.0 to extract
 a15b704743f53d3edb9cdd1182ca78d1: Zip archive data, at least v2.0 to extract
 aac4d15741abe0ee9b4afe78be090599: Zip archive data, at least v2.0 to extract
-
 </pre>
 </div>
 </div>
@@ -2100,14 +2097,14 @@ aac4d15741abe0ee9b4afe78be090599: Zip archive data, at least v2.0 to extract
 <div class="prompt input_prompt">
 In&nbsp;[151]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">unzip</span> <span class="o">-</span><span class="n">l</span> <span class="mf">7276e76298</span><span class="n">c50d2ee78271cf5114a176</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -2115,9 +2112,8 @@ In&nbsp;[151]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-Archive:  7276e76298c50d2ee78271cf5114a176
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">Archive:  7276e76298c50d2ee78271cf5114a176
 signed by SignApk
   Length      Date    Time    Name
 ---------  ---------- -----   ----
@@ -2140,7 +2136,6 @@ signed by SignApk
      3196  2008-02-29 05:33   resources.arsc
 ---------                     -------
    449584                     17 files
-
 </pre>
 </div>
 </div>
@@ -2164,15 +2159,15 @@ signed by SignApk
 <div class="prompt input_prompt">
 In&nbsp;[159]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cp</span> <span class="mf">7276e76298</span><span class="n">c50d2ee78271cf5114a176</span> <span class="n">FakeBanker</span><span class="o">.</span><span class="n">apk</span>
 <span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">apktool1</span><span class="o">.</span><span class="mf">5.2</span><span class="o">/</span><span class="n">apktool</span><span class="o">.</span><span class="n">jar</span> <span class="n">d</span> <span class="mf">7276e76298</span><span class="n">c50d2ee78271cf5114a176</span> <span class="n">output</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -2180,10 +2175,8 @@ In&nbsp;[159]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-Destination directory (/root/work/apk/DroidBox/APK/output) already exists. Use -f switch if you want to overwrite it.
-
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">Destination directory (/root/work/apk/DroidBox/APK/output) already exists. Use -f switch if you want to overwrite it.
 </pre>
 </div>
 </div>
@@ -2207,14 +2200,14 @@ Destination directory (/root/work/apk/DroidBox/APK/output) already exists. Use -
 <div class="prompt input_prompt">
 In&nbsp;[192]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cat</span> <span class="n">output</span><span class="o">/</span><span class="n">AndroidManifest</span><span class="o">.</span><span class="n">xml</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -2222,9 +2215,8 @@ In&nbsp;[192]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;manifest android:versionCode=&quot;1&quot; android:versionName=&quot;1.0&quot; package=&quot;com.gmail.xpack&quot;
   xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
     &lt;uses-permission android:name=&quot;android.permission.RECEIVE_BOOT_COMPLETED&quot; /&gt;
@@ -2266,8 +2258,7 @@ In&nbsp;[192]:
             &lt;/intent-filter&gt;
         &lt;/activity&gt;
     &lt;/application&gt;
-&lt;/manifest&gt;
-</pre>
+&lt;/manifest&gt;</pre>
 </div>
 </div>
 
@@ -2290,8 +2281,8 @@ In&nbsp;[192]:
 <div class="prompt input_prompt">
 In&nbsp;[213]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">media_paths</span> <span class="o">=</span> <span class="err">!</span><span class="n">find</span> <span class="n">output</span> <span class="o">-</span><span class="n">regextype</span> <span class="n">posix</span><span class="o">-</span><span class="n">egrep</span> <span class="o">-</span><span class="n">regex</span> <span class="s">&quot;^.*\.(png|jpg|jpeg|gif|bmp)$&quot;</span>
 <span class="n">display</span><span class="p">(</span><span class="n">media_paths</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">media_paths</span><span class="p">:</span>
@@ -2299,7 +2290,7 @@ In&nbsp;[213]:
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -2309,15 +2300,11 @@ In&nbsp;[213]:
 <div class="output_area"><div class="prompt"></div>
 
 
-<div class="output_text output_subarea ">
-<pre>
-[&apos;output/res/drawable-ldpi/ic_launcher1.png&apos;,
+<pre class="ipynb">[&apos;output/res/drawable-ldpi/ic_launcher1.png&apos;,
  &apos;output/res/drawable-mdpi/ic_launcher1.png&apos;,
  &apos;output/res/drawable-xhdpi/ic_launcher1.png&apos;,
  &apos;output/res/drawable-hdpi/logo.png&apos;,
- &apos;output/res/drawable-hdpi/ic_launcher1.png&apos;]
-</pre>
-</div>
+ &apos;output/res/drawable-hdpi/ic_launcher1.png&apos;]</pre>
 
 </div>
 
@@ -3010,15 +2997,15 @@ n2oln6IunvLC7ts9Ire2uUcVpe4kQ4neFrsJ3I5gM2coKySbhuw5Be2f/ls8A+hTNhULh3AO6dSW
 <div class="prompt input_prompt">
 In&nbsp;[212]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="c"># Ignore smali directory</span>
 <span class="n">tree</span> <span class="o">-</span><span class="n">f</span> <span class="o">-</span><span class="n">I</span> <span class="s">&quot;smali&quot;</span> <span class="n">output</span><span class="o">/</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -3026,9 +3013,8 @@ In&nbsp;[212]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-output
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">output
 ├── output/AndroidManifest.xml
 ├── output/apktool.yml
 └── output/res
@@ -3057,7 +3043,6 @@ output
         └── output/res/values/styles.xml
 
 9 directories, 17 files
-
 </pre>
 </div>
 </div>
@@ -3119,8 +3104,8 @@ output
 <div class="prompt input_prompt">
 In&nbsp;[5]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Use AndroGuard to static analysis</span>
 <span class="c"># Have a look at https://code.google.com/p/androguard/wiki/RE for some introduction</span>
 <span class="c">#a = anz.APK(&#39;KC.apk&#39;)</span>
@@ -3135,7 +3120,7 @@ In&nbsp;[5]:
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -3146,11 +3131,7 @@ In&nbsp;[5]:
     Out[5]:</div>
 
 
-<div class="output_text output_subarea output_pyout">
-<pre>
-&apos;\nd = anz.DalvikVMFormat(a.get_dex())\ndx = anz.VMAnalysis( d )\ngx = anz.GVMAnalysis( dx, None )\nd.set_vmanalysis( dx )\nd.set_gvmanalysis( gx )\n&apos;
-</pre>
-</div>
+<pre class="ipynb">&apos;\nd = anz.DalvikVMFormat(a.get_dex())\ndx = anz.VMAnalysis( d )\ngx = anz.GVMAnalysis( dx, None )\nd.set_vmanalysis( dx )\nd.set_gvmanalysis( gx )\n&apos;</pre>
 
 </div>
 
@@ -3173,13 +3154,13 @@ In&nbsp;[5]:
 <div class="prompt input_prompt">
 In&nbsp;[133]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">a</span><span class="o">.</span><span class="n">files</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -3190,9 +3171,7 @@ In&nbsp;[133]:
     Out[133]:</div>
 
 
-<div class="output_text output_subarea output_pyout">
-<pre>
-{&apos;AndroidManifest.xml&apos;: &apos;Unknown&apos;,
+<pre class="ipynb">{&apos;AndroidManifest.xml&apos;: &apos;Unknown&apos;,
  &apos;META-INF/CERT.RSA&apos;: &apos;Unknown&apos;,
  &apos;META-INF/CERT.SF&apos;: &apos;Unknown&apos;,
  &apos;META-INF/MANIFEST.MF&apos;: &apos;Unknown&apos;,
@@ -3208,9 +3187,7 @@ In&nbsp;[133]:
  &apos;res/menu/main.xml&apos;: &apos;Unknown&apos;,
  &apos;res/raw/blfs.key&apos;: &apos;Unknown&apos;,
  &apos;res/raw/config.cfg&apos;: &apos;Unknown&apos;,
- &apos;resources.arsc&apos;: &apos;Unknown&apos;}
-</pre>
-</div>
+ &apos;resources.arsc&apos;: &apos;Unknown&apos;}</pre>
 
 </div>
 
@@ -3223,13 +3200,13 @@ In&nbsp;[133]:
 <div class="prompt input_prompt">
 In&nbsp;[8]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">a</span><span class="o">.</span><span class="n">permissions</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -3240,17 +3217,13 @@ In&nbsp;[8]:
     Out[8]:</div>
 
 
-<div class="output_text output_subarea output_pyout">
-<pre>
-[&apos;android.permission.RECEIVE_BOOT_COMPLETED&apos;,
+<pre class="ipynb">[&apos;android.permission.RECEIVE_BOOT_COMPLETED&apos;,
  &apos;android.permission.READ_SMS&apos;,
  &apos;android.permission.RECEIVE_SMS&apos;,
  &apos;android.permission.INTERNET&apos;,
  &apos;android.permission.READ_PHONE_STATE&apos;,
  &apos;android.permission.ACCESS_COARSE_LOCATION&apos;,
- &apos;android.permission.ACCESS_NETWORK_STATE&apos;]
-</pre>
-</div>
+ &apos;android.permission.ACCESS_NETWORK_STATE&apos;]</pre>
 
 </div>
 
@@ -3263,13 +3236,13 @@ In&nbsp;[8]:
 <div class="prompt input_prompt">
 In&nbsp;[9]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">a</span><span class="o">.</span><span class="n">get_activities</span><span class="p">()</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -3280,11 +3253,7 @@ In&nbsp;[9]:
     Out[9]:</div>
 
 
-<div class="output_text output_subarea output_pyout">
-<pre>
-[&apos;com.gmail.xpack.MainActivity&apos;, &apos;com.gmail.xpack.ActUpdate&apos;]
-</pre>
-</div>
+<pre class="ipynb">[&apos;com.gmail.xpack.MainActivity&apos;, &apos;com.gmail.xpack.ActUpdate&apos;]</pre>
 
 </div>
 
@@ -3297,13 +3266,13 @@ In&nbsp;[9]:
 <div class="prompt input_prompt">
 In&nbsp;[10]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">a</span><span class="o">.</span><span class="n">get_services</span><span class="p">()</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -3314,11 +3283,7 @@ In&nbsp;[10]:
     Out[10]:</div>
 
 
-<div class="output_text output_subarea output_pyout">
-<pre>
-[&apos;com.gmail.xservices.XService&apos;, &apos;com.gmail.xservices.XSmsIncom&apos;]
-</pre>
-</div>
+<pre class="ipynb">[&apos;com.gmail.xservices.XService&apos;, &apos;com.gmail.xservices.XSmsIncom&apos;]</pre>
 
 </div>
 
@@ -3331,13 +3296,13 @@ In&nbsp;[10]:
 <div class="prompt input_prompt">
 In&nbsp;[18]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">a</span><span class="o">.</span><span class="n">get_receivers</span><span class="p">()</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -3348,14 +3313,10 @@ In&nbsp;[18]:
     Out[18]:</div>
 
 
-<div class="output_text output_subarea output_pyout">
-<pre>
-[&apos;com.gmail.xbroadcast.OnBootReceiver&apos;,
+<pre class="ipynb">[&apos;com.gmail.xbroadcast.OnBootReceiver&apos;,
  &apos;com.gmail.xbroadcast.MessageReceiver&apos;,
  &apos;com.gmail.xservices.XRepeat&apos;,
- &apos;com.gmail.xservices.XUpdate&apos;]
-</pre>
-</div>
+ &apos;com.gmail.xservices.XUpdate&apos;]</pre>
 
 </div>
 
@@ -3368,13 +3329,13 @@ In&nbsp;[18]:
 <div class="prompt input_prompt">
 In&nbsp;[19]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">a</span><span class="o">.</span><span class="n">get_main_activity</span><span class="p">()</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -3385,11 +3346,7 @@ In&nbsp;[19]:
     Out[19]:</div>
 
 
-<div class="output_text output_subarea output_pyout">
-<pre>
-u&apos;com.gmail.xpack.MainActivity&apos;
-</pre>
-</div>
+<pre class="ipynb">u&apos;com.gmail.xpack.MainActivity&apos;</pre>
 
 </div>
 
@@ -3402,13 +3359,13 @@ u&apos;com.gmail.xpack.MainActivity&apos;
 <div class="prompt input_prompt">
 In&nbsp;[18]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xpack_MainActivity</span><span class="o">.</span><span class="n">METHOD_onCreate</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -3416,9 +3373,8 @@ In&nbsp;[18]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">
     protected void onCreate(android.os.Bundle p5)
     {
         super.onCreate(p5);
@@ -3428,7 +3384,6 @@ In&nbsp;[18]:
         this.startService(new android.content.Intent(&quot;XMainProcessStart&quot;).putExtra(&quot;name&quot;, &quot;value&quot;));
         return;
     }
-
 
 </pre>
 </div>
@@ -3452,14 +3407,14 @@ In&nbsp;[18]:
 <div class="prompt input_prompt">
 In&nbsp;[15]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">methods</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xlibs_myFunctions</span><span class="o">.</span><span class="n">get_methods</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">methods</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">get_name</span><span class="p">())</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -3467,9 +3422,8 @@ In&nbsp;[15]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-&lt;init&gt;
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">&lt;init&gt;
 IntToStr
 StrToInt
 checkPhone
@@ -3493,7 +3447,6 @@ setVar
 setVar
 setVarsList
 typeInternetConnection
-
 </pre>
 </div>
 </div>
@@ -3516,13 +3469,13 @@ typeInternetConnection
 <div class="prompt input_prompt">
 In&nbsp;[198]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xlibs_myFunctions</span><span class="o">.</span><span class="n">METHOD_setK12</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -3530,9 +3483,8 @@ In&nbsp;[198]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">
     public static String setK12(String p4, android.content.Context p5)
     {
         String v2;
@@ -3544,7 +3496,6 @@ In&nbsp;[198]:
         }
         return v2;
     }
-
 
 </pre>
 </div>
@@ -3584,13 +3535,13 @@ In&nbsp;[198]:
 <div class="prompt input_prompt">
 In&nbsp;[26]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xlibs_Blowfish</span><span class="o">.</span><span class="n">METHOD_init</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -3598,9 +3549,8 @@ In&nbsp;[26]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">
     public Blowfish(String p2, String p3, String p4)
     {
         this.IV = &quot;12345678&quot;;
@@ -3610,7 +3560,6 @@ In&nbsp;[26]:
         this.in_out_format = p3;
         return;
     }
-
 
 </pre>
 </div>
@@ -3634,14 +3583,14 @@ In&nbsp;[26]:
 <div class="prompt input_prompt">
 In&nbsp;[143]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">z</span> <span class="o">=</span> <span class="n">dx</span><span class="o">.</span><span class="n">tainted_variables</span><span class="o">.</span><span class="n">get_string</span><span class="p">(</span><span class="s">&quot;BLFSK&quot;</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">z</span><span class="p">:</span> <span class="n">z</span><span class="o">.</span><span class="n">show_paths</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -3649,13 +3598,11 @@ In&nbsp;[143]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-R 62 Lcom/gmail/xlibs/myFunctions;-&gt;getFirst (Landroid/content/Context;)V
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">R 62 Lcom/gmail/xlibs/myFunctions;-&gt;getFirst (Landroid/content/Context;)V
 R 17c Lcom/gmail/xlibs/myFunctions;-&gt;getFirst (Landroid/content/Context;)V
 R e8 Lcom/gmail/xlibs/myFunctions;-&gt;getSecond (Landroid/content/Context;)V
 R 0 Lcom/gmail/xlibs/myFunctions;-&gt;setK12 (Ljava/lang/String; Landroid/content/Context;)Ljava/lang/String;
-
 </pre>
 </div>
 </div>
@@ -3678,14 +3625,14 @@ R 0 Lcom/gmail/xlibs/myFunctions;-&gt;setK12 (Ljava/lang/String; Landroid/conten
 <div class="prompt input_prompt">
 In&nbsp;[123]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">find</span> <span class="n">output</span> <span class="o">-</span><span class="n">name</span> <span class="s">&quot;blfs*&quot;</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -3693,10 +3640,8 @@ In&nbsp;[123]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-output/res/raw/blfs.key
-
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">output/res/raw/blfs.key
 </pre>
 </div>
 </div>
@@ -3710,14 +3655,14 @@ output/res/raw/blfs.key
 <div class="prompt input_prompt">
 In&nbsp;[37]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cat</span> <span class="n">output</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">raw</span><span class="o">/</span><span class="n">blfs</span><span class="o">.</span><span class="n">key</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -3725,10 +3670,8 @@ In&nbsp;[37]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-NfvnkjlnvkjKCNXKDKLFHSKD:LJmdklsXKLNDS:&lt;XObcniuaebkjxbcz
-</pre>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">NfvnkjlnvkjKCNXKDKLFHSKD:LJmdklsXKLNDS:&lt;XObcniuaebkjxbcz</pre>
 </div>
 </div>
 
@@ -3750,14 +3693,14 @@ NfvnkjlnvkjKCNXKDKLFHSKD:LJmdklsXKLNDS:&lt;XObcniuaebkjxbcz
 <div class="prompt input_prompt">
 In&nbsp;[40]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">ls</span> <span class="o">-</span><span class="n">l</span> <span class="n">output</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">raw</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -3765,12 +3708,10 @@ In&nbsp;[40]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-total 8
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">total 8
 -rw-r--r-- 1 root root   56 Jun 25 13:26 blfs.key
 -rw-r--r-- 1 root root 1048 Jun 25 13:26 config.cfg
-
 </pre>
 </div>
 </div>
@@ -3784,14 +3725,14 @@ total 8
 <div class="prompt input_prompt">
 In&nbsp;[42]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cat</span> <span class="n">output</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">raw</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">cfg</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -3799,10 +3740,8 @@ In&nbsp;[42]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-HoBbgAt+xT9vXJUlyhYYAVOx5Oy4XSMLyc7JC+ly5a1tbUtWvFMny2yqavP9D9GT0ogg2U4LN5FZE8/0Y2duLgE7dfXLPcaeXKoIuTmJ4LBiUjS0OokxUPMOrJYCTCx2oWGmdHJqohz7QlbqnZPWch9BvjiWG3TeXKDkjrPKohMswoPA/EVQy3is6XBBfqYKoExCDci14mcoHfnbw1V+YAJlwONpjn1dmzVkJLVQ4ZEbg2WPD5LnXwhdGkhVXF4kS/pHk+6h4ZVd4CMcG7kbWpe7f/dbBX3zJ2NXP+E+MxYW/MTYrNRBMQIfZbuhGmsULXjpHb16R19NZvV4qQwi68KrFbc5hZyfSkWUwD50t2O3o9mSQB3/IlqzzA7VE3XxrsUkZQcBYEixFshSTN+lywZwohooyjGiPEhof7k08bo3YgkDh/8vMR1rttvUKs0xTdQtLF8iER8GDCt6ZUtG0+Lf2G+THOw/Azp/ipC3JJ7Rcj0m1uTj3AAjwfK69rcbtCTP6q5qV8pDEtSr3foU7KZvjCXJL/8TVvZozttjoHnJhI3x5KGKLrczoavKsbiR0iI3ncwGTI5CQ7uZwfMkB5Q2Y4M7oDFTurCPT3iRAvhUQN3Ah8TKAyzwACUlCk9nA2A7H9IFfTgI2QvaXQlNxkPeZMh+iOYImUELMSbNQ1HpsaF1Bbymg6vWTgvyViVsAjf+Y22y+n0eFJicsLPzc9GNs6bCgPCIDVRr2iLoiXjP8AE4gQUdxfqCQ1JtvBfWXmB4kAWb1ciuqsE1Zff+aahnT1Qbet1vA6g9DsTLuumqX0tjmCD/E50eL48Bz0etthaS7RbJiIpg3SU9Lio1GmZeYBB9/4FW4CB1M+cH9jjjKmj4sXUwcLrBDgD+JvCEc7VGxdLj/Ori631mkWvRtlKC4sIOLlHQEDwRcXDgvLnAKZYG65Tm4a5gr490Yco1QSKxeMkMKvMitGQS87ObKaqr30nfXZHMwdWLc6Q437aVyOxc9GvxGC7qmtnYU4Pw5alh1XKtXdjY4EGsVhk/MQ==
-</pre>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">HoBbgAt+xT9vXJUlyhYYAVOx5Oy4XSMLyc7JC+ly5a1tbUtWvFMny2yqavP9D9GT0ogg2U4LN5FZE8/0Y2duLgE7dfXLPcaeXKoIuTmJ4LBiUjS0OokxUPMOrJYCTCx2oWGmdHJqohz7QlbqnZPWch9BvjiWG3TeXKDkjrPKohMswoPA/EVQy3is6XBBfqYKoExCDci14mcoHfnbw1V+YAJlwONpjn1dmzVkJLVQ4ZEbg2WPD5LnXwhdGkhVXF4kS/pHk+6h4ZVd4CMcG7kbWpe7f/dbBX3zJ2NXP+E+MxYW/MTYrNRBMQIfZbuhGmsULXjpHb16R19NZvV4qQwi68KrFbc5hZyfSkWUwD50t2O3o9mSQB3/IlqzzA7VE3XxrsUkZQcBYEixFshSTN+lywZwohooyjGiPEhof7k08bo3YgkDh/8vMR1rttvUKs0xTdQtLF8iER8GDCt6ZUtG0+Lf2G+THOw/Azp/ipC3JJ7Rcj0m1uTj3AAjwfK69rcbtCTP6q5qV8pDEtSr3foU7KZvjCXJL/8TVvZozttjoHnJhI3x5KGKLrczoavKsbiR0iI3ncwGTI5CQ7uZwfMkB5Q2Y4M7oDFTurCPT3iRAvhUQN3Ah8TKAyzwACUlCk9nA2A7H9IFfTgI2QvaXQlNxkPeZMh+iOYImUELMSbNQ1HpsaF1Bbymg6vWTgvyViVsAjf+Y22y+n0eFJicsLPzc9GNs6bCgPCIDVRr2iLoiXjP8AE4gQUdxfqCQ1JtvBfWXmB4kAWb1ciuqsE1Zff+aahnT1Qbet1vA6g9DsTLuumqX0tjmCD/E50eL48Bz0etthaS7RbJiIpg3SU9Lio1GmZeYBB9/4FW4CB1M+cH9jjjKmj4sXUwcLrBDgD+JvCEc7VGxdLj/Ori631mkWvRtlKC4sIOLlHQEDwRcXDgvLnAKZYG65Tm4a5gr490Yco1QSKxeMkMKvMitGQS87ObKaqr30nfXZHMwdWLc6Q437aVyOxc9GvxGC7qmtnYU4Pw5alh1XKtXdjY4EGsVhk/MQ==</pre>
 </div>
 </div>
 
@@ -3824,15 +3763,15 @@ HoBbgAt+xT9vXJUlyhYYAVOx5Oy4XSMLyc7JC+ly5a1tbUtWvFMny2yqavP9D9GT0ogg2U4LN5FZE8/0
 <div class="prompt input_prompt">
 In&nbsp;[46]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">base64</span> <span class="o">-</span><span class="n">d</span> <span class="n">output</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">raw</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">cfg</span> <span class="o">&gt;</span> <span class="n">output</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">raw</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">cfg</span><span class="o">.</span><span class="n">raw</span>
 <span class="nb">file</span> <span class="n">output</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">raw</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">cfg</span><span class="o">.</span><span class="n">raw</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -3840,10 +3779,8 @@ In&nbsp;[46]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-output/res/raw/config.cfg.raw: data
-
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">output/res/raw/config.cfg.raw: data
 </pre>
 </div>
 </div>
@@ -3866,13 +3803,13 @@ output/res/raw/config.cfg.raw: data
 <div class="prompt input_prompt">
 In&nbsp;[191]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xlibs_Blowfish</span><span class="o">.</span><span class="n">METHOD_encrypt</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -3880,9 +3817,8 @@ In&nbsp;[191]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">
     public String encrypt(String p10)
     {
         try {
@@ -3907,7 +3843,6 @@ In&nbsp;[191]:
         return v7;
     }
 
-
 </pre>
 </div>
 </div>
@@ -3930,13 +3865,13 @@ In&nbsp;[191]:
 <div class="prompt input_prompt">
 In&nbsp;[136]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xlibs_Blowfish</span><span class="o">.</span><span class="n">METHOD_decrypt</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -3944,9 +3879,8 @@ In&nbsp;[136]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">
     public String decrypt(String p9)
     {
         try {
@@ -3971,7 +3905,6 @@ In&nbsp;[136]:
         return v6;
     }
 
-
 </pre>
 </div>
 </div>
@@ -3994,13 +3927,13 @@ In&nbsp;[136]:
 <div class="prompt input_prompt">
 In&nbsp;[145]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xlibs_myFunctions</span><span class="o">.</span><span class="n">METHOD_getFirst</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -4008,9 +3941,8 @@ In&nbsp;[145]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">
     public static void getFirst(android.content.Context p14)
     {
         if (com.gmail.xlibs.myFunctions.getVar(&quot;RID&quot;, 0, p14) == 0) {
@@ -4051,7 +3983,6 @@ In&nbsp;[145]:
         }
         return;
     }
-
 
 </pre>
 </div>
@@ -4096,13 +4027,13 @@ In&nbsp;[145]:
 <div class="prompt input_prompt">
 In&nbsp;[147]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xlibs_myFunctions</span><span class="o">.</span><span class="n">METHOD_getRawData</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -4110,9 +4041,8 @@ In&nbsp;[147]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">
     public static String getRawData(int p9, int p10, android.content.Context p11)
     {
         java.io.InputStream v4 = p11.getResources().openRawResource(p9);
@@ -4136,7 +4066,6 @@ In&nbsp;[147]:
         }
         v4.close();
     }
-
 
 </pre>
 </div>
@@ -4170,14 +4099,14 @@ hex(2130968577) = 7f040001
 <div class="prompt input_prompt">
 In&nbsp;[153]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">grep</span> <span class="o">-</span><span class="n">r</span> <span class="s">&quot;7f040000&quot;</span> <span class="n">output</span><span class="o">/*</span> <span class="o">&amp;&amp;</span> <span class="n">grep</span> <span class="o">-</span><span class="n">r</span> <span class="s">&quot;7f040001&quot;</span> <span class="n">output</span><span class="o">/*</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -4185,14 +4114,12 @@ In&nbsp;[153]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-output/res/values/public.xml:    &lt;public type=&quot;raw&quot; name=&quot;blfs&quot; id=&quot;0x7f040000&quot; /&gt;
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">output/res/values/public.xml:    &lt;public type=&quot;raw&quot; name=&quot;blfs&quot; id=&quot;0x7f040000&quot; /&gt;
 output/smali/com/gmail/xpack/R$raw.smali:.field public static final blfs:I = 0x7f040000
 output/res/values/public.xml:    &lt;public type=&quot;raw&quot; name=&quot;config&quot; id=&quot;0x7f040001&quot; /&gt;
 output/smali/com/gmail/xlibs/myFunctions.smali:    const v11, 0x7f040001
 output/smali/com/gmail/xpack/R$raw.smali:.field public static final config:I = 0x7f040001
-
 </pre>
 </div>
 </div>
@@ -4215,14 +4142,14 @@ output/smali/com/gmail/xpack/R$raw.smali:.field public static final config:I = 0
 <div class="prompt input_prompt">
 In&nbsp;[7]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">grep</span> <span class="s">&quot;7f04000&quot;</span> <span class="n">output</span><span class="o">/</span><span class="n">smali</span><span class="o">/</span><span class="n">com</span><span class="o">/</span><span class="n">gmail</span><span class="o">/</span><span class="n">xpack</span><span class="o">/</span><span class="n">R</span>\<span class="err">$</span><span class="n">raw</span><span class="o">.</span><span class="n">smali</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -4230,11 +4157,9 @@ In&nbsp;[7]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-.field public static final blfs:I = 0x7f040000
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">.field public static final blfs:I = 0x7f040000
 .field public static final config:I = 0x7f040001
-
 </pre>
 </div>
 </div>
@@ -4281,8 +4206,8 @@ In&nbsp;[7]:
 <div class="prompt input_prompt">
 In&nbsp;[39]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">Blowfish</span>
 <span class="kn">from</span> <span class="nn">Crypto</span> <span class="kn">import</span> <span class="n">Random</span>
 <span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="n">pack</span>
@@ -4311,7 +4236,7 @@ In&nbsp;[39]:
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -4322,11 +4247,7 @@ In&nbsp;[39]:
     Out[39]:</div>
 
 
-<div class="output_text output_subarea output_pyout">
-<pre>
-&apos;&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;\n          &lt;config&gt;\n            &lt;data rid=&quot;25&quot; \n                  shnum10=&quot;&quot; shtext10=&quot;&quot; shnum5=&quot;&quot; shtext5=&quot;&quot; shnum3=&quot;&quot; shtext3=&quot;&quot; shnum1=&quot;&quot; shtext1=&quot;&quot; \n                  del_dev=&quot;0&quot; \n                  url_main=&quot;http://best-invest-int.com/gallery/3.php;http://citroen-club.ch/images/3.php&quot; \n                  url_data=&quot;http://best-invest-int.com/gallery/1.php;http://citroen-club.ch/images/1.php&quot; \n                  url_sms=&quot;http://best-invest-int.com/gallery/2.php;http://citroen-club.ch/images/2.php&quot;\n                  url_log=&quot;http://best-invest-int.com/gallery/4.php;http://citroen-club.ch/images/4.php&quot;\n                  download_domain=&quot;certificates-security.com&quot;\n                  ready_to_bind=&quot;0&quot; /&gt;\n            \n          &lt;/config&gt;\x05\x05\x05\x05\x05&apos;
-</pre>
-</div>
+<pre class="ipynb">&apos;&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;\n          &lt;config&gt;\n            &lt;data rid=&quot;25&quot; \n                  shnum10=&quot;&quot; shtext10=&quot;&quot; shnum5=&quot;&quot; shtext5=&quot;&quot; shnum3=&quot;&quot; shtext3=&quot;&quot; shnum1=&quot;&quot; shtext1=&quot;&quot; \n                  del_dev=&quot;0&quot; \n                  url_main=&quot;http://best-invest-int.com/gallery/3.php;http://citroen-club.ch/images/3.php&quot; \n                  url_data=&quot;http://best-invest-int.com/gallery/1.php;http://citroen-club.ch/images/1.php&quot; \n                  url_sms=&quot;http://best-invest-int.com/gallery/2.php;http://citroen-club.ch/images/2.php&quot;\n                  url_log=&quot;http://best-invest-int.com/gallery/4.php;http://citroen-club.ch/images/4.php&quot;\n                  download_domain=&quot;certificates-security.com&quot;\n                  ready_to_bind=&quot;0&quot; /&gt;\n            \n          &lt;/config&gt;\x05\x05\x05\x05\x05&apos;</pre>
 
 </div>
 
@@ -4348,8 +4269,8 @@ In&nbsp;[39]:
 <div class="prompt input_prompt">
 In&nbsp;[199]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
 <span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="kn">as</span> <span class="nn">ET</span>
 
@@ -4374,7 +4295,7 @@ In&nbsp;[199]:
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -4530,8 +4451,8 @@ In&nbsp;[199]:
 <div class="prompt input_prompt">
 In&nbsp;[197]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">urllib2</span>
  
 <span class="c"># Get URLs from DataFrame (only the valid ones)</span>
@@ -4563,7 +4484,7 @@ In&nbsp;[197]:
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -4574,9 +4495,7 @@ In&nbsp;[197]:
     Out[197]:</div>
 
 
-<div class="output_text output_subarea output_pyout">
-<pre>
-{&apos;http://best-invest-int.com/gallery/1.php&apos;: None,
+<pre class="ipynb">{&apos;http://best-invest-int.com/gallery/1.php&apos;: None,
  &apos;http://best-invest-int.com/gallery/2.php&apos;: None,
  &apos;http://best-invest-int.com/gallery/3.php&apos;: None,
  &apos;http://best-invest-int.com/gallery/4.php&apos;: None,
@@ -4595,9 +4514,7 @@ In&nbsp;[197]:
  &apos;http://citroen-club.ch/images/4.php&apos;: [(&apos;date&apos;,
    &apos;Fri, 04 Jul 2014 08:31:12 GMT&apos;),
   (&apos;content-type&apos;, &apos;text/html; charset=iso-8859-1&apos;),
-  (&apos;server&apos;, &apos;Apache&apos;)]}
-</pre>
-</div>
+  (&apos;server&apos;, &apos;Apache&apos;)]}</pre>
 
 </div>
 
@@ -4629,8 +4546,8 @@ In&nbsp;[197]:
 <div class="prompt input_prompt">
 In&nbsp;[224]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">mkdir</span> <span class="n">DEX</span>
 <span class="n">cp</span> <span class="mf">7276e76298</span><span class="n">c50d2ee78271cf5114a176</span> <span class="n">DEX</span>
@@ -4640,7 +4557,7 @@ In&nbsp;[224]:
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -4648,9 +4565,8 @@ In&nbsp;[224]:
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-Archive:  7276e76298c50d2ee78271cf5114a176
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">Archive:  7276e76298c50d2ee78271cf5114a176
 signed by SignApk
   inflating: META-INF/MANIFEST.MF    
   inflating: META-INF/CERT.SF        
@@ -4669,7 +4585,6 @@ signed by SignApk
  extracting: res/raw/blfs.key        
   inflating: res/raw/config.cfg      
   inflating: resources.arsc          
-
 </pre>
 </div>
 </div>
@@ -4683,8 +4598,8 @@ signed by SignApk
 <div class="prompt input_prompt">
 In&nbsp;[106]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">hashlib</span>
 <span class="kn">import</span> <span class="nn">StringIO</span><span class="o">,</span> <span class="nn">pydot</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
@@ -4720,7 +4635,7 @@ In&nbsp;[106]:
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 </div>
@@ -4739,8 +4654,8 @@ In&nbsp;[106]:
 <div class="prompt input_prompt">
 In&nbsp;[42]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Definition:  d.get_method_descriptor(self, class_name, method_name, descriptor)</span>
 <span class="c"># </span>
 <span class="c"># Examples for method descriptors:</span>
@@ -4757,7 +4672,7 @@ In&nbsp;[42]:
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -15569,8 +15484,8 @@ AAAAAElFTkSuQmCC
 <div class="prompt input_prompt">
 In&nbsp;[108]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">m</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get_method_descriptor</span><span class="p">(</span><span class="s">&quot;Lcom/gmail/xlibs/myFunctions;&quot;</span><span class="p">,</span> <span class="s">&quot;getSecond&quot;</span><span class="p">,</span> <span class="s">&quot;(Landroid/content/Context;)V&quot;</span><span class="p">)</span>
 <span class="n">buff_dot</span> <span class="o">=</span> <span class="n">method2dot</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">get_method</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
 
@@ -15579,7 +15494,7 @@ In&nbsp;[108]:
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -23854,15 +23769,15 @@ aEIAAAAAAAAAAKlDEwIAAAAAAAAASB2aEAAAAAAAAABA6tCEAAAAAAAAAABShyYEAAAAAAAAAJA6
 <div class="prompt input_prompt">
 In&nbsp;[111]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># We should have a list of PathP objects which represent where a specific method is called:</span>
 <span class="n">paths</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">tainted_packages</span><span class="o">.</span><span class="n">search_methods</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">,</span> <span class="s">&quot;onReceive&quot;</span><span class="p">,</span> <span class="s">&quot;.&quot;</span><span class="p">)</span>
 <span class="n">paths</span>
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -23873,11 +23788,7 @@ In&nbsp;[111]:
     Out[111]:</div>
 
 
-<div class="output_text output_subarea output_pyout">
-<pre>
-[&lt;androguard.core.analysis.analysis.PathP instance at 0x101a5290&gt;]
-</pre>
-</div>
+<pre class="ipynb">[&lt;androguard.core.analysis.analysis.PathP instance at 0x101a5290&gt;]</pre>
 
 </div>
 
@@ -23890,8 +23801,8 @@ In&nbsp;[111]:
 <div class="prompt input_prompt">
 In&nbsp;[115]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Get the class manager from the VM</span>
 <span class="n">cm</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get_class_manager</span><span class="p">()</span>
 
@@ -23909,7 +23820,7 @@ In&nbsp;[115]:
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -23979,8 +23890,8 @@ In&nbsp;[115]:
 <div class="prompt input_prompt">
 In&nbsp;[253]:
 </div>
-<div class="inner_cell">
-    <div class="input_area">
+
+<div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">m</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get_method_descriptor</span><span class="p">(</span><span class="s">&quot;Lcom/gmail/xservices/XRepeat;&quot;</span><span class="p">,</span> <span class="s">&quot;onReceive&quot;</span><span class="p">,</span> <span class="s">&quot;(Landroid/content/Context; Landroid/content/Intent;)V&quot;</span><span class="p">)</span>
 
 <span class="n">buff_dot</span> <span class="o">=</span> <span class="n">method2dot</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">get_method</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
@@ -23989,7 +23900,7 @@ In&nbsp;[253]:
 </pre></div>
 
 </div>
-</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -25777,18 +25688,18 @@ TypeError: exceptions must be old-style classes or derived from BaseException, n
     Posted by <span class="fn">Victor Dorneanu</span>
   </span>
 <time datetime="2014-07-07T00:00:00" pubdate>Mon 07 July 2014</time>  <span class="categories">
-    <a class="category" href="http://blog.dornea.nu/tag/android/">android</a>
-    <a class="category" href="http://blog.dornea.nu/tag/hacking/">hacking</a>
-    <a class="category" href="http://blog.dornea.nu/tag/network/">network</a>
-    <a class="category" href="http://blog.dornea.nu/tag/security/">security</a>
-    <a class="category" href="http://blog.dornea.nu/tag/ipython/">ipython</a>
-    <a class="category" href="http://blog.dornea.nu/tag/code/">code</a>
-    <a class="category" href="http://blog.dornea.nu/tag/sca/">sca</a>
-    <a class="category" href="http://blog.dornea.nu/tag/androguard/">androguard</a>
-    <a class="category" href="http://blog.dornea.nu/tag/re/">re</a>
+    <a class="category" href="../../../../tag/android/">android</a>
+    <a class="category" href="../../../../tag/hacking/">hacking</a>
+    <a class="category" href="../../../../tag/network/">network</a>
+    <a class="category" href="../../../../tag/security/">security</a>
+    <a class="category" href="../../../../tag/ipython/">ipython</a>
+    <a class="category" href="../../../../tag/code/">code</a>
+    <a class="category" href="../../../../tag/sca/">sca</a>
+    <a class="category" href="../../../../tag/androguard/">androguard</a>
+    <a class="category" href="../../../../tag/re/">re</a>
   </span>
 </p><div class="sharing">
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis" data-via="victordorneanu" data-counturl="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="../../../../2014/07/07/disect-android-apks-like-a-pro-static-code-analysis" data-via="victordorneanu" data-counturl="../../../../2014/07/07/disect-android-apks-like-a-pro-static-code-analysis" >Tweet</a>
 </div>    </footer>
   </article>
 
@@ -25802,19 +25713,19 @@ TypeError: exceptions must be old-style classes or derived from BaseException, n
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
-          <a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a>
+          <a href="../../../../2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a>
       </li>
       <li class="post">
-          <a href="http://blog.dornea.nu/2014/07/01/on-java-openssl-crypto-blowfish-and-stuff">On Java, OpenSSL, Crypto, Blowfish and stuff</a>
+          <a href="../../../../2014/07/01/on-java-openssl-crypto-blowfish-and-stuff">On Java, OpenSSL, Crypto, Blowfish and stuff</a>
       </li>
       <li class="post">
-          <a href="http://blog.dornea.nu/2014/06/29/whatsapp-bot">WhatsApp bot</a>
+          <a href="../../../../2014/06/29/whatsapp-bot">WhatsApp bot</a>
       </li>
       <li class="post">
-          <a href="http://blog.dornea.nu/2014/06/18/migrate-this-blog-from-octopress-to-pelican">Migrate this blog from Octopress to Pelican</a>
+          <a href="../../../../2014/06/18/migrate-this-blog-from-octopress-to-pelican">Migrate this blog from Octopress to Pelican</a>
       </li>
       <li class="post">
-          <a href="http://blog.dornea.nu/2014/06/02/googles-xss-game-solutions">Googles XSS Game - Solutions</a>
+          <a href="../../../../2014/06/02/googles-xss-game-solutions">Googles XSS Game - Solutions</a>
       </li>
     </ul>
   </section>
@@ -25822,14 +25733,14 @@ TypeError: exceptions must be old-style classes or derived from BaseException, n
       
     <h1>Categories</h1>
     <ul id="recent_posts">
-        <li><a href="http://blog.dornea.nu/category/blog">blog</a></li>
+        <li><a href="../../../../category/blog">blog</a></li>
     </ul>
   </section>
  
 
   <section>
   <h1>Tags</h1>
-    <a href="http://blog.dornea.nu/tag//"></a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
+    <a href="../../../../tag//"></a>,    <a href="../../../../tag/pelican/">pelican</a>,    <a href="../../../../tag/code/">code</a>,    <a href="../../../../tag/coding/">coding</a>,    <a href="../../../../tag/openssl/">openssl</a>,    <a href="../../../../tag/virtualization/">virtualization</a>,    <a href="../../../../tag/web/">web</a>,    <a href="../../../../tag/wargames/">wargames</a>,    <a href="../../../../tag/java/">java</a>,    <a href="../../../../tag/network/">network</a>,    <a href="../../../../tag/octopress/">octopress</a>,    <a href="../../../../tag/blog/">blog</a>,    <a href="../../../../tag/re/">re</a>,    <a href="../../../../tag/low/">low</a>,    <a href="../../../../tag/android/">android</a>,    <a href="../../../../tag/androguard/">androguard</a>,    <a href="../../../../tag/events/">events</a>,    <a href="../../../../tag/uncategorized/">uncategorized</a>,    <a href="../../../../tag/cryptography/">cryptography</a>,    <a href="../../../../tag/python/">python</a>,    <a href="../../../../tag/misc/">misc</a>,    <a href="../../../../tag/howto/">howto</a>,    <a href="../../../../tag/wtf/">wtf</a>,    <a href="../../../../tag/ipython/">ipython</a>,    <a href="../../../../tag/security/">security</a>,    <a href="../../../../tag/crypto/">crypto</a>,    <a href="../../../../tag/sca/">sca</a>,    <a href="../../../../tag/whatsapp/">whatsapp</a>,    <a href="../../../../tag/hacking/">hacking</a>  </section>
 
 
 
@@ -25843,7 +25754,7 @@ TypeError: exceptions must be old-style classes or derived from BaseException, n
           if (!window.jXHR){
               var jxhr = document.createElement('script');
               jxhr.type = 'text/javascript';
-              jxhr.src = 'http://blog.dornea.nu/theme/js/jXHR.js';
+              jxhr.src = '../../../../theme/js/jXHR.js';
               var s = document.getElementsByTagName('script')[0];
               s.parentNode.insertBefore(jxhr, s);
           }
@@ -25856,7 +25767,7 @@ TypeError: exceptions must be old-style classes or derived from BaseException, n
           });
       });
     </script>
-    <script src="http://blog.dornea.nu/theme/js/github.js" type="text/javascript"> </script>
+    <script src="../../../../theme/js/github.js" type="text/javascript"> </script>
   </section>
 
     <section>
@@ -25931,7 +25842,7 @@ TypeError: exceptions must be old-style classes or derived from BaseException, n
 	<script type="text/javascript">
 	  var disqus_shortname = 'dorneanu';
           var disqus_identifier = '/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis';
-          var disqus_url = 'http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis';
+          var disqus_url = '../../../../2014/07/07/disect-android-apks-like-a-pro-static-code-analysis';
           var disqus_title = 'Disect Android APKs like a Pro - Static code analysis';
 	  (function() {
 	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -25949,4 +25860,5 @@ TypeError: exceptions must be old-style classes or derived from BaseException, n
     })();
   </script>
 </body>
+                <script src="http://blog.dornea.nu/js/d3-timeline.js"></script>
 </html>

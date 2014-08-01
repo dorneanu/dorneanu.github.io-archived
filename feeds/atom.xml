@@ -105,8 +105,8 @@ permitted &lt;span class="keyword"&gt;by&lt;/span&gt; applicable law.
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[102]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
 
@@ -123,7 +123,7 @@ In&amp;nbsp;[102]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -142,8 +142,8 @@ In&amp;nbsp;[102]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[104]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="k"&gt;pylab&lt;/span&gt; &lt;span class="n"&gt;inline&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
@@ -157,7 +157,7 @@ In&amp;nbsp;[104]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -165,10 +165,8 @@ In&amp;nbsp;[104]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-Populating the interactive namespace from numpy and matplotlib
-
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;Populating the interactive namespace from numpy and matplotlib
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -251,14 +249,14 @@ p7zip &lt;span class="constant"&gt;Version&lt;/span&gt; &lt;span class="number"&
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[105]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# Change CWD&lt;/span&gt;
 &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;chdir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/root/work/apk/DroidBox/APK&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -277,14 +275,14 @@ In&amp;nbsp;[105]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[42]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;do&lt;/span&gt; &lt;span class="nb"&gt;file&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;done&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -292,12 +290,10 @@ In&amp;nbsp;[42]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-7276e76298c50d2ee78271cf5114a176: Zip archive data, at least v2.0 to extract
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;7276e76298c50d2ee78271cf5114a176: Zip archive data, at least v2.0 to extract
 a15b704743f53d3edb9cdd1182ca78d1: Zip archive data, at least v2.0 to extract
 aac4d15741abe0ee9b4afe78be090599: Zip archive data, at least v2.0 to extract
-
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -321,14 +317,14 @@ aac4d15741abe0ee9b4afe78be090599: Zip archive data, at least v2.0 to extract
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[151]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="n"&gt;unzip&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="mf"&gt;7276e76298&lt;/span&gt;&lt;span class="n"&gt;c50d2ee78271cf5114a176&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -336,9 +332,8 @@ In&amp;nbsp;[151]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-Archive:  7276e76298c50d2ee78271cf5114a176
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;Archive:  7276e76298c50d2ee78271cf5114a176
 signed by SignApk
   Length      Date    Time    Name
 ---------  ---------- -----   ----
@@ -361,7 +356,6 @@ signed by SignApk
      3196  2008-02-29 05:33   resources.arsc
 ---------                     -------
    449584                     17 files
-
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -385,15 +379,15 @@ signed by SignApk
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[159]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="n"&gt;cp&lt;/span&gt; &lt;span class="mf"&gt;7276e76298&lt;/span&gt;&lt;span class="n"&gt;c50d2ee78271cf5114a176&lt;/span&gt; &lt;span class="n"&gt;FakeBanker&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apk&lt;/span&gt;
 &lt;span class="n"&gt;java&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;jar&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;work&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nb"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;apktool1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mf"&gt;5.2&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;apktool&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jar&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="mf"&gt;7276e76298&lt;/span&gt;&lt;span class="n"&gt;c50d2ee78271cf5114a176&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -401,10 +395,8 @@ In&amp;nbsp;[159]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-Destination directory (/root/work/apk/DroidBox/APK/output) already exists. Use -f switch if you want to overwrite it.
-
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;Destination directory (/root/work/apk/DroidBox/APK/output) already exists. Use -f switch if you want to overwrite it.
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -428,14 +420,14 @@ Destination directory (/root/work/apk/DroidBox/APK/output) already exists. Use -
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[192]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;AndroidManifest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xml&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -443,9 +435,8 @@ In&amp;nbsp;[192]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt;
 &amp;lt;manifest android:versionCode=&amp;quot;1&amp;quot; android:versionName=&amp;quot;1.0&amp;quot; package=&amp;quot;com.gmail.xpack&amp;quot;
   xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot;&amp;gt;
     &amp;lt;uses-permission android:name=&amp;quot;android.permission.RECEIVE_BOOT_COMPLETED&amp;quot; /&amp;gt;
@@ -487,8 +478,7 @@ In&amp;nbsp;[192]:
             &amp;lt;/intent-filter&amp;gt;
         &amp;lt;/activity&amp;gt;
     &amp;lt;/application&amp;gt;
-&amp;lt;/manifest&amp;gt;
-&lt;/pre&gt;
+&amp;lt;/manifest&amp;gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
@@ -511,8 +501,8 @@ In&amp;nbsp;[192]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[213]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;media_paths&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="err"&gt;!&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;regextype&lt;/span&gt; &lt;span class="n"&gt;posix&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;egrep&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;regex&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;^.*\.(png|jpg|jpeg|gif|bmp)$&amp;quot;&lt;/span&gt;
 &lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;media_paths&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;media_paths&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
@@ -520,7 +510,7 @@ In&amp;nbsp;[213]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -530,15 +520,11 @@ In&amp;nbsp;[213]:
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 
 
-&lt;div class="output_text output_subarea "&gt;
-&lt;pre&gt;
-[&amp;apos;output/res/drawable-ldpi/ic_launcher1.png&amp;apos;,
+&lt;pre class="ipynb"&gt;[&amp;apos;output/res/drawable-ldpi/ic_launcher1.png&amp;apos;,
  &amp;apos;output/res/drawable-mdpi/ic_launcher1.png&amp;apos;,
  &amp;apos;output/res/drawable-xhdpi/ic_launcher1.png&amp;apos;,
  &amp;apos;output/res/drawable-hdpi/logo.png&amp;apos;,
- &amp;apos;output/res/drawable-hdpi/ic_launcher1.png&amp;apos;]
-&lt;/pre&gt;
-&lt;/div&gt;
+ &amp;apos;output/res/drawable-hdpi/ic_launcher1.png&amp;apos;]&lt;/pre&gt;
 
 &lt;/div&gt;
 
@@ -1231,15 +1217,15 @@ n2oln6IunvLC7ts9Ire2uUcVpe4kQ4neFrsJ3I5gM2coKySbhuw5Be2f/ls8A+hTNhULh3AO6dSW
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[212]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="c"&gt;# Ignore smali directory&lt;/span&gt;
 &lt;span class="n"&gt;tree&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;I&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;smali&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -1247,9 +1233,8 @@ In&amp;nbsp;[212]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-output
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;output
 ├── output/AndroidManifest.xml
 ├── output/apktool.yml
 └── output/res
@@ -1278,7 +1263,6 @@ output
         └── output/res/values/styles.xml
 
 9 directories, 17 files
-
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1340,8 +1324,8 @@ output
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[5]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# Use AndroGuard to static analysis&lt;/span&gt;
 &lt;span class="c"&gt;# Have a look at https://code.google.com/p/androguard/wiki/RE for some introduction&lt;/span&gt;
 &lt;span class="c"&gt;#a = anz.APK(&amp;#39;KC.apk&amp;#39;)&lt;/span&gt;
@@ -1356,7 +1340,7 @@ In&amp;nbsp;[5]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -1367,11 +1351,7 @@ In&amp;nbsp;[5]:
     Out[5]:&lt;/div&gt;
 
 
-&lt;div class="output_text output_subarea output_pyout"&gt;
-&lt;pre&gt;
-&amp;apos;\nd = anz.DalvikVMFormat(a.get_dex())\ndx = anz.VMAnalysis( d )\ngx = anz.GVMAnalysis( dx, None )\nd.set_vmanalysis( dx )\nd.set_gvmanalysis( gx )\n&amp;apos;
-&lt;/pre&gt;
-&lt;/div&gt;
+&lt;pre class="ipynb"&gt;&amp;apos;\nd = anz.DalvikVMFormat(a.get_dex())\ndx = anz.VMAnalysis( d )\ngx = anz.GVMAnalysis( dx, None )\nd.set_vmanalysis( dx )\nd.set_gvmanalysis( gx )\n&amp;apos;&lt;/pre&gt;
 
 &lt;/div&gt;
 
@@ -1394,13 +1374,13 @@ In&amp;nbsp;[5]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[133]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;files&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -1411,9 +1391,7 @@ In&amp;nbsp;[133]:
     Out[133]:&lt;/div&gt;
 
 
-&lt;div class="output_text output_subarea output_pyout"&gt;
-&lt;pre&gt;
-{&amp;apos;AndroidManifest.xml&amp;apos;: &amp;apos;Unknown&amp;apos;,
+&lt;pre class="ipynb"&gt;{&amp;apos;AndroidManifest.xml&amp;apos;: &amp;apos;Unknown&amp;apos;,
  &amp;apos;META-INF/CERT.RSA&amp;apos;: &amp;apos;Unknown&amp;apos;,
  &amp;apos;META-INF/CERT.SF&amp;apos;: &amp;apos;Unknown&amp;apos;,
  &amp;apos;META-INF/MANIFEST.MF&amp;apos;: &amp;apos;Unknown&amp;apos;,
@@ -1429,9 +1407,7 @@ In&amp;nbsp;[133]:
  &amp;apos;res/menu/main.xml&amp;apos;: &amp;apos;Unknown&amp;apos;,
  &amp;apos;res/raw/blfs.key&amp;apos;: &amp;apos;Unknown&amp;apos;,
  &amp;apos;res/raw/config.cfg&amp;apos;: &amp;apos;Unknown&amp;apos;,
- &amp;apos;resources.arsc&amp;apos;: &amp;apos;Unknown&amp;apos;}
-&lt;/pre&gt;
-&lt;/div&gt;
+ &amp;apos;resources.arsc&amp;apos;: &amp;apos;Unknown&amp;apos;}&lt;/pre&gt;
 
 &lt;/div&gt;
 
@@ -1444,13 +1420,13 @@ In&amp;nbsp;[133]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[8]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;permissions&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -1461,17 +1437,13 @@ In&amp;nbsp;[8]:
     Out[8]:&lt;/div&gt;
 
 
-&lt;div class="output_text output_subarea output_pyout"&gt;
-&lt;pre&gt;
-[&amp;apos;android.permission.RECEIVE_BOOT_COMPLETED&amp;apos;,
+&lt;pre class="ipynb"&gt;[&amp;apos;android.permission.RECEIVE_BOOT_COMPLETED&amp;apos;,
  &amp;apos;android.permission.READ_SMS&amp;apos;,
  &amp;apos;android.permission.RECEIVE_SMS&amp;apos;,
  &amp;apos;android.permission.INTERNET&amp;apos;,
  &amp;apos;android.permission.READ_PHONE_STATE&amp;apos;,
  &amp;apos;android.permission.ACCESS_COARSE_LOCATION&amp;apos;,
- &amp;apos;android.permission.ACCESS_NETWORK_STATE&amp;apos;]
-&lt;/pre&gt;
-&lt;/div&gt;
+ &amp;apos;android.permission.ACCESS_NETWORK_STATE&amp;apos;]&lt;/pre&gt;
 
 &lt;/div&gt;
 
@@ -1484,13 +1456,13 @@ In&amp;nbsp;[8]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[9]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_activities&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -1501,11 +1473,7 @@ In&amp;nbsp;[9]:
     Out[9]:&lt;/div&gt;
 
 
-&lt;div class="output_text output_subarea output_pyout"&gt;
-&lt;pre&gt;
-[&amp;apos;com.gmail.xpack.MainActivity&amp;apos;, &amp;apos;com.gmail.xpack.ActUpdate&amp;apos;]
-&lt;/pre&gt;
-&lt;/div&gt;
+&lt;pre class="ipynb"&gt;[&amp;apos;com.gmail.xpack.MainActivity&amp;apos;, &amp;apos;com.gmail.xpack.ActUpdate&amp;apos;]&lt;/pre&gt;
 
 &lt;/div&gt;
 
@@ -1518,13 +1486,13 @@ In&amp;nbsp;[9]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[10]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_services&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -1535,11 +1503,7 @@ In&amp;nbsp;[10]:
     Out[10]:&lt;/div&gt;
 
 
-&lt;div class="output_text output_subarea output_pyout"&gt;
-&lt;pre&gt;
-[&amp;apos;com.gmail.xservices.XService&amp;apos;, &amp;apos;com.gmail.xservices.XSmsIncom&amp;apos;]
-&lt;/pre&gt;
-&lt;/div&gt;
+&lt;pre class="ipynb"&gt;[&amp;apos;com.gmail.xservices.XService&amp;apos;, &amp;apos;com.gmail.xservices.XSmsIncom&amp;apos;]&lt;/pre&gt;
 
 &lt;/div&gt;
 
@@ -1552,13 +1516,13 @@ In&amp;nbsp;[10]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[18]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_receivers&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -1569,14 +1533,10 @@ In&amp;nbsp;[18]:
     Out[18]:&lt;/div&gt;
 
 
-&lt;div class="output_text output_subarea output_pyout"&gt;
-&lt;pre&gt;
-[&amp;apos;com.gmail.xbroadcast.OnBootReceiver&amp;apos;,
+&lt;pre class="ipynb"&gt;[&amp;apos;com.gmail.xbroadcast.OnBootReceiver&amp;apos;,
  &amp;apos;com.gmail.xbroadcast.MessageReceiver&amp;apos;,
  &amp;apos;com.gmail.xservices.XRepeat&amp;apos;,
- &amp;apos;com.gmail.xservices.XUpdate&amp;apos;]
-&lt;/pre&gt;
-&lt;/div&gt;
+ &amp;apos;com.gmail.xservices.XUpdate&amp;apos;]&lt;/pre&gt;
 
 &lt;/div&gt;
 
@@ -1589,13 +1549,13 @@ In&amp;nbsp;[18]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[19]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_main_activity&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -1606,11 +1566,7 @@ In&amp;nbsp;[19]:
     Out[19]:&lt;/div&gt;
 
 
-&lt;div class="output_text output_subarea output_pyout"&gt;
-&lt;pre&gt;
-u&amp;apos;com.gmail.xpack.MainActivity&amp;apos;
-&lt;/pre&gt;
-&lt;/div&gt;
+&lt;pre class="ipynb"&gt;u&amp;apos;com.gmail.xpack.MainActivity&amp;apos;&lt;/pre&gt;
 
 &lt;/div&gt;
 
@@ -1623,13 +1579,13 @@ u&amp;apos;com.gmail.xpack.MainActivity&amp;apos;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[18]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CLASS_Lcom_gmail_xpack_MainActivity&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;METHOD_onCreate&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -1637,9 +1593,8 @@ In&amp;nbsp;[18]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;
     protected void onCreate(android.os.Bundle p5)
     {
         super.onCreate(p5);
@@ -1649,7 +1604,6 @@ In&amp;nbsp;[18]:
         this.startService(new android.content.Intent(&amp;quot;XMainProcessStart&amp;quot;).putExtra(&amp;quot;name&amp;quot;, &amp;quot;value&amp;quot;));
         return;
     }
-
 
 &lt;/pre&gt;
 &lt;/div&gt;
@@ -1673,14 +1627,14 @@ In&amp;nbsp;[18]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[15]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;methods&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CLASS_Lcom_gmail_xlibs_myFunctions&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_methods&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;methods&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_name&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -1688,9 +1642,8 @@ In&amp;nbsp;[15]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-&amp;lt;init&amp;gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;&amp;lt;init&amp;gt;
 IntToStr
 StrToInt
 checkPhone
@@ -1714,7 +1667,6 @@ setVar
 setVar
 setVarsList
 typeInternetConnection
-
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1737,13 +1689,13 @@ typeInternetConnection
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[198]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CLASS_Lcom_gmail_xlibs_myFunctions&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;METHOD_setK12&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -1751,9 +1703,8 @@ In&amp;nbsp;[198]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;
     public static String setK12(String p4, android.content.Context p5)
     {
         String v2;
@@ -1765,7 +1716,6 @@ In&amp;nbsp;[198]:
         }
         return v2;
     }
-
 
 &lt;/pre&gt;
 &lt;/div&gt;
@@ -1805,13 +1755,13 @@ In&amp;nbsp;[198]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[26]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CLASS_Lcom_gmail_xlibs_Blowfish&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;METHOD_init&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -1819,9 +1769,8 @@ In&amp;nbsp;[26]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;
     public Blowfish(String p2, String p3, String p4)
     {
         this.IV = &amp;quot;12345678&amp;quot;;
@@ -1831,7 +1780,6 @@ In&amp;nbsp;[26]:
         this.in_out_format = p3;
         return;
     }
-
 
 &lt;/pre&gt;
 &lt;/div&gt;
@@ -1855,14 +1803,14 @@ In&amp;nbsp;[26]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[143]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;z&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dx&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tainted_variables&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_string&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;BLFSK&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;show_paths&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -1870,13 +1818,11 @@ In&amp;nbsp;[143]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-R 62 Lcom/gmail/xlibs/myFunctions;-&amp;gt;getFirst (Landroid/content/Context;)V
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;R 62 Lcom/gmail/xlibs/myFunctions;-&amp;gt;getFirst (Landroid/content/Context;)V
 R 17c Lcom/gmail/xlibs/myFunctions;-&amp;gt;getFirst (Landroid/content/Context;)V
 R e8 Lcom/gmail/xlibs/myFunctions;-&amp;gt;getSecond (Landroid/content/Context;)V
 R 0 Lcom/gmail/xlibs/myFunctions;-&amp;gt;setK12 (Ljava/lang/String; Landroid/content/Context;)Ljava/lang/String;
-
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1899,14 +1845,14 @@ R 0 Lcom/gmail/xlibs/myFunctions;-&amp;gt;setK12 (Ljava/lang/String; Landroid/co
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[123]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;blfs*&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -1914,10 +1860,8 @@ In&amp;nbsp;[123]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-output/res/raw/blfs.key
-
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;output/res/raw/blfs.key
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1931,14 +1875,14 @@ output/res/raw/blfs.key
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[37]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;raw&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blfs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -1946,10 +1890,8 @@ In&amp;nbsp;[37]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-NfvnkjlnvkjKCNXKDKLFHSKD:LJmdklsXKLNDS:&amp;lt;XObcniuaebkjxbcz
-&lt;/pre&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;NfvnkjlnvkjKCNXKDKLFHSKD:LJmdklsXKLNDS:&amp;lt;XObcniuaebkjxbcz&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
@@ -1971,14 +1913,14 @@ NfvnkjlnvkjKCNXKDKLFHSKD:LJmdklsXKLNDS:&amp;lt;XObcniuaebkjxbcz
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[40]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;raw&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -1986,12 +1928,10 @@ In&amp;nbsp;[40]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-total 8
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;total 8
 -rw-r--r-- 1 root root   56 Jun 25 13:26 blfs.key
 -rw-r--r-- 1 root root 1048 Jun 25 13:26 config.cfg
-
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2005,14 +1945,14 @@ total 8
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[42]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;raw&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cfg&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -2020,10 +1960,8 @@ In&amp;nbsp;[42]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-HoBbgAt+xT9vXJUlyhYYAVOx5Oy4XSMLyc7JC+ly5a1tbUtWvFMny2yqavP9D9GT0ogg2U4LN5FZE8/0Y2duLgE7dfXLPcaeXKoIuTmJ4LBiUjS0OokxUPMOrJYCTCx2oWGmdHJqohz7QlbqnZPWch9BvjiWG3TeXKDkjrPKohMswoPA/EVQy3is6XBBfqYKoExCDci14mcoHfnbw1V+YAJlwONpjn1dmzVkJLVQ4ZEbg2WPD5LnXwhdGkhVXF4kS/pHk+6h4ZVd4CMcG7kbWpe7f/dbBX3zJ2NXP+E+MxYW/MTYrNRBMQIfZbuhGmsULXjpHb16R19NZvV4qQwi68KrFbc5hZyfSkWUwD50t2O3o9mSQB3/IlqzzA7VE3XxrsUkZQcBYEixFshSTN+lywZwohooyjGiPEhof7k08bo3YgkDh/8vMR1rttvUKs0xTdQtLF8iER8GDCt6ZUtG0+Lf2G+THOw/Azp/ipC3JJ7Rcj0m1uTj3AAjwfK69rcbtCTP6q5qV8pDEtSr3foU7KZvjCXJL/8TVvZozttjoHnJhI3x5KGKLrczoavKsbiR0iI3ncwGTI5CQ7uZwfMkB5Q2Y4M7oDFTurCPT3iRAvhUQN3Ah8TKAyzwACUlCk9nA2A7H9IFfTgI2QvaXQlNxkPeZMh+iOYImUELMSbNQ1HpsaF1Bbymg6vWTgvyViVsAjf+Y22y+n0eFJicsLPzc9GNs6bCgPCIDVRr2iLoiXjP8AE4gQUdxfqCQ1JtvBfWXmB4kAWb1ciuqsE1Zff+aahnT1Qbet1vA6g9DsTLuumqX0tjmCD/E50eL48Bz0etthaS7RbJiIpg3SU9Lio1GmZeYBB9/4FW4CB1M+cH9jjjKmj4sXUwcLrBDgD+JvCEc7VGxdLj/Ori631mkWvRtlKC4sIOLlHQEDwRcXDgvLnAKZYG65Tm4a5gr490Yco1QSKxeMkMKvMitGQS87ObKaqr30nfXZHMwdWLc6Q437aVyOxc9GvxGC7qmtnYU4Pw5alh1XKtXdjY4EGsVhk/MQ==
-&lt;/pre&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;HoBbgAt+xT9vXJUlyhYYAVOx5Oy4XSMLyc7JC+ly5a1tbUtWvFMny2yqavP9D9GT0ogg2U4LN5FZE8/0Y2duLgE7dfXLPcaeXKoIuTmJ4LBiUjS0OokxUPMOrJYCTCx2oWGmdHJqohz7QlbqnZPWch9BvjiWG3TeXKDkjrPKohMswoPA/EVQy3is6XBBfqYKoExCDci14mcoHfnbw1V+YAJlwONpjn1dmzVkJLVQ4ZEbg2WPD5LnXwhdGkhVXF4kS/pHk+6h4ZVd4CMcG7kbWpe7f/dbBX3zJ2NXP+E+MxYW/MTYrNRBMQIfZbuhGmsULXjpHb16R19NZvV4qQwi68KrFbc5hZyfSkWUwD50t2O3o9mSQB3/IlqzzA7VE3XxrsUkZQcBYEixFshSTN+lywZwohooyjGiPEhof7k08bo3YgkDh/8vMR1rttvUKs0xTdQtLF8iER8GDCt6ZUtG0+Lf2G+THOw/Azp/ipC3JJ7Rcj0m1uTj3AAjwfK69rcbtCTP6q5qV8pDEtSr3foU7KZvjCXJL/8TVvZozttjoHnJhI3x5KGKLrczoavKsbiR0iI3ncwGTI5CQ7uZwfMkB5Q2Y4M7oDFTurCPT3iRAvhUQN3Ah8TKAyzwACUlCk9nA2A7H9IFfTgI2QvaXQlNxkPeZMh+iOYImUELMSbNQ1HpsaF1Bbymg6vWTgvyViVsAjf+Y22y+n0eFJicsLPzc9GNs6bCgPCIDVRr2iLoiXjP8AE4gQUdxfqCQ1JtvBfWXmB4kAWb1ciuqsE1Zff+aahnT1Qbet1vA6g9DsTLuumqX0tjmCD/E50eL48Bz0etthaS7RbJiIpg3SU9Lio1GmZeYBB9/4FW4CB1M+cH9jjjKmj4sXUwcLrBDgD+JvCEc7VGxdLj/Ori631mkWvRtlKC4sIOLlHQEDwRcXDgvLnAKZYG65Tm4a5gr490Yco1QSKxeMkMKvMitGQS87ObKaqr30nfXZHMwdWLc6Q437aVyOxc9GvxGC7qmtnYU4Pw5alh1XKtXdjY4EGsVhk/MQ==&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
@@ -2045,15 +1983,15 @@ HoBbgAt+xT9vXJUlyhYYAVOx5Oy4XSMLyc7JC+ly5a1tbUtWvFMny2yqavP9D9GT0ogg2U4LN5FZE8/0
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[46]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="n"&gt;base64&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;raw&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cfg&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;raw&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cfg&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw&lt;/span&gt;
 &lt;span class="nb"&gt;file&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;raw&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cfg&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -2061,10 +1999,8 @@ In&amp;nbsp;[46]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-output/res/raw/config.cfg.raw: data
-
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;output/res/raw/config.cfg.raw: data
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2087,13 +2023,13 @@ output/res/raw/config.cfg.raw: data
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[191]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CLASS_Lcom_gmail_xlibs_Blowfish&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;METHOD_encrypt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -2101,9 +2037,8 @@ In&amp;nbsp;[191]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;
     public String encrypt(String p10)
     {
         try {
@@ -2128,7 +2063,6 @@ In&amp;nbsp;[191]:
         return v7;
     }
 
-
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2151,13 +2085,13 @@ In&amp;nbsp;[191]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[136]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CLASS_Lcom_gmail_xlibs_Blowfish&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;METHOD_decrypt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -2165,9 +2099,8 @@ In&amp;nbsp;[136]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;
     public String decrypt(String p9)
     {
         try {
@@ -2192,7 +2125,6 @@ In&amp;nbsp;[136]:
         return v6;
     }
 
-
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2215,13 +2147,13 @@ In&amp;nbsp;[136]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[145]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CLASS_Lcom_gmail_xlibs_myFunctions&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;METHOD_getFirst&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -2229,9 +2161,8 @@ In&amp;nbsp;[145]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;
     public static void getFirst(android.content.Context p14)
     {
         if (com.gmail.xlibs.myFunctions.getVar(&amp;quot;RID&amp;quot;, 0, p14) == 0) {
@@ -2272,7 +2203,6 @@ In&amp;nbsp;[145]:
         }
         return;
     }
-
 
 &lt;/pre&gt;
 &lt;/div&gt;
@@ -2317,13 +2247,13 @@ In&amp;nbsp;[145]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[147]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CLASS_Lcom_gmail_xlibs_myFunctions&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;METHOD_getRawData&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -2331,9 +2261,8 @@ In&amp;nbsp;[147]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;
     public static String getRawData(int p9, int p10, android.content.Context p11)
     {
         java.io.InputStream v4 = p11.getResources().openRawResource(p9);
@@ -2357,7 +2286,6 @@ In&amp;nbsp;[147]:
         }
         v4.close();
     }
-
 
 &lt;/pre&gt;
 &lt;/div&gt;
@@ -2391,14 +2319,14 @@ hex(2130968577) = 7f040001
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[153]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="n"&gt;grep&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;7f040000&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="o"&gt;/*&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;grep&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;7f040001&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="o"&gt;/*&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -2406,14 +2334,12 @@ In&amp;nbsp;[153]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-output/res/values/public.xml:    &amp;lt;public type=&amp;quot;raw&amp;quot; name=&amp;quot;blfs&amp;quot; id=&amp;quot;0x7f040000&amp;quot; /&amp;gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;output/res/values/public.xml:    &amp;lt;public type=&amp;quot;raw&amp;quot; name=&amp;quot;blfs&amp;quot; id=&amp;quot;0x7f040000&amp;quot; /&amp;gt;
 output/smali/com/gmail/xpack/R$raw.smali:.field public static final blfs:I = 0x7f040000
 output/res/values/public.xml:    &amp;lt;public type=&amp;quot;raw&amp;quot; name=&amp;quot;config&amp;quot; id=&amp;quot;0x7f040001&amp;quot; /&amp;gt;
 output/smali/com/gmail/xlibs/myFunctions.smali:    const v11, 0x7f040001
 output/smali/com/gmail/xpack/R$raw.smali:.field public static final config:I = 0x7f040001
-
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2436,14 +2362,14 @@ output/smali/com/gmail/xpack/R$raw.smali:.field public static final config:I = 0
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[7]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="n"&gt;grep&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;7f04000&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;smali&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;gmail&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;xpack&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;R&lt;/span&gt;\&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;raw&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;smali&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -2451,11 +2377,9 @@ In&amp;nbsp;[7]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-.field public static final blfs:I = 0x7f040000
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;.field public static final blfs:I = 0x7f040000
 .field public static final config:I = 0x7f040001
-
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2502,8 +2426,8 @@ In&amp;nbsp;[7]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[39]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;Crypto.Cipher&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Blowfish&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;Crypto&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Random&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;struct&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;pack&lt;/span&gt;
@@ -2532,7 +2456,7 @@ In&amp;nbsp;[39]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -2543,11 +2467,7 @@ In&amp;nbsp;[39]:
     Out[39]:&lt;/div&gt;
 
 
-&lt;div class="output_text output_subarea output_pyout"&gt;
-&lt;pre&gt;
-&amp;apos;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt;\n          &amp;lt;config&amp;gt;\n            &amp;lt;data rid=&amp;quot;25&amp;quot; \n                  shnum10=&amp;quot;&amp;quot; shtext10=&amp;quot;&amp;quot; shnum5=&amp;quot;&amp;quot; shtext5=&amp;quot;&amp;quot; shnum3=&amp;quot;&amp;quot; shtext3=&amp;quot;&amp;quot; shnum1=&amp;quot;&amp;quot; shtext1=&amp;quot;&amp;quot; \n                  del_dev=&amp;quot;0&amp;quot; \n                  url_main=&amp;quot;http://best-invest-int.com/gallery/3.php;http://citroen-club.ch/images/3.php&amp;quot; \n                  url_data=&amp;quot;http://best-invest-int.com/gallery/1.php;http://citroen-club.ch/images/1.php&amp;quot; \n                  url_sms=&amp;quot;http://best-invest-int.com/gallery/2.php;http://citroen-club.ch/images/2.php&amp;quot;\n                  url_log=&amp;quot;http://best-invest-int.com/gallery/4.php;http://citroen-club.ch/images/4.php&amp;quot;\n                  download_domain=&amp;quot;certificates-security.com&amp;quot;\n                  ready_to_bind=&amp;quot;0&amp;quot; /&amp;gt;\n            \n          &amp;lt;/config&amp;gt;\x05\x05\x05\x05\x05&amp;apos;
-&lt;/pre&gt;
-&lt;/div&gt;
+&lt;pre class="ipynb"&gt;&amp;apos;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt;\n          &amp;lt;config&amp;gt;\n            &amp;lt;data rid=&amp;quot;25&amp;quot; \n                  shnum10=&amp;quot;&amp;quot; shtext10=&amp;quot;&amp;quot; shnum5=&amp;quot;&amp;quot; shtext5=&amp;quot;&amp;quot; shnum3=&amp;quot;&amp;quot; shtext3=&amp;quot;&amp;quot; shnum1=&amp;quot;&amp;quot; shtext1=&amp;quot;&amp;quot; \n                  del_dev=&amp;quot;0&amp;quot; \n                  url_main=&amp;quot;http://best-invest-int.com/gallery/3.php;http://citroen-club.ch/images/3.php&amp;quot; \n                  url_data=&amp;quot;http://best-invest-int.com/gallery/1.php;http://citroen-club.ch/images/1.php&amp;quot; \n                  url_sms=&amp;quot;http://best-invest-int.com/gallery/2.php;http://citroen-club.ch/images/2.php&amp;quot;\n                  url_log=&amp;quot;http://best-invest-int.com/gallery/4.php;http://citroen-club.ch/images/4.php&amp;quot;\n                  download_domain=&amp;quot;certificates-security.com&amp;quot;\n                  ready_to_bind=&amp;quot;0&amp;quot; /&amp;gt;\n            \n          &amp;lt;/config&amp;gt;\x05\x05\x05\x05\x05&amp;apos;&lt;/pre&gt;
 
 &lt;/div&gt;
 
@@ -2569,8 +2489,8 @@ In&amp;nbsp;[39]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[199]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;lxml&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;etree&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;xml.etree.ElementTree&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;ET&lt;/span&gt;
 
@@ -2595,7 +2515,7 @@ In&amp;nbsp;[199]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -2751,8 +2671,8 @@ In&amp;nbsp;[199]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[197]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;urllib2&lt;/span&gt;
  
 &lt;span class="c"&gt;# Get URLs from DataFrame (only the valid ones)&lt;/span&gt;
@@ -2784,7 +2704,7 @@ In&amp;nbsp;[197]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -2795,9 +2715,7 @@ In&amp;nbsp;[197]:
     Out[197]:&lt;/div&gt;
 
 
-&lt;div class="output_text output_subarea output_pyout"&gt;
-&lt;pre&gt;
-{&amp;apos;http://best-invest-int.com/gallery/1.php&amp;apos;: None,
+&lt;pre class="ipynb"&gt;{&amp;apos;http://best-invest-int.com/gallery/1.php&amp;apos;: None,
  &amp;apos;http://best-invest-int.com/gallery/2.php&amp;apos;: None,
  &amp;apos;http://best-invest-int.com/gallery/3.php&amp;apos;: None,
  &amp;apos;http://best-invest-int.com/gallery/4.php&amp;apos;: None,
@@ -2816,9 +2734,7 @@ In&amp;nbsp;[197]:
  &amp;apos;http://citroen-club.ch/images/4.php&amp;apos;: [(&amp;apos;date&amp;apos;,
    &amp;apos;Fri, 04 Jul 2014 08:31:12 GMT&amp;apos;),
   (&amp;apos;content-type&amp;apos;, &amp;apos;text/html; charset=iso-8859-1&amp;apos;),
-  (&amp;apos;server&amp;apos;, &amp;apos;Apache&amp;apos;)]}
-&lt;/pre&gt;
-&lt;/div&gt;
+  (&amp;apos;server&amp;apos;, &amp;apos;Apache&amp;apos;)]}&lt;/pre&gt;
 
 &lt;/div&gt;
 
@@ -2850,8 +2766,8 @@ In&amp;nbsp;[197]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[224]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="n"&gt;mkdir&lt;/span&gt; &lt;span class="n"&gt;DEX&lt;/span&gt;
 &lt;span class="n"&gt;cp&lt;/span&gt; &lt;span class="mf"&gt;7276e76298&lt;/span&gt;&lt;span class="n"&gt;c50d2ee78271cf5114a176&lt;/span&gt; &lt;span class="n"&gt;DEX&lt;/span&gt;
@@ -2861,7 +2777,7 @@ In&amp;nbsp;[224]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -2869,9 +2785,8 @@ In&amp;nbsp;[224]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-Archive:  7276e76298c50d2ee78271cf5114a176
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;Archive:  7276e76298c50d2ee78271cf5114a176
 signed by SignApk
   inflating: META-INF/MANIFEST.MF    
   inflating: META-INF/CERT.SF        
@@ -2890,7 +2805,6 @@ signed by SignApk
  extracting: res/raw/blfs.key        
   inflating: res/raw/config.cfg      
   inflating: resources.arsc          
-
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2904,8 +2818,8 @@ signed by SignApk
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[106]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;hashlib&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;StringIO&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;pydot&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.display&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Image&lt;/span&gt;
@@ -2941,7 +2855,7 @@ In&amp;nbsp;[106]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -2960,8 +2874,8 @@ In&amp;nbsp;[106]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[42]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# Definition:  d.get_method_descriptor(self, class_name, method_name, descriptor)&lt;/span&gt;
 &lt;span class="c"&gt;# &lt;/span&gt;
 &lt;span class="c"&gt;# Examples for method descriptors:&lt;/span&gt;
@@ -2978,7 +2892,7 @@ In&amp;nbsp;[42]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -13790,8 +13704,8 @@ AAAAAElFTkSuQmCC
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[108]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_method_descriptor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Lcom/gmail/xlibs/myFunctions;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;getSecond&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;(Landroid/content/Context;)V&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;buff_dot&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;method2dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_method&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
@@ -13800,7 +13714,7 @@ In&amp;nbsp;[108]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -22075,15 +21989,15 @@ aEIAAAAAAAAAAKlDEwIAAAAAAAAASB2aEAAAAAAAAABA6tCEAAAAAAAAAABShyYEAAAAAAAAAJA6
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[111]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# We should have a list of PathP objects which represent where a specific method is called:&lt;/span&gt;
 &lt;span class="n"&gt;paths&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tainted_packages&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;search_methods&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;onReceive&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;paths&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -22094,11 +22008,7 @@ In&amp;nbsp;[111]:
     Out[111]:&lt;/div&gt;
 
 
-&lt;div class="output_text output_subarea output_pyout"&gt;
-&lt;pre&gt;
-[&amp;lt;androguard.core.analysis.analysis.PathP instance at 0x101a5290&amp;gt;]
-&lt;/pre&gt;
-&lt;/div&gt;
+&lt;pre class="ipynb"&gt;[&amp;lt;androguard.core.analysis.analysis.PathP instance at 0x101a5290&amp;gt;]&lt;/pre&gt;
 
 &lt;/div&gt;
 
@@ -22111,8 +22021,8 @@ In&amp;nbsp;[111]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[115]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# Get the class manager from the VM&lt;/span&gt;
 &lt;span class="n"&gt;cm&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_class_manager&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
@@ -22130,7 +22040,7 @@ In&amp;nbsp;[115]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -22200,8 +22110,8 @@ In&amp;nbsp;[115]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[253]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_method_descriptor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Lcom/gmail/xservices/XRepeat;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;onReceive&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;(Landroid/content/Context; Landroid/content/Intent;)V&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="n"&gt;buff_dot&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;method2dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_method&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
@@ -22210,7 +22120,7 @@ In&amp;nbsp;[253]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -24309,14 +24219,14 @@ TypeError: exceptions must be old-style classes or derived from BaseException, n
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[8]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="n"&gt;cp&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;work&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;octopress&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;_posts&lt;/span&gt;&lt;span class="o"&gt;/*.&lt;/span&gt;&lt;span class="n"&gt;markdown&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;work&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;markdown&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -24325,14 +24235,14 @@ In&amp;nbsp;[8]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[9]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;work&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;markdown&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -24340,9 +24250,8 @@ In&amp;nbsp;[9]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-2014-05-27-berlinsides-0x05.markdown
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;2014-05-27-berlinsides-0x05.markdown
 2014-06-02-googles-xss-game-solutions.markdown
 2014-05-20-howto-write-pentest-reports-the-easy-way.markdown
 2014-05-15-test2.markdown
@@ -24352,7 +24261,6 @@ In&amp;nbsp;[9]:
 2014-03-07-unfancy-dashboard-using-matplotlib.markdown
 2014-05-04-howto-create-docs-with-sphinx.markdown
 2014-01-23-24h-android-sniffing-using-tcpdump.markdown
-
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -24376,8 +24284,8 @@ In&amp;nbsp;[9]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[21]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;writefile&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;work&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;transform&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;awk&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="c"&gt;# Date&lt;/span&gt;
@@ -24442,7 +24350,7 @@ In&amp;nbsp;[21]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -24450,10 +24358,8 @@ In&amp;nbsp;[21]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-Overwriting /home/victor/work/blog/pelican/content/transform.awk
-
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;Overwriting /home/victor/work/blog/pelican/content/transform.awk
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -24477,8 +24383,8 @@ Overwriting /home/victor/work/blog/pelican/content/transform.awk
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[22]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;work&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
 &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;markdown&lt;/span&gt;&lt;span class="o"&gt;/*.&lt;/span&gt;&lt;span class="n"&gt;markdown&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;do&lt;/span&gt; 
@@ -24489,7 +24395,7 @@ In&amp;nbsp;[22]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -24497,9 +24403,8 @@ In&amp;nbsp;[22]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-content/markdown/blogging-with-the-ipython-notebook-example.markdown-meta
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;content/markdown/blogging-with-the-ipython-notebook-example.markdown-meta
 content/markdown/2014-06-02-googles-xss-game-solutions.markdown-meta
 content/markdown/2014-05-27-berlinsides-0x05.markdown-meta
 content/markdown/2014-05-20-howto-write-pentest-reports-the-easy-way.markdown-meta
@@ -24509,7 +24414,6 @@ content/markdown/2014-03-07-unfancy-dashboard-using-matplotlib.markdown-meta
 content/markdown/2014-02-14-links-of-the-week-27.markdown-meta
 content/markdown/2014-02-07-links-of-the-week-26.markdown-meta
 content/markdown/2014-01-31-links-of-the-week-25-2.markdown-meta
-
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -24533,14 +24437,14 @@ content/markdown/2014-01-31-links-of-the-week-25-2.markdown-meta
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[25]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;work&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;markdown&lt;/span&gt;&lt;span class="o"&gt;/*-&lt;/span&gt;&lt;span class="n"&gt;meta&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;2014-05-*&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;exec&lt;/span&gt; &lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt; \&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -24548,9 +24452,8 @@ In&amp;nbsp;[25]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-Title: HowTo: Create docs with sphinx
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;Title: HowTo: Create docs with sphinx
 Author: Victor
 Date: 2014-05-04
 Tags: coding, howto
@@ -24570,7 +24473,6 @@ Title: BerlinSides 0x05
 Date: 2014-05-27
 Tags: events, hacking, security
 Category: blog
-
 
 &lt;/pre&gt;
 &lt;/div&gt;
@@ -24595,8 +24497,8 @@ Category: blog
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[26]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;work&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;markdown&lt;/span&gt;
 &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;*.&lt;/span&gt;&lt;span class="n"&gt;markdown&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;do&lt;/span&gt;
@@ -24605,7 +24507,7 @@ In&amp;nbsp;[26]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -24624,8 +24526,8 @@ In&amp;nbsp;[26]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[27]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;work&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;markdown&lt;/span&gt;
 &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;*.&lt;/span&gt;&lt;span class="n"&gt;markdown&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;do&lt;/span&gt;
@@ -24634,7 +24536,7 @@ In&amp;nbsp;[27]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -24653,15 +24555,15 @@ In&amp;nbsp;[27]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[31]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;work&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;markdown&lt;/span&gt;
 &lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;2014-05*.markdown-final&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;exec&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt; \&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -24669,9 +24571,8 @@ In&amp;nbsp;[31]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-Title: Test2
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;Title: Test2
 Date: 2014-05-15
 Tags: 
 Category: blog
@@ -24711,7 +24612,6 @@ The [**BerlinSides**](http://berlinsides.org/) is a conference from hacker for h
 All my greetings go to:
 
 * [nullsecurity.net](http://nullsecurity.net)
-
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -24735,8 +24635,8 @@ All my greetings go to:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[32]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;work&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;markdown&lt;/span&gt;
 
@@ -24747,7 +24647,7 @@ In&amp;nbsp;[32]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -24766,8 +24666,8 @@ In&amp;nbsp;[32]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[33]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;work&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;markdown&lt;/span&gt;
 &lt;span class="n"&gt;rm&lt;/span&gt; &lt;span class="o"&gt;*.&lt;/span&gt;&lt;span class="n"&gt;markdown&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;sed&lt;/span&gt;
@@ -24780,7 +24680,7 @@ In&amp;nbsp;[33]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -24808,8 +24708,8 @@ In&amp;nbsp;[33]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[37]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
 &lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;work&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
 
@@ -24818,7 +24718,7 @@ In&amp;nbsp;[37]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -24826,14 +24726,12 @@ In&amp;nbsp;[37]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;
-pelican /home/victor/work/blog/pelican/content -o /home/victor/work/blog/pelican/output -s /home/victor/work/blog/pelican/pelicanconf.py 
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;pelican /home/victor/work/blog/pelican/content -o /home/victor/work/blog/pelican/output -s /home/victor/work/blog/pelican/pelicanconf.py 
 
  ** Writing styles to _nb_header.html: this should be included in the theme. **
 
 Done: Processed 124 articles and 1 pages in 6.38 seconds.
-
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -37894,8 +37792,8 @@ root@debian-on-android:~#
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[2]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;PCAP_FILE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;/home/victor/work/Projects/24h-Android-Monitoring/pcap/merged.pcap&amp;quot;&lt;/span&gt;
 
 &lt;span class="c"&gt;# Tshark generated files&lt;/span&gt;
@@ -37905,7 +37803,7 @@ In&amp;nbsp;[2]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -37914,13 +37812,13 @@ In&amp;nbsp;[2]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -37939,8 +37837,8 @@ In&amp;nbsp;[]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[25]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;dns_queries&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="err"&gt;!&lt;/span&gt;&lt;span class="n"&gt;tshark&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;PCAP_FILE&lt;/span&gt;  &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;R&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;dns.flags.response == 1&amp;quot;&lt;/span&gt;  &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;E&lt;/span&gt; &lt;span class="n"&gt;occurrence&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;E&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; \
               &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt; &lt;span class="n"&gt;fields&lt;/span&gt;  &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="n"&gt;frame&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;number&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="n"&gt;frame&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="n"&gt;dns&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;qry&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="n"&gt;dns&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;resp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;addr&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;DNS_QUERIES&lt;/span&gt;
     
@@ -37953,7 +37851,7 @@ In&amp;nbsp;[25]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -37962,13 +37860,13 @@ In&amp;nbsp;[25]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -37977,15 +37875,15 @@ In&amp;nbsp;[]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[26]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sqlite3&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;sql&lt;/span&gt;
 &lt;span class="n"&gt;con&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sql&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;:memory:&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;con&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cursor&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -37994,13 +37892,13 @@ In&amp;nbsp;[26]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -38009,8 +37907,8 @@ In&amp;nbsp;[]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[27]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;binascii&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
@@ -38065,7 +37963,7 @@ In&amp;nbsp;[27]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -38139,13 +38037,13 @@ In&amp;nbsp;[27]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -38154,13 +38052,13 @@ In&amp;nbsp;[]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -38179,8 +38077,8 @@ In&amp;nbsp;[]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[191]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;p1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pdsql&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_frame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
 &lt;span class="s"&gt;    SELECT COUNT(dns_response) AS &amp;#39;# DNS Responses&amp;#39;, dns_query AS &amp;#39;DNS to lookup&amp;#39; &lt;/span&gt;
 &lt;span class="s"&gt;    FROM dns GROUP BY dns_query &lt;/span&gt;
@@ -38191,7 +38089,7 @@ In&amp;nbsp;[191]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -38728,8 +38626,8 @@ In&amp;nbsp;[191]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[40]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;p_testing&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pdsql&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_frame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;quot;&amp;quot; &lt;/span&gt;
 &lt;span class="s"&gt;    SELECT COUNT(c.dst),c.dst, c.dstport, c.frame_protocols FROM connection AS c &lt;/span&gt;
 &lt;span class="s"&gt;    JOIN dns AS d ON c.dst=d.dns_response&lt;/span&gt;
@@ -38748,7 +38646,7 @@ In&amp;nbsp;[40]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -39487,13 +39385,13 @@ In&amp;nbsp;[40]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -39512,8 +39410,8 @@ In&amp;nbsp;[]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[193]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;p2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pdsql&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_frame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;quot;&amp;quot; &lt;/span&gt;
 &lt;span class="s"&gt;    SELECT COUNT(c.dst), d.dns_query, c.dstport, c.frame_protocols FROM connection AS c &lt;/span&gt;
 &lt;span class="s"&gt;    JOIN dns AS d ON c.dst=d.dns_response&lt;/span&gt;
@@ -39525,7 +39423,7 @@ In&amp;nbsp;[193]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -40264,13 +40162,13 @@ In&amp;nbsp;[193]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -40279,8 +40177,8 @@ In&amp;nbsp;[]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[171]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;p_testing&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pdsql&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_frame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;quot;&amp;quot; &lt;/span&gt;
 &lt;span class="s"&gt;    SELECT  frame_number, frame_protocols&lt;/span&gt;
 &lt;span class="s"&gt;    FROM connection&lt;/span&gt;
@@ -40293,7 +40191,7 @@ In&amp;nbsp;[171]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -40350,13 +40248,13 @@ In&amp;nbsp;[171]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -40375,8 +40273,8 @@ In&amp;nbsp;[]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[189]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;p_proto&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pdsql&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_frame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;quot;&amp;quot; &lt;/span&gt;
 &lt;span class="s"&gt;    SELECT COUNT(frame_protocols), frame_protocols&lt;/span&gt;
 &lt;span class="s"&gt;    FROM connection&lt;/span&gt;
@@ -40387,7 +40285,7 @@ In&amp;nbsp;[189]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -40759,13 +40657,13 @@ In&amp;nbsp;[189]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -40784,8 +40682,8 @@ In&amp;nbsp;[]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[186]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;p_ports&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pdsql&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_frame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;quot;&amp;quot; &lt;/span&gt;
 &lt;span class="s"&gt;    SELECT COUNT(c.dstport), c.dstport&lt;/span&gt;
 &lt;span class="s"&gt;    FROM connection AS c&lt;/span&gt;
@@ -40798,7 +40696,7 @@ In&amp;nbsp;[186]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -40885,13 +40783,13 @@ In&amp;nbsp;[186]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -40920,8 +40818,8 @@ In&amp;nbsp;[]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[132]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;p_http_methods&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pdsql&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_frame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;quot;&amp;quot; &lt;/span&gt;
 &lt;span class="s"&gt;    SELECT COUNT(request_method), request_method&lt;/span&gt;
 &lt;span class="s"&gt;    FROM http&lt;/span&gt;
@@ -40933,7 +40831,7 @@ In&amp;nbsp;[132]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -40990,8 +40888,8 @@ In&amp;nbsp;[132]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[147]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;p_user_agents&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pdsql&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_frame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;quot;&amp;quot; &lt;/span&gt;
 &lt;span class="s"&gt;    SELECT COUNT(user_agent), user_agent&lt;/span&gt;
 &lt;span class="s"&gt;    FROM http&lt;/span&gt;
@@ -41003,7 +40901,7 @@ In&amp;nbsp;[147]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -41145,13 +41043,13 @@ In&amp;nbsp;[147]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -41170,8 +41068,8 @@ In&amp;nbsp;[]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[190]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;p3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pdsql&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_frame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;quot;&amp;quot; &lt;/span&gt;
 &lt;span class="s"&gt;    SELECT h.frame_number, h.ip_dst, d.dns_query, h.request_method, h.request_uri, h.user_agent FROM http AS  h&lt;/span&gt;
 &lt;span class="s"&gt;    JOIN dns AS d ON h.ip_dst = d.dns_response&lt;/span&gt;
@@ -41200,7 +41098,7 @@ In&amp;nbsp;[190]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -43158,13 +43056,13 @@ In&amp;nbsp;[190]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[130]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -43173,13 +43071,13 @@ In&amp;nbsp;[130]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -43198,8 +43096,8 @@ In&amp;nbsp;[]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[149]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;p3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pdsql&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_frame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;quot;&amp;quot; &lt;/span&gt;
 &lt;span class="s"&gt;    SELECT h.frame_number, d.dns_query, h.request_uri, h.data, h.text FROM http AS  h&lt;/span&gt;
 &lt;span class="s"&gt;    JOIN dns AS d ON h.ip_dst = d.dns_response&lt;/span&gt;
@@ -43210,7 +43108,7 @@ In&amp;nbsp;[149]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
@@ -44786,13 +44684,13 @@ In&amp;nbsp;[149]:
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
+
+&lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;&lt;/p&gt;</summary><category term="android"></category><category term="hacking"></category><category term="network"></category><category term="security"></category><category term="ipython"></category></entry><entry><title>Links of the Week #23</title><link href="http://blog.dornea.nu/2014/01/17/links-of-the-week-23" rel="alternate"></link><updated>2014-01-17T00:00:00+01:00</updated><author><name>Victor</name></author><id>tag:blog.dornea.nu,2014-01-17:2014/01/17/links-of-the-week-23</id><summary type="html">&lt;ul&gt;
