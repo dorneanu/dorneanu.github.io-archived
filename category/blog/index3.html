@@ -1369,12 +1369,12 @@ input.engine_num_input{width:60px}
 div.cell{border:1px solid transparent;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}div.cell.selected{border-radius:4px;border:thin #ababab solid}
 div.cell.edit_mode{border-radius:4px;border:thin #008000 solid}
 div.cell{width:100%;padding:5px 5px 5px 0;margin:0;outline:none}
-div.prompt{min-width:11ex;padding:.4em;margin:0;font-family:monospace;text-align:right;line-height:1.21429em}
+div.prompt{min-width:11ex;padding:.4em;margin:0;font-family:monospace;text-align:left;line-height:1.21429em;font-size:50%;}
 @media (max-width:480px){div.prompt{text-align:left}}div.inner_cell{display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;flex:1}
 div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;line-height:1.21429em}
 div.prompt:empty{padding-top:0;padding-bottom:0}
 div.input{page-break-inside:avoid;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:horizontal;-moz-box-align:stretch;display:box;box-orient:horizontal;box-align:stretch;display:flex;flex-direction:row;align-items:stretch}
-@media (max-width:480px){div.input{display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}}div.input_prompt{color:#000080;border-top:1px solid transparent}
+@media (max-width:480px){div.input{display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}}div.input_prompt{color:#000080;border-top:1px solid transparent, font-size:50%;}
 div.input_area>div.highlight{margin:.4em;border:none;padding:0;background-color:transparent}
 div.input_area>div.highlight>pre{margin:0;border:none;padding:0;background-color:transparent}
 .CodeMirror{line-height:1.21429em;height:auto;background:none;}
@@ -1455,11 +1455,11 @@ p.p-space{margin-bottom:10px}
 .rendered_html *+ol{margin-top:1em}
 .rendered_html hr{color:#000;background-color:#000}
 .rendered_html pre{margin:1em 2em}
-.rendered_html pre,.rendered_html code{border:0;background-color:#fff;color:#000;font-size:100%;padding:0}
+.rendered_html pre,.rendered_html code{border:0;background-color:#fff;color:#000;font-size:70%;padding:0}
 .rendered_html blockquote{margin:1em 2em}
-.rendered_html table{margin-left:auto;margin-right:auto;border:1px solid #000;border-collapse:collapse}
+.rendered_html table{margin-left:auto;margin-right:auto;border:1px solid #000;border-collapse:collapse;font-size:50%;}
 .rendered_html tr,.rendered_html th,.rendered_html td{border:1px solid #000;border-collapse:collapse;margin:1em 2em}
-.rendered_html td,.rendered_html th{text-align:left;vertical-align:middle;padding:4px}
+.rendered_html td,.rendered_html th{text-align:left;vertical-align:middle;padding:4px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;}
 .rendered_html th{font-weight:bold}
 .rendered_html *+table{margin-top:1em}
 .rendered_html p{text-align:justify}
@@ -1667,11 +1667,12 @@ div.text_cell_render {
 img.anim_icon{padding:0; border:0; vertical-align:middle; -webkit-box-shadow:none; -box-shadow:none}
 
 div.collapseheader {
-    width=100%;
-    background-color:#d3d3d3;
+    width=98%;
+    background-color:#f7f7f7;
     padding: 2px;
     cursor: pointer;
     font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 16px;
 }
 </style>
 
@@ -1719,12 +1720,12 @@ jQuery(document).ready(function($) {
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link href="http://blog.dornea.nu/favicon.png" rel="icon">
-  <link href="http://blog.dornea.nu/theme/css/main.css" media="screen, projection"
+  <link href="../../favicon.png" rel="icon">
+  <link href="../../theme/css/main.css" media="screen, projection"
         rel="stylesheet" type="text/css">
-  <script src="http://blog.dornea.nu/theme/js/modernizr-2.0.js"></script>
-  <script src="http://blog.dornea.nu/theme/js/ender.js"></script>
-  <script src="http://blog.dornea.nu/theme/js/octopress.js" type="text/javascript"></script>
+  <script src="../../theme/js/modernizr-2.0.js"></script>
+  <script src="../../theme/js/ender.js"></script>
+  <script src="../../theme/js/octopress.js" type="text/javascript"></script>
 
   <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
         rel="stylesheet" type="text/css">
@@ -1735,7 +1736,7 @@ jQuery(document).ready(function($) {
 
 <body>
   <header role="banner"><hgroup>
-  <h1><a href="http://blog.dornea.nu/">blog.dornea.nu</a></h1>
+  <h1><a href="../../">blog.dornea.nu</a></h1>
     <h2>Hack, code and drink some țuică.</h2>
 </hgroup></header>
   <nav role="navigation"><ul class="subscription" data-subscription="rss">
@@ -1753,10 +1754,10 @@ jQuery(document).ready(function($) {
 
 <ul class="main-navigation">
     <li><a href="/archives">Archives</a></li>
-      <li><a href="http://blog.dornea.nu/pages/about">About</a></li>
-      <li><a href="http://blog.dornea.nu/pages/books">Books</a></li>
+      <li><a href="../../pages/about">About</a></li>
+      <li><a href="../../pages/books">Books</a></li>
     <li class="active">
-    <a href="http://blog.dornea.nu/category/blog">Blog</a>
+    <a href="../../category/blog">Blog</a>
     </li>
 </ul></nav>
   <div id="main">
@@ -1765,18 +1766,51 @@ jQuery(document).ready(function($) {
   		<article>
 <header>
     
-    <div id="qr-code-2013/12/04/convert-ip-ranges-to-list" class="qr-code-image-block"></div>
-    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
+    <div id="qr-code-2013/12/06/links-of-the-week-20" class="qr-code-image-block"></div>
+    <script src="../../theme/js/qr.min.js" type="text/javascript"></script>
     <script>
         var img = qr.image({
-            value: 'http://blog.dornea.nu/2013/12/04/convert-ip-ranges-to-list',
+            value: '../../2013/12/06/links-of-the-week-20',
+            level: 'L',
+            size: 4
+        });
+        document.getElementById('qr-code-2013/12/06/links-of-the-week-20').appendChild(img);
+    </script>
+      <h1 class="entry-title">
+        <a href="../../2013/12/06/links-of-the-week-20">Links of the Week #20</a>
+      </h1>
+      <p class="meta"><time datetime="2013-12-06T00:00:00" pubdate>Fri 06 December 2013</time></p>
+</header>
+
+  <div class="entry-content"><ul>
+<li><a href="https://www.netspi.com/blog/entryid/209/android-root-detection-techniques">Android Root Detection Techniques</a></li>
+<li><a href="https://www.youtube.com/playlist?list=PLiq_fDYFoqMrYqGIQ21vyV7Eod62Jp07d">Shmoocon 2013 Playlist</a></li>
+<li><a href="http://www.net-security.org/dl/insecure/INSECURE-Mag-40.pdf">INSECURE Mag 40</a></li>
+<li><a href="http://stevegattuso.me/2013/11/30/a-society-of-phone-zombies.html">A society of phone Zombies</a></li>
+<li><a href="https://github.com/cryptosphere/cryptosphere">Encrypted peer-to-peer web application platform for decentralized, privacy-preserving applications</a></li>
+<li><a href="http://www.freebsd.org/cgi/cvsweb.cgi/~checkout~/src/share/misc/bsd-family-tree?rev=HEAD">The UNIX system family tree: Research and BSD</a></li>
+<li><a href="http://arstechnica.com/security/2013/12/found-hacker-server-storing-two-million-pilfered-paswords/">Found: Hacker server storing two million pilfered passwords</a></li>
+<li><a href="http://blog.h3xstream.com/2013/12/new-burpzap-plugin-script-generator.html">Burp/Zap plugin: generator script</a></li>
+</ul></div>
+  <footer>
+    <a rel="full-article" href="../../2013/12/06/links-of-the-week-20">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+    
+    <div id="qr-code-2013/12/04/convert-ip-ranges-to-list" class="qr-code-image-block"></div>
+    <script src="../../theme/js/qr.min.js" type="text/javascript"></script>
+    <script>
+        var img = qr.image({
+            value: '../../2013/12/04/convert-ip-ranges-to-list',
             level: 'L',
             size: 4
         });
         document.getElementById('qr-code-2013/12/04/convert-ip-ranges-to-list').appendChild(img);
     </script>
       <h1 class="entry-title">
-        <a href="http://blog.dornea.nu/2013/12/04/convert-ip-ranges-to-list">Convert IP ranges to list</a>
+        <a href="../../2013/12/04/convert-ip-ranges-to-list">Convert IP ranges to list</a>
       </h1>
       <p class="meta"><time datetime="2013-12-04T00:00:00" pubdate>Wed 04 December 2013</time></p>
 </header>
@@ -1793,24 +1827,24 @@ while True:
     line = buf.readline()
     if ...</pre></div>
   <footer>
-    <a rel="full-article" href="http://blog.dornea.nu/2013/12/04/convert-ip-ranges-to-list">Read On &crarr;</a>
+    <a rel="full-article" href="../../2013/12/04/convert-ip-ranges-to-list">Read On &crarr;</a>
   </footer>
   		</article>
   		<article>
 <header>
     
     <div id="qr-code-2013/11/29/links-of-the-week-19" class="qr-code-image-block"></div>
-    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
+    <script src="../../theme/js/qr.min.js" type="text/javascript"></script>
     <script>
         var img = qr.image({
-            value: 'http://blog.dornea.nu/2013/11/29/links-of-the-week-19',
+            value: '../../2013/11/29/links-of-the-week-19',
             level: 'L',
             size: 4
         });
         document.getElementById('qr-code-2013/11/29/links-of-the-week-19').appendChild(img);
     </script>
       <h1 class="entry-title">
-        <a href="http://blog.dornea.nu/2013/11/29/links-of-the-week-19">Links of the Week #19</a>
+        <a href="../../2013/11/29/links-of-the-week-19">Links of the Week #19</a>
       </h1>
       <p class="meta"><time datetime="2013-11-29T00:00:00" pubdate>Fri 29 November 2013</time></p>
 </header>
@@ -1840,24 +1874,24 @@ while True:
 <li style="text-align: justify;">
   <a href="http://nayuki.eigenstate.org/page/aes-cipher-internals-in-excel">AES cipher ...</a></li></div>
   <footer>
-    <a rel="full-article" href="http://blog.dornea.nu/2013/11/29/links-of-the-week-19">Read On &crarr;</a>
+    <a rel="full-article" href="../../2013/11/29/links-of-the-week-19">Read On &crarr;</a>
   </footer>
   		</article>
   		<article>
 <header>
     
     <div id="qr-code-2013/11/22/links-of-the-week-18" class="qr-code-image-block"></div>
-    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
+    <script src="../../theme/js/qr.min.js" type="text/javascript"></script>
     <script>
         var img = qr.image({
-            value: 'http://blog.dornea.nu/2013/11/22/links-of-the-week-18',
+            value: '../../2013/11/22/links-of-the-week-18',
             level: 'L',
             size: 4
         });
         document.getElementById('qr-code-2013/11/22/links-of-the-week-18').appendChild(img);
     </script>
       <h1 class="entry-title">
-        <a href="http://blog.dornea.nu/2013/11/22/links-of-the-week-18">Links of the Week #18</a>
+        <a href="../../2013/11/22/links-of-the-week-18">Links of the Week #18</a>
       </h1>
       <p class="meta"><time datetime="2013-11-22T00:00:00" pubdate>Fri 22 November 2013</time></p>
 </header>
@@ -1873,24 +1907,24 @@ while True:
 <li><a href="http://imgur.com/a/2M17n#0">ELF: A Linux executable walkthrough</a></li>
 <li><a href="http://adamjsho.blogspot.co.uk/2013/10/creating-pretty-graphs-in-linux-with.html">Creating pretty graphs in linux ...</a></li></ul></div>
   <footer>
-    <a rel="full-article" href="http://blog.dornea.nu/2013/11/22/links-of-the-week-18">Read On &crarr;</a>
+    <a rel="full-article" href="../../2013/11/22/links-of-the-week-18">Read On &crarr;</a>
   </footer>
   		</article>
   		<article>
 <header>
     
     <div id="qr-code-2013/11/18/links-of-the-week-17" class="qr-code-image-block"></div>
-    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
+    <script src="../../theme/js/qr.min.js" type="text/javascript"></script>
     <script>
         var img = qr.image({
-            value: 'http://blog.dornea.nu/2013/11/18/links-of-the-week-17',
+            value: '../../2013/11/18/links-of-the-week-17',
             level: 'L',
             size: 4
         });
         document.getElementById('qr-code-2013/11/18/links-of-the-week-17').appendChild(img);
     </script>
       <h1 class="entry-title">
-        <a href="http://blog.dornea.nu/2013/11/18/links-of-the-week-17">Links of the Week #17</a>
+        <a href="../../2013/11/18/links-of-the-week-17">Links of the Week #17</a>
       </h1>
       <p class="meta"><time datetime="2013-11-18T00:00:00" pubdate>Mon 18 November 2013</time></p>
 </header>
@@ -1904,24 +1938,24 @@ while True:
 <li><a title="Permanent link to Duplicity + S3: easy, cheap, encrypted, automated full-disk backups for your servers" href="http://blog.phusion.nl/2013/11/11/duplicity-s3-easy-cheap-encrypted-automated-full-disk-backups-for-your-servers/" rel="bookmark">Duplicity + S3: easy, cheap, encrypted, automated full-disk backups for your servers</a></li>
 <li><a href="http://de.slideshare.net/HansMichaelVarbaek/botnets-of-the-web-how-to-hijack-one">Botnets of the Web: How to hijack ...</a></li></ul></div>
   <footer>
-    <a rel="full-article" href="http://blog.dornea.nu/2013/11/18/links-of-the-week-17">Read On &crarr;</a>
+    <a rel="full-article" href="../../2013/11/18/links-of-the-week-17">Read On &crarr;</a>
   </footer>
   		</article>
   		<article>
 <header>
     
     <div id="qr-code-2013/11/08/links-of-the-week-16" class="qr-code-image-block"></div>
-    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
+    <script src="../../theme/js/qr.min.js" type="text/javascript"></script>
     <script>
         var img = qr.image({
-            value: 'http://blog.dornea.nu/2013/11/08/links-of-the-week-16',
+            value: '../../2013/11/08/links-of-the-week-16',
             level: 'L',
             size: 4
         });
         document.getElementById('qr-code-2013/11/08/links-of-the-week-16').appendChild(img);
     </script>
       <h1 class="entry-title">
-        <a href="http://blog.dornea.nu/2013/11/08/links-of-the-week-16">Links of the Week #16</a>
+        <a href="../../2013/11/08/links-of-the-week-16">Links of the Week #16</a>
       </h1>
       <p class="meta"><time datetime="2013-11-08T00:00:00" pubdate>Fri 08 November 2013</time></p>
 </header>
@@ -1935,24 +1969,24 @@ while True:
 <li><a href="http://www.netresec.com/?page=Blog&amp;amp;month=2013-10&amp;amp;post=Command-line-Forensics-of-hacked-PHP-net">Commandline forensics of hacked PHP.net</a></li>
 </ul></div>
   <footer>
-    <a rel="full-article" href="http://blog.dornea.nu/2013/11/08/links-of-the-week-16">Read On &crarr;</a>
+    <a rel="full-article" href="../../2013/11/08/links-of-the-week-16">Read On &crarr;</a>
   </footer>
   		</article>
   		<article>
 <header>
     
     <div id="qr-code-2013/11/01/links-of-the-week-15" class="qr-code-image-block"></div>
-    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
+    <script src="../../theme/js/qr.min.js" type="text/javascript"></script>
     <script>
         var img = qr.image({
-            value: 'http://blog.dornea.nu/2013/11/01/links-of-the-week-15',
+            value: '../../2013/11/01/links-of-the-week-15',
             level: 'L',
             size: 4
         });
         document.getElementById('qr-code-2013/11/01/links-of-the-week-15').appendChild(img);
     </script>
       <h1 class="entry-title">
-        <a href="http://blog.dornea.nu/2013/11/01/links-of-the-week-15">Links of the Week #15</a>
+        <a href="../../2013/11/01/links-of-the-week-15">Links of the Week #15</a>
       </h1>
       <p class="meta"><time datetime="2013-11-01T00:00:00" pubdate>Fri 01 November 2013</time></p>
 </header>
@@ -1966,24 +2000,24 @@ while True:
 </ul>
 <!--more--></div>
   <footer>
-    <a rel="full-article" href="http://blog.dornea.nu/2013/11/01/links-of-the-week-15">Read On &crarr;</a>
+    <a rel="full-article" href="../../2013/11/01/links-of-the-week-15">Read On &crarr;</a>
   </footer>
   		</article>
   		<article>
 <header>
     
     <div id="qr-code-2013/10/25/links-of-the-week-14" class="qr-code-image-block"></div>
-    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
+    <script src="../../theme/js/qr.min.js" type="text/javascript"></script>
     <script>
         var img = qr.image({
-            value: 'http://blog.dornea.nu/2013/10/25/links-of-the-week-14',
+            value: '../../2013/10/25/links-of-the-week-14',
             level: 'L',
             size: 4
         });
         document.getElementById('qr-code-2013/10/25/links-of-the-week-14').appendChild(img);
     </script>
       <h1 class="entry-title">
-        <a href="http://blog.dornea.nu/2013/10/25/links-of-the-week-14">Links of the Week #14</a>
+        <a href="../../2013/10/25/links-of-the-week-14">Links of the Week #14</a>
       </h1>
       <p class="meta"><time datetime="2013-10-25T00:00:00" pubdate>Fri 25 October 2013</time></p>
 </header>
@@ -1997,24 +2031,24 @@ while True:
 </ol>
 <!--more--></div>
   <footer>
-    <a rel="full-article" href="http://blog.dornea.nu/2013/10/25/links-of-the-week-14">Read On &crarr;</a>
+    <a rel="full-article" href="../../2013/10/25/links-of-the-week-14">Read On &crarr;</a>
   </footer>
   		</article>
   		<article>
 <header>
     
     <div id="qr-code-2013/10/18/links-of-the-week-13" class="qr-code-image-block"></div>
-    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
+    <script src="../../theme/js/qr.min.js" type="text/javascript"></script>
     <script>
         var img = qr.image({
-            value: 'http://blog.dornea.nu/2013/10/18/links-of-the-week-13',
+            value: '../../2013/10/18/links-of-the-week-13',
             level: 'L',
             size: 4
         });
         document.getElementById('qr-code-2013/10/18/links-of-the-week-13').appendChild(img);
     </script>
       <h1 class="entry-title">
-        <a href="http://blog.dornea.nu/2013/10/18/links-of-the-week-13">Links of the Week #13</a>
+        <a href="../../2013/10/18/links-of-the-week-13">Links of the Week #13</a>
       </h1>
       <p class="meta"><time datetime="2013-10-18T00:00:00" pubdate>Fri 18 October 2013</time></p>
 </header>
@@ -2034,24 +2068,24 @@ while True:
 </ol>
 <!--more--></div>
   <footer>
-    <a rel="full-article" href="http://blog.dornea.nu/2013/10/18/links-of-the-week-13">Read On &crarr;</a>
+    <a rel="full-article" href="../../2013/10/18/links-of-the-week-13">Read On &crarr;</a>
   </footer>
   		</article>
   		<article>
 <header>
     
     <div id="qr-code-2013/09/20/links-of-the-week-12" class="qr-code-image-block"></div>
-    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
+    <script src="../../theme/js/qr.min.js" type="text/javascript"></script>
     <script>
         var img = qr.image({
-            value: 'http://blog.dornea.nu/2013/09/20/links-of-the-week-12',
+            value: '../../2013/09/20/links-of-the-week-12',
             level: 'L',
             size: 4
         });
         document.getElementById('qr-code-2013/09/20/links-of-the-week-12').appendChild(img);
     </script>
       <h1 class="entry-title">
-        <a href="http://blog.dornea.nu/2013/09/20/links-of-the-week-12">Links of the Week #12</a>
+        <a href="../../2013/09/20/links-of-the-week-12">Links of the Week #12</a>
       </h1>
       <p class="meta"><time datetime="2013-09-20T00:00:00" pubdate>Fri 20 September 2013</time></p>
 </header>
@@ -2064,57 +2098,13 @@ while True:
 <li><a href="http://blogs.avg.com/mobile-2/analyzing-android-webview-exploit/">Analyzing an Android Webview Exploit</a></li>
 </ul></div>
   <footer>
-    <a rel="full-article" href="http://blog.dornea.nu/2013/09/20/links-of-the-week-12">Read On &crarr;</a>
-  </footer>
-  		</article>
-  		<article>
-<header>
-    
-    <div id="qr-code-2013/09/13/howto-automate-nmap-scanning" class="qr-code-image-block"></div>
-    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
-    <script>
-        var img = qr.image({
-            value: 'http://blog.dornea.nu/2013/09/13/howto-automate-nmap-scanning',
-            level: 'L',
-            size: 4
-        });
-        document.getElementById('qr-code-2013/09/13/howto-automate-nmap-scanning').appendChild(img);
-    </script>
-      <h1 class="entry-title">
-        <a href="http://blog.dornea.nu/2013/09/13/howto-automate-nmap-scanning">HowTo: Automate nmap scanning</a>
-      </h1>
-      <p class="meta"><time datetime="2013-09-13T00:00:00" pubdate>Fri 13 September 2013</time></p>
-</header>
-
-  <div class="entry-content"><p>Recently a <a href="http://nullsecurity.net/about.html">colleague</a> of mine at <a href="http://nullsecurity.net/">nullsecurity.net</a> released a new scanning tool called <a href="http://nullsecurity.net/tools/automation/wnmap-0.1.tar.gz">wnmap</a>. Basically it&#8217;s a wrapper around nmap which helps automating the scanning process by using simple configuration files. Let&#8217;s have a look at it..</p>
-<div id="toc_container" class="toc_wrap_right toc_transparent no_bullets">
-  <p class="toc_title">
-    Contents
-  </p>
-
-  <ul class="toc_list">
-    <li>
-      <a href="#i"><span class="toc_number toc_depth_1">1</span> </a>
-    </li>
-    <li>
-      <a href="#Configuration"><span class="toc_number toc_depth_1">2</span> Configuration</a>
-    </li>
-    <li>
-      <a href="#i-2"><span class="toc_number toc_depth_1">3</span> </a>
-    </li>
-    <li>
-      <a href="#Running_the_tool"><span class="toc_number toc_depth_1">4</span> Running the tool</a>
-    </li>
-    <li>
-      <a href="#i-3"><span class="toc_number toc_depth_1">5 ...</span></a></li></ul></div></div>
-  <footer>
-    <a rel="full-article" href="http://blog.dornea.nu/2013/09/13/howto-automate-nmap-scanning">Read On &crarr;</a>
+    <a rel="full-article" href="../../2013/09/20/links-of-the-week-12">Read On &crarr;</a>
   </footer>
   		</article>
 <div class="pagination">
-    <a class="prev" href="http://blog.dornea.nu/category/blog/index4.html">&larr; Older</a>
+    <a class="prev" href="../../category/blog/index4.html">&larr; Older</a>
 
-    <a class="next" href="http://blog.dornea.nu/category/blog/index2.html">Newer &rarr;</a>
+    <a class="next" href="../../category/blog/index2.html">Newer &rarr;</a>
   <br />
 </div></div>
 <aside class="sidebar">
@@ -2122,19 +2112,19 @@ while True:
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
-          <a href="http://blog.dornea.nu/2014/08/05/android-dynamic-code-analysis-mastering-droidbox">Android Dynamic Code Analysis - Mastering DroidBox</a>
+          <a href="../../2014/08/05/android-dynamic-code-analysis-mastering-droidbox">Android Dynamic Code Analysis - Mastering DroidBox</a>
       </li>
       <li class="post">
-          <a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a>
+          <a href="../../2014/08/05/application-survey-tutorial">Application Survey Tutorial</a>
       </li>
       <li class="post">
-          <a href="http://blog.dornea.nu/2014/07/01/on-java-openssl-crypto-blowfish-and-stuff">On Java, OpenSSL, Crypto, Blowfish and stuff</a>
+          <a href="../../2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a>
       </li>
       <li class="post">
-          <a href="http://blog.dornea.nu/2014/06/29/whatsapp-bot">WhatsApp bot</a>
+          <a href="../../2014/07/01/on-java-openssl-crypto-blowfish-and-stuff">On Java, OpenSSL, Crypto, Blowfish and stuff</a>
       </li>
       <li class="post">
-          <a href="http://blog.dornea.nu/2014/06/18/migrate-this-blog-from-octopress-to-pelican">Migrate this blog from Octopress to Pelican</a>
+          <a href="../../2014/06/29/whatsapp-bot">WhatsApp bot</a>
       </li>
     </ul>
   </section>
@@ -2142,14 +2132,14 @@ while True:
       
     <h1>Categories</h1>
     <ul id="recent_posts">
-        <li><a href="http://blog.dornea.nu/category/blog">blog</a></li>
+        <li><a href="../../category/blog">blog</a></li>
     </ul>
   </section>
  
 
   <section>
   <h1>Tags</h1>
-    <a href="http://blog.dornea.nu/tag//"></a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
+    <a href="../../tag//"></a>,    <a href="../../tag/pelican/">pelican</a>,    <a href="../../tag/code/">code</a>,    <a href="../../tag/coding/">coding</a>,    <a href="../../tag/droidbox/">droidbox</a>,    <a href="../../tag/openssl/">openssl</a>,    <a href="../../tag/virtualization/">virtualization</a>,    <a href="../../tag/web/">web</a>,    <a href="../../tag/wargames/">wargames</a>,    <a href="../../tag/java/">java</a>,    <a href="../../tag/network/">network</a>,    <a href="../../tag/octopress/">octopress</a>,    <a href="../../tag/blog/">blog</a>,    <a href="../../tag/re/">re</a>,    <a href="../../tag/low/">low</a>,    <a href="../../tag/android/">android</a>,    <a href="../../tag/androguard/">androguard</a>,    <a href="../../tag/events/">events</a>,    <a href="../../tag/uncategorized/">uncategorized</a>,    <a href="../../tag/cryptography/">cryptography</a>,    <a href="../../tag/python/">python</a>,    <a href="../../tag/misc/">misc</a>,    <a href="../../tag/howto/">howto</a>,    <a href="../../tag/wtf/">wtf</a>,    <a href="../../tag/ipython/">ipython</a>,    <a href="../../tag/security/">security</a>,    <a href="../../tag/crypto/">crypto</a>,    <a href="../../tag/sca/">sca</a>,    <a href="../../tag/appsec/">appsec</a>,    <a href="../../tag/whatsapp/">whatsapp</a>,    <a href="../../tag/hacking/">hacking</a>  </section>
 
 
 
@@ -2163,7 +2153,7 @@ while True:
           if (!window.jXHR){
               var jxhr = document.createElement('script');
               jxhr.type = 'text/javascript';
-              jxhr.src = 'http://blog.dornea.nu/theme/js/jXHR.js';
+              jxhr.src = '../../theme/js/jXHR.js';
               var s = document.getElementsByTagName('script')[0];
               s.parentNode.insertBefore(jxhr, s);
           }
@@ -2176,7 +2166,7 @@ while True:
           });
       });
     </script>
-    <script src="http://blog.dornea.nu/theme/js/github.js" type="text/javascript"> </script>
+    <script src="../../theme/js/github.js" type="text/javascript"> </script>
   </section>
 
     <section>
