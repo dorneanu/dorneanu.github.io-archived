@@ -1720,9 +1720,9 @@ jQuery(document).ready(function($) {
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Lightbox2 support -->
-  <script src="../../../../js/lightbox-2.6.min.js"></script>
-  <link href="../../../../css/lightbox.css" rel="stylesheet" type="text/css" />
+  <!-- FancyBox support -->
+  <script src="../../../../js/jquery.fancybox.js"></script>
+  <link href="../../../../css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
 
   <link href="../../../../favicon.png" rel="icon">
   <link href="../../../../theme/css/main.css" media="screen, projection"
@@ -6033,4 +6033,11 @@ In&nbsp;[26]:
   </script>
 </body>
                 <script src="http://blog.dornea.nu/js/d3-timeline.js"></script>
+
+  <-- FancyBox trigger -->
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $("img").fancybox();
+  });
+  </script>
 </html>
