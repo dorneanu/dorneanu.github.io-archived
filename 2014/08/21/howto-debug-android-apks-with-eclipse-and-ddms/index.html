@@ -1721,15 +1721,15 @@ jQuery(document).ready(function($) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- FancyBox support -->
-  <script src="http://blog.dornea.nu/js/jquery.fancybox.js"></script>
-  <link href="http://blog.dornea.nu/css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+  <script src="../../../../js/jquery.fancybox.js"></script>
+  <link href="../../../../css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
 
-  <link href="http://blog.dornea.nu/favicon.png" rel="icon">
-  <link href="http://blog.dornea.nu/theme/css/main.css" media="screen, projection"
+  <link href="../../../../favicon.png" rel="icon">
+  <link href="../../../../theme/css/main.css" media="screen, projection"
         rel="stylesheet" type="text/css">
-  <script src="http://blog.dornea.nu/theme/js/modernizr-2.0.js"></script>
-  <script src="http://blog.dornea.nu/theme/js/ender.js"></script>
-  <script src="http://blog.dornea.nu/theme/js/octopress.js" type="text/javascript"></script>
+  <script src="../../../../theme/js/modernizr-2.0.js"></script>
+  <script src="../../../../theme/js/ender.js"></script>
+  <script src="../../../../theme/js/octopress.js" type="text/javascript"></script>
 
   <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
         rel="stylesheet" type="text/css">
@@ -1740,7 +1740,7 @@ jQuery(document).ready(function($) {
 
 <body>
   <header role="banner"><hgroup>
-  <h1><a href="http://blog.dornea.nu/">blog.dornea.nu</a></h1>
+  <h1><a href="../../../../">blog.dornea.nu</a></h1>
     <h2>Hack, code and drink some țuică.</h2>
 </hgroup></header>
   <nav role="navigation"><ul class="subscription" data-subscription="rss">
@@ -1758,10 +1758,10 @@ jQuery(document).ready(function($) {
 
 <ul class="main-navigation">
     <li><a href="/archives">Archives</a></li>
-      <li><a href="http://blog.dornea.nu/pages/about">About</a></li>
-      <li><a href="http://blog.dornea.nu/pages/books">Books</a></li>
+      <li><a href="../../../../pages/about">About</a></li>
+      <li><a href="../../../../pages/books">Books</a></li>
     <li class="active">
-    <a href="http://blog.dornea.nu/category/blog">Blog</a>
+    <a href="../../../../category/blog">Blog</a>
     </li>
 </ul></nav>
   <div id="main">
@@ -1771,10 +1771,10 @@ jQuery(document).ready(function($) {
 <header>
     
     <div id="qr-code-2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms" class="qr-code-image-block"></div>
-    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
+    <script src="../../../../theme/js/qr.min.js" type="text/javascript"></script>
     <script>
         var img = qr.image({
-            value: 'http://blog.dornea.nu/2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms',
+            value: '../../../../2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms',
             level: 'L',
             size: 4
         });
@@ -1990,28 +1990,68 @@ jQuery(document).ready(function($) {
 </pre></div>
 
 
-<h2>Import APKs sources</h2>
+<h2>Create new project</h2>
 <p>First of all make sure you have the <a href="http://developer.android.com/tools/sdk/eclipse-adt.html">ADT</a> along with the <a href="http://developer.android.com/sdk/index.html">Android SDK</a> installed. Now let's move on:</p>
 <h4>Create new Java project</h4>
+<p>First create a new <em>Java</em> project and use <code>source</code> as the location of the project.</p>
 <p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_create_java_project.png"></p>
 <h4>Add src folder to build path</h4>
-<p><img src="http://dl.dornea.nu/tmp/2014/eclipse-ddms/eclipse_project_src.png"></p>
+<p>Make sure the <code>src</code> folder is added as a source location to the build path.</p>
+<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_project_src.png"></p>
 <h4>Check project properties</h4>
-<p><img src="http://dl.dornea.nu/tmp/2014/eclipse-ddms/eclipse_project_properties_build_path.png"></p></div>
+<p>You could also check the project properties by clicking on it and then <code>ALT+Enter</code>. You should have sth similar to:</p>
+<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_project_properties_build_path.png"></p>
+<h2>Set breakpoints</h2>
+<p>Having set up the Eclipse environment let's add some breakpoints. First search for <strong>onCreate</strong> in all files:</p>
+<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_search_on_create.png"></p>
+<p>Eclipse found several matches:</p>
+<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_found_oncreate.png"></p>
+<p>We'll now concentrate on <code>MainActivity.java</code> and set a breakpoint:</p>
+<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_set_breakpoint.png"></p>
+<p>Switching the perspective to <code>Debug</code> you should be able to see your breakpoints (marked in red):</p>
+<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_view_breakpoints.png"></p>
+<h2>Run application</h2>
+<p>Before running our application we'll have a look at the alread running processes on the device:</p>
+<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_running_processes.png"></p>
+<p>After starting the application in the <code>AVD</code> you'll notice a new process:</p>
+<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_running_processes_after_app_start.png"></p>
+<p>The red "bug" indicates that the process isn't being debugged yet.</p>
+<h4>Debug configuration</h4>
+<p>In order to be able to debug process you'll have to add a new debug configuration:</p>
+<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_debug_configuration.png"></p>
+<p>When setting up the configuration pay attention to the <strong>port</strong> your debugger should connect to. Make sure it matches with the port pair previously 
+seen in the running process list (marked in red):</p>
+<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_debug_set_port.png"></p>
+<p>Now click on <strong>Debug</strong> and you're ready to go. Take a look at the running processes. You'll notice sth changed:</p>
+<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_debug_running.png"></p>
+<p>The bug is now "green" meaning you're ready to debug your application.</p>
+<h2>Trigger breakpoint</h2>
+<p>We've previously set a breakpoint at the <code>onCreate</code> method. Now that the application is running I had to "trigger" that breakpoint. Switching to my AVD I took 
+a look at the application and filled in the fields:</p>
+<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/app_enter_click.png"></p>
+<p>Afterwards I've clicked <em>Enter</em>. Switching back to Eclipse I got following picture:</p>
+<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_hold_on_breakpoint.png"></p>
+<p>The execution stopped at the breakpoint. Success! Now I've typed F6 (Step over) and the execution moved on:</p>
+<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_debug_stepin.png"></p>
+<h2>Conclusion</h2>
+<p>Using great tools like <code>apktool</code> and <code>dex2jar</code> you can prepare your APK to inspect it dynamically in Eclipse. I think Eclipse (along with ADT) is a very powerful tool 
+when it comes to dynamic analysis. I can easily switch between code parts and analyze the execution flow. Keep in mind that when the original is <em>obfuscated</em> you may 
+want to debug <strong>smali</strong> code. In that case make sure you add the <strong>smali</strong> order instead of the <strong>src</strong> one (described earlier). For any questions feel free to write comments
+below.     </p></div>
     <footer>
 <p class="meta">
   <span class="byline author vcard">
     Posted by <span class="fn">Victor Dorneanu</span>
   </span>
 <time datetime="2014-08-21T00:00:00" pubdate>Thu 21 August 2014</time>  <span class="categories">
-    <a class="category" href="http://blog.dornea.nu/tag/android/">android</a>
-    <a class="category" href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>
-    <a class="category" href="http://blog.dornea.nu/tag/java/">java</a>
-    <a class="category" href="http://blog.dornea.nu/tag/debug/">debug</a>
-    <a class="category" href="http://blog.dornea.nu/tag/howto/">howto</a>
+    <a class="category" href="../../../../tag/android/">android</a>
+    <a class="category" href="../../../../tag/eclipse/">eclipse</a>
+    <a class="category" href="../../../../tag/java/">java</a>
+    <a class="category" href="../../../../tag/debug/">debug</a>
+    <a class="category" href="../../../../tag/howto/">howto</a>
   </span>
 </p><div class="sharing">
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.dornea.nu/2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms" data-via="victordorneanu" data-counturl="http://blog.dornea.nu/2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="../../../../2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms" data-via="victordorneanu" data-counturl="../../../../2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms" >Tweet</a>
 </div>    </footer>
   </article>
 
@@ -2025,19 +2065,19 @@ jQuery(document).ready(function($) {
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
-          <a href="http://blog.dornea.nu/2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms">HowTo: Debug Android APKs with Eclipse and DDMS</a>
+          <a href="../../../../2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms">HowTo: Debug Android APKs with Eclipse and DDMS</a>
       </li>
       <li class="post">
-          <a href="http://blog.dornea.nu/2014/08/06/python-for-data-analysis">Python for Data Analysis</a>
+          <a href="../../../../2014/08/06/python-for-data-analysis">Python for Data Analysis</a>
       </li>
       <li class="post">
-          <a href="http://blog.dornea.nu/2014/08/06/web-application-survey-tutorial">Web Application Survey Tutorial</a>
+          <a href="../../../../2014/08/06/web-application-survey-tutorial">Web Application Survey Tutorial</a>
       </li>
       <li class="post">
-          <a href="http://blog.dornea.nu/2014/08/05/android-dynamic-code-analysis-mastering-droidbox">Android Dynamic Code Analysis - Mastering DroidBox</a>
+          <a href="../../../../2014/08/05/android-dynamic-code-analysis-mastering-droidbox">Android Dynamic Code Analysis - Mastering DroidBox</a>
       </li>
       <li class="post">
-          <a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a>
+          <a href="../../../../2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a>
       </li>
     </ul>
   </section>
@@ -2045,14 +2085,14 @@ jQuery(document).ready(function($) {
       
     <h1>Categories</h1>
     <ul id="recent_posts">
-        <li><a href="http://blog.dornea.nu/category/blog">blog</a></li>
+        <li><a href="../../../../category/blog">blog</a></li>
     </ul>
   </section>
  
 
   <section>
   <h1>Tags</h1>
-    <a href="http://blog.dornea.nu/tag//"></a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
+    <a href="../../../../tag//"></a>,    <a href="../../../../tag/pelican/">pelican</a>,    <a href="../../../../tag/code/">code</a>,    <a href="../../../../tag/coding/">coding</a>,    <a href="../../../../tag/droidbox/">droidbox</a>,    <a href="../../../../tag/openssl/">openssl</a>,    <a href="../../../../tag/books/">books</a>,    <a href="../../../../tag/virtualization/">virtualization</a>,    <a href="../../../../tag/web/">web</a>,    <a href="../../../../tag/wargames/">wargames</a>,    <a href="../../../../tag/java/">java</a>,    <a href="../../../../tag/network/">network</a>,    <a href="../../../../tag/octopress/">octopress</a>,    <a href="../../../../tag/blog/">blog</a>,    <a href="../../../../tag/re/">re</a>,    <a href="../../../../tag/low/">low</a>,    <a href="../../../../tag/android/">android</a>,    <a href="../../../../tag/androguard/">androguard</a>,    <a href="../../../../tag/events/">events</a>,    <a href="../../../../tag/uncategorized/">uncategorized</a>,    <a href="../../../../tag/cryptography/">cryptography</a>,    <a href="../../../../tag/python/">python</a>,    <a href="../../../../tag/misc/">misc</a>,    <a href="../../../../tag/howto/">howto</a>,    <a href="../../../../tag/wtf/">wtf</a>,    <a href="../../../../tag/ipython/">ipython</a>,    <a href="../../../../tag/security/">security</a>,    <a href="../../../../tag/science/">science</a>,    <a href="../../../../tag/eclipse/">eclipse</a>,    <a href="../../../../tag/crypto/">crypto</a>,    <a href="../../../../tag/sca/">sca</a>,    <a href="../../../../tag/appsec/">appsec</a>,    <a href="../../../../tag/whatsapp/">whatsapp</a>,    <a href="../../../../tag/debug/">debug</a>,    <a href="../../../../tag/hacking/">hacking</a>  </section>
 
 
 
@@ -2066,7 +2106,7 @@ jQuery(document).ready(function($) {
           if (!window.jXHR){
               var jxhr = document.createElement('script');
               jxhr.type = 'text/javascript';
-              jxhr.src = 'http://blog.dornea.nu/theme/js/jXHR.js';
+              jxhr.src = '../../../../theme/js/jXHR.js';
               var s = document.getElementsByTagName('script')[0];
               s.parentNode.insertBefore(jxhr, s);
           }
@@ -2079,7 +2119,7 @@ jQuery(document).ready(function($) {
           });
       });
     </script>
-    <script src="http://blog.dornea.nu/theme/js/github.js" type="text/javascript"> </script>
+    <script src="../../../../theme/js/github.js" type="text/javascript"> </script>
   </section>
 
     <section>
@@ -2154,7 +2194,7 @@ jQuery(document).ready(function($) {
 	<script type="text/javascript">
 	  var disqus_shortname = 'dorneanu';
           var disqus_identifier = '/2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms';
-          var disqus_url = 'http://blog.dornea.nu/2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms';
+          var disqus_url = '../../../../2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms';
           var disqus_title = 'HowTo: Debug Android APKs with Eclipse and DDMS';
 	  (function() {
 	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
