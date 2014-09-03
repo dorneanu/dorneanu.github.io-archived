@@ -1720,9 +1720,9 @@ jQuery(document).ready(function($) {
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- FancyBox support -->
-  <script src="http://blog.dornea.nu/js/jquery.fancybox.js"></script>
-  <link href="http://blog.dornea.nu/css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+  <!-- JQuery support -->
+  <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 
   <link href="http://blog.dornea.nu/favicon.png" rel="icon">
   <link href="http://blog.dornea.nu/theme/css/main.css" media="screen, projection"
@@ -1794,6 +1794,21 @@ jQuery(document).ready(function($) {
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb">
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -1807,7 +1822,7 @@ jQuery(document).ready(function($) {
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[24]:
+In&nbsp;[236]:
 </div>
 
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
@@ -1876,7 +1891,7 @@ In&nbsp;[24]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[25]:
+In&nbsp;[259]:
 </div>
 
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
@@ -1895,22 +1910,41 @@ In&nbsp;[25]:
 <span class="s">            &lt;script type=&quot;text/javascript&quot; charset=&quot;utf8&quot; src=&quot;http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js&quot;&gt;&lt;/script&gt;</span>
 
 <span class="s">            &lt;script type=&quot;text/javascript&quot;&gt;</span>
-<span class="s">                $(&#39;#datatable-container-</span><span class="si">%s</span><span class="s"> table.datatable&#39;).dataTable( {</span>
-<span class="s">                        &quot;sPaginationType&quot;: &quot;full_numbers&quot;,</span>
-<span class="s">                        &quot;bJQueryUI&quot;: true,</span>
-<span class="s">                        &quot;sDom&quot;: &quot;frtip&quot;,</span>
-<span class="s">                        &quot;iDisplayLength&quot;: 10,</span>
-<span class="s">                        &quot;bInfo&quot;: true</span>
-<span class="s">                });</span>
+<span class="s">                var url = window.location.href;</span>
+<span class="s">                </span>
+<span class="s">                if(url.indexOf(&quot;localhost:9999&quot;) != -1){</span>
+<span class="s">                    $(&#39;#datatable-container-</span><span class="si">%s</span><span class="s"> table.datatable&#39;).dataTable();</span>
+<span class="s">                } else {</span>
+<span class="s">                    $.getScript(&quot;http://code.jquery.com/jquery-1.11.1.min.js&quot;);</span>
+<span class="s">                    $(document).ready(function() {</span>
+<span class="s">                        $(&#39;#datatable-container-</span><span class="si">%s</span><span class="s"> table.datatable&#39;).dataTable();</span>
+<span class="s">                    });</span>
+<span class="s">                }</span>
+<span class="s">                </span>
 <span class="s">            &lt;/script&gt;</span>
 <span class="s">            &lt;!-- Insert table below --&gt;</span>
 <span class="s">            </span><span class="si">%s</span><span class="s"></span>
 <span class="s">        &lt;/div&gt;</span>
-<span class="s">    &quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">id_container</span><span class="p">,</span> <span class="n">id_container</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="s">&quot;datatable dataframe&quot;</span><span class="p">))</span>
+<span class="s">    &quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">id_container</span><span class="p">,</span> <span class="n">id_container</span><span class="p">,</span> <span class="n">id_container</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="s">&quot;datatable dataframe&quot;</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">HTML</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
 </pre></div>
 
 </div>
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[250]:
+</div>
+
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb">
+</pre></div>
+
 </div>
 
 </div>
@@ -1928,7 +1962,7 @@ In&nbsp;[25]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[26]:
+In&nbsp;[247]:
 </div>
 
 <div class="input_area box-flex1">
@@ -1959,10 +1993,299 @@ In&nbsp;[26]:
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Classic-HTML-output">Classic HTML output<a class="anchor-link" href="#Classic-HTML-output">&#182;</a></h3>
+</div>
+</div>
+</div>
+
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[27]:
+In&nbsp;[239]:
+</div>
+
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_targets</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[239]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>scheme</th>
+      <th>userinfo</th>
+      <th>host</th>
+      <th>port</th>
+      <th>path</th>
+      <th>query</th>
+      <th>fragment</th>
+      <th>decoded</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0 </th>
+      <td> http</td>
+      <td> </td>
+      <td>               www.altpress.org</td>
+      <td> </td>
+      <td>                  /</td>
+      <td> </td>
+      <td> </td>
+      <td> False</td>
+    </tr>
+    <tr>
+      <th>1 </th>
+      <td> http</td>
+      <td> </td>
+      <td>           www.nzfortress.co.nz</td>
+      <td> </td>
+      <td>                   </td>
+      <td> </td>
+      <td> </td>
+      <td> False</td>
+    </tr>
+    <tr>
+      <th>2 </th>
+      <td> http</td>
+      <td> </td>
+      <td>         www.evillasforsale.com</td>
+      <td> </td>
+      <td>                   </td>
+      <td> </td>
+      <td> </td>
+      <td> False</td>
+    </tr>
+    <tr>
+      <th>3 </th>
+      <td> http</td>
+      <td> </td>
+      <td>           www.playingenemy.com</td>
+      <td> </td>
+      <td>                  /</td>
+      <td> </td>
+      <td> </td>
+      <td> False</td>
+    </tr>
+    <tr>
+      <th>4 </th>
+      <td> http</td>
+      <td> </td>
+      <td>      www.richardsonscharts.com</td>
+      <td> </td>
+      <td>                   </td>
+      <td> </td>
+      <td> </td>
+      <td> False</td>
+    </tr>
+    <tr>
+      <th>5 </th>
+      <td> http</td>
+      <td> </td>
+      <td>                 www.xenith.net</td>
+      <td> </td>
+      <td>                   </td>
+      <td> </td>
+      <td> </td>
+      <td> False</td>
+    </tr>
+    <tr>
+      <th>6 </th>
+      <td> http</td>
+      <td> </td>
+      <td>             www.tdbrecords.com</td>
+      <td> </td>
+      <td>                   </td>
+      <td> </td>
+      <td> </td>
+      <td> False</td>
+    </tr>
+    <tr>
+      <th>7 </th>
+      <td> http</td>
+      <td> </td>
+      <td>   www.electrichumanproject.com</td>
+      <td> </td>
+      <td>                  /</td>
+      <td> </td>
+      <td> </td>
+      <td> False</td>
+    </tr>
+    <tr>
+      <th>8 </th>
+      <td> http</td>
+      <td> </td>
+      <td>      tweekerchick.blogspot.com</td>
+      <td> </td>
+      <td>                  /</td>
+      <td> </td>
+      <td> </td>
+      <td> False</td>
+    </tr>
+    <tr>
+      <th>9 </th>
+      <td> http</td>
+      <td> </td>
+      <td>                www.besound.com</td>
+      <td> </td>
+      <td> /pushead/home.html</td>
+      <td> </td>
+      <td> </td>
+      <td> False</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td> http</td>
+      <td> </td>
+      <td> www.porkchopscreenprinting.com</td>
+      <td> </td>
+      <td>                  /</td>
+      <td> </td>
+      <td> </td>
+      <td> False</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td> http</td>
+      <td> </td>
+      <td>           www.kinseyvisual.com</td>
+      <td> </td>
+      <td>                   </td>
+      <td> </td>
+      <td> </td>
+      <td> False</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td> http</td>
+      <td> </td>
+      <td>             www.rathergood.com</td>
+      <td> </td>
+      <td>                   </td>
+      <td> </td>
+      <td> </td>
+      <td> False</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td> http</td>
+      <td> </td>
+      <td>                 www.lepoint.fr</td>
+      <td> </td>
+      <td>                  /</td>
+      <td> </td>
+      <td> </td>
+      <td> False</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td> http</td>
+      <td> </td>
+      <td>                  www.revhq.com</td>
+      <td> </td>
+      <td>                   </td>
+      <td> </td>
+      <td> </td>
+      <td> False</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td> http</td>
+      <td> </td>
+      <td>        www.poprocksandcoke.com</td>
+      <td> </td>
+      <td>                   </td>
+      <td> </td>
+      <td> </td>
+      <td> False</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td> http</td>
+      <td> </td>
+      <td>            www.samuraiblue.com</td>
+      <td> </td>
+      <td>                  /</td>
+      <td> </td>
+      <td> </td>
+      <td> False</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td> http</td>
+      <td> </td>
+      <td>                www.openbsd.org</td>
+      <td> </td>
+      <td>   /cgi-bin/man.cgi</td>
+      <td> </td>
+      <td> </td>
+      <td> False</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td> http</td>
+      <td> </td>
+      <td>                www.sysblog.com</td>
+      <td> </td>
+      <td>                   </td>
+      <td> </td>
+      <td> </td>
+      <td> False</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td> http</td>
+      <td> </td>
+      <td>         www.voicesofsafety.com</td>
+      <td> </td>
+      <td>                   </td>
+      <td> </td>
+      <td> </td>
+      <td> False</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="JQuery-DataTables-output">JQuery DataTables output<a class="anchor-link" href="#JQuery-DataTables-output">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[260]:
 </div>
 
 <div class="input_area box-flex1">
@@ -1978,23 +2301,27 @@ In&nbsp;[27]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[27]:</div>
+    Out[260]:</div>
 
 <div class="output_html rendered_html output_subarea output_pyout">
 
-        <div id="datatable-container-f2e02e84-2eba-11e4-95d5-52540086692e">
+        <div id="datatable-container-aab341ae-2f8d-11e4-95d5-52540086692e">
             <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css">
             <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css">
             <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>
 
             <script type="text/javascript">
-                $('#datatable-container-f2e02e84-2eba-11e4-95d5-52540086692e table.datatable').dataTable( {
-                        "sPaginationType": "full_numbers",
-                        "bJQueryUI": true,
-                        "sDom": "frtip",
-                        "iDisplayLength": 10,
-                        "bInfo": true
-                });
+                var url = window.location.href;
+                
+                if(url.indexOf("localhost:9999") != -1){
+                    $('#datatable-container-aab341ae-2f8d-11e4-95d5-52540086692e table.datatable').dataTable();
+                } else {
+                    $.getScript("http://code.jquery.com/jquery-1.11.1.min.js");
+                    $(document).ready(function() {
+                        $('#datatable-container-aab341ae-2f8d-11e4-95d5-52540086692e table.datatable').dataTable();
+                    });
+                }
+                
             </script>
             <!-- Insert table below -->
             <table border="1" class="dataframe datatable dataframe">
@@ -2223,14 +2550,24 @@ In&nbsp;[27]:
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Jinja2-cellmagic">Jinja2 cellmagic<a class="anchor-link" href="#Jinja2-cellmagic">&#182;</a></h3>
+</div>
+</div>
+</div>
+
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[18]:
+In&nbsp;[242]:
 </div>
 
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">html_data</span> <span class="o">=</span> <span class="n">df_targets</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="s">&quot;datatable dataframe&quot;</span><span class="p">)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">html_output</span> <span class="o">=</span> <span class="n">DataTable</span><span class="p">(</span><span class="n">df_targets</span><span class="p">[:</span><span class="mi">20</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -2241,22 +2578,13 @@ In&nbsp;[18]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[35]:
+In&nbsp;[211]:
 </div>
 
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">jinja</span> <span class="n">html</span>
-<span class="o">&lt;</span><span class="n">div</span> <span class="nb">id</span><span class="o">=</span><span class="s">&quot;datatable-container-testing&quot;</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="n">link</span> <span class="n">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="nb">type</span><span class="o">=</span><span class="s">&quot;text/css&quot;</span> <span class="n">href</span><span class="o">=</span><span class="s">&quot;//cdn.datatables.net/1.10.2/css/jquery.dataTables.css&quot;</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="n">script</span> <span class="nb">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span> <span class="n">language</span><span class="o">=</span><span class="s">&quot;javascript&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s">&quot;//cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js&quot;</span><span class="o">&gt;&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="n">script</span> <span class="nb">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
-        <span class="err">$</span><span class="p">(</span><span class="n">document</span><span class="p">)</span><span class="o">.</span><span class="n">ready</span><span class="p">(</span><span class="n">function</span><span class="p">()</span> <span class="p">{</span>
-            <span class="err">$</span><span class="p">(</span><span class="s">&#39;#datatable-container-testing .datatable&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">dataTable</span><span class="p">();</span>
-        <span class="p">}</span> <span class="p">);</span>
-    <span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
-    
-    <span class="o">&lt;</span><span class="err">!</span><span class="o">--</span> <span class="n">Insert</span> <span class="n">table</span> <span class="n">below</span> <span class="o">--&gt;</span>
-    <span class="p">{{</span> <span class="n">html_data</span> <span class="p">}}</span>
+<span class="o">&lt;</span><span class="n">div</span> <span class="nb">id</span><span class="o">=</span><span class="s">&quot;table-container&quot;</span><span class="o">&gt;</span>
+    <span class="p">{{</span> <span class="n">html_output</span> <span class="p">}}</span>
 <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 </pre></div>
 
@@ -2269,20 +2597,53 @@ In&nbsp;[35]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[35]:</div>
+    Out[211]:</div>
 
 <div class="output_html rendered_html output_subarea output_pyout">
-<div id="datatable-container-testing">
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.2/css/jquery.dataTables.css">
-    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#datatable-container-testing .datatable').dataTable();
-        } );
-    </script>
-    
-    <!-- Insert table below -->
-    <table border="1" class="dataframe datatable dataframe">
+<div id="table-container">
+    <IPython.core.display.HTML object at 0x7f042eaa02d0>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[243]:
+</div>
+
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">html_output</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[243]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+
+        <div id="datatable-container-3b6a2692-2f8c-11e4-95d5-52540086692e">
+            <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css">
+            <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css">
+            <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>
+
+            <script type="text/javascript">
+                $('#datatable-container-3b6a2692-2f8c-11e4-95d5-52540086692e table.datatable').dataTable();
+            </script>
+            <!-- Insert table below -->
+            <table border="1" class="dataframe datatable dataframe">
   <thead>
     <tr style="text-align: right;">
       <th>scheme</th>
@@ -2498,7 +2859,8 @@ In&nbsp;[35]:
     </tr>
   </tbody>
 </table>
-</div>
+        </div>
+    
 </div>
 
 </div>
@@ -2545,6 +2907,9 @@ In&nbsp;[35]:
           <a href="http://blog.dornea.nu/2014/08/28/using-jquery-datatables-with-ipython">Using JQuery DataTables with IPython</a>
       </li>
       <li class="post">
+          <a href="http://blog.dornea.nu/2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms">HowTo: Debug Android APKs with Eclipse and DDMS</a>
+      </li>
+      <li class="post">
           <a href="http://blog.dornea.nu/2014/08/06/python-for-data-analysis">Python for Data Analysis</a>
       </li>
       <li class="post">
@@ -2552,9 +2917,6 @@ In&nbsp;[35]:
       </li>
       <li class="post">
           <a href="http://blog.dornea.nu/2014/08/05/android-dynamic-code-analysis-mastering-droidbox">Android Dynamic Code Analysis - Mastering DroidBox</a>
-      </li>
-      <li class="post">
-          <a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a>
       </li>
     </ul>
   </section>
@@ -2569,7 +2931,7 @@ In&nbsp;[35]:
 
   <section>
   <h1>Tags</h1>
-    <a href="http://blog.dornea.nu/tag//"></a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
+    <a href="http://blog.dornea.nu/tag//"></a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
 
 
 
