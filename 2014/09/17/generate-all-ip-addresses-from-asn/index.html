@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Dinge, die ein Informatikerstudent niemals sagen wÃ¼rde….</title>
+  <title>Generate all IP addresses from ASN</title>
   <meta name="author" content="Victor Dorneanu">
   <meta name="keywords" content="victor dorneanu, dorneanu, dornea.nu, blog, web, application security, linux, unix, hacking, assembler, python, ipython, javascript, c, c++, freebsd, netbsd, openbsd, debian, arch linux, blacktrack, kali linux" />
 
@@ -1770,92 +1770,100 @@ jQuery(document).ready(function($) {
   <article class="hentry" role="article">
 <header>
     
-    <div id="qr-code-2013/06/26/dinge-die-ein-informatikerstudent-niemals-sagen-wa14rde" class="qr-code-image-block"></div>
+    <div id="qr-code-2014/09/17/generate-all-ip-addresses-from-asn" class="qr-code-image-block"></div>
     <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
     <script>
         var img = qr.image({
-            value: 'http://blog.dornea.nu/2013/06/26/dinge-die-ein-informatikerstudent-niemals-sagen-wa14rde',
+            value: 'http://blog.dornea.nu/2014/09/17/generate-all-ip-addresses-from-asn',
             level: 'L',
             size: 4
         });
-        document.getElementById('qr-code-2013/06/26/dinge-die-ein-informatikerstudent-niemals-sagen-wa14rde').appendChild(img);
+        document.getElementById('qr-code-2014/09/17/generate-all-ip-addresses-from-asn').appendChild(img);
     </script>
-      <h1 class="entry-title">Dinge, die ein Informatikerstudent niemals sagen wÃ¼rde….</h1>
-      <p class="meta"><time datetime="2013-06-26T00:00:00" pubdate>Wed 26 June 2013</time></p>
+      <h1 class="entry-title">Generate all IP addresses from ASN</h1>
+      <p class="meta"><time datetime="2014-09-17T00:00:00" pubdate>Wed 17 September 2014</time></p>
 </header>
 
-  <div class="entry-content"><h5 data-ft="{&quot;type&quot;:1,&quot;tn&quot;:&quot;K&quot;}">
-  Dinge, die ein informatikstudent niemals sagen wÃ¼rde:
-</h5>
+  <div class="entry-content"><p>Sometimes you need to know if a certain IP (or several ones) are within an IP range or belong to a certain <a href="http://en.wikipedia.org/wiki/Autonomous_System_%28Internet%29">ASN</a>. Let's give it a try and generate all possible IP addresses for <a href="http://telekom.de">telekom.de</a>. </p>
+<div class="highlight"><pre><span class="err">$</span> <span class="n">dig</span> <span class="n">telekom</span><span class="p">.</span><span class="n">de</span> 
+<span class="p">...</span>
+<span class="n">telekom</span><span class="p">.</span><span class="n">de</span><span class="p">.</span>     <span class="mi">86346</span>   <span class="n">IN</span>  <span class="n">A</span>   <span class="mf">46.29.100.76</span>
+<span class="p">...</span>
+</pre></div>
 
-<ul>
-<li>
-<ul>
-<li>ich hab sonnenbrand</li>
-</ul>
-</li>
-<li>
-<ul>
-<li>meine freundin&#8230;</li>
-</ul>
-</li>
-<li>
-<ul>
-<li>&#8230;lass uns das mit pointern lÃ¶sen</li>
-</ul>
-</li>
-<li>
-<ul>
-<li>yey, ein beweis!</li>
-</ul>
-</li>
-<li>
-<ul>
-<li>ich weiÃ, warum mein programm funktioniert</li>
-</ul>
-</li>
-<li>
-<ul>
-<li>ich entwickel erst einmal ein ausfÃ¼hrliches konzept und denke an alle mÃ¶glichen fehlerfÃ¤lle, bevor ich auch nur eine zeile programmiere</li>
-</ul>
-</li>
-<li>
-<ul>
-<li>ich hab windows und office legal gekauft</li>
-</ul>
-</li>
-<li>
-<ul>
-<li>der typ vor mir duftet aber gut</li>
-</ul>
-</li>
-<li>
-<ul>
-<li>heute kommentiere ich ausfÃ¼hrlich</li>
-</ul>
-</li>
-<li>
-<ul>
-<li>das internet benÃ¶tige ich nie zum programmieren</li>
-</ul>
-</li>
-<li>
-<ul>
-<li>wirtschaftsinformatik ist ein vÃ¶llig gleichwertiger studiengang zu informatik</li>
-</ul>
-</li>
-</ul>
-<!--more--></div>
+
+<p>Now let's find out the ASN:</p>
+<div class="highlight"><pre><span class="err">$</span> <span class="n">whois</span> <span class="mf">46.29.100.76</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">origin</span>            
+<span class="nl">origin:</span>         <span class="n">AS34086</span>
+</pre></div>
+
+
+<p>Now ask <a href="http://ripe.net">RIPE</a> for the IP ranges:</p>
+<div class="highlight"><pre><span class="err">$</span> <span class="n">whois</span> <span class="o">-</span><span class="n">h</span> <span class="n">whois</span><span class="p">.</span><span class="n">ripe</span><span class="p">.</span><span class="n">net</span> <span class="o">-</span><span class="n">T</span> <span class="n">route</span> <span class="n">AS34086</span> <span class="o">-</span><span class="n">i</span> <span class="n">origin</span> <span class="o">|</span> <span class="n">egrep</span> <span class="s">&quot;route: &quot;</span> <span class="o">|</span> <span class="n">awk</span> <span class="err">&#39;</span><span class="p">{</span><span class="n">print</span> <span class="err">$</span><span class="n">NF</span><span class="p">}</span><span class="err">&#39;</span>   
+<span class="mf">145.225.1.0</span><span class="o">/</span><span class="mi">24</span>
+<span class="mf">151.136.0.0</span><span class="o">/</span><span class="mi">16</span>
+<span class="mf">185.9.216.0</span><span class="o">/</span><span class="mi">22</span>
+<span class="mf">193.143.55.0</span><span class="o">/</span><span class="mi">24</span>
+<span class="mf">193.143.56.0</span><span class="o">/</span><span class="mi">24</span>
+<span class="mf">193.143.57.0</span><span class="o">/</span><span class="mi">24</span>
+<span class="mf">217.150.144.0</span><span class="o">/</span><span class="mi">20</span>
+<span class="mf">217.150.144.0</span><span class="o">/</span><span class="mi">21</span>
+<span class="mf">46.29.96.0</span><span class="o">/</span><span class="mi">21</span>
+<span class="mf">93.188.240.0</span><span class="o">/</span><span class="mi">21</span>
+<span class="mf">94.100.240.0</span><span class="o">/</span><span class="mi">20</span>
+</pre></div>
+
+
+<p>Now for every IP range let's generate all <em>possible</em> IP addresses. Therefore I've wrote a simple python script. </p>
+<blockquote>
+<p>I know there is <a href="www.cpan.org/authors/id/R/RA/RAYNERLUC/cidr2range-0.9.pl">cidr2range</a> but that didn't work for certain blocks like <strong>145.225.1.0/24</strong>.</p>
+</blockquote>
+<div class="highlight"><pre><span class="err">$</span> <span class="n">cat</span> <span class="n">cidr2list</span><span class="p">.</span><span class="n">py</span> 
+<span class="cp">#!/usr/bin/env python2</span>
+
+<span class="n">import</span> <span class="n">sys</span>
+<span class="n">from</span> <span class="n">netaddr</span> <span class="n">import</span> <span class="n">IPNetwork</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="o">:</span>
+    <span class="k">if</span> <span class="n">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="o">:</span>
+        <span class="n">print</span> <span class="s">&quot;Usage: %s &lt;CIDR Block&gt;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="nl">else:</span>
+        <span class="k">for</span> <span class="n">ip</span> <span class="n">in</span> <span class="n">IPNetwork</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">:</span>
+            <span class="n">print</span> <span class="err">&#39;</span><span class="o">%</span><span class="n">s</span><span class="err">&#39;</span> <span class="o">%</span> <span class="n">ip</span>
+</pre></div>
+
+
+<p>Now let's generate the lists:</p>
+<div class="highlight"><pre><span class="err">$</span> <span class="n">whois</span> <span class="o">-</span><span class="n">h</span> <span class="n">whois</span><span class="p">.</span><span class="n">ripe</span><span class="p">.</span><span class="n">net</span> <span class="o">-</span><span class="n">T</span> <span class="n">route</span> <span class="n">AS34086</span> <span class="o">-</span><span class="n">i</span> <span class="n">origin</span> <span class="o">|</span> <span class="n">egrep</span> <span class="s">&quot;route: &quot;</span> <span class="o">|</span> <span class="n">awk</span> <span class="err">&#39;</span><span class="p">{</span><span class="n">print</span> <span class="err">$</span><span class="n">NF</span><span class="p">}</span><span class="err">&#39;</span>  <span class="o">&gt;&gt;</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ip</span><span class="o">-</span><span class="n">ranges</span><span class="p">.</span><span class="n">txt</span>
+<span class="err">$</span> <span class="n">cat</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ip</span><span class="o">-</span><span class="n">ranges</span><span class="p">.</span><span class="n">txt</span> <span class="o">|</span> <span class="n">xargs</span> <span class="o">-</span><span class="n">n1</span> <span class="p">.</span><span class="o">/</span><span class="n">cidr2list</span><span class="p">.</span><span class="n">py</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ip</span><span class="o">-</span><span class="n">lists</span><span class="p">.</span><span class="n">txt</span>
+<span class="err">$</span>  <span class="n">head</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ip</span><span class="o">-</span><span class="n">lists</span><span class="p">.</span><span class="n">txt</span> 
+<span class="mf">145.225.1.0</span>
+<span class="mf">145.225.1.1</span>
+<span class="mf">145.225.1.2</span>
+<span class="mf">145.225.1.3</span>
+<span class="mf">145.225.1.4</span>
+<span class="mf">145.225.1.5</span>
+<span class="mf">145.225.1.6</span>
+<span class="mf">145.225.1.7</span>
+<span class="mf">145.225.1.8</span>
+<span class="mf">145.225.1.9</span>
+<span class="err">$</span> <span class="n">wc</span> <span class="o">-</span><span class="n">l</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ip</span><span class="o">-</span><span class="n">lists</span><span class="p">.</span><span class="n">txt</span> 
+<span class="mi">81920</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ip</span><span class="o">-</span><span class="n">lists</span><span class="p">.</span><span class="n">txt</span>
+</pre></div>
+
+
+<p>Voila! :) </p></div>
     <footer>
 <p class="meta">
   <span class="byline author vcard">
-    Posted by <span class="fn">Victor</span>
+    Posted by <span class="fn">Victor Dorneanu</span>
   </span>
-<time datetime="2013-06-26T00:00:00" pubdate>Wed 26 June 2013</time>  <span class="categories">
-    <a class="category" href="http://blog.dornea.nu/tag/misc/">misc</a>
+<time datetime="2014-09-17T00:00:00" pubdate>Wed 17 September 2014</time>  <span class="categories">
+    <a class="category" href="http://blog.dornea.nu/tag/networking/">networking</a>
+    <a class="category" href="http://blog.dornea.nu/tag/hacking/">hacking</a>
   </span>
 </p><div class="sharing">
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.dornea.nu/2013/06/26/dinge-die-ein-informatikerstudent-niemals-sagen-wa14rde" data-via="victordorneanu" data-counturl="http://blog.dornea.nu/2013/06/26/dinge-die-ein-informatikerstudent-niemals-sagen-wa14rde" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.dornea.nu/2014/09/17/generate-all-ip-addresses-from-asn" data-via="victordorneanu" data-counturl="http://blog.dornea.nu/2014/09/17/generate-all-ip-addresses-from-asn" >Tweet</a>
 </div>    </footer>
   </article>
 
@@ -1997,9 +2005,9 @@ jQuery(document).ready(function($) {
 </script>
 	<script type="text/javascript">
 	  var disqus_shortname = 'dorneanu';
-          var disqus_identifier = '/2013/06/26/dinge-die-ein-informatikerstudent-niemals-sagen-wa14rde';
-          var disqus_url = 'http://blog.dornea.nu/2013/06/26/dinge-die-ein-informatikerstudent-niemals-sagen-wa14rde';
-          var disqus_title = 'Dinge, die ein Informatikerstudent niemals sagen wÃ¼rde&#8230;.';
+          var disqus_identifier = '/2014/09/17/generate-all-ip-addresses-from-asn';
+          var disqus_url = 'http://blog.dornea.nu/2014/09/17/generate-all-ip-addresses-from-asn';
+          var disqus_title = 'Generate all IP addresses from ASN';
 	  (function() {
 	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
 	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
