@@ -667,7 +667,7 @@ padding-right:55px
 
 @media only screen and (min-width: 768px) {
 ul,ol {
-margin-left:0
+margin-left:1.5em;
 }
 }
 
@@ -2143,4 +2143,15 @@ padding:2px
 
 .qr-code-image-block img {
     box-shadow: none;
+}
+
+
+ul, ul ul, ul ol, ol, ol ul, ol ol, ul, ol {
+    margin-left: 1.5em;
+}
+
+
+ul li p,
+ol li p{
+    margin-bottom: 0;
 }
