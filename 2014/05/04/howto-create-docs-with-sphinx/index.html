@@ -1724,12 +1724,12 @@ jQuery(document).ready(function($) {
   <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
   <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 
-  <link href="../../../../favicon.png" rel="icon">
-  <link href="../../../../theme/css/main.css" media="screen, projection"
+  <link href="http://blog.dornea.nu/favicon.png" rel="icon">
+  <link href="http://blog.dornea.nu/theme/css/main.css" media="screen, projection"
         rel="stylesheet" type="text/css">
-  <script src="../../../../theme/js/modernizr-2.0.js"></script>
-  <script src="../../../../theme/js/ender.js"></script>
-  <script src="../../../../theme/js/octopress.js" type="text/javascript"></script>
+  <script src="http://blog.dornea.nu/theme/js/modernizr-2.0.js"></script>
+  <script src="http://blog.dornea.nu/theme/js/ender.js"></script>
+  <script src="http://blog.dornea.nu/theme/js/octopress.js" type="text/javascript"></script>
 
   <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
         rel="stylesheet" type="text/css">
@@ -1740,7 +1740,7 @@ jQuery(document).ready(function($) {
 
 <body>
   <header role="banner"><hgroup>
-  <h1><a href="../../../../">blog.dornea.nu</a></h1>
+  <h1><a href="http://blog.dornea.nu/">blog.dornea.nu</a></h1>
     <h2>Hack, code and drink some țuică.</h2>
 </hgroup></header>
   <nav role="navigation"><ul class="subscription" data-subscription="rss">
@@ -1758,10 +1758,10 @@ jQuery(document).ready(function($) {
 
 <ul class="main-navigation">
     <li><a href="/archives">Archives</a></li>
-      <li><a href="../../../../pages/about">About</a></li>
-      <li><a href="../../../../pages/books">Books</a></li>
+      <li><a href="http://blog.dornea.nu/pages/about">About</a></li>
+      <li><a href="http://blog.dornea.nu/pages/books">Books</a></li>
     <li class="active">
-    <a href="../../../../category/blog">Blog</a>
+    <a href="http://blog.dornea.nu/category/blog">Blog</a>
     </li>
 </ul></nav>
   <div id="main">
@@ -1771,10 +1771,10 @@ jQuery(document).ready(function($) {
 <header>
     
     <div id="qr-code-2014/05/04/howto-create-docs-with-sphinx" class="qr-code-image-block"></div>
-    <script src="../../../../theme/js/qr.min.js" type="text/javascript"></script>
+    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
     <script>
         var img = qr.image({
-            value: '../../../../2014/05/04/howto-create-docs-with-sphinx',
+            value: 'http://blog.dornea.nu/2014/05/04/howto-create-docs-with-sphinx',
             level: 'L',
             size: 4
         });
@@ -1812,247 +1812,247 @@ needs:</p>
 <h2>Quickstart</h2>
 <h3>Install tools</h3>
 <p>First of create a new <a href="http://www.virtualenv.org/en/latest/">virtualenv</a> environment:</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">mkdir</span> <span class="n">doku</span>
-<span class="err">$</span> <span class="n">virtualenv</span> <span class="n">doku</span>
-<span class="n">Using</span> <span class="n">base</span> <span class="n">prefix</span> <span class="o">&amp;</span><span class="err">#</span><span class="mo">03</span><span class="mi">9</span><span class="p">;</span><span class="o">/</span><span class="n">usr</span><span class="o">&amp;</span><span class="err">#</span><span class="mo">03</span><span class="mi">9</span><span class="p">;</span>
-<span class="n">New</span> <span class="n">python</span> <span class="n">executable</span> <span class="n">in</span> <span class="n">doku</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">python3</span>
-<span class="n">Also</span> <span class="n">creating</span> <span class="n">executable</span> <span class="n">in</span> <span class="n">doku</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">python</span>
-<span class="n">Installing</span> <span class="n">setuptools</span><span class="p">,</span> <span class="n">pip</span><span class="p">...</span><span class="n">done</span><span class="p">.</span>
+<div class="highlight"><pre>$ mkdir doku
+$ virtualenv doku
+Using base prefix &amp;#039;/usr&amp;#039;
+New python executable in doku/bin/python3
+Also creating executable in doku/bin/python
+Installing setuptools, pip...done.
 </pre></div>
 
 
 <p>Then activate it:</p>
-<div class="highlight"><pre>    <span class="err">$</span> <span class="n">source</span> <span class="n">doku</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">activate</span>
-    <span class="err">â</span>  <span class="n">tmp</span>  <span class="n">source</span> <span class="n">doku</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">activate</span>
-    <span class="p">(</span><span class="n">doku</span><span class="p">)</span><span class="err">â</span>  <span class="n">tmp</span>  <span class="n">cd</span> <span class="n">doku</span>
-    <span class="p">(</span><span class="n">doku</span><span class="p">)</span><span class="err">â</span>  <span class="n">doku</span>  <span class="n">ls</span> <span class="o">-</span><span class="n">l</span>
-    <span class="n">total</span> <span class="mi">12</span>
-    <span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">victor</span> <span class="n">users</span> <span class="mi">4096</span> <span class="n">May</span>  <span class="mi">4</span> <span class="mi">13</span><span class="o">:</span><span class="mi">37</span> <span class="n">bin</span>
-    <span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">victor</span> <span class="n">users</span> <span class="mi">4096</span> <span class="n">May</span>  <span class="mi">4</span> <span class="mi">13</span><span class="o">:</span><span class="mi">37</span> <span class="n">include</span>
-    <span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">3</span> <span class="n">victor</span> <span class="n">users</span> <span class="mi">4096</span> <span class="n">May</span>  <span class="mi">4</span> <span class="mi">13</span><span class="o">:</span><span class="mi">37</span> <span class="n">lib</span>
+<div class="highlight"><pre>    $ source doku/bin/activate
+    â  tmp  source doku/bin/activate
+    (doku)â  tmp  cd doku
+    (doku)â  doku  ls -l
+    total 12
+    drwxr-xr-x 2 victor users 4096 May  4 13:37 bin
+    drwxr-xr-x 2 victor users 4096 May  4 13:37 include
+    drwxr-xr-x 3 victor users 4096 May  4 13:37 lib
 </pre></div>
 
 
 <p>Now you&#8217;ll have to install <strong>sphinx</strong> using <strong>pip</strong>:</p>
-<div class="highlight"><pre>    <span class="p">(</span><span class="n">doku</span><span class="p">)</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">sphinx</span>
-    <span class="n">Downloading</span><span class="o">/</span><span class="n">unpacking</span> <span class="n">sphinx</span>
-      <span class="n">Downloading</span> <span class="n">Sphinx</span><span class="o">-</span><span class="mf">1.2.2</span><span class="o">-</span><span class="n">py33</span><span class="o">-</span><span class="n">none</span><span class="o">-</span><span class="n">any</span><span class="p">.</span><span class="n">whl</span> <span class="p">(</span><span class="mf">1.1</span><span class="n">MB</span><span class="p">)</span><span class="o">:</span> <span class="mf">1.1</span><span class="n">MB</span> <span class="n">downloaded</span>
-    <span class="n">Downloading</span><span class="o">/</span><span class="n">unpacking</span> <span class="n">docutils</span><span class="o">&gt;=</span><span class="mf">0.10</span> <span class="p">(</span><span class="n">from</span> <span class="n">sphinx</span><span class="p">)</span>
-      <span class="n">Downloading</span> <span class="n">docutils</span><span class="o">-</span><span class="mf">0.11</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span> <span class="p">(</span><span class="mf">1.6</span><span class="n">MB</span><span class="p">)</span><span class="o">:</span> <span class="mf">1.6</span><span class="n">MB</span> <span class="n">downloaded</span>
-      <span class="n">Running</span> <span class="n">setup</span><span class="p">.</span><span class="n">py</span> <span class="p">(</span><span class="n">path</span><span class="o">:/</span><span class="n">home</span><span class="o">/</span><span class="n">victor</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">doku</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docutils</span><span class="o">/</span><span class="n">setup</span><span class="p">.</span><span class="n">py</span><span class="p">)</span> <span class="n">egg_info</span> <span class="k">for</span> <span class="n">package</span> <span class="n">docutils</span>
+<div class="highlight"><pre>    (doku) pip install sphinx
+    Downloading/unpacking sphinx
+      Downloading Sphinx-1.2.2-py33-none-any.whl (1.1MB): 1.1MB downloaded
+    Downloading/unpacking docutils&gt;=0.10 (from sphinx)
+      Downloading docutils-0.11.tar.gz (1.6MB): 1.6MB downloaded
+      Running setup.py (path:/home/victor/tmp/doku/build/docutils/setup.py) egg_info for package docutils
 
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">files</span> <span class="n">found</span> <span class="n">matching</span> <span class="err">&#39;</span><span class="n">MANIFEST</span><span class="err">&#39;</span>
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">files</span> <span class="n">found</span> <span class="n">matching</span> <span class="sc">&#39;*&#39;</span> <span class="n">under</span> <span class="n">directory</span> <span class="err">&#39;</span><span class="n">extras</span><span class="err">&#39;</span>
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">previously</span><span class="o">-</span><span class="n">included</span> <span class="n">files</span> <span class="n">matching</span> <span class="err">&#39;</span><span class="p">.</span><span class="n">cvsignore</span><span class="err">&#39;</span> <span class="n">found</span> <span class="n">under</span> <span class="n">directory</span> <span class="sc">&#39;*&#39;</span>
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">previously</span><span class="o">-</span><span class="n">included</span> <span class="n">files</span> <span class="n">matching</span> <span class="err">&#39;</span><span class="o">*</span><span class="p">.</span><span class="n">pyc</span><span class="err">&#39;</span> <span class="n">found</span> <span class="n">under</span> <span class="n">directory</span> <span class="sc">&#39;*&#39;</span>
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">previously</span><span class="o">-</span><span class="n">included</span> <span class="n">files</span> <span class="n">matching</span> <span class="err">&#39;</span><span class="o">*~</span><span class="err">&#39;</span> <span class="n">found</span> <span class="n">under</span> <span class="n">directory</span> <span class="sc">&#39;*&#39;</span>
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">previously</span><span class="o">-</span><span class="n">included</span> <span class="n">files</span> <span class="n">matching</span> <span class="err">&#39;</span><span class="p">.</span><span class="n">DS_Store</span><span class="err">&#39;</span> <span class="n">found</span> <span class="n">under</span> <span class="n">directory</span> <span class="sc">&#39;*&#39;</span>
-    <span class="n">Downloading</span><span class="o">/</span><span class="n">unpacking</span> <span class="n">Jinja2</span><span class="o">&gt;=</span><span class="mf">2.3</span> <span class="p">(</span><span class="n">from</span> <span class="n">sphinx</span><span class="p">)</span>
-      <span class="n">Downloading</span> <span class="n">Jinja2</span><span class="o">-</span><span class="mf">2.7.2</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span> <span class="p">(</span><span class="mi">378</span><span class="n">kB</span><span class="p">)</span><span class="o">:</span> <span class="mi">378</span><span class="n">kB</span> <span class="n">downloaded</span>
-      <span class="n">Running</span> <span class="n">setup</span><span class="p">.</span><span class="n">py</span> <span class="p">(</span><span class="n">path</span><span class="o">:/</span><span class="n">home</span><span class="o">/</span><span class="n">victor</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">doku</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">Jinja2</span><span class="o">/</span><span class="n">setup</span><span class="p">.</span><span class="n">py</span><span class="p">)</span> <span class="n">egg_info</span> <span class="k">for</span> <span class="n">package</span> <span class="n">Jinja2</span>
+        warning: no files found matching &#39;MANIFEST&#39;
+        warning: no files found matching &#39;*&#39; under directory &#39;extras&#39;
+        warning: no previously-included files matching &#39;.cvsignore&#39; found under directory &#39;*&#39;
+        warning: no previously-included files matching &#39;*.pyc&#39; found under directory &#39;*&#39;
+        warning: no previously-included files matching &#39;*~&#39; found under directory &#39;*&#39;
+        warning: no previously-included files matching &#39;.DS_Store&#39; found under directory &#39;*&#39;
+    Downloading/unpacking Jinja2&gt;=2.3 (from sphinx)
+      Downloading Jinja2-2.7.2.tar.gz (378kB): 378kB downloaded
+      Running setup.py (path:/home/victor/tmp/doku/build/Jinja2/setup.py) egg_info for package Jinja2
 
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">files</span> <span class="n">found</span> <span class="n">matching</span> <span class="sc">&#39;*&#39;</span> <span class="n">under</span> <span class="n">directory</span> <span class="err">&#39;</span><span class="n">custom_fixers</span><span class="err">&#39;</span>
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">previously</span><span class="o">-</span><span class="n">included</span> <span class="n">files</span> <span class="n">matching</span> <span class="sc">&#39;*&#39;</span> <span class="n">found</span> <span class="n">under</span> <span class="n">directory</span> <span class="err">&#39;</span><span class="n">docs</span><span class="o">/</span><span class="n">_build</span><span class="err">&#39;</span>
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">previously</span><span class="o">-</span><span class="n">included</span> <span class="n">files</span> <span class="n">matching</span> <span class="err">&#39;</span><span class="o">*</span><span class="p">.</span><span class="n">pyc</span><span class="err">&#39;</span> <span class="n">found</span> <span class="n">under</span> <span class="n">directory</span> <span class="err">&#39;</span><span class="n">jinja2</span><span class="err">&#39;</span>
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">previously</span><span class="o">-</span><span class="n">included</span> <span class="n">files</span> <span class="n">matching</span> <span class="err">&#39;</span><span class="o">*</span><span class="p">.</span><span class="n">pyc</span><span class="err">&#39;</span> <span class="n">found</span> <span class="n">under</span> <span class="n">directory</span> <span class="err">&#39;</span><span class="n">docs</span><span class="err">&#39;</span>
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">previously</span><span class="o">-</span><span class="n">included</span> <span class="n">files</span> <span class="n">matching</span> <span class="err">&#39;</span><span class="o">*</span><span class="p">.</span><span class="n">pyo</span><span class="err">&#39;</span> <span class="n">found</span> <span class="n">under</span> <span class="n">directory</span> <span class="err">&#39;</span><span class="n">jinja2</span><span class="err">&#39;</span>
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">previously</span><span class="o">-</span><span class="n">included</span> <span class="n">files</span> <span class="n">matching</span> <span class="err">&#39;</span><span class="o">*</span><span class="p">.</span><span class="n">pyo</span><span class="err">&#39;</span> <span class="n">found</span> <span class="n">under</span> <span class="n">directory</span> <span class="err">&#39;</span><span class="n">docs</span><span class="err">&#39;</span>
-    <span class="n">Downloading</span><span class="o">/</span><span class="n">unpacking</span> <span class="n">Pygments</span><span class="o">&gt;=</span><span class="mf">1.2</span> <span class="p">(</span><span class="n">from</span> <span class="n">sphinx</span><span class="p">)</span>
-      <span class="n">Downloading</span> <span class="n">Pygments</span><span class="o">-</span><span class="mf">1.6</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span> <span class="p">(</span><span class="mf">1.4</span><span class="n">MB</span><span class="p">)</span><span class="o">:</span> <span class="mf">1.4</span><span class="n">MB</span> <span class="n">downloaded</span>
-      <span class="n">Running</span> <span class="n">setup</span><span class="p">.</span><span class="n">py</span> <span class="p">(</span><span class="n">path</span><span class="o">:/</span><span class="n">home</span><span class="o">/</span><span class="n">victor</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">doku</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">Pygments</span><span class="o">/</span><span class="n">setup</span><span class="p">.</span><span class="n">py</span><span class="p">)</span> <span class="n">egg_info</span> <span class="k">for</span> <span class="n">package</span> <span class="n">Pygments</span>
+        warning: no files found matching &#39;*&#39; under directory &#39;custom_fixers&#39;
+        warning: no previously-included files matching &#39;*&#39; found under directory &#39;docs/_build&#39;
+        warning: no previously-included files matching &#39;*.pyc&#39; found under directory &#39;jinja2&#39;
+        warning: no previously-included files matching &#39;*.pyc&#39; found under directory &#39;docs&#39;
+        warning: no previously-included files matching &#39;*.pyo&#39; found under directory &#39;jinja2&#39;
+        warning: no previously-included files matching &#39;*.pyo&#39; found under directory &#39;docs&#39;
+    Downloading/unpacking Pygments&gt;=1.2 (from sphinx)
+      Downloading Pygments-1.6.tar.gz (1.4MB): 1.4MB downloaded
+      Running setup.py (path:/home/victor/tmp/doku/build/Pygments/setup.py) egg_info for package Pygments
 
-    <span class="n">Downloading</span><span class="o">/</span><span class="n">unpacking</span> <span class="n">markupsafe</span> <span class="p">(</span><span class="n">from</span> <span class="n">Jinja2</span><span class="o">&gt;=</span><span class="mf">2.3</span><span class="o">-&gt;</span><span class="n">sphinx</span><span class="p">)</span>
-      <span class="n">Downloading</span> <span class="n">MarkupSafe</span><span class="o">-</span><span class="mf">0.21</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span>
-      <span class="n">Running</span> <span class="n">setup</span><span class="p">.</span><span class="n">py</span> <span class="p">(</span><span class="n">path</span><span class="o">:/</span><span class="n">home</span><span class="o">/</span><span class="n">victor</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">doku</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">markupsafe</span><span class="o">/</span><span class="n">setup</span><span class="p">.</span><span class="n">py</span><span class="p">)</span> <span class="n">egg_info</span> <span class="k">for</span> <span class="n">package</span> <span class="n">markupsafe</span>
+    Downloading/unpacking markupsafe (from Jinja2&gt;=2.3-&gt;sphinx)
+      Downloading MarkupSafe-0.21.tar.gz
+      Running setup.py (path:/home/victor/tmp/doku/build/markupsafe/setup.py) egg_info for package markupsafe
 
-    <span class="n">Installing</span> <span class="n">collected</span> <span class="n">packages</span><span class="o">:</span> <span class="n">sphinx</span><span class="p">,</span> <span class="n">docutils</span><span class="p">,</span> <span class="n">Jinja2</span><span class="p">,</span> <span class="n">Pygments</span><span class="p">,</span> <span class="n">markupsafe</span>
-      <span class="n">Running</span> <span class="n">setup</span><span class="p">.</span><span class="n">py</span> <span class="n">install</span> <span class="k">for</span> <span class="n">docutils</span>
-        <span class="n">Skipping</span> <span class="n">implicit</span> <span class="n">fixer</span><span class="o">:</span> <span class="n">buffer</span>
-        <span class="n">Skipping</span> <span class="n">implicit</span> <span class="n">fixer</span><span class="o">:</span> <span class="n">idioms</span>
-        <span class="n">Skipping</span> <span class="n">implicit</span> <span class="n">fixer</span><span class="o">:</span> <span class="n">set_literal</span>
-        <span class="n">Skipping</span> <span class="n">implicit</span> <span class="n">fixer</span><span class="o">:</span> <span class="n">ws_comma</span>
-        <span class="n">copy</span><span class="o">/</span><span class="n">convert</span> <span class="n">test</span> <span class="n">suite</span>
-        <span class="n">changing</span> <span class="n">mode</span> <span class="n">of</span> <span class="n">build</span><span class="o">/</span><span class="n">scripts</span><span class="o">-</span><span class="mf">3.4</span><span class="o">/</span><span class="n">rst2html</span><span class="p">.</span><span class="n">py</span> <span class="n">from</span> <span class="mi">644</span> <span class="n">to</span> <span class="mi">755</span>
-        <span class="n">changing</span> <span class="n">mode</span> <span class="n">of</span> <span class="n">build</span><span class="o">/</span><span class="n">scripts</span><span class="o">-</span><span class="mf">3.4</span><span class="o">/</span><span class="n">rst2s5</span><span class="p">.</span><span class="n">py</span> <span class="n">from</span> <span class="mi">644</span> <span class="n">to</span> <span class="mi">755</span>
-        <span class="n">changing</span> <span class="n">mode</span> <span class="n">of</span> <span class="n">build</span><span class="o">/</span><span class="n">scripts</span><span class="o">-</span><span class="mf">3.4</span><span class="o">/</span><span class="n">rst2latex</span><span class="p">.</span><span class="n">py</span> <span class="n">from</span> <span class="mi">644</span> <span class="n">to</span> <span class="mi">755</span>
-        <span class="n">changing</span> <span class="n">mode</span> <span class="n">of</span> <span class="n">build</span><span class="o">/</span><span class="n">scripts</span><span class="o">-</span><span class="mf">3.4</span><span class="o">/</span><span class="n">rst2xetex</span><span class="p">.</span><span class="n">py</span> <span class="n">from</span> <span class="mi">644</span> <span class="n">to</span> <span class="mi">755</span>
-        <span class="n">changing</span> <span class="n">mode</span> <span class="n">of</span> <span class="n">build</span><span class="o">/</span><span class="n">scripts</span><span class="o">-</span><span class="mf">3.4</span><span class="o">/</span><span class="n">rst2man</span><span class="p">.</span><span class="n">py</span> <span class="n">from</span> <span class="mi">644</span> <span class="n">to</span> <span class="mi">755</span>
-        <span class="n">changing</span> <span class="n">mode</span> <span class="n">of</span> <span class="n">build</span><span class="o">/</span><span class="n">scripts</span><span class="o">-</span><span class="mf">3.4</span><span class="o">/</span><span class="n">rst2xml</span><span class="p">.</span><span class="n">py</span> <span class="n">from</span> <span class="mi">644</span> <span class="n">to</span> <span class="mi">755</span>
-        <span class="n">changing</span> <span class="n">mode</span> <span class="n">of</span> <span class="n">build</span><span class="o">/</span><span class="n">scripts</span><span class="o">-</span><span class="mf">3.4</span><span class="o">/</span><span class="n">rst2pseudoxml</span><span class="p">.</span><span class="n">py</span> <span class="n">from</span> <span class="mi">644</span> <span class="n">to</span> <span class="mi">755</span>
-        <span class="n">changing</span> <span class="n">mode</span> <span class="n">of</span> <span class="n">build</span><span class="o">/</span><span class="n">scripts</span><span class="o">-</span><span class="mf">3.4</span><span class="o">/</span><span class="n">rstpep2html</span><span class="p">.</span><span class="n">py</span> <span class="n">from</span> <span class="mi">644</span> <span class="n">to</span> <span class="mi">755</span>
-        <span class="n">changing</span> <span class="n">mode</span> <span class="n">of</span> <span class="n">build</span><span class="o">/</span><span class="n">scripts</span><span class="o">-</span><span class="mf">3.4</span><span class="o">/</span><span class="n">rst2odt</span><span class="p">.</span><span class="n">py</span> <span class="n">from</span> <span class="mi">644</span> <span class="n">to</span> <span class="mi">755</span>
-        <span class="n">changing</span> <span class="n">mode</span> <span class="n">of</span> <span class="n">build</span><span class="o">/</span><span class="n">scripts</span><span class="o">-</span><span class="mf">3.4</span><span class="o">/</span><span class="n">rst2odt_prepstyles</span><span class="p">.</span><span class="n">py</span> <span class="n">from</span> <span class="mi">644</span> <span class="n">to</span> <span class="mi">755</span>
+    Installing collected packages: sphinx, docutils, Jinja2, Pygments, markupsafe
+      Running setup.py install for docutils
+        Skipping implicit fixer: buffer
+        Skipping implicit fixer: idioms
+        Skipping implicit fixer: set_literal
+        Skipping implicit fixer: ws_comma
+        copy/convert test suite
+        changing mode of build/scripts-3.4/rst2html.py from 644 to 755
+        changing mode of build/scripts-3.4/rst2s5.py from 644 to 755
+        changing mode of build/scripts-3.4/rst2latex.py from 644 to 755
+        changing mode of build/scripts-3.4/rst2xetex.py from 644 to 755
+        changing mode of build/scripts-3.4/rst2man.py from 644 to 755
+        changing mode of build/scripts-3.4/rst2xml.py from 644 to 755
+        changing mode of build/scripts-3.4/rst2pseudoxml.py from 644 to 755
+        changing mode of build/scripts-3.4/rstpep2html.py from 644 to 755
+        changing mode of build/scripts-3.4/rst2odt.py from 644 to 755
+        changing mode of build/scripts-3.4/rst2odt_prepstyles.py from 644 to 755
 
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">files</span> <span class="n">found</span> <span class="n">matching</span> <span class="err">&#39;</span><span class="n">MANIFEST</span><span class="err">&#39;</span>
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">files</span> <span class="n">found</span> <span class="n">matching</span> <span class="sc">&#39;*&#39;</span> <span class="n">under</span> <span class="n">directory</span> <span class="err">&#39;</span><span class="n">extras</span><span class="err">&#39;</span>
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">previously</span><span class="o">-</span><span class="n">included</span> <span class="n">files</span> <span class="n">matching</span> <span class="err">&#39;</span><span class="p">.</span><span class="n">cvsignore</span><span class="err">&#39;</span> <span class="n">found</span> <span class="n">under</span> <span class="n">directory</span> <span class="sc">&#39;*&#39;</span>
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">previously</span><span class="o">-</span><span class="n">included</span> <span class="n">files</span> <span class="n">matching</span> <span class="err">&#39;</span><span class="o">*</span><span class="p">.</span><span class="n">pyc</span><span class="err">&#39;</span> <span class="n">found</span> <span class="n">under</span> <span class="n">directory</span> <span class="sc">&#39;*&#39;</span>
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">previously</span><span class="o">-</span><span class="n">included</span> <span class="n">files</span> <span class="n">matching</span> <span class="err">&#39;</span><span class="o">*~</span><span class="err">&#39;</span> <span class="n">found</span> <span class="n">under</span> <span class="n">directory</span> <span class="sc">&#39;*&#39;</span>
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">previously</span><span class="o">-</span><span class="n">included</span> <span class="n">files</span> <span class="n">matching</span> <span class="err">&#39;</span><span class="p">.</span><span class="n">DS_Store</span><span class="err">&#39;</span> <span class="n">found</span> <span class="n">under</span> <span class="n">directory</span> <span class="sc">&#39;*&#39;</span>
-        <span class="n">changing</span> <span class="n">mode</span> <span class="n">of</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">victor</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">doku</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">rstpep2html</span><span class="p">.</span><span class="n">py</span> <span class="n">to</span> <span class="mi">755</span>
-        <span class="n">changing</span> <span class="n">mode</span> <span class="n">of</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">victor</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">doku</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">rst2xml</span><span class="p">.</span><span class="n">py</span> <span class="n">to</span> <span class="mi">755</span>
-        <span class="n">changing</span> <span class="n">mode</span> <span class="n">of</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">victor</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">doku</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">rst2pseudoxml</span><span class="p">.</span><span class="n">py</span> <span class="n">to</span> <span class="mi">755</span>
-        <span class="n">changing</span> <span class="n">mode</span> <span class="n">of</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">victor</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">doku</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">rst2html</span><span class="p">.</span><span class="n">py</span> <span class="n">to</span> <span class="mi">755</span>
-        <span class="n">changing</span> <span class="n">mode</span> <span class="n">of</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">victor</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">doku</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">rst2odt_prepstyles</span><span class="p">.</span><span class="n">py</span> <span class="n">to</span> <span class="mi">755</span>
-        <span class="n">changing</span> <span class="n">mode</span> <span class="n">of</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">victor</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">doku</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">rst2latex</span><span class="p">.</span><span class="n">py</span> <span class="n">to</span> <span class="mi">755</span>
-        <span class="n">changing</span> <span class="n">mode</span> <span class="n">of</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">victor</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">doku</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">rst2man</span><span class="p">.</span><span class="n">py</span> <span class="n">to</span> <span class="mi">755</span>
-        <span class="n">changing</span> <span class="n">mode</span> <span class="n">of</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">victor</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">doku</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">rst2odt</span><span class="p">.</span><span class="n">py</span> <span class="n">to</span> <span class="mi">755</span>
-        <span class="n">changing</span> <span class="n">mode</span> <span class="n">of</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">victor</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">doku</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">rst2xetex</span><span class="p">.</span><span class="n">py</span> <span class="n">to</span> <span class="mi">755</span>
-        <span class="n">changing</span> <span class="n">mode</span> <span class="n">of</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">victor</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">doku</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">rst2s5</span><span class="p">.</span><span class="n">py</span> <span class="n">to</span> <span class="mi">755</span>
-      <span class="n">Running</span> <span class="n">setup</span><span class="p">.</span><span class="n">py</span> <span class="n">install</span> <span class="k">for</span> <span class="n">Jinja2</span>
+        warning: no files found matching &#39;MANIFEST&#39;
+        warning: no files found matching &#39;*&#39; under directory &#39;extras&#39;
+        warning: no previously-included files matching &#39;.cvsignore&#39; found under directory &#39;*&#39;
+        warning: no previously-included files matching &#39;*.pyc&#39; found under directory &#39;*&#39;
+        warning: no previously-included files matching &#39;*~&#39; found under directory &#39;*&#39;
+        warning: no previously-included files matching &#39;.DS_Store&#39; found under directory &#39;*&#39;
+        changing mode of /home/victor/tmp/doku/bin/rstpep2html.py to 755
+        changing mode of /home/victor/tmp/doku/bin/rst2xml.py to 755
+        changing mode of /home/victor/tmp/doku/bin/rst2pseudoxml.py to 755
+        changing mode of /home/victor/tmp/doku/bin/rst2html.py to 755
+        changing mode of /home/victor/tmp/doku/bin/rst2odt_prepstyles.py to 755
+        changing mode of /home/victor/tmp/doku/bin/rst2latex.py to 755
+        changing mode of /home/victor/tmp/doku/bin/rst2man.py to 755
+        changing mode of /home/victor/tmp/doku/bin/rst2odt.py to 755
+        changing mode of /home/victor/tmp/doku/bin/rst2xetex.py to 755
+        changing mode of /home/victor/tmp/doku/bin/rst2s5.py to 755
+      Running setup.py install for Jinja2
 
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">files</span> <span class="n">found</span> <span class="n">matching</span> <span class="sc">&#39;*&#39;</span> <span class="n">under</span> <span class="n">directory</span> <span class="err">&#39;</span><span class="n">custom_fixers</span><span class="err">&#39;</span>
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">previously</span><span class="o">-</span><span class="n">included</span> <span class="n">files</span> <span class="n">matching</span> <span class="sc">&#39;*&#39;</span> <span class="n">found</span> <span class="n">under</span> <span class="n">directory</span> <span class="err">&#39;</span><span class="n">docs</span><span class="o">/</span><span class="n">_build</span><span class="err">&#39;</span>
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">previously</span><span class="o">-</span><span class="n">included</span> <span class="n">files</span> <span class="n">matching</span> <span class="err">&#39;</span><span class="o">*</span><span class="p">.</span><span class="n">pyc</span><span class="err">&#39;</span> <span class="n">found</span> <span class="n">under</span> <span class="n">directory</span> <span class="err">&#39;</span><span class="n">jinja2</span><span class="err">&#39;</span>
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">previously</span><span class="o">-</span><span class="n">included</span> <span class="n">files</span> <span class="n">matching</span> <span class="err">&#39;</span><span class="o">*</span><span class="p">.</span><span class="n">pyc</span><span class="err">&#39;</span> <span class="n">found</span> <span class="n">under</span> <span class="n">directory</span> <span class="err">&#39;</span><span class="n">docs</span><span class="err">&#39;</span>
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">previously</span><span class="o">-</span><span class="n">included</span> <span class="n">files</span> <span class="n">matching</span> <span class="err">&#39;</span><span class="o">*</span><span class="p">.</span><span class="n">pyo</span><span class="err">&#39;</span> <span class="n">found</span> <span class="n">under</span> <span class="n">directory</span> <span class="err">&#39;</span><span class="n">jinja2</span><span class="err">&#39;</span>
-        <span class="nl">warning:</span> <span class="n">no</span> <span class="n">previously</span><span class="o">-</span><span class="n">included</span> <span class="n">files</span> <span class="n">matching</span> <span class="err">&#39;</span><span class="o">*</span><span class="p">.</span><span class="n">pyo</span><span class="err">&#39;</span> <span class="n">found</span> <span class="n">under</span> <span class="n">directory</span> <span class="err">&#39;</span><span class="n">docs</span><span class="err">&#39;</span>
-      <span class="n">Running</span> <span class="n">setup</span><span class="p">.</span><span class="n">py</span> <span class="n">install</span> <span class="k">for</span> <span class="n">Pygments</span>
-        <span class="n">Skipping</span> <span class="n">implicit</span> <span class="n">fixer</span><span class="o">:</span> <span class="n">buffer</span>
-        <span class="n">Skipping</span> <span class="n">implicit</span> <span class="n">fixer</span><span class="o">:</span> <span class="n">idioms</span>
-        <span class="n">Skipping</span> <span class="n">implicit</span> <span class="n">fixer</span><span class="o">:</span> <span class="n">set_literal</span>
-        <span class="n">Skipping</span> <span class="n">implicit</span> <span class="n">fixer</span><span class="o">:</span> <span class="n">ws_comma</span>
+        warning: no files found matching &#39;*&#39; under directory &#39;custom_fixers&#39;
+        warning: no previously-included files matching &#39;*&#39; found under directory &#39;docs/_build&#39;
+        warning: no previously-included files matching &#39;*.pyc&#39; found under directory &#39;jinja2&#39;
+        warning: no previously-included files matching &#39;*.pyc&#39; found under directory &#39;docs&#39;
+        warning: no previously-included files matching &#39;*.pyo&#39; found under directory &#39;jinja2&#39;
+        warning: no previously-included files matching &#39;*.pyo&#39; found under directory &#39;docs&#39;
+      Running setup.py install for Pygments
+        Skipping implicit fixer: buffer
+        Skipping implicit fixer: idioms
+        Skipping implicit fixer: set_literal
+        Skipping implicit fixer: ws_comma
 
-        <span class="n">Installing</span> <span class="n">pygmentize</span> <span class="n">script</span> <span class="n">to</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">victor</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">doku</span><span class="o">/</span><span class="n">bin</span>
-      <span class="n">Running</span> <span class="n">setup</span><span class="p">.</span><span class="n">py</span> <span class="n">install</span> <span class="k">for</span> <span class="n">markupsafe</span>
+        Installing pygmentize script to /home/victor/tmp/doku/bin
+      Running setup.py install for markupsafe
 
-        <span class="n">building</span> <span class="err">&#39;</span><span class="n">markupsafe</span><span class="p">.</span><span class="n">_speedups</span><span class="err">&#39;</span> <span class="n">extension</span>
-        <span class="n">gcc</span> <span class="o">-</span><span class="n">pthread</span> <span class="o">-</span><span class="n">Wno</span><span class="o">-</span><span class="n">unused</span><span class="o">-</span><span class="n">result</span> <span class="o">-</span><span class="n">Werror</span><span class="o">=</span><span class="n">declaration</span><span class="o">-</span><span class="n">after</span><span class="o">-</span><span class="n">statement</span> <span class="o">-</span><span class="n">DDYNAMIC_ANNOTATIONS_ENABLED</span><span class="o">=</span><span class="mi">1</span> <span class="o">-</span><span class="n">DNDEBUG</span> <span class="o">-</span><span class="n">g</span> <span class="o">-</span><span class="n">fwrapv</span> <span class="o">-</span><span class="n">O3</span> <span class="o">-</span><span class="n">Wall</span> <span class="o">-</span><span class="n">Wstrict</span><span class="o">-</span><span class="n">prototypes</span> <span class="o">-</span><span class="n">march</span><span class="o">=</span><span class="n">x86</span><span class="o">-</span><span class="mi">64</span> <span class="o">-</span><span class="n">mtune</span><span class="o">=</span><span class="n">generic</span> <span class="o">-</span><span class="n">O2</span> <span class="o">-</span><span class="n">pipe</span> <span class="o">-</span><span class="n">fstack</span><span class="o">-</span><span class="n">protector</span> <span class="o">--</span><span class="n">param</span><span class="o">=</span><span class="n">ssp</span><span class="o">-</span><span class="n">buffer</span><span class="o">-</span><span class="n">size</span><span class="o">=</span><span class="mi">4</span> <span class="o">-</span><span class="n">fPIC</span> <span class="o">-</span><span class="n">I</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">include</span><span class="o">/</span><span class="n">python3</span><span class="mf">.4</span><span class="n">m</span> <span class="o">-</span><span class="n">c</span> <span class="n">markupsafe</span><span class="o">/</span><span class="n">_speedups</span><span class="p">.</span><span class="n">c</span> <span class="o">-</span><span class="n">o</span> <span class="n">build</span><span class="o">/</span><span class="n">temp</span><span class="p">.</span><span class="n">linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">-</span><span class="mf">3.4</span><span class="o">/</span><span class="n">markupsafe</span><span class="o">/</span><span class="n">_speedups</span><span class="p">.</span><span class="n">o</span>
-        <span class="n">gcc</span> <span class="o">-</span><span class="n">pthread</span> <span class="o">-</span><span class="n">shared</span> <span class="o">-</span><span class="n">Wl</span><span class="p">,</span><span class="o">-</span><span class="n">O1</span><span class="p">,</span><span class="o">--</span><span class="n">sort</span><span class="o">-</span><span class="n">common</span><span class="p">,</span><span class="o">--</span><span class="n">as</span><span class="o">-</span><span class="n">needed</span><span class="p">,</span><span class="o">-</span><span class="n">z</span><span class="p">,</span><span class="n">relro</span> <span class="n">build</span><span class="o">/</span><span class="n">temp</span><span class="p">.</span><span class="n">linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">-</span><span class="mf">3.4</span><span class="o">/</span><span class="n">markupsafe</span><span class="o">/</span><span class="n">_speedups</span><span class="p">.</span><span class="n">o</span> <span class="o">-</span><span class="n">L</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span> <span class="o">-</span><span class="n">lpython3</span><span class="mf">.4</span><span class="n">m</span> <span class="o">-</span><span class="n">o</span> <span class="n">build</span><span class="o">/</span><span class="n">lib</span><span class="p">.</span><span class="n">linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">-</span><span class="mf">3.4</span><span class="o">/</span><span class="n">markupsafe</span><span class="o">/</span><span class="n">_speedups</span><span class="p">.</span><span class="n">cpython</span><span class="o">-</span><span class="mi">34</span><span class="n">m</span><span class="p">.</span><span class="n">so</span>
-    <span class="n">Successfully</span> <span class="n">installed</span> <span class="n">sphinx</span> <span class="n">docutils</span> <span class="n">Jinja2</span> <span class="n">Pygments</span> <span class="n">markupsafe</span>
-    <span class="n">Cleaning</span> <span class="n">up</span><span class="p">...</span>
-    <span class="p">(</span><span class="n">doku</span><span class="p">)</span> <span class="n">doku</span>
+        building &#39;markupsafe._speedups&#39; extension
+        gcc -pthread -Wno-unused-result -Werror=declaration-after-statement -DDYNAMIC_ANNOTATIONS_ENABLED=1 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -fPIC -I/usr/include/python3.4m -c markupsafe/_speedups.c -o build/temp.linux-x86_64-3.4/markupsafe/_speedups.o
+        gcc -pthread -shared -Wl,-O1,--sort-common,--as-needed,-z,relro build/temp.linux-x86_64-3.4/markupsafe/_speedups.o -L/usr/lib -lpython3.4m -o build/lib.linux-x86_64-3.4/markupsafe/_speedups.cpython-34m.so
+    Successfully installed sphinx docutils Jinja2 Pygments markupsafe
+    Cleaning up...
+    (doku) doku
 </pre></div>
 
 
 <p>Now you should be ready to go.</p>
 <h3>Create new documentation dir structure</h3>
-<div class="highlight"><pre>    <span class="p">(</span><span class="n">doku</span><span class="p">)</span><span class="err">â</span>  <span class="n">doku</span>  <span class="n">mkdir</span> <span class="n">my_documentation</span>
-    <span class="p">(</span><span class="n">doku</span><span class="p">)</span><span class="err">â</span>  <span class="n">doku</span>  <span class="n">sphinx</span><span class="o">-</span><span class="n">quickstart</span>
-    <span class="n">Welcome</span> <span class="n">to</span> <span class="n">the</span> <span class="n">Sphinx</span> <span class="mf">1.2.2</span> <span class="n">quickstart</span> <span class="n">utility</span><span class="p">.</span>
+<div class="highlight"><pre>    (doku)â  doku  mkdir my_documentation
+    (doku)â  doku  sphinx-quickstart
+    Welcome to the Sphinx 1.2.2 quickstart utility.
 
-    <span class="n">Please</span> <span class="n">enter</span> <span class="n">values</span> <span class="k">for</span> <span class="n">the</span> <span class="n">following</span> <span class="n">settings</span> <span class="p">(</span><span class="n">just</span> <span class="n">press</span> <span class="n">Enter</span> <span class="n">to</span>
-    <span class="n">accept</span> <span class="n">a</span> <span class="k">default</span> <span class="n">value</span><span class="p">,</span> <span class="k">if</span> <span class="n">one</span> <span class="n">is</span> <span class="n">given</span> <span class="n">in</span> <span class="n">brackets</span><span class="p">).</span>
+    Please enter values for the following settings (just press Enter to
+    accept a default value, if one is given in brackets).
 
-    <span class="n">Enter</span> <span class="n">the</span> <span class="n">root</span> <span class="n">path</span> <span class="k">for</span> <span class="n">documentation</span><span class="p">.</span>
-    <span class="o">&gt;</span> <span class="n">Root</span> <span class="n">path</span> <span class="k">for</span> <span class="n">the</span> <span class="n">documentation</span> <span class="p">[.]</span><span class="o">:</span> <span class="n">my_documentation</span>
+    Enter the root path for documentation.
+    &gt; Root path for the documentation [.]: my_documentation
 
-    <span class="n">You</span> <span class="n">have</span> <span class="n">two</span> <span class="n">options</span> <span class="k">for</span> <span class="n">placing</span> <span class="n">the</span> <span class="n">build</span> <span class="n">directory</span> <span class="k">for</span> <span class="n">Sphinx</span> <span class="n">output</span><span class="p">.</span>
-    <span class="n">Either</span><span class="p">,</span> <span class="n">you</span> <span class="n">use</span> <span class="n">a</span> <span class="n">directory</span> <span class="s">&quot;_build&quot;</span> <span class="n">within</span> <span class="n">the</span> <span class="n">root</span> <span class="n">path</span><span class="p">,</span> <span class="n">or</span> <span class="n">you</span> <span class="n">separate</span>
-    <span class="s">&quot;source&quot;</span> <span class="n">and</span> <span class="s">&quot;build&quot;</span> <span class="n">directories</span> <span class="n">within</span> <span class="n">the</span> <span class="n">root</span> <span class="n">path</span><span class="p">.</span>
-    <span class="o">&gt;</span> <span class="n">Separate</span> <span class="n">source</span> <span class="n">and</span> <span class="n">build</span> <span class="n">directories</span> <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">:</span> <span class="n">n</span>
+    You have two options for placing the build directory for Sphinx output.
+    Either, you use a directory &quot;_build&quot; within the root path, or you separate
+    &quot;source&quot; and &quot;build&quot; directories within the root path.
+    &gt; Separate source and build directories (y/n) [n]: n
 
-    <span class="n">Inside</span> <span class="n">the</span> <span class="n">root</span> <span class="n">directory</span><span class="p">,</span> <span class="n">two</span> <span class="n">more</span> <span class="n">directories</span> <span class="n">will</span> <span class="n">be</span> <span class="n">created</span><span class="p">;</span> <span class="s">&quot;_templates&quot;</span>
-    <span class="k">for</span> <span class="n">custom</span> <span class="n">HTML</span> <span class="n">templates</span> <span class="n">and</span> <span class="s">&quot;_static&quot;</span> <span class="k">for</span> <span class="n">custom</span> <span class="n">stylesheets</span> <span class="n">and</span> <span class="n">other</span> <span class="k">static</span>
-    <span class="n">files</span><span class="p">.</span> <span class="n">You</span> <span class="n">can</span> <span class="n">enter</span> <span class="n">another</span> <span class="n">prefix</span> <span class="p">(</span><span class="n">such</span> <span class="n">as</span> <span class="s">&quot;.&quot;</span><span class="p">)</span> <span class="n">to</span> <span class="n">replace</span> <span class="n">the</span> <span class="n">underscore</span><span class="p">.</span>
-    <span class="o">&gt;</span> <span class="n">Name</span> <span class="n">prefix</span> <span class="k">for</span> <span class="n">templates</span> <span class="n">and</span> <span class="k">static</span> <span class="n">dir</span> <span class="p">[</span><span class="n">_</span><span class="p">]</span><span class="o">:</span>
+    Inside the root directory, two more directories will be created; &quot;_templates&quot;
+    for custom HTML templates and &quot;_static&quot; for custom stylesheets and other static
+    files. You can enter another prefix (such as &quot;.&quot;) to replace the underscore.
+    &gt; Name prefix for templates and static dir [_]:
 
-    <span class="n">The</span> <span class="n">project</span> <span class="n">name</span> <span class="n">will</span> <span class="n">occur</span> <span class="n">in</span> <span class="n">several</span> <span class="n">places</span> <span class="n">in</span> <span class="n">the</span> <span class="n">built</span> <span class="n">documentation</span><span class="p">.</span>
-    <span class="o">&gt;</span> <span class="n">Project</span> <span class="n">name</span><span class="o">:</span> <span class="n">My</span> <span class="n">Documentation</span>
-    <span class="o">&gt;</span> <span class="n">Author</span> <span class="n">name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">:</span> <span class="n">Victor</span>
+    The project name will occur in several places in the built documentation.
+    &gt; Project name: My Documentation
+    &gt; Author name(s): Victor
 
-    <span class="n">Sphinx</span> <span class="n">has</span> <span class="n">the</span> <span class="n">notion</span> <span class="n">of</span> <span class="n">a</span> <span class="s">&quot;version&quot;</span> <span class="n">and</span> <span class="n">a</span> <span class="s">&quot;release&quot;</span> <span class="k">for</span> <span class="n">the</span>
-    <span class="n">software</span><span class="p">.</span> <span class="n">Each</span> <span class="n">version</span> <span class="n">can</span> <span class="n">have</span> <span class="n">multiple</span> <span class="n">releases</span><span class="p">.</span> <span class="n">For</span> <span class="n">example</span><span class="p">,</span> <span class="k">for</span>
-    <span class="n">Python</span> <span class="n">the</span> <span class="n">version</span> <span class="n">is</span> <span class="n">something</span> <span class="n">like</span> <span class="mf">2.5</span> <span class="n">or</span> <span class="mf">3.0</span><span class="p">,</span> <span class="k">while</span> <span class="n">the</span> <span class="n">release</span> <span class="n">is</span>
-    <span class="n">something</span> <span class="n">like</span> <span class="mf">2.5.1</span> <span class="n">or</span> <span class="mf">3.0</span><span class="n">a1</span><span class="p">.</span>  <span class="n">If</span> <span class="n">you</span> <span class="n">don</span><span class="err">&#39;</span><span class="n">t</span> <span class="n">need</span> <span class="n">this</span> <span class="n">dual</span> <span class="n">structure</span><span class="p">,</span>
-    <span class="n">just</span> <span class="n">set</span> <span class="n">both</span> <span class="n">to</span> <span class="n">the</span> <span class="n">same</span> <span class="n">value</span><span class="p">.</span>
-    <span class="o">&gt;</span> <span class="n">Project</span> <span class="n">version</span><span class="o">:</span> <span class="mf">0.1</span>
-    <span class="o">&gt;</span> <span class="n">Project</span> <span class="n">release</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">]</span><span class="o">:</span> <span class="mf">0.1.0</span>
+    Sphinx has the notion of a &quot;version&quot; and a &quot;release&quot; for the
+    software. Each version can have multiple releases. For example, for
+    Python the version is something like 2.5 or 3.0, while the release is
+    something like 2.5.1 or 3.0a1.  If you don&#39;t need this dual structure,
+    just set both to the same value.
+    &gt; Project version: 0.1
+    &gt; Project release [0.1]: 0.1.0
 
-    <span class="n">The</span> <span class="n">file</span> <span class="n">name</span> <span class="n">suffix</span> <span class="k">for</span> <span class="n">source</span> <span class="n">files</span><span class="p">.</span> <span class="n">Commonly</span><span class="p">,</span> <span class="n">this</span> <span class="n">is</span> <span class="n">either</span> <span class="s">&quot;.txt&quot;</span>
-    <span class="n">or</span> <span class="s">&quot;.rst&quot;</span><span class="p">.</span>  <span class="n">Only</span> <span class="n">files</span> <span class="n">with</span> <span class="n">this</span> <span class="n">suffix</span> <span class="n">are</span> <span class="n">considered</span> <span class="n">documents</span><span class="p">.</span>
-    <span class="o">&gt;</span> <span class="n">Source</span> <span class="n">file</span> <span class="n">suffix</span> <span class="p">[.</span><span class="n">rst</span><span class="p">]</span><span class="o">:</span>
+    The file name suffix for source files. Commonly, this is either &quot;.txt&quot;
+    or &quot;.rst&quot;.  Only files with this suffix are considered documents.
+    &gt; Source file suffix [.rst]:
 
-    <span class="n">One</span> <span class="n">document</span> <span class="n">is</span> <span class="n">special</span> <span class="n">in</span> <span class="n">that</span> <span class="n">it</span> <span class="n">is</span> <span class="n">considered</span> <span class="n">the</span> <span class="n">top</span> <span class="n">node</span> <span class="n">of</span> <span class="n">the</span>
-    <span class="s">&quot;contents tree&quot;</span><span class="p">,</span> <span class="n">that</span> <span class="n">is</span><span class="p">,</span> <span class="n">it</span> <span class="n">is</span> <span class="n">the</span> <span class="n">root</span> <span class="n">of</span> <span class="n">the</span> <span class="n">hierarchical</span> <span class="n">structure</span>
-    <span class="n">of</span> <span class="n">the</span> <span class="n">documents</span><span class="p">.</span> <span class="n">Normally</span><span class="p">,</span> <span class="n">this</span> <span class="n">is</span> <span class="s">&quot;index&quot;</span><span class="p">,</span> <span class="n">but</span> <span class="k">if</span> <span class="n">your</span> <span class="s">&quot;index&quot;</span>
-    <span class="n">document</span> <span class="n">is</span> <span class="n">a</span> <span class="n">custom</span> <span class="n">template</span><span class="p">,</span> <span class="n">you</span> <span class="n">can</span> <span class="n">also</span> <span class="n">set</span> <span class="n">this</span> <span class="n">to</span> <span class="n">another</span> <span class="n">filename</span><span class="p">.</span>
-    <span class="o">&gt;</span> <span class="n">Name</span> <span class="n">of</span> <span class="n">your</span> <span class="n">master</span> <span class="n">document</span> <span class="p">(</span><span class="n">without</span> <span class="n">suffix</span><span class="p">)</span> <span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">:</span>
+    One document is special in that it is considered the top node of the
+    &quot;contents tree&quot;, that is, it is the root of the hierarchical structure
+    of the documents. Normally, this is &quot;index&quot;, but if your &quot;index&quot;
+    document is a custom template, you can also set this to another filename.
+    &gt; Name of your master document (without suffix) [index]:
 
-    <span class="n">Sphinx</span> <span class="n">can</span> <span class="n">also</span> <span class="n">add</span> <span class="n">configuration</span> <span class="k">for</span> <span class="n">epub</span> <span class="n">output</span><span class="o">:</span>
-    <span class="o">&gt;</span> <span class="n">Do</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">use</span> <span class="n">the</span> <span class="n">epub</span> <span class="n">builder</span> <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">:</span> <span class="n">n</span>
+    Sphinx can also add configuration for epub output:
+    &gt; Do you want to use the epub builder (y/n) [n]: n
 
-    <span class="n">Please</span> <span class="n">indicate</span> <span class="k">if</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">use</span> <span class="n">one</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">Sphinx</span> <span class="n">extensions</span><span class="o">:</span>
-    <span class="o">&gt;</span> <span class="n">autodoc</span><span class="o">:</span> <span class="n">automatically</span> <span class="n">insert</span> <span class="n">docstrings</span> <span class="n">from</span> <span class="n">modules</span> <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">:</span> <span class="n">y</span>
-    <span class="o">&gt;</span> <span class="n">doctest</span><span class="o">:</span> <span class="n">automatically</span> <span class="n">test</span> <span class="n">code</span> <span class="n">snippets</span> <span class="n">in</span> <span class="n">doctest</span> <span class="n">blocks</span> <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">:</span> <span class="n">n</span>
-    <span class="o">&gt;</span> <span class="n">intersphinx</span><span class="o">:</span> <span class="n">link</span> <span class="n">between</span> <span class="n">Sphinx</span> <span class="n">documentation</span> <span class="n">of</span> <span class="n">different</span> <span class="n">projects</span> <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">:</span> <span class="n">n</span>
-    <span class="o">&gt;</span> <span class="n">todo</span><span class="o">:</span> <span class="n">write</span> <span class="s">&quot;todo&quot;</span> <span class="n">entries</span> <span class="n">that</span> <span class="n">can</span> <span class="n">be</span> <span class="n">shown</span> <span class="n">or</span> <span class="n">hidden</span> <span class="n">on</span> <span class="n">build</span> <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">:</span> <span class="n">n</span>
-    <span class="o">&gt;</span> <span class="n">coverage</span><span class="o">:</span> <span class="n">checks</span> <span class="k">for</span> <span class="n">documentation</span> <span class="n">coverage</span> <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">:</span> <span class="n">n</span>
-    <span class="o">&gt;</span> <span class="n">pngmath</span><span class="o">:</span> <span class="n">include</span> <span class="n">math</span><span class="p">,</span> <span class="n">rendered</span> <span class="n">as</span> <span class="n">PNG</span> <span class="n">images</span> <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">:</span> <span class="n">n</span>
-    <span class="o">&gt;</span> <span class="n">mathjax</span><span class="o">:</span> <span class="n">include</span> <span class="n">math</span><span class="p">,</span> <span class="n">rendered</span> <span class="n">in</span> <span class="n">the</span> <span class="n">browser</span> <span class="n">by</span> <span class="n">MathJax</span> <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">:</span> <span class="n">n</span>
-    <span class="o">&gt;</span> <span class="n">ifconfig</span><span class="o">:</span> <span class="n">conditional</span> <span class="n">inclusion</span> <span class="n">of</span> <span class="n">content</span> <span class="n">based</span> <span class="n">on</span> <span class="n">config</span> <span class="n">values</span> <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">:</span> <span class="n">n</span>
-    <span class="o">&gt;</span> <span class="n">viewcode</span><span class="o">:</span> <span class="n">include</span> <span class="n">links</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">code</span> <span class="n">of</span> <span class="n">documented</span> <span class="n">Python</span> <span class="n">objects</span> <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">:</span> <span class="n">n</span>
+    Please indicate if you want to use one of the following Sphinx extensions:
+    &gt; autodoc: automatically insert docstrings from modules (y/n) [n]: y
+    &gt; doctest: automatically test code snippets in doctest blocks (y/n) [n]: n
+    &gt; intersphinx: link between Sphinx documentation of different projects (y/n) [n]: n
+    &gt; todo: write &quot;todo&quot; entries that can be shown or hidden on build (y/n) [n]: n
+    &gt; coverage: checks for documentation coverage (y/n) [n]: n
+    &gt; pngmath: include math, rendered as PNG images (y/n) [n]: n
+    &gt; mathjax: include math, rendered in the browser by MathJax (y/n) [n]: n
+    &gt; ifconfig: conditional inclusion of content based on config values (y/n) [n]: n
+    &gt; viewcode: include links to the source code of documented Python objects (y/n) [n]: n
 
-    <span class="n">A</span> <span class="n">Makefile</span> <span class="n">and</span> <span class="n">a</span> <span class="n">Windows</span> <span class="n">command</span> <span class="n">file</span> <span class="n">can</span> <span class="n">be</span> <span class="n">generated</span> <span class="k">for</span> <span class="n">you</span> <span class="n">so</span> <span class="n">that</span> <span class="n">you</span>
-    <span class="n">only</span> <span class="n">have</span> <span class="n">to</span> <span class="n">run</span> <span class="n">e</span><span class="p">.</span><span class="n">g</span><span class="p">.</span> <span class="err">`</span><span class="n">make</span> <span class="n">html</span><span class="err">&#39;</span> <span class="n">instead</span> <span class="n">of</span> <span class="n">invoking</span> <span class="n">sphinx</span><span class="o">-</span><span class="n">build</span>
-    <span class="n">directly</span><span class="p">.</span>
-    <span class="o">&gt;</span> <span class="n">Create</span> <span class="n">Makefile</span><span class="o">?</span> <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="p">[</span><span class="n">y</span><span class="p">]</span><span class="o">:</span>
-    <span class="o">&gt;</span> <span class="n">Create</span> <span class="n">Windows</span> <span class="n">command</span> <span class="n">file</span><span class="o">?</span> <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="p">[</span><span class="n">y</span><span class="p">]</span><span class="o">:</span> <span class="n">n</span>
+    A Makefile and a Windows command file can be generated for you so that you
+    only have to run e.g. `make html&#39; instead of invoking sphinx-build
+    directly.
+    &gt; Create Makefile? (y/n) [y]:
+    &gt; Create Windows command file? (y/n) [y]: n
 
-    <span class="n">Creating</span> <span class="n">file</span> <span class="n">my_documentation</span><span class="o">/</span><span class="n">conf</span><span class="p">.</span><span class="n">py</span><span class="p">.</span>
-    <span class="n">Creating</span> <span class="n">file</span> <span class="n">my_documentation</span><span class="o">/</span><span class="n">index</span><span class="p">.</span><span class="n">rst</span><span class="p">.</span>
-    <span class="n">Creating</span> <span class="n">file</span> <span class="n">my_documentation</span><span class="o">/</span><span class="n">Makefile</span><span class="p">.</span>
+    Creating file my_documentation/conf.py.
+    Creating file my_documentation/index.rst.
+    Creating file my_documentation/Makefile.
 
-    <span class="nl">Finished:</span> <span class="n">An</span> <span class="n">initial</span> <span class="n">directory</span> <span class="n">structure</span> <span class="n">has</span> <span class="n">been</span> <span class="n">created</span><span class="p">.</span>
+    Finished: An initial directory structure has been created.
 
-    <span class="n">You</span> <span class="n">should</span> <span class="n">now</span> <span class="n">populate</span> <span class="n">your</span> <span class="n">master</span> <span class="n">file</span> <span class="n">my_documentation</span><span class="o">/</span><span class="n">index</span><span class="p">.</span><span class="n">rst</span> <span class="n">and</span> <span class="n">create</span> <span class="n">other</span> <span class="n">documentation</span>
-    <span class="n">source</span> <span class="n">files</span><span class="p">.</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">Makefile</span> <span class="n">to</span> <span class="n">build</span> <span class="n">the</span> <span class="n">docs</span><span class="p">,</span> <span class="n">like</span> <span class="n">so</span><span class="o">:</span>
-       <span class="n">make</span> <span class="n">builder</span>
-    <span class="n">where</span> <span class="s">&quot;builder&quot;</span> <span class="n">is</span> <span class="n">one</span> <span class="n">of</span> <span class="n">the</span> <span class="n">supported</span> <span class="n">builders</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">g</span><span class="p">.</span> <span class="n">html</span><span class="p">,</span> <span class="n">latex</span> <span class="n">or</span> <span class="n">linkcheck</span><span class="p">.</span>
+    You should now populate your master file my_documentation/index.rst and create other documentation
+    source files. Use the Makefile to build the docs, like so:
+       make builder
+    where &quot;builder&quot; is one of the supported builders, e.g. html, latex or linkcheck.
 </pre></div>
 
 
 <h3>Create some builds</h3>
 <p>Now you can call <strong>make</strong> to build your desired documentation format:</p>
-<div class="highlight"><pre>    <span class="p">(</span><span class="nx">doku</span><span class="p">)</span><span class="err">â</span>  <span class="nx">my_documentation</span>  <span class="nx">make</span>
-    <span class="nx">Please</span> <span class="nx">use</span> <span class="err">`</span><span class="nx">make</span> <span class="o">&lt;</span><span class="nb">target</span><span class="o">&gt;</span><span class="s1">&#39; where &lt;target&gt; is one of</span>
-<span class="s1">      html       to make standalone HTML files</span>
-<span class="s1">      dirhtml    to make HTML files named index.html in directories</span>
-<span class="s1">      singlehtml to make a single large HTML file</span>
-<span class="s1">      pickle     to make pickle files</span>
-<span class="s1">      json       to make JSON files</span>
-<span class="s1">      htmlhelp   to make HTML files and a HTML help project</span>
-<span class="s1">      qthelp     to make HTML files and a qthelp project</span>
-<span class="s1">      devhelp    to make HTML files and a Devhelp project</span>
-<span class="s1">      epub       to make an epub</span>
-<span class="s1">      latex      to make LaTeX files, you can set PAPER=a4 or PAPER=letter</span>
-<span class="s1">      latexpdf   to make LaTeX files and run them through pdflatex</span>
-<span class="s1">      latexpdfja to make LaTeX files and run them through platex/dvipdfmx</span>
-<span class="s1">      text       to make text files</span>
-<span class="s1">      man        to make manual pages</span>
-<span class="s1">      texinfo    to make Texinfo files</span>
-<span class="s1">      info       to make Texinfo files and run them through makeinfo</span>
-<span class="s1">      gettext    to make PO message catalogs</span>
-<span class="s1">      changes    to make an overview of all changed/added/deprecated items</span>
-<span class="s1">      xml        to make Docutils-native XML files</span>
-<span class="s1">      pseudoxml  to make pseudoxml-XML files for display purposes</span>
-<span class="s1">      linkcheck  to check all external links for integrity</span>
-<span class="s1">      doctest    to run all doctests embedded in the documentation (if enabled)</span>
+<div class="highlight"><pre>    (doku)â  my_documentation  make
+    Please use `make &lt;target&gt;&#39; where &lt;target&gt; is one of
+      html       to make standalone HTML files
+      dirhtml    to make HTML files named index.html in directories
+      singlehtml to make a single large HTML file
+      pickle     to make pickle files
+      json       to make JSON files
+      htmlhelp   to make HTML files and a HTML help project
+      qthelp     to make HTML files and a qthelp project
+      devhelp    to make HTML files and a Devhelp project
+      epub       to make an epub
+      latex      to make LaTeX files, you can set PAPER=a4 or PAPER=letter
+      latexpdf   to make LaTeX files and run them through pdflatex
+      latexpdfja to make LaTeX files and run them through platex/dvipdfmx
+      text       to make text files
+      man        to make manual pages
+      texinfo    to make Texinfo files
+      info       to make Texinfo files and run them through makeinfo
+      gettext    to make PO message catalogs
+      changes    to make an overview of all changed/added/deprecated items
+      xml        to make Docutils-native XML files
+      pseudoxml  to make pseudoxml-XML files for display purposes
+      linkcheck  to check all external links for integrity
+      doctest    to run all doctests embedded in the documentation (if enabled)
 </pre></div>
 
 
 <p>Let's try with <strong>html</strong>:</p>
-<div class="highlight"><pre>    <span class="p">(</span><span class="n">doku</span><span class="p">)</span><span class="err">â</span>  <span class="n">my_documentation</span>  <span class="n">make</span> <span class="n">html</span>
-    <span class="n">sphinx</span><span class="o">-</span><span class="n">build</span> <span class="o">-</span><span class="n">b</span> <span class="n">html</span> <span class="o">-</span><span class="n">d</span> <span class="n">_build</span><span class="o">/</span><span class="n">doctrees</span>   <span class="p">.</span> <span class="n">_build</span><span class="o">/</span><span class="n">html</span>
-    <span class="n">Making</span> <span class="n">output</span> <span class="n">directory</span><span class="p">...</span>
-    <span class="n">Running</span> <span class="n">Sphinx</span> <span class="n">v1</span><span class="mf">.2.2</span>
-    <span class="n">loading</span> <span class="n">pickled</span> <span class="n">environment</span><span class="p">...</span> <span class="n">failed</span><span class="o">:</span> <span class="p">[</span><span class="n">Errno</span> <span class="mi">2</span><span class="p">]</span> <span class="n">No</span> <span class="n">such</span> <span class="n">file</span> <span class="n">or</span> <span class="n">directory</span><span class="o">:</span> <span class="err">&#39;</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">victor</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">doku</span><span class="o">/</span><span class="n">my_documentation</span><span class="o">/</span><span class="n">_build</span><span class="o">/</span><span class="n">doctrees</span><span class="o">/</span><span class="n">environment</span><span class="p">.</span><span class="n">pickle</span><span class="err">&#39;</span>
-    <span class="n">building</span> <span class="p">[</span><span class="n">html</span><span class="p">]</span><span class="o">:</span> <span class="n">targets</span> <span class="k">for</span> <span class="mi">1</span> <span class="n">source</span> <span class="n">files</span> <span class="n">that</span> <span class="n">are</span> <span class="n">out</span> <span class="n">of</span> <span class="n">date</span>
-    <span class="n">updating</span> <span class="n">environment</span><span class="o">:</span> <span class="mi">1</span> <span class="n">added</span><span class="p">,</span> <span class="mi">0</span> <span class="n">changed</span><span class="p">,</span> <span class="mi">0</span> <span class="n">removed</span>
-    <span class="n">reading</span> <span class="n">sources</span><span class="p">...</span> <span class="p">[</span><span class="mi">100</span><span class="o">%</span><span class="p">]</span> <span class="n">index</span>
-    <span class="n">looking</span> <span class="k">for</span> <span class="n">now</span><span class="o">-</span><span class="n">outdated</span> <span class="n">files</span><span class="p">...</span> <span class="n">none</span> <span class="n">found</span>
-    <span class="n">pickling</span> <span class="n">environment</span><span class="p">...</span> <span class="n">done</span>
-    <span class="n">checking</span> <span class="n">consistency</span><span class="p">...</span> <span class="n">done</span>
-    <span class="n">preparing</span> <span class="n">documents</span><span class="p">...</span> <span class="n">done</span>
-    <span class="n">writing</span> <span class="n">output</span><span class="p">...</span> <span class="p">[</span><span class="mi">100</span><span class="o">%</span><span class="p">]</span> <span class="n">index</span>
-    <span class="n">writing</span> <span class="n">additional</span> <span class="n">files</span><span class="p">...</span> <span class="n">genindex</span> <span class="n">search</span>
-    <span class="n">copying</span> <span class="k">static</span> <span class="n">files</span><span class="p">...</span> <span class="n">done</span>
-    <span class="n">copying</span> <span class="n">extra</span> <span class="n">files</span><span class="p">...</span> <span class="n">done</span>
-    <span class="n">dumping</span> <span class="n">search</span> <span class="n">index</span><span class="p">...</span> <span class="n">done</span>
-    <span class="n">dumping</span> <span class="n">object</span> <span class="n">inventory</span><span class="p">...</span> <span class="n">done</span>
-    <span class="n">build</span> <span class="n">succeeded</span><span class="p">.</span>
+<div class="highlight"><pre>    (doku)â  my_documentation  make html
+    sphinx-build -b html -d _build/doctrees   . _build/html
+    Making output directory...
+    Running Sphinx v1.2.2
+    loading pickled environment... failed: [Errno 2] No such file or directory: &#39;/home/victor/tmp/doku/my_documentation/_build/doctrees/environment.pickle&#39;
+    building [html]: targets for 1 source files that are out of date
+    updating environment: 1 added, 0 changed, 0 removed
+    reading sources... [100%] index
+    looking for now-outdated files... none found
+    pickling environment... done
+    checking consistency... done
+    preparing documents... done
+    writing output... [100%] index
+    writing additional files... genindex search
+    copying static files... done
+    copying extra files... done
+    dumping search index... done
+    dumping object inventory... done
+    build succeeded.
 
-    <span class="n">Build</span> <span class="n">finished</span><span class="p">.</span> <span class="n">The</span> <span class="n">HTML</span> <span class="n">pages</span> <span class="n">are</span> <span class="n">in</span> <span class="n">_build</span><span class="o">/</span><span class="n">html</span><span class="p">.</span>
+    Build finished. The HTML pages are in _build/html.
 </pre></div>
 
 
@@ -2079,60 +2079,60 @@ needs:</p>
     Transcript written on MyDocumentation.log.
     make<a href="https://readthedocs.org/">1</a>: Leaving directory '/home/victor/tmp/doku/my_documentation/_build/latex'
     pdflatex finished; the PDF files are in _build/latex.</p>
-<div class="highlight"><pre><span class="n">You</span> <span class="n">can</span> <span class="n">find</span> <span class="n">you</span> <span class="o">**</span><span class="n">builds</span><span class="o">**</span> <span class="n">inside</span> <span class="n">the</span> <span class="o">**</span><span class="n">_build</span><span class="o">**</span> <span class="n">folder</span><span class="o">:</span>
+<div class="highlight"><pre>You can find you **builds** inside the **_build** folder:
 
-<span class="o">~~~</span> <span class="n">shell</span>
-    <span class="p">(</span><span class="n">doku</span><span class="p">)</span><span class="err">â</span>  <span class="n">my_documentation</span>  <span class="n">tree</span> <span class="n">_build</span>
-    <span class="n">_build</span>
-    <span class="err">âââ</span> <span class="n">doctrees</span>
-    <span class="err">âÂ Â </span> <span class="err">âââ</span> <span class="n">environment</span><span class="p">.</span><span class="n">pickle</span>
-    <span class="err">âÂ Â </span> <span class="err">âââ</span> <span class="n">index</span><span class="p">.</span><span class="n">doctree</span>
-    <span class="err">âââ</span> <span class="n">html</span>
-    <span class="err">âÂ Â </span> <span class="err">âââ</span> <span class="n">genindex</span><span class="p">.</span><span class="n">html</span>
-    <span class="err">âÂ Â </span> <span class="err">âââ</span> <span class="n">index</span><span class="p">.</span><span class="n">html</span>
-    <span class="err">âÂ Â </span> <span class="err">âââ</span> <span class="n">objects</span><span class="p">.</span><span class="n">inv</span>
-    <span class="err">âÂ Â </span> <span class="err">âââ</span> <span class="n">search</span><span class="p">.</span><span class="n">html</span>
-    <span class="err">âÂ Â </span> <span class="err">âââ</span> <span class="n">searchindex</span><span class="p">.</span><span class="n">js</span>
-    <span class="err">âÂ Â </span> <span class="err">âââ</span> <span class="n">_sources</span>
-    <span class="err">âÂ Â </span> <span class="err">âÂ Â </span> <span class="err">âââ</span> <span class="n">index</span><span class="p">.</span><span class="n">txt</span>
-    <span class="err">âÂ Â </span> <span class="err">âââ</span> <span class="n">_static</span>
-    <span class="err">âÂ Â </span>     <span class="err">âââ</span> <span class="n">ajax</span><span class="o">-</span><span class="n">loader</span><span class="p">.</span><span class="n">gif</span>
-    <span class="err">âÂ Â </span>     <span class="err">âââ</span> <span class="n">basic</span><span class="p">.</span><span class="n">css</span>
-    <span class="err">âÂ Â </span>     <span class="err">âââ</span> <span class="n">comment</span><span class="o">-</span><span class="n">bright</span><span class="p">.</span><span class="n">png</span>
-    <span class="err">âÂ Â </span>     <span class="err">âââ</span> <span class="n">comment</span><span class="o">-</span><span class="n">close</span><span class="p">.</span><span class="n">png</span>
-    <span class="err">âÂ Â </span>     <span class="err">âââ</span> <span class="n">comment</span><span class="p">.</span><span class="n">png</span>
-    <span class="err">âÂ Â </span>     <span class="err">âââ</span> <span class="k">default</span><span class="p">.</span><span class="n">css</span>
-    <span class="err">âÂ Â </span>     <span class="err">âââ</span> <span class="n">doctools</span><span class="p">.</span><span class="n">js</span>
-    <span class="err">âÂ Â </span>     <span class="err">âââ</span> <span class="n">down</span><span class="p">.</span><span class="n">png</span>
-    <span class="err">âÂ Â </span>     <span class="err">âââ</span> <span class="n">down</span><span class="o">-</span><span class="n">pressed</span><span class="p">.</span><span class="n">png</span>
-    <span class="err">âÂ Â </span>     <span class="err">âââ</span> <span class="n">file</span><span class="p">.</span><span class="n">png</span>
-    <span class="err">âÂ Â </span>     <span class="err">âââ</span> <span class="n">jquery</span><span class="p">.</span><span class="n">js</span>
-    <span class="err">âÂ Â </span>     <span class="err">âââ</span> <span class="n">minus</span><span class="p">.</span><span class="n">png</span>
-    <span class="err">âÂ Â </span>     <span class="err">âââ</span> <span class="n">plus</span><span class="p">.</span><span class="n">png</span>
-    <span class="err">âÂ Â </span>     <span class="err">âââ</span> <span class="n">pygments</span><span class="p">.</span><span class="n">css</span>
-    <span class="err">âÂ Â </span>     <span class="err">âââ</span> <span class="n">searchtools</span><span class="p">.</span><span class="n">js</span>
-    <span class="err">âÂ Â </span>     <span class="err">âââ</span> <span class="n">sidebar</span><span class="p">.</span><span class="n">js</span>
-    <span class="err">âÂ Â </span>     <span class="err">âââ</span> <span class="n">underscore</span><span class="p">.</span><span class="n">js</span>
-    <span class="err">âÂ Â </span>     <span class="err">âââ</span> <span class="n">up</span><span class="p">.</span><span class="n">png</span>
-    <span class="err">âÂ Â </span>     <span class="err">âââ</span> <span class="n">up</span><span class="o">-</span><span class="n">pressed</span><span class="p">.</span><span class="n">png</span>
-    <span class="err">âÂ Â </span>     <span class="err">âââ</span> <span class="n">websupport</span><span class="p">.</span><span class="n">js</span>
-    <span class="err">âââ</span> <span class="n">latex</span>
-        <span class="err">âââ</span> <span class="n">fncychap</span><span class="p">.</span><span class="n">sty</span>
-        <span class="err">âââ</span> <span class="n">Makefile</span>
-        <span class="err">âââ</span> <span class="n">MyDocumentation</span><span class="p">.</span><span class="n">aux</span>
-        <span class="err">âââ</span> <span class="n">MyDocumentation</span><span class="p">.</span><span class="n">idx</span>
-        <span class="err">âââ</span> <span class="n">MyDocumentation</span><span class="p">.</span><span class="n">ilg</span>
-        <span class="err">âââ</span> <span class="n">MyDocumentation</span><span class="p">.</span><span class="n">ind</span>
-        <span class="err">âââ</span> <span class="n">MyDocumentation</span><span class="p">.</span><span class="n">log</span>
-        <span class="err">âââ</span> <span class="n">MyDocumentation</span><span class="p">.</span><span class="n">out</span>
-        <span class="err">âââ</span> <span class="n">MyDocumentation</span><span class="p">.</span><span class="n">pdf</span>
-        <span class="err">âââ</span> <span class="n">MyDocumentation</span><span class="p">.</span><span class="n">tex</span>
-        <span class="err">âââ</span> <span class="n">MyDocumentation</span><span class="p">.</span><span class="n">toc</span>
-        <span class="err">âââ</span> <span class="n">python</span><span class="p">.</span><span class="n">ist</span>
-        <span class="err">âââ</span> <span class="n">sphinxhowto</span><span class="p">.</span><span class="n">cls</span>
-        <span class="err">âââ</span> <span class="n">sphinxmanual</span><span class="p">.</span><span class="n">cls</span>
-        <span class="err">âââ</span> <span class="n">sphinx</span><span class="p">.</span><span class="n">sty</span>
-        <span class="err">âââ</span> <span class="n">tabulary</span><span class="p">.</span><span class="n">sty</span>
+~~~ shell
+    (doku)â  my_documentation  tree _build
+    _build
+    âââ doctrees
+    âÂ Â  âââ environment.pickle
+    âÂ Â  âââ index.doctree
+    âââ html
+    âÂ Â  âââ genindex.html
+    âÂ Â  âââ index.html
+    âÂ Â  âââ objects.inv
+    âÂ Â  âââ search.html
+    âÂ Â  âââ searchindex.js
+    âÂ Â  âââ _sources
+    âÂ Â  âÂ Â  âââ index.txt
+    âÂ Â  âââ _static
+    âÂ Â      âââ ajax-loader.gif
+    âÂ Â      âââ basic.css
+    âÂ Â      âââ comment-bright.png
+    âÂ Â      âââ comment-close.png
+    âÂ Â      âââ comment.png
+    âÂ Â      âââ default.css
+    âÂ Â      âââ doctools.js
+    âÂ Â      âââ down.png
+    âÂ Â      âââ down-pressed.png
+    âÂ Â      âââ file.png
+    âÂ Â      âââ jquery.js
+    âÂ Â      âââ minus.png
+    âÂ Â      âââ plus.png
+    âÂ Â      âââ pygments.css
+    âÂ Â      âââ searchtools.js
+    âÂ Â      âââ sidebar.js
+    âÂ Â      âââ underscore.js
+    âÂ Â      âââ up.png
+    âÂ Â      âââ up-pressed.png
+    âÂ Â      âââ websupport.js
+    âââ latex
+        âââ fncychap.sty
+        âââ Makefile
+        âââ MyDocumentation.aux
+        âââ MyDocumentation.idx
+        âââ MyDocumentation.ilg
+        âââ MyDocumentation.ind
+        âââ MyDocumentation.log
+        âââ MyDocumentation.out
+        âââ MyDocumentation.pdf
+        âââ MyDocumentation.tex
+        âââ MyDocumentation.toc
+        âââ python.ist
+        âââ sphinxhowto.cls
+        âââ sphinxmanual.cls
+        âââ sphinx.sty
+        âââ tabulary.sty
 </pre></div>
 
 
@@ -2157,11 +2157,11 @@ Also search for themes: <a href="https://github.com/search?q=sphinx+theme&amp;re
     Posted by <span class="fn">Victor</span>
   </span>
 <time datetime="2014-05-04T00:00:00+02:00" pubdate>Sun 04 May 2014</time>  <span class="categories">
-    <a class="category" href="../../../../tag/coding/">coding</a>
-    <a class="category" href="../../../../tag/howto/">howto</a>
+    <a class="category" href="http://blog.dornea.nu/tag/coding/">coding</a>
+    <a class="category" href="http://blog.dornea.nu/tag/howto/">howto</a>
   </span>
 </p><div class="sharing">
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="../../../../2014/05/04/howto-create-docs-with-sphinx" data-via="victordorneanu" data-counturl="../../../../2014/05/04/howto-create-docs-with-sphinx" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.dornea.nu/2014/05/04/howto-create-docs-with-sphinx" data-via="victordorneanu" data-counturl="http://blog.dornea.nu/2014/05/04/howto-create-docs-with-sphinx" >Tweet</a>
 </div>    </footer>
   </article>
 
@@ -2175,19 +2175,19 @@ Also search for themes: <a href="https://github.com/search?q=sphinx+theme&amp;re
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
-          <a href="../../../../2014/10/29/howto-ios-apps-static-analysis">HowTo: iOS Apps - Static analysis</a>
+          <a href="http://blog.dornea.nu/2014/11/13/using-graphviz-with-pelican-and-liquid-tags">Using Graphviz with Pelican and liquid tags</a>
       </li>
       <li class="post">
-          <a href="../../../../2014/09/17/generate-all-ip-addresses-from-asn">Generate all IP addresses from ASN</a>
+          <a href="http://blog.dornea.nu/2014/10/29/howto-ios-apps-static-analysis">HowTo: iOS Apps - Static analysis</a>
       </li>
       <li class="post">
-          <a href="../../../../2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a>
+          <a href="http://blog.dornea.nu/2014/09/17/generate-all-ip-addresses-from-asn">Generate all IP addresses from ASN</a>
       </li>
       <li class="post">
-          <a href="../../../../2014/08/28/using-jquery-datatables-with-ipython">Using JQuery DataTables with IPython</a>
+          <a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a>
       </li>
       <li class="post">
-          <a href="../../../../2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms">HowTo: Debug Android APKs with Eclipse and DDMS</a>
+          <a href="http://blog.dornea.nu/2014/08/28/using-jquery-datatables-with-ipython">Using JQuery DataTables with IPython</a>
       </li>
     </ul>
   </section>
@@ -2195,14 +2195,14 @@ Also search for themes: <a href="https://github.com/search?q=sphinx+theme&amp;re
       
     <h1>Categories</h1>
     <ul id="recent_posts">
-        <li><a href="../../../../category/blog">blog</a></li>
+        <li><a href="http://blog.dornea.nu/category/blog">blog</a></li>
     </ul>
   </section>
  
 
   <section>
   <h1>Tags</h1>
-    <a href="../../../../tag//"></a>,    <a href="../../../../tag/docker/">docker</a>,    <a href="../../../../tag/code/">code</a>,    <a href="../../../../tag/pelican/">pelican</a>,    <a href="../../../../tag/coding/">coding</a>,    <a href="../../../../tag/droidbox/">droidbox</a>,    <a href="../../../../tag/openssl/">openssl</a>,    <a href="../../../../tag/books/">books</a>,    <a href="../../../../tag/virtualization/">virtualization</a>,    <a href="../../../../tag/web/">web</a>,    <a href="../../../../tag/wargames/">wargames</a>,    <a href="../../../../tag/networking/">networking</a>,    <a href="../../../../tag/network/">network</a>,    <a href="../../../../tag/octopress/">octopress</a>,    <a href="../../../../tag/blog/">blog</a>,    <a href="../../../../tag/re/">re</a>,    <a href="../../../../tag/low/">low</a>,    <a href="../../../../tag/android/">android</a>,    <a href="../../../../tag/androguard/">androguard</a>,    <a href="../../../../tag/events/">events</a>,    <a href="../../../../tag/uncategorized/">uncategorized</a>,    <a href="../../../../tag/cryptography/">cryptography</a>,    <a href="../../../../tag/python/">python</a>,    <a href="../../../../tag/misc/">misc</a>,    <a href="../../../../tag/javascript/">javascript</a>,    <a href="../../../../tag/howto/">howto</a>,    <a href="../../../../tag/wtf/">wtf</a>,    <a href="../../../../tag/ipython/">ipython</a>,    <a href="../../../../tag/java/">java</a>,    <a href="../../../../tag/ios/">ios</a>,    <a href="../../../../tag/security/">security</a>,    <a href="../../../../tag/jquery/">jquery</a>,    <a href="../../../../tag/science/">science</a>,    <a href="../../../../tag/eclipse/">eclipse</a>,    <a href="../../../../tag/crypto/">crypto</a>,    <a href="../../../../tag/sca/">sca</a>,    <a href="../../../../tag/appsec/">appsec</a>,    <a href="../../../../tag/whatsapp/">whatsapp</a>,    <a href="../../../../tag/debug/">debug</a>,    <a href="../../../../tag/hacking/">hacking</a>  </section>
+    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
 
 
 
@@ -2216,7 +2216,7 @@ Also search for themes: <a href="https://github.com/search?q=sphinx+theme&amp;re
           if (!window.jXHR){
               var jxhr = document.createElement('script');
               jxhr.type = 'text/javascript';
-              jxhr.src = '../../../../theme/js/jXHR.js';
+              jxhr.src = 'http://blog.dornea.nu/theme/js/jXHR.js';
               var s = document.getElementsByTagName('script')[0];
               s.parentNode.insertBefore(jxhr, s);
           }
@@ -2229,7 +2229,7 @@ Also search for themes: <a href="https://github.com/search?q=sphinx+theme&amp;re
           });
       });
     </script>
-    <script src="../../../../theme/js/github.js" type="text/javascript"> </script>
+    <script src="http://blog.dornea.nu/theme/js/github.js" type="text/javascript"> </script>
   </section>
 
     <section>
@@ -2279,6 +2279,7 @@ Also search for themes: <a href="https://github.com/search?q=sphinx+theme&amp;re
 </section>
 </aside>    </div>
   </div>
+
   <footer role="contentinfo"><p>
     Copyright &copy;  2008-2014  - Victor Dorneanu -
   <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
@@ -2304,7 +2305,7 @@ Also search for themes: <a href="https://github.com/search?q=sphinx+theme&amp;re
 	<script type="text/javascript">
 	  var disqus_shortname = 'dorneanu';
           var disqus_identifier = '/2014/05/04/howto-create-docs-with-sphinx';
-          var disqus_url = '../../../../2014/05/04/howto-create-docs-with-sphinx';
+          var disqus_url = 'http://blog.dornea.nu/2014/05/04/howto-create-docs-with-sphinx';
           var disqus_title = 'HowTo: Create docs with sphinx';
 	  (function() {
 	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -2321,5 +2322,10 @@ Also search for themes: <a href="https://github.com/search?q=sphinx+theme&amp;re
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
+
 </body>
+
+  <!-- Custom JS snippets -->
+  <script src="http://blog.dornea.nu/js/custom.js"></script>
+  
 </html>

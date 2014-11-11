@@ -1724,12 +1724,12 @@ jQuery(document).ready(function($) {
   <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
   <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 
-  <link href="../../../../favicon.png" rel="icon">
-  <link href="../../../../theme/css/main.css" media="screen, projection"
+  <link href="http://blog.dornea.nu/favicon.png" rel="icon">
+  <link href="http://blog.dornea.nu/theme/css/main.css" media="screen, projection"
         rel="stylesheet" type="text/css">
-  <script src="../../../../theme/js/modernizr-2.0.js"></script>
-  <script src="../../../../theme/js/ender.js"></script>
-  <script src="../../../../theme/js/octopress.js" type="text/javascript"></script>
+  <script src="http://blog.dornea.nu/theme/js/modernizr-2.0.js"></script>
+  <script src="http://blog.dornea.nu/theme/js/ender.js"></script>
+  <script src="http://blog.dornea.nu/theme/js/octopress.js" type="text/javascript"></script>
 
   <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
         rel="stylesheet" type="text/css">
@@ -1740,7 +1740,7 @@ jQuery(document).ready(function($) {
 
 <body>
   <header role="banner"><hgroup>
-  <h1><a href="../../../../">blog.dornea.nu</a></h1>
+  <h1><a href="http://blog.dornea.nu/">blog.dornea.nu</a></h1>
     <h2>Hack, code and drink some țuică.</h2>
 </hgroup></header>
   <nav role="navigation"><ul class="subscription" data-subscription="rss">
@@ -1758,10 +1758,10 @@ jQuery(document).ready(function($) {
 
 <ul class="main-navigation">
     <li><a href="/archives">Archives</a></li>
-      <li><a href="../../../../pages/about">About</a></li>
-      <li><a href="../../../../pages/books">Books</a></li>
+      <li><a href="http://blog.dornea.nu/pages/about">About</a></li>
+      <li><a href="http://blog.dornea.nu/pages/books">Books</a></li>
     <li class="active">
-    <a href="../../../../category/blog">Blog</a>
+    <a href="http://blog.dornea.nu/category/blog">Blog</a>
     </li>
 </ul></nav>
   <div id="main">
@@ -1771,10 +1771,10 @@ jQuery(document).ready(function($) {
 <header>
     
     <div id="qr-code-2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms" class="qr-code-image-block"></div>
-    <script src="../../../../theme/js/qr.min.js" type="text/javascript"></script>
+    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
     <script>
         var img = qr.image({
-            value: '../../../../2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms',
+            value: 'http://blog.dornea.nu/2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms',
             level: 'L',
             size: 4
         });
@@ -1788,68 +1788,68 @@ jQuery(document).ready(function($) {
 After hours of wild googling these are the steps to make your APK debuggable under Eclipse. I'll be using the <code>FakeBanker</code> APK reverse-engineered in previous <a href="http://blog.dornea.nu/tag/android/">articles</a>.</p>
 <h2>Dump the APK</h2>
 <p>First of all make sure you'll have the latest version of <code>apktool</code>. I've compiled it by myself:</p>
-<div class="highlight"><pre><span class="cp"># git clone git:</span><span class="c1">//github.com/iBotPeaches/Apktool.git</span>
-<span class="n">Cloning</span> <span class="n">into</span> <span class="err">&#39;</span><span class="n">Apktool</span><span class="err">&#39;</span><span class="p">...</span>    
-<span class="nl">remote:</span> <span class="n">Counting</span> <span class="n">objects</span><span class="o">:</span> <span class="mi">9605</span><span class="p">,</span> <span class="n">done</span><span class="p">.</span>
-<span class="nl">remote:</span> <span class="n">Compressing</span> <span class="n">objects</span><span class="o">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">3622</span><span class="o">/</span><span class="mi">3622</span><span class="p">),</span> <span class="n">done</span><span class="p">.</span>
-<span class="nl">remote:</span> <span class="n">Total</span> <span class="mi">9605</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">4556</span><span class="p">),</span> <span class="n">reused</span> <span class="mi">9494</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">4502</span><span class="p">)</span>
-<span class="n">Receiving</span> <span class="n">objects</span><span class="o">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">9605</span><span class="o">/</span><span class="mi">9605</span><span class="p">),</span> <span class="mf">34.27</span> <span class="n">MiB</span> <span class="o">|</span> <span class="mf">3.89</span> <span class="n">MiB</span><span class="o">/</span><span class="n">s</span><span class="p">,</span> <span class="n">done</span><span class="p">.</span>
-<span class="n">Resolving</span> <span class="n">deltas</span><span class="o">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">4556</span><span class="o">/</span><span class="mi">4556</span><span class="p">),</span> <span class="n">done</span><span class="p">.</span>
-<span class="n">Checking</span> <span class="n">connectivity</span><span class="p">...</span> <span class="n">done</span><span class="p">.</span>
+<div class="highlight"><pre># git clone git://github.com/iBotPeaches/Apktool.git
+Cloning into &#39;Apktool&#39;...    
+remote: Counting objects: 9605, done.
+remote: Compressing objects: 100% (3622/3622), done.
+remote: Total 9605 (delta 4556), reused 9494 (delta 4502)
+Receiving objects: 100% (9605/9605), 34.27 MiB | 3.89 MiB/s, done.
+Resolving deltas: 100% (4556/4556), done.
+Checking connectivity... done.
 
-<span class="cp"># cd Apktool</span>
-<span class="cp"># ./gradlew build fatJar</span>
-<span class="p">[...]</span>
+# cd Apktool
+# ./gradlew build fatJar
+[...]
 </pre></div>
 
 
 <p>Afterwards you'll get a new fresh <code>apktool</code> to use within the next steps:</p>
-<div class="highlight"><pre><span class="cp"># find . -name &quot;apktool-cli.jar&quot;</span>
-<span class="p">.</span><span class="o">/</span><span class="n">brut</span><span class="p">.</span><span class="n">apktool</span><span class="o">/</span><span class="n">apktool</span><span class="o">-</span><span class="n">cli</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">libs</span><span class="o">/</span><span class="n">apktool</span><span class="o">-</span><span class="n">cli</span><span class="p">.</span><span class="n">jar</span>
+<div class="highlight"><pre># find . -name &quot;apktool-cli.jar&quot;
+./brut.apktool/apktool-cli/build/libs/apktool-cli.jar
 
-<span class="cp"># cp ./brut.apktool/apktool-cli/build/libs/apktool-cli.jar /tmp</span>
+# cp ./brut.apktool/apktool-cli/build/libs/apktool-cli.jar /tmp
 </pre></div>
 
 
 <p>After having installed the right tool it's time to dump the APK contents:</p>
-<div class="highlight"><pre><span class="cp"># java -jar /tmp/apktool-cli.jar d -d FakeBanker.apk -o source</span>
-<span class="nl">I:</span> <span class="n">Using</span> <span class="n">Apktool</span> <span class="mf">2.0.0</span><span class="o">-</span><span class="mi">3</span><span class="n">d2e93</span><span class="o">-</span><span class="n">SNAPSHOT</span> <span class="n">on</span> <span class="n">FakeBanker</span><span class="p">.</span><span class="n">apk</span>
-<span class="nl">I:</span> <span class="n">Loading</span> <span class="n">resource</span> <span class="n">table</span><span class="p">...</span>
-<span class="nl">I:</span> <span class="n">Loading</span> <span class="n">resource</span> <span class="n">table</span><span class="p">...</span>
-<span class="nl">I:</span> <span class="n">Decoding</span> <span class="n">AndroidManifest</span><span class="p">.</span><span class="n">xml</span> <span class="n">with</span> <span class="n">resources</span><span class="p">...</span>
-<span class="nl">I:</span> <span class="n">Loading</span> <span class="n">resource</span> <span class="n">table</span> <span class="n">from</span> <span class="n">file</span><span class="o">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">victor</span><span class="o">/</span><span class="n">apktool</span><span class="o">/</span><span class="n">framework</span><span class="o">/</span><span class="mf">1.</span><span class="n">apk</span>
-<span class="nl">I:</span> <span class="n">Regular</span> <span class="n">manifest</span> <span class="n">package</span><span class="p">...</span>
-<span class="nl">I:</span> <span class="n">Decoding</span> <span class="n">file</span><span class="o">-</span><span class="n">resources</span><span class="p">...</span>
-<span class="nl">I:</span> <span class="n">Decoding</span> <span class="n">values</span> <span class="err">*/</span><span class="o">*</span> <span class="n">XMLs</span><span class="p">...</span>
-<span class="nl">I:</span> <span class="n">Baksmaling</span> <span class="n">classes</span><span class="p">.</span><span class="n">dex</span><span class="p">...</span>
-<span class="nl">I:</span> <span class="n">Copying</span> <span class="n">assets</span> <span class="n">and</span> <span class="n">libs</span><span class="p">...</span>
-<span class="nl">I:</span> <span class="n">Copying</span> <span class="n">unknown</span> <span class="n">files</span><span class="p">...</span>
-<span class="nl">I:</span> <span class="n">Copying</span> <span class="n">original</span> <span class="n">files</span><span class="p">...</span>
+<div class="highlight"><pre># java -jar /tmp/apktool-cli.jar d -d FakeBanker.apk -o source
+I: Using Apktool 2.0.0-3d2e93-SNAPSHOT on FakeBanker.apk
+I: Loading resource table...
+I: Loading resource table...
+I: Decoding AndroidManifest.xml with resources...
+I: Loading resource table from file: /home/victor/apktool/framework/1.apk
+I: Regular manifest package...
+I: Decoding file-resources...
+I: Decoding values */* XMLs...
+I: Baksmaling classes.dex...
+I: Copying assets and libs...
+I: Copying unknown files...
+I: Copying original files...
 </pre></div>
 
 
 <p>Afterwards I got following file structure:</p>
-<div class="highlight"><pre><span class="n">tree</span> <span class="o">-</span><span class="n">L</span> <span class="mi">2</span> <span class="n">source</span> 
-<span class="n">source</span>
-<span class="err">├──</span> <span class="n">AndroidManifest</span><span class="p">.</span><span class="n">xml</span>
-<span class="err">├──</span> <span class="n">apktool</span><span class="p">.</span><span class="n">yml</span>
-<span class="err">├──</span> <span class="n">original</span>
-<span class="err">│  </span> <span class="err">├──</span> <span class="n">AndroidManifest</span><span class="p">.</span><span class="n">xml</span>
-<span class="err">│  </span> <span class="err">└──</span> <span class="n">META</span><span class="o">-</span><span class="n">INF</span>
-<span class="err">├──</span> <span class="n">res</span>
-<span class="err">│  </span> <span class="err">├──</span> <span class="n">drawable</span><span class="o">-</span><span class="n">hdpi</span>
-<span class="err">│  </span> <span class="err">├──</span> <span class="n">drawable</span><span class="o">-</span><span class="n">ldpi</span>
-<span class="err">│  </span> <span class="err">├──</span> <span class="n">drawable</span><span class="o">-</span><span class="n">mdpi</span>
-<span class="err">│  </span> <span class="err">├──</span> <span class="n">drawable</span><span class="o">-</span><span class="n">xhdpi</span>
-<span class="err">│  </span> <span class="err">├──</span> <span class="n">layout</span>
-<span class="err">│  </span> <span class="err">├──</span> <span class="n">menu</span>
-<span class="err">│  </span> <span class="err">├──</span> <span class="n">raw</span>
-<span class="err">│  </span> <span class="err">└──</span> <span class="n">values</span>
-<span class="err">└──</span> <span class="n">smali</span>
-    <span class="err">├──</span> <span class="n">android</span>
-    <span class="err">└──</span> <span class="n">com</span>
+<div class="highlight"><pre>tree -L 2 source 
+source
+├── AndroidManifest.xml
+├── apktool.yml
+├── original
+│   ├── AndroidManifest.xml
+│   └── META-INF
+├── res
+│   ├── drawable-hdpi
+│   ├── drawable-ldpi
+│   ├── drawable-mdpi
+│   ├── drawable-xhdpi
+│   ├── layout
+│   ├── menu
+│   ├── raw
+│   └── values
+└── smali
+    ├── android
+    └── com
 
-<span class="mi">14</span> <span class="n">directories</span><span class="p">,</span> <span class="mi">3</span> <span class="n">files</span>
+14 directories, 3 files
 </pre></div>
 
 
@@ -1868,14 +1868,14 @@ After hours of wild googling these are the steps to make your APK debuggable und
 
 <h2>Build new APP</h2>
 <p>Now you're ready to build you new debuggable APK using <code>apktool</code>:</p>
-<div class="highlight"><pre><span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">apktool</span><span class="o">-</span><span class="n">cli</span><span class="p">.</span><span class="n">jar</span> <span class="n">b</span> <span class="o">-</span><span class="n">d</span> <span class="n">source</span> <span class="n">FakeBanker</span><span class="p">.</span><span class="n">Debug</span><span class="p">.</span><span class="n">apk</span>
-<span class="nl">I:</span> <span class="n">Using</span> <span class="n">Apktool</span> <span class="mf">2.0.0</span><span class="o">-</span><span class="mi">3</span><span class="n">d2e93</span><span class="o">-</span><span class="n">SNAPSHOT</span> <span class="n">on</span> <span class="n">source</span>
-<span class="nl">I:</span> <span class="n">Checking</span> <span class="n">whether</span> <span class="n">sources</span> <span class="n">has</span> <span class="n">changed</span><span class="p">...</span>
-<span class="nl">I:</span> <span class="n">Smaling</span> <span class="n">smali</span> <span class="n">folder</span> <span class="n">into</span> <span class="n">classes</span><span class="p">.</span><span class="n">dex</span><span class="p">...</span>
-<span class="nl">I:</span> <span class="n">Checking</span> <span class="n">whether</span> <span class="n">resources</span> <span class="n">has</span> <span class="n">changed</span><span class="p">...</span>
-<span class="nl">I:</span> <span class="n">Building</span> <span class="n">resources</span><span class="p">...</span>
-<span class="nl">Warning:</span> <span class="n">AndroidManifest</span><span class="p">.</span><span class="n">xml</span> <span class="n">already</span> <span class="n">defines</span> <span class="n">debuggable</span> <span class="p">(</span><span class="n">in</span> <span class="n">http</span><span class="o">:</span><span class="c1">//schemas.android.com/apk/res/android); using existing value in manifest.</span>
-<span class="nl">I:</span> <span class="n">Building</span> <span class="n">apk</span> <span class="n">file</span><span class="p">...</span>
+<div class="highlight"><pre>java -jar /tmp/apktool-cli.jar b -d source FakeBanker.Debug.apk
+I: Using Apktool 2.0.0-3d2e93-SNAPSHOT on source
+I: Checking whether sources has changed...
+I: Smaling smali folder into classes.dex...
+I: Checking whether resources has changed...
+I: Building resources...
+Warning: AndroidManifest.xml already defines debuggable (in http://schemas.android.com/apk/res/android); using existing value in manifest.
+I: Building apk file...
 </pre></div>
 
 
@@ -1888,29 +1888,29 @@ After hours of wild googling these are the steps to make your APK debuggable und
 </ul>
 <h2>Extract sources</h2>
 <p>I'll be using <code>jd-gui</code> to <strong>undex</strong> the dex files inside the newly created package. First let's unpack <code>FakeBanker.Debug.apk</code>:</p>
-<div class="highlight"><pre><span class="cp"># unzip FakeBanker.Debug.apk -d unpacked</span>
-<span class="nl">Archive:</span>  <span class="n">FakeBanker</span><span class="p">.</span><span class="n">Debug</span><span class="p">.</span><span class="n">apk</span>
- <span class="nl">extracting:</span> <span class="n">unpacked</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">drawable</span><span class="o">-</span><span class="n">hdpi</span><span class="o">/</span><span class="n">ic_launcher1</span><span class="p">.</span><span class="n">png</span>  
- <span class="n">extracting</span><span class="o">:</span> <span class="n">unpacked</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">drawable</span><span class="o">-</span><span class="n">hdpi</span><span class="o">/</span><span class="n">logo</span><span class="p">.</span><span class="n">png</span>  
- <span class="n">extracting</span><span class="o">:</span> <span class="n">unpacked</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">drawable</span><span class="o">-</span><span class="n">ldpi</span><span class="o">/</span><span class="n">ic_launcher1</span><span class="p">.</span><span class="n">png</span>  
- <span class="n">extracting</span><span class="o">:</span> <span class="n">unpacked</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">drawable</span><span class="o">-</span><span class="n">mdpi</span><span class="o">/</span><span class="n">ic_launcher1</span><span class="p">.</span><span class="n">png</span>  
- <span class="n">extracting</span><span class="o">:</span> <span class="n">unpacked</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">drawable</span><span class="o">-</span><span class="n">xhdpi</span><span class="o">/</span><span class="n">ic_launcher1</span><span class="p">.</span><span class="n">png</span>  
-  <span class="n">inflating</span><span class="o">:</span> <span class="n">unpacked</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">layout</span><span class="o">/</span><span class="n">actup</span><span class="p">.</span><span class="n">xml</span>  
-  <span class="n">inflating</span><span class="o">:</span> <span class="n">unpacked</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">layout</span><span class="o">/</span><span class="n">main</span><span class="p">.</span><span class="n">xml</span>  
-  <span class="n">inflating</span><span class="o">:</span> <span class="n">unpacked</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">layout</span><span class="o">/</span><span class="n">main2</span><span class="p">.</span><span class="n">xml</span>  
-  <span class="n">inflating</span><span class="o">:</span> <span class="n">unpacked</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">menu</span><span class="o">/</span><span class="n">main</span><span class="p">.</span><span class="n">xml</span>  
- <span class="n">extracting</span><span class="o">:</span> <span class="n">unpacked</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">raw</span><span class="o">/</span><span class="n">blfs</span><span class="p">.</span><span class="n">key</span>  
-  <span class="n">inflating</span><span class="o">:</span> <span class="n">unpacked</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">raw</span><span class="o">/</span><span class="n">config</span><span class="p">.</span><span class="n">cfg</span>  
-  <span class="n">inflating</span><span class="o">:</span> <span class="n">unpacked</span><span class="o">/</span><span class="n">AndroidManifest</span><span class="p">.</span><span class="n">xml</span>  
-  <span class="n">inflating</span><span class="o">:</span> <span class="n">unpacked</span><span class="o">/</span><span class="n">classes</span><span class="p">.</span><span class="n">dex</span>    
-  <span class="n">inflating</span><span class="o">:</span> <span class="n">unpacked</span><span class="o">/</span><span class="n">resources</span><span class="p">.</span><span class="n">arsc</span>  
+<div class="highlight"><pre># unzip FakeBanker.Debug.apk -d unpacked
+Archive:  FakeBanker.Debug.apk
+ extracting: unpacked/res/drawable-hdpi/ic_launcher1.png  
+ extracting: unpacked/res/drawable-hdpi/logo.png  
+ extracting: unpacked/res/drawable-ldpi/ic_launcher1.png  
+ extracting: unpacked/res/drawable-mdpi/ic_launcher1.png  
+ extracting: unpacked/res/drawable-xhdpi/ic_launcher1.png  
+  inflating: unpacked/res/layout/actup.xml  
+  inflating: unpacked/res/layout/main.xml  
+  inflating: unpacked/res/layout/main2.xml  
+  inflating: unpacked/res/menu/main.xml  
+ extracting: unpacked/res/raw/blfs.key  
+  inflating: unpacked/res/raw/config.cfg  
+  inflating: unpacked/AndroidManifest.xml  
+  inflating: unpacked/classes.dex    
+  inflating: unpacked/resources.arsc  
 </pre></div>
 
 
 <p>Let <code>dex2jar</code> do its job:</p>
-<div class="highlight"><pre><span class="cp"># cd unpacked</span>
-<span class="cp"># dex2jar classes.dex</span>
-<span class="n">dex2jar</span> <span class="n">classes</span><span class="p">.</span><span class="n">dex</span> <span class="o">-&gt;</span> <span class="n">classes</span><span class="o">-</span><span class="n">dex2jar</span><span class="p">.</span><span class="n">jar</span>
+<div class="highlight"><pre># cd unpacked
+# dex2jar classes.dex
+dex2jar classes.dex -&gt; classes-dex2jar.jar
 </pre></div>
 
 
@@ -1918,77 +1918,77 @@ After hours of wild googling these are the steps to make your APK debuggable und
 <p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/jd-gui.png"></p>
 <h2>Sign the APK</h2>
 <p>In order to push your APK to the device you'll have to <strong>sign</strong> it. I'll therefor using a test <a href="http://developer.android.com/tools/publishing/app-signing.html">certificate</a>:</p>
-<div class="highlight"><pre><span class="cp"># git clone https:</span><span class="c1">//github.com/appium/sign</span>
-<span class="n">Cloning</span> <span class="n">into</span> <span class="err">&#39;</span><span class="n">sign</span><span class="err">&#39;</span><span class="p">...</span>
-<span class="nl">remote:</span> <span class="n">Counting</span> <span class="n">objects</span><span class="o">:</span> <span class="mi">49</span><span class="p">,</span> <span class="n">done</span><span class="p">.</span>
-<span class="nl">remote:</span> <span class="n">Total</span> <span class="mi">49</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">0</span><span class="p">),</span> <span class="n">reused</span> <span class="mi">0</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">Unpacking</span> <span class="n">objects</span><span class="o">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">49</span><span class="o">/</span><span class="mi">49</span><span class="p">),</span> <span class="n">done</span><span class="p">.</span>
-<span class="n">Checking</span> <span class="n">connectivity</span><span class="p">...</span> <span class="n">done</span><span class="p">.</span>
+<div class="highlight"><pre># git clone https://github.com/appium/sign
+Cloning into &#39;sign&#39;...
+remote: Counting objects: 49, done.
+remote: Total 49 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (49/49), done.
+Checking connectivity... done.
 </pre></div>
 
 
 <p>Now let's sign it:</p>
-<div class="highlight"><pre><span class="c"># java -jar sign/dist/signapk.jar sign/testkey.x509.pem sign/testkey.pk8 FakeBanker.Debug.apk FakeBanker.Debug.Signed.apk          </span>
+<div class="highlight"><pre># java -jar sign/dist/signapk.jar sign/testkey.x509.pem sign/testkey.pk8 FakeBanker.Debug.apk FakeBanker.Debug.Signed.apk          
 </pre></div>
 
 
 <h2>Install the APK</h2>
 <p>Having signed the APK now you're ready to push it to your device and have some fun.</p>
-<div class="highlight"><pre><span class="cp"># adb devices -l  </span>
-<span class="n">List</span> <span class="n">of</span> <span class="n">devices</span> <span class="n">attached</span> 
-<span class="n">emulator</span><span class="o">-</span><span class="mi">5554</span>          <span class="n">device</span> <span class="n">product</span><span class="o">:</span><span class="n">sdk</span> <span class="n">model</span><span class="o">:</span><span class="n">sdk</span> <span class="n">device</span><span class="o">:</span><span class="n">generic</span>
+<div class="highlight"><pre># adb devices -l  
+List of devices attached 
+emulator-5554          device product:sdk model:sdk device:generic
 
-<span class="cp"># adb install FakeBanker.Debug.Signed.apk</span>
-<span class="mi">1628</span> <span class="n">KB</span><span class="o">/</span><span class="n">s</span> <span class="p">(</span><span class="mi">219033</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mf">0.131</span><span class="n">s</span><span class="p">)</span>
-    <span class="nl">pkg:</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">FakeBanker</span><span class="p">.</span><span class="n">Debug</span><span class="p">.</span><span class="n">Signed</span><span class="p">.</span><span class="n">apk</span>
-<span class="n">Success</span>
+# adb install FakeBanker.Debug.Signed.apk
+1628 KB/s (219033 bytes in 0.131s)
+    pkg: /data/local/tmp/FakeBanker.Debug.Signed.apk
+Success
 </pre></div>
 
 
 <p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/app_installed.png"></p>
 <h2>Add sources</h2>
 <p>We'll add the Java sources to the <code>source</code> directory structure:</p>
-<div class="highlight"><pre><span class="cp"># mkdir source/src</span>
-<span class="cp"># unzip classes-dex2jar.src.zip -d source/src </span>
-<span class="nl">Archive:</span>  <span class="n">classes</span><span class="o">-</span><span class="n">dex2jar</span><span class="p">.</span><span class="n">src</span><span class="p">.</span><span class="n">zip</span>
-   <span class="nl">creating:</span> <span class="n">source</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">android</span><span class="o">/</span>
-   <span class="nl">creating:</span> <span class="n">source</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">android</span><span class="o">/</span><span class="n">support</span><span class="o">/</span>
-<span class="p">...</span>
+<div class="highlight"><pre># mkdir source/src
+# unzip classes-dex2jar.src.zip -d source/src 
+Archive:  classes-dex2jar.src.zip
+   creating: source/src/android/
+   creating: source/src/android/support/
+...
 </pre></div>
 
 
 <p>The new directory structure will be:</p>
-<div class="highlight"><pre><span class="cp"># tree -L 2 source </span>
-<span class="n">source</span>
-<span class="err">├──</span> <span class="n">AndroidManifest</span><span class="p">.</span><span class="n">xml</span>
-<span class="err">├──</span> <span class="n">apktool</span><span class="p">.</span><span class="n">yml</span>
-<span class="err">├──</span> <span class="n">bin</span>
-<span class="err">│  </span> <span class="err">├──</span> <span class="n">android</span>
-<span class="err">│  </span> <span class="err">└──</span> <span class="n">com</span>
-<span class="err">├──</span> <span class="n">build</span>
-<span class="err">│  </span> <span class="err">└──</span> <span class="n">apk</span>
-<span class="err">├──</span> <span class="n">dist</span>
-<span class="err">│  </span> <span class="err">└──</span> <span class="n">FakeBanker</span><span class="p">.</span><span class="n">apk</span>
-<span class="err">├──</span> <span class="n">original</span>
-<span class="err">│  </span> <span class="err">├──</span> <span class="n">AndroidManifest</span><span class="p">.</span><span class="n">xml</span>
-<span class="err">│  </span> <span class="err">└──</span> <span class="n">META</span><span class="o">-</span><span class="n">INF</span>
-<span class="err">├──</span> <span class="n">res</span>
-<span class="err">│  </span> <span class="err">├──</span> <span class="n">drawable</span><span class="o">-</span><span class="n">hdpi</span>
-<span class="err">│  </span> <span class="err">├──</span> <span class="n">drawable</span><span class="o">-</span><span class="n">ldpi</span>
-<span class="err">│  </span> <span class="err">├──</span> <span class="n">drawable</span><span class="o">-</span><span class="n">mdpi</span>
-<span class="err">│  </span> <span class="err">├──</span> <span class="n">drawable</span><span class="o">-</span><span class="n">xhdpi</span>
-<span class="err">│  </span> <span class="err">├──</span> <span class="n">layout</span>
-<span class="err">│  </span> <span class="err">├──</span> <span class="n">menu</span>
-<span class="err">│  </span> <span class="err">├──</span> <span class="n">raw</span>
-<span class="err">│  </span> <span class="err">└──</span> <span class="n">values</span>
-<span class="err">├──</span> <span class="n">smali</span>
-<span class="err">│  </span> <span class="err">├──</span> <span class="n">android</span>
-<span class="err">│  </span> <span class="err">└──</span> <span class="n">com</span>
-<span class="err">└──</span> <span class="n">src</span>
-    <span class="err">├──</span> <span class="n">android</span>
-    <span class="err">└──</span> <span class="n">com</span>
+<div class="highlight"><pre># tree -L 2 source 
+source
+├── AndroidManifest.xml
+├── apktool.yml
+├── bin
+│   ├── android
+│   └── com
+├── build
+│   └── apk
+├── dist
+│   └── FakeBanker.apk
+├── original
+│   ├── AndroidManifest.xml
+│   └── META-INF
+├── res
+│   ├── drawable-hdpi
+│   ├── drawable-ldpi
+│   ├── drawable-mdpi
+│   ├── drawable-xhdpi
+│   ├── layout
+│   ├── menu
+│   ├── raw
+│   └── values
+├── smali
+│   ├── android
+│   └── com
+└── src
+    ├── android
+    └── com
 
-<span class="mi">23</span> <span class="n">directories</span><span class="p">,</span> <span class="mi">4</span> <span class="n">files</span>
+23 directories, 4 files
 </pre></div>
 
 
@@ -2057,14 +2057,14 @@ below.     </p>
     Posted by <span class="fn">Victor Dorneanu</span>
   </span>
 <time datetime="2014-08-21T00:00:00+02:00" pubdate>Thu 21 August 2014</time>  <span class="categories">
-    <a class="category" href="../../../../tag/android/">android</a>
-    <a class="category" href="../../../../tag/eclipse/">eclipse</a>
-    <a class="category" href="../../../../tag/java/">java</a>
-    <a class="category" href="../../../../tag/debug/">debug</a>
-    <a class="category" href="../../../../tag/howto/">howto</a>
+    <a class="category" href="http://blog.dornea.nu/tag/android/">android</a>
+    <a class="category" href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>
+    <a class="category" href="http://blog.dornea.nu/tag/java/">java</a>
+    <a class="category" href="http://blog.dornea.nu/tag/debug/">debug</a>
+    <a class="category" href="http://blog.dornea.nu/tag/howto/">howto</a>
   </span>
 </p><div class="sharing">
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="../../../../2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms" data-via="victordorneanu" data-counturl="../../../../2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.dornea.nu/2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms" data-via="victordorneanu" data-counturl="http://blog.dornea.nu/2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms" >Tweet</a>
 </div>    </footer>
   </article>
 
@@ -2078,19 +2078,19 @@ below.     </p>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
-          <a href="../../../../2014/10/29/howto-ios-apps-static-analysis">HowTo: iOS Apps - Static analysis</a>
+          <a href="http://blog.dornea.nu/2014/11/13/using-graphviz-with-pelican-and-liquid-tags">Using Graphviz with Pelican and liquid tags</a>
       </li>
       <li class="post">
-          <a href="../../../../2014/09/17/generate-all-ip-addresses-from-asn">Generate all IP addresses from ASN</a>
+          <a href="http://blog.dornea.nu/2014/10/29/howto-ios-apps-static-analysis">HowTo: iOS Apps - Static analysis</a>
       </li>
       <li class="post">
-          <a href="../../../../2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a>
+          <a href="http://blog.dornea.nu/2014/09/17/generate-all-ip-addresses-from-asn">Generate all IP addresses from ASN</a>
       </li>
       <li class="post">
-          <a href="../../../../2014/08/28/using-jquery-datatables-with-ipython">Using JQuery DataTables with IPython</a>
+          <a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a>
       </li>
       <li class="post">
-          <a href="../../../../2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms">HowTo: Debug Android APKs with Eclipse and DDMS</a>
+          <a href="http://blog.dornea.nu/2014/08/28/using-jquery-datatables-with-ipython">Using JQuery DataTables with IPython</a>
       </li>
     </ul>
   </section>
@@ -2098,14 +2098,14 @@ below.     </p>
       
     <h1>Categories</h1>
     <ul id="recent_posts">
-        <li><a href="../../../../category/blog">blog</a></li>
+        <li><a href="http://blog.dornea.nu/category/blog">blog</a></li>
     </ul>
   </section>
  
 
   <section>
   <h1>Tags</h1>
-    <a href="../../../../tag//"></a>,    <a href="../../../../tag/docker/">docker</a>,    <a href="../../../../tag/code/">code</a>,    <a href="../../../../tag/pelican/">pelican</a>,    <a href="../../../../tag/coding/">coding</a>,    <a href="../../../../tag/droidbox/">droidbox</a>,    <a href="../../../../tag/openssl/">openssl</a>,    <a href="../../../../tag/books/">books</a>,    <a href="../../../../tag/virtualization/">virtualization</a>,    <a href="../../../../tag/web/">web</a>,    <a href="../../../../tag/wargames/">wargames</a>,    <a href="../../../../tag/networking/">networking</a>,    <a href="../../../../tag/network/">network</a>,    <a href="../../../../tag/octopress/">octopress</a>,    <a href="../../../../tag/blog/">blog</a>,    <a href="../../../../tag/re/">re</a>,    <a href="../../../../tag/low/">low</a>,    <a href="../../../../tag/android/">android</a>,    <a href="../../../../tag/androguard/">androguard</a>,    <a href="../../../../tag/events/">events</a>,    <a href="../../../../tag/uncategorized/">uncategorized</a>,    <a href="../../../../tag/cryptography/">cryptography</a>,    <a href="../../../../tag/python/">python</a>,    <a href="../../../../tag/misc/">misc</a>,    <a href="../../../../tag/javascript/">javascript</a>,    <a href="../../../../tag/howto/">howto</a>,    <a href="../../../../tag/wtf/">wtf</a>,    <a href="../../../../tag/ipython/">ipython</a>,    <a href="../../../../tag/java/">java</a>,    <a href="../../../../tag/ios/">ios</a>,    <a href="../../../../tag/security/">security</a>,    <a href="../../../../tag/jquery/">jquery</a>,    <a href="../../../../tag/science/">science</a>,    <a href="../../../../tag/eclipse/">eclipse</a>,    <a href="../../../../tag/crypto/">crypto</a>,    <a href="../../../../tag/sca/">sca</a>,    <a href="../../../../tag/appsec/">appsec</a>,    <a href="../../../../tag/whatsapp/">whatsapp</a>,    <a href="../../../../tag/debug/">debug</a>,    <a href="../../../../tag/hacking/">hacking</a>  </section>
+    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
 
 
 
@@ -2119,7 +2119,7 @@ below.     </p>
           if (!window.jXHR){
               var jxhr = document.createElement('script');
               jxhr.type = 'text/javascript';
-              jxhr.src = '../../../../theme/js/jXHR.js';
+              jxhr.src = 'http://blog.dornea.nu/theme/js/jXHR.js';
               var s = document.getElementsByTagName('script')[0];
               s.parentNode.insertBefore(jxhr, s);
           }
@@ -2132,7 +2132,7 @@ below.     </p>
           });
       });
     </script>
-    <script src="../../../../theme/js/github.js" type="text/javascript"> </script>
+    <script src="http://blog.dornea.nu/theme/js/github.js" type="text/javascript"> </script>
   </section>
 
     <section>
@@ -2182,6 +2182,7 @@ below.     </p>
 </section>
 </aside>    </div>
   </div>
+
   <footer role="contentinfo"><p>
     Copyright &copy;  2008-2014  - Victor Dorneanu -
   <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
@@ -2207,7 +2208,7 @@ below.     </p>
 	<script type="text/javascript">
 	  var disqus_shortname = 'dorneanu';
           var disqus_identifier = '/2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms';
-          var disqus_url = '../../../../2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms';
+          var disqus_url = 'http://blog.dornea.nu/2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms';
           var disqus_title = 'HowTo: Debug Android APKs with Eclipse and DDMS';
 	  (function() {
 	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -2224,5 +2225,10 @@ below.     </p>
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
+
 </body>
+
+  <!-- Custom JS snippets -->
+  <script src="http://blog.dornea.nu/js/custom.js"></script>
+  
 </html>

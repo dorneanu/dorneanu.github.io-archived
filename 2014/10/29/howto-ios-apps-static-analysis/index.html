@@ -1724,12 +1724,12 @@ jQuery(document).ready(function($) {
   <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
   <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 
-  <link href="../../../../favicon.png" rel="icon">
-  <link href="../../../../theme/css/main.css" media="screen, projection"
+  <link href="http://blog.dornea.nu/favicon.png" rel="icon">
+  <link href="http://blog.dornea.nu/theme/css/main.css" media="screen, projection"
         rel="stylesheet" type="text/css">
-  <script src="../../../../theme/js/modernizr-2.0.js"></script>
-  <script src="../../../../theme/js/ender.js"></script>
-  <script src="../../../../theme/js/octopress.js" type="text/javascript"></script>
+  <script src="http://blog.dornea.nu/theme/js/modernizr-2.0.js"></script>
+  <script src="http://blog.dornea.nu/theme/js/ender.js"></script>
+  <script src="http://blog.dornea.nu/theme/js/octopress.js" type="text/javascript"></script>
 
   <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
         rel="stylesheet" type="text/css">
@@ -1740,7 +1740,7 @@ jQuery(document).ready(function($) {
 
 <body>
   <header role="banner"><hgroup>
-  <h1><a href="../../../../">blog.dornea.nu</a></h1>
+  <h1><a href="http://blog.dornea.nu/">blog.dornea.nu</a></h1>
     <h2>Hack, code and drink some țuică.</h2>
 </hgroup></header>
   <nav role="navigation"><ul class="subscription" data-subscription="rss">
@@ -1758,10 +1758,10 @@ jQuery(document).ready(function($) {
 
 <ul class="main-navigation">
     <li><a href="/archives">Archives</a></li>
-      <li><a href="../../../../pages/about">About</a></li>
-      <li><a href="../../../../pages/books">Books</a></li>
+      <li><a href="http://blog.dornea.nu/pages/about">About</a></li>
+      <li><a href="http://blog.dornea.nu/pages/books">Books</a></li>
     <li class="active">
-    <a href="../../../../category/blog">Blog</a>
+    <a href="http://blog.dornea.nu/category/blog">Blog</a>
     </li>
 </ul></nav>
   <div id="main">
@@ -1771,10 +1771,10 @@ jQuery(document).ready(function($) {
 <header>
     
     <div id="qr-code-2014/10/29/howto-ios-apps-static-analysis" class="qr-code-image-block"></div>
-    <script src="../../../../theme/js/qr.min.js" type="text/javascript"></script>
+    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
     <script>
         var img = qr.image({
-            value: '../../../../2014/10/29/howto-ios-apps-static-analysis',
+            value: 'http://blog.dornea.nu/2014/10/29/howto-ios-apps-static-analysis',
             level: 'L',
             size: 4
         });
@@ -1814,8 +1814,8 @@ jQuery(document).ready(function($) {
 <p>The <strong>App binary</strong> is the target to be analyzed. It's compiled for ARM and used the <strong>Mach-O</strong>(mach object) file format. Check out next section for more detailed information.</p>
 <h4>Installing the App</h4>
 <p>Usually you can manually install apps by using <strong>ipainstaller</strong>:</p>
-<div class="highlight"><pre><span class="cp"># ipainstaller &lt;ipa file&gt;</span>
-<span class="p">...</span>
+<div class="highlight"><pre># ipainstaller &lt;ipa file&gt;
+...
 </pre></div>
 
 
@@ -1825,25 +1825,25 @@ jQuery(document).ready(function($) {
 <p><img height="200" width="600" alt="Mach-O Mach-O" title="Mach-O Mach-O" src="https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/MachORuntime/art/mach_o_segments.gif"></p>
 <h4>Header</h4>
 <p>The <strong>header</strong> contains basic file type information like architecture and several flags. Using <strong>otool</strong> you can have a look a the headers:</p>
-<div class="highlight"><pre><span class="cp"># otool -h BINARY</span>
-<span class="nl">BINARY:</span>
-<span class="n">Mach</span> <span class="n">header</span>
-      <span class="n">magic</span> <span class="n">cputype</span> <span class="n">cpusubtype</span>  <span class="n">caps</span>    <span class="n">filetype</span> <span class="n">ncmds</span> <span class="n">sizeofcmds</span>      <span class="n">flags</span>
- <span class="mh">0xfeedfacf</span> <span class="mi">16777228</span>          <span class="mi">0</span>  <span class="mh">0x00</span>          <span class="mi">2</span>    <span class="mi">29</span>       <span class="mi">3832</span> <span class="mh">0x00200085</span>
+<div class="highlight"><pre># otool -h BINARY
+BINARY:
+Mach header
+      magic cputype cpusubtype  caps    filetype ncmds sizeofcmds      flags
+ 0xfeedfacf 16777228          0  0x00          2    29       3832 0x00200085
 </pre></div>
 
 
 <p>Sometimes you'll get an application that is built for multiple architectures. These applications then consist of multiple Mach-O files and are called <strong>fat</strong> or <strong>universal</strong> binaries. Mach-O fat binaries not only group completely different CPU architectures (PowerPC, Intel) but also 32- or 64-bit versions of an architecture. Besides that you'll also get different CPU subtypes bundled in one binary. The device running the binary will choose the "part" of the binary it can best support. Also have a look at this great <a href="http://wanderingcoder.net/2010/07/19/ought-arm/">article</a>.</p>
 <p>Here is an example of a fat binary:</p>
-<div class="highlight"><pre><span class="cp"># otool -arch all -h PewPew </span>
-<span class="n">PewPew</span> <span class="p">(</span><span class="n">architecture</span> <span class="n">cputype</span> <span class="p">(</span><span class="mi">12</span><span class="p">)</span> <span class="n">cpusubtype</span> <span class="p">(</span><span class="mi">9</span><span class="p">))</span><span class="o">:</span>
-<span class="n">Mach</span> <span class="n">header</span>
-      <span class="n">magic</span> <span class="n">cputype</span> <span class="n">cpusubtype</span>  <span class="n">caps</span>    <span class="n">filetype</span> <span class="n">ncmds</span> <span class="n">sizeofcmds</span>      <span class="n">flags</span>
- <span class="mh">0xfeedface</span>      <span class="mi">12</span>          <span class="mi">9</span>  <span class="mh">0x00</span>          <span class="mi">2</span>    <span class="mi">29</span>       <span class="mi">3544</span> <span class="mh">0x00210085</span>
-<span class="n">PewPew</span> <span class="p">(</span><span class="n">architecture</span> <span class="n">cputype</span> <span class="p">(</span><span class="mi">12</span><span class="p">)</span> <span class="n">cpusubtype</span> <span class="p">(</span><span class="mi">11</span><span class="p">))</span><span class="o">:</span>
-<span class="n">Mach</span> <span class="n">header</span>
-      <span class="n">magic</span> <span class="n">cputype</span> <span class="n">cpusubtype</span>  <span class="n">caps</span>    <span class="n">filetype</span> <span class="n">ncmds</span> <span class="n">sizeofcmds</span>      <span class="n">flags</span>
- <span class="mh">0xfeedface</span>      <span class="mi">12</span>         <span class="mi">11</span>  <span class="mh">0x00</span>          <span class="mi">2</span>    <span class="mi">29</span>       <span class="mi">3544</span> <span class="mh">0x00210085</span>
+<div class="highlight"><pre># otool -arch all -h PewPew 
+PewPew (architecture cputype (12) cpusubtype (9)):
+Mach header
+      magic cputype cpusubtype  caps    filetype ncmds sizeofcmds      flags
+ 0xfeedface      12          9  0x00          2    29       3544 0x00210085
+PewPew (architecture cputype (12) cpusubtype (11)):
+Mach header
+      magic cputype cpusubtype  caps    filetype ncmds sizeofcmds      flags
+ 0xfeedface      12         11  0x00          2    29       3544 0x00210085
 </pre></div>
 
 
@@ -1856,8 +1856,8 @@ jQuery(document).ready(function($) {
 <p>For my understanding it's pretty much the same as ELFs segments and sections:</p>
 <p><img height="200" width="600" alt="ELF ELF" title="ELF ELF" src="http://oi59.tinypic.com/3478ltk.jpg"></p>
 <p>Load commands also define whether an application is encrypted or not. To have a look at the those run:</p>
-<div class="highlight"><pre><span class="cp"># otool -Vl BINARY</span>
-<span class="p">...</span>
+<div class="highlight"><pre># otool -Vl BINARY
+...
 </pre></div>
 
 
@@ -1905,47 +1905,47 @@ jQuery(document).ready(function($) {
 <p>Comparing Android to iOS I must admit you'll have to overcome more (technical) challenges for a successful analysis. iOS uses <strong>binary</strong> files (instead of <em>bytecode</em>). Having that said I'll be using <strong>otool</strong> (which seems to be the equivalent to <strong>readelf</strong>) to inspect the binary.</p>
 <h4>Architecture</h4>
 <p>Let's first determine the <em>architecture</em> the binary was compiled for:</p>
-<div class="highlight"><pre><span class="cp"># otool -f BINARY                                                                                              </span>
-<span class="n">Fat</span> <span class="n">headers</span>
-<span class="n">fat_magic</span> <span class="mh">0xcafebabe</span>
-<span class="n">nfat_arch</span> <span class="mi">2</span>
-<span class="n">architecture</span> <span class="mi">0</span>
-    <span class="n">cputype</span> <span class="mi">12</span>
-    <span class="n">cpusubtype</span> <span class="mi">9</span>
-    <span class="n">capabilities</span> <span class="mh">0x0</span>
-    <span class="n">offset</span> <span class="mi">16384</span>
-    <span class="n">size</span> <span class="mi">2712496</span>
-    <span class="n">align</span> <span class="mi">2</span><span class="o">^</span><span class="mi">14</span> <span class="p">(</span><span class="mi">16384</span><span class="p">)</span>
-<span class="n">architecture</span> <span class="mi">1</span>
-    <span class="n">cputype</span> <span class="mi">16777228</span>
-    <span class="n">cpusubtype</span> <span class="mi">0</span>
-    <span class="n">capabilities</span> <span class="mh">0x0</span>
-    <span class="n">offset</span> <span class="mi">2736128</span>
-    <span class="n">size</span> <span class="mi">3213664</span>
-    <span class="n">align</span> <span class="mi">2</span><span class="o">^</span><span class="mi">14</span> <span class="p">(</span><span class="mi">16384</span><span class="p">)</span>
+<div class="highlight"><pre># otool -f BINARY                                                                                              
+Fat headers
+fat_magic 0xcafebabe
+nfat_arch 2
+architecture 0
+    cputype 12
+    cpusubtype 9
+    capabilities 0x0
+    offset 16384
+    size 2712496
+    align 2^14 (16384)
+architecture 1
+    cputype 16777228
+    cpusubtype 0
+    capabilities 0x0
+    offset 2736128
+    size 3213664
+    align 2^14 (16384)
 </pre></div>
 
 
 <p>Or using old-school <code>file</code>:</p>
-<div class="highlight"><pre><span class="cp"># file BINARY</span>
-<span class="nl">PM:</span> <span class="n">Mach</span><span class="o">-</span><span class="n">O</span> <span class="n">fat</span> <span class="n">file</span> <span class="n">with</span> <span class="mi">2</span> <span class="n">architectures</span>
+<div class="highlight"><pre># file BINARY
+PM: Mach-O fat file with 2 architectures
 </pre></div>
 
 
 <p>Also have a look at this cool <a href="http://blakespot.com/ios_device_specifications_grid.html">list</a>.</p>
 <h4>Encryption</h4>
 <p>Usually the <code>ipa</code> file will be decrypted at runtime by the kernel's mach loader. If the binary is encrypted or not is easily found out using:</p>
-<div class="highlight"><pre><span class="c"># otool -l BINARY | grep -A 4 LC_ENCRYPTION_INFO</span>
+<div class="highlight"><pre># otool -l BINARY | grep -A 4 LC_ENCRYPTION_INFO
 </pre></div>
 
 
 <p>In this case the binary file is <strong>not</strong> encrypted. Let me show an example where the binary <strong>is</strong> encrypted:</p>
-<div class="highlight"><pre><span class="cp"># otool -l OTHER_BINARY | grep -A 4 LC_ENCRYPTION_INFO                            </span>
-          <span class="n">cmd</span> <span class="n">LC_ENCRYPTION_INFO</span>
-      <span class="n">cmdsize</span> <span class="mi">20</span>
- <span class="n">cryptoff</span>  <span class="mi">16384</span>
- <span class="n">cryptsize</span> <span class="mi">10502144</span>
- <span class="n">cryptid</span>   <span class="mi">1</span>
+<div class="highlight"><pre># otool -l OTHER_BINARY | grep -A 4 LC_ENCRYPTION_INFO                            
+          cmd LC_ENCRYPTION_INFO
+      cmdsize 20
+ cryptoff  16384
+ cryptsize 10502144
+ cryptid   1
 </pre></div>
 
 
@@ -1957,11 +1957,11 @@ jQuery(document).ready(function($) {
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre><span class="cp"># otool -Vh BINARY </span>
-<span class="n">WH</span> <span class="n">Quest</span><span class="o">:</span>
-<span class="n">Mach</span> <span class="n">header</span>
-      <span class="n">magic</span> <span class="n">cputype</span> <span class="n">cpusubtype</span>  <span class="n">caps</span>    <span class="n">filetype</span> <span class="n">ncmds</span> <span class="n">sizeofcmds</span>      <span class="n">flags</span>
-   <span class="n">MH_MAGIC</span>     <span class="n">ARM</span>          <span class="mi">9</span>  <span class="mh">0x00</span>     <span class="n">EXECUTE</span>    <span class="mi">45</span>       <span class="mi">4684</span>   <span class="n">NOUNDEFS</span> <span class="n">DYLDLINK</span> <span class="n">TWOLEVEL</span> <span class="n">BINDS_TO_WEAK</span> <span class="n">PIE</span>
+<div class="highlight"><pre># otool -Vh BINARY 
+WH Quest:
+Mach header
+      magic cputype cpusubtype  caps    filetype ncmds sizeofcmds      flags
+   MH_MAGIC     ARM          9  0x00     EXECUTE    45       4684   NOUNDEFS DYLDLINK TWOLEVEL BINDS_TO_WEAK PIE
 </pre></div>
 
 
@@ -1973,8 +1973,8 @@ jQuery(document).ready(function($) {
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre><span class="cp"># otool -v -l BINARY | grep stack</span>
-<span class="p">...</span>
+<div class="highlight"><pre># otool -v -l BINARY | grep stack
+...
 </pre></div>
 
 
@@ -1985,44 +1985,44 @@ jQuery(document).ready(function($) {
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre><span class="cp"># otool -v -I BINARY  | grep release</span>
-<span class="mh">0x008b8ce4</span> <span class="mi">241789</span> <span class="n">_objc_autorelease</span>
-<span class="mh">0x008b8cf4</span> <span class="mi">241790</span> <span class="n">_objc_autoreleasePoolPop</span>
-<span class="mh">0x008b8d04</span> <span class="mi">241791</span> <span class="n">_objc_autoreleasePoolPush</span>
-<span class="mh">0x008b8d14</span> <span class="mi">241792</span> <span class="n">_objc_autoreleaseReturnValue</span>
-<span class="mh">0x008b8ea4</span> <span class="mi">241817</span> <span class="n">_objc_release</span>
-<span class="mh">0x008b8ed4</span> <span class="mi">241820</span> <span class="n">_objc_retainAutorelease</span>
-<span class="mh">0x008b8ee4</span> <span class="mi">241821</span> <span class="n">_objc_retainAutoreleaseReturnValue</span>
-<span class="mh">0x008b8ef4</span> <span class="mi">241822</span> <span class="n">_objc_retainAutoreleasedReturnValue</span>
-<span class="mh">0x008b9504</span> <span class="mi">241439</span> <span class="n">___cxa_guard_release</span>
-<span class="mh">0x008b9674</span> <span class="mi">241341</span> <span class="n">__Block_release</span>
-<span class="mh">0x008b9ab4</span> <span class="mi">241551</span> <span class="n">_dispatch_release</span>
-<span class="mh">0x00a0c3f4</span> <span class="mi">229369</span> <span class="n">__ZN11GPASWrapperI6GPHashE7releaseEv</span>
-<span class="mh">0x00a12e8c</span> <span class="mi">241789</span> <span class="n">_objc_autorelease</span>
-<span class="mh">0x00a12e90</span> <span class="mi">241790</span> <span class="n">_objc_autoreleasePoolPop</span>
-<span class="mh">0x00a12e94</span> <span class="mi">241791</span> <span class="n">_objc_autoreleasePoolPush</span>
-<span class="mh">0x00a12e98</span> <span class="mi">241792</span> <span class="n">_objc_autoreleaseReturnValue</span>
-<span class="mh">0x00a12efc</span> <span class="mi">241817</span> <span class="n">_objc_release</span>
-<span class="mh">0x00a12f08</span> <span class="mi">241820</span> <span class="n">_objc_retainAutorelease</span>
-<span class="mh">0x00a12f0c</span> <span class="mi">241821</span> <span class="n">_objc_retainAutoreleaseReturnValue</span>
-<span class="mh">0x00a12f10</span> <span class="mi">241822</span> <span class="n">_objc_retainAutoreleasedReturnValue</span>
-<span class="mh">0x00a13094</span> <span class="mi">241439</span> <span class="n">___cxa_guard_release</span>
-<span class="mh">0x00a130f0</span> <span class="mi">241341</span> <span class="n">__Block_release</span>
-<span class="mh">0x00a13200</span> <span class="mi">241551</span> <span class="n">_dispatch_release</span>
+<div class="highlight"><pre># otool -v -I BINARY  | grep release
+0x008b8ce4 241789 _objc_autorelease
+0x008b8cf4 241790 _objc_autoreleasePoolPop
+0x008b8d04 241791 _objc_autoreleasePoolPush
+0x008b8d14 241792 _objc_autoreleaseReturnValue
+0x008b8ea4 241817 _objc_release
+0x008b8ed4 241820 _objc_retainAutorelease
+0x008b8ee4 241821 _objc_retainAutoreleaseReturnValue
+0x008b8ef4 241822 _objc_retainAutoreleasedReturnValue
+0x008b9504 241439 ___cxa_guard_release
+0x008b9674 241341 __Block_release
+0x008b9ab4 241551 _dispatch_release
+0x00a0c3f4 229369 __ZN11GPASWrapperI6GPHashE7releaseEv
+0x00a12e8c 241789 _objc_autorelease
+0x00a12e90 241790 _objc_autoreleasePoolPop
+0x00a12e94 241791 _objc_autoreleasePoolPush
+0x00a12e98 241792 _objc_autoreleaseReturnValue
+0x00a12efc 241817 _objc_release
+0x00a12f08 241820 _objc_retainAutorelease
+0x00a12f0c 241821 _objc_retainAutoreleaseReturnValue
+0x00a12f10 241822 _objc_retainAutoreleasedReturnValue
+0x00a13094 241439 ___cxa_guard_release
+0x00a130f0 241341 __Block_release
+0x00a13200 241551 _dispatch_release
 </pre></div>
 
 
 <h4>Dangerous functions</h4>
 <p>Beside the previosly mentioned symbols we can also seek for symbols aimed at (classical) memory management mechanisms like <code>malloc</code> and <code>free</code>. Their presence indicate that the application has its own memory management which is the opposite to <strong>ARC</strong>. While this is not always a bad thing it could easily lead to some memory related vulnerabilities if not handled properly.</p>
-<div class="highlight"><pre><span class="cp"># otool -v -I BINARY  | grep malloc</span>
-<span class="mh">0x008b9f64</span> <span class="mi">241776</span> <span class="n">_malloc</span>
-<span class="mh">0x00a1332c</span> <span class="mi">241776</span> <span class="n">_malloc</span>
+<div class="highlight"><pre># otool -v -I BINARY  | grep malloc
+0x008b9f64 241776 _malloc
+0x00a1332c 241776 _malloc
 
-<span class="cp"># otool -v -I BINARY  | grep free  </span>
-<span class="mh">0x008b9cb4</span> <span class="mi">241583</span> <span class="n">_free</span>
-<span class="mh">0x008b9cc4</span> <span class="mi">241584</span> <span class="n">_freeifaddrs</span>
-<span class="mh">0x00a13280</span> <span class="mi">241583</span> <span class="n">_free</span>
-<span class="mh">0x00a13284</span> <span class="mi">241584</span> <span class="n">_freeifaddrs</span>
+# otool -v -I BINARY  | grep free  
+0x008b9cb4 241583 _free
+0x008b9cc4 241584 _freeifaddrs
+0x00a13280 241583 _free
+0x00a13284 241584 _freeifaddrs
 </pre></div>
 
 
@@ -2032,92 +2032,92 @@ jQuery(document).ready(function($) {
 <h2>Understand the App</h2>
 <p>Now that we have examined the binary we should proceed and try to "understand" the application. This means we have to look at it from a <em>logical perspective</em> and identify its main components. Afterwards one can go into detail and analyze only certain parts of the application which might be of interest. </p>
 <p>Using <code>class-dump-z</code> we'll dump the class information:</p>
-<div class="highlight"><pre><span class="cp"># class-dump-z BINARY | head -20</span>
-<span class="nl">Warning:</span> <span class="n">Part</span> <span class="n">of</span> <span class="n">this</span> <span class="n">binary</span> <span class="n">is</span> <span class="n">encrypted</span><span class="p">.</span> <span class="n">Usually</span><span class="p">,</span> <span class="n">the</span> <span class="n">result</span> <span class="n">will</span> <span class="n">be</span> <span class="n">not</span> <span class="n">meaningful</span><span class="p">.</span> <span class="n">Try</span> <span class="n">to</span> <span class="n">provide</span> <span class="n">an</span> <span class="n">unencrypted</span> <span class="n">version</span> <span class="n">instead</span><span class="p">.</span>
-<span class="cm">/**</span>
-<span class="cm"> * This header is generated by class-dump-z 0.2-0.</span>
-<span class="cm"> * class-dump-z is Copyright (C) 2009 by KennyTM~, licensed under GPLv3.</span>
-<span class="cm"> *</span>
-<span class="cm"> * Source: (null)</span>
-<span class="cm"> */</span>
+<div class="highlight"><pre># class-dump-z BINARY | head -20
+Warning: Part of this binary is encrypted. Usually, the result will be not meaningful. Try to provide an unencrypted version instead.
+/**
+ * This header is generated by class-dump-z 0.2-0.
+ * class-dump-z is Copyright (C) 2009 by KennyTM~, licensed under GPLv3.
+ *
+ * Source: (null)
+ */
 
-<span class="k">@protocol</span> <span class="nc">XXEncryptedProtocol_aff088</span>
-<span class="k">@property</span><span class="p">(</span><span class="n">assign</span><span class="p">)</span> <span class="o">?</span> <span class="n">XXEncryptedProperty_8bd3a0</span><span class="p">;</span>
-<span class="k">@property</span><span class="p">(</span><span class="n">assign</span><span class="p">)</span> <span class="o">?</span> <span class="n">XXEncryptedProperty_8bd383</span><span class="p">;</span>
-<span class="k">@property</span><span class="p">(</span><span class="n">assign</span><span class="p">)</span> <span class="o">?</span> <span class="n">XXEncryptedProperty_8bd373</span><span class="p">;</span>
-<span class="k">@property</span><span class="p">(</span><span class="n">assign</span><span class="p">)</span> <span class="o">?</span> <span class="n">XXEncryptedProperty_8bd369</span><span class="p">;</span>
-<span class="k">-</span><span class="p">(</span><span class="o">?</span><span class="p">)</span><span class="nf">XXEncryptedMethod_93d1ce</span><span class="p">;</span>
-<span class="k">-</span><span class="p">(</span><span class="o">?</span><span class="p">)</span><span class="nf">XXEncryptedMethod_93d1c3</span><span class="p">;</span>
-<span class="k">-</span><span class="p">(</span><span class="o">?</span><span class="p">)</span><span class="nf">XXEncryptedMethod_93d1be</span><span class="p">;</span>
-<span class="k">-</span><span class="p">(</span><span class="o">?</span><span class="p">)</span><span class="nf">XXEncryptedMethod_93d1b9</span><span class="p">;</span>
-<span class="k">-</span><span class="p">(</span><span class="o">?</span><span class="p">)</span><span class="nf">XXEncryptedMethod_93d1ad</span><span class="p">;</span>
-<span class="k">-</span><span class="p">(</span><span class="o">?</span><span class="p">)</span><span class="nf">XXEncryptedMethod_93c8e5</span><span class="p">;</span>
-<span class="k">-</span><span class="p">(</span><span class="o">?</span><span class="p">)</span><span class="nf">XXEncryptedMethod_93c784</span><span class="p">;</span>
-<span class="k">-</span><span class="p">(</span><span class="o">?</span><span class="p">)</span><span class="nf">XXEncryptedMethod_93c697</span><span class="p">;</span>
+@protocol XXEncryptedProtocol_aff088
+@property(assign) ? XXEncryptedProperty_8bd3a0;
+@property(assign) ? XXEncryptedProperty_8bd383;
+@property(assign) ? XXEncryptedProperty_8bd373;
+@property(assign) ? XXEncryptedProperty_8bd369;
+-(?)XXEncryptedMethod_93d1ce;
+-(?)XXEncryptedMethod_93d1c3;
+-(?)XXEncryptedMethod_93d1be;
+-(?)XXEncryptedMethod_93d1b9;
+-(?)XXEncryptedMethod_93d1ad;
+-(?)XXEncryptedMethod_93c8e5;
+-(?)XXEncryptedMethod_93c784;
+-(?)XXEncryptedMethod_93c697;
 </pre></div>
 
 
 <p>Every class name seems to be encrypted. That's a good hint you should decrypt the binary in case you haven't done so yet. </p>
 <h3>Decrypt binary</h3>
 <p>Since every application downloaded from the AppStore is encrypted using Apple's FairPlay DRM you'll have to decrypt them before starting your analysis. For this step I'll be using <code>clutch</code> to dump the relevant data from memory to disk.</p>
-<div class="highlight"><pre><span class="cp"># Clutch MyAPP</span>
-<span class="n">Cracking</span> <span class="n">MyAPP</span><span class="p">...</span>
-<span class="n">Creating</span> <span class="n">working</span> <span class="n">directory</span><span class="p">...</span>
-<span class="n">Performing</span> <span class="n">initial</span> <span class="n">analysis</span><span class="p">...</span>
-<span class="n">Performing</span> <span class="n">cracking</span> <span class="n">preflight</span><span class="p">...</span>
-<span class="n">yolofat</span> <span class="n">magic</span> <span class="mi">4277009102</span>
-<span class="n">Application</span> <span class="n">is</span> <span class="n">a</span> <span class="n">thin</span> <span class="n">binary</span><span class="p">,</span> <span class="n">cracking</span> <span class="n">single</span> <span class="n">architecture</span><span class="p">...</span>
-<span class="n">dumping</span> <span class="n">binary</span><span class="o">:</span> <span class="n">analyzing</span> <span class="n">load</span> <span class="n">commands</span>
-<span class="n">found</span> <span class="n">vmaddr</span>
-<span class="n">found</span> <span class="n">LC_ENCRYPTION</span>
-<span class="n">found</span> <span class="n">LC_CODE_SIGNATURE</span>
-<span class="n">dumping</span> <span class="n">binary</span><span class="o">:</span> <span class="n">obtaining</span> <span class="n">ptrace</span> <span class="n">handle</span>
-<span class="n">dumping</span> <span class="n">binary</span><span class="o">:</span> <span class="n">forking</span> <span class="n">to</span> <span class="n">begin</span> <span class="n">tracing</span>
-<span class="n">dumping</span> <span class="n">binary</span><span class="o">:</span> <span class="n">obtaining</span> <span class="n">mach</span> <span class="n">port</span>
-<span class="n">dumping</span> <span class="n">binary</span><span class="o">:</span> <span class="n">preparing</span> <span class="n">code</span> <span class="n">resign</span>
-<span class="n">dumping</span> <span class="n">binary</span><span class="o">:</span> <span class="n">preparing</span> <span class="n">to</span> <span class="n">dump</span>
-<span class="n">dumping</span> <span class="n">binary</span><span class="o">:</span> <span class="n">ASLR</span> <span class="n">enabled</span><span class="p">,</span> <span class="n">identifying</span> <span class="n">dump</span> <span class="n">location</span> <span class="n">dynamically</span>
-<span class="n">dumping</span> <span class="n">binary</span><span class="o">:</span> <span class="n">performing</span> <span class="n">dump</span>
-<span class="n">dumping</span> <span class="n">binary</span><span class="o">:</span> <span class="n">patched</span> <span class="n">cryptid</span>
-<span class="n">dumping</span> <span class="n">binary</span><span class="o">:</span> <span class="n">writing</span> <span class="n">new</span> <span class="n">checksum</span>
-<span class="n">Censoring</span> <span class="n">iTunesMetadata</span><span class="p">.</span><span class="n">plist</span><span class="p">...</span>
-<span class="nl">warning:</span> <span class="n">iTunesMetadata</span><span class="p">.</span><span class="n">plist</span> <span class="n">item</span> <span class="n">named</span> <span class="err">&#39;</span><span class="n">asset</span><span class="o">-</span><span class="n">info</span><span class="err">&#39;</span> <span class="n">is</span> <span class="n">unrecognized</span>
-<span class="nl">warning:</span> <span class="n">iTunesMetadata</span><span class="p">.</span><span class="n">plist</span> <span class="n">item</span> <span class="n">named</span> <span class="err">&#39;</span><span class="n">product</span><span class="o">-</span><span class="n">type</span><span class="err">&#39;</span> <span class="n">is</span> <span class="n">unrecognized</span>
-<span class="nl">warning:</span> <span class="n">iTunesMetadata</span><span class="p">.</span><span class="n">plist</span> <span class="n">item</span> <span class="n">named</span> <span class="err">&#39;</span><span class="n">bundleDisplayName</span><span class="err">&#39;</span> <span class="n">is</span> <span class="n">unrecognized</span>
-<span class="n">Packaging</span> <span class="n">IPA</span> <span class="n">file</span><span class="p">...</span>
-<span class="n">Compressing</span> <span class="n">second</span> <span class="n">stage</span> <span class="n">payload</span> <span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">)...</span>
-    <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">Documents</span><span class="o">/</span><span class="n">Cracked</span><span class="o">/</span><span class="n">MyAPP</span><span class="p">.</span><span class="n">ipa</span>
+<div class="highlight"><pre># Clutch MyAPP
+Cracking MyAPP...
+Creating working directory...
+Performing initial analysis...
+Performing cracking preflight...
+yolofat magic 4277009102
+Application is a thin binary, cracking single architecture...
+dumping binary: analyzing load commands
+found vmaddr
+found LC_ENCRYPTION
+found LC_CODE_SIGNATURE
+dumping binary: obtaining ptrace handle
+dumping binary: forking to begin tracing
+dumping binary: obtaining mach port
+dumping binary: preparing code resign
+dumping binary: preparing to dump
+dumping binary: ASLR enabled, identifying dump location dynamically
+dumping binary: performing dump
+dumping binary: patched cryptid
+dumping binary: writing new checksum
+Censoring iTunesMetadata.plist...
+warning: iTunesMetadata.plist item named &#39;asset-info&#39; is unrecognized
+warning: iTunesMetadata.plist item named &#39;product-type&#39; is unrecognized
+warning: iTunesMetadata.plist item named &#39;bundleDisplayName&#39; is unrecognized
+Packaging IPA file...
+Compressing second stage payload (2/2)...
+    /var/root/Documents/Cracked/MyAPP.ipa
 </pre></div>
 
 
 <p>Now that you have decrypted to binary and got a fresh new IPA file, you're ready to unpack it:</p>
-<div class="highlight"><pre><span class="cp"># unzip -d MyAPP MyAPP.ipa</span>
-<span class="p">...</span>
+<div class="highlight"><pre># unzip -d MyAPP MyAPP.ipa
+...
 </pre></div>
 
 
 <p>Afterwards you can have a look at the new binary using <code>class-dump-z</code>:</p>
-<div class="highlight"><pre><span class="cp"># class-dump-z BINARY  | head -n 20</span>
-<span class="cm">/**</span>
-<span class="cm"> * This header is generated by class-dump-z 0.2-0.</span>
-<span class="cm"> * class-dump-z is Copyright (C) 2009 by KennyTM~, licensed under GPLv3.</span>
-<span class="cm"> *</span>
-<span class="cm"> * Source: (null)</span>
-<span class="cm"> */</span>
+<div class="highlight"><pre># class-dump-z BINARY  | head -n 20
+/**
+ * This header is generated by class-dump-z 0.2-0.
+ * class-dump-z is Copyright (C) 2009 by KennyTM~, licensed under GPLv3.
+ *
+ * Source: (null)
+ */
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">_NSZone</span> <span class="n">NSZone</span><span class="p">;</span>
+typedef struct _NSZone NSZone;
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">CGPoint</span> <span class="p">{</span>
-    <span class="kt">float</span> <span class="n">x</span><span class="p">;</span>
-    <span class="kt">float</span> <span class="n">y</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">CGPoint</span><span class="p">;</span>
+typedef struct CGPoint {
+    float x;
+    float y;
+} CGPoint;
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">CGSize</span> <span class="p">{</span>
-    <span class="kt">float</span> <span class="n">width</span><span class="p">;</span>
-    <span class="kt">float</span> <span class="n">height</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">CGSize</span><span class="p">;</span>
+typedef struct CGSize {
+    float width;
+    float height;
+} CGSize;
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">CGRect</span> <span class="p">{</span>
+typedef struct CGRect {
 </pre></div>
 
 
@@ -2140,14 +2140,14 @@ jQuery(document).ready(function($) {
     Posted by <span class="fn">Victor Dorneanu</span>
   </span>
 <time datetime="2014-10-29T00:00:00+01:00" pubdate>Wed 29 October 2014</time>  <span class="categories">
-    <a class="category" href="../../../../tag/coding/">coding</a>
-    <a class="category" href="../../../../tag/security/">security</a>
-    <a class="category" href="../../../../tag/ios/">ios</a>
-    <a class="category" href="../../../../tag/appsec/">appsec</a>
-    <a class="category" href="../../../../tag/howto/">howto</a>
+    <a class="category" href="http://blog.dornea.nu/tag/coding/">coding</a>
+    <a class="category" href="http://blog.dornea.nu/tag/security/">security</a>
+    <a class="category" href="http://blog.dornea.nu/tag/ios/">ios</a>
+    <a class="category" href="http://blog.dornea.nu/tag/appsec/">appsec</a>
+    <a class="category" href="http://blog.dornea.nu/tag/howto/">howto</a>
   </span>
 </p><div class="sharing">
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="../../../../2014/10/29/howto-ios-apps-static-analysis" data-via="victordorneanu" data-counturl="../../../../2014/10/29/howto-ios-apps-static-analysis" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.dornea.nu/2014/10/29/howto-ios-apps-static-analysis" data-via="victordorneanu" data-counturl="http://blog.dornea.nu/2014/10/29/howto-ios-apps-static-analysis" >Tweet</a>
 </div>    </footer>
   </article>
 
@@ -2161,19 +2161,19 @@ jQuery(document).ready(function($) {
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
-          <a href="../../../../2014/10/29/howto-ios-apps-static-analysis">HowTo: iOS Apps - Static analysis</a>
+          <a href="http://blog.dornea.nu/2014/11/13/using-graphviz-with-pelican-and-liquid-tags">Using Graphviz with Pelican and liquid tags</a>
       </li>
       <li class="post">
-          <a href="../../../../2014/09/17/generate-all-ip-addresses-from-asn">Generate all IP addresses from ASN</a>
+          <a href="http://blog.dornea.nu/2014/10/29/howto-ios-apps-static-analysis">HowTo: iOS Apps - Static analysis</a>
       </li>
       <li class="post">
-          <a href="../../../../2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a>
+          <a href="http://blog.dornea.nu/2014/09/17/generate-all-ip-addresses-from-asn">Generate all IP addresses from ASN</a>
       </li>
       <li class="post">
-          <a href="../../../../2014/08/28/using-jquery-datatables-with-ipython">Using JQuery DataTables with IPython</a>
+          <a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a>
       </li>
       <li class="post">
-          <a href="../../../../2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms">HowTo: Debug Android APKs with Eclipse and DDMS</a>
+          <a href="http://blog.dornea.nu/2014/08/28/using-jquery-datatables-with-ipython">Using JQuery DataTables with IPython</a>
       </li>
     </ul>
   </section>
@@ -2181,14 +2181,14 @@ jQuery(document).ready(function($) {
       
     <h1>Categories</h1>
     <ul id="recent_posts">
-        <li><a href="../../../../category/blog">blog</a></li>
+        <li><a href="http://blog.dornea.nu/category/blog">blog</a></li>
     </ul>
   </section>
  
 
   <section>
   <h1>Tags</h1>
-    <a href="../../../../tag//"></a>,    <a href="../../../../tag/docker/">docker</a>,    <a href="../../../../tag/code/">code</a>,    <a href="../../../../tag/pelican/">pelican</a>,    <a href="../../../../tag/coding/">coding</a>,    <a href="../../../../tag/droidbox/">droidbox</a>,    <a href="../../../../tag/openssl/">openssl</a>,    <a href="../../../../tag/books/">books</a>,    <a href="../../../../tag/virtualization/">virtualization</a>,    <a href="../../../../tag/web/">web</a>,    <a href="../../../../tag/wargames/">wargames</a>,    <a href="../../../../tag/networking/">networking</a>,    <a href="../../../../tag/network/">network</a>,    <a href="../../../../tag/octopress/">octopress</a>,    <a href="../../../../tag/blog/">blog</a>,    <a href="../../../../tag/re/">re</a>,    <a href="../../../../tag/low/">low</a>,    <a href="../../../../tag/android/">android</a>,    <a href="../../../../tag/androguard/">androguard</a>,    <a href="../../../../tag/events/">events</a>,    <a href="../../../../tag/uncategorized/">uncategorized</a>,    <a href="../../../../tag/cryptography/">cryptography</a>,    <a href="../../../../tag/python/">python</a>,    <a href="../../../../tag/misc/">misc</a>,    <a href="../../../../tag/javascript/">javascript</a>,    <a href="../../../../tag/howto/">howto</a>,    <a href="../../../../tag/wtf/">wtf</a>,    <a href="../../../../tag/ipython/">ipython</a>,    <a href="../../../../tag/java/">java</a>,    <a href="../../../../tag/ios/">ios</a>,    <a href="../../../../tag/security/">security</a>,    <a href="../../../../tag/jquery/">jquery</a>,    <a href="../../../../tag/science/">science</a>,    <a href="../../../../tag/eclipse/">eclipse</a>,    <a href="../../../../tag/crypto/">crypto</a>,    <a href="../../../../tag/sca/">sca</a>,    <a href="../../../../tag/appsec/">appsec</a>,    <a href="../../../../tag/whatsapp/">whatsapp</a>,    <a href="../../../../tag/debug/">debug</a>,    <a href="../../../../tag/hacking/">hacking</a>  </section>
+    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
 
 
 
@@ -2202,7 +2202,7 @@ jQuery(document).ready(function($) {
           if (!window.jXHR){
               var jxhr = document.createElement('script');
               jxhr.type = 'text/javascript';
-              jxhr.src = '../../../../theme/js/jXHR.js';
+              jxhr.src = 'http://blog.dornea.nu/theme/js/jXHR.js';
               var s = document.getElementsByTagName('script')[0];
               s.parentNode.insertBefore(jxhr, s);
           }
@@ -2215,7 +2215,7 @@ jQuery(document).ready(function($) {
           });
       });
     </script>
-    <script src="../../../../theme/js/github.js" type="text/javascript"> </script>
+    <script src="http://blog.dornea.nu/theme/js/github.js" type="text/javascript"> </script>
   </section>
 
     <section>
@@ -2265,6 +2265,7 @@ jQuery(document).ready(function($) {
 </section>
 </aside>    </div>
   </div>
+
   <footer role="contentinfo"><p>
     Copyright &copy;  2008-2014  - Victor Dorneanu -
   <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
@@ -2290,7 +2291,7 @@ jQuery(document).ready(function($) {
 	<script type="text/javascript">
 	  var disqus_shortname = 'dorneanu';
           var disqus_identifier = '/2014/10/29/howto-ios-apps-static-analysis';
-          var disqus_url = '../../../../2014/10/29/howto-ios-apps-static-analysis';
+          var disqus_url = 'http://blog.dornea.nu/2014/10/29/howto-ios-apps-static-analysis';
           var disqus_title = 'HowTo: iOS Apps - Static analysis';
 	  (function() {
 	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -2307,5 +2308,10 @@ jQuery(document).ready(function($) {
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
+
 </body>
+
+  <!-- Custom JS snippets -->
+  <script src="http://blog.dornea.nu/js/custom.js"></script>
+  
 </html>

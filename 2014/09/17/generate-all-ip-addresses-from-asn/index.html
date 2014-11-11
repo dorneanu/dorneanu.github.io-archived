@@ -1724,12 +1724,12 @@ jQuery(document).ready(function($) {
   <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
   <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 
-  <link href="../../../../favicon.png" rel="icon">
-  <link href="../../../../theme/css/main.css" media="screen, projection"
+  <link href="http://blog.dornea.nu/favicon.png" rel="icon">
+  <link href="http://blog.dornea.nu/theme/css/main.css" media="screen, projection"
         rel="stylesheet" type="text/css">
-  <script src="../../../../theme/js/modernizr-2.0.js"></script>
-  <script src="../../../../theme/js/ender.js"></script>
-  <script src="../../../../theme/js/octopress.js" type="text/javascript"></script>
+  <script src="http://blog.dornea.nu/theme/js/modernizr-2.0.js"></script>
+  <script src="http://blog.dornea.nu/theme/js/ender.js"></script>
+  <script src="http://blog.dornea.nu/theme/js/octopress.js" type="text/javascript"></script>
 
   <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
         rel="stylesheet" type="text/css">
@@ -1740,7 +1740,7 @@ jQuery(document).ready(function($) {
 
 <body>
   <header role="banner"><hgroup>
-  <h1><a href="../../../../">blog.dornea.nu</a></h1>
+  <h1><a href="http://blog.dornea.nu/">blog.dornea.nu</a></h1>
     <h2>Hack, code and drink some țuică.</h2>
 </hgroup></header>
   <nav role="navigation"><ul class="subscription" data-subscription="rss">
@@ -1758,10 +1758,10 @@ jQuery(document).ready(function($) {
 
 <ul class="main-navigation">
     <li><a href="/archives">Archives</a></li>
-      <li><a href="../../../../pages/about">About</a></li>
-      <li><a href="../../../../pages/books">Books</a></li>
+      <li><a href="http://blog.dornea.nu/pages/about">About</a></li>
+      <li><a href="http://blog.dornea.nu/pages/books">Books</a></li>
     <li class="active">
-    <a href="../../../../category/blog">Blog</a>
+    <a href="http://blog.dornea.nu/category/blog">Blog</a>
     </li>
 </ul></nav>
   <div id="main">
@@ -1771,10 +1771,10 @@ jQuery(document).ready(function($) {
 <header>
     
     <div id="qr-code-2014/09/17/generate-all-ip-addresses-from-asn" class="qr-code-image-block"></div>
-    <script src="../../../../theme/js/qr.min.js" type="text/javascript"></script>
+    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
     <script>
         var img = qr.image({
-            value: '../../../../2014/09/17/generate-all-ip-addresses-from-asn',
+            value: 'http://blog.dornea.nu/2014/09/17/generate-all-ip-addresses-from-asn',
             level: 'L',
             size: 4
         });
@@ -1785,32 +1785,32 @@ jQuery(document).ready(function($) {
 </header>
 
   <div class="entry-content"><p>Sometimes you need to know if a certain IP (or several ones) are within an IP range or belong to a certain <a href="http://en.wikipedia.org/wiki/Autonomous_System_%28Internet%29">ASN</a>. Let's give it a try and generate all possible IP addresses for <a href="http://telekom.de">telekom.de</a>. </p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">dig</span> <span class="n">telekom</span><span class="p">.</span><span class="n">de</span> 
-<span class="p">...</span>
-<span class="n">telekom</span><span class="p">.</span><span class="n">de</span><span class="p">.</span>     <span class="mi">86346</span>   <span class="n">IN</span>  <span class="n">A</span>   <span class="mf">46.29.100.76</span>
-<span class="p">...</span>
+<div class="highlight"><pre>$ dig telekom.de 
+...
+telekom.de.     86346   IN  A   46.29.100.76
+...
 </pre></div>
 
 
 <p>Now let's find out the ASN:</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">whois</span> <span class="mf">46.29.100.76</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">origin</span>            
-<span class="nl">origin:</span>         <span class="n">AS34086</span>
+<div class="highlight"><pre>$ whois 46.29.100.76 | grep origin            
+origin:         AS34086
 </pre></div>
 
 
 <p>Now ask <a href="http://ripe.net">RIPE</a> for the IP ranges:</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">whois</span> <span class="o">-</span><span class="n">h</span> <span class="n">whois</span><span class="p">.</span><span class="n">ripe</span><span class="p">.</span><span class="n">net</span> <span class="o">-</span><span class="n">T</span> <span class="n">route</span> <span class="n">AS34086</span> <span class="o">-</span><span class="n">i</span> <span class="n">origin</span> <span class="o">|</span> <span class="n">egrep</span> <span class="s">&quot;route: &quot;</span> <span class="o">|</span> <span class="n">awk</span> <span class="err">&#39;</span><span class="p">{</span><span class="n">print</span> <span class="err">$</span><span class="n">NF</span><span class="p">}</span><span class="err">&#39;</span>   
-<span class="mf">145.225.1.0</span><span class="o">/</span><span class="mi">24</span>
-<span class="mf">151.136.0.0</span><span class="o">/</span><span class="mi">16</span>
-<span class="mf">185.9.216.0</span><span class="o">/</span><span class="mi">22</span>
-<span class="mf">193.143.55.0</span><span class="o">/</span><span class="mi">24</span>
-<span class="mf">193.143.56.0</span><span class="o">/</span><span class="mi">24</span>
-<span class="mf">193.143.57.0</span><span class="o">/</span><span class="mi">24</span>
-<span class="mf">217.150.144.0</span><span class="o">/</span><span class="mi">20</span>
-<span class="mf">217.150.144.0</span><span class="o">/</span><span class="mi">21</span>
-<span class="mf">46.29.96.0</span><span class="o">/</span><span class="mi">21</span>
-<span class="mf">93.188.240.0</span><span class="o">/</span><span class="mi">21</span>
-<span class="mf">94.100.240.0</span><span class="o">/</span><span class="mi">20</span>
+<div class="highlight"><pre>$ whois -h whois.ripe.net -T route AS34086 -i origin | egrep &quot;route: &quot; | awk &#39;{print $NF}&#39;   
+145.225.1.0/24
+151.136.0.0/16
+185.9.216.0/22
+193.143.55.0/24
+193.143.56.0/24
+193.143.57.0/24
+217.150.144.0/20
+217.150.144.0/21
+46.29.96.0/21
+93.188.240.0/21
+94.100.240.0/20
 </pre></div>
 
 
@@ -1818,37 +1818,37 @@ jQuery(document).ready(function($) {
 <blockquote>
 <p>I know there is <a href="www.cpan.org/authors/id/R/RA/RAYNERLUC/cidr2range-0.9.pl">cidr2range</a> but that didn't work for certain blocks like <strong>145.225.1.0/24</strong>.</p>
 </blockquote>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">cat</span> <span class="n">cidr2list</span><span class="p">.</span><span class="n">py</span> 
-<span class="cp">#!/usr/bin/env python2</span>
+<div class="highlight"><pre>$ cat cidr2list.py 
+#!/usr/bin/env python2
 
-<span class="n">import</span> <span class="n">sys</span>
-<span class="n">from</span> <span class="n">netaddr</span> <span class="n">import</span> <span class="n">IPNetwork</span>
+import sys
+from netaddr import IPNetwork
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="o">:</span>
-    <span class="k">if</span> <span class="n">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="o">:</span>
-        <span class="n">print</span> <span class="s">&quot;Usage: %s &lt;CIDR Block&gt;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="nl">else:</span>
-        <span class="k">for</span> <span class="n">ip</span> <span class="n">in</span> <span class="n">IPNetwork</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">:</span>
-            <span class="n">print</span> <span class="err">&#39;</span><span class="o">%</span><span class="n">s</span><span class="err">&#39;</span> <span class="o">%</span> <span class="n">ip</span>
+if __name__ == &quot;__main__&quot;:
+    if len(sys.argv) != 2:
+        print &quot;Usage: %s &lt;CIDR Block&gt;\n&quot; % sys.argv[0]
+    else:
+        for ip in IPNetwork(sys.argv[1]):
+            print &#39;%s&#39; % ip
 </pre></div>
 
 
 <p>Now let's generate the lists:</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">whois</span> <span class="o">-</span><span class="n">h</span> <span class="n">whois</span><span class="p">.</span><span class="n">ripe</span><span class="p">.</span><span class="n">net</span> <span class="o">-</span><span class="n">T</span> <span class="n">route</span> <span class="n">AS34086</span> <span class="o">-</span><span class="n">i</span> <span class="n">origin</span> <span class="o">|</span> <span class="n">egrep</span> <span class="s">&quot;route: &quot;</span> <span class="o">|</span> <span class="n">awk</span> <span class="err">&#39;</span><span class="p">{</span><span class="n">print</span> <span class="err">$</span><span class="n">NF</span><span class="p">}</span><span class="err">&#39;</span>  <span class="o">&gt;&gt;</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ip</span><span class="o">-</span><span class="n">ranges</span><span class="p">.</span><span class="n">txt</span>
-<span class="err">$</span> <span class="n">cat</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ip</span><span class="o">-</span><span class="n">ranges</span><span class="p">.</span><span class="n">txt</span> <span class="o">|</span> <span class="n">xargs</span> <span class="o">-</span><span class="n">n1</span> <span class="p">.</span><span class="o">/</span><span class="n">cidr2list</span><span class="p">.</span><span class="n">py</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ip</span><span class="o">-</span><span class="n">lists</span><span class="p">.</span><span class="n">txt</span>
-<span class="err">$</span>  <span class="n">head</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ip</span><span class="o">-</span><span class="n">lists</span><span class="p">.</span><span class="n">txt</span> 
-<span class="mf">145.225.1.0</span>
-<span class="mf">145.225.1.1</span>
-<span class="mf">145.225.1.2</span>
-<span class="mf">145.225.1.3</span>
-<span class="mf">145.225.1.4</span>
-<span class="mf">145.225.1.5</span>
-<span class="mf">145.225.1.6</span>
-<span class="mf">145.225.1.7</span>
-<span class="mf">145.225.1.8</span>
-<span class="mf">145.225.1.9</span>
-<span class="err">$</span> <span class="n">wc</span> <span class="o">-</span><span class="n">l</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ip</span><span class="o">-</span><span class="n">lists</span><span class="p">.</span><span class="n">txt</span> 
-<span class="mi">81920</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ip</span><span class="o">-</span><span class="n">lists</span><span class="p">.</span><span class="n">txt</span>
+<div class="highlight"><pre>$ whois -h whois.ripe.net -T route AS34086 -i origin | egrep &quot;route: &quot; | awk &#39;{print $NF}&#39;  &gt;&gt; /tmp/ip-ranges.txt
+$ cat /tmp/ip-ranges.txt | xargs -n1 ./cidr2list.py &gt; /tmp/ip-lists.txt
+$  head -n 10 /tmp/ip-lists.txt 
+145.225.1.0
+145.225.1.1
+145.225.1.2
+145.225.1.3
+145.225.1.4
+145.225.1.5
+145.225.1.6
+145.225.1.7
+145.225.1.8
+145.225.1.9
+$ wc -l /tmp/ip-lists.txt 
+81920 /tmp/ip-lists.txt
 </pre></div>
 
 
@@ -1859,11 +1859,11 @@ jQuery(document).ready(function($) {
     Posted by <span class="fn">Victor Dorneanu</span>
   </span>
 <time datetime="2014-09-17T00:00:00+02:00" pubdate>Wed 17 September 2014</time>  <span class="categories">
-    <a class="category" href="../../../../tag/networking/">networking</a>
-    <a class="category" href="../../../../tag/hacking/">hacking</a>
+    <a class="category" href="http://blog.dornea.nu/tag/networking/">networking</a>
+    <a class="category" href="http://blog.dornea.nu/tag/hacking/">hacking</a>
   </span>
 </p><div class="sharing">
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="../../../../2014/09/17/generate-all-ip-addresses-from-asn" data-via="victordorneanu" data-counturl="../../../../2014/09/17/generate-all-ip-addresses-from-asn" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.dornea.nu/2014/09/17/generate-all-ip-addresses-from-asn" data-via="victordorneanu" data-counturl="http://blog.dornea.nu/2014/09/17/generate-all-ip-addresses-from-asn" >Tweet</a>
 </div>    </footer>
   </article>
 
@@ -1877,19 +1877,19 @@ jQuery(document).ready(function($) {
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
-          <a href="../../../../2014/10/29/howto-ios-apps-static-analysis">HowTo: iOS Apps - Static analysis</a>
+          <a href="http://blog.dornea.nu/2014/11/13/using-graphviz-with-pelican-and-liquid-tags">Using Graphviz with Pelican and liquid tags</a>
       </li>
       <li class="post">
-          <a href="../../../../2014/09/17/generate-all-ip-addresses-from-asn">Generate all IP addresses from ASN</a>
+          <a href="http://blog.dornea.nu/2014/10/29/howto-ios-apps-static-analysis">HowTo: iOS Apps - Static analysis</a>
       </li>
       <li class="post">
-          <a href="../../../../2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a>
+          <a href="http://blog.dornea.nu/2014/09/17/generate-all-ip-addresses-from-asn">Generate all IP addresses from ASN</a>
       </li>
       <li class="post">
-          <a href="../../../../2014/08/28/using-jquery-datatables-with-ipython">Using JQuery DataTables with IPython</a>
+          <a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a>
       </li>
       <li class="post">
-          <a href="../../../../2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms">HowTo: Debug Android APKs with Eclipse and DDMS</a>
+          <a href="http://blog.dornea.nu/2014/08/28/using-jquery-datatables-with-ipython">Using JQuery DataTables with IPython</a>
       </li>
     </ul>
   </section>
@@ -1897,14 +1897,14 @@ jQuery(document).ready(function($) {
       
     <h1>Categories</h1>
     <ul id="recent_posts">
-        <li><a href="../../../../category/blog">blog</a></li>
+        <li><a href="http://blog.dornea.nu/category/blog">blog</a></li>
     </ul>
   </section>
  
 
   <section>
   <h1>Tags</h1>
-    <a href="../../../../tag//"></a>,    <a href="../../../../tag/docker/">docker</a>,    <a href="../../../../tag/code/">code</a>,    <a href="../../../../tag/pelican/">pelican</a>,    <a href="../../../../tag/coding/">coding</a>,    <a href="../../../../tag/droidbox/">droidbox</a>,    <a href="../../../../tag/openssl/">openssl</a>,    <a href="../../../../tag/books/">books</a>,    <a href="../../../../tag/virtualization/">virtualization</a>,    <a href="../../../../tag/web/">web</a>,    <a href="../../../../tag/wargames/">wargames</a>,    <a href="../../../../tag/networking/">networking</a>,    <a href="../../../../tag/network/">network</a>,    <a href="../../../../tag/octopress/">octopress</a>,    <a href="../../../../tag/blog/">blog</a>,    <a href="../../../../tag/re/">re</a>,    <a href="../../../../tag/low/">low</a>,    <a href="../../../../tag/android/">android</a>,    <a href="../../../../tag/androguard/">androguard</a>,    <a href="../../../../tag/events/">events</a>,    <a href="../../../../tag/uncategorized/">uncategorized</a>,    <a href="../../../../tag/cryptography/">cryptography</a>,    <a href="../../../../tag/python/">python</a>,    <a href="../../../../tag/misc/">misc</a>,    <a href="../../../../tag/javascript/">javascript</a>,    <a href="../../../../tag/howto/">howto</a>,    <a href="../../../../tag/wtf/">wtf</a>,    <a href="../../../../tag/ipython/">ipython</a>,    <a href="../../../../tag/java/">java</a>,    <a href="../../../../tag/ios/">ios</a>,    <a href="../../../../tag/security/">security</a>,    <a href="../../../../tag/jquery/">jquery</a>,    <a href="../../../../tag/science/">science</a>,    <a href="../../../../tag/eclipse/">eclipse</a>,    <a href="../../../../tag/crypto/">crypto</a>,    <a href="../../../../tag/sca/">sca</a>,    <a href="../../../../tag/appsec/">appsec</a>,    <a href="../../../../tag/whatsapp/">whatsapp</a>,    <a href="../../../../tag/debug/">debug</a>,    <a href="../../../../tag/hacking/">hacking</a>  </section>
+    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
 
 
 
@@ -1918,7 +1918,7 @@ jQuery(document).ready(function($) {
           if (!window.jXHR){
               var jxhr = document.createElement('script');
               jxhr.type = 'text/javascript';
-              jxhr.src = '../../../../theme/js/jXHR.js';
+              jxhr.src = 'http://blog.dornea.nu/theme/js/jXHR.js';
               var s = document.getElementsByTagName('script')[0];
               s.parentNode.insertBefore(jxhr, s);
           }
@@ -1931,7 +1931,7 @@ jQuery(document).ready(function($) {
           });
       });
     </script>
-    <script src="../../../../theme/js/github.js" type="text/javascript"> </script>
+    <script src="http://blog.dornea.nu/theme/js/github.js" type="text/javascript"> </script>
   </section>
 
     <section>
@@ -1981,6 +1981,7 @@ jQuery(document).ready(function($) {
 </section>
 </aside>    </div>
   </div>
+
   <footer role="contentinfo"><p>
     Copyright &copy;  2008-2014  - Victor Dorneanu -
   <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
@@ -2006,7 +2007,7 @@ jQuery(document).ready(function($) {
 	<script type="text/javascript">
 	  var disqus_shortname = 'dorneanu';
           var disqus_identifier = '/2014/09/17/generate-all-ip-addresses-from-asn';
-          var disqus_url = '../../../../2014/09/17/generate-all-ip-addresses-from-asn';
+          var disqus_url = 'http://blog.dornea.nu/2014/09/17/generate-all-ip-addresses-from-asn';
           var disqus_title = 'Generate all IP addresses from ASN';
 	  (function() {
 	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -2023,5 +2024,10 @@ jQuery(document).ready(function($) {
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
+
 </body>
+
+  <!-- Custom JS snippets -->
+  <script src="http://blog.dornea.nu/js/custom.js"></script>
+  
 </html>
