@@ -1785,7 +1785,7 @@ jQuery(document).ready(function($) {
 </header>
 
   <div class="entry-content"><p>In this short article I'll try to explain what are the main steps to analyze an iOS app. Since I've writen similar posts related to <a href="/tag/android/">Android</a> I thought I could devote some of spare time writing about the steps required to analyze iOS apps/binaries. But first of all let's start with:</p>
-<h2>What's an iOS app?</h2>
+<h2 id="whats-an-ios-app">What's an iOS app?</h2>
 <p>In a nutshell here are the main characteristics:</p>
 <ul>
 <li>Objective-C / C / C++ compiled (ARM) executable</li>
@@ -1795,7 +1795,7 @@ jQuery(document).ready(function($) {
 <li>apps come as an <strong>IPA</strong> file which is the counterpart to Android's <strong>APK</strong></li>
 </ul>
 <p>Now that you roughly know what an iOS app is let's have a look at the most common <em>blackbox</em> pentesting tools out there. In this post I'll focus only on <em>static analysis</em>. <em>Dynamic analysis</em> (also known as <em>runtime analysis</em>) will be covered in a future post. </p>
-<h2>Binary Analysis Tools</h2>
+<h2 id="binary-analysis-tools">Binary Analysis Tools</h2>
 <p>Assuming you've already jailbreaked your device, you'll definitely need these tools:</p>
 <ul>
 <li><strong>SSH</strong> - For connecting to the device</li>
@@ -1808,11 +1808,11 @@ jQuery(document).ready(function($) {
 </ul>
 </li>
 </ul>
-<h2>IPA</h2>
+<h2 id="ipa">IPA</h2>
 <p><strong>ipa</strong> files are archive files which are usually encrypted using Apple's FairPlay DRM. In a nutshell an ipa file consists of:</p>
 <p><img width="600" title="IPA-File" alt="IPA-File" src="http://oi60.tinypic.com/15q2ici.jpg" height="200"></p>
 <p>The <strong>App binary</strong> is the target to be analyzed. It's compiled for ARM and used the <strong>Mach-O</strong>(mach object) file format. Check out next section for more detailed information.</p>
-<h4>Installing the App</h4>
+<h4 id="installing-the-app">Installing the App</h4>
 <p>Usually you can manually install apps by using <strong>ipainstaller</strong>:</p>
 <div class="highlight"><pre># ipainstaller &lt;ipa file&gt;
 ...
@@ -1820,10 +1820,10 @@ jQuery(document).ready(function($) {
 
 
 <p>This will install your app under <code>/var/mobile/Applications</code>. Just do a <code>grep</code> to find out to which folder your app was copied to.</p>
-<h2>Mach-O</h2>
+<h2 id="mach-o">Mach-O</h2>
 <p>The Mach-O binary consists of 3 components:</p>
 <p><img height="200" width="600" alt="Mach-O Mach-O" title="Mach-O Mach-O" src="https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/MachORuntime/art/mach_o_segments.gif"></p>
-<h4>Header</h4>
+<h4 id="header">Header</h4>
 <p>The <strong>header</strong> contains basic file type information like architecture and several flags. Using <strong>otool</strong> you can have a look a the headers:</p>
 <div class="highlight"><pre># otool -h BINARY
 BINARY:
@@ -1847,7 +1847,7 @@ Mach header
 </pre></div>
 
 
-<h4>Load commands</h4>
+<h4 id="load-commands">Load commands</h4>
 <p>The <a href="https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/MachORuntime/index.html#//apple_ref/doc/uid/20001298-89026">load commands</a> are located directly after the header and specify the logical structure of the binary (as a file) and it's representation in the virtual memory (using offsets). Besides that you'll be able to get:</p>
 <ul>
 <li>the symbol table</li>
@@ -1861,9 +1861,9 @@ Mach header
 </pre></div>
 
 
-<h4>Raw segment data</h4>
+<h4 id="raw-segment-data">Raw segment data</h4>
 <p>In the Mach-O file you'll also have <a href="https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/MachOTopics/0-Introduction/introduction.html">raw data</a> for the segments specified in the load commands. One segment can consist of multiple sections.</p>
-<h2>Runtime protection features</h2>
+<h2 id="runtime-protection-features">Runtime protection features</h2>
 <p>iOS has several mechanisms which prevent application from being compromised at runtime. In order to understand the security issues that affect iOS applications, it is important to understand and to known the security features of the platform. The main security features of iOS <a href="http://www.apple.com/ipad/business/docs/iOS_Security_Feb14.pdf">are</a>:</p>
 <ul>
 <li>
@@ -1901,9 +1901,9 @@ Mach header
 </li>
 </ul>
 <p>Keeping all this stuff in mind, let's pickup some binary and go for it.</p>
-<h2>Analyzing the binary</h2>
+<h2 id="analyzing-the-binary">Analyzing the binary</h2>
 <p>Comparing Android to iOS I must admit you'll have to overcome more (technical) challenges for a successful analysis. iOS uses <strong>binary</strong> files (instead of <em>bytecode</em>). Having that said I'll be using <strong>otool</strong> (which seems to be the equivalent to <strong>readelf</strong>) to inspect the binary.</p>
-<h4>Architecture</h4>
+<h4 id="architecture">Architecture</h4>
 <p>Let's first determine the <em>architecture</em> the binary was compiled for:</p>
 <div class="highlight"><pre># otool -f BINARY                                                                                              
 Fat headers
@@ -1933,7 +1933,7 @@ PM: Mach-O fat file with 2 architectures
 
 
 <p>Also have a look at this cool <a href="http://blakespot.com/ios_device_specifications_grid.html">list</a>.</p>
-<h4>Encryption</h4>
+<h4 id="encryption">Encryption</h4>
 <p>Usually the <code>ipa</code> file will be decrypted at runtime by the kernel's mach loader. If the binary is encrypted or not is easily found out using:</p>
 <div class="highlight"><pre># otool -l BINARY | grep -A 4 LC_ENCRYPTION_INFO
 </pre></div>
@@ -1949,7 +1949,7 @@ PM: Mach-O fat file with 2 architectures
 </pre></div>
 
 
-<h3>Runtime protections mechanisms</h3>
+<h3 id="runtime-protections-mechanisms">Runtime protections mechanisms</h3>
 <p>This time I'll show you how to extract some valuable information from the binary itself regarding some runtime protection mechanisms:</p>
 <ul>
 <li><strong>ASLR</strong><ul>
@@ -2012,7 +2012,7 @@ Mach header
 </pre></div>
 
 
-<h4>Dangerous functions</h4>
+<h4 id="dangerous-functions">Dangerous functions</h4>
 <p>Beside the previosly mentioned symbols we can also seek for symbols aimed at (classical) memory management mechanisms like <code>malloc</code> and <code>free</code>. Their presence indicate that the application has its own memory management which is the opposite to <strong>ARC</strong>. While this is not always a bad thing it could easily lead to some memory related vulnerabilities if not handled properly.</p>
 <div class="highlight"><pre># otool -v -I BINARY  | grep malloc
 0x008b9f64 241776 _malloc
@@ -2029,7 +2029,7 @@ Mach header
 <blockquote>
 <p>Sometimes you'll find goodies like <code>strcpy</code> :)</p>
 </blockquote>
-<h2>Understand the App</h2>
+<h2 id="understand-the-app">Understand the App</h2>
 <p>Now that we have examined the binary we should proceed and try to "understand" the application. This means we have to look at it from a <em>logical perspective</em> and identify its main components. Afterwards one can go into detail and analyze only certain parts of the application which might be of interest. </p>
 <p>Using <code>class-dump-z</code> we'll dump the class information:</p>
 <div class="highlight"><pre># class-dump-z BINARY | head -20
@@ -2058,7 +2058,7 @@ Warning: Part of this binary is encrypted. Usually, the result will be not meani
 
 
 <p>Every class name seems to be encrypted. That's a good hint you should decrypt the binary in case you haven't done so yet. </p>
-<h3>Decrypt binary</h3>
+<h3 id="decrypt-binary">Decrypt binary</h3>
 <p>Since every application downloaded from the AppStore is encrypted using Apple's FairPlay DRM you'll have to decrypt them before starting your analysis. For this step I'll be using <code>clutch</code> to dump the relevant data from memory to disk.</p>
 <div class="highlight"><pre># Clutch MyAPP
 Cracking MyAPP...
@@ -2122,11 +2122,11 @@ typedef struct CGRect {
 
 
 <p>Much better, isn't it? :)</p>
-<h3>Disassemble binary</h3>
+<h3 id="disassemble-binary">Disassemble binary</h3>
 <p>I don't want to be too specific and go into too much detail. A good <em>disassembler</em> could save you a <strong>lot</strong> of time. I really like <a href="http://www.hopperapp.com/">Hopper</a> because it's <em>free</em> and <em>easy</em> to use. For the geeks out there feel free to throw your binary into <a href="https://www.hex-rays.com/products/ida/">IDA</a> and let the bin rock. Particularly noteworthy is also <a href="http://www.radare.org/y/">radare2</a> which is unix-like reverse engineering framework. </p>
-<h2>Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 <p>Binary analysis can be a hell of a lot of fun if you have the right tools. Especially when you're not used to Apple's universe and don't have a Mac OS machine it could be useful to jailbreak your smartphone/tablet and install your tools there. <em>Gather</em> as much information as you can get to get a pretty precise image of what you're dealing with. <em>Disassemble</em> your binary to get more in "contact". Afterwards <em>run</em> it and do some runtime analysis.</p>
-<h2>References</h2>
+<h2 id="references">References</h2>
 <ul>
 <li><a href="http://conference.hitb.org/hitbsecconf2013ams/materials/D2T2%20-%20Chilik%20Tamir%20-%20iAnalyzer%20-%20No%20More%20Blackbox%20iOS%20Analysis.pdf">iNalyzer – No More iOS Blackbox Assessments</a></li>
 <li><a href="https://www.sans.org/reading-room/whitepapers/testing/ipwn-apps-pentesting-ios-applications-34577">iPwn Apps: Pentesting iOS Applications</a></li>
@@ -2161,6 +2161,9 @@ typedef struct CGRect {
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="http://blog.dornea.nu/2014/11/21/using-blockdiag-with-pelican-and-liquid-tags">Using Blockdiag with Pelican and liquid tags</a>
+      </li>
+      <li class="post">
           <a href="http://blog.dornea.nu/2014/11/13/using-graphviz-with-pelican-and-liquid-tags">Using Graphviz with Pelican and liquid tags</a>
       </li>
       <li class="post">
@@ -2171,9 +2174,6 @@ typedef struct CGRect {
       </li>
       <li class="post">
           <a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a>
-      </li>
-      <li class="post">
-          <a href="http://blog.dornea.nu/2014/08/28/using-jquery-datatables-with-ipython">Using JQuery DataTables with IPython</a>
       </li>
     </ul>
   </section>
@@ -2188,7 +2188,7 @@ typedef struct CGRect {
 
   <section>
   <h1>Tags</h1>
-    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
+    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/blockdiag/">blockdiag</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/viz/">viz</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/pandoc/">pandoc</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
 
 
 

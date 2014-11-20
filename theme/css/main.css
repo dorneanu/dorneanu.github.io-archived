@@ -2157,7 +2157,8 @@ ol li p{
 }
 
 
-div.graphviz img {
+div.graphviz img,
+div.blockdiag img {
 	margin:0 auto;
     display:block;
 	box-shadow: none;

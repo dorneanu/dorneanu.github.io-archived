@@ -1822,8 +1822,8 @@ jQuery(document).ready(function($) {
   </ul>
 </div>
 
-<h1><span id="i"><span style="display: none;"> </span><span id="cke_bm_336S" style="display: none;"> </span></span></h1>
-<h2><span id="Getting_started">Getting started</span></h2>
+<h1 id="_1"><span id="i"><span style="display: none;"> </span><span id="cke_bm_336S" style="display: none;"> </span></span></h1>
+<h2 id="getting-started"><span id="Getting_started">Getting started</span></h2>
 <p>First you&#8217;ll have to get the latest version of icmpKNOCK. Please check the SVN download <a href="http://dl.dornea.nu/svn/icmpKNOCK">link</a> for the newest packages. Then make sure to upload the package to your server and copy it to a secret place where nobody &#8211; besides you &#8211; has read permissions on the actions file. Why is that important? Because the actions file contains your &#8220;secret&#8221; hex sequences used to trigger certain actions. So you don&#8217;t want anybody to know these ones. In that case potential attackers might manipulate the behaviour of your system without noticing it.</p>
 <pre class="brush:plain;">~/icmpknock/v0.2.r9# ls -l
 total 32
@@ -1835,7 +1835,7 @@ drwxr-xr-x 2 root root 4096 Sep 30 16:33 conf
 drwxr-xr-x 2 root root 4096 Sep 30 16:11 modules
 drwxr-xr-x 2 root root 4096 Sep 30 16:11 scripts</pre>
 
-<h2><span id="Generate_hex_sequences">Generate hex sequences</span></h2>
+<h2 id="generate-hex-sequences"><span id="Generate_hex_sequences">Generate hex sequences</span></h2>
 <p>Now you&#8217;ll have to generate your keys. You could use MD4, MD5, SHA-1 etc hashes. This is what I did:</p>
 <pre class="brush:bash;">$ for i in `seq 1 10`; 
 do pwgen 20 1 | md5; 
@@ -1852,8 +1852,8 @@ d047732f4c0b083f8f322437f0071bb9
 b124d903a6c510fbba2b1ccb23a11f2d</pre>
 
 <p>That should do the work. Now you&#8217;ll have to edit your actions file (conf/actions.conf) and copy these values to it. Please have a look at the descriptive text inside the file for further information.</p>
-<h1><span id="i-2"> </span></h1>
-<h2><span id="Define_actions">Define actions</span></h2>
+<h1 id="_2"><span id="i-2"> </span></h1>
+<h2 id="define-actions"><span id="Define_actions">Define actions</span></h2>
 <p>This is the most interesting part. In this HowTo I&#8217;ll give you an example how to block/open SSH port 22 using icmpKNOCK. Therefor I&#8217;ll be using iptables which should be available within every Linux distribution. So let&#8217;s start&#8230;</p>
 <p>For this tutorial the SSH port should be always closed. Let&#8217;s define the action describing that:</p>
 <pre class="brush:plain;">[stop_ssh]
@@ -1867,8 +1867,8 @@ payload = iptables -D INPUT -p tcp --dport 22 -j REJECT --reject-with tcp-reset<
 
 <p>In that case you simply delete the previously created rule. Afterwards port 22 should be open again.</p>
 <p>Of course: There are lot of other possible configurations. Perhaps it is a better idea to define only 1 action which allows you to connect to port 22 within 20 seconds, close the port again after 20 seconds and keep the established connections. Feel free to use your brain <img src="http://dornea.nu/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley" /> </p>
-<h1><span id="i-3"> </span></h1>
-<h2><span id="Prepare_your_scripts">Prepare your scripts</span></h2>
+<h1 id="_3"><span id="i-3"> </span></h1>
+<h2 id="prepare-your-scripts"><span id="Prepare_your_scripts">Prepare your scripts</span></h2>
 <p>Your server &#8211; along with the Python application &#8211; will listen for incoming ICMP packets. Your client will be the ping utility as described above. In order to send your sequences to the server you&#8217;ll need a small bash script which will do the rest for you:</p>
 <pre class="brush:bash;">#!/bin/sh
 
@@ -1908,6 +1908,9 @@ done</pre>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="http://blog.dornea.nu/2014/11/21/using-blockdiag-with-pelican-and-liquid-tags">Using Blockdiag with Pelican and liquid tags</a>
+      </li>
+      <li class="post">
           <a href="http://blog.dornea.nu/2014/11/13/using-graphviz-with-pelican-and-liquid-tags">Using Graphviz with Pelican and liquid tags</a>
       </li>
       <li class="post">
@@ -1918,9 +1921,6 @@ done</pre>
       </li>
       <li class="post">
           <a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a>
-      </li>
-      <li class="post">
-          <a href="http://blog.dornea.nu/2014/08/28/using-jquery-datatables-with-ipython">Using JQuery DataTables with IPython</a>
       </li>
     </ul>
   </section>
@@ -1935,7 +1935,7 @@ done</pre>
 
   <section>
   <h1>Tags</h1>
-    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
+    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/blockdiag/">blockdiag</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/viz/">viz</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/pandoc/">pandoc</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
 
 
 

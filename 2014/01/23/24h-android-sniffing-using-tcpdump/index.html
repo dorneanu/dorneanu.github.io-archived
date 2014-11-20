@@ -1784,13 +1784,13 @@ jQuery(document).ready(function($) {
       <p class="meta"><time datetime="2014-01-23T00:00:00+01:00" pubdate>Thu 23 January 2014</time></p>
 </header>
 
-  <div class="entry-content"><h1><span id="Motivation">Motivation</span></h1>
+  <div class="entry-content"><h1 id="motivation"><span id="Motivation">Motivation</span></h1>
 <p>I&#8217;ve started this little project since I was mainly interested in the data my smartphone isÂ ending all the time without my knowledge. I have a bunch of apps installed on my phone and I have absolutely no ideea which (kind of) data is beeing transfered to the Internet all day long. I thought I&#8217;d be a great ideea to monitor/sniff my data interface (3G, Edge etc. NOT Wifi) for 24h during my normal daily phone usage.</p>
 <p>I have sniffed on a Saturday between 14:00h and 15:00h next day. During this time my phone hasn&#8217;t been shutdown or put into flight modus.<!--more--></p>
 <blockquote>
 <p>Also check out the IPython notebook <a href="/2014/01/23/24h-android-sniffing-using-tcpdump-ipython-notebook-version/">article</a></p>
 </blockquote>
-<h1>Changelog</h1>
+<h1 id="changelog">Changelog</h1>
 <table border="0">
   <tr align="left">
     <th>
@@ -1833,7 +1833,7 @@ jQuery(document).ready(function($) {
   </tr>
 </table>
 
-<h1><span id="Sniff_environment">Sniff environment</span></h1>
+<h1 id="sniff-environment"><span id="Sniff_environment">Sniff environment</span></h1>
 <p>I&#8217;ve used my <a href="/hackinglab/samsung-galaxy-note-n7000">Samsung Note 1 (GT N7000</a>) as sniffing device. At the moment I use a customized ROM (slimbean) with root access. In order to be to use sniffing tools on my phone I had to work in a chrooted environment like <a href="http://sven-ola.dyndns.org/repo/debian-kit-en.html">&#8220;Debian on Android Kit&#8221;</a>. This way I was given access to phones data interfaces and I was ready to go.</p>
 <pre class="theme:ado font:ubuntu-mono lang:sh highlight:0 decode:true" title="Connect to the Android device">u0_a99@android:/ $ deb
 e2fsck 1.41.11 (14-Mar-2010)
@@ -1869,7 +1869,7 @@ done</pre>
 -rw-r--r--. 1 root root 12492822 Jan 19 16:27 output-2014-01-19-1390140216.pcap
 root@debian-on-android:~#</pre>
 
-<h1><span id="Extract_information_from_pcap_files">Extract information from pcap files</span></h1>
+<h1 id="extract-information-from-pcap-files"><span id="Extract_information_from_pcap_files">Extract information from pcap files</span></h1>
 <p>I did this analysis using <a href="http://ipython.org/notebook.html">IPython Notebook</a>. This tool is everything worth mentioning. I was fascinated by the simplicity and the Pythonic way to handle/manipulate data. You should defnitely also have look at <a href="http://pandas.pydata.org/">Pandas</a>. Ok, back to sniffing <img src="http://dornea.nu/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley" /></p>
 <p>and First I had to merge the pcap files to one piece:</p>
 <pre class="theme:ado font:ubuntu-mono lang:sh decode:true" title="Merge pcap files">$ mergecap -F libpcap -a output-* -w merged.pcap</pre>
@@ -1898,7 +1898,7 @@ http_traffic = !tshark -r $PCAP_FILE -Y "http.request" -E header=y -T fields \
               -e frame.number -e frame.time -e ip.dst -e http.request.method -e http.request.uri -e http.user_agent \
               -e http.response.code  -e http.response.phrase -e http.content_length -e data -e text &gt; $HTTP_TRAFFIC</pre>
 
-<h1><span id="Import_data_into_SQLite3_DB">Import data into SQLite3 DB</span></h1>
+<h1 id="import-data-into-sqlite3-db"><span id="Import_data_into_SQLite3_DB">Import data into SQLite3 DB</span></h1>
 <p>Now that we have all necessary data, all we have to do is to import it into some RDMS so we can analyze it.</p>
 <pre class="theme:ado font:ubuntu-mono lang:python decode:true" title="Create SQLite3 DB in memory">import sqlite3 as sql
 con = sql.connect(":memory:")
@@ -1948,7 +1948,7 @@ pdsql.write_frame(con_df, name="connection", con=con, if_exists="delete")
 pdsql.write_frame(http_df, name="http", con=con, if_exists="delete")</pre>
 
 <p>Â Now we&#8217;re ready to do the analysis.</p>
-<h1><span id="Results">Results</span></h1>
+<h1 id="results"><span id="Results">Results</span></h1>
 <p>It was a lot of fun doing this kind of analysis. I had <strong>80 MB </strong>of pcap data and <strong>138515</strong>Â framesÂ to be analyzed.Â Â I&#8217;m aware of the fact that this analysis is far from being complete. Since I wanted to get a rough overview over the connections initiated by my smartphone I think the results below are quite promising. If you have any suggestions for further &#8220;investigations&#8221;, feel free to drop a comment below.</p>
 <p>As you may notice in the results below Google and Facebook had the most connections, which doesn&#8217;t really surprise me. Although I don&#8217;t use Facebook on a regular daily basis the numbers are pretty high.Â </p>
 <p>And speaking of Google&#8230; It is also no surprise that a lot of data is collected through ads. A few examples (from section &#8216;GET Requests&#8217;):</p>
@@ -2005,7 +2005,7 @@ pdsql.write_frame(http_df, name="http", con=con, if_exists="delete")</pre>
 </table>
 
 <p>&nbsp;</p>
-<h2><span id="Top_100_DNS_queries">Top 100 DNS queries</span></h2>
+<h2 id="top-100-dns-queries"><span id="Top_100_DNS_queries">Top 100 DNS queries</span></h2>
 <pre class="theme:ado font:ubuntu-mono lang:python decode:true" title="Top 100 DNS queries">p1 = pdsql.read_frame("""
     SELECT COUNT(dns_response) AS '# DNS Responses', dns_query AS 'DNS to lookup'
     FROM dns GROUP BY dns_query
@@ -13794,6 +13794,9 @@ p3.head(500)</pre></p>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="http://blog.dornea.nu/2014/11/21/using-blockdiag-with-pelican-and-liquid-tags">Using Blockdiag with Pelican and liquid tags</a>
+      </li>
+      <li class="post">
           <a href="http://blog.dornea.nu/2014/11/13/using-graphviz-with-pelican-and-liquid-tags">Using Graphviz with Pelican and liquid tags</a>
       </li>
       <li class="post">
@@ -13804,9 +13807,6 @@ p3.head(500)</pre></p>
       </li>
       <li class="post">
           <a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a>
-      </li>
-      <li class="post">
-          <a href="http://blog.dornea.nu/2014/08/28/using-jquery-datatables-with-ipython">Using JQuery DataTables with IPython</a>
       </li>
     </ul>
   </section>
@@ -13821,7 +13821,7 @@ p3.head(500)</pre></p>
 
   <section>
   <h1>Tags</h1>
-    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
+    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/blockdiag/">blockdiag</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/viz/">viz</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/pandoc/">pandoc</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
 
 
 

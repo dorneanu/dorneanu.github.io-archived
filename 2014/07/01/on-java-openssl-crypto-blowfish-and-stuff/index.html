@@ -1791,7 +1791,7 @@ jQuery(document).ready(function($) {
 <li>Java &lt;-&gt; openssl</li>
 <li>Python &lt;-&gt; openssl</li>
 </ol>
-<h2>Java</h2>
+<h2 id="java">Java</h2>
 <p>Let's take a look at some routines in <code>Java</code>. You can also view/download the following code on this <a href="https://gist.github.com/dorneanu/b8e53b034d89f6be383c">GitHub Gist</a>.</p>
 <div class="highlight"><pre><span class="cm">/*</span>
 <span class="cm"> * Based on https://raw.githubusercontent.com/usefulfor/usefulfor/master/security/JBoss.java</span>
@@ -1908,7 +1908,7 @@ PLAIN:   secretmessage
 
 
 <p>Our little Java application does its job pretty fine. Ok, now let's have a look at <code>openssl</code>.</p>
-<h2>OpenSSL &lt;-&gt; Java</h2>
+<h2 id="openssl-java">OpenSSL &lt;-&gt; Java</h2>
 <p>Using <code>openssl</code> I'll encrypt/decrypt the previous secret message with the same cipher:</p>
 <div class="highlight"><pre># echo &quot;secretmessage&quot; | openssl bf-cbc -nosalt -a -pass pass:victor -iv 3132333435363738 -p
 key=FFC150A160D37E92012C196B6AF4160D
@@ -1951,7 +1951,7 @@ iv =3132333435363738
 </tbody>
 </table>
 <p>Besides the IV everything looks different :(</p>
-<h2>Python &lt;-&gt; Java</h2>
+<h2 id="python-java">Python &lt;-&gt; Java</h2>
 <p>Let's also have a look at <em>Python</em>:</p>
 <div class="highlight"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">67</span><span class="p">]:</span>    <span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">Blowfish</span>
             <span class="kn">from</span> <span class="nn">Crypto</span> <span class="kn">import</span> <span class="n">Random</span>
@@ -1999,7 +1999,7 @@ iv =3132333435363738
 </tr>
 </tbody>
 </table>
-<h2>Python &lt;-&gt; openssl</h2>
+<h2 id="python-openssl">Python &lt;-&gt; openssl</h2>
 <p>This time let's encrypt some message using Python:</p>
 <div class="highlight"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">71</span><span class="p">]:</span>    <span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">Blowfish</span>
             <span class="kn">from</span> <span class="nn">Crypto</span> <span class="kn">import</span> <span class="n">Random</span>
@@ -2032,7 +2032,7 @@ bad decrypt
 
 
 <p>Again the encryption key doesn't match the one we used in the Python code. Thus the Bas64 string can't be decoded by openssl.</p>
-<h2>Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 <p>Obviously I'm not the <a href="http://stackoverflow.com/questions/8468799/decrypting-openssl-blowfish-with-java">only one</a> facing this problem.</p>
 <blockquote>
 <p><a href="http://juliusdavies.ca/commons-ssl/pbe.html">Not-Yet-Commons-SSL</a> has an implementation of PBE ("password based encryption") that is 100% compatible with OpenSSL's command-line "enc" utility</p>
@@ -2098,6 +2098,9 @@ iv =1234567800000000
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="http://blog.dornea.nu/2014/11/21/using-blockdiag-with-pelican-and-liquid-tags">Using Blockdiag with Pelican and liquid tags</a>
+      </li>
+      <li class="post">
           <a href="http://blog.dornea.nu/2014/11/13/using-graphviz-with-pelican-and-liquid-tags">Using Graphviz with Pelican and liquid tags</a>
       </li>
       <li class="post">
@@ -2108,9 +2111,6 @@ iv =1234567800000000
       </li>
       <li class="post">
           <a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a>
-      </li>
-      <li class="post">
-          <a href="http://blog.dornea.nu/2014/08/28/using-jquery-datatables-with-ipython">Using JQuery DataTables with IPython</a>
       </li>
     </ul>
   </section>
@@ -2125,7 +2125,7 @@ iv =1234567800000000
 
   <section>
   <h1>Tags</h1>
-    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
+    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/blockdiag/">blockdiag</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/viz/">viz</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/pandoc/">pandoc</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
 
 
 

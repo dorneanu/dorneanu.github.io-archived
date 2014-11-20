@@ -1910,7 +1910,7 @@ $ ifconfig tap0 10.0.2.100 netmask 255.255.255.0 up
 
 <p>You should now be able to access your Qemu host from your guest host (ping 10.0.2.101). 10.0.100 (guest system) should be also accessible from your Qemu process.</p>
 <p>&nbsp;</p>
-<h2><span id="31_Connecting_VLANs_to_TAP_devices_2_hosts"><span style="font-weight: bold;">3.1) Connecting VLANs to TAP devices (2 hosts)</span></span></h2>
+<h2 id="31-connecting-vlans-to-tap-devices-2-hosts"><span id="31_Connecting_VLANs_to_TAP_devices_2_hosts"><span style="font-weight: bold;">3.1) Connecting VLANs to TAP devices (2 hosts)</span></span></h2>
 <p><span style="font-weight: bold;"><a href="http://static.dornea.nu/img/2010/f391a6d4ddc3b7529bb985925061366c.png"><img class="trigger_lightbox mceItem" style="float: left; padding-right: 10px;" title="Connecting VLANs to TAP device (2 hosts)" alt="Connecting VLANs to TAP device (2 hosts)" src="http://static.dornea.nu/img/2010/f391a6d4ddc3b7529bb985925061366c.png" width="275" height="119" /></a></span>In this example we&#8217;ll have 2 guests (= 2 TAP devices). Each guest is connected to the host system by a TAP device. In order to allow inter-connectivity the gust system should have a bridge between both TAP devices. The bridge will act as a central network node between the guest and both virtual hosts. For Internet access IP forwarding should be enabled (disabled by default). First we&#8217;ll have to create the TAP devices:</p>
 <pre class="brush: plain; toolbar: false;">$ ifconfig tap0 create
 $ ifconfig tap1 create
@@ -1963,7 +1963,7 @@ $ ifconfig tap1 10.0.3.100 netmask 255.255.255.0 up</pre>
 
 <p>In all cases you should be able to ping/access any system no matter what system you operate on. </p>
 <p>&nbsp;</p>
-<h2><span id="4_References"><span style="font-weight: bold;"><a name="References"></a>4) References</span></span></h2>
+<h2 id="4-references"><span id="4_References"><span style="font-weight: bold;"><a name="References"></a>4) References</span></span></h2>
 <p>a) <a href="http://wiki.qemu.org/Main_Page">http://wiki.qemu.org/Main_Page</a></p>
 <p>b)<a href="http://qemu-buch.de/de/index.php/QEMU-KVM-Buch/_Netzwerkoptionen/_Virtuelle_Netzwerke_konfigurieren"> http://qemu-buch.de/de/index.php/QEMU-KVM-Buch/_Netzwerkoptionen/_Virtuelle_Netzwerke_konfigurieren</a></p>
 <p>c) <a href="http://compsoc.dur.ac.uk/%7Edjw/qemu.html">http://compsoc.dur.ac.uk/~djw/qemu.html</a></p>
@@ -1992,6 +1992,9 @@ $ ifconfig tap1 10.0.3.100 netmask 255.255.255.0 up</pre>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="http://blog.dornea.nu/2014/11/21/using-blockdiag-with-pelican-and-liquid-tags">Using Blockdiag with Pelican and liquid tags</a>
+      </li>
+      <li class="post">
           <a href="http://blog.dornea.nu/2014/11/13/using-graphviz-with-pelican-and-liquid-tags">Using Graphviz with Pelican and liquid tags</a>
       </li>
       <li class="post">
@@ -2002,9 +2005,6 @@ $ ifconfig tap1 10.0.3.100 netmask 255.255.255.0 up</pre>
       </li>
       <li class="post">
           <a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a>
-      </li>
-      <li class="post">
-          <a href="http://blog.dornea.nu/2014/08/28/using-jquery-datatables-with-ipython">Using JQuery DataTables with IPython</a>
       </li>
     </ul>
   </section>
@@ -2019,7 +2019,7 @@ $ ifconfig tap1 10.0.3.100 netmask 255.255.255.0 up</pre>
 
   <section>
   <h1>Tags</h1>
-    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
+    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/blockdiag/">blockdiag</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/viz/">viz</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/pandoc/">pandoc</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
 
 
 

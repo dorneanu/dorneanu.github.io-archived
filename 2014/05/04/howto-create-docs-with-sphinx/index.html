@@ -1790,7 +1790,7 @@ without any big efforts. In fact it would be great if you could write your code 
 documentation and extract it later on for publishing.</p>
 <!--more-->
 
-<h1><span id="Meet_sphinx">Meet <a href="http://sphinx-doc.org">sphinx</a></span></h1>
+<h1 id="meet-sphinx"><span id="Meet_sphinx">Meet <a href="http://sphinx-doc.org">sphinx</a></span></h1>
 <p>It is a tool that you&#8217;ll love! Being more technical:</p>
 <blockquote>
 <p>It was originally created for the new Python documentation,
@@ -1809,8 +1809,8 @@ needs:</p>
 <li><a href="http://sphinx-doc.org/latest/builders.html#sphinx.builders.epub.EpubBuilder">EPUB</a></li>
 <li>and many <a href="http://sphinx-doc.org/latest/builders.html">more</a></li>
 </ul>
-<h2>Quickstart</h2>
-<h3>Install tools</h3>
+<h2 id="quickstart">Quickstart</h2>
+<h3 id="install-tools">Install tools</h3>
 <p>First of create a new <a href="http://www.virtualenv.org/en/latest/">virtualenv</a> environment:</p>
 <div class="highlight"><pre>$ mkdir doku
 $ virtualenv doku
@@ -1926,7 +1926,7 @@ Installing setuptools, pip...done.
 
 
 <p>Now you should be ready to go.</p>
-<h3>Create new documentation dir structure</h3>
+<h3 id="create-new-documentation-dir-structure">Create new documentation dir structure</h3>
 <div class="highlight"><pre>    (doku)â  doku  mkdir my_documentation
     (doku)â  doku  sphinx-quickstart
     Welcome to the Sphinx 1.2.2 quickstart utility.
@@ -2002,7 +2002,7 @@ Installing setuptools, pip...done.
 </pre></div>
 
 
-<h3>Create some builds</h3>
+<h3 id="create-some-builds">Create some builds</h3>
 <p>Now you can call <strong>make</strong> to build your desired documentation format:</p>
 <div class="highlight"><pre>    (doku)â  my_documentation  make
     Please use `make &lt;target&gt;&#39; where &lt;target&gt; is one of
@@ -2139,11 +2139,11 @@ Installing setuptools, pip...done.
 <p>You can easily customize the output of your PDF (when dealing with LaTeX). Just have a look at Pedros <a href="http://pedrokroger.net/using-sphinx-write-technical-books/">tips</a>
 how to do that. However if you don&#8217;t want to use LaTeX to generate your PDF, you could also have a look at <a href="https://code.google.com/p/rst2pdf/">rst2pdf</a>
 which will convert your RST file into some PDF. <strong>Attention</strong>: <strong>rst2pdf</strong> is <strong>not</strong> available for Python <strong>3</strong>.x!</p>
-<h2>Themes</h2>
+<h2 id="themes">Themes</h2>
 <p>Although I like to use PDFs when generating my documentation, HTML file are also fine. Make sure you have a look at <a href="http://sphinx-doc.org/theming.html">how</a>
 themes are used. There are some basic themes provided within sphinx itself, but you can also create your own <a href="http://sphinx-doc.org/theming.html#creating-themes">ones</a>.
 Also search for themes: <a href="https://github.com/search?q=sphinx+theme&amp;ref=cmdform">GitHub is your friend!</a></p>
-<h1>Conclusion</h1>
+<h1 id="conclusion">Conclusion</h1>
 <p>You can use <strong>sphinx</strong> to generate all kind of documentation. Examples:</p>
 <ul>
 <li><a href="https://github.com/AndreasHeger/sphinx-report">Reports</a></li>
@@ -2175,6 +2175,9 @@ Also search for themes: <a href="https://github.com/search?q=sphinx+theme&amp;re
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="http://blog.dornea.nu/2014/11/21/using-blockdiag-with-pelican-and-liquid-tags">Using Blockdiag with Pelican and liquid tags</a>
+      </li>
+      <li class="post">
           <a href="http://blog.dornea.nu/2014/11/13/using-graphviz-with-pelican-and-liquid-tags">Using Graphviz with Pelican and liquid tags</a>
       </li>
       <li class="post">
@@ -2185,9 +2188,6 @@ Also search for themes: <a href="https://github.com/search?q=sphinx+theme&amp;re
       </li>
       <li class="post">
           <a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a>
-      </li>
-      <li class="post">
-          <a href="http://blog.dornea.nu/2014/08/28/using-jquery-datatables-with-ipython">Using JQuery DataTables with IPython</a>
       </li>
     </ul>
   </section>
@@ -2202,7 +2202,7 @@ Also search for themes: <a href="https://github.com/search?q=sphinx+theme&amp;re
 
   <section>
   <h1>Tags</h1>
-    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
+    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/blockdiag/">blockdiag</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/viz/">viz</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/pandoc/">pandoc</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
 
 
 

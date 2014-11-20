@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/index.html</loc>
-<lastmod>2014-11-15T13:14:11-00:00</lastmod>
+<lastmod>2014-11-20T17:03:12-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/archives.html</loc>
-<lastmod>2014-11-15T13:14:11-00:00</lastmod>
+<lastmod>2014-11-20T17:03:12-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/tags.html</loc>
-<lastmod>2014-11-15T13:14:11-00:00</lastmod>
+<lastmod>2014-11-20T17:03:12-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/categories.html</loc>
-<lastmod>2014-11-15T13:14:11-00:00</lastmod>
+<lastmod>2014-11-20T17:03:12-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -35,6 +35,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <loc>http://blog.dornea.nu/pages/books</loc>
 <lastmod>2014-06-23T00:00:00+02:00</lastmod>
 <changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.dornea.nu/2014/11/21/using-blockdiag-with-pelican-and-liquid-tags</loc>
+<lastmod>2014-11-21T00:00:00+01:00</lastmod>
+<changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -139,6 +146,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://blog.dornea.nu/2014/05/27/berlinsides-0x05</loc>
 <lastmod>2014-05-27T00:00:00+02:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.dornea.nu/2014/05/20/howto-write-pentest-reports-the-easy-way</loc>
+<lastmod>2014-05-20T00:00:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -978,7 +992,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/category/blog</loc>
-<lastmod>2014-11-13T00:00:00+00:53</lastmod>
+<lastmod>2014-11-21T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -999,7 +1013,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/pelican/</loc>
-<lastmod>2014-11-13T00:00:00+00:53</lastmod>
+<lastmod>2014-11-21T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1019,8 +1033,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.dornea.nu/tag/openssl/</loc>
-<lastmod>2014-07-01T00:00:00+00:53</lastmod>
+<loc>http://blog.dornea.nu/tag/graphviz/</loc>
+<lastmod>2014-11-13T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1033,8 +1047,22 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>http://blog.dornea.nu/tag/blockdiag/</loc>
+<lastmod>2014-11-21T00:00:00+00:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>http://blog.dornea.nu/tag/virtualization/</loc>
 <lastmod>2011-03-21T00:00:00+00:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.dornea.nu/tag/viz/</loc>
+<lastmod>2014-11-21T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1063,6 +1091,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://blog.dornea.nu/tag/network/</loc>
 <lastmod>2014-08-05T00:00:00+00:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.dornea.nu/tag/pandoc/</loc>
+<lastmod>2014-05-20T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1180,13 +1215,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.dornea.nu/tag/graphviz/</loc>
-<lastmod>2014-11-13T00:00:00+00:53</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
 <loc>http://blog.dornea.nu/tag/ios/</loc>
 <lastmod>2014-10-29T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
@@ -1203,6 +1231,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://blog.dornea.nu/tag/jquery/</loc>
 <lastmod>2014-08-28T00:00:00+00:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.dornea.nu/tag/openssl/</loc>
+<lastmod>2014-07-01T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1265,7 +1300,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/author/victor.html</loc>
-<lastmod>2014-05-04T00:00:00+00:53</lastmod>
+<lastmod>2014-11-21T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

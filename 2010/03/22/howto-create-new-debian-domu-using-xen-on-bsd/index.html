@@ -1838,7 +1838,7 @@ jQuery(document).ready(function($) {
   </ul>
 </div>
 
-<h2><span id="Prerequisites"><span style="text-decoration: underline;">Prerequisites</span></span></h2>
+<h2 id="prerequisites"><span id="Prerequisites"><span style="text-decoration: underline;">Prerequisites</span></span></h2>
 <p>At this point you should have a running Xen instance and have booted your dom0 (NetBSD with kernel XEN3_DOM0). You should have sth like this:</p>
 <pre>$ uname -a
 NetBSD BlackTiny 5.0_STABLE NetBSD 5.0_STABLE (XEN3_DOM0)</pre>
@@ -1851,8 +1851,8 @@ NetBSD BlackTiny 5.0_STABLE NetBSD 5.0_STABLE (XEN3_DOM0)</pre>
 <li>Xen tools: <em>xentools33-3.3.2nb1</em></li>
 <li>Xen dom0 kernel: <em>NetBSD 5.0_STABLE</em></li>
 </ul>
-<h2><span id="i"> </span></h2>
-<h2><span id="Step_1_Network_configuration"><strong><span style="text-decoration: underline;">Step 1: Network configuration</span><br /> </strong></span></h2>
+<h2 id="_1"><span id="i"> </span></h2>
+<h2 id="step-1-network-configuration"><span id="Step_1_Network_configuration"><strong><span style="text-decoration: underline;">Step 1: Network configuration</span><br /> </strong></span></h2>
 <p>Now you&#8217;ll have to create a network bridge:</p>
 <pre class="brush: plain; toolbar: false">$ ifconfig bridge0 create
 $ ifconfig bridge0
@@ -1883,20 +1883,20 @@ bridge0: flags=41 UP,RUNNING
 
 <p>Be sure to replace &#8220;[your LAN interface]&#8221; with the interface identifier on your system (in my case it would be wm0).</p>
 <p>&nbsp;</p>
-<h2><span id="Step_2_Create_disk_container"><span style="text-decoration: underline;"><strong>Step 2: Create disk container</strong></span></span></h2>
+<h2 id="step-2-create-disk-container"><span id="Step_2_Create_disk_container"><span style="text-decoration: underline;"><strong>Step 2: Create disk container</strong></span></span></h2>
 <p>After setting up the network stuff, you should now create a container (about 2GB) where Debian will be later on installed.</p>
 <pre class="brush: plain; toolbar: false">$ dd if=/dev/zero of=Debian-Lenny.img bs=1m count=2048</pre>
 
-<h2><span id="i-2"> </span></h2>
-<h2><span id="Step_3_Get_Debian_kernel_and_ramdisk_file"><span style="text-decoration: underline;"><strong>Step 3: Get Debian kernel and ramdisk file</strong></span></span></h2>
+<h2 id="_2"><span id="i-2"> </span></h2>
+<h2 id="step-3-get-debian-kernel-and-ramdisk-file"><span id="Step_3_Get_Debian_kernel_and_ramdisk_file"><span style="text-decoration: underline;"><strong>Step 3: Get Debian kernel and ramdisk file</strong></span></span></h2>
 <p>In order to have a fully functionable Debian installation <strong>DON&#8217;T</strong> use <a href="http://people.debian.org/%7Ejoeyh/d-i/images/daily/">these</a> files. You&#8217;ll run into several problems which will keep you busy searching the Internet for the solutions. Instead you should use the i386-current Xen netboot installer from this<a href="ftp://ftp.debian.org/debian/dists/lenny/main/installer-i386/current/images/netboot/xen/"> link</a>. You should at least download:</p>
 <ul>
 <li>the kernel file (<a href="ftp://ftp.debian.org/debian/dists/lenny/main/installer-i386/current/images/netboot/xen/vmlinuz">vmlinuz</a>)</li>
 <li>the ramdisk file (<a href="ftp://ftp.debian.org/debian/dists/lenny/main/installer-i386/current/images/netboot/xen/initrd.gz">initrd.gz</a>)</li>
 </ul>
 <p>to your local directory.</p>
-<h2><span id="i-3"> </span></h2>
-<h2><span id="Step_4_Xen_domU_configuration"><span style="text-decoration: underline;"><strong>Step 4: Xen domU configuration</strong></span></span></h2>
+<h2 id="_3"><span id="i-3"> </span></h2>
+<h2 id="step-4-xen-domu-configuration"><span id="Step_4_Xen_domU_configuration"><span style="text-decoration: underline;"><strong>Step 4: Xen domU configuration</strong></span></span></h2>
 <p>Now let us configure then Xen domU at least with these options (see xm-debian.cfg):</p>
 <pre class="brush: plain"># Initial memory allocation (in megabytes) for the new domain.
 memory = 128
@@ -1908,8 +1908,8 @@ name = "debianinstall"
 vif = ['bridge=bridge0']
 ...</pre>
 
-<h2><span id="i-4"> </span></h2>
-<h2><span id="Step_5_Start_Xen_services"><span style="text-decoration: underline;"><strong>Step 5: Start Xen services</strong></span></span></h2>
+<h2 id="_4"><span id="i-4"> </span></h2>
+<h2 id="step-5-start-xen-services"><span id="Step_5_Start_Xen_services"><span style="text-decoration: underline;"><strong>Step 5: Start Xen services</strong></span></span></h2>
 <p>First be sure you have following entries in your /etc/rc.conf:</p>
 <pre class="lang:default decode:true">xend=YES
 xendomains=YES
@@ -1925,8 +1925,8 @@ i.e $LOCALBASE/etc/xen/domain.foo.In my case $LOCALBASE is defined as /usr/pkg.T
 $ /usr/pkg/share/examples/rc.d/xenbackendd start
 $ /usr/pkg/share/examples/rc.d/xendomains start</pre>
 
-<h2><span id="i-5"> </span></h2>
-<h2><span id="Step_6_Install_Debian"><strong><span style="text-decoration: underline;">Step 6: Install Debian</span></strong></span></h2>
+<h2 id="_5"><span id="i-5"> </span></h2>
+<h2 id="step-6-install-debian"><span id="Step_6_Install_Debian"><strong><span style="text-decoration: underline;">Step 6: Install Debian</span></strong></span></h2>
 <p>Now you should be able to start the Debian installation process.</p>
 <pre class="brush: plain">$ ls -l
 -rw-r--r--  1 root  wheel  13796958 Mar  3 18:13 initrd.gz
@@ -1954,10 +1954,10 @@ SHA1 (initrd.gz) = 11bc2711f08ed8a0863169c506ab88d69cf9f3cf</pre>
 <p>Then proceed with the installation process&#8230;</p>
 <p><a class="trigger_lightbox" href="http://static.dornea.nu/img/2010/4f84fcd0c434884b03a50531499c541c.jpg"><img class="trigger_lightbox mceItem" style="float: left; padding-right: 2px;" title="Debian Installer - Configure network / proceed with installation process" alt="Debian Installer - Configure network / proceed with installation process" src="http://static.dornea.nu/img/2010/4f84fcd0c434884b03a50531499c541c.jpg" width="295" height="220" /></a><a class="trigger_lightbox" href="http://static.dornea.nu/img/2010/560b3db8c519b3d8c561429dc840ed73.jpg"><img class="trigger_lightbox mceItem" title="Debian Installer - Network configuration succeeded" alt="Debian Installer - Network configuration succeeded" src="http://static.dornea.nu/img/2010/560b3db8c519b3d8c561429dc840ed73.jpg" width="295" height="221" /></a></p>
 <p><span style="color: #ff0000;"><strong>Attention: </strong><span style="color: #000000;">When configuring the virtual disk, </span></span>have in mind that you should format your disk as ext2 and <strong>not as ext3</strong>. Ext3 is currently not supported by NetBSD. When you have reached the partitioning step, select the partition marked as ext3, press enter and change afterwards the file system type to ext2. Then you should select &#8220;Done setting up the partition&#8221; and press enter.</p>
-<h2><span id="i-6"><a class="trigger_lightbox" href="http://static.dornea.nu/img/2010/8b9b3a02919c388d16d8bdd25c4fef01.jpg"><img class="trigger_lightbox mceItem" style="float: left; padding-right: 2px;" title="Debian Installer - Partitioning/ Change file system type to ext2" alt="Debian Installer - Partitioning/ Change file system type to ext2" src="http://static.dornea.nu/img/2010/8b9b3a02919c388d16d8bdd25c4fef01.jpg" width="293" height="220" /></a><a class="trigger_lightbox" href="http://static.dornea.nu/img/2010/cbd9626a2849d42d044ef161349e6bb7.jpg"><img class="trigger_lightbox mceItem" title="Debian Installer - Partitioning/ Change file system type to ext2" alt="Debian Installer - Partitioning/ Change file system type to ext2" src="http://static.dornea.nu/img/2010/cbd9626a2849d42d044ef161349e6bb7.jpg" width="295" height="221" /></a></span></h2>
+<h2 id="_6"><span id="i-6"><a class="trigger_lightbox" href="http://static.dornea.nu/img/2010/8b9b3a02919c388d16d8bdd25c4fef01.jpg"><img class="trigger_lightbox mceItem" style="float: left; padding-right: 2px;" title="Debian Installer - Partitioning/ Change file system type to ext2" alt="Debian Installer - Partitioning/ Change file system type to ext2" src="http://static.dornea.nu/img/2010/8b9b3a02919c388d16d8bdd25c4fef01.jpg" width="293" height="220" /></a><a class="trigger_lightbox" href="http://static.dornea.nu/img/2010/cbd9626a2849d42d044ef161349e6bb7.jpg"><img class="trigger_lightbox mceItem" title="Debian Installer - Partitioning/ Change file system type to ext2" alt="Debian Installer - Partitioning/ Change file system type to ext2" src="http://static.dornea.nu/img/2010/cbd9626a2849d42d044ef161349e6bb7.jpg" width="295" height="221" /></a></span></h2>
 <p><a class="trigger_lightbox" href="http://static.dornea.nu/img/2010/aaa8de2581873be2e1b1e13972f468f4.jpg"><img class="trigger_lightbox mceItem" style="float: left; padding-right: 2px;" title="Debian Installer - Partitioning/ Change file system type to ext2" alt="Debian Installer - Partitioning/ Change file system type to ext2" src="http://static.dornea.nu/img/2010/aaa8de2581873be2e1b1e13972f468f4.jpg" width="293" height="220" /></a><a class="trigger_lightbox" href="http://static.dornea.nu/img/2010/f3cb029d9740b3b32fc13e27af86a5af.jpg"><img class="trigger_lightbox mceItem" title="Debian Installer - Partitioning/ Change file system type to ext2" alt="Debian Installer - Partitioning/ Change file system type to ext2" src="http://static.dornea.nu/img/2010/f3cb029d9740b3b32fc13e27af86a5af.jpg" width="295" height="221" /></a></p>
 <p>You should now go through the installation process without experiencing any troubles. At the end of the installation you won&#8217;t have to install grub nor any boot loader, so simply ignore the error messages and select &#8220;Continue&#8221;. Even if you should go back to the main installation menu, select &#8220;Continue without any boot loader&#8221; and everything will be alright.</p>
-<h2><span id="Step_7_Start_your_fresh_new_Debian_system"><strong><span style="text-decoration: underline;">Step 7: Start your fresh new Debian system</span></strong></span></h2>
+<h2 id="step-7-start-your-fresh-new-debian-system"><span id="Step_7_Start_your_fresh_new_Debian_system"><strong><span style="text-decoration: underline;">Step 7: Start your fresh new Debian system</span></strong></span></h2>
 <p>First you&#8217;ll have to extract &#8220;vmlinuz&#8221; and &#8220;initrd.gz&#8221; from your local disk container. NetBSD provides vnconfig(8) to configure pseudo disk devices.</p>
 <pre class="lang:default decode:true">$ vnconfig vnd0 Debian-Lenny.img
 $ disklabel /dev/vnd0
@@ -2068,6 +2068,9 @@ $ xen create -c Debian-Lenny.conf</pre>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="http://blog.dornea.nu/2014/11/21/using-blockdiag-with-pelican-and-liquid-tags">Using Blockdiag with Pelican and liquid tags</a>
+      </li>
+      <li class="post">
           <a href="http://blog.dornea.nu/2014/11/13/using-graphviz-with-pelican-and-liquid-tags">Using Graphviz with Pelican and liquid tags</a>
       </li>
       <li class="post">
@@ -2078,9 +2081,6 @@ $ xen create -c Debian-Lenny.conf</pre>
       </li>
       <li class="post">
           <a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a>
-      </li>
-      <li class="post">
-          <a href="http://blog.dornea.nu/2014/08/28/using-jquery-datatables-with-ipython">Using JQuery DataTables with IPython</a>
       </li>
     </ul>
   </section>
@@ -2095,7 +2095,7 @@ $ xen create -c Debian-Lenny.conf</pre>
 
   <section>
   <h1>Tags</h1>
-    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
+    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/blockdiag/">blockdiag</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/viz/">viz</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/pandoc/">pandoc</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
 
 
 

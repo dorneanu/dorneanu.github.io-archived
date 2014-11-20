@@ -1824,7 +1824,7 @@ jQuery(document).ready(function($) {
   </ul>
 </div>
 
-<h2><span id="The_Big_picture"><strong>The Big picture</strong></span></h2>
+<h2 id="the-big-picture"><span id="The_Big_picture"><strong>The Big picture</strong></span></h2>
 <p><strong><a href="http://static.dornea.nu/img/2010/34ef840b696169b327c1123e80afe531.png"><img class="trigger_lightbox" style="width: 590px; height: 407px;" alt="IP Masqueradeing" src="http://static.dornea.nu/img/2010/34ef840b696169b327c1123e80afe531.png" width="728" height="502" /></a></strong><!--more--></p>
 <!--break-->
 
@@ -1834,10 +1834,10 @@ jQuery(document).ready(function($) {
 <li>192.168.178.x (wlan0)</li>
 </ul>
 <p>wlan1 will act as a Access Point waiting for incomming connections and wlan0 will be connected to the Internet via FritzBox. Let&#8217;s get all the pieces together.</p>
-<h2><span id="Configure_wlan0">Configure wlan0</span></h2>
+<h2 id="configure-wlan0"><span id="Configure_wlan0">Configure wlan0</span></h2>
 <p>Well there is not much to say about this section. Make sure you have a working Internet connection via wlan0.</p>
-<h2><span id="i"> </span></h2>
-<h2><span id="Configure_wlan1">Configure wlan1</span></h2>
+<h2 id="_1"><span id="i"> </span></h2>
+<h2 id="configure-wlan1"><span id="Configure_wlan1">Configure wlan1</span></h2>
 <p>Now comes the more interesting part. You want to allow your clients (whoever they are) to connect to your host via <strong>wlan1</strong> and use the Internet connection on <strong>wlan0</strong>. Pretty much &#8230; simple! Let&#8217;s sum up which steps are required:</p>
 <ul>
 <li>Allow users to connect to wlan1</li>
@@ -1846,8 +1846,8 @@ jQuery(document).ready(function($) {
 <li>Forward packets comming from <strong>wlan1</strong> to <strong>wlan0</strong></li>
 <li>Forward packets which refer to our <em>10.0.0.x</em> network from <strong>wlan0</strong> to <strong>wlan1</strong></li>
 </ul>
-<h2><span id="i-2"> </span></h2>
-<h2><span id="Configure_hostapd">Configure hostapd</span></h2>
+<h2 id="_2"><span id="i-2"> </span></h2>
+<h2 id="configure-hostapd"><span id="Configure_hostapd">Configure hostapd</span></h2>
 <p>That sounds quite simple, isn&#8217;t it? Suppose <strong>wlan1</strong> is already listening for incoming connection. You can achieve that by using <strong>hostapd</strong>  and thereby acting like an Access Point on <strong>wlan1</strong>. Maybe I&#8217;ll write an additional tutorial related to this topic. But by now let&#8217;s say hostapd is running (among with <strong>dhcpd, </strong>which will assign IP addresses to the clients) and your clients are able to connect to your wifi interface and are successfully in getting an IP address.</p>
 <pre class="brush:plain;"># hostapd /etc/hostapd/hostapd.conf 
 Configuration file: /etc/hostapd/hostapd.conf
@@ -1885,7 +1885,7 @@ Nov 25 20:03:16 nat dhcpd: All rights reserved.
 Nov 25 20:03:16 nat dhcpd: For info, please visit https://www.isc.org/software/dhcp/
 Nov 25 20:03:16 nat dhcpd: Wrote 11 leases to leases file.</pre>
 
-<h2><span id="Do_some_tests"><strong>Do some tests</strong></span></h2>
+<h2 id="do-some-tests"><span id="Do_some_tests"><strong>Do some tests</strong></span></h2>
 <p>Let&#8217;s say host <em>&#8220;BlackTiny&#8221;</em> is listening for incomming connections and host &#8220;<em>Daemon&#8221;</em> would like to connect to <em>&#8220;BlackTiny&#8221;</em>. <strong>Start with the client</strong>:</p>
 <pre class="brush:plain;"># ifconfig [wifi-interface] up
 # iwconfig [wifi-interface] essid "HackLAN" 
@@ -1915,8 +1915,8 @@ rtt min/avg/max/mdev = 2.557/3.076/3.596/0.522 ms</pre>
 ping: unknown host h.de</pre>
 
 <p>Oh &#8230; I have forgotten about that. We&#8217;ll have to allow <em>&#8220;Daemon&#8221;</em> to access the Internet through <em>&#8220;BlackTiny&#8221;</em>. Move on to the next step.</p>
-<h2><span id="i-3"> </span></h2>
-<h2><span id="Do_the_cool_stuff">Do the cool stuff</span></h2>
+<h2 id="_3"><span id="i-3"> </span></h2>
+<h2 id="do-the-cool-stuff"><span id="Do_the_cool_stuff">Do the cool stuff</span></h2>
 <p>First  of all we&#8217;ll enable port forwarding on <em>&#8220;BlackTiny&#8221;</em>:</p>
 <pre class="brush:plain;gutter:false;"># sysctl -w net.ipv4.ip_forward=1
 net.ipv4.ip_forward = 1</pre>
@@ -1954,7 +1954,7 @@ target     prot opt source               destination</pre>
 
 <p>Here is an explanation( found on <a href="http://www.linuxtopia.org/Linux_Firewall_iptables/x4658.html">Linuxtopia.com</a>):</p>
 <p><em>&#8220;The <b class="COMMAND">&#8211;to-source</b> option is used to specify which source the packet should use. This option, at its simplest, takes one IP address which we want to use for the <b class="COMMAND">source IP</b> address in the <b class="COMMAND">IP header</b>. [...] The &#8211;to&#8211;source IP numbers could then, for instance, be something like: 194.236.50.155-194.236.50.160. [...] We can also specify a range of ports to be used by <b class="COMMAND">SNAT</b>. All the source ports would then be confined to the ports specified. The port bit of the rule would then look like in the example above, :1024-32000. This is only valid if -p tcp or -p udp was specified somewhere in the match of the rule in question. [...]&#8220;</em></p>
-<h2><span id="Give_it_a_try">Give it a try</span></h2>
+<h2 id="give-it-a-try"><span id="Give_it_a_try">Give it a try</span></h2>
 <p>Client <em>&#8220;Daemon&#8221;</em>:</p>
 <pre class="brush:bash;gutter:false;"># ping h.de
 PING h.de (212.34.170.3) 56(84) bytes of data.
@@ -2011,6 +2011,9 @@ rtt min/avg/max/mdev = 33.835/44.782/60.853/11.609 ms
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="http://blog.dornea.nu/2014/11/21/using-blockdiag-with-pelican-and-liquid-tags">Using Blockdiag with Pelican and liquid tags</a>
+      </li>
+      <li class="post">
           <a href="http://blog.dornea.nu/2014/11/13/using-graphviz-with-pelican-and-liquid-tags">Using Graphviz with Pelican and liquid tags</a>
       </li>
       <li class="post">
@@ -2021,9 +2024,6 @@ rtt min/avg/max/mdev = 33.835/44.782/60.853/11.609 ms
       </li>
       <li class="post">
           <a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a>
-      </li>
-      <li class="post">
-          <a href="http://blog.dornea.nu/2014/08/28/using-jquery-datatables-with-ipython">Using JQuery DataTables with IPython</a>
       </li>
     </ul>
   </section>
@@ -2038,7 +2038,7 @@ rtt min/avg/max/mdev = 33.835/44.782/60.853/11.609 ms
 
   <section>
   <h1>Tags</h1>
-    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
+    <a href="http://blog.dornea.nu/tag/docker/">docker</a>,    <a href="http://blog.dornea.nu/tag/code/">code</a>,    <a href="http://blog.dornea.nu/tag/pelican/">pelican</a>,    <a href="http://blog.dornea.nu/tag/coding/">coding</a>,    <a href="http://blog.dornea.nu/tag/droidbox/">droidbox</a>,    <a href="http://blog.dornea.nu/tag/graphviz/">graphviz</a>,    <a href="http://blog.dornea.nu/tag/books/">books</a>,    <a href="http://blog.dornea.nu/tag/blockdiag/">blockdiag</a>,    <a href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>,    <a href="http://blog.dornea.nu/tag/viz/">viz</a>,    <a href="http://blog.dornea.nu/tag/web/">web</a>,    <a href="http://blog.dornea.nu/tag/wargames/">wargames</a>,    <a href="http://blog.dornea.nu/tag/networking/">networking</a>,    <a href="http://blog.dornea.nu/tag/network/">network</a>,    <a href="http://blog.dornea.nu/tag/pandoc/">pandoc</a>,    <a href="http://blog.dornea.nu/tag/octopress/">octopress</a>,    <a href="http://blog.dornea.nu/tag/blog/">blog</a>,    <a href="http://blog.dornea.nu/tag/re/">re</a>,    <a href="http://blog.dornea.nu/tag/low/">low</a>,    <a href="http://blog.dornea.nu/tag/android/">android</a>,    <a href="http://blog.dornea.nu/tag/androguard/">androguard</a>,    <a href="http://blog.dornea.nu/tag/events/">events</a>,    <a href="http://blog.dornea.nu/tag/uncategorized/">uncategorized</a>,    <a href="http://blog.dornea.nu/tag/cryptography/">cryptography</a>,    <a href="http://blog.dornea.nu/tag/python/">python</a>,    <a href="http://blog.dornea.nu/tag/misc/">misc</a>,    <a href="http://blog.dornea.nu/tag/javascript/">javascript</a>,    <a href="http://blog.dornea.nu/tag/howto/">howto</a>,    <a href="http://blog.dornea.nu/tag/wtf/">wtf</a>,    <a href="http://blog.dornea.nu/tag/ipython/">ipython</a>,    <a href="http://blog.dornea.nu/tag/java/">java</a>,    <a href="http://blog.dornea.nu/tag/ios/">ios</a>,    <a href="http://blog.dornea.nu/tag/security/">security</a>,    <a href="http://blog.dornea.nu/tag/jquery/">jquery</a>,    <a href="http://blog.dornea.nu/tag/openssl/">openssl</a>,    <a href="http://blog.dornea.nu/tag/science/">science</a>,    <a href="http://blog.dornea.nu/tag/eclipse/">eclipse</a>,    <a href="http://blog.dornea.nu/tag/crypto/">crypto</a>,    <a href="http://blog.dornea.nu/tag/sca/">sca</a>,    <a href="http://blog.dornea.nu/tag/appsec/">appsec</a>,    <a href="http://blog.dornea.nu/tag/whatsapp/">whatsapp</a>,    <a href="http://blog.dornea.nu/tag/debug/">debug</a>,    <a href="http://blog.dornea.nu/tag/hacking/">hacking</a>  </section>
 
 
 
