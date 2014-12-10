@@ -1789,10 +1789,15 @@ jQuery(document).ready(function($) {
 
   <div class="entry-content"><p>Simply out of necessity I've written this mini-tutorial how debug android APKs using Eclipse and <a href="http://developer.android.com/tools/debugging/ddms.html">DDMS</a>. 
 After hours of wild googling these are the steps to make your APK debuggable under Eclipse. I'll be using the <code>FakeBanker</code> APK reverse-engineered in previous <a href="http://blog.dornea.nu/tag/android/">articles</a>.</p>
+<h2 id="revisions">Revisions</h2>
+<ul>
+<li><strong><em>UPDATE 2014-12-09</em></strong>: </li>
+</ul>
+<p>Before looking at the next steps, make sure you'll have a look at <a href="http://adus.dev.dornea.nu/">ADUS</a>. It will help you with the automation of several steps described in this post. Added some additional infos regarding the breakpoints.</p>
 <h2 id="dump-the-apk">Dump the APK</h2>
 <p>First of all make sure you'll have the latest version of <code>apktool</code>. I've compiled it by myself:</p>
 <div class="highlight"><pre># git clone git://github.com/iBotPeaches/Apktool.git
-Cloning into &#39;Apktool&#39;...    
+oCloning into &#39;Apktool&#39;...    
 remote: Counting objects: 9605, done.
 remote: Compressing objects: 100% (3622/3622), done.
 remote: Total 9605 (delta 4556), reused 9494 (delta 4502)
@@ -1802,13 +1807,13 @@ Checking connectivity... done.
 
 # cd Apktool
 # ./gradlew build fatJar
-[...]
+[o...]
 </pre></div>
 
 
 <p>Afterwards you'll get a new fresh <code>apktool</code> to use within the next steps:</p>
 <div class="highlight"><pre># find . -name &quot;apktool-cli.jar&quot;
-./brut.apktool/apktool-cli/build/libs/apktool-cli.jar
+./obrut.apktool/apktool-cli/build/libs/apktool-cli.jar
 
 # cp ./brut.apktool/apktool-cli/build/libs/apktool-cli.jar /tmp
 </pre></div>
@@ -2011,7 +2016,15 @@ This will prevent your app starting before any debugger gets connected to it.</p
 <p>You could also check the project properties by clicking on it and then <code>ALT+Enter</code>. You should have sth similar to:</p>
 <p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_project_properties_build_path.png"></p>
 <h2 id="set-breakpoints">Set breakpoints</h2>
-<p>Having set up the Eclipse environment let's add some breakpoints. First search for <strong>onCreate</strong> in all files:</p>
+<p>Having set up the Eclipse environment let's add some breakpoints. </p>
+<h3 id="update-2014-12-09">UPDATE 2014-12-09</h3>
+<p><strong>Important note</strong>: As stated <a href="https://code.google.com/p/android-apktool/wiki/SmaliDebugging">here</a> you should pay attention <strong>where</strong> you set your breakpoint:</p>
+<blockquote>
+<p>You must select line with some instruction, you can't set breakpoint on lines starting with ".", ":" or "#". </p>
+</blockquote>
+<p>So be careful whet choosing your breakpoints otherwise you might ask yourself why your code doesn't get debugged.</p>
+<h3 id="debug-oncreate">Debug onCreate</h3>
+<p>First search for <strong>onCreate</strong> in all files:</p>
 <p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_search_on_create.png"></p>
 <p>Eclipse found several matches:</p>
 <p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_found_oncreate.png"></p>
