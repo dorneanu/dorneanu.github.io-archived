@@ -1773,6 +1773,38 @@ jQuery(document).ready(function($) {
   		<article>
 <header>
     
+    <div id="qr-code-2014/06/02/googles-xss-game-solutions" class="qr-code-image-block"></div>
+    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
+    <script>
+        var img = qr.image({
+            value: 'http://blog.dornea.nu/2014/06/02/googles-xss-game-solutions',
+            level: 'L',
+            size: 4
+        });
+        document.getElementById('qr-code-2014/06/02/googles-xss-game-solutions').appendChild(img);
+    </script>
+      <h1 class="entry-title">
+        <a href="http://blog.dornea.nu/2014/06/02/googles-xss-game-solutions">Googles XSS Game - Solutions</a>
+      </h1>
+      <p class="meta"><time datetime="2014-06-02T00:00:00+02:00" pubdate>Mon 02 June 2014</time></p>
+</header>
+
+  <div class="entry-content"><p>These are my steps how I've solved the <a href="https://xss-game.appspot.com/">XSS Game</a></p>
+<h2 id="level-1">Level 1</h2>
+<p>This is the most obvious and easiest one. Just insert following code and you're done:</p>
+<div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span><span class="nx">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</pre></div>
+
+
+<h2 id="level-2">Level 2</h2>
+<p>Since the <code>script</code> won't work you'll have to think of another tags to ...</p></div>
+  <footer>
+    <a rel="full-article" href="http://blog.dornea.nu/2014/06/02/googles-xss-game-solutions">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+    
     <div id="qr-code-2014/05/27/berlinsides-0x05" class="qr-code-image-block"></div>
     <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
     <script>
@@ -1903,6 +1935,9 @@ Since I try to keep things simple I'll give you a rough idea ...</p></div>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="http://blog.dornea.nu/2015/02/19/redirect-androids-traffic-to-burp">Redirect Androids traffic to Burp</a>
+      </li>
+      <li class="post">
           <a href="http://blog.dornea.nu/2015/01/15/android-hackers-handbook">Android Hacker's Handbook</a>
       </li>
       <li class="post">
@@ -1913,9 +1948,6 @@ Since I try to keep things simple I'll give you a rough idea ...</p></div>
       </li>
       <li class="post">
           <a href="http://blog.dornea.nu/2014/12/03/import-burp-cert-into-android">Import Burp cert into Android</a>
-      </li>
-      <li class="post">
-          <a href="http://blog.dornea.nu/2014/12/02/howto-proxy-non-proxy-aware-android-applications-through-burp">HowTo: Proxy Non-Proxy-Aware Android Applications through Burp</a>
       </li>
     </ul>
   </section>

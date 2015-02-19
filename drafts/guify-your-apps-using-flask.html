@@ -1784,18 +1784,53 @@ jQuery(document).ready(function($) {
         document.getElementById('qr-code-drafts/guify-your-apps-using-flask.html').appendChild(img);
     </script>
       <h1 class="entry-title">GUIfy your Apps using Flask</h1>
-      <p class="meta"><time datetime="2014-12-12T00:00:00+01:00" pubdate>Fri 12 December 2014</time></p>
+      <p class="meta"><time datetime="2015-02-05T00:00:00+01:00" pubdate>Thu 05 February 2015</time></p>
 </header>
 
-  <div class="entry-content"><p>helo there</p>
-<h3 id="define-your-models">Define your models</h3>
+  <div class="entry-content"><p>If you follow this blog, you might have noticed that I'm mainly interested in #infosec, #hacking and so on. 
+The main reason for writing this post was to encourage people to look behind the plate and make 
+their life more enjoyable (and still stay inside their comfort zone :). Ok, "WTF?" you're probably asking 
+yourself. Let me first start with a more detailed motivation behind this writing. </p>
+<h2 id="motivation">Motivation</h2>
+<p>Being involved in data analysis on a daily basis, I have to read and modify data in a quick and easy way.
+Since I'm the only person accessing the data I don't have to concern about multi-user, concurrency and such
+stuff. Even if it's a simple SQLite DB, I just have my client - I recommend <a href="http://sqlitestudio.pl/">sqlitestudio</a> - 
+and there you go. Well this works if you don't really want to share your data with your team, allow them to modify
+it or even allow reports to be generated. This approach is a more single-user one.</p>
+<p>Well in the past few months (functional) requirements have changed. Among these:</p>
+<ul>
+<li>multi-user data access</li>
+<li>multiple roles for accessing the data (read, write etc.)</li>
+<li>easy data access due to additional software installation restrictions</li>
+<li>charts!</li>
+</ul>
+<p>At the first moment this sounded very challenging and for somebody (like /me) who mainly just <em>uses</em>
+some tools sth was clear: I have to do it on myself. Why reinvent the wheel? For me it was clear that 
+my ambitious plan had to be finished in reasonable amount of time. I didn't want to reinvent the wheel.
+I just wanted to "form" it in such way to fullfil my very specific needs and requirements. </p>
+<h2 id="data">Data!</h2>
+<p>If you open your data analysis bibel you'll read: "[...] and at the beginning the was a <strong>lot</strong> of data!"
+And when I'm talking about data think of sth very complex that has to be first re-structured in order 
+to understand it. And because I use <a href="http://en.wikipedia.org/wiki/Relational_database_management_system">RDBMS</a>
+I like to structure my data in:</p>
+<ul>
+<li><strong>entities</strong> and</li>
+<li><strong>relationships</strong></li>
+</ul>
+<p>This way to you should be able to get a more high-level overview on your data. Try to think of useful
+entities which should reflect the nature of your data. Besides that try to look for connections/relationships
+between your data and define meaningful and deductive relations between your data entities. Once you have that 
+you can model your DB schema using a more high-level approach. I've found <a href="http://www.sqlalchemy.org/">SQLAlchemy</a>
+to be a very powerful framework to build SQL DB in a Pythonic way.</p>
+<h2 id="define-your-models">Define your models</h2>
+<h3 id="define-your-models_1">Define your models</h3>
 <p>this is has to be written! :)</p></div>
     <footer>
 <p class="meta">
   <span class="byline author vcard">
     Posted by <span class="fn">Victor Dorneanu</span>
   </span>
-<time datetime="2014-12-12T00:00:00+01:00" pubdate>Fri 12 December 2014</time>  <span class="categories">
+<time datetime="2015-02-05T00:00:00+01:00" pubdate>Thu 05 February 2015</time>  <span class="categories">
     <a class="category" href="http://blog.dornea.nu/tag/python/">python</a>
     <a class="category" href="http://blog.dornea.nu/tag/flask/">flask</a>
   </span>
@@ -1810,6 +1845,9 @@ jQuery(document).ready(function($) {
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="http://blog.dornea.nu/2015/02/19/redirect-androids-traffic-to-burp">Redirect Androids traffic to Burp</a>
+      </li>
+      <li class="post">
           <a href="http://blog.dornea.nu/2015/01/15/android-hackers-handbook">Android Hacker's Handbook</a>
       </li>
       <li class="post">
@@ -1820,9 +1858,6 @@ jQuery(document).ready(function($) {
       </li>
       <li class="post">
           <a href="http://blog.dornea.nu/2014/12/03/import-burp-cert-into-android">Import Burp cert into Android</a>
-      </li>
-      <li class="post">
-          <a href="http://blog.dornea.nu/2014/12/02/howto-proxy-non-proxy-aware-android-applications-through-burp">HowTo: Proxy Non-Proxy-Aware Android Applications through Burp</a>
       </li>
     </ul>
   </section>

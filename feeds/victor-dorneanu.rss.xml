@@ -1,5 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>blog.dornea.nu</title><link>http://blog.dornea.nu/</link><description>Hack, code and drink some țuică.</description><atom:link href="http://blog.dornea.nu/feeds/victor-dorneanu.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 15 Jan 2015 00:00:00 +0100</lastBuildDate><item><title>Android Hacker's Handbook</title><link>http://blog.dornea.nu/2015/01/15/android-hackers-handbook</link><description>&lt;p&gt;&lt;img src="http://dl.dornea.nu/img/2015/18add683b7e400d63d7172be60eb564a.jpg"&gt;&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>blog.dornea.nu</title><link>http://blog.dornea.nu/</link><description>Hack, code and drink some țuică.</description><atom:link href="http://blog.dornea.nu/feeds/victor-dorneanu.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 19 Feb 2015 00:00:00 +0100</lastBuildDate><item><title>Redirect Androids traffic to Burp</title><link>http://blog.dornea.nu/2015/02/19/redirect-androids-traffic-to-burp</link><description>&lt;p&gt;If you want to redirect you Android devices traffic to your Burp instance, you'll just have to use &lt;strong&gt;DNAT&lt;/strong&gt;
+and &lt;strong&gt;MASQUERADING&lt;/strong&gt;. I was more detailed about this topic in &lt;a href="http://blog.dornea.nu/2014/12/02/howto-proxy-non-proxy-aware-android-applications-through-burp/"&gt;this&lt;/a&gt;
+post. And since the Internet is full of misleading information there are the steps to get it working.&lt;/p&gt;
+&lt;p&gt;Supposing your Android device (192.168.0.3) and the machine Burp is listening on (192.168.0.2:8080) are in the same WiFi-Network, you first:&lt;/p&gt;
+&lt;h3 id="flush-iptables-nat-table"&gt;Flush iptables NAT table&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ adb shell &amp;quot;iptables -t nat -F&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3 id="redirect-http-traffic-to-burp"&gt;Redirect HTTP traffic to Burp&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ adb shell &amp;quot;iptables -t nat -A OUTPUT -p tcp --dport 80 -j DNAT --to-destination 192.168.0.2:8080
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3 id="redirect-https-traffic-to-burp"&gt;Redirect HTTPS traffic to Burp&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ adb shell &amp;quot;iptables -t nat -A OUTPUT -p tcp --dport 443 -j DNAT --to-destination 192.168.0.2:8080
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3 id="activate-masquerading"&gt;Activate Masquerading&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ adb shell &amp;quot;iptables -t nat -A POSTROUTING -p tcp --dport 80 -j MASQUERADE&amp;quot;
+$ adb shell &amp;quot;iptables -t nat -A POSTROUTING -p tcp --dport 443 -j MASQUERADE&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;That's it. You can test it by making a HTTPS connection to &lt;code&gt;paypal.com&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ curl -I https://www.paypal.com
+curl: (60) SSL certificate problem, verify that the CA cert is OK. Details:
+error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed
+More details here: http://curl.haxx.se/docs/sslcerts.html
+
+curl performs SSL certificate verification by default, using a &amp;quot;bundle&amp;quot;
+ of Certificate Authority (CA) public keys (CA certs). If the default
+ bundle file isn&amp;#39;t adequate, you can specify an alternate file
+ using the --cacert option.
+If this HTTPS server uses a certificate signed by a CA represented in
+ the bundle, the certificate verification probably failed due to a
+ problem with the certificate (it might be expired, or the name might
+ not match the domain name in the URL).
+If you&amp;#39;d like to turn off curl&amp;#39;s verification of the certificate, use
+ the -k (or --insecure) option.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This happens because Burp is presenting the client (curl) it's own certificate. If you see that, then you're 
+successfully redirecting your HTTP(s) traffic to Burp.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This should also work for other ports/protocols.&lt;/p&gt;
+&lt;/blockquote&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Victor Dorneanu</dc:creator><pubDate>Thu, 19 Feb 2015 00:00:00 +0100</pubDate><guid>tag:blog.dornea.nu,2015-02-19:2015/02/19/redirect-androids-traffic-to-burp</guid><category>note</category></item><item><title>Android Hacker's Handbook</title><link>http://blog.dornea.nu/2015/01/15/android-hackers-handbook</link><description>&lt;p&gt;&lt;img src="http://dl.dornea.nu/img/2015/18add683b7e400d63d7172be60eb564a.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;What should I say about this book? A lot has been said and this uppon reasonable grounds. This book is meant to give
 you an overview of the most important security topics related to Android. Not only you'll
 get a lot of stuff about Android's internals, you'll also learn about exploits (and how they work)
