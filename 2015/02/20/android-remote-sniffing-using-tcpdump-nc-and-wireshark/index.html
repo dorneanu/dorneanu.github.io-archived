@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Gentoo, systemd, consolekit, udev and some failed system update</title>
+  <title>Android remote sniffing using Tcpdump, nc and Wireshark</title>
   <meta name="author" content="Victor Dorneanu">
   <meta name="keywords" content="victor dorneanu, dorneanu, dornea.nu, blog, web, application security, linux, unix, hacking, assembler, python, ipython, javascript, c, c++, freebsd, netbsd, openbsd, debian, arch linux, blacktrack, kali linux" />
 
@@ -1760,10 +1760,10 @@ jQuery(document).ready(function($) {
     <li><a href="/archives">Archives</a></li>
     <li><a href="http://dornea.nu">About</a></li>
       <li><a href="http://blog.dornea.nu/pages/books">Books</a></li>
-    <li class="active">
+    <li >
     <a href="http://blog.dornea.nu/category/blog">Blog</a>
     </li>
-    <li >
+    <li class="active">
     <a href="http://blog.dornea.nu/category/notes">Notes</a>
     </li>
 </ul></nav>
@@ -1773,140 +1773,70 @@ jQuery(document).ready(function($) {
   <article class="hentry" role="article">
 <header>
     
-    <div id="qr-code-2013/08/10/gentoo-systemd-consolekit-udev-and-some-failed-system-update" class="qr-code-image-block"></div>
+    <div id="qr-code-2015/02/20/android-remote-sniffing-using-tcpdump-nc-and-wireshark" class="qr-code-image-block"></div>
     <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
     <script>
         var img = qr.image({
-            value: 'http://blog.dornea.nu/2013/08/10/gentoo-systemd-consolekit-udev-and-some-failed-system-update',
+            value: 'http://blog.dornea.nu/2015/02/20/android-remote-sniffing-using-tcpdump-nc-and-wireshark',
             level: 'L',
             size: 4
         });
-        document.getElementById('qr-code-2013/08/10/gentoo-systemd-consolekit-udev-and-some-failed-system-update').appendChild(img);
+        document.getElementById('qr-code-2015/02/20/android-remote-sniffing-using-tcpdump-nc-and-wireshark').appendChild(img);
     </script>
-      <h1 class="entry-title">Gentoo, systemd, consolekit, udev and some failed system update</h1>
-      <p class="meta"><time datetime="2013-08-10T00:00:00+02:00" pubdate>Sat 10 August 2013</time></p>
+      <h1 class="entry-title">Android remote sniffing using Tcpdump, nc and Wireshark</h1>
+      <p class="meta"><time datetime="2015-02-20T00:00:00+01:00" pubdate>Fri 20 February 2015</time></p>
 </header>
 
-  <div class="entry-content"><p>OK, first some explanations:</p>
+  <div class="entry-content"><p>If you want to sniff your devices traffic and visualize it on Wireshark, you'll need:</p>
 <ul>
-<li><strong>systemd</strong> is a modern sysvinit &amp; RC replacement for Linux systems. It is supported in Gentoo as an alternate init system. (Source: <a href="http://wiki.gentoo.org/wiki/Systemd">http://wiki.gentoo.org/wiki/Systemd)</a></li>
-<li><strong>ConsoleKit</strong> is a framework for defining and tracking users, login sessions, and seats. (Source:<a href="http://wiki.gentoo.org/wiki/ConsoleKit"> http://wiki.gentoo.org/wiki/ConsoleKit)</a></li>
-<li><strong>udev</strong> is the device manager for the Linux kernel. Primarily, it manages device nodes in <tt>/dev</tt> and handles all user space actions when adding/removing devices. Also have a look at <a href="http://www.gentoo.org/proj/en/eudev" rel="nofollow">eudev</a> a gentoo fork of udev. (Source: <a href="http://wiki.gentoo.org/wiki/Udev">http://wiki.gentoo.org/wiki/Udev)</a></li>
+<li>tcpdump</li>
+<li>netcat</li>
+<li>wireshark/tshark</li>
 </ul>
-<!--more-->
+<p>Make sure you have <code>tcpdump</code> installed on your machine. I <em>highly</em> recommend you installing 
+the <a href="https://play.google.com/store/apps/details?id=org.dyndns.sven_ola.debian_kit&amp;hl=en">Debian Kit</a> 
+which I've been using for years now. It makes things less complicated. Once you have done that, log in 
+to your Android device and switch to the Debian environment:</p>
+<div class="highlight"><pre>victor@delia:/$ adb shell
+# deb
+root@debian:/#
+</pre></div>
 
-<p>At first look they don&#8217;t seem to have sth in common. These are some other facts:</p>
-<ul>
-<li><em>systemd</em> and <em>udev</em> don&#8217;t like each other</li>
-<li><em>systemd</em> conflicts with <em>consolekit</em></li>
-<li><em>consolekit</em> is not longer maintained</li>
-<li><em>systemd</em> *is* <em>udev</em> (as systemd somehow includes udev)</li>
-<li><em>polkit</em> depends on <em>consolekit</em> and they will both pull eath other</li>
-<li><em>consolekit</em> has been replaced by logind which is being provided by <em>systemd</em></li>
-<li>&#8230;and top of that <em>OpenRC</em> is somehow also involved in this whole thing.</li>
-</ul>
-<p>As you may have noticed: THIS IS A WHOLE BUNCH OF BULLSHIT GOING ON! I just wanted to update my Gentoo system and got stucked in some stupid conflicts between the mentioned packets. It took about one day to solve it (after reading lots of forum threads of people complaining about the same thing). Check:</p>
-<ul>
-<li><a href="http://forums.gentoo.org/viewtopic-t-920340-start-0.html" title="Force Disable ConsoleKit?">Force Disable Consolekit</a></li>
-<li><a href="http://forums.gentoo.org/viewtopic-t-917584.html">Want to get rid of *kits. What should I be careful about?</a></li>
-<li><a href="http://forums.gentoo.org/viewtopic-p-7367906.html">SOLVED gnome3 systemd udev and many other things</a></li>
-</ul>
-<p>Be sure you read them. They&#8217;ve helped me a lot to understand this whole topic. So after all this is how I was able to solve it:</p>
-<ul>
-<li>
-<p>Remove all USE flags related to consolekit: <pre class="lang:sh decode:true"># euse -D consolekit policykit upower udisks</pre></p>
-</li>
-<li>
-<p>Make sure you have a &#8220;clean&#8221; /etc/make.conf. Here is mine: <pre class="lang:sh decode:true "># These settings were set by the catalyst build script that automatically</p>
-</li>
-</ul>
-<h1 id="built-this-stage">built this stage.</h1>
-<h1 id="please-consult-usrshareportageconfigmakeconfexample-for-a-more">Please consult /usr/share/portage/config/make.conf.example for a more</h1>
-<h1 id="detailed-example">detailed example.</h1>
-<p>CFLAGS="-O2 -pipe"
-CXXFLAGS="${CFLAGS}"</p>
-<h1 id="warning-changing-your-chost-is-not-something-that-should-be-done-lightly">WARNING: Changing your CHOST is not something that should be done lightly.</h1>
-<h1 id="please-consult-httpwwwgentooorgdocenchange-chostxml-before-changing">Please consult http://www.gentoo.org/doc/en/change-chost.xml before changing.</h1>
-<p>CHOST="x86_64-pc-linux-gnu"</p>
-<h1 id="these-are-the-use-flags-that-were-used-in-addition-to-what-is-provided-by-the">These are the USE flags that were used in addition to what is provided by the</h1>
-<h1 id="profile-used-for-building">profile used for building.</h1>
-<p>ACCEPT_LICENSE="*"
-ACCEPT_KEYWORDS="~amd64"
-AUTOCLEAN="yes"
-VIDEO_CARDS="intel"
-USE="acpi smapi mmx sse sse2 cairo svg -kde qt4 qt3support dbus \
-     declarative jpeg png vorbis ogg pulse alsa usb sdl spice gtk gtk3 \
-     -gnome-shell -consolekit -policykit -upower -udisks"
-MAKEOPTS="-j2"
-FEATURES="-userfetch"</p>
-<h1 id="ccache_dirvartmpccache">CCACHE_DIR="/var/tmp/ccache"</h1>
-<h1 id="ccache_size2g">CCACHE_SIZE="2G"</h1>
-<h1 id="source-varliblaymanmakeconf">source /var/lib/layman/make.conf</h1>
-<h1 id="set-portdir-for-backward-compatibility-with-various-tools">Set PORTDIR for backward compatibility with various tools:</h1>
-<h1 id="gentoo-bashcomp-bug-478444">gentoo-bashcomp - bug #478444</h1>
-<h1 id="euse-bug-474574">euse - bug #474574</h1>
-<h1 id="euses-and-ufed-bug-478318">euses and ufed - bug #478318</h1>
-<p>PORTDIR="/usr/portage"</pre></p>
-<ul>
-<li>
-<p>Make sure you have selected the right profile <pre class="lang:default decode:true "># eselect profile list
-Available profile symlink targets:
-  <a href="http://wiki.gentoo.org/wiki/Systemd">1</a>   default/linux/amd64/13.0
-  <a href="http://wiki.gentoo.org/wiki/ConsoleKit">2</a>   default/linux/amd64/13.0/selinux
-  <a href="http://wiki.gentoo.org/wiki/Udev">3</a>   default/linux/amd64/13.0/desktop *
-  <a href="http://forums.gentoo.org/viewtopic-t-920340-start-0.html" title="Force Disable ConsoleKit?">4</a>   default/linux/amd64/13.0/desktop/gnome
-  <a href="http://forums.gentoo.org/viewtopic-t-917584.html">5</a>   default/linux/amd64/13.0/desktop/kde
-  <a href="http://forums.gentoo.org/viewtopic-p-7367906.html">6</a>   default/linux/amd64/13.0/developer
-  [7]   default/linux/amd64/13.0/no-multilib
-  [8]   default/linux/amd64/13.0/x32
-  [9]   hardened/linux/amd64
-  [10]  hardened/linux/amd64/selinux
-  [11]  hardened/linux/amd64/no-multilib
-  [12]  hardened/linux/amd64/no-multilib/selinux
-  [13]  hardened/linux/amd64/x32
-  [14]  hardened/linux/uclibc/amd64</pre></p>
-</li>
-<li>
-<p>Adjust profile settings <pre class="lang:default decode:true"># cd /etc/portage/profile</p>
-</li>
-</ul>
-<h1 id="cat-useforce">cat use.force</h1>
-<p>-consolekit</p>
-<h1 id="cat-usemask">cat use.mask</h1>
-<p>consolekit
--systemd</pre></p>
-<ul>
-<li>
-<p>Remove udev, consolekit and polkit <pre class="lang:default decode:true"># emerge -aC udev consolekit polkit</pre></p>
-</li>
-<li>
-<p>Now you should be able to install systemd <pre class="lang:sh decode:true"># emerge -pv systemd</pre></p>
-</li>
-<li>
-<p>Now update your system</p>
-</li>
-<li>
-<p><pre class="lang:default decode:true"># emerge --keep-going --jobs 4 --update --newuse --ask --deep --with-bdeps=y @world</pre></p>
-<p>&nbsp;</li> </ul> 
-Additional steps to clean up your system:</p>
-<p><pre class="lang:sh decode:true"># emerge -a --depclean</p>
-<h1 id="revdep-rebuild-q-keep-going">revdep-rebuild -- -q --keep-going</pre></h1>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-</li>
-</ul></div>
+
+<p>Now you can start <code>tcpdump</code> and pipe its output to <code>netcat</code>:</p>
+<div class="highlight"><pre>root@debian:/# tcpdump -i wlan0 -s0 -w - | nc -l -p 11111
+</pre></div>
+
+
+<p>Afterwards you want to access port <code>11111</code> on the Android device using port forwarding:</p>
+<div class="highlight"><pre>victor@delia:/$ adb forward tcp:11111 tcp:11111
+</pre></div>
+
+
+<p>On your laptop/pentest machine you can run <code>tshark</code>:</p>
+<div class="highlight"><pre>victor@delia:/$ nc localhost 11111 | tshark -i -
+</pre></div>
+
+
+<p>Using <code>wireshark</code> that'd be:</p>
+<div class="highlight"><pre>victor@delia:/$ nc localhost 11111 | wireshark -k -S -i -
+</pre></div>
+
+
+<p>Happy hacking!</p></div>
     <footer>
 <p class="meta">
   <span class="byline author vcard">
-    Posted by <span class="fn">Victor</span>
+    Posted by <span class="fn">Victor Dorneanu</span>
   </span>
-<time datetime="2013-08-10T00:00:00+02:00" pubdate>Sat 10 August 2013</time>  <span class="categories">
-    <a class="category" href="http://blog.dornea.nu/tag/misc/">misc</a>
-    <a class="category" href="http://blog.dornea.nu/tag/wtf/">wtf</a>
+<time datetime="2015-02-20T00:00:00+01:00" pubdate>Fri 20 February 2015</time>  <span class="categories">
+    <a class="category" href="http://blog.dornea.nu/tag/note/">note</a>
+    <a class="category" href="http://blog.dornea.nu/tag/network/">network</a>
+    <a class="category" href="http://blog.dornea.nu/tag/android/">android</a>
+    <a class="category" href="http://blog.dornea.nu/tag/mobile/">mobile</a>
   </span>
 </p><div class="sharing">
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.dornea.nu/2013/08/10/gentoo-systemd-consolekit-udev-and-some-failed-system-update" data-via="victordorneanu" data-counturl="http://blog.dornea.nu/2013/08/10/gentoo-systemd-consolekit-udev-and-some-failed-system-update" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.dornea.nu/2015/02/20/android-remote-sniffing-using-tcpdump-nc-and-wireshark" data-via="victordorneanu" data-counturl="http://blog.dornea.nu/2015/02/20/android-remote-sniffing-using-tcpdump-nc-and-wireshark" >Tweet</a>
 </div>    </footer>
   </article>
 
@@ -2050,9 +1980,9 @@ Additional steps to clean up your system:</p>
 </script>
 	<script type="text/javascript">
 	  var disqus_shortname = 'dorneanu';
-          var disqus_identifier = '/2013/08/10/gentoo-systemd-consolekit-udev-and-some-failed-system-update';
-          var disqus_url = 'http://blog.dornea.nu/2013/08/10/gentoo-systemd-consolekit-udev-and-some-failed-system-update';
-          var disqus_title = 'Gentoo, systemd, consolekit, udev and some failed system update';
+          var disqus_identifier = '/2015/02/20/android-remote-sniffing-using-tcpdump-nc-and-wireshark';
+          var disqus_url = 'http://blog.dornea.nu/2015/02/20/android-remote-sniffing-using-tcpdump-nc-and-wireshark';
+          var disqus_title = 'Android remote sniffing using Tcpdump, nc and Wireshark';
 	  (function() {
 	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
 	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';

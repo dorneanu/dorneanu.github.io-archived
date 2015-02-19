@@ -1,5 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>blog.dornea.nu</title><link href="http://blog.dornea.nu/" rel="alternate"></link><link href="http://blog.dornea.nu/feeds/victor-dorneanu.atom.xml" rel="self"></link><id>http://blog.dornea.nu/</id><updated>2015-02-19T00:00:00+01:00</updated><entry><title>Redirect Androids traffic to Burp</title><link href="http://blog.dornea.nu/2015/02/19/redirect-androids-traffic-to-burp" rel="alternate"></link><updated>2015-02-19T00:00:00+01:00</updated><author><name>Victor Dorneanu</name></author><id>tag:blog.dornea.nu,2015-02-19:2015/02/19/redirect-androids-traffic-to-burp</id><summary type="html">&lt;p&gt;If you want to redirect you Android devices traffic to your Burp instance, you'll just have to use &lt;strong&gt;DNAT&lt;/strong&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>blog.dornea.nu</title><link href="http://blog.dornea.nu/" rel="alternate"></link><link href="http://blog.dornea.nu/feeds/victor-dorneanu.atom.xml" rel="self"></link><id>http://blog.dornea.nu/</id><updated>2015-02-20T00:00:00+01:00</updated><entry><title>Android remote sniffing using Tcpdump, nc and Wireshark</title><link href="http://blog.dornea.nu/2015/02/20/android-remote-sniffing-using-tcpdump-nc-and-wireshark" rel="alternate"></link><updated>2015-02-20T00:00:00+01:00</updated><author><name>Victor Dorneanu</name></author><id>tag:blog.dornea.nu,2015-02-20:2015/02/20/android-remote-sniffing-using-tcpdump-nc-and-wireshark</id><summary type="html">&lt;p&gt;If you want to sniff your devices traffic and visualize it on Wireshark, you'll need:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;tcpdump&lt;/li&gt;
+&lt;li&gt;netcat&lt;/li&gt;
+&lt;li&gt;wireshark/tshark&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Make sure you have &lt;code&gt;tcpdump&lt;/code&gt; installed on your machine. I &lt;em&gt;highly&lt;/em&gt; recommend you installing 
+the &lt;a href="https://play.google.com/store/apps/details?id=org.dyndns.sven_ola.debian_kit&amp;amp;hl=en"&gt;Debian Kit&lt;/a&gt; 
+which I've been using for years now. It makes things less complicated. Once you have done that, log in 
+to your Android device and switch to the Debian environment:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;victor@delia:/$ adb shell
+# deb
+root@debian:/#
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now you can start &lt;code&gt;tcpdump&lt;/code&gt; and pipe its output to &lt;code&gt;netcat&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;root@debian:/# tcpdump -i wlan0 -s0 -w - | nc -l -p 11111
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Afterwards you want to access port &lt;code&gt;11111&lt;/code&gt; on the Android device using port forwarding:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;victor@delia:/$ adb forward tcp:11111 tcp:11111
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;On your laptop/pentest machine you can run &lt;code&gt;tshark&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;victor@delia:/$ nc localhost 11111 | tshark -i -
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Using &lt;code&gt;wireshark&lt;/code&gt; that'd be:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;victor@delia:/$ nc localhost 11111 | wireshark -k -S -i -
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Happy hacking!&lt;/p&gt;</summary><category term="note"></category><category term="network"></category><category term="android"></category><category term="mobile"></category></entry><entry><title>Redirect Androids traffic to Burp</title><link href="http://blog.dornea.nu/2015/02/19/redirect-androids-traffic-to-burp" rel="alternate"></link><updated>2015-02-19T00:00:00+01:00</updated><author><name>Victor Dorneanu</name></author><id>tag:blog.dornea.nu,2015-02-19:2015/02/19/redirect-androids-traffic-to-burp</id><summary type="html">&lt;p&gt;If you want to redirect you Android devices traffic to your Burp instance, you'll just have to use &lt;strong&gt;DNAT&lt;/strong&gt;
 and &lt;strong&gt;MASQUERADING&lt;/strong&gt;. I was more detailed about this topic in &lt;a href="http://blog.dornea.nu/2014/12/02/howto-proxy-non-proxy-aware-android-applications-through-burp/"&gt;this&lt;/a&gt;
 post. And since the Internet is full of misleading information there are the steps to get it working.&lt;/p&gt;
 &lt;p&gt;Supposing your Android device (192.168.0.3) and the machine Burp is listening on (192.168.0.2:8080) are in the same WiFi-Network, you first:&lt;/p&gt;

@@ -1,5 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>blog.dornea.nu</title><link>http://blog.dornea.nu/</link><description>Hack, code and drink some țuică.</description><atom:link href="http://blog.dornea.nu/feeds/victor-dorneanu.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 19 Feb 2015 00:00:00 +0100</lastBuildDate><item><title>Redirect Androids traffic to Burp</title><link>http://blog.dornea.nu/2015/02/19/redirect-androids-traffic-to-burp</link><description>&lt;p&gt;If you want to redirect you Android devices traffic to your Burp instance, you'll just have to use &lt;strong&gt;DNAT&lt;/strong&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>blog.dornea.nu</title><link>http://blog.dornea.nu/</link><description>Hack, code and drink some țuică.</description><atom:link href="http://blog.dornea.nu/feeds/victor-dorneanu.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 20 Feb 2015 00:00:00 +0100</lastBuildDate><item><title>Android remote sniffing using Tcpdump, nc and Wireshark</title><link>http://blog.dornea.nu/2015/02/20/android-remote-sniffing-using-tcpdump-nc-and-wireshark</link><description>&lt;p&gt;If you want to sniff your devices traffic and visualize it on Wireshark, you'll need:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;tcpdump&lt;/li&gt;
+&lt;li&gt;netcat&lt;/li&gt;
+&lt;li&gt;wireshark/tshark&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Make sure you have &lt;code&gt;tcpdump&lt;/code&gt; installed on your machine. I &lt;em&gt;highly&lt;/em&gt; recommend you installing 
+the &lt;a href="https://play.google.com/store/apps/details?id=org.dyndns.sven_ola.debian_kit&amp;amp;hl=en"&gt;Debian Kit&lt;/a&gt; 
+which I've been using for years now. It makes things less complicated. Once you have done that, log in 
+to your Android device and switch to the Debian environment:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;victor@delia:/$ adb shell
+# deb
+root@debian:/#
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now you can start &lt;code&gt;tcpdump&lt;/code&gt; and pipe its output to &lt;code&gt;netcat&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;root@debian:/# tcpdump -i wlan0 -s0 -w - | nc -l -p 11111
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Afterwards you want to access port &lt;code&gt;11111&lt;/code&gt; on the Android device using port forwarding:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;victor@delia:/$ adb forward tcp:11111 tcp:11111
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;On your laptop/pentest machine you can run &lt;code&gt;tshark&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;victor@delia:/$ nc localhost 11111 | tshark -i -
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Using &lt;code&gt;wireshark&lt;/code&gt; that'd be:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;victor@delia:/$ nc localhost 11111 | wireshark -k -S -i -
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Happy hacking!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Victor Dorneanu</dc:creator><pubDate>Fri, 20 Feb 2015 00:00:00 +0100</pubDate><guid>tag:blog.dornea.nu,2015-02-20:2015/02/20/android-remote-sniffing-using-tcpdump-nc-and-wireshark</guid><category>note</category><category>network</category><category>android</category><category>mobile</category></item><item><title>Redirect Androids traffic to Burp</title><link>http://blog.dornea.nu/2015/02/19/redirect-androids-traffic-to-burp</link><description>&lt;p&gt;If you want to redirect you Android devices traffic to your Burp instance, you'll just have to use &lt;strong&gt;DNAT&lt;/strong&gt;
 and &lt;strong&gt;MASQUERADING&lt;/strong&gt;. I was more detailed about this topic in &lt;a href="http://blog.dornea.nu/2014/12/02/howto-proxy-non-proxy-aware-android-applications-through-burp/"&gt;this&lt;/a&gt;
 post. And since the Internet is full of misleading information there are the steps to get it working.&lt;/p&gt;
 &lt;p&gt;Supposing your Android device (192.168.0.3) and the machine Burp is listening on (192.168.0.2:8080) are in the same WiFi-Network, you first:&lt;/p&gt;
