@@ -1773,6 +1773,32 @@ jQuery(document).ready(function($) {
   		<article>
 <header>
     
+    <div id="qr-code-2015/04/30/gethostbyname-vs-getaddrinfo" class="qr-code-image-block"></div>
+    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
+    <script>
+        var img = qr.image({
+            value: 'http://blog.dornea.nu/2015/04/30/gethostbyname-vs-getaddrinfo',
+            level: 'L',
+            size: 4
+        });
+        document.getElementById('qr-code-2015/04/30/gethostbyname-vs-getaddrinfo').appendChild(img);
+    </script>
+      <h1 class="entry-title">
+        <a href="http://blog.dornea.nu/2015/04/30/gethostbyname-vs-getaddrinfo">gethostbyname vs. getaddrinfo</a>
+      </h1>
+      <p class="meta"><time datetime="2015-04-30T00:00:00+02:00" pubdate>Thu 30 April 2015</time></p>
+</header>
+
+  <div class="entry-content"><p>After started coding in C <a href="http://blog.dornea.nu/2015/04/21/coming-back-to-cc-after-2-years">again</a> I've had a look
+at some basic network stuff like: <strong>socket()</strong>, <strong>connect()</strong> etc. In order to resolve domain names, one was used to 
+use <strong>gethostbyname()</strong>. I've used this function in all my previous C projects but this one seems to be out-dated ...</p></div>
+  <footer>
+    <a rel="full-article" href="http://blog.dornea.nu/2015/04/30/gethostbyname-vs-getaddrinfo">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+    
     <div id="qr-code-2015/04/21/coming-back-to-cc-after-2-years" class="qr-code-image-block"></div>
     <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
     <script>
@@ -2029,36 +2055,6 @@ applications: <em>Android</em> and <em>iOS</em>. For the first time in my whole 
     <a rel="full-article" href="http://blog.dornea.nu/2014/12/03/import-burp-cert-into-android">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-    
-    <div id="qr-code-2014/12/02/howto-proxy-non-proxy-aware-android-applications-through-burp" class="qr-code-image-block"></div>
-    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
-    <script>
-        var img = qr.image({
-            value: 'http://blog.dornea.nu/2014/12/02/howto-proxy-non-proxy-aware-android-applications-through-burp',
-            level: 'L',
-            size: 4
-        });
-        document.getElementById('qr-code-2014/12/02/howto-proxy-non-proxy-aware-android-applications-through-burp').appendChild(img);
-    </script>
-      <h1 class="entry-title">
-        <a href="http://blog.dornea.nu/2014/12/02/howto-proxy-non-proxy-aware-android-applications-through-burp">HowTo: Proxy Non-Proxy-Aware Android Applications through Burp</a>
-      </h1>
-      <p class="meta"><time datetime="2014-12-02T00:00:00+01:00" pubdate>Tue 02 December 2014</time></p>
-</header>
-
-  <div class="entry-content"><p>Proxying HTTP(s) traffic from Android devices through Burp should be actually no magic. Nevertheless you'll have to take some important steps into consideration:</p>
-<ul>
-<li>
-<p>Install Burps <strong>CA cert</strong> on the device</p>
-<ul>
-<li>I usually access Burp directly and download the cert file (<code>cacert.crt</code>)</li>
-<li>If Burp is listening on <code>192 ...</code></li></ul></li></ul></div>
-  <footer>
-    <a rel="full-article" href="http://blog.dornea.nu/2014/12/02/howto-proxy-non-proxy-aware-android-applications-through-burp">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="http://blog.dornea.nu/author/victor-dorneanu2.html">&larr; Older</a>
 
@@ -2068,6 +2064,9 @@ applications: <em>Android</em> and <em>iOS</em>. For the first time in my whole 
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
+      <li class="post">
+          <a href="http://blog.dornea.nu/2015/04/30/gethostbyname-vs-getaddrinfo">gethostbyname vs. getaddrinfo</a>
+      </li>
       <li class="post">
           <a href="http://blog.dornea.nu/2015/04/21/coming-back-to-cc-after-2-years">Coming back to C/C++ after 2 years</a>
       </li>
@@ -2079,9 +2078,6 @@ applications: <em>Android</em> and <em>iOS</em>. For the first time in my whole 
       </li>
       <li class="post">
           <a href="http://blog.dornea.nu/2015/02/20/android-remote-sniffing-using-tcpdump-nc-and-wireshark">Android remote sniffing using Tcpdump, nc and Wireshark</a>
-      </li>
-      <li class="post">
-          <a href="http://blog.dornea.nu/2015/02/19/redirect-androids-traffic-to-burp">Redirect Androids traffic to Burp</a>
       </li>
     </ul>
   </section>
