@@ -1791,7 +1791,7 @@ jQuery(document).ready(function($) {
 before starting coding. I think the biggest one has to do with the <a href="https://wiki.python.org/moin/GlobalInterpreterLock">Global Interpreter Lock</a> which prevents several threads from 
 executing Python bytecodes at once. Nevertheless you may want to apply <a href="http://en.wikipedia.org/wiki/Concurrency_pattern">concurrency patterns</a> to you code in order to achieve more speed. Besides that 
 you may want to use your cores properly otherwise you'll end up like this:</p>
-<p><img alt="Parallelism in Action" src="https://pbs.twimg.com/media/CIBrfc.jpg:large" /></p>
+<p><img alt="Parallelism in Action" src="https://pbs.twimg.com/media/CIBrfc.jpg" /></p>
 <p>In my specific case I wanted to speed up the process of parsing files (as a major features of <a href="https://github.com/dorneanu/smalisca">smalisca</a>). I've ended up looking at the <a href="https://docs.python.org/2/library/multiprocessing.html">muliprocessing</a> package which seemed quite promising:</p>
 <blockquote>
 <p>multiprocessing is a package that supports spawning processes using an API similar to the threading module. The multiprocessing package offers both local and remote concurrency, effectively side-stepping the Global Interpreter Lock by using subprocesses instead of threads. Due to this, the multiprocessing module allows the programmer to fully leverage multiple processors on a given machine. It runs on both Unix and Windows.</p>
