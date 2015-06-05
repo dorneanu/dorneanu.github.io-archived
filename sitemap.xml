@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/index.html</loc>
-<lastmod>2015-06-04T15:15:49-00:00</lastmod>
+<lastmod>2015-06-05T08:14:35-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/archives.html</loc>
-<lastmod>2015-06-04T15:15:49-00:00</lastmod>
+<lastmod>2015-06-05T08:14:35-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/tags.html</loc>
-<lastmod>2015-06-04T15:15:49-00:00</lastmod>
+<lastmod>2015-06-05T08:14:35-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/categories.html</loc>
-<lastmod>2015-06-04T15:15:49-00:00</lastmod>
+<lastmod>2015-06-05T08:14:35-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -39,8 +39,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.dornea.nu/2015/05/24/usd-ag-hacker-day-in-hamburg</loc>
-<lastmod>2015-05-24T00:00:00+02:00</lastmod>
+<loc>http://blog.dornea.nu/2015/06/03/usd-ag-hacker-day-in-hamburg</loc>
+<lastmod>2015-06-03T00:00:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1097,7 +1097,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/category/blog</loc>
-<lastmod>2015-05-24T00:00:00+00:53</lastmod>
+<lastmod>2015-06-03T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1237,7 +1237,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/network/</loc>
-<lastmod>2015-05-24T00:00:00+00:53</lastmod>
+<lastmod>2015-06-03T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1384,7 +1384,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/ipython/</loc>
-<lastmod>2015-05-24T00:00:00+00:53</lastmod>
+<lastmod>2015-06-03T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1454,7 +1454,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/hacking/</loc>
-<lastmod>2015-05-24T00:00:00+00:53</lastmod>
+<lastmod>2015-06-03T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1496,7 +1496,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/security/</loc>
-<lastmod>2015-05-24T00:00:00+00:53</lastmod>
+<lastmod>2015-06-03T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1517,7 +1517,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/author/victor-dorneanu.html</loc>
-<lastmod>2015-05-24T00:00:00+00:53</lastmod>
+<lastmod>2015-06-03T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
