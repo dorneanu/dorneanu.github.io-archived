@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>blog.dornea.nu</title><link>http://blog.dornea.nu/</link><description>Hack, code and drink some țuică. Personal blog of Victor Dorneanu.</description><atom:link href="http://blog.dornea.nu/feeds/victor-dorneanu.rss.xml" rel="self"></atom:link><lastBuildDate>Sun, 24 May 2015 00:00:00 +0200</lastBuildDate><item><title>Validating and pinning X.509 certificates</title><link>http://blog.dornea.nu/2015/05/24/validating-and-pinning-x509-certificates</link><description>&lt;p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>blog.dornea.nu</title><link>http://blog.dornea.nu/</link><description>Hack, code and drink some țuică. Personal blog of Victor Dorneanu.</description><atom:link href="http://blog.dornea.nu/feeds/victor-dorneanu.rss.xml" rel="self"></atom:link><lastBuildDate>Sun, 24 May 2015 00:00:00 +0200</lastBuildDate><item><title>usd AG Hacker Day in Hamburg</title><link>http://blog.dornea.nu/2015/05/24/usd-ag-hacker-day-in-hamburg</link><description>&lt;p&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Do you remember this &lt;a href="http://blog.dornea.nu/2015/03/18/usd-ag-hacker-challenge-2015-solutions/"&gt;usd AG hacker challenge write-up&lt;/a&gt;? This years &lt;a href="https://www.usd.de/akademie_/hackertag/"&gt;hacking event&lt;/a&gt; organized by the same company took place in &lt;strong&gt;Hamburg&lt;/strong&gt;. 9 hackers all over Germany were invited to pwn&amp;amp;0wn all the things. Every team was assigned a certain IP range that had to be pentested. Every host ...&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Victor Dorneanu</dc:creator><pubDate>Sun, 24 May 2015 00:00:00 +0200</pubDate><guid>tag:blog.dornea.nu,2015-05-24:2015/05/24/usd-ag-hacker-day-in-hamburg</guid><category>ipython</category><category>hacking</category><category>network</category><category>security</category></item><item><title>Validating and pinning X.509 certificates</title><link>http://blog.dornea.nu/2015/05/24/validating-and-pinning-x509-certificates</link><description>&lt;p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;

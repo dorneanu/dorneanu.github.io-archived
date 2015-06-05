@@ -1773,6 +1773,40 @@ jQuery(document).ready(function($) {
   		<article>
 <header>
     
+    <div id="qr-code-2013/12/04/convert-ip-ranges-to-list" class="qr-code-image-block"></div>
+    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
+    <script>
+        var img = qr.image({
+            value: 'http://blog.dornea.nu/2013/12/04/convert-ip-ranges-to-list',
+            level: 'L',
+            size: 4
+        });
+        document.getElementById('qr-code-2013/12/04/convert-ip-ranges-to-list').appendChild(img);
+    </script>
+      <h1 class="entry-title">
+        <a href="http://blog.dornea.nu/2013/12/04/convert-ip-ranges-to-list">Convert IP ranges to list</a>
+      </h1>
+      <p class="meta"><time datetime="2013-12-04T00:00:00+01:00" pubdate>Wed 04 December 2013</time></p>
+</header>
+
+  <div class="entry-content"><p>If you got IP ranges in this layout: x.x.x.1-255, y.y.y.42-120 etc., you could easily use this code to generate full IP adresses without any ranges:</p>
+<pre class="lang:python decode:true ">ips = """
+x.x.x.1-23
+y.y.y.56-12
+"""
+
+buf = StringIO.StringIO(ips)
+
+while True:
+    line = buf.readline()
+    if ...</pre></div>
+  <footer>
+    <a rel="full-article" href="http://blog.dornea.nu/2013/12/04/convert-ip-ranges-to-list">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+    
     <div id="qr-code-2013/11/29/links-of-the-week-19" class="qr-code-image-block"></div>
     <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
     <script>
@@ -2085,40 +2119,6 @@ jQuery(document).ready(function($) {
     <a rel="full-article" href="http://blog.dornea.nu/2013/09/13/howto-automate-nmap-scanning">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-    
-    <div id="qr-code-2013/09/13/links-of-the-week-11" class="qr-code-image-block"></div>
-    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
-    <script>
-        var img = qr.image({
-            value: 'http://blog.dornea.nu/2013/09/13/links-of-the-week-11',
-            level: 'L',
-            size: 4
-        });
-        document.getElementById('qr-code-2013/09/13/links-of-the-week-11').appendChild(img);
-    </script>
-      <h1 class="entry-title">
-        <a href="http://blog.dornea.nu/2013/09/13/links-of-the-week-11">Links of the Week #11</a>
-      </h1>
-      <p class="meta"><time datetime="2013-09-13T00:00:00+02:00" pubdate>Fri 13 September 2013</time></p>
-</header>
-
-  <div class="entry-content"><ol>
-<li><a href="http://de.slideshare.net/mruef/nmap-nse-hacking-for-it-security-professionals">nmap NSE hacking for IT security professionals</a></li>
-<li><a href="http://symbo1ics.com/blog/?p=2055">The Wretched Google Interview Experience</a></li>
-<li><a href="https://medium.com/editors-picks/c02f1ff471c6">Why I left Google</a></li>
-<li><a href="http://www.fastcompany.com/3016938/dialed/why-i-left-google">I Left Google And Lived To Happily Tell About It</a></li>
-<li><a href="https://www.schneier.com/blog/archives/2013/09/the_nsas_crypto_1.html">The NSA&#8217;s Cryptographic Capabilities</a></li>
-<li><a href="https://blog.avast.com/2013/08/27/linux-trojan-hand-of-thief-ungloved/">Linux Trojan âHand of Thiefâ ungloved</a></li>
-<li><a href="http://blog.chrisdrane.com/?p=49">Youâre Smart. So What?</a></li>
-<li><a href="http://www.brandonmwest.com/development/2013/08/22/github-is-not-your-new-resume.html">GitHub is Not Your New Resume</a></li>
-</ol>
-<!--more--></div>
-  <footer>
-    <a rel="full-article" href="http://blog.dornea.nu/2013/09/13/links-of-the-week-11">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="http://blog.dornea.nu/category/blog/index6.html">&larr; Older</a>
 
@@ -2130,6 +2130,9 @@ jQuery(document).ready(function($) {
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="http://blog.dornea.nu/2015/05/24/usd-ag-hacker-day-in-hamburg">usd AG Hacker Day in Hamburg</a>
+      </li>
+      <li class="post">
           <a href="http://blog.dornea.nu/2015/05/24/validating-and-pinning-x509-certificates">Validating and pinning X.509 certificates</a>
       </li>
       <li class="post">
@@ -2140,9 +2143,6 @@ jQuery(document).ready(function($) {
       </li>
       <li class="post">
           <a href="http://blog.dornea.nu/2015/04/21/coming-back-to-cc-after-2-years">Coming back to C/C++ after 2 years</a>
-      </li>
-      <li class="post">
-          <a href="http://blog.dornea.nu/2015/03/18/usd-ag-hacker-challenge-2015-solutions">usd AG Hacker challenge 2015 - Solutions</a>
       </li>
     </ul>
   </section>
