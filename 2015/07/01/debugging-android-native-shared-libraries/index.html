@@ -3086,7 +3086,7 @@ Backtrace stopped: previous frame identical to this frame (corrupt stack?)
 Breakpoint 1, Java_com_example_jni_1debug_1demo_SquaredWrapper_squared (je=0x4187fe30, jc=0x7a100019, base=8) at jni/square.c:5
 5           return (base*base);
 </code></pre><p>You can see that the execution currently stopped at <strong>0x60b5bc40</strong>. Now you can inspect the <em>registers</em>, set <em>additional</em> breakpoints, <em>step</em> into routines etc. </p>
-<p><img src="http://dl.dornea.nu/img/2015/android-solib/18d6146e96dbb21ceed498ae1cdd92f4.png" alt="GDB GEF">
+<p><img src="http://dl.dornea.nu/img/2015/android-solib/1c34d2da522b2a450b603cf8cd6a965a.png" alt="GDB GEF">
 <img src="http://dl.dornea.nu/img/2015/android-solib/18d6146e96dbb21ceed498ae1cdd92f4.png" alt="GDB GEF"></p>
 <p>At this point you should now be equipped with enough knowledge to dissect shared libraries and get some reverse engineering job done. Although this was a quite easy one due to the fact that we had debug symbols and were able to compile the library, the same techniques should also work on <em>stripped</em> binaries. In the post I&#39;ll some <em>binary analysis</em> on some random Android shared library using <a href="http://www.radare.org/r/">radare</a>.</p>
 </div>
