@@ -1773,6 +1773,36 @@ jQuery(document).ready(function($) {
   		<article>
 <header>
     
+    <div id="qr-code-2015/07/01/debugging-android-native-shared-libraries" class="qr-code-image-block"></div>
+    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
+    <script>
+        var img = qr.image({
+            value: 'http://blog.dornea.nu/2015/07/01/debugging-android-native-shared-libraries',
+            level: 'L',
+            size: 4
+        });
+        document.getElementById('qr-code-2015/07/01/debugging-android-native-shared-libraries').appendChild(img);
+    </script>
+      <h1 class="entry-title">
+        <a href="http://blog.dornea.nu/2015/07/01/debugging-android-native-shared-libraries">Debugging Android native shared libraries</a>
+      </h1>
+      <p class="meta"><time datetime="2015-07-01T00:00:00+02:00" pubdate>Wed 01 July 2015</time></p>
+</header>
+
+  <div class="entry-content"><p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Since I haven&#39;t done this before, I thought I could share some experiences with you. All this began during some APK analysis which was heavily using <a href="https://en.wikipedia.org/wiki/Java_Native_Interface">JNI</a>s. In my particular case <em>Java Native Interfaces</em> were used to call functions inside libraries written in C/C++. At that time ...</p></div></div></div></p></div>
+  <footer>
+    <a rel="full-article" href="http://blog.dornea.nu/2015/07/01/debugging-android-native-shared-libraries">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+    
     <div id="qr-code-2015/06/22/decode-adobe-flex-amf-protocol" class="qr-code-image-block"></div>
     <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
     <script>
@@ -2038,33 +2068,6 @@ which I've been using for years now. It makes things less complicated ...</p></d
     <a rel="full-article" href="http://blog.dornea.nu/2015/02/20/android-remote-sniffing-using-tcpdump-nc-and-wireshark">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-    
-    <div id="qr-code-2015/02/19/redirect-androids-traffic-to-burp" class="qr-code-image-block"></div>
-    <script src="http://blog.dornea.nu/theme/js/qr.min.js" type="text/javascript"></script>
-    <script>
-        var img = qr.image({
-            value: 'http://blog.dornea.nu/2015/02/19/redirect-androids-traffic-to-burp',
-            level: 'L',
-            size: 4
-        });
-        document.getElementById('qr-code-2015/02/19/redirect-androids-traffic-to-burp').appendChild(img);
-    </script>
-      <h1 class="entry-title">
-        <a href="http://blog.dornea.nu/2015/02/19/redirect-androids-traffic-to-burp">Redirect Androids traffic to Burp</a>
-      </h1>
-      <p class="meta"><time datetime="2015-02-19T00:00:00+01:00" pubdate>Thu 19 February 2015</time></p>
-</header>
-
-  <div class="entry-content"><p>If you want to redirect you Android devices traffic to your Burp instance, you'll just have to use <strong>DNAT</strong>
-and <strong>MASQUERADING</strong>. I was more detailed about this topic in <a href="http://blog.dornea.nu/2014/12/02/howto-proxy-non-proxy-aware-android-applications-through-burp/">this</a>
-post. And since the Internet is full of misleading information these are the steps to get it working. 
-A ...</p></div>
-  <footer>
-    <a rel="full-article" href="http://blog.dornea.nu/2015/02/19/redirect-androids-traffic-to-burp">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="http://blog.dornea.nu/index2.html">&larr; Older</a>
 
@@ -2074,6 +2077,9 @@ A ...</p></div>
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
+      <li class="post">
+          <a href="http://blog.dornea.nu/2015/07/01/debugging-android-native-shared-libraries">Debugging Android native shared libraries</a>
+      </li>
       <li class="post">
           <a href="http://blog.dornea.nu/2015/06/22/decode-adobe-flex-amf-protocol">Decode Adobe Flex AMF protocol</a>
       </li>
@@ -2085,9 +2091,6 @@ A ...</p></div>
       </li>
       <li class="post">
           <a href="http://blog.dornea.nu/2015/05/06/adding-concurrency-to-smalisca">Adding concurrency to smalisca</a>
-      </li>
-      <li class="post">
-          <a href="http://blog.dornea.nu/2015/04/30/gethostbyname-vs-getaddrinfo">gethostbyname vs. getaddrinfo</a>
       </li>
     </ul>
   </section>
