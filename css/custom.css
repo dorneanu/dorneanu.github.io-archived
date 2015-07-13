@@ -1,0 +1,133 @@
+#banner h1 {
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+div.collapseheader {
+    width=98%;
+    background-color: #cccccc;
+    padding: 2px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family:Arial, sans-serif;
+}                  
+
+#blog-archives {
+color:#777
+}
+
+#blog-archives article {
+padding:1em 0;
+position:relative;
+background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAABCAYAAACsXeyTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAFUlEQVQIHWNIS0sr/v//PwMMDzY+ADqMahlW4J91AAAAAElFTkSuQmCC) bottom left repeat-x
+}
+
+#blog-archives article:last-child {
+background:none
+}
+
+#blog-archives article footer {
+padding:0;
+margin:0
+}
+
+#blog-archives h1 {
+color:#333;
+margin-bottom:.3em
+}
+
+#blog-archives h2 {
+display:none
+}
+
+#blog-archives h1 {
+font-size:1.5em
+}
+
+#blog-archives h1 a {
+text-decoration:none;
+color:inherit;
+font-weight:400;
+display:inline-block
+}
+
+#blog-archives h1 a:hover {
+text-decoration:underline;
+color:#0181eb
+}
+
+#blog-archives a.category,#blog-archives time {
+color:#777
+}
+
+#blog-archives .entry-content {
+display:none
+}
+
+#blog-archives time {
+font-size:.9em;
+line-height:1.2em
+}
+
+#blog-archives time .month,#blog-archives time .day {
+display:inline-block
+}
+
+#blog-archives time .month {
+text-transform:uppercase
+}
+
+#blog-archives p {
+margin-bottom:1em
+}
+
+#blog-archives a,#blog-archives .entry-content a {
+color:inherit
+}
+
+#blog-archives a:hover,#blog-archives .entry-content a:hover {
+color:#0181eb
+}
+
+#blog-archives a:hover {
+color:#0181eb
+}
+
+@media only screen and (min-width: 550px) {
+#blog-archives article {
+margin-left:10em
+}
+
+#blog-archives h2 {
+margin-bottom:.3em;
+font-weight:400;
+display:inline-block;
+position:relative;
+top:-1px;
+float:left;
+margin-right: 20px;
+}
+
+#blog-archives h2:first-child {
+}
+
+#blog-archives time {
+position:absolute;
+text-align:right;
+left:0;
+top:1.8em
+}
+
+#blog-archives .year {
+display:none
+}
+
+#blog-archives article {
+padding-left:4.5em;
+padding-bottom:.7em
+}
+
+#blog-archives a.category {
+line-height:1.1em
+}
+}
+

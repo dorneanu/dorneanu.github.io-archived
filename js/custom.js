@@ -1,5 +1,14 @@
 // Collapsible panes
-$(document).ready(function() {
 //collapsible management
-    
+jQuery(document).ready(function($) {
+    $("div.collapseheader").click(function () {
+        $header = $(this).children("span").first();
+        $codearea = $(this).children(".input_area");
+        console.log($(this).children());
+        $codearea.slideToggle(500, function () {
+            $header.text(function () {
+                return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+            });
+        });
+    });
 });
