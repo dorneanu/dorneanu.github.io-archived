@@ -1,3 +1,23 @@
+.container img {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+}
+
+.output_svg {
+    position: relative;
+    width: 100%;
+    padding: 0;
+    padding-bottom: 100%; 
+}
+
+.output_svg svg {
+    position: relative;
+    width: 80%;
+    left: 0;
+    top: 0;
+}
+
 #banner h1 {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
@@ -128,6 +148,5 @@ padding-bottom:.7em
 
 #blog-archives a.category {
 line-height:1.1em
-}
 }
 
