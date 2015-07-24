@@ -1,7 +1,7 @@
 .container img {
     display: block;
     margin: auto;
-    max-width: 100%;
+    max-width: 850;
 }
 
 .output_svg {
@@ -21,6 +21,10 @@
 #banner h1 {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
+
+#sidebar {
+}
+
 
 div.collapseheader {
     width=98%;
