@@ -1981,8 +1981,8 @@ It kind of surprised me too. I've compared the execution time (<strong>just for 
 <li>using different number of jobs/workers</li>
 </ul>
 <p>I've used my Laptop (<strong>Dell XPS 13 with Intel Core i7</strong>) for the testings. Using a larger code repository (bigger than the <em>FakeBanker</em> one) I've first ran the <strong>old</strong> smalisca version (0.1). This what I've got:</p>
-<div class="highlight"><pre>$ export CMD=&quot;time smalisca parser -l /home/victor/work/Projects/XXX/source/smali -s java -f sqlite  -o ~/work/Projects/XXXX/db.sqlite&quot;
-$ for i in {1..10};do eval ${CMD} | grep total; done 
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">export </span><span class="nv">CMD</span><span class="o">=</span><span class="s2">&quot;time smalisca parser -l /home/victor/work/Projects/XXX/source/smali -s java -f sqlite  -o ~/work/Projects/XXXX/db.sqlite&quot;</span>
+<span class="nv">$ </span><span class="k">for</span> i in <span class="o">{</span>1..10<span class="o">}</span><span class="p">;</span><span class="k">do</span> <span class="nb">eval</span> <span class="si">${</span><span class="nv">CMD</span><span class="si">}</span> <span class="p">|</span> grep total<span class="p">;</span> <span class="k">done</span> 
 smalisca parser -l  -s java -f sqlite -o   3.61s user 0.11s system 100% cpu 3.712 total
 smalisca parser -l  -s java -f sqlite -o   3.66s user 0.12s system 100% cpu 3.778 total
 smalisca parser -l  -s java -f sqlite -o   3.66s user 0.10s system 100% cpu 3.762 total
@@ -1998,18 +1998,18 @@ smalisca parser -l  -s java -f sqlite -o   3.55s user 0.11s system 100% cpu 3.65
 
 <p>As you see it takes ca. <strong>3.5 seconds</strong> to finish the parsing. OK, now what about the 
 <strong>concurrent</strong> version of smalisca?</p>
-<div class="highlight"><pre>$ export CMD=&quot;time ./smalisca-test.py parser --depth 2 -l /home/victor/work/Projects/XXX/source/smali -s java -f sqlite  -o ~/work/Projects/XXXX/db.sqlite&quot;
-$ for i in {1..10};do eval ${CMD} 2&gt;&amp;1 /dev/null | grep total; done 
-./smalisca-test.py parser --depth 2 -l  -s java -f sqlite -o   5.52s user 0.28s system 156% cpu 3.704 total
-./smalisca-test.py parser --depth 2 -l  -s java -f sqlite -o   5.50s user 0.32s system 155% cpu 3.743 total
-./smalisca-test.py parser --depth 2 -l  -s java -f sqlite -o   5.59s user 0.29s system 152% cpu 3.864 total
-./smalisca-test.py parser --depth 2 -l  -s java -f sqlite -o   5.48s user 0.40s system 155% cpu 3.794 total
-./smalisca-test.py parser --depth 2 -l  -s java -f sqlite -o   5.42s user 0.35s system 155% cpu 3.720 total
-./smalisca-test.py parser --depth 2 -l  -s java -f sqlite -o   5.79s user 0.32s system 156% cpu 3.904 total
-./smalisca-test.py parser --depth 2 -l  -s java -f sqlite -o   5.50s user 0.34s system 152% cpu 3.836 total
-./smalisca-test.py parser --depth 2 -l  -s java -f sqlite -o   5.39s user 0.35s system 150% cpu 3.824 total
-./smalisca-test.py parser --depth 2 -l  -s java -f sqlite -o   5.58s user 0.31s system 159% cpu 3.684 total
-./smalisca-test.py parser --depth 2 -l  -s java -f sqlite -o   5.44s user 0.33s system 155% cpu 3.707 total
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">export </span><span class="nv">CMD</span><span class="o">=</span><span class="s2">&quot;time ./smalisca-test.py parser --depth 2 -l /home/victor/work/Projects/XXX/source/smali -s java -f sqlite  -o ~/work/Projects/XXXX/db.sqlite&quot;</span>
+<span class="nv">$ </span><span class="k">for</span> i in <span class="o">{</span>1..10<span class="o">}</span><span class="p">;</span><span class="k">do</span> <span class="nb">eval</span> <span class="si">${</span><span class="nv">CMD</span><span class="si">}</span> 2&gt;<span class="p">&amp;</span><span class="m">1</span> /dev/null <span class="p">|</span> grep total<span class="p">;</span> <span class="k">done</span> 
+./smalisca-test.py parser --depth <span class="m">2</span> -l  -s java -f sqlite -o   5.52s user 0.28s system 156% cpu 3.704 total
+./smalisca-test.py parser --depth <span class="m">2</span> -l  -s java -f sqlite -o   5.50s user 0.32s system 155% cpu 3.743 total
+./smalisca-test.py parser --depth <span class="m">2</span> -l  -s java -f sqlite -o   5.59s user 0.29s system 152% cpu 3.864 total
+./smalisca-test.py parser --depth <span class="m">2</span> -l  -s java -f sqlite -o   5.48s user 0.40s system 155% cpu 3.794 total
+./smalisca-test.py parser --depth <span class="m">2</span> -l  -s java -f sqlite -o   5.42s user 0.35s system 155% cpu 3.720 total
+./smalisca-test.py parser --depth <span class="m">2</span> -l  -s java -f sqlite -o   5.79s user 0.32s system 156% cpu 3.904 total
+./smalisca-test.py parser --depth <span class="m">2</span> -l  -s java -f sqlite -o   5.50s user 0.34s system 152% cpu 3.836 total
+./smalisca-test.py parser --depth <span class="m">2</span> -l  -s java -f sqlite -o   5.39s user 0.35s system 150% cpu 3.824 total
+./smalisca-test.py parser --depth <span class="m">2</span> -l  -s java -f sqlite -o   5.58s user 0.31s system 159% cpu 3.684 total
+./smalisca-test.py parser --depth <span class="m">2</span> -l  -s java -f sqlite -o   5.44s user 0.33s system 155% cpu 3.707 total
 </pre></div>
 
 
@@ -2124,11 +2124,11 @@ $ for i in {1..10};do eval ${CMD} 2&gt;&amp;1 /dev/null | grep total; done
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2015/05/24/validating-and-pinning-x509-certificates">Validating and pinning X.509 certificates</a></li>
+        <li><a href="http://blog.dornea.nu/2013/08/02/howto-automate-burp-using-burp-extender-api">HowTo: Automate Burp using Burp Extender API</a></li>
         <li><a href="http://blog.dornea.nu/2015/04/21/coming-back-to-cc-after-2-years">Coming back to C/C++ after 2 years</a></li>
-        <li><a href="http://blog.dornea.nu/2015/04/30/gethostbyname-vs-getaddrinfo">gethostbyname vs. getaddrinfo</a></li>
-        <li><a href="http://blog.dornea.nu/2009/05/21/overthewire-vortex-level0">OverTheWire: Vortex Level0</a></li>
-        <li><a href="http://blog.dornea.nu/2014/08/06/python-for-data-analysis">Python for Data Analysis</a></li>
+        <li><a href="http://blog.dornea.nu/2015/05/24/validating-and-pinning-x509-certificates">Validating and pinning X.509 certificates</a></li>
+        <li><a href="http://blog.dornea.nu/2014/05/04/howto-create-docs-with-sphinx">HowTo: Create docs with sphinx</a></li>
+        <li><a href="http://blog.dornea.nu/2010/05/07/birthday-paradoxproblem">Birthday paradox/problem</a></li>
     </ul>
 </section>
     <hr />
@@ -2189,6 +2189,11 @@ $ for i in {1..10};do eval ${CMD} 2&gt;&amp;1 /dev/null | grep total; done
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
                 <ul class="list-group" id="recentposts">
                     <li class="list-group-item">
+                        <a href="http://blog.dornea.nu/2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer">
+                            Basic Layer 2 Switching using Cisco Packet Tracer
+                        </a>
+                    </li>
+                    <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2015/10/02/manage-pki-using-openssl">
                             Manage PKI using OpenSSL
                         </a>
@@ -2218,11 +2223,6 @@ $ for i in {1..10};do eval ${CMD} 2&gt;&amp;1 /dev/null | grep total; done
                             Validating and pinning X.509 certificates
                         </a>
                     </li>
-                    <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/2015/05/06/adding-concurrency-to-smalisca">
-                            Adding concurrency to smalisca
-                        </a>
-                    </li>
                 </ul>
             </li>
 
@@ -2243,316 +2243,6 @@ $ for i in {1..10};do eval ${CMD} 2&gt;&amp;1 /dev/null | grep total; done
 
             <li class="list-group-item"><a href="http://blog.dornea.nu/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group list-inline tagcloud" id="tags">
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/adobe/">
-                            adobe
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/androguard/">
-                            androguard
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/android/">
-                            android
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/apple/">
-                            apple
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/appsec/">
-                            appsec
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/blockdiag/">
-                            blockdiag
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/blog/">
-                            blog
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/books/">
-                            books
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/burp/">
-                            burp
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/c/">
-                            c
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/code/">
-                            code
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/coding/">
-                            coding
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/crypto/">
-                            crypto
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/cryptography/">
-                            cryptography
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/debug/">
-                            debug
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/docker/">
-                            docker
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/droidbox/">
-                            droidbox
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/eclipse/">
-                            eclipse
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/events/">
-                            events
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/fakebanker/">
-                            fakebanker
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/flash/">
-                            flash
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/graphviz/">
-                            graphviz
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/hacking/">
-                            hacking
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/howto/">
-                            howto
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/infosec/">
-                            infosec
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/ios/">
-                            ios
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/iptables/">
-                            iptables
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/ipython/">
-                            ipython
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/java/">
-                            java
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/javascript/">
-                            javascript
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/jquery/">
-                            jquery
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/linux/">
-                            linux
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/low/">
-                            low
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/misc/">
-                            misc
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/mobile/">
-                            mobile
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/network/">
-                            network
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/networking/">
-                            networking
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/note/">
-                            note
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/octopress/">
-                            octopress
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/openssl/">
-                            openssl
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/pandoc/">
-                            pandoc
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/pelican/">
-                            pelican
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/pocket/">
-                            pocket
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/programming/">
-                            programming
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/python/">
-                            python
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/re/">
-                            re
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/sca/">
-                            sca
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/science/">
-                            science
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/security/">
-                            security
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/smalisca/">
-                            smalisca
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/ssl/">
-                            ssl
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/tiddly/">
-                            tiddly
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/tls/">
-                            tls
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/uncategorized/">
-                            uncategorized
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/virtualization/">
-                            virtualization
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/viz/">
-                            viz
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/wargames/">
-                            wargames
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/web/">
-                            web
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/whatsapp/">
-                            whatsapp
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/wtf/">
-                            wtf
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/x509/">
-                            x509
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/xmind/">
-                            xmind
-                        </a>
-                    </li>
                 </ul>
             </li>
 

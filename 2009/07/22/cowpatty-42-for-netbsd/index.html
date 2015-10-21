@@ -1596,7 +1596,7 @@ init_mathjax();
 <link rel="canonical" href="http://blog.dornea.nu/2009/07/22/cowpatty-42-for-netbsd">
 
         <meta name="author" content="Victor" />
-        <meta name="keywords" content="security" />
+        <meta name="keywords" content="security,netbsd" />
         <meta name="description" content="From http://wirelessdefence.org/Contents/coWPAttyMain.htm: “coWPAtty is designed to audit the pre-shared key (PSK) selection for WPA networks based on the TKIP protocol.” - Joshua Wright. Since I had problems installing/compiling cowpatty, I had to modify the Makefile and several include-lines in some files. Currently I’m using ..." />
 
         <meta property="og:site_name" content="blog.dornea.nu" />
@@ -1607,6 +1607,7 @@ init_mathjax();
         <meta property="article:published_time" content="2009-07-22" />
             <meta property="article:section" content="blog" />
             <meta property="article:tag" content="security" />
+            <meta property="article:tag" content="netbsd" />
             <meta property="article:author" content="Victor" />
 
     <meta name="twitter:card" content="summary">
@@ -1706,6 +1707,8 @@ blog.dornea.nu            </a>
 
 <span class="label label-default">Tags</span>
 	<a href="http://blog.dornea.nu/tag/security/">security</a>
+        /
+	<a href="http://blog.dornea.nu/tag/netbsd/">netbsd</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -1719,10 +1722,10 @@ blog.dornea.nu            </a>
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2012/12/30/ccc-29c3">CCC / 29C3</a></li>
-        <li><a href="http://blog.dornea.nu/2013/05/02/overthewire-vortex-level1">OverTheWire: Vortex Level1</a></li>
-        <li><a href="http://blog.dornea.nu/2010/10/07/find-out-your-geolocation-via-mac-address">Find out your geolocation via MAC address</a></li>
-        <li><a href="http://blog.dornea.nu/2013/05/02/overthewire-vortex-level2">OverTheWire: Vortex Level2</a></li>
+        <li><a href="http://blog.dornea.nu/2009/11/14/netbsd-linux-xen-does-it-work">NetBSD, Linux &#038; Xen &#8211; Does it work?</a></li>
+        <li><a href="http://blog.dornea.nu/2010/09/17/the-ac1db1tch3z-exploit-and-robert-you-suck-thingie">The Ac1db1tch3z exploit and &#8220;Robert you suck&#8221; thingie</a></li>
+        <li><a href="http://blog.dornea.nu/2008/11/26/viral-infections-on-linux-german">Viral Infections on Linux (german)</a></li>
+        <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump">24h Android sniffing using tcpdump</a></li>
         <li><a href="http://blog.dornea.nu/2014/10/29/howto-ios-apps-static-analysis">HowTo: iOS Apps - Static analysis</a></li>
     </ul>
 </section>
@@ -1784,6 +1787,11 @@ blog.dornea.nu            </a>
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
                 <ul class="list-group" id="recentposts">
                     <li class="list-group-item">
+                        <a href="http://blog.dornea.nu/2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer">
+                            Basic Layer 2 Switching using Cisco Packet Tracer
+                        </a>
+                    </li>
+                    <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2015/10/02/manage-pki-using-openssl">
                             Manage PKI using OpenSSL
                         </a>
@@ -1813,11 +1821,6 @@ blog.dornea.nu            </a>
                             Validating and pinning X.509 certificates
                         </a>
                     </li>
-                    <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/2015/05/06/adding-concurrency-to-smalisca">
-                            Adding concurrency to smalisca
-                        </a>
-                    </li>
                 </ul>
             </li>
 
@@ -1838,316 +1841,6 @@ blog.dornea.nu            </a>
 
             <li class="list-group-item"><a href="http://blog.dornea.nu/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group list-inline tagcloud" id="tags">
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/adobe/">
-                            adobe
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/androguard/">
-                            androguard
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/android/">
-                            android
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/apple/">
-                            apple
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/appsec/">
-                            appsec
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/blockdiag/">
-                            blockdiag
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/blog/">
-                            blog
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/books/">
-                            books
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/burp/">
-                            burp
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/c/">
-                            c
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/code/">
-                            code
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/coding/">
-                            coding
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/crypto/">
-                            crypto
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/cryptography/">
-                            cryptography
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/debug/">
-                            debug
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/docker/">
-                            docker
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/droidbox/">
-                            droidbox
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/eclipse/">
-                            eclipse
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/events/">
-                            events
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/fakebanker/">
-                            fakebanker
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/flash/">
-                            flash
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/graphviz/">
-                            graphviz
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/hacking/">
-                            hacking
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/howto/">
-                            howto
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/infosec/">
-                            infosec
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/ios/">
-                            ios
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/iptables/">
-                            iptables
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/ipython/">
-                            ipython
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/java/">
-                            java
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/javascript/">
-                            javascript
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/jquery/">
-                            jquery
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/linux/">
-                            linux
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/low/">
-                            low
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/misc/">
-                            misc
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/mobile/">
-                            mobile
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/network/">
-                            network
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/networking/">
-                            networking
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/note/">
-                            note
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/octopress/">
-                            octopress
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/openssl/">
-                            openssl
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/pandoc/">
-                            pandoc
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/pelican/">
-                            pelican
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/pocket/">
-                            pocket
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/programming/">
-                            programming
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/python/">
-                            python
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/re/">
-                            re
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/sca/">
-                            sca
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/science/">
-                            science
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/security/">
-                            security
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/smalisca/">
-                            smalisca
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/ssl/">
-                            ssl
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/tiddly/">
-                            tiddly
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/tls/">
-                            tls
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/uncategorized/">
-                            uncategorized
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/virtualization/">
-                            virtualization
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/viz/">
-                            viz
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/wargames/">
-                            wargames
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/web/">
-                            web
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/whatsapp/">
-                            whatsapp
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/wtf/">
-                            wtf
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/x509/">
-                            x509
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/xmind/">
-                            xmind
-                        </a>
-                    </li>
                 </ul>
             </li>
 

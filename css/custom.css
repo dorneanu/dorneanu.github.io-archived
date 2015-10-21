@@ -1,7 +1,7 @@
 .container img {
     display: block;
-    margin: auto;
-    max-width: 90%;
+    /* margin: auto; */
+    max-width: 65%;
 }
 
 .output_svg {

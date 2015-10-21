@@ -1596,7 +1596,7 @@ init_mathjax();
 <link rel="canonical" href="http://blog.dornea.nu/2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms">
 
         <meta name="author" content="Victor Dorneanu" />
-        <meta name="keywords" content="android,eclipse,java,debug,howto,mobile,fakebanker" />
+        <meta name="keywords" content="android,eclipse,java,debug,howto,mobile,fakebanker,appsec" />
         <meta name="description" content="Simply out of necessity I&#39;ve written this mini-tutorial how debug android APKs using Eclipse and DDMS. After hours of wild googling these are the steps to make your APK debuggable under Eclipse. I&#39;ll be using the FakeBanker APK reverse-engineered in previous articles. Revisions UPDATE 2014-12-09: Before looking at ..." />
 
         <meta property="og:site_name" content="blog.dornea.nu" />
@@ -1613,6 +1613,7 @@ init_mathjax();
             <meta property="article:tag" content="howto" />
             <meta property="article:tag" content="mobile" />
             <meta property="article:tag" content="fakebanker" />
+            <meta property="article:tag" content="appsec" />
             <meta property="article:author" content="Victor Dorneanu" />
 
     <meta name="twitter:card" content="summary">
@@ -1724,6 +1725,8 @@ blog.dornea.nu            </a>
 	<a href="http://blog.dornea.nu/tag/mobile/">mobile</a>
         /
 	<a href="http://blog.dornea.nu/tag/fakebanker/">fakebanker</a>
+        /
+	<a href="http://blog.dornea.nu/tag/appsec/">appsec</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -1736,31 +1739,31 @@ After hours of wild googling these are the steps to make your APK debuggable und
 <p>Before looking at the next steps, make sure you'll have a look at <a href="http://adus.dev.dornea.nu/">ADUS</a>. It will help you with the automation of several steps described in this post. Added some additional infos regarding the breakpoints.</p>
 <h2 id="dump-the-apk">Dump the APK</h2>
 <p>First of all make sure you'll have the latest version of <code>apktool</code>. I've compiled it by myself:</p>
-<div class="highlight"><pre># git clone git://github.com/iBotPeaches/Apktool.git
-oCloning into &#39;Apktool&#39;...    
-remote: Counting objects: 9605, done.
-remote: Compressing objects: 100% (3622/3622), done.
-remote: Total 9605 (delta 4556), reused 9494 (delta 4502)
-Receiving objects: 100% (9605/9605), 34.27 MiB | 3.89 MiB/s, done.
-Resolving deltas: 100% (4556/4556), done.
-Checking connectivity... done.
+<div class="highlight"><pre><span class="c"># git clone git://github.com/iBotPeaches/Apktool.git</span>
+oCloning into <span class="s1">&#39;Apktool&#39;</span>...    
+remote: Counting objects: 9605, <span class="k">done</span>.
+remote: Compressing objects: 100% <span class="o">(</span>3622/3622<span class="o">)</span>, <span class="k">done</span>.
+remote: Total <span class="m">9605</span> <span class="o">(</span>delta 4556<span class="o">)</span>, reused <span class="m">9494</span> <span class="o">(</span>delta 4502<span class="o">)</span>
+Receiving objects: 100% <span class="o">(</span>9605/9605<span class="o">)</span>, 34.27 MiB <span class="p">|</span> 3.89 MiB/s, <span class="k">done</span>.
+Resolving deltas: 100% <span class="o">(</span>4556/4556<span class="o">)</span>, <span class="k">done</span>.
+Checking connectivity... <span class="k">done</span>.
 
-# cd Apktool
-# ./gradlew build fatJar
-[o...]
+<span class="c"># cd Apktool</span>
+<span class="c"># ./gradlew build fatJar</span>
+<span class="o">[</span>o...<span class="o">]</span>
 </pre></div>
 
 
 <p>Afterwards you'll get a new fresh <code>apktool</code> to use within the next steps:</p>
-<div class="highlight"><pre># find . -name &quot;apktool-cli.jar&quot;
+<div class="highlight"><pre><span class="c"># find . -name &quot;apktool-cli.jar&quot;</span>
 ./obrut.apktool/apktool-cli/build/libs/apktool-cli.jar
 
-# cp ./brut.apktool/apktool-cli/build/libs/apktool-cli.jar /tmp
+<span class="c"># cp ./brut.apktool/apktool-cli/build/libs/apktool-cli.jar /tmp</span>
 </pre></div>
 
 
 <p>After having installed the right tool it's time to dump the APK contents:</p>
-<div class="highlight"><pre># java -jar /tmp/apktool-cli.jar d -d FakeBanker.apk -o source
+<div class="highlight"><pre><span class="c"># java -jar /tmp/apktool-cli.jar d -d FakeBanker.apk -o source</span>
 I: Using Apktool 2.0.0-3d2e93-SNAPSHOT on FakeBanker.apk
 I: Loading resource table...
 I: Loading resource table...
@@ -1777,8 +1780,8 @@ I: Copying original files...
 
 
 <p>Afterwards I got following file structure:</p>
-<div class="highlight"><pre>tree -L 2 source 
-source
+<div class="highlight"><pre>tree -L <span class="m">2</span> <span class="nb">source </span>
+<span class="nb">source</span>
 ├── AndroidManifest.xml
 ├── apktool.yml
 ├── original
@@ -1797,7 +1800,7 @@ source
     ├── android
     └── com
 
-14 directories, 3 files
+<span class="m">14</span> directories, <span class="m">3</span> files
 </pre></div>
 
 
@@ -1816,13 +1819,13 @@ source
 
 <h2 id="build-new-app">Build new APP</h2>
 <p>Now you're ready to build you new debuggable APK using <code>apktool</code>:</p>
-<div class="highlight"><pre>java -jar /tmp/apktool-cli.jar b -d source FakeBanker.Debug.apk
-I: Using Apktool 2.0.0-3d2e93-SNAPSHOT on source
+<div class="highlight"><pre>java -jar /tmp/apktool-cli.jar b -d <span class="nb">source </span>FakeBanker.Debug.apk
+I: Using Apktool 2.0.0-3d2e93-SNAPSHOT on <span class="nb">source</span>
 I: Checking whether sources has changed...
 I: Smaling smali folder into classes.dex...
 I: Checking whether resources has changed...
 I: Building resources...
-Warning: AndroidManifest.xml already defines debuggable (in http://schemas.android.com/apk/res/android); using existing value in manifest.
+Warning: AndroidManifest.xml already defines debuggable <span class="o">(</span>in http://schemas.android.com/apk/res/android<span class="o">)</span><span class="p">;</span> using existing value in manifest.
 I: Building apk file...
 </pre></div>
 
@@ -1836,7 +1839,7 @@ I: Building apk file...
 </ul>
 <h2 id="extract-sources">Extract sources</h2>
 <p>I'll be using <code>jd-gui</code> to <strong>undex</strong> the dex files inside the newly created package. First let's unpack <code>FakeBanker.Debug.apk</code>:</p>
-<div class="highlight"><pre># unzip FakeBanker.Debug.apk -d unpacked
+<div class="highlight"><pre><span class="c"># unzip FakeBanker.Debug.apk -d unpacked</span>
 Archive:  FakeBanker.Debug.apk
  extracting: unpacked/res/drawable-hdpi/ic_launcher1.png  
  extracting: unpacked/res/drawable-hdpi/logo.png  
@@ -1856,8 +1859,8 @@ Archive:  FakeBanker.Debug.apk
 
 
 <p>Let <code>dex2jar</code> do its job:</p>
-<div class="highlight"><pre># cd unpacked
-# dex2jar classes.dex
+<div class="highlight"><pre><span class="c"># cd unpacked</span>
+<span class="c"># dex2jar classes.dex</span>
 dex2jar classes.dex -&gt; classes-dex2jar.jar
 </pre></div>
 
@@ -1866,28 +1869,28 @@ dex2jar classes.dex -&gt; classes-dex2jar.jar
 <p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/jd-gui.png"></p>
 <h2 id="sign-the-apk">Sign the APK</h2>
 <p>In order to push your APK to the device you'll have to <strong>sign</strong> it. I'll therefor using a test <a href="http://developer.android.com/tools/publishing/app-signing.html">certificate</a>:</p>
-<div class="highlight"><pre># git clone https://github.com/appium/sign
-Cloning into &#39;sign&#39;...
-remote: Counting objects: 49, done.
-remote: Total 49 (delta 0), reused 0 (delta 0)
-Unpacking objects: 100% (49/49), done.
-Checking connectivity... done.
+<div class="highlight"><pre><span class="c"># git clone https://github.com/appium/sign</span>
+Cloning into <span class="s1">&#39;sign&#39;</span>...
+remote: Counting objects: 49, <span class="k">done</span>.
+remote: Total <span class="m">49</span> <span class="o">(</span>delta 0<span class="o">)</span>, reused <span class="m">0</span> <span class="o">(</span>delta 0<span class="o">)</span>
+Unpacking objects: 100% <span class="o">(</span>49/49<span class="o">)</span>, <span class="k">done</span>.
+Checking connectivity... <span class="k">done</span>.
 </pre></div>
 
 
 <p>Now let's sign it:</p>
-<div class="highlight"><pre># java -jar sign/dist/signapk.jar sign/testkey.x509.pem sign/testkey.pk8 FakeBanker.Debug.apk FakeBanker.Debug.Signed.apk          
+<div class="highlight"><pre><span class="c"># java -jar sign/dist/signapk.jar sign/testkey.x509.pem sign/testkey.pk8 FakeBanker.Debug.apk FakeBanker.Debug.Signed.apk          </span>
 </pre></div>
 
 
 <h2 id="install-the-apk">Install the APK</h2>
 <p>Having signed the APK now you're ready to push it to your device and have some fun.</p>
-<div class="highlight"><pre># adb devices -l  
+<div class="highlight"><pre><span class="c"># adb devices -l  </span>
 List of devices attached 
 emulator-5554          device product:sdk model:sdk device:generic
 
-# adb install FakeBanker.Debug.Signed.apk
-1628 KB/s (219033 bytes in 0.131s)
+<span class="c"># adb install FakeBanker.Debug.Signed.apk</span>
+<span class="m">1628</span> KB/s <span class="o">(</span><span class="m">219033</span> bytes in 0.131s<span class="o">)</span>
     pkg: /data/local/tmp/FakeBanker.Debug.Signed.apk
 Success
 </pre></div>
@@ -1896,18 +1899,18 @@ Success
 <p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/app_installed.png"></p>
 <h2 id="add-sources">Add sources</h2>
 <p>We'll add the Java sources to the <code>source</code> directory structure:</p>
-<div class="highlight"><pre># mkdir source/src
-# unzip classes-dex2jar.src.zip -d source/src 
+<div class="highlight"><pre><span class="c"># mkdir source/src</span>
+<span class="c"># unzip classes-dex2jar.src.zip -d source/src </span>
 Archive:  classes-dex2jar.src.zip
-   creating: source/src/android/
-   creating: source/src/android/support/
+   creating: <span class="nb">source</span>/src/android/
+   creating: <span class="nb">source</span>/src/android/support/
 ...
 </pre></div>
 
 
 <p>The new directory structure will be:</p>
-<div class="highlight"><pre># tree -L 2 source 
-source
+<div class="highlight"><pre><span class="c"># tree -L 2 source </span>
+<span class="nb">source</span>
 ├── AndroidManifest.xml
 ├── apktool.yml
 ├── bin
@@ -1936,7 +1939,7 @@ source
     ├── android
     └── com
 
-23 directories, 4 files
+<span class="m">23</span> directories, <span class="m">4</span> files
 </pre></div>
 
 
@@ -2012,11 +2015,11 @@ below.     </p>
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2014/08/05/android-dynamic-code-analysis-mastering-droidbox">Android Dynamic Code Analysis - Mastering DroidBox</a></li>
-        <li><a href="http://blog.dornea.nu/2014/12/02/howto-proxy-non-proxy-aware-android-applications-through-burp">HowTo: Proxy Non-Proxy-Aware Android Applications through Burp</a></li>
         <li><a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a></li>
         <li><a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a></li>
-        <li><a href="http://blog.dornea.nu/2015/02/20/android-remote-sniffing-using-tcpdump-nc-and-wireshark">Android remote sniffing using Tcpdump, nc and Wireshark</a></li>
+        <li><a href="http://blog.dornea.nu/2014/08/05/android-dynamic-code-analysis-mastering-droidbox">Android Dynamic Code Analysis - Mastering DroidBox</a></li>
+        <li><a href="http://blog.dornea.nu/2014/12/02/howto-proxy-non-proxy-aware-android-applications-through-burp">HowTo: Proxy Non-Proxy-Aware Android Applications through Burp</a></li>
+        <li><a href="http://blog.dornea.nu/2015/07/01/debugging-android-native-shared-libraries">Debugging Android native shared libraries</a></li>
     </ul>
 </section>
     <hr />
@@ -2077,6 +2080,11 @@ below.     </p>
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
                 <ul class="list-group" id="recentposts">
                     <li class="list-group-item">
+                        <a href="http://blog.dornea.nu/2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer">
+                            Basic Layer 2 Switching using Cisco Packet Tracer
+                        </a>
+                    </li>
+                    <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2015/10/02/manage-pki-using-openssl">
                             Manage PKI using OpenSSL
                         </a>
@@ -2106,11 +2114,6 @@ below.     </p>
                             Validating and pinning X.509 certificates
                         </a>
                     </li>
-                    <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/2015/05/06/adding-concurrency-to-smalisca">
-                            Adding concurrency to smalisca
-                        </a>
-                    </li>
                 </ul>
             </li>
 
@@ -2131,316 +2134,6 @@ below.     </p>
 
             <li class="list-group-item"><a href="http://blog.dornea.nu/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group list-inline tagcloud" id="tags">
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/adobe/">
-                            adobe
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/androguard/">
-                            androguard
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/android/">
-                            android
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/apple/">
-                            apple
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/appsec/">
-                            appsec
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/blockdiag/">
-                            blockdiag
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/blog/">
-                            blog
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/books/">
-                            books
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/burp/">
-                            burp
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/c/">
-                            c
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/code/">
-                            code
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/coding/">
-                            coding
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/crypto/">
-                            crypto
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/cryptography/">
-                            cryptography
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/debug/">
-                            debug
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/docker/">
-                            docker
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/droidbox/">
-                            droidbox
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/eclipse/">
-                            eclipse
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/events/">
-                            events
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/fakebanker/">
-                            fakebanker
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/flash/">
-                            flash
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/graphviz/">
-                            graphviz
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/hacking/">
-                            hacking
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/howto/">
-                            howto
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/infosec/">
-                            infosec
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/ios/">
-                            ios
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/iptables/">
-                            iptables
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/ipython/">
-                            ipython
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/java/">
-                            java
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/javascript/">
-                            javascript
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/jquery/">
-                            jquery
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/linux/">
-                            linux
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/low/">
-                            low
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/misc/">
-                            misc
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/mobile/">
-                            mobile
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/network/">
-                            network
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/networking/">
-                            networking
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/note/">
-                            note
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/octopress/">
-                            octopress
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/openssl/">
-                            openssl
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/pandoc/">
-                            pandoc
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/pelican/">
-                            pelican
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/pocket/">
-                            pocket
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/programming/">
-                            programming
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/python/">
-                            python
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/re/">
-                            re
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/sca/">
-                            sca
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/science/">
-                            science
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/security/">
-                            security
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/smalisca/">
-                            smalisca
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/ssl/">
-                            ssl
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/tiddly/">
-                            tiddly
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/tls/">
-                            tls
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/uncategorized/">
-                            uncategorized
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/virtualization/">
-                            virtualization
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/viz/">
-                            viz
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/wargames/">
-                            wargames
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/web/">
-                            web
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/whatsapp/">
-                            whatsapp
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/wtf/">
-                            wtf
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/x509/">
-                            x509
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/xmind/">
-                            xmind
-                        </a>
-                    </li>
                 </ul>
             </li>
 

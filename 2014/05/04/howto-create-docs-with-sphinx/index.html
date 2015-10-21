@@ -1596,7 +1596,7 @@ init_mathjax();
 <link rel="canonical" href="http://blog.dornea.nu/2014/05/04/howto-create-docs-with-sphinx">
 
         <meta name="author" content="Victor" />
-        <meta name="keywords" content="coding,howto" />
+        <meta name="keywords" content="coding,howto,python" />
         <meta name="description" content="In this post I’d like to show some handy way to improve your process of documentating your project. Since we all know documentation is a must you might have wondered how to handle that without any big efforts. In fact it would be great if you could write your ..." />
 
         <meta property="og:site_name" content="blog.dornea.nu" />
@@ -1608,6 +1608,7 @@ init_mathjax();
             <meta property="article:section" content="blog" />
             <meta property="article:tag" content="coding" />
             <meta property="article:tag" content="howto" />
+            <meta property="article:tag" content="python" />
             <meta property="article:author" content="Victor" />
 
     <meta name="twitter:card" content="summary">
@@ -1709,6 +1710,8 @@ blog.dornea.nu            </a>
 	<a href="http://blog.dornea.nu/tag/coding/">coding</a>
         /
 	<a href="http://blog.dornea.nu/tag/howto/">howto</a>
+        /
+	<a href="http://blog.dornea.nu/tag/python/">python</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -1740,9 +1743,9 @@ needs:</p>
 <h2 id="quickstart">Quickstart</h2>
 <h3 id="install-tools">Install tools</h3>
 <p>First of create a new <a href="http://www.virtualenv.org/en/latest/">virtualenv</a> environment:</p>
-<div class="highlight"><pre>$ mkdir doku
-$ virtualenv doku
-Using base prefix &amp;#039;/usr&amp;#039;
+<div class="highlight"><pre><span class="nv">$ </span>mkdir doku
+<span class="nv">$ </span>virtualenv doku
+Using base prefix <span class="p">&amp;</span><span class="c">#039;/usr&amp;#039;</span>
 New python executable in doku/bin/python3
 Also creating executable in doku/bin/python
 Installing setuptools, pip...done.
@@ -1750,73 +1753,73 @@ Installing setuptools, pip...done.
 
 
 <p>Then activate it:</p>
-<div class="highlight"><pre>    $ source doku/bin/activate
-    â  tmp  source doku/bin/activate
-    (doku)â  tmp  cd doku
-    (doku)â  doku  ls -l
+<div class="highlight"><pre>    <span class="nv">$ </span><span class="nb">source </span>doku/bin/activate
+    â  tmp  <span class="nb">source </span>doku/bin/activate
+    <span class="o">(</span>doku<span class="o">)</span>â  tmp  <span class="nb">cd </span>doku
+    <span class="o">(</span>doku<span class="o">)</span>â  doku  ls -l
     total 12
-    drwxr-xr-x 2 victor users 4096 May  4 13:37 bin
-    drwxr-xr-x 2 victor users 4096 May  4 13:37 include
-    drwxr-xr-x 3 victor users 4096 May  4 13:37 lib
+    drwxr-xr-x <span class="m">2</span> victor users <span class="m">4096</span> May  <span class="m">4</span> 13:37 bin
+    drwxr-xr-x <span class="m">2</span> victor users <span class="m">4096</span> May  <span class="m">4</span> 13:37 include
+    drwxr-xr-x <span class="m">3</span> victor users <span class="m">4096</span> May  <span class="m">4</span> 13:37 lib
 </pre></div>
 
 
 <p>Now you&#8217;ll have to install <strong>sphinx</strong> using <strong>pip</strong>:</p>
-<div class="highlight"><pre>    (doku) pip install sphinx
+<div class="highlight"><pre>    <span class="o">(</span>doku<span class="o">)</span> pip install sphinx
     Downloading/unpacking sphinx
-      Downloading Sphinx-1.2.2-py33-none-any.whl (1.1MB): 1.1MB downloaded
-    Downloading/unpacking docutils&gt;=0.10 (from sphinx)
-      Downloading docutils-0.11.tar.gz (1.6MB): 1.6MB downloaded
-      Running setup.py (path:/home/victor/tmp/doku/build/docutils/setup.py) egg_info for package docutils
+      Downloading Sphinx-1.2.2-py33-none-any.whl <span class="o">(</span>1.1MB<span class="o">)</span>: 1.1MB downloaded
+    Downloading/unpacking docutils&gt;<span class="o">=</span>0.10 <span class="o">(</span>from sphinx<span class="o">)</span>
+      Downloading docutils-0.11.tar.gz <span class="o">(</span>1.6MB<span class="o">)</span>: 1.6MB downloaded
+      Running setup.py <span class="o">(</span>path:/home/victor/tmp/doku/build/docutils/setup.py<span class="o">)</span> egg_info <span class="k">for</span> package docutils
 
-        warning: no files found matching &#39;MANIFEST&#39;
-        warning: no files found matching &#39;*&#39; under directory &#39;extras&#39;
-        warning: no previously-included files matching &#39;.cvsignore&#39; found under directory &#39;*&#39;
-        warning: no previously-included files matching &#39;*.pyc&#39; found under directory &#39;*&#39;
-        warning: no previously-included files matching &#39;*~&#39; found under directory &#39;*&#39;
-        warning: no previously-included files matching &#39;.DS_Store&#39; found under directory &#39;*&#39;
-    Downloading/unpacking Jinja2&gt;=2.3 (from sphinx)
-      Downloading Jinja2-2.7.2.tar.gz (378kB): 378kB downloaded
-      Running setup.py (path:/home/victor/tmp/doku/build/Jinja2/setup.py) egg_info for package Jinja2
+        warning: no files found matching <span class="s1">&#39;MANIFEST&#39;</span>
+        warning: no files found matching <span class="s1">&#39;*&#39;</span> under directory <span class="s1">&#39;extras&#39;</span>
+        warning: no previously-included files matching <span class="s1">&#39;.cvsignore&#39;</span> found under directory <span class="s1">&#39;*&#39;</span>
+        warning: no previously-included files matching <span class="s1">&#39;*.pyc&#39;</span> found under directory <span class="s1">&#39;*&#39;</span>
+        warning: no previously-included files matching <span class="s1">&#39;*~&#39;</span> found under directory <span class="s1">&#39;*&#39;</span>
+        warning: no previously-included files matching <span class="s1">&#39;.DS_Store&#39;</span> found under directory <span class="s1">&#39;*&#39;</span>
+    Downloading/unpacking Jinja2&gt;<span class="o">=</span>2.3 <span class="o">(</span>from sphinx<span class="o">)</span>
+      Downloading Jinja2-2.7.2.tar.gz <span class="o">(</span>378kB<span class="o">)</span>: 378kB downloaded
+      Running setup.py <span class="o">(</span>path:/home/victor/tmp/doku/build/Jinja2/setup.py<span class="o">)</span> egg_info <span class="k">for</span> package Jinja2
 
-        warning: no files found matching &#39;*&#39; under directory &#39;custom_fixers&#39;
-        warning: no previously-included files matching &#39;*&#39; found under directory &#39;docs/_build&#39;
-        warning: no previously-included files matching &#39;*.pyc&#39; found under directory &#39;jinja2&#39;
-        warning: no previously-included files matching &#39;*.pyc&#39; found under directory &#39;docs&#39;
-        warning: no previously-included files matching &#39;*.pyo&#39; found under directory &#39;jinja2&#39;
-        warning: no previously-included files matching &#39;*.pyo&#39; found under directory &#39;docs&#39;
-    Downloading/unpacking Pygments&gt;=1.2 (from sphinx)
-      Downloading Pygments-1.6.tar.gz (1.4MB): 1.4MB downloaded
-      Running setup.py (path:/home/victor/tmp/doku/build/Pygments/setup.py) egg_info for package Pygments
+        warning: no files found matching <span class="s1">&#39;*&#39;</span> under directory <span class="s1">&#39;custom_fixers&#39;</span>
+        warning: no previously-included files matching <span class="s1">&#39;*&#39;</span> found under directory <span class="s1">&#39;docs/_build&#39;</span>
+        warning: no previously-included files matching <span class="s1">&#39;*.pyc&#39;</span> found under directory <span class="s1">&#39;jinja2&#39;</span>
+        warning: no previously-included files matching <span class="s1">&#39;*.pyc&#39;</span> found under directory <span class="s1">&#39;docs&#39;</span>
+        warning: no previously-included files matching <span class="s1">&#39;*.pyo&#39;</span> found under directory <span class="s1">&#39;jinja2&#39;</span>
+        warning: no previously-included files matching <span class="s1">&#39;*.pyo&#39;</span> found under directory <span class="s1">&#39;docs&#39;</span>
+    Downloading/unpacking Pygments&gt;<span class="o">=</span>1.2 <span class="o">(</span>from sphinx<span class="o">)</span>
+      Downloading Pygments-1.6.tar.gz <span class="o">(</span>1.4MB<span class="o">)</span>: 1.4MB downloaded
+      Running setup.py <span class="o">(</span>path:/home/victor/tmp/doku/build/Pygments/setup.py<span class="o">)</span> egg_info <span class="k">for</span> package Pygments
 
-    Downloading/unpacking markupsafe (from Jinja2&gt;=2.3-&gt;sphinx)
+    Downloading/unpacking markupsafe <span class="o">(</span>from Jinja2&gt;<span class="o">=</span>2.3-&gt;sphinx<span class="o">)</span>
       Downloading MarkupSafe-0.21.tar.gz
-      Running setup.py (path:/home/victor/tmp/doku/build/markupsafe/setup.py) egg_info for package markupsafe
+      Running setup.py <span class="o">(</span>path:/home/victor/tmp/doku/build/markupsafe/setup.py<span class="o">)</span> egg_info <span class="k">for</span> package markupsafe
 
     Installing collected packages: sphinx, docutils, Jinja2, Pygments, markupsafe
-      Running setup.py install for docutils
+      Running setup.py install <span class="k">for</span> docutils
         Skipping implicit fixer: buffer
         Skipping implicit fixer: idioms
         Skipping implicit fixer: set_literal
         Skipping implicit fixer: ws_comma
-        copy/convert test suite
-        changing mode of build/scripts-3.4/rst2html.py from 644 to 755
-        changing mode of build/scripts-3.4/rst2s5.py from 644 to 755
-        changing mode of build/scripts-3.4/rst2latex.py from 644 to 755
-        changing mode of build/scripts-3.4/rst2xetex.py from 644 to 755
-        changing mode of build/scripts-3.4/rst2man.py from 644 to 755
-        changing mode of build/scripts-3.4/rst2xml.py from 644 to 755
-        changing mode of build/scripts-3.4/rst2pseudoxml.py from 644 to 755
-        changing mode of build/scripts-3.4/rstpep2html.py from 644 to 755
-        changing mode of build/scripts-3.4/rst2odt.py from 644 to 755
-        changing mode of build/scripts-3.4/rst2odt_prepstyles.py from 644 to 755
+        copy/convert <span class="nb">test </span>suite
+        changing mode of build/scripts-3.4/rst2html.py from <span class="m">644</span> to 755
+        changing mode of build/scripts-3.4/rst2s5.py from <span class="m">644</span> to 755
+        changing mode of build/scripts-3.4/rst2latex.py from <span class="m">644</span> to 755
+        changing mode of build/scripts-3.4/rst2xetex.py from <span class="m">644</span> to 755
+        changing mode of build/scripts-3.4/rst2man.py from <span class="m">644</span> to 755
+        changing mode of build/scripts-3.4/rst2xml.py from <span class="m">644</span> to 755
+        changing mode of build/scripts-3.4/rst2pseudoxml.py from <span class="m">644</span> to 755
+        changing mode of build/scripts-3.4/rstpep2html.py from <span class="m">644</span> to 755
+        changing mode of build/scripts-3.4/rst2odt.py from <span class="m">644</span> to 755
+        changing mode of build/scripts-3.4/rst2odt_prepstyles.py from <span class="m">644</span> to 755
 
-        warning: no files found matching &#39;MANIFEST&#39;
-        warning: no files found matching &#39;*&#39; under directory &#39;extras&#39;
-        warning: no previously-included files matching &#39;.cvsignore&#39; found under directory &#39;*&#39;
-        warning: no previously-included files matching &#39;*.pyc&#39; found under directory &#39;*&#39;
-        warning: no previously-included files matching &#39;*~&#39; found under directory &#39;*&#39;
-        warning: no previously-included files matching &#39;.DS_Store&#39; found under directory &#39;*&#39;
+        warning: no files found matching <span class="s1">&#39;MANIFEST&#39;</span>
+        warning: no files found matching <span class="s1">&#39;*&#39;</span> under directory <span class="s1">&#39;extras&#39;</span>
+        warning: no previously-included files matching <span class="s1">&#39;.cvsignore&#39;</span> found under directory <span class="s1">&#39;*&#39;</span>
+        warning: no previously-included files matching <span class="s1">&#39;*.pyc&#39;</span> found under directory <span class="s1">&#39;*&#39;</span>
+        warning: no previously-included files matching <span class="s1">&#39;*~&#39;</span> found under directory <span class="s1">&#39;*&#39;</span>
+        warning: no previously-included files matching <span class="s1">&#39;.DS_Store&#39;</span> found under directory <span class="s1">&#39;*&#39;</span>
         changing mode of /home/victor/tmp/doku/bin/rstpep2html.py to 755
         changing mode of /home/victor/tmp/doku/bin/rst2xml.py to 755
         changing mode of /home/victor/tmp/doku/bin/rst2pseudoxml.py to 755
@@ -1827,95 +1830,95 @@ Installing setuptools, pip...done.
         changing mode of /home/victor/tmp/doku/bin/rst2odt.py to 755
         changing mode of /home/victor/tmp/doku/bin/rst2xetex.py to 755
         changing mode of /home/victor/tmp/doku/bin/rst2s5.py to 755
-      Running setup.py install for Jinja2
+      Running setup.py install <span class="k">for</span> Jinja2
 
-        warning: no files found matching &#39;*&#39; under directory &#39;custom_fixers&#39;
-        warning: no previously-included files matching &#39;*&#39; found under directory &#39;docs/_build&#39;
-        warning: no previously-included files matching &#39;*.pyc&#39; found under directory &#39;jinja2&#39;
-        warning: no previously-included files matching &#39;*.pyc&#39; found under directory &#39;docs&#39;
-        warning: no previously-included files matching &#39;*.pyo&#39; found under directory &#39;jinja2&#39;
-        warning: no previously-included files matching &#39;*.pyo&#39; found under directory &#39;docs&#39;
-      Running setup.py install for Pygments
+        warning: no files found matching <span class="s1">&#39;*&#39;</span> under directory <span class="s1">&#39;custom_fixers&#39;</span>
+        warning: no previously-included files matching <span class="s1">&#39;*&#39;</span> found under directory <span class="s1">&#39;docs/_build&#39;</span>
+        warning: no previously-included files matching <span class="s1">&#39;*.pyc&#39;</span> found under directory <span class="s1">&#39;jinja2&#39;</span>
+        warning: no previously-included files matching <span class="s1">&#39;*.pyc&#39;</span> found under directory <span class="s1">&#39;docs&#39;</span>
+        warning: no previously-included files matching <span class="s1">&#39;*.pyo&#39;</span> found under directory <span class="s1">&#39;jinja2&#39;</span>
+        warning: no previously-included files matching <span class="s1">&#39;*.pyo&#39;</span> found under directory <span class="s1">&#39;docs&#39;</span>
+      Running setup.py install <span class="k">for</span> Pygments
         Skipping implicit fixer: buffer
         Skipping implicit fixer: idioms
         Skipping implicit fixer: set_literal
         Skipping implicit fixer: ws_comma
 
         Installing pygmentize script to /home/victor/tmp/doku/bin
-      Running setup.py install for markupsafe
+      Running setup.py install <span class="k">for</span> markupsafe
 
-        building &#39;markupsafe._speedups&#39; extension
-        gcc -pthread -Wno-unused-result -Werror=declaration-after-statement -DDYNAMIC_ANNOTATIONS_ENABLED=1 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -fPIC -I/usr/include/python3.4m -c markupsafe/_speedups.c -o build/temp.linux-x86_64-3.4/markupsafe/_speedups.o
+        building <span class="s1">&#39;markupsafe._speedups&#39;</span> extension
+        gcc -pthread -Wno-unused-result -Werror<span class="o">=</span>declaration-after-statement -DDYNAMIC_ANNOTATIONS_ENABLED<span class="o">=</span><span class="m">1</span> -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -march<span class="o">=</span>x86-64 -mtune<span class="o">=</span>generic -O2 -pipe -fstack-protector --param<span class="o">=</span>ssp-buffer-size<span class="o">=</span><span class="m">4</span> -fPIC -I/usr/include/python3.4m -c markupsafe/_speedups.c -o build/temp.linux-x86_64-3.4/markupsafe/_speedups.o
         gcc -pthread -shared -Wl,-O1,--sort-common,--as-needed,-z,relro build/temp.linux-x86_64-3.4/markupsafe/_speedups.o -L/usr/lib -lpython3.4m -o build/lib.linux-x86_64-3.4/markupsafe/_speedups.cpython-34m.so
     Successfully installed sphinx docutils Jinja2 Pygments markupsafe
     Cleaning up...
-    (doku) doku
+    <span class="o">(</span>doku<span class="o">)</span> doku
 </pre></div>
 
 
 <p>Now you should be ready to go.</p>
 <h3 id="create-new-documentation-dir-structure">Create new documentation dir structure</h3>
-<div class="highlight"><pre>    (doku)â  doku  mkdir my_documentation
-    (doku)â  doku  sphinx-quickstart
+<div class="highlight"><pre>    <span class="o">(</span>doku<span class="o">)</span>â  doku  mkdir my_documentation
+    <span class="o">(</span>doku<span class="o">)</span>â  doku  sphinx-quickstart
     Welcome to the Sphinx 1.2.2 quickstart utility.
 
-    Please enter values for the following settings (just press Enter to
-    accept a default value, if one is given in brackets).
+    Please enter values <span class="k">for</span> the following settings <span class="o">(</span>just press Enter to
+    accept a default value, <span class="k">if</span> one is given in brackets<span class="o">)</span>.
 
-    Enter the root path for documentation.
-    &gt; Root path for the documentation [.]: my_documentation
+    Enter the root path <span class="k">for</span> documentation.
+    &gt; Root path <span class="k">for</span> the documentation <span class="o">[</span>.<span class="o">]</span>: my_documentation
 
-    You have two options for placing the build directory for Sphinx output.
-    Either, you use a directory &quot;_build&quot; within the root path, or you separate
-    &quot;source&quot; and &quot;build&quot; directories within the root path.
-    &gt; Separate source and build directories (y/n) [n]: n
+    You have two options <span class="k">for</span> placing the build directory <span class="k">for</span> Sphinx output.
+    Either, you use a directory <span class="s2">&quot;_build&quot;</span> within the root path, or you separate
+    <span class="s2">&quot;source&quot;</span> and <span class="s2">&quot;build&quot;</span> directories within the root path.
+    &gt; Separate <span class="nb">source </span>and build directories <span class="o">(</span>y/n<span class="o">)</span> <span class="o">[</span>n<span class="o">]</span>: n
 
-    Inside the root directory, two more directories will be created; &quot;_templates&quot;
-    for custom HTML templates and &quot;_static&quot; for custom stylesheets and other static
-    files. You can enter another prefix (such as &quot;.&quot;) to replace the underscore.
-    &gt; Name prefix for templates and static dir [_]:
+    Inside the root directory, two more directories will be created<span class="p">;</span> <span class="s2">&quot;_templates&quot;</span>
+    <span class="k">for</span> custom HTML templates and <span class="s2">&quot;_static&quot;</span> <span class="k">for</span> custom stylesheets and other static
+    files. You can enter another prefix <span class="o">(</span>such as <span class="s2">&quot;.&quot;</span><span class="o">)</span> to replace the underscore.
+    &gt; Name prefix <span class="k">for</span> templates and static dir <span class="o">[</span>_<span class="o">]</span>:
 
     The project name will occur in several places in the built documentation.
     &gt; Project name: My Documentation
-    &gt; Author name(s): Victor
+    &gt; Author name<span class="o">(</span>s<span class="o">)</span>: Victor
 
-    Sphinx has the notion of a &quot;version&quot; and a &quot;release&quot; for the
-    software. Each version can have multiple releases. For example, for
-    Python the version is something like 2.5 or 3.0, while the release is
-    something like 2.5.1 or 3.0a1.  If you don&#39;t need this dual structure,
-    just set both to the same value.
-    &gt; Project version: 0.1
-    &gt; Project release [0.1]: 0.1.0
+    Sphinx has the notion of a <span class="s2">&quot;version&quot;</span> and a <span class="s2">&quot;release&quot;</span> <span class="k">for</span> the
+    software. Each version can have multiple releases. For example, <span class="k">for</span>
+    Python the version is something like 2.5 or 3.0, <span class="k">while</span> the release is
+    something like 2.5.1 or 3.0a1.  If you don<span class="s1">&#39;t need this dual structure,</span>
+<span class="s1">    just set both to the same value.</span>
+<span class="s1">    &gt; Project version: 0.1</span>
+<span class="s1">    &gt; Project release [0.1]: 0.1.0</span>
 
-    The file name suffix for source files. Commonly, this is either &quot;.txt&quot;
-    or &quot;.rst&quot;.  Only files with this suffix are considered documents.
-    &gt; Source file suffix [.rst]:
+<span class="s1">    The file name suffix for source files. Commonly, this is either &quot;.txt&quot;</span>
+<span class="s1">    or &quot;.rst&quot;.  Only files with this suffix are considered documents.</span>
+<span class="s1">    &gt; Source file suffix [.rst]:</span>
 
-    One document is special in that it is considered the top node of the
-    &quot;contents tree&quot;, that is, it is the root of the hierarchical structure
-    of the documents. Normally, this is &quot;index&quot;, but if your &quot;index&quot;
-    document is a custom template, you can also set this to another filename.
-    &gt; Name of your master document (without suffix) [index]:
+<span class="s1">    One document is special in that it is considered the top node of the</span>
+<span class="s1">    &quot;contents tree&quot;, that is, it is the root of the hierarchical structure</span>
+<span class="s1">    of the documents. Normally, this is &quot;index&quot;, but if your &quot;index&quot;</span>
+<span class="s1">    document is a custom template, you can also set this to another filename.</span>
+<span class="s1">    &gt; Name of your master document (without suffix) [index]:</span>
 
-    Sphinx can also add configuration for epub output:
-    &gt; Do you want to use the epub builder (y/n) [n]: n
+<span class="s1">    Sphinx can also add configuration for epub output:</span>
+<span class="s1">    &gt; Do you want to use the epub builder (y/n) [n]: n</span>
 
-    Please indicate if you want to use one of the following Sphinx extensions:
-    &gt; autodoc: automatically insert docstrings from modules (y/n) [n]: y
-    &gt; doctest: automatically test code snippets in doctest blocks (y/n) [n]: n
-    &gt; intersphinx: link between Sphinx documentation of different projects (y/n) [n]: n
-    &gt; todo: write &quot;todo&quot; entries that can be shown or hidden on build (y/n) [n]: n
-    &gt; coverage: checks for documentation coverage (y/n) [n]: n
-    &gt; pngmath: include math, rendered as PNG images (y/n) [n]: n
-    &gt; mathjax: include math, rendered in the browser by MathJax (y/n) [n]: n
-    &gt; ifconfig: conditional inclusion of content based on config values (y/n) [n]: n
-    &gt; viewcode: include links to the source code of documented Python objects (y/n) [n]: n
+<span class="s1">    Please indicate if you want to use one of the following Sphinx extensions:</span>
+<span class="s1">    &gt; autodoc: automatically insert docstrings from modules (y/n) [n]: y</span>
+<span class="s1">    &gt; doctest: automatically test code snippets in doctest blocks (y/n) [n]: n</span>
+<span class="s1">    &gt; intersphinx: link between Sphinx documentation of different projects (y/n) [n]: n</span>
+<span class="s1">    &gt; todo: write &quot;todo&quot; entries that can be shown or hidden on build (y/n) [n]: n</span>
+<span class="s1">    &gt; coverage: checks for documentation coverage (y/n) [n]: n</span>
+<span class="s1">    &gt; pngmath: include math, rendered as PNG images (y/n) [n]: n</span>
+<span class="s1">    &gt; mathjax: include math, rendered in the browser by MathJax (y/n) [n]: n</span>
+<span class="s1">    &gt; ifconfig: conditional inclusion of content based on config values (y/n) [n]: n</span>
+<span class="s1">    &gt; viewcode: include links to the source code of documented Python objects (y/n) [n]: n</span>
 
-    A Makefile and a Windows command file can be generated for you so that you
-    only have to run e.g. `make html&#39; instead of invoking sphinx-build
+<span class="s1">    A Makefile and a Windows command file can be generated for you so that you</span>
+<span class="s1">    only have to run e.g. `make html&#39;</span> instead of invoking sphinx-build
     directly.
-    &gt; Create Makefile? (y/n) [y]:
-    &gt; Create Windows command file? (y/n) [y]: n
+    &gt; Create Makefile? <span class="o">(</span>y/n<span class="o">)</span> <span class="o">[</span>y<span class="o">]</span>:
+    &gt; Create Windows <span class="nb">command </span>file? <span class="o">(</span>y/n<span class="o">)</span> <span class="o">[</span>y<span class="o">]</span>: n
 
     Creating file my_documentation/conf.py.
     Creating file my_documentation/index.rst.
@@ -1924,26 +1927,26 @@ Installing setuptools, pip...done.
     Finished: An initial directory structure has been created.
 
     You should now populate your master file my_documentation/index.rst and create other documentation
-    source files. Use the Makefile to build the docs, like so:
+    <span class="nb">source </span>files. Use the Makefile to build the docs, like so:
        make builder
-    where &quot;builder&quot; is one of the supported builders, e.g. html, latex or linkcheck.
+    where <span class="s2">&quot;builder&quot;</span> is one of the supported builders, e.g. html, latex or linkcheck.
 </pre></div>
 
 
 <h3 id="create-some-builds">Create some builds</h3>
 <p>Now you can call <strong>make</strong> to build your desired documentation format:</p>
-<div class="highlight"><pre>    (doku)â  my_documentation  make
-    Please use `make &lt;target&gt;&#39; where &lt;target&gt; is one of
+<div class="highlight"><pre>    <span class="o">(</span>doku<span class="o">)</span>â  my_documentation  make
+    Please use <span class="sb">`</span>make &lt;target&gt;<span class="err">&#39;</span> where &lt;target&gt; is one of
       html       to make standalone HTML files
       dirhtml    to make HTML files named index.html in directories
       singlehtml to make a single large HTML file
       pickle     to make pickle files
       json       to make JSON files
-      htmlhelp   to make HTML files and a HTML help project
+      htmlhelp   to make HTML files and a HTML <span class="nb">help </span>project
       qthelp     to make HTML files and a qthelp project
       devhelp    to make HTML files and a Devhelp project
       epub       to make an epub
-      latex      to make LaTeX files, you can set PAPER=a4 or PAPER=letter
+      latex      to make LaTeX files, you can <span class="nb">set </span><span class="nv">PAPER</span><span class="o">=</span>a4 or <span class="nv">PAPER</span><span class="o">=</span>letter
       latexpdf   to make LaTeX files and run them through pdflatex
       latexpdfja to make LaTeX files and run them through platex/dvipdfmx
       text       to make text files
@@ -1953,31 +1956,31 @@ Installing setuptools, pip...done.
       gettext    to make PO message catalogs
       changes    to make an overview of all changed/added/deprecated items
       xml        to make Docutils-native XML files
-      pseudoxml  to make pseudoxml-XML files for display purposes
-      linkcheck  to check all external links for integrity
-      doctest    to run all doctests embedded in the documentation (if enabled)
+      pseudoxml  to make pseudoxml-XML files <span class="k">for</span> display purposes
+      linkcheck  to check all external links <span class="k">for</span> integrity
+      doctest    to run all doctests embedded in the documentation <span class="o">(</span><span class="k">if</span> enabled<span class="o">)</span>
 </pre></div>
 
 
 <p>Let's try with <strong>html</strong>:</p>
-<div class="highlight"><pre>    (doku)â  my_documentation  make html
+<div class="highlight"><pre>    <span class="o">(</span>doku<span class="o">)</span>â  my_documentation  make html
     sphinx-build -b html -d _build/doctrees   . _build/html
     Making output directory...
     Running Sphinx v1.2.2
-    loading pickled environment... failed: [Errno 2] No such file or directory: &#39;/home/victor/tmp/doku/my_documentation/_build/doctrees/environment.pickle&#39;
-    building [html]: targets for 1 source files that are out of date
-    updating environment: 1 added, 0 changed, 0 removed
-    reading sources... [100%] index
-    looking for now-outdated files... none found
-    pickling environment... done
-    checking consistency... done
-    preparing documents... done
-    writing output... [100%] index
+    loading pickled environment... failed: <span class="o">[</span>Errno 2<span class="o">]</span> No such file or directory: <span class="s1">&#39;/home/victor/tmp/doku/my_documentation/_build/doctrees/environment.pickle&#39;</span>
+    building <span class="o">[</span>html<span class="o">]</span>: targets <span class="k">for</span> <span class="m">1</span> <span class="nb">source </span>files that are out of date
+    updating environment: <span class="m">1</span> added, <span class="m">0</span> changed, <span class="m">0</span> removed
+    reading sources... <span class="o">[</span>100%<span class="o">]</span> index
+    looking <span class="k">for</span> now-outdated files... none found
+    pickling environment... <span class="k">done</span>
+    checking consistency... <span class="k">done</span>
+    preparing documents... <span class="k">done</span>
+    writing output... <span class="o">[</span>100%<span class="o">]</span> index
     writing additional files... genindex search
-    copying static files... done
-    copying extra files... done
-    dumping search index... done
-    dumping object inventory... done
+    copying static files... <span class="k">done</span>
+    copying extra files... <span class="k">done</span>
+    dumping search index... <span class="k">done</span>
+    dumping object inventory... <span class="k">done</span>
     build succeeded.
 
     Build finished. The HTML pages are in _build/html.
@@ -2084,11 +2087,11 @@ Also search for themes: <a href="https://github.com/search?q=sphinx+theme&amp;re
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2009/03/30/howto-get-setof-from-array-in-postgresql">HowTo: Get SETOF from Array in PostgreSQL</a></li>
-        <li><a href="http://blog.dornea.nu/2014/10/29/howto-ios-apps-static-analysis">HowTo: iOS Apps - Static analysis</a></li>
         <li><a href="http://blog.dornea.nu/2013/08/02/howto-automate-burp-using-burp-extender-api">HowTo: Automate Burp using Burp Extender API</a></li>
-        <li><a href="http://blog.dornea.nu/2011/03/19/my-own-cheap-nas-the-openwrt-way">My own cheap NAS &#8211; the OpenWRT way</a></li>
-        <li><a href="http://blog.dornea.nu/2009/05/21/overthewire-vortex-level0">OverTheWire: Vortex Level0</a></li>
+        <li><a href="http://blog.dornea.nu/2009/03/30/howto-get-setof-from-array-in-postgresql">HowTo: Get SETOF from Array in PostgreSQL</a></li>
+        <li><a href="http://blog.dornea.nu/2015/05/06/adding-concurrency-to-smalisca">Adding concurrency to smalisca</a></li>
+        <li><a href="http://blog.dornea.nu/2015/05/24/validating-and-pinning-x509-certificates">Validating and pinning X.509 certificates</a></li>
+        <li><a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a></li>
     </ul>
 </section>
     <hr />
@@ -2149,6 +2152,11 @@ Also search for themes: <a href="https://github.com/search?q=sphinx+theme&amp;re
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
                 <ul class="list-group" id="recentposts">
                     <li class="list-group-item">
+                        <a href="http://blog.dornea.nu/2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer">
+                            Basic Layer 2 Switching using Cisco Packet Tracer
+                        </a>
+                    </li>
+                    <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2015/10/02/manage-pki-using-openssl">
                             Manage PKI using OpenSSL
                         </a>
@@ -2178,11 +2186,6 @@ Also search for themes: <a href="https://github.com/search?q=sphinx+theme&amp;re
                             Validating and pinning X.509 certificates
                         </a>
                     </li>
-                    <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/2015/05/06/adding-concurrency-to-smalisca">
-                            Adding concurrency to smalisca
-                        </a>
-                    </li>
                 </ul>
             </li>
 
@@ -2203,316 +2206,6 @@ Also search for themes: <a href="https://github.com/search?q=sphinx+theme&amp;re
 
             <li class="list-group-item"><a href="http://blog.dornea.nu/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group list-inline tagcloud" id="tags">
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/adobe/">
-                            adobe
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/androguard/">
-                            androguard
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/android/">
-                            android
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/apple/">
-                            apple
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/appsec/">
-                            appsec
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/blockdiag/">
-                            blockdiag
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/blog/">
-                            blog
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/books/">
-                            books
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/burp/">
-                            burp
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/c/">
-                            c
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/code/">
-                            code
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/coding/">
-                            coding
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/crypto/">
-                            crypto
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/cryptography/">
-                            cryptography
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/debug/">
-                            debug
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/docker/">
-                            docker
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/droidbox/">
-                            droidbox
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/eclipse/">
-                            eclipse
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/events/">
-                            events
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/fakebanker/">
-                            fakebanker
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/flash/">
-                            flash
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/graphviz/">
-                            graphviz
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/hacking/">
-                            hacking
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/howto/">
-                            howto
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/infosec/">
-                            infosec
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/ios/">
-                            ios
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/iptables/">
-                            iptables
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/ipython/">
-                            ipython
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/java/">
-                            java
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/javascript/">
-                            javascript
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/jquery/">
-                            jquery
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/linux/">
-                            linux
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/low/">
-                            low
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/misc/">
-                            misc
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/mobile/">
-                            mobile
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/network/">
-                            network
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/networking/">
-                            networking
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/note/">
-                            note
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/octopress/">
-                            octopress
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/openssl/">
-                            openssl
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/pandoc/">
-                            pandoc
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/pelican/">
-                            pelican
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/pocket/">
-                            pocket
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/programming/">
-                            programming
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/python/">
-                            python
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/re/">
-                            re
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/sca/">
-                            sca
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/science/">
-                            science
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/security/">
-                            security
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/smalisca/">
-                            smalisca
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/ssl/">
-                            ssl
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/tiddly/">
-                            tiddly
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/tls/">
-                            tls
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/uncategorized/">
-                            uncategorized
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/virtualization/">
-                            virtualization
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/viz/">
-                            viz
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/wargames/">
-                            wargames
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/web/">
-                            web
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/whatsapp/">
-                            whatsapp
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/wtf/">
-                            wtf
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/x509/">
-                            x509
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/xmind/">
-                            xmind
-                        </a>
-                    </li>
                 </ul>
             </li>
 

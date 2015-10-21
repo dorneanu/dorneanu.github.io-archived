@@ -1596,7 +1596,7 @@ init_mathjax();
 <link rel="canonical" href="http://blog.dornea.nu/2014/07/01/on-java-openssl-crypto-blowfish-and-stuff">
 
         <meta name="author" content="Victor Dorneanu" />
-        <meta name="keywords" content="java,cryptography,crypto,openssl" />
+        <meta name="keywords" content="java,cryptography,crypto,openssl,ssl,tls" />
         <meta name="description" content="During some Android malware analysis I came along some Java routines which were meant to decrypt/encrypt some content. Nothing special about it. The key had to be extracted from a file and the encrypted file was in Base64. After unsuccessfully trying openssl in order to decrypt the file I ..." />
 
         <meta property="og:site_name" content="blog.dornea.nu" />
@@ -1610,6 +1610,8 @@ init_mathjax();
             <meta property="article:tag" content="cryptography" />
             <meta property="article:tag" content="crypto" />
             <meta property="article:tag" content="openssl" />
+            <meta property="article:tag" content="ssl" />
+            <meta property="article:tag" content="tls" />
             <meta property="article:author" content="Victor Dorneanu" />
 
     <meta name="twitter:card" content="summary">
@@ -1715,6 +1717,10 @@ blog.dornea.nu            </a>
 	<a href="http://blog.dornea.nu/tag/crypto/">crypto</a>
         /
 	<a href="http://blog.dornea.nu/tag/openssl/">openssl</a>
+        /
+	<a href="http://blog.dornea.nu/tag/ssl/">ssl</a>
+        /
+	<a href="http://blog.dornea.nu/tag/tls/">tls</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -1756,7 +1762,7 @@ blog.dornea.nu            </a>
             <span class="n">hexChars</span><span class="o">[</span><span class="n">j</span> <span class="o">*</span> <span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="n">hexArray</span><span class="o">[</span><span class="n">v</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">4</span><span class="o">];</span>
             <span class="n">hexChars</span><span class="o">[</span><span class="n">j</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">hexArray</span><span class="o">[</span><span class="n">v</span> <span class="o">&amp;</span> <span class="mh">0x0F</span><span class="o">];</span>
         <span class="o">}</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">String</span><span class="o">(</span><span class="n">hexChars</span><span class="o">);</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">hexChars</span><span class="o">);</span>
     <span class="o">}</span>
 
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span>
@@ -1819,19 +1825,19 @@ blog.dornea.nu            </a>
 <li><code>-d &lt;Base64&gt;</code>: will decrypt the specified Base64 string &lt; Base64 &gt;</li>
 </ul>
 <p>The encryption <code>key</code> and the <code>IV</code> (initialization vector) are static. Let's see an example:</p>
-<div class="highlight"><pre># javac JBlowfish.java
-# java -cp . JBlowfish -e secretmessage
+<div class="highlight"><pre><span class="c"># javac JBlowfish.java</span>
+<span class="c"># java -cp . JBlowfish -e secretmessage</span>
 -- Settings -----------
 KEY:     736563726574
 IV:      3132333435363738
 -- Encrypted -----------
-Base64:  2CEndW0AA2xpsYz3XrXnrA==
+Base64:  <span class="nv">2CEndW0AA2xpsYz3XrXnrA</span><span class="o">==</span>
 HEX:     D82127756D00036C69B18CF75EB5E7AC
 </pre></div>
 
 
 <p>We just <em>encrypted</em> the message <em>"secretmessage</em>" with <em>Blowfish/CBC</em>. In the <em>settings</em> section you'll see the <code>KEY</code> and the <code>IV</code> in their <em>hex</em> representation. Afterwards the programm will show the <code>Base64</code> and the <code>hex</code> representation of <strong>encrypted</strong> message. <em>Decryption</em> works quite straightforward:</p>
-<div class="highlight"><pre># java -cp . JBlowfish -d 2CEndW0AA2xpsYz3XrXnrA==
+<div class="highlight"><pre><span class="c"># java -cp . JBlowfish -d 2CEndW0AA2xpsYz3XrXnrA==</span>
 -- Settings -----------
 KEY:     736563726574
 IV:      3132333435363738
@@ -1844,10 +1850,10 @@ PLAIN:   secretmessage
 <p>Our little Java application does its job pretty fine. Ok, now let's have a look at <code>openssl</code>.</p>
 <h2 id="openssl-java">OpenSSL &lt;-&gt; Java</h2>
 <p>Using <code>openssl</code> I'll encrypt/decrypt the previous secret message with the same cipher:</p>
-<div class="highlight"><pre># echo &quot;secretmessage&quot; | openssl bf-cbc -nosalt -a -pass pass:victor -iv 3132333435363738 -p
-key=FFC150A160D37E92012C196B6AF4160D
-iv =3132333435363738
-+NtBjHQzii7i//apIvfHkw==
+<div class="highlight"><pre><span class="c"># echo &quot;secretmessage&quot; | openssl bf-cbc -nosalt -a -pass pass:victor -iv 3132333435363738 -p</span>
+<span class="nv">key</span><span class="o">=</span>FFC150A160D37E92012C196B6AF4160D
+<span class="nv">iv</span> <span class="o">=</span>3132333435363738
++NtBjHQzii7i//apIvfHkw<span class="o">==</span>
 </pre></div>
 
 
@@ -1957,9 +1963,9 @@ iv =3132333435363738
 
 
 <p>Now decrypt that ciphertext using openssl:</p>
-<div class="highlight"><pre># echo &quot;AQoNkUl1CjI=&quot; | openssl bf-cbc -d -a -nosalt -pass pass:secret -iv 3132333435363738  -p
-key=5EBE2294ECD0E0F08EAB7690D2A6EE69
-iv =3132333435363738
+<div class="highlight"><pre><span class="c"># echo &quot;AQoNkUl1CjI=&quot; | openssl bf-cbc -d -a -nosalt -pass pass:secret -iv 3132333435363738  -p</span>
+<span class="nv">key</span><span class="o">=</span>5EBE2294ECD0E0F08EAB7690D2A6EE69
+<span class="nv">iv</span> <span class="o">=</span>3132333435363738
 bad decrypt
 140568446580392:error:06065064:digital envelope routines:EVP_DecryptFinal_ex:bad decrypt:evp_enc.c:539:
 </pre></div>
@@ -1977,10 +1983,10 @@ bad decrypt
 </blockquote>
 <p>as stated <a href="http://juliusdavies.ca/commons-ssl/download.html">here</a>.</p>
 <p>If you still want some compatibility between <code>openssl</code> and your code, you should use the <code>key</code> and <code>IV</code> from openssl. Example:</p>
-<div class="highlight"><pre># echo &quot;this-is-secret&quot; | openssl bf-cbc -a -nosalt -pass pass:secret -iv 12345678 -p
-key=5EBE2294ECD0E0F08EAB7690D2A6EE69
-iv =1234567800000000
-2whDyIn5hRdyXpRZbMZayw==
+<div class="highlight"><pre><span class="c"># echo &quot;this-is-secret&quot; | openssl bf-cbc -a -nosalt -pass pass:secret -iv 12345678 -p</span>
+<span class="nv">key</span><span class="o">=</span>5EBE2294ECD0E0F08EAB7690D2A6EE69
+<span class="nv">iv</span> <span class="o">=</span>1234567800000000
+<span class="nv">2whDyIn5hRdyXpRZbMZayw</span><span class="o">==</span>
 </pre></div>
 
 
@@ -2013,7 +2019,9 @@ iv =1234567800000000
     <ul>
         <li><a href="http://blog.dornea.nu/2015/10/02/manage-pki-using-openssl">Manage PKI using OpenSSL</a></li>
         <li><a href="http://blog.dornea.nu/2015/05/24/validating-and-pinning-x509-certificates">Validating and pinning X.509 certificates</a></li>
-        <li><a href="http://blog.dornea.nu/2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms">HowTo: Debug Android APKs with Eclipse and DDMS</a></li>
+        <li><a href="http://blog.dornea.nu/2011/11/30/add-namecheap-mail-account-ox-mail-to-thunderbird">Add Namecheap Mail account (OX Mail) to Thunderbird</a></li>
+        <li><a href="http://blog.dornea.nu/2011/07/28/howto-keep-your-passwords-safe-using-sqlite-and-sqlcipher">HowTo: Keep your passwords safe using SQLite and SQLCipher</a></li>
+        <li><a href="http://blog.dornea.nu/2011/03/07/howto-full-encrypt-data-using-gentooluks-and-initramfs">HowTo: Full-Encrypt data using Gentoo,Luks and initramfs</a></li>
     </ul>
 </section>
     <hr />
@@ -2074,6 +2082,11 @@ iv =1234567800000000
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
                 <ul class="list-group" id="recentposts">
                     <li class="list-group-item">
+                        <a href="http://blog.dornea.nu/2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer">
+                            Basic Layer 2 Switching using Cisco Packet Tracer
+                        </a>
+                    </li>
+                    <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2015/10/02/manage-pki-using-openssl">
                             Manage PKI using OpenSSL
                         </a>
@@ -2103,11 +2116,6 @@ iv =1234567800000000
                             Validating and pinning X.509 certificates
                         </a>
                     </li>
-                    <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/2015/05/06/adding-concurrency-to-smalisca">
-                            Adding concurrency to smalisca
-                        </a>
-                    </li>
                 </ul>
             </li>
 
@@ -2128,316 +2136,6 @@ iv =1234567800000000
 
             <li class="list-group-item"><a href="http://blog.dornea.nu/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group list-inline tagcloud" id="tags">
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/adobe/">
-                            adobe
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/androguard/">
-                            androguard
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/android/">
-                            android
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/apple/">
-                            apple
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/appsec/">
-                            appsec
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/blockdiag/">
-                            blockdiag
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/blog/">
-                            blog
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/books/">
-                            books
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/burp/">
-                            burp
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/c/">
-                            c
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/code/">
-                            code
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/coding/">
-                            coding
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/crypto/">
-                            crypto
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/cryptography/">
-                            cryptography
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/debug/">
-                            debug
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/docker/">
-                            docker
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/droidbox/">
-                            droidbox
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/eclipse/">
-                            eclipse
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/events/">
-                            events
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/fakebanker/">
-                            fakebanker
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/flash/">
-                            flash
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/graphviz/">
-                            graphviz
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/hacking/">
-                            hacking
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/howto/">
-                            howto
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/infosec/">
-                            infosec
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/ios/">
-                            ios
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/iptables/">
-                            iptables
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/ipython/">
-                            ipython
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/java/">
-                            java
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/javascript/">
-                            javascript
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/jquery/">
-                            jquery
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/linux/">
-                            linux
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/low/">
-                            low
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/misc/">
-                            misc
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/mobile/">
-                            mobile
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/network/">
-                            network
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/networking/">
-                            networking
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/note/">
-                            note
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/octopress/">
-                            octopress
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/openssl/">
-                            openssl
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/pandoc/">
-                            pandoc
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/pelican/">
-                            pelican
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/pocket/">
-                            pocket
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/programming/">
-                            programming
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/python/">
-                            python
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/re/">
-                            re
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/sca/">
-                            sca
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/science/">
-                            science
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/security/">
-                            security
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/smalisca/">
-                            smalisca
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/ssl/">
-                            ssl
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/tiddly/">
-                            tiddly
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/tls/">
-                            tls
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/uncategorized/">
-                            uncategorized
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/virtualization/">
-                            virtualization
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://blog.dornea.nu/tag/viz/">
-                            viz
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://blog.dornea.nu/tag/wargames/">
-                            wargames
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/web/">
-                            web
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/whatsapp/">
-                            whatsapp
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://blog.dornea.nu/tag/wtf/">
-                            wtf
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/x509/">
-                            x509
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://blog.dornea.nu/tag/xmind/">
-                            xmind
-                        </a>
-                    </li>
                 </ul>
             </li>
 
