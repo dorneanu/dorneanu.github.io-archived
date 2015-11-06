@@ -1672,6 +1672,19 @@ blog.dornea.nu            </a>
         <li class="active">blog</li>
     </ol>
             <article>
+                <h2><a href="http://blog.dornea.nu/2014/12/02/howto-proxy-non-proxy-aware-android-applications-through-burp">HowTo: Proxy Non-Proxy-Aware Android Applications through Burp</a></h2>
+                <div class="summary"><p>Proxying HTTP(s) traffic from Android devices through Burp should be actually no magic. Nevertheless you'll have to take some important steps into consideration:</p>
+<ul>
+<li>
+<p>Install Burps <strong>CA cert</strong> on the device</p>
+<ul>
+<li>I usually access Burp directly and download the cert file (<code>cacert.crt</code>)</li>
+<li>If Burp is listening on <code>192 ...</code></li></ul></li></ul>
+                    <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2014/12/02/howto-proxy-non-proxy-aware-android-applications-through-burp">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="http://blog.dornea.nu/2014/11/21/using-blockdiag-with-pelican-and-liquid-tags">Using Blockdiag with Pelican and liquid tags</a></h2>
                 <div class="summary"><p>After writing the <a href="/2014/11/13/using-graphviz-with-pelican-and-liquid-tags/">previous article</a> I thought I should share some <code>Blockdiag</code> plugin for Pelican. You can also check out the <a href="https://github.com/getpelican/pelican-plugins/pull/356"><strong>pull request</strong></a>. </p>
 <h2 id="blockdiag">blockdiag</h2>
@@ -1829,21 +1842,6 @@ After hours of wild googling these are the steps to make your APK debuggable und
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="http://blog.dornea.nu/2014/06/02/googles-xss-game-solutions">Googles XSS Game - Solutions</a></h2>
-                <div class="summary"><p>These are my steps how I've solved the <a href="https://xss-game.appspot.com/">XSS Game</a></p>
-<h2 id="level-1">Level 1</h2>
-<p>This is the most obvious and easiest one. Just insert following code and you're done:</p>
-<div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span><span class="nx">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;</span><span class="err">/script&gt;</span>
-</pre></div>
-
-
-<h2 id="level-2">Level 2</h2>
-<p>Since the <code>script</code> won't work you'll have to think of another tags to ...</p>
-                    <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2014/06/02/googles-xss-game-solutions">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://blog.dornea.nu/category/blog/index.html">&laquo;</a>
@@ -1868,6 +1866,8 @@ After hours of wild googling these are the steps to make your APK debuggable und
                             href="http://blog.dornea.nu/category/blog9.html">9</a></li>
                     <li class=""><a
                             href="http://blog.dornea.nu/category/blog10.html">10</a></li>
+                    <li class=""><a
+                            href="http://blog.dornea.nu/category/blog11.html">11</a></li>
                 <li class="next"><a
                         href="http://blog.dornea.nu/category/blog/index3.html">&raquo;</a></li>
         </ul>
@@ -1887,6 +1887,11 @@ After hours of wild googling these are the steps to make your APK debuggable und
 
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
                 <ul class="list-group" id="recentposts">
+                    <li class="list-group-item">
+                        <a href="http://blog.dornea.nu/2015/11/06/advanced-inter-vlan-switching-using-cisco">
+                            Advanced inter VLAN switching using Cisco
+                        </a>
+                    </li>
                     <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer">
                             Basic Layer 2 Switching using Cisco Packet Tracer
@@ -1915,11 +1920,6 @@ After hours of wild googling these are the steps to make your APK debuggable und
                     <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2015/05/24/validating-and-pinning-x509-certificates">
                             Validating and pinning X.509 certificates
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/2015/05/06/adding-concurrency-to-smalisca">
-                            Adding concurrency to smalisca
                         </a>
                     </li>
                 </ul>

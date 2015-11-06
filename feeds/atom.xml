@@ -1,5 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>blog.dornea.nu</title><link href="http://blog.dornea.nu/" rel="alternate"></link><link href="http://blog.dornea.nu/feeds/atom.xml" rel="self"></link><id>http://blog.dornea.nu/</id><updated>2015-10-21T00:00:00+02:00</updated><entry><title>Basic Layer 2 Switching using Cisco Packet Tracer</title><link href="http://blog.dornea.nu/2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer" rel="alternate"></link><updated>2015-10-21T00:00:00+02:00</updated><author><name>Victor Dorneanu</name></author><id>tag:blog.dornea.nu,2015-10-21:2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer</id><summary type="html">&lt;p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>blog.dornea.nu</title><link href="http://blog.dornea.nu/" rel="alternate"></link><link href="http://blog.dornea.nu/feeds/atom.xml" rel="self"></link><id>http://blog.dornea.nu/</id><updated>2015-11-06T00:00:00+01:00</updated><entry><title>Advanced inter VLAN switching using Cisco</title><link href="http://blog.dornea.nu/2015/11/06/advanced-inter-vlan-switching-using-cisco" rel="alternate"></link><updated>2015-11-06T00:00:00+01:00</updated><author><name>Victor Dorneanu</name></author><id>tag:blog.dornea.nu,2015-11-06:2015/11/06/advanced-inter-vlan-switching-using-cisco</id><summary type="html">&lt;p&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Continuing my &lt;a href="http://blog.dornea.nu/tag/ccna/"&gt;CCNA&lt;/a&gt; journey I&amp;#39;d like to address &lt;em&gt;inter VLAN switching&lt;/em&gt; in a more detailed way. In this post I&amp;#39;ll configure my &lt;a href="http://blog.dornea.nu/2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer/"&gt;previous topology&lt;/a&gt; to use &lt;strong&gt;VTP&lt;/strong&gt; and let &lt;strong&gt;STP&lt;/strong&gt; prevent &lt;em&gt;frame looping&lt;/em&gt; and other &amp;quot;anomalies&amp;quot; on &lt;em&gt;Layer 2&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Updated-network-topology"&gt;Updated network topology&lt;a class="anchor-link" href="#Updated-network-topology"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[35]:
+&lt;/div&gt;
+
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style=""&gt;Expand Code&lt;/span&gt;
+&lt;div class="input_area box-flex1" style="display:none"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;blockdiag&lt;/span&gt;
+&lt;span class="n"&gt;diagram ...&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;</summary><category term="networking"></category><category term="cisco"></category><category term="ccna"></category><category term="layer 2"></category><category term="switch"></category><category term="vlan"></category><category term="vtp"></category><category term="stp"></category></entry><entry><title>Basic Layer 2 Switching using Cisco Packet Tracer</title><link href="http://blog.dornea.nu/2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer" rel="alternate"></link><updated>2015-10-21T00:00:00+02:00</updated><author><name>Victor Dorneanu</name></author><id>tag:blog.dornea.nu,2015-10-21:2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer</id><summary type="html">&lt;p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;

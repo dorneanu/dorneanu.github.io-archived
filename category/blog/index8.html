@@ -1672,6 +1672,26 @@ blog.dornea.nu            </a>
         <li class="active">blog</li>
     </ol>
             <article>
+                <h2><a href="http://blog.dornea.nu/2010/09/04/speed-up-drupal-by-preloading-the-page-cache">Speed up Drupal by preloading the page cache</a></h2>
+                <div class="summary"><p>If you need some technical background, have a look <a href="http://nadeausoftware.com/node/98">here</a>. The preload cache script I&#8217;ve been using for a couple a months:<!--more--></p>
+<pre class="lang:default decode:true">#!/bin/bash
+#
+# Preload a web site's cache
+#
+
+site="dornea.nu"
+tmp="downloads"
+log="log.txt"
+
+echo "Crawling $site."
+
+# Remove any prior downloaded files.
+rm -rf $tmp ...</pre>
+                    <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2010/09/04/speed-up-drupal-by-preloading-the-page-cache">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="http://blog.dornea.nu/2010/09/02/funniest-ad-on-aids">Funniest ad on aids!</a></h2>
                 <div class="summary"><p>This one is the funnies advertising video related to AIDS I&#8217;Ve ever seen in my life <img src="/sites/all/libraries/tinymce/jscripts/tiny_mce/plugins/emotions/img/smiley-cool.gif" alt="Cool" title="Cool" border="0" /></p>
 <!--break-->
@@ -1781,13 +1801,6 @@ blog.dornea.nu            </a>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="http://blog.dornea.nu/2010/01/07/check-your-brain-activity">Check your brain activity!</a></h2>
-                <div class="summary"><p><span style="font-size: medium;"><a class="trigger_lightbox" title="Check your brain!" href="http://static.dornea.nu/img/2010/0bf498949185be4c8d44c92b174dfd56.gif"><img class="trigger_lightbox mceItem" style="float: left; padding-right: 10px;" title="Check your brain!" alt="Check your brain!" src="http://static.dornea.nu/img/2010/0bf498949185be4c8d44c92b174dfd56.gif" width="150" height="200" /></a>Just click on the left picture and have a look at the dancer&#8230; When you see her dancing anti-clockwise, then you&#8217;re probably using your left brain hemisphere, which is normally used for &#8220;intellectual power&#8221;  aka ability to think logically. When you see her dancing clockwise then your right brain ...</span></p>
-                    <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2010/01/07/check-your-brain-activity">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://blog.dornea.nu/category/blog/index7.html">&laquo;</a>
@@ -1812,6 +1825,8 @@ blog.dornea.nu            </a>
                             href="http://blog.dornea.nu/category/blog9.html">9</a></li>
                     <li class=""><a
                             href="http://blog.dornea.nu/category/blog10.html">10</a></li>
+                    <li class=""><a
+                            href="http://blog.dornea.nu/category/blog11.html">11</a></li>
                 <li class="next"><a
                         href="http://blog.dornea.nu/category/blog/index9.html">&raquo;</a></li>
         </ul>
@@ -1831,6 +1846,11 @@ blog.dornea.nu            </a>
 
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
                 <ul class="list-group" id="recentposts">
+                    <li class="list-group-item">
+                        <a href="http://blog.dornea.nu/2015/11/06/advanced-inter-vlan-switching-using-cisco">
+                            Advanced inter VLAN switching using Cisco
+                        </a>
+                    </li>
                     <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer">
                             Basic Layer 2 Switching using Cisco Packet Tracer
@@ -1859,11 +1879,6 @@ blog.dornea.nu            </a>
                     <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2015/05/24/validating-and-pinning-x509-certificates">
                             Validating and pinning X.509 certificates
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/2015/05/06/adding-concurrency-to-smalisca">
-                            Adding concurrency to smalisca
                         </a>
                     </li>
                 </ul>
