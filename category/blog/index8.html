@@ -1616,6 +1616,7 @@ init_mathjax();
     <link href="http://blog.dornea.nu/theme/css/pygments/native.css" rel="stylesheet">
     <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/style.css" type="text/css"/>
         <link href="http://blog.dornea.nu/css/custom.css" rel="stylesheet">
+        <link href="http://blog.dornea.nu/theme/css/shariff/shariff.min.css" rel="stylesheet">
 
         <link href="http://blog.dornea.nu/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
               title="blog.dornea.nu ATOM Feed"/>
@@ -1671,6 +1672,16 @@ blog.dornea.nu            </a>
         <li><a href="http://blog.dornea.nu/" title="blog.dornea.nu Categories">Categories</a></li>
         <li class="active">blog</li>
     </ol>
+            <article>
+                <h2><a href="http://blog.dornea.nu/2010/09/07/drupals-clean-urls-using-lighttpd-moved-from-lua-to-rewrite-once">Drupals clean urls using Lighttpd: Moved from Lua to rewrite-once</a></h2>
+                <div class="summary"><p>I&#8217;ve been using Lighttpd + Drupal for a long time. In order to have those sexy clean urls, you&#8217;ll have to do some rewrite stuff. A few months ago I found this Lua script, which served its purpose without any complications.<!--more--></p>
+<pre class="lang:default decode:true">-- little helper function
+function file_exists(path)
+local attr ...</pre>
+                    <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2010/09/07/drupals-clean-urls-using-lighttpd-moved-from-lua-to-rewrite-once">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2><a href="http://blog.dornea.nu/2010/09/04/speed-up-drupal-by-preloading-the-page-cache">Speed up Drupal by preloading the page cache</a></h2>
                 <div class="summary"><p>If you need some technical background, have a look <a href="http://nadeausoftware.com/node/98">here</a>. The preload cache script I&#8217;ve been using for a couple a months:<!--more--></p>
@@ -1794,13 +1805,6 @@ rm -rf $tmp ...</pre>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="http://blog.dornea.nu/2010/03/01/howto-qemu-networking-on-netbsd">HowTo: Qemu networking on NetBSD</a></h2>
-                <div class="summary"><p>In this tutorial I&#8217;d like to give you some useful examples how to configure network when using Qemu as virtualization machine. The videos in this HowTo were taken on a NetBSD-5_STABLE/amd64 machine using  Qemu 0.11.1. <strong>Attention: </strong>On my system I&#8217;ve used a patched version of ...</p>
-                    <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2010/03/01/howto-qemu-networking-on-netbsd">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://blog.dornea.nu/category/blog/index7.html">&laquo;</a>
@@ -1847,6 +1851,11 @@ rm -rf $tmp ...</pre>
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
                 <ul class="list-group" id="recentposts">
                     <li class="list-group-item">
+                        <a href="http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids">
+                            OpenVPN for paranoids
+                        </a>
+                    </li>
+                    <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2015/11/06/advanced-inter-vlan-switching-using-cisco">
                             Advanced inter VLAN switching using Cisco
                         </a>
@@ -1874,11 +1883,6 @@ rm -rf $tmp ...</pre>
                     <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2015/06/03/usd-ag-hacker-day-in-hamburg">
                             usd AG Hacker Day in Hamburg
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/2015/05/24/validating-and-pinning-x509-certificates">
-                            Validating and pinning X.509 certificates
                         </a>
                     </li>
                 </ul>

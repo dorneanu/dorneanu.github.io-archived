@@ -1616,6 +1616,7 @@ init_mathjax();
     <link href="http://blog.dornea.nu/theme/css/pygments/native.css" rel="stylesheet">
     <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/style.css" type="text/css"/>
         <link href="http://blog.dornea.nu/css/custom.css" rel="stylesheet">
+        <link href="http://blog.dornea.nu/theme/css/shariff/shariff.min.css" rel="stylesheet">
 
         <link href="http://blog.dornea.nu/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
               title="blog.dornea.nu ATOM Feed"/>
@@ -1671,6 +1672,20 @@ blog.dornea.nu            </a>
         <li><a href="http://blog.dornea.nu/" title="Tags">Tags</a></li>
         <li class="active">networking</li>
     </ol>
+            <article>
+                <h2><a href="http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids">OpenVPN for paranoids</a></h2>
+                <div class="summary"><p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Continuing my <a href="http://blog.dornea.nu/tag/admin/">admin</a> series this time I&#39;d like to setup a <strong>VPN</strong> using <a href="https://openvpn.net">OpenVPN  </a> as <strong>user-based</strong> VPN solution. Unlike <em>IPSec</em> solutions which require IPSec on both (server and client) sides, securing the VPN tunnel by <strong>OpenSSL</strong> is a more preferable option.</p>
+<p>In this post I&#39;ll try to show ...</p></div></div></div></p>
+                    <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2><a href="http://blog.dornea.nu/2015/11/06/advanced-inter-vlan-switching-using-cisco">Advanced inter VLAN switching using Cisco</a></h2>
                 <div class="summary"><p>
@@ -1904,16 +1919,6 @@ while True:
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="http://blog.dornea.nu/2011/06/24/free-pptp-vpn-servers">Free PPTP VPN servers</a></h2>
-                <div class="summary"><p>I&#8217;d recommend you all using some VPN to keep your identity safe and private. Here&#8217;s some setup:</p>
-<pre class="brush: bash;fontsize: 100; first-line: 1;">$ pptpsetup --create vpnde --server pptp.freedevpn.com --username free --password --encrypt 
-$ pptpsetup --create vpnca --server freecavpn.com --username free --password --encrypt 
-$ pptpsetup --create vpnl --server freenlvpn.com --username free --password --encrypt ...</pre>
-                    <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2011/06/24/free-pptp-vpn-servers">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev disabled"><a href="#">&laquo;</a></li>
@@ -1943,6 +1948,11 @@ $ pptpsetup --create vpnl --server freenlvpn.com --username free --password --en
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
                 <ul class="list-group" id="recentposts">
                     <li class="list-group-item">
+                        <a href="http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids">
+                            OpenVPN for paranoids
+                        </a>
+                    </li>
+                    <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2015/11/06/advanced-inter-vlan-switching-using-cisco">
                             Advanced inter VLAN switching using Cisco
                         </a>
@@ -1970,11 +1980,6 @@ $ pptpsetup --create vpnl --server freenlvpn.com --username free --password --en
                     <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2014/09/17/generate-all-ip-addresses-from-asn">
                             Generate all IP addresses from ASN
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">
-                            HowTo: Androguard with Docker
                         </a>
                     </li>
                 </ul>

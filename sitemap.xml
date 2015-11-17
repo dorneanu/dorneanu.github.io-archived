@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/index.html</loc>
-<lastmod>2015-11-06T16:58:42-00:00</lastmod>
+<lastmod>2015-11-17T18:26:33-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/archives.html</loc>
-<lastmod>2015-11-06T16:58:42-00:00</lastmod>
+<lastmod>2015-11-17T18:26:33-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/tags.html</loc>
-<lastmod>2015-11-06T16:58:42-00:00</lastmod>
+<lastmod>2015-11-17T18:26:33-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/categories.html</loc>
-<lastmod>2015-11-06T16:58:42-00:00</lastmod>
+<lastmod>2015-11-17T18:26:33-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -35,6 +35,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <loc>http://blog.dornea.nu/pages/books</loc>
 <lastmod>2014-06-23T00:00:00+02:00</lastmod>
 <changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids</loc>
+<lastmod>2015-11-17T00:00:00+01:00</lastmod>
+<changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -1139,7 +1146,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/category/blog</loc>
-<lastmod>2015-11-06T00:00:00+00:53</lastmod>
+<lastmod>2015-11-17T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1194,6 +1201,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>http://blog.dornea.nu/tag/pki/</loc>
+<lastmod>2015-10-02T00:00:00+00:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>http://blog.dornea.nu/tag/web/</loc>
 <lastmod>2015-06-22T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
@@ -1236,6 +1250,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>http://blog.dornea.nu/tag/openvpn/</loc>
+<lastmod>2015-11-17T00:00:00+00:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>http://blog.dornea.nu/tag/mail/</loc>
 <lastmod>2011-11-30T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
@@ -1257,15 +1278,15 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.dornea.nu/tag/xmind/</loc>
-<lastmod>2015-09-17T00:00:00+00:53</lastmod>
+<loc>http://blog.dornea.nu/tag/ccna/</loc>
+<lastmod>2015-11-06T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/tag/iptables/</loc>
-<lastmod>2015-02-19T00:00:00+00:53</lastmod>
+<lastmod>2015-11-17T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1307,7 +1328,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/ssl/</loc>
-<lastmod>2015-10-02T00:00:00+00:53</lastmod>
+<lastmod>2015-11-17T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1335,7 +1356,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/crypto/</loc>
-<lastmod>2015-10-02T00:00:00+00:53</lastmod>
+<lastmod>2015-11-17T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1362,8 +1383,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.dornea.nu/tag/fakebanker/</loc>
-<lastmod>2014-08-21T00:00:00+00:53</lastmod>
+<loc>http://blog.dornea.nu/tag/security/</loc>
+<lastmod>2015-07-01T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1454,7 +1475,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/ipython/</loc>
-<lastmod>2015-10-02T00:00:00+00:53</lastmod>
+<lastmod>2015-11-17T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1467,15 +1488,15 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.dornea.nu/tag/security/</loc>
-<lastmod>2015-07-01T00:00:00+00:53</lastmod>
+<loc>http://blog.dornea.nu/tag/fakebanker/</loc>
+<lastmod>2014-08-21T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/tag/tls/</loc>
-<lastmod>2015-10-02T00:00:00+00:53</lastmod>
+<lastmod>2015-11-17T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1496,7 +1517,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/admin/</loc>
-<lastmod>2012-01-26T00:00:00+00:53</lastmod>
+<lastmod>2015-11-17T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1510,7 +1531,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/openssl/</loc>
-<lastmod>2015-10-02T00:00:00+00:53</lastmod>
+<lastmod>2015-11-17T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1608,7 +1629,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/networking/</loc>
-<lastmod>2015-11-06T00:00:00+00:53</lastmod>
+<lastmod>2015-11-17T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1775,8 +1796,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.dornea.nu/tag/ccna/</loc>
-<lastmod>2015-11-06T00:00:00+00:53</lastmod>
+<loc>http://blog.dornea.nu/tag/xmind/</loc>
+<lastmod>2015-09-17T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1909,7 +1930,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/author/victor-dorneanu.html</loc>
-<lastmod>2015-11-06T00:00:00+00:53</lastmod>
+<lastmod>2015-11-17T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

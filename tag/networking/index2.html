@@ -1616,6 +1616,7 @@ init_mathjax();
     <link href="http://blog.dornea.nu/theme/css/pygments/native.css" rel="stylesheet">
     <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/style.css" type="text/css"/>
         <link href="http://blog.dornea.nu/css/custom.css" rel="stylesheet">
+        <link href="http://blog.dornea.nu/theme/css/shariff/shariff.min.css" rel="stylesheet">
 
         <link href="http://blog.dornea.nu/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
               title="blog.dornea.nu ATOM Feed"/>
@@ -1671,6 +1672,16 @@ blog.dornea.nu            </a>
         <li><a href="http://blog.dornea.nu/" title="Tags">Tags</a></li>
         <li class="active">networking</li>
     </ol>
+            <article>
+                <h2><a href="http://blog.dornea.nu/2011/06/24/free-pptp-vpn-servers">Free PPTP VPN servers</a></h2>
+                <div class="summary"><p>I&#8217;d recommend you all using some VPN to keep your identity safe and private. Here&#8217;s some setup:</p>
+<pre class="brush: bash;fontsize: 100; first-line: 1;">$ pptpsetup --create vpnde --server pptp.freedevpn.com --username free --password --encrypt 
+$ pptpsetup --create vpnca --server freecavpn.com --username free --password --encrypt 
+$ pptpsetup --create vpnl --server freenlvpn.com --username free --password --encrypt ...</pre>
+                    <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2011/06/24/free-pptp-vpn-servers">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2><a href="http://blog.dornea.nu/2011/04/04/vnc-connect-to-current-desktop-session-using-x11vnc-and-ssh">VNC: Connect to current desktop session using x11vnc and ssh</a></h2>
                 <div class="summary"><p><strong>x11vnc</strong> allows you to connect to real X displays without creating any new X session (fluxbox, twm, gnome etc.). It allows you to control the mouse, keyboard and X events remotely. I usually use it when friends of mine need help and I want to see what exactly they're ...</p>
@@ -1794,13 +1805,6 @@ Filesystem                Size      Used ...</pre></p></li></ul></!--break-->
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="http://blog.dornea.nu/2009/07/31/icmpknock-icmp-port-knocking-server">icmpKNOCK &#8211; ICMP port knocking server</a></h2>
-                <div class="summary"><p>1) Whats this about? If you&#8217;re familiar with port knocking, you should know the basics and how this technique basically works. If don&#8217;t have a clue what I&#8217;m talking about, feel free to have a look at the *Links* section. Most port knocking tools are listening for ...</p>
-                    <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2009/07/31/icmpknock-icmp-port-knocking-server">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://blog.dornea.nu/tag/networking/index.html">&laquo;</a>
@@ -1831,6 +1835,11 @@ Filesystem                Size      Used ...</pre></p></li></ul></!--break-->
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
                 <ul class="list-group" id="recentposts">
                     <li class="list-group-item">
+                        <a href="http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids">
+                            OpenVPN for paranoids
+                        </a>
+                    </li>
+                    <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2015/11/06/advanced-inter-vlan-switching-using-cisco">
                             Advanced inter VLAN switching using Cisco
                         </a>
@@ -1858,11 +1867,6 @@ Filesystem                Size      Used ...</pre></p></li></ul></!--break-->
                     <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2014/09/17/generate-all-ip-addresses-from-asn">
                             Generate all IP addresses from ASN
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">
-                            HowTo: Androguard with Docker
                         </a>
                     </li>
                 </ul>

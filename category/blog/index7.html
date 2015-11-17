@@ -1616,6 +1616,7 @@ init_mathjax();
     <link href="http://blog.dornea.nu/theme/css/pygments/native.css" rel="stylesheet">
     <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/style.css" type="text/css"/>
         <link href="http://blog.dornea.nu/css/custom.css" rel="stylesheet">
+        <link href="http://blog.dornea.nu/theme/css/shariff/shariff.min.css" rel="stylesheet">
 
         <link href="http://blog.dornea.nu/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
               title="blog.dornea.nu ATOM Feed"/>
@@ -1671,6 +1672,28 @@ blog.dornea.nu            </a>
         <li><a href="http://blog.dornea.nu/" title="blog.dornea.nu Categories">Categories</a></li>
         <li class="active">blog</li>
     </ol>
+            <article>
+                <h2><a href="http://blog.dornea.nu/2011/03/19/my-own-cheap-nas-the-openwrt-way">My own cheap NAS &#8211; the OpenWRT way</a></h2>
+                <div class="summary"><p>Introducing my <strong>TP-Link TL-WR1043ND</strong> &#8230;</p>
+<p><a href="http://static.dornea.nu/img/2011/6451cc078252b490477421fba4c28f04.jpg"><img class="trigger_lightbox" style="height: 400px; width: 600px;" alt="Front" src="http://static.dornea.nu/img/2011/6451cc078252b490477421fba4c28f04.jpg" width="900" height="600" /></a><!--more--></p>
+<!--break-->
+
+<p>Summary:</p>
+<ul>
+<li><strong>OS</strong>: Linux <strong>OpenWrt</strong> 2.6.32.25 #1 Fri Nov 19 20:27:50 PST 2010 mips GNU/Linux</li>
+<li>
+<p><strong>CPU</strong>:  <pre class="brush:java;">system type             : Atheros AR9132 rev 2
+machine                 : TP-LINK TL-WR1043ND
+processor               : 0
+cpu model               : MIPS 24Kc V7.4</pre></p>
+</li>
+<li>
+<p><strong>Filesystems</strong>:  <pre class="brush:java;">root@OpenWrt:~# df -Ph
+Filesystem                Size      Used ...</pre></p></li></ul></!--break-->
+                    <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2011/03/19/my-own-cheap-nas-the-openwrt-way">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2><a href="http://blog.dornea.nu/2011/03/07/howto-full-encrypt-data-using-gentooluks-and-initramfs">HowTo: Full-Encrypt data using Gentoo,Luks and initramfs</a></h2>
                 <div class="summary"><p><a href="http://static.dornea.nu/img/2011/0da33a2b7f96741b4d379ce62da56e04.jpg"><img class="trigger_lightbox" style="height: 96px; width: 150px; margin-top: 1px; margin-bottom: 1px; padding-right: 5px;" alt="Naked Data" src="http://static.dornea.nu/img/2011/0da33a2b7f96741b4d379ce62da56e04.jpg" width="800" height="510" /></a></p>
@@ -1775,16 +1798,6 @@ blog.dornea.nu            </a>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="http://blog.dornea.nu/2010/09/07/drupals-clean-urls-using-lighttpd-moved-from-lua-to-rewrite-once">Drupals clean urls using Lighttpd: Moved from Lua to rewrite-once</a></h2>
-                <div class="summary"><p>I&#8217;ve been using Lighttpd + Drupal for a long time. In order to have those sexy clean urls, you&#8217;ll have to do some rewrite stuff. A few months ago I found this Lua script, which served its purpose without any complications.<!--more--></p>
-<pre class="lang:default decode:true">-- little helper function
-function file_exists(path)
-local attr ...</pre>
-                    <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2010/09/07/drupals-clean-urls-using-lighttpd-moved-from-lua-to-rewrite-once">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://blog.dornea.nu/category/blog/index6.html">&laquo;</a>
@@ -1831,6 +1844,11 @@ local attr ...</pre>
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
                 <ul class="list-group" id="recentposts">
                     <li class="list-group-item">
+                        <a href="http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids">
+                            OpenVPN for paranoids
+                        </a>
+                    </li>
+                    <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2015/11/06/advanced-inter-vlan-switching-using-cisco">
                             Advanced inter VLAN switching using Cisco
                         </a>
@@ -1858,11 +1876,6 @@ local attr ...</pre>
                     <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2015/06/03/usd-ag-hacker-day-in-hamburg">
                             usd AG Hacker Day in Hamburg
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/2015/05/24/validating-and-pinning-x509-certificates">
-                            Validating and pinning X.509 certificates
                         </a>
                     </li>
                 </ul>
