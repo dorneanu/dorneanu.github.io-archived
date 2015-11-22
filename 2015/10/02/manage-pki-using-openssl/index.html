@@ -1739,8 +1739,8 @@ blog.dornea.nu            </a>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In the previous X.509 related <a href="http://blog.dornea.nu/2015/05/24/validating-and-pinning-x509-certificates/">post</a> I&#39;ve had a look at the internals of a X.509 certficate. This time I want to setup my own <a href="https://en.wikipedia.org/wiki/Public_key_infrastructure">PKI</a> using some <em>open source</em> software. This post is a preparation for setting up a VPN using <em>OpenVPN</em>. </p>
-<p>Before implementing the PKI let&#39;s have a look what a PKI should definitely include (make sure you have a look at the <a href="https://en.wikipedia.org/wiki/Public_key_infrastructure">Wikipedia entry</a>):</p>
+<p>In the previous X.509 related <a href="http://blog.dornea.nu/2015/05/24/validating-and-pinning-x509-certificates/">post</a> I've had a look at the internals of a X.509 certficate. This time I want to setup my own <a href="https://en.wikipedia.org/wiki/Public_key_infrastructure">PKI</a> using some <em>open source</em> software. This post is a preparation for setting up a VPN using <em>OpenVPN</em>. </p>
+<p>Before implementing the PKI let's have a look what a PKI should definitely include (make sure you have a look at the <a href="https://en.wikipedia.org/wiki/Public_key_infrastructure">Wikipedia entry</a>):</p>
 <ul>
 <li>certificate authority (<strong>CA</strong>)<ul>
 <li>has a public and a private key</li>
@@ -1757,21 +1757,20 @@ blog.dornea.nu            </a>
 </li>
 </ul>
 <h2 id="revision">Revision</h2>
-<table class="equalDevide" cellpadding="0" cellspacing="0" width="100%" border="0">
-  <tr>
-    <th><b>Date</b></th>
-    <th><b>Description</b></th>
-  </tr>
-  <tr>
-    <td>2015-10-02</td>
-    <td>First release</td>
-  </tr>
-  <tr>
-    <td>2015-11-17</td>
-    <td>Added creation of VPN-CA and related certificates.</td>
-  </tr>
+<table border="0" cellpadding="0" cellspacing="0" class=" table-striped table table-hover equalDevide" width="100%">
+<tr>
+<th><b>Date</b></th>
+<th><b>Description</b></th>
+</tr>
+<tr>
+<td>2015-10-02</td>
+<td>First release</td>
+</tr>
+<tr>
+<td>2015-11-17</td>
+<td>Added creation of VPN-CA and related certificates.</td>
+</tr>
 </table>
-
 <h2 id="ca-types">CA types</h2>
 <p>There are several <a href="https://pki-tutorial.readthedocs.org/en/latest/#ca-types">types</a> of <strong>CA</strong>s:</p>
 <ul>
@@ -1810,16 +1809,15 @@ blog.dornea.nu            </a>
 </li>
 </ul>
 <h2 id="pki-hierarchy">PKI hierarchy</h2>
-<p>In most modern companies you&#39;ll find a <strong>3-tier</strong> PKI hierarchy. </p>
+<p>In most modern companies you'll find a <strong>3-tier</strong> PKI hierarchy. </p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[170]:
+In [170]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">blockdiag</span>
@@ -1830,47 +1828,40 @@ In&nbsp;[170]:
   <span class="k">class</span> <span class="nc">blackline</span> <span class="p">[</span><span class="n">color</span> <span class="o">=</span> <span class="n">black</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
   <span class="k">class</span> <span class="nc">blue</span> <span class="p">[</span><span class="n">color</span> <span class="o">=</span> <span class="n">lightblue</span><span class="p">];</span>
 
-  <span class="n">Root_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= &quot;</span><span class="nc">emphasis</span><span class="s">&quot;, label = &quot;</span><span class="n">Root</span> <span class="n">CA</span><span class="s">&quot;];</span>
-  <span class="n">Intermediate_CA1</span> <span class="p">[</span><span class="k">class</span> <span class="err">= &quot;</span><span class="nc">blue</span><span class="s">&quot;, label = &quot;</span><span class="n">Intermediate</span> <span class="n">CA</span><span class="s">&quot;];</span>
-  <span class="n">Intermediate_CA2</span> <span class="p">[</span><span class="k">class</span> <span class="err">= &quot;</span><span class="nc">blue</span><span class="s">&quot;, label = &quot;</span><span class="n">Intermediate</span> <span class="n">CA</span><span class="s">&quot;];</span>
-  <span class="n">Intermediate_CA3</span> <span class="p">[</span><span class="k">class</span> <span class="err">= &quot;</span><span class="nc">blue</span><span class="s">&quot;, label = &quot;</span> <span class="o">...</span> <span class="s">&quot;];</span>
-  <span class="n">Signing_CA1</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;Signing CA&quot;</span><span class="p">];</span>
-  <span class="n">Signing_CA1_0</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot; ... &quot;</span><span class="p">];</span>
+  <span class="n">Root_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= "</span><span class="nc">emphasis</span><span class="s">", label = "</span><span class="n">Root</span> <span class="n">CA</span><span class="s">"];</span>
+  <span class="n">Intermediate_CA1</span> <span class="p">[</span><span class="k">class</span> <span class="err">= "</span><span class="nc">blue</span><span class="s">", label = "</span><span class="n">Intermediate</span> <span class="n">CA</span><span class="s">"];</span>
+  <span class="n">Intermediate_CA2</span> <span class="p">[</span><span class="k">class</span> <span class="err">= "</span><span class="nc">blue</span><span class="s">", label = "</span><span class="n">Intermediate</span> <span class="n">CA</span><span class="s">"];</span>
+  <span class="n">Intermediate_CA3</span> <span class="p">[</span><span class="k">class</span> <span class="err">= "</span><span class="nc">blue</span><span class="s">", label = "</span> <span class="o">...</span> <span class="s">"];</span>
+  <span class="n">Signing_CA1</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"Signing CA"</span><span class="p">];</span>
+  <span class="n">Signing_CA1_0</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">" ... "</span><span class="p">];</span>
   
-  <span class="n">Signing_CA2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;Signing CA&quot;</span><span class="p">];</span>
-  <span class="n">Signing_CA2_0</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot; ... &quot;</span><span class="p">];</span>
+  <span class="n">Signing_CA2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"Signing CA"</span><span class="p">];</span>
+  <span class="n">Signing_CA2_0</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">" ... "</span><span class="p">];</span>
   
-  <span class="n">Signing_CA3</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;Signing CA&quot;</span><span class="p">];</span>
-  <span class="n">Signing_CA3_0</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot; ... &quot;</span><span class="p">];</span>
+  <span class="n">Signing_CA3</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"Signing CA"</span><span class="p">];</span>
+  <span class="n">Signing_CA3_0</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">" ... "</span><span class="p">];</span>
 
   <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Intermediate_CA1</span><span class="p">;</span>
-  <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Intermediate_CA2</span> <span class="p">[</span><span class="k">class</span> <span class="err">= &quot;</span><span class="nc">blackline</span><span class="s">&quot;];</span>
-  <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Intermediate_CA3</span> <span class="p">[</span><span class="k">class</span> <span class="err">= &quot;</span><span class="nc">blackline</span><span class="s">&quot;];</span>
+  <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Intermediate_CA2</span> <span class="p">[</span><span class="k">class</span> <span class="err">= "</span><span class="nc">blackline</span><span class="s">"];</span>
+  <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Intermediate_CA3</span> <span class="p">[</span><span class="k">class</span> <span class="err">= "</span><span class="nc">blackline</span><span class="s">"];</span>
   <span class="n">Intermediate_CA1</span> <span class="o">-&gt;</span> <span class="n">Signing_CA1</span><span class="p">;</span>
-  <span class="n">Intermediate_CA1</span> <span class="o">-&gt;</span> <span class="n">Signing_CA1_0</span> <span class="p">[</span><span class="k">class</span> <span class="err">= &quot;</span><span class="nc">blackline</span><span class="s">&quot;];</span>
+  <span class="n">Intermediate_CA1</span> <span class="o">-&gt;</span> <span class="n">Signing_CA1_0</span> <span class="p">[</span><span class="k">class</span> <span class="err">= "</span><span class="nc">blackline</span><span class="s">"];</span>
 
-  <span class="n">Intermediate_CA2</span> <span class="o">-&gt;</span> <span class="n">Signing_CA2</span> <span class="p">[</span><span class="k">class</span> <span class="err">= &quot;</span><span class="nc">blackline</span><span class="s">&quot;];</span>
-  <span class="n">Intermediate_CA2</span> <span class="o">-&gt;</span> <span class="n">Signing_CA2_0</span> <span class="p">[</span><span class="k">class</span> <span class="err">= &quot;</span><span class="nc">blackline</span><span class="s">&quot;];</span>
+  <span class="n">Intermediate_CA2</span> <span class="o">-&gt;</span> <span class="n">Signing_CA2</span> <span class="p">[</span><span class="k">class</span> <span class="err">= "</span><span class="nc">blackline</span><span class="s">"];</span>
+  <span class="n">Intermediate_CA2</span> <span class="o">-&gt;</span> <span class="n">Signing_CA2_0</span> <span class="p">[</span><span class="k">class</span> <span class="err">= "</span><span class="nc">blackline</span><span class="s">"];</span>
 
-  <span class="n">Intermediate_CA3</span> <span class="o">-&gt;</span> <span class="n">Signing_CA3</span> <span class="p">[</span><span class="k">class</span> <span class="err">= &quot;</span><span class="nc">blackline</span><span class="s">&quot;];</span>
-  <span class="n">Intermediate_CA3</span> <span class="o">-&gt;</span> <span class="n">Signing_CA3_0</span> <span class="p">[</span><span class="k">class</span> <span class="err">= &quot;</span><span class="nc">blackline</span><span class="s">&quot;];</span>
+  <span class="n">Intermediate_CA3</span> <span class="o">-&gt;</span> <span class="n">Signing_CA3</span> <span class="p">[</span><span class="k">class</span> <span class="err">= "</span><span class="nc">blackline</span><span class="s">"];</span>
+  <span class="n">Intermediate_CA3</span> <span class="o">-&gt;</span> <span class="n">Signing_CA3_0</span> <span class="p">[</span><span class="k">class</span> <span class="err">= "</span><span class="nc">blackline</span><span class="s">"];</span>
 <span class="p">}</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
-
-
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABMAAAAEYCAYAAAC6H4pzAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABMAAAAEYCAYAAAC6H4pzAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACAASURB
 VHic7d15mGRleTf+b3dPzwwwLAKKMBoiaF4FQU3cAzKImqCgeeMaDaCJikKQV5MXfyYxtCbEqDGu
 GNBEBjcgoqDgEjUyuCC8IyoiLugACrLKALNPz0z374+q0326unoYhenqOs/nc13nOrV19VPV33M/
@@ -2097,31 +2088,26 @@ bfLffKXnf4qSQ721117y+1KirW3cjdzwI/9Mkv9tv4/mkf9tv4/mkf9tv4/mkf9tv4/mKTH/SQS9
 4n2grtEbfRfyT538UzL5p2TyT8nkn5KVln8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAD6y/8P88vHQMz75sAAAAAASUVORK5CYII=
-"
->
-</div>
-
-</div>
-
+">
+</img></div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For my purposes I&#39;ll be using only a <strong>2-tier</strong> hierarchy as shown below:</p>
+<p>For my purposes I'll be using only a <strong>2-tier</strong> hierarchy as shown below:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[5]:
+In [5]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">blockdiag</span>
@@ -2134,31 +2120,24 @@ In&nbsp;[5]:
   <span class="k">class</span> <span class="nc">blackline</span> <span class="p">[</span><span class="n">color</span> <span class="o">=</span> <span class="n">black</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
   <span class="k">class</span> <span class="nc">blue</span> <span class="p">[</span><span class="n">color</span> <span class="o">=</span> <span class="n">lightblue</span><span class="p">];</span>
 
-  <span class="n">Root_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= &quot;</span><span class="nc">emphasis</span><span class="s">&quot;, label = &quot;</span><span class="n">Root</span> <span class="n">CA</span><span class="s">&quot;];</span>
-  <span class="n">Signing_CA1</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;Signing CA&quot;</span><span class="p">];</span>
-  <span class="n">Signing_CA2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;Signing CA&quot;</span><span class="p">];</span>
-  <span class="n">Signing_CA3</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;Signing CA&quot;</span><span class="p">];</span>
+  <span class="n">Root_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= "</span><span class="nc">emphasis</span><span class="s">", label = "</span><span class="n">Root</span> <span class="n">CA</span><span class="s">"];</span>
+  <span class="n">Signing_CA1</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"Signing CA"</span><span class="p">];</span>
+  <span class="n">Signing_CA2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"Signing CA"</span><span class="p">];</span>
+  <span class="n">Signing_CA3</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"Signing CA"</span><span class="p">];</span>
 
   <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Signing_CA1</span><span class="p">;</span>
   <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Signing_CA2</span><span class="p">;</span>
   <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Signing_CA3</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
-
-
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAADICAYAAAB4WVALAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAADICAYAAAB4WVALAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAABmWSURB
 VHic7d17lBTlncbxp+fGiAjGS1DGLKto1hvo7ibGCy5jUBMSlWwM0dWAmhyjgajnuK6emGSZ5ByS
 eNmj8WiiZsMMagBXNqASTQIbBlEDS9QgKis6gAFR44XbXHuY7v2j651+u7p6QJnpnq7f93NOne7p
@@ -2276,15 +2255,11 @@ fK/iqFAjDq8A9vZ55Yb820b+Cz9G/uPPev5zWA51X6/d8vtiUV+NO5YNX+QfWeR/78chfizmXxJB
 d3gf4It1o49A/uEj/7DMWv4BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoL/8PzShrAEvgzpV
 AAAAAElFTkSuQmCC
-"
->
-</div>
-
-</div>
-
+">
+</img></div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -2296,16 +2271,15 @@ AAAAAElFTkSuQmCC
 <p>Also checkout this <a href="http://blogs.technet.com/b/askds/archive/2009/09/01/designing-and-implementing-a-pki-part-i-design-and-planning.aspx">awesome article</a> for further details.</p>
 </blockquote>
 <h3 id="dornea-nu-pki-hierarchy">dornea.nu PKI hierarchy</h3>
-<p>And now let&#39;s make this whole hierarchy more personalized:</p>
+<p>And now let's make this whole hierarchy more personalized:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[13]:
+In [13]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">blockdiag</span>
@@ -2319,39 +2293,32 @@ In&nbsp;[13]:
   <span class="k">class</span> <span class="nc">blue</span> <span class="p">[</span><span class="n">color</span> <span class="o">=</span> <span class="n">lightblue</span><span class="p">];</span>
   <span class="k">class</span> <span class="nc">inactive</span> <span class="p">[</span><span class="n">color</span> <span class="o">=</span> <span class="n">lightgrey</span><span class="p">];</span>
 
-  <span class="n">Root_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= &quot;</span><span class="nc">emphasis</span><span class="s">&quot;, label = &quot;</span><span class="n">dornea</span><span class="o">.</span><span class="n">nu</span> <span class="n">root</span> <span class="n">CA</span><span class="s">&quot;];</span>
-  <span class="n">Signing_CA2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;dev.dornea.nu CA&quot;</span><span class="p">];</span>
-  <span class="n">Signing_CA3</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;vpn.dornea.nu CA&quot;</span><span class="p">];</span>
-  <span class="n">TLS_Server_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;TLS Server Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">TLS_Client_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;TLS Client Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">VPN_Server_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VPN Server Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">VPN_Client_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VPN Client Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">Root_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= "</span><span class="nc">emphasis</span><span class="s">", label = "</span><span class="n">dornea</span><span class="o">.</span><span class="n">nu</span> <span class="n">root</span> <span class="n">CA</span><span class="s">"];</span>
+  <span class="n">Signing_CA2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"dev.dornea.nu CA"</span><span class="p">];</span>
+  <span class="n">Signing_CA3</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"vpn.dornea.nu CA"</span><span class="p">];</span>
+  <span class="n">TLS_Server_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"TLS Server Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">TLS_Client_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"TLS Client Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">VPN_Server_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"VPN Server Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">VPN_Client_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"VPN Client Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
 
-  <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Signing_CA2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;issues&quot;</span><span class="p">];</span>
+  <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Signing_CA2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"issues"</span><span class="p">];</span>
   <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Signing_CA3</span><span class="p">;</span>
 
-  <span class="n">Signing_CA2</span> <span class="o">-&gt;</span> <span class="n">TLS_Server_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;issues&quot;</span><span class="p">];</span>
+  <span class="n">Signing_CA2</span> <span class="o">-&gt;</span> <span class="n">TLS_Server_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"issues"</span><span class="p">];</span>
   <span class="n">Signing_CA2</span> <span class="o">-&gt;</span> <span class="n">TLS_Client_CA</span><span class="p">;</span>
     
-  <span class="n">Signing_CA3</span> <span class="o">-&gt;</span> <span class="n">VPN_Server_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;issues&quot;</span><span class="p">];</span>
+  <span class="n">Signing_CA3</span> <span class="o">-&gt;</span> <span class="n">VPN_Server_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"issues"</span><span class="p">];</span>
   <span class="n">Signing_CA3</span> <span class="o">-&gt;</span> <span class="n">VPN_Client_CA</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
-
-
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0AAAAEYCAYAAAB1IZbxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0AAAAEYCAYAAAB1IZbxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACAASURB
 VHic7N15eFNV/sfxd7q37JsCBQRB9sXBESoUKQplERDBqlgQFAUUtaI4guNA0VF0HJWfgjuCKC6I
 IAguiFoEhAoyiKAgUgqWQimUtnQvTX5/pEmTNGVtmzb383qe+yS59+bkpP3mnHzPPfcGRERERERE
@@ -2756,26 +2723,22 @@ hVr3hb6bmH9tYP4jg/nXBuY/Mph/bWD+Q8DQdh/fO21ggY8M5l8bmP/IYP61gfmPDOZfG5h/IiIi
 IiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIi
 IiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIi
 IiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiouj3/4wmYtOK6+7fAAAAAElFTkSuQmCC
-"
->
-</div>
-
-</div>
-
+">
+</img></div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We&#39;ll have a <strong>root CA</strong> bound to the domain <code>dornea.nu</code> followed by 2 intermediate CAs: <strong>dev.dornea.nu CA</strong> and <strong>vpn.dornea.nu CA</strong>. The CAs will be used to issue certificates to <em>users</em> and <em>networks</em>.</p>
+<p>We'll have a <strong>root CA</strong> bound to the domain <code>dornea.nu</code> followed by 2 intermediate CAs: <strong>dev.dornea.nu CA</strong> and <strong>vpn.dornea.nu CA</strong>. The CAs will be used to issue certificates to <em>users</em> and <em>networks</em>.</p>
 <p>The <strong>TLS Server CA</strong> will be used by a web server like Apache or Nginx to server content over a SSL/TLS connection. The server will only accept connection from clients with a valid <strong>TLS Client CA</strong> which has been signed (and generated) from <strong>dev.dornea.nu CA</strong>. </p>
 <p>The <strong>vpn.dornea.nu CA</strong> will then issue certificates for a <strong>VPN Server CA</strong> and a <strong>VPN Client CA</strong>. </p>
 <blockquote>
-<p>In this post the creation of the <em>VPN Server CA</em> and <em>VPN Client CA</em> will be ommitted. I&#39;ll cover this in a related post. </p>
+<p>In this post the creation of the <em>VPN Server CA</em> and <em>VPN Client CA</em> will be ommitted. I'll cover this in a related post. </p>
 </blockquote>
 </div>
 </div>
@@ -2786,24 +2749,20 @@ IiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiouj3/4wmYtOK6+7fAAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="openssl">OpenSSL</h2>
-<p><a href="https://www.openssl.org">OpenSSL</a> is probably the most known cryptography software and SSL/TLS toolkit. Let&#39;s have look how things are done using OpenSSL. First of all I&#39;ll setup a directory structure to represent each of the PKI component in a clean way.</p>
+<p><a href="https://www.openssl.org">OpenSSL</a> is probably the most known cryptography software and SSL/TLS toolkit. Let's have look how things are done using OpenSSL. First of all I'll setup a directory structure to represent each of the PKI component in a clean way.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[1]:
+In [1]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span><span class="err">↔</span>
 </pre></div>
-
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -2817,9 +2776,8 @@ In&nbsp;[1]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[2]:
+In [2]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pki</span>
@@ -2828,31 +2786,22 @@ In&nbsp;[2]:
 <span class="n">echo</span> <span class="mo">01</span> <span class="o">&gt;</span> <span class="n">ca</span><span class="o">/</span><span class="n">root</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span><span class="n">db</span><span class="o">/</span><span class="n">root</span><span class="o">-</span><span class="n">ca</span><span class="o">.</span><span class="n">crt</span><span class="o">.</span><span class="n">srl</span>
 <span class="n">echo</span> <span class="mo">01</span> <span class="o">&gt;</span> <span class="n">ca</span><span class="o">/</span><span class="n">root</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span><span class="n">db</span><span class="o">/</span><span class="n">root</span><span class="o">-</span><span class="n">ca</span><span class="o">.</span><span class="n">crl</span><span class="o">.</span><span class="n">srl</span>
 </pre></div>
-
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[3]:
+In [3]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">tree</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pki</span>
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">/tmp/pki
@@ -2872,45 +2821,43 @@ In&nbsp;[3]:
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In order to create the certificates I&#39;ll keep track of every CA using OpenSSL <strong>configuration files</strong>. </p>
+<p>In order to create the certificates I'll keep track of every CA using OpenSSL <strong>configuration files</strong>. </p>
 <h3 id="sub-commands">Sub-commands</h3>
 <p>Below there is an overview of the most used <em>subcommands</em> in openssl:</p>
-<table class="equalDevide" cellpadding="0" cellspacing="0" width="100%" border="0">
-  <tr>
-    <th class="tg-yw4l">Subcommand</th>
-    <th class="tg-yw4l">Description</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">req</td>
-    <td class="tg-yw4l">PKCS#10 X.509 Certificate Signing Request (CSR) Management</td>
-    <td>The req command primarily creates and processes certificate requests in PKCS#10 format. It can additionally create self signed certificates for use as root CAs for example.</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">ca</td>
-    <td class="tg-yw4l">Certificate Authority (CA) Management</td>
-    <td>It can be used to sign certificate requests in a variety of forms and generate CRLs it also maintains a text database of issued certificates and their status.</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">pkcs12</td>
-    <td class="tg-yw4l">PKCS#12 Data Management</td>
-    <td>The pkcs12 command allows PKCS#12 files (sometimes referred to as PFX files) to be created and parsed. PKCS#12 files are used by several programs including Netscape, MSIE and MS Outlook.</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">x509</td>
-    <td class="tg-yw4l">X.509 Certificate Data Management</td>
-    <td>It can be used to display certificate information, convert certificates to various forms, sign certificate requests like a &quot;mini CA&quot; or edit certificate trust settings.</td>
-  </tr>
+<table border="0" cellpadding="0" cellspacing="0" class=" table-striped table table-hover equalDevide" width="100%">
+<tr>
+<th class="tg-yw4l">Subcommand</th>
+<th class="tg-yw4l">Description</th>
+<th>Details</th>
+</tr>
+<tr>
+<td class="tg-yw4l">req</td>
+<td class="tg-yw4l">PKCS#10 X.509 Certificate Signing Request (CSR) Management</td>
+<td>The req command primarily creates and processes certificate requests in PKCS#10 format. It can additionally create self signed certificates for use as root CAs for example.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">ca</td>
+<td class="tg-yw4l">Certificate Authority (CA) Management</td>
+<td>It can be used to sign certificate requests in a variety of forms and generate CRLs it also maintains a text database of issued certificates and their status.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">pkcs12</td>
+<td class="tg-yw4l">PKCS#12 Data Management</td>
+<td>The pkcs12 command allows PKCS#12 files (sometimes referred to as PFX files) to be created and parsed. PKCS#12 files are used by several programs including Netscape, MSIE and MS Outlook.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">x509</td>
+<td class="tg-yw4l">X.509 Certificate Data Management</td>
+<td>It can be used to display certificate information, convert certificates to various forms, sign certificate requests like a "mini CA" or edit certificate trust settings.</td>
+</tr>
 </table>
 </div>
 </div>
@@ -2920,17 +2867,15 @@ In&nbsp;[3]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Create-dornea.nu-root-CA">Create dornea.nu root CA<a class="anchor-link" href="#Create-dornea.nu-root-CA">&#182;</a></h3>
+<h3 id="Create-dornea.nu-root-CA">Create dornea.nu root CA<a class="anchor-link" href="#Create-dornea.nu-root-CA">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[14]:
+In [14]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">blockdiag</span>
@@ -2945,13 +2890,13 @@ In&nbsp;[14]:
   <span class="k">class</span> <span class="nc">active</span> <span class="p">[</span><span class="n">color</span> <span class="o">=</span> <span class="n">lightgreen</span><span class="p">];</span>
   <span class="k">class</span> <span class="nc">inactive</span> <span class="p">[</span><span class="n">color</span> <span class="o">=</span> <span class="n">lightgrey</span><span class="p">];</span>  
 
-  <span class="n">Root_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">active</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;dornea.nu root CA&quot;</span><span class="p">];</span>
-  <span class="n">Signing_CA2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;dev.dornea.nu CA&quot;</span><span class="p">];</span>
-  <span class="n">Signing_CA3</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;vpn.dornea.nu CA&quot;</span><span class="p">];</span>
-  <span class="n">TLS_Server_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;TLS Server Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">TLS_Client_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;TLS Client Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">VPN_Server_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VPN Server Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">VPN_Client_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VPN Client Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">Root_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">active</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"dornea.nu root CA"</span><span class="p">];</span>
+  <span class="n">Signing_CA2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"dev.dornea.nu CA"</span><span class="p">];</span>
+  <span class="n">Signing_CA3</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"vpn.dornea.nu CA"</span><span class="p">];</span>
+  <span class="n">TLS_Server_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"TLS Server Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">TLS_Client_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"TLS Client Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">VPN_Server_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"VPN Server Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">VPN_Client_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"VPN Client Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
 
   <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Signing_CA2</span><span class="p">;</span>
   <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Signing_CA3</span><span class="p">;</span>
@@ -2963,21 +2908,14 @@ In&nbsp;[14]:
   <span class="n">Signing_CA3</span> <span class="o">-&gt;</span> <span class="n">VPN_Client_CA</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
-
-
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0AAAAEYCAYAAAB1IZbxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0AAAAEYCAYAAAB1IZbxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACAASURB
 VHic7N13fFPV/8fxV9JJgbL3HiIbARHEskcBQYbgoCwHoCjiQAUnituv4/tFwIHg+OKPoUBRVBCV
 pYLwZaigCBSKZbSs7t3090d60yRNyyqE5r6fj8d9ZPbmJP3knPs559wTEBERERERERERERERERER
@@ -3352,15 +3290,11 @@ aNZ4w+bILvS58JH/5Y/8dw/5X/7If/eQ/+WP/C8CIV24+d4r3svlYb5G7Xyj7xD5twP57w7ybwfy
 3x3k3w7kvw2EtnO8d3agwXcH+bcD+e8O8m8H8t8d5N8O5B8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACD+/g/1GhXCTg4kNQAAAABJRU5ErkJggg==
-"
->
-</div>
-
-</div>
-
+">
+</img></div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -3374,9 +3308,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACD+/g/1GhXCTg4kNQAAAABJRU5ErkJggg==
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[4]:
+In [4]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">writefile</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">ca</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">root</span><span class="o">-</span><span class="n">ca</span><span class="o">.</span><span class="n">conf</span>
@@ -3401,15 +3334,15 @@ In&nbsp;[4]:
 <span class="n">default_md</span>              <span class="o">=</span> <span class="n">sha2</span>                  <span class="c"># MD to use</span>
 <span class="n">utf8</span>                    <span class="o">=</span> <span class="n">yes</span>                   <span class="c"># Input is UTF-8</span>
 <span class="n">string_mask</span>             <span class="o">=</span> <span class="n">utf8only</span>              <span class="c"># Emit UTF-8 strings</span>
-<span class="n">prompt</span>                  <span class="o">=</span> <span class="n">no</span>                    <span class="c"># Don&#39;t prompt for DN</span>
+<span class="n">prompt</span>                  <span class="o">=</span> <span class="n">no</span>                    <span class="c"># Don't prompt for DN</span>
 <span class="n">distinguished_name</span>      <span class="o">=</span> <span class="n">ca_dn</span>                 <span class="c"># DN section</span>
 <span class="n">req_extensions</span>          <span class="o">=</span> <span class="n">ca_reqext</span>             <span class="c"># Desired extensions</span>
 
 <span class="p">[</span> <span class="n">ca_dn</span> <span class="p">]</span>
-<span class="n">countryName</span>             <span class="o">=</span> <span class="s">&quot;NU&quot;</span>
-<span class="n">organizationName</span>        <span class="o">=</span> <span class="s">&quot;dornea.nu&quot;</span>
-<span class="n">organizationalUnitName</span>  <span class="o">=</span> <span class="s">&quot;dornea.nu Root CA&quot;</span>
-<span class="n">commonName</span>              <span class="o">=</span> <span class="s">&quot;dornea.nu Root CA&quot;</span>
+<span class="n">countryName</span>             <span class="o">=</span> <span class="s">"NU"</span>
+<span class="n">organizationName</span>        <span class="o">=</span> <span class="s">"dornea.nu"</span>
+<span class="n">organizationalUnitName</span>  <span class="o">=</span> <span class="s">"dornea.nu Root CA"</span>
+<span class="n">commonName</span>              <span class="o">=</span> <span class="s">"dornea.nu Root CA"</span>
 
 <span class="p">[</span> <span class="n">ca_reqext</span> <span class="p">]</span>
 <span class="n">keyUsage</span>                <span class="o">=</span> <span class="n">critical</span><span class="p">,</span><span class="n">keyCertSign</span><span class="p">,</span><span class="n">cRLSign</span>
@@ -3492,33 +3425,26 @@ In&nbsp;[4]:
 
 <span class="p">[</span> <span class="n">additional_oids</span> <span class="p">]</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">Writing /tmp/pki/ca/conf/root-ca.conf
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now let&#39;s create the <strong>CA request</strong>. The configuration for the creation of the <strong>CSR</strong> if found in the <em>configuration</em> file in the section <code>[req]</code>:</p>
+<p>Now let's create the <strong>CA request</strong>. The configuration for the creation of the <strong>CSR</strong> if found in the <em>configuration</em> file in the section <code>[req]</code>:</p>
 <pre><code class="language-.bash"><span class="comment">$ cd /tmp/pki
 $</span> <span class="comment">openssl</span> <span class="comment">req</span> <span class="literal">-</span><span class="comment">new</span> <span class="comment">\</span>
             <span class="literal">-</span><span class="comment">config</span> <span class="comment">ca/conf/root</span>-<span class="comment">ca</span>.<span class="comment">conf</span> <span class="comment">\</span>
@@ -3594,17 +3520,15 @@ Using configuration from ca/conf/root-ca<span class="preprocessor">.conf</span>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Create-dev.dornea.nu-CA">Create dev.dornea.nu CA<a class="anchor-link" href="#Create-dev.dornea.nu-CA">&#182;</a></h3>
+<h3 id="Create-dev.dornea.nu-CA">Create dev.dornea.nu CA<a class="anchor-link" href="#Create-dev.dornea.nu-CA">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[15]:
+In [15]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">blockdiag</span>
@@ -3619,13 +3543,13 @@ In&nbsp;[15]:
   <span class="k">class</span> <span class="nc">active</span> <span class="p">[</span><span class="n">color</span> <span class="o">=</span> <span class="n">lightgreen</span><span class="p">];</span>
   <span class="k">class</span> <span class="nc">inactive</span> <span class="p">[</span><span class="n">color</span> <span class="o">=</span> <span class="n">lightgrey</span><span class="p">];</span>    
 
-  <span class="n">Root_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;dornea.nu root CA&quot;</span><span class="p">];</span>
-  <span class="n">Signing_CA2</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">active</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;dev.dornea.nu CA&quot;</span><span class="p">];</span>
-  <span class="n">Signing_CA3</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;vpn.dornea.nu CA&quot;</span><span class="p">];</span>
-  <span class="n">TLS_Server_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;TLS Server Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">TLS_Client_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;TLS Client Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">VPN_Server_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VPN Server Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">VPN_Client_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VPN Client Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">Root_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"dornea.nu root CA"</span><span class="p">];</span>
+  <span class="n">Signing_CA2</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">active</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"dev.dornea.nu CA"</span><span class="p">];</span>
+  <span class="n">Signing_CA3</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"vpn.dornea.nu CA"</span><span class="p">];</span>
+  <span class="n">TLS_Server_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"TLS Server Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">TLS_Client_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"TLS Client Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">VPN_Server_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"VPN Server Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">VPN_Client_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"VPN Client Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
 
   <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Signing_CA2</span><span class="p">;</span>
   <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Signing_CA3</span><span class="p">;</span>
@@ -3637,21 +3561,14 @@ In&nbsp;[15]:
   <span class="n">Signing_CA3</span> <span class="o">-&gt;</span> <span class="n">VPN_Client_CA</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
-
-
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0AAAAEYCAYAAAB1IZbxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0AAAAEYCAYAAAB1IZbxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACAASURB
 VHic7N15eFNV/sfxd9KWLkCRTSj7NrKDgkDFIiD7XvhRUBFhBhUVFZhhFEdF1HFfQBHRUUEHdRAV
 REERUdmhgCCyKLJDKXsppXub5PdHetMkTctWCM39vJ7nPlnu7c1J+s0593vPuScgIiIiIiIiIiIi
@@ -4029,15 +3946,11 @@ OKvcn4VXEdB7Rja4HvXXLPee8Je70bp7Q/RHvcHXm+9qTeN3If/mIf/+If/mIf/+If/mIf9rRECX
 dmagwbcG+TcD+W8N8m8G8t8a5N8M5B8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAACD4/g+lxTXpvxfbPQAAAABJRU5ErkJggg==
-"
->
-</div>
-
-</div>
-
+">
+</img></div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -4051,17 +3964,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAACD4/g+lxTXpvxfbPQAAAABJRU5ErkJggg==
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[5]:
+In [5]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span><span class="err">↔</span>
 </pre></div>
-
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -4075,9 +3984,8 @@ In&nbsp;[5]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[6]:
+In [6]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pki</span>
@@ -4086,11 +3994,8 @@ In&nbsp;[6]:
 <span class="n">echo</span> <span class="mo">01</span> <span class="o">&gt;</span> <span class="n">ca</span><span class="o">/</span><span class="n">dev</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span><span class="n">db</span><span class="o">/</span><span class="n">dev</span><span class="o">-</span><span class="n">ca</span><span class="o">.</span><span class="n">crt</span><span class="o">.</span><span class="n">srl</span>
 <span class="n">echo</span> <span class="mo">01</span> <span class="o">&gt;</span> <span class="n">ca</span><span class="o">/</span><span class="n">dev</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span><span class="n">db</span><span class="o">/</span><span class="n">dev</span><span class="o">-</span><span class="n">ca</span><span class="o">.</span><span class="n">crl</span><span class="o">.</span><span class="n">srl</span>
 </pre></div>
-
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -4104,9 +4009,8 @@ In&nbsp;[6]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[7]:
+In [7]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">writefile</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">ca</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">dev</span><span class="o">-</span><span class="n">ca</span><span class="o">.</span><span class="n">conf</span>
@@ -4130,15 +4034,15 @@ In&nbsp;[7]:
 <span class="n">default_md</span>              <span class="o">=</span> <span class="n">sha2</span>                  <span class="c"># MD to use</span>
 <span class="n">utf8</span>                    <span class="o">=</span> <span class="n">yes</span>                   <span class="c"># Input is UTF-8</span>
 <span class="n">string_mask</span>             <span class="o">=</span> <span class="n">utf8only</span>              <span class="c"># Emit UTF-8 strings</span>
-<span class="n">prompt</span>                  <span class="o">=</span> <span class="n">no</span>                    <span class="c"># Don&#39;t prompt for DN</span>
+<span class="n">prompt</span>                  <span class="o">=</span> <span class="n">no</span>                    <span class="c"># Don't prompt for DN</span>
 <span class="n">distinguished_name</span>      <span class="o">=</span> <span class="n">ca_dn</span>                 <span class="c"># DN section</span>
 <span class="n">req_extensions</span>          <span class="o">=</span> <span class="n">ca_reqext</span>             <span class="c"># Desired extensions</span>
 
 <span class="p">[</span> <span class="n">ca_dn</span> <span class="p">]</span>
-<span class="n">countryName</span>             <span class="o">=</span> <span class="s">&quot;NU&quot;</span>
-<span class="n">organizationName</span>        <span class="o">=</span> <span class="s">&quot;dornea.nu&quot;</span>
-<span class="n">organizationalUnitName</span>  <span class="o">=</span> <span class="s">&quot;dornea.nu Root CA&quot;</span>
-<span class="n">commonName</span>              <span class="o">=</span> <span class="s">&quot;dev.dornea.nu CA&quot;</span>
+<span class="n">countryName</span>             <span class="o">=</span> <span class="s">"NU"</span>
+<span class="n">organizationName</span>        <span class="o">=</span> <span class="s">"dornea.nu"</span>
+<span class="n">organizationalUnitName</span>  <span class="o">=</span> <span class="s">"dornea.nu Root CA"</span>
+<span class="n">commonName</span>              <span class="o">=</span> <span class="s">"dev.dornea.nu CA"</span>
 
 <span class="p">[</span> <span class="n">ca_reqext</span> <span class="p">]</span>
 <span class="n">keyUsage</span>                <span class="o">=</span> <span class="n">critical</span><span class="p">,</span><span class="n">keyCertSign</span><span class="p">,</span><span class="n">cRLSign</span>
@@ -4171,10 +4075,10 @@ In&nbsp;[7]:
 <span class="n">crl_extensions</span>          <span class="o">=</span> <span class="n">crl_ext</span>               <span class="c"># CRL extensions</span>
 
 <span class="p">[</span> <span class="n">match_pol</span> <span class="p">]</span>
-<span class="n">countryName</span>             <span class="o">=</span> <span class="n">match</span>                 <span class="c"># Must match &#39;NO&#39;</span>
+<span class="n">countryName</span>             <span class="o">=</span> <span class="n">match</span>                 <span class="c"># Must match 'NO'</span>
 <span class="n">stateOrProvinceName</span>     <span class="o">=</span> <span class="n">optional</span>              <span class="c"># Included if present</span>
 <span class="n">localityName</span>            <span class="o">=</span> <span class="n">optional</span>              <span class="c"># Included if present</span>
-<span class="n">organizationName</span>        <span class="o">=</span> <span class="n">match</span>                 <span class="c"># Must match &#39;Green AS&#39;</span>
+<span class="n">organizationName</span>        <span class="o">=</span> <span class="n">match</span>                 <span class="c"># Must match 'Green AS'</span>
 <span class="n">organizationalUnitName</span>  <span class="o">=</span> <span class="n">optional</span>              <span class="c"># Included if present</span>
 <span class="n">commonName</span>              <span class="o">=</span> <span class="n">supplied</span>              <span class="c"># Must be present</span>
 
@@ -4226,26 +4130,19 @@ In&nbsp;[7]:
 <span class="p">[</span> <span class="n">crl_info</span> <span class="p">]</span>
 <span class="n">URI</span><span class="o">.</span><span class="mi">0</span>                   <span class="o">=</span> <span class="err">$</span><span class="n">crl_url</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">Writing /tmp/pki/ca/conf/dev-ca.conf
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -4329,17 +4226,15 @@ $</span> <span class="comment">openssl</span> <span class="comment">req</span> <
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Create-vpn.dornea.nu-CA">Create vpn.dornea.nu CA<a class="anchor-link" href="#Create-vpn.dornea.nu-CA">&#182;</a></h3>
+<h3 id="Create-vpn.dornea.nu-CA">Create vpn.dornea.nu CA<a class="anchor-link" href="#Create-vpn.dornea.nu-CA">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[4]:
+In [4]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">blockdiag</span>
@@ -4354,13 +4249,13 @@ In&nbsp;[4]:
   <span class="k">class</span> <span class="nc">active</span> <span class="p">[</span><span class="n">color</span> <span class="o">=</span> <span class="n">lightgreen</span><span class="p">];</span>
   <span class="k">class</span> <span class="nc">inactive</span> <span class="p">[</span><span class="n">color</span> <span class="o">=</span> <span class="n">lightgrey</span><span class="p">];</span> 
 
-  <span class="n">Root_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;dornea.nu root CA&quot;</span><span class="p">];</span>
-  <span class="n">Signing_CA2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;dev.dornea.nu CA&quot;</span><span class="p">];</span>
-  <span class="n">Signing_CA3</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">active</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;vpn.dornea.nu CA&quot;</span><span class="p">];</span>
-  <span class="n">TLS_Server_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;TLS Server Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">TLS_Client_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;TLS Client Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">VPN_Server_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VPN Server Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">VPN_Client_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VPN Client Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">Root_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"dornea.nu root CA"</span><span class="p">];</span>
+  <span class="n">Signing_CA2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"dev.dornea.nu CA"</span><span class="p">];</span>
+  <span class="n">Signing_CA3</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">active</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"vpn.dornea.nu CA"</span><span class="p">];</span>
+  <span class="n">TLS_Server_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"TLS Server Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">TLS_Client_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"TLS Client Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">VPN_Server_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"VPN Server Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">VPN_Client_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"VPN Client Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
 
   <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Signing_CA2</span><span class="p">;</span>
   <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Signing_CA3</span><span class="p">;</span>
@@ -4372,21 +4267,14 @@ In&nbsp;[4]:
   <span class="n">Signing_CA3</span> <span class="o">-&gt;</span> <span class="n">VPN_Client_CA</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
-
-
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0AAAAEYCAYAAAB1IZbxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0AAAAEYCAYAAAB1IZbxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACAASURB
 VHic7N15XBTlHwfwzx6cCognoCgeeSHiDzzQUDw4vEXTLPGgzLvSykrLlLLSsrJfZlbmXf2szDMr
 j8pb0fLII005VERARUBu2J3fH8sMs8suXuDKzuf9es1rjxlmn12++zzzneeZZwEiIiIiIiIiIiIi
@@ -4764,15 +4652,11 @@ DoR07Vb7rPgsN4bVGrX1jb5J5N8M5L81yL8ZyH9rkH8zkP8GENrm8dmZgQbfGuTfDOS/Nci/Gch/
 a5B/M5B/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AACA8Ps/LEs0rX6VuwAAAAAASUVORK5CYII=
-"
->
-</div>
-
-</div>
-
+">
+</img></div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -4786,19 +4670,15 @@ AACA8Ps/LEs0rX6VuwAAAAAASUVORK5CYII=
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[8]:
+In [8]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pki</span>
 <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="n">ca</span><span class="o">/</span><span class="n">vpn</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span> <span class="n">ca</span><span class="o">/</span><span class="n">vpn</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span><span class="n">private</span> <span class="n">ca</span><span class="o">/</span><span class="n">vpn</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span><span class="n">db</span> <span class="n">ca</span><span class="o">/</span><span class="n">vpn</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span><span class="n">certs</span>
 </pre></div>
-
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -4812,9 +4692,8 @@ In&nbsp;[8]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[9]:
+In [9]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pki</span>
@@ -4823,11 +4702,8 @@ In&nbsp;[9]:
 <span class="n">echo</span> <span class="mo">01</span> <span class="o">&gt;</span> <span class="n">ca</span><span class="o">/</span><span class="n">vpn</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span><span class="n">db</span><span class="o">/</span><span class="n">vpn</span><span class="o">-</span><span class="n">ca</span><span class="o">.</span><span class="n">crt</span><span class="o">.</span><span class="n">srl</span>
 <span class="n">echo</span> <span class="mo">01</span> <span class="o">&gt;</span> <span class="n">ca</span><span class="o">/</span><span class="n">vpn</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span><span class="n">db</span><span class="o">/</span><span class="n">vpn</span><span class="o">-</span><span class="n">ca</span><span class="o">.</span><span class="n">crl</span><span class="o">.</span><span class="n">srl</span>
 </pre></div>
-
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -4841,9 +4717,8 @@ In&nbsp;[9]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[18]:
+In [18]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">writefile</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">ca</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">vpn</span><span class="o">-</span><span class="n">ca</span><span class="o">.</span><span class="n">conf</span>
@@ -4867,15 +4742,15 @@ In&nbsp;[18]:
 <span class="n">default_md</span>              <span class="o">=</span> <span class="n">sha2</span>                  <span class="c"># MD to use</span>
 <span class="n">utf8</span>                    <span class="o">=</span> <span class="n">yes</span>                   <span class="c"># Input is UTF-8</span>
 <span class="n">string_mask</span>             <span class="o">=</span> <span class="n">utf8only</span>              <span class="c"># Emit UTF-8 strings</span>
-<span class="n">prompt</span>                  <span class="o">=</span> <span class="n">no</span>                    <span class="c"># Don&#39;t prompt for DN</span>
+<span class="n">prompt</span>                  <span class="o">=</span> <span class="n">no</span>                    <span class="c"># Don't prompt for DN</span>
 <span class="n">distinguished_name</span>      <span class="o">=</span> <span class="n">ca_dn</span>                 <span class="c"># DN section</span>
 <span class="n">req_extensions</span>          <span class="o">=</span> <span class="n">ca_reqext</span>             <span class="c"># Desired extensions</span>
 
 <span class="p">[</span> <span class="n">ca_dn</span> <span class="p">]</span>
-<span class="n">countryName</span>             <span class="o">=</span> <span class="s">&quot;NU&quot;</span>
-<span class="n">organizationName</span>        <span class="o">=</span> <span class="s">&quot;dornea.nu&quot;</span>
-<span class="n">organizationalUnitName</span>  <span class="o">=</span> <span class="s">&quot;dornea.nu Root CA&quot;</span>
-<span class="n">commonName</span>              <span class="o">=</span> <span class="s">&quot;vpn.dornea.nu CA&quot;</span>
+<span class="n">countryName</span>             <span class="o">=</span> <span class="s">"NU"</span>
+<span class="n">organizationName</span>        <span class="o">=</span> <span class="s">"dornea.nu"</span>
+<span class="n">organizationalUnitName</span>  <span class="o">=</span> <span class="s">"dornea.nu Root CA"</span>
+<span class="n">commonName</span>              <span class="o">=</span> <span class="s">"vpn.dornea.nu CA"</span>
 
 <span class="p">[</span> <span class="n">ca_reqext</span> <span class="p">]</span>
 <span class="n">keyUsage</span>                <span class="o">=</span> <span class="n">critical</span><span class="p">,</span><span class="n">keyCertSign</span><span class="p">,</span><span class="n">cRLSign</span>
@@ -4908,10 +4783,10 @@ In&nbsp;[18]:
 <span class="n">crl_extensions</span>          <span class="o">=</span> <span class="n">crl_ext</span>               <span class="c"># CRL extensions</span>
 
 <span class="p">[</span> <span class="n">match_pol</span> <span class="p">]</span>
-<span class="n">countryName</span>             <span class="o">=</span> <span class="n">match</span>                 <span class="c"># Must match &#39;NO&#39;</span>
+<span class="n">countryName</span>             <span class="o">=</span> <span class="n">match</span>                 <span class="c"># Must match 'NO'</span>
 <span class="n">stateOrProvinceName</span>     <span class="o">=</span> <span class="n">optional</span>              <span class="c"># Included if present</span>
 <span class="n">localityName</span>            <span class="o">=</span> <span class="n">optional</span>              <span class="c"># Included if present</span>
-<span class="n">organizationName</span>        <span class="o">=</span> <span class="n">match</span>                 <span class="c"># Must match &#39;Green AS&#39;</span>
+<span class="n">organizationName</span>        <span class="o">=</span> <span class="n">match</span>                 <span class="c"># Must match 'Green AS'</span>
 <span class="n">organizationalUnitName</span>  <span class="o">=</span> <span class="n">optional</span>              <span class="c"># Included if present</span>
 <span class="n">commonName</span>              <span class="o">=</span> <span class="n">supplied</span>              <span class="c"># Must be present</span>
 
@@ -4963,26 +4838,19 @@ In&nbsp;[18]:
 <span class="p">[</span> <span class="n">crl_info</span> <span class="p">]</span>
 <span class="n">URI</span><span class="o">.</span><span class="mi">0</span>                   <span class="o">=</span> <span class="err">$</span><span class="n">crl_url</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">Overwriting /tmp/pki/ca/conf/vpn-ca.conf
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -5066,54 +4934,44 @@ $</span> <span class="comment">openssl</span> <span class="comment">req</span> <
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Create-dev-ca-CA-chain">Create dev-ca CA chain<a class="anchor-link" href="#Create-dev-ca-CA-chain">&#182;</a></h2>
+<h2 id="Create-dev-ca-CA-chain">Create dev-ca CA chain<a class="anchor-link" href="#Create-dev-ca-CA-chain">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[6]:
+In [6]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pki</span>
 <span class="n">cat</span> <span class="n">ca</span><span class="o">/</span><span class="n">dev</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span><span class="n">dev</span><span class="o">-</span><span class="n">ca</span><span class="o">.</span><span class="n">crt</span> <span class="n">ca</span><span class="o">/</span><span class="n">root</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span><span class="n">root</span><span class="o">-</span><span class="n">ca</span><span class="o">.</span><span class="n">crt</span> <span class="o">&gt;</span> <span class="n">ca</span><span class="o">/</span><span class="n">dev</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span><span class="n">dev</span><span class="o">-</span><span class="n">ca</span><span class="o">-</span><span class="n">chain</span><span class="o">.</span><span class="n">pem</span>
 </pre></div>
-
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Create-vpn-ca-CA-chain">Create vpn-ca CA chain<a class="anchor-link" href="#Create-vpn-ca-CA-chain">&#182;</a></h2>
+<h2 id="Create-vpn-ca-CA-chain">Create vpn-ca CA chain<a class="anchor-link" href="#Create-vpn-ca-CA-chain">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[7]:
+In [7]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pki</span>
 <span class="n">cat</span> <span class="n">ca</span><span class="o">/</span><span class="n">vpn</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span><span class="n">vpn</span><span class="o">-</span><span class="n">ca</span><span class="o">.</span><span class="n">crt</span> <span class="n">ca</span><span class="o">/</span><span class="n">root</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span><span class="n">root</span><span class="o">-</span><span class="n">ca</span><span class="o">.</span><span class="n">crt</span> <span class="o">&gt;</span> <span class="n">ca</span><span class="o">/</span><span class="n">vpn</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span><span class="n">vpn</span><span class="o">-</span><span class="n">ca</span><span class="o">-</span><span class="n">chain</span><span class="o">.</span><span class="n">pem</span>
 </pre></div>
-
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -5121,7 +4979,7 @@ In&nbsp;[7]:
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="issue-dev-ca-certificates">Issue dev-CA certificates</h1>
-<p>We&#39;ll now create the <strong>TLS</strong> <em>server</em> and <em>client</em> certificates.</p>
+<p>We'll now create the <strong>TLS</strong> <em>server</em> and <em>client</em> certificates.</p>
 <h2 id="create-tls-server-certificate">Create TLS server certificate</h2>
 </div>
 </div>
@@ -5129,9 +4987,8 @@ In&nbsp;[7]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[16]:
+In [16]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">blockdiag</span>
@@ -5146,15 +5003,15 @@ In&nbsp;[16]:
   <span class="k">class</span> <span class="nc">active</span> <span class="p">[</span><span class="n">color</span> <span class="o">=</span> <span class="n">lightgreen</span><span class="p">];</span>
   <span class="k">class</span> <span class="nc">inactive</span> <span class="p">[</span><span class="n">color</span> <span class="o">=</span> <span class="n">lightgrey</span><span class="p">];</span> 
 
-  <span class="n">Root_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;dornea.nu root CA&quot;</span><span class="p">];</span>
-  <span class="n">Signing_CA2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;dev.dornea.nu CA&quot;</span><span class="p">];</span>
-  <span class="n">Signing_CA3</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;vpn.dornea.nu CA&quot;</span><span class="p">];</span>
-  <span class="n">TLS_Server_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">active</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;TLS Server Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">TLS_Client_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;TLS Client Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">VPN_Server_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VPN Server Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">VPN_Client_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VPN Client Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">Root_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"dornea.nu root CA"</span><span class="p">];</span>
+  <span class="n">Signing_CA2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"dev.dornea.nu CA"</span><span class="p">];</span>
+  <span class="n">Signing_CA3</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"vpn.dornea.nu CA"</span><span class="p">];</span>
+  <span class="n">TLS_Server_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">active</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"TLS Server Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">TLS_Client_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"TLS Client Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">VPN_Server_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"VPN Server Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">VPN_Client_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"VPN Client Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
     
-  <span class="n">dev_dornea_nu</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">active</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;DNS: dev.dornea.nu</span><span class="se">\n</span><span class="s">DNS: dev2.dornea.nu</span><span class="se">\n</span><span class="s">IP: 10.10.10.1</span><span class="se">\n</span><span class="s">IP: 10.20.20.1&quot;</span><span class="p">];</span>
+  <span class="n">dev_dornea_nu</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">active</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"DNS: dev.dornea.nu</span><span class="se">\n</span><span class="s">DNS: dev2.dornea.nu</span><span class="se">\n</span><span class="s">IP: 10.10.10.1</span><span class="se">\n</span><span class="s">IP: 10.20.20.1"</span><span class="p">];</span>
 
   <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Signing_CA2</span><span class="p">;</span>
   <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Signing_CA3</span><span class="p">;</span>
@@ -5168,21 +5025,14 @@ In&nbsp;[16]:
   <span class="n">TLS_Server_CA</span> <span class="o">-&gt;</span> <span class="n">dev_dornea_nu</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
-
-
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0AAAAFoCAYAAAB+A5swAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0AAAAFoCAYAAAB+A5swAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACAASURB
 VHic7N13XFNX/wfwTxK2DFEcqCCOuhCxWhEtCg5A3NpSW6nV1qqttlp97FO11lHttK3W2eXW/nzU
 qlStrdLWhRZ3Xa0DRUEUlL1Hcn9/hBtuQoILiOR+3q9XXiG5Nzcn4Ztz8j3n3BOAiIiIiIiIiIiI
@@ -5704,15 +5554,11 @@ THyIiIiIwghP9N34PZAUkx4iIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIi
 IiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIi
 IiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIrqa
 /X86S2dPdxLtxQAAAABJRU5ErkJggg==
-"
->
-</div>
-
-</div>
-
+">
+</img></div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -5726,16 +5572,15 @@ IiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIrqa
 <li>DNS names</li>
 <li>etc.</li>
 </ul>
-<p>Let&#39;s have a look at the config file:</p>
+<p>Let's have a look at the config file:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[118]:
+In [118]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">writefile</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">ca</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">vpn</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">cert</span><span class="o">.</span><span class="n">conf</span>
@@ -5757,13 +5602,13 @@ In&nbsp;[118]:
 <span class="n">req_extensions</span>          <span class="o">=</span> <span class="n">server_reqext</span>         <span class="c"># Desired extensions</span>
 
 <span class="p">[</span> <span class="n">server_dn</span> <span class="p">]</span>
-<span class="n">countryName</span>             <span class="o">=</span> <span class="s">&quot;1. Country Name (2 letters) (eg, US)       &quot;</span>
+<span class="n">countryName</span>             <span class="o">=</span> <span class="s">"1. Country Name (2 letters) (eg, US)       "</span>
 <span class="n">countryName_max</span>         <span class="o">=</span> <span class="mi">2</span>
-<span class="n">stateOrProvinceName</span>     <span class="o">=</span> <span class="s">&quot;2. State or Province Name   (eg, region)   &quot;</span>
-<span class="n">localityName</span>            <span class="o">=</span> <span class="s">&quot;3. Locality Name            (eg, city)     &quot;</span>
-<span class="n">organizationName</span>        <span class="o">=</span> <span class="s">&quot;4. Organization Name        (eg, company)  &quot;</span>
-<span class="n">organizationalUnitName</span>  <span class="o">=</span> <span class="s">&quot;5. Organizational Unit Name (eg, section)  &quot;</span>
-<span class="n">commonName</span>              <span class="o">=</span> <span class="s">&quot;6. Common Name              (eg, FQDN)     &quot;</span>
+<span class="n">stateOrProvinceName</span>     <span class="o">=</span> <span class="s">"2. State or Province Name   (eg, region)   "</span>
+<span class="n">localityName</span>            <span class="o">=</span> <span class="s">"3. Locality Name            (eg, city)     "</span>
+<span class="n">organizationName</span>        <span class="o">=</span> <span class="s">"4. Organization Name        (eg, company)  "</span>
+<span class="n">organizationalUnitName</span>  <span class="o">=</span> <span class="s">"5. Organizational Unit Name (eg, section)  "</span>
+<span class="n">commonName</span>              <span class="o">=</span> <span class="s">"6. Common Name              (eg, FQDN)     "</span>
 <span class="n">commonName_max</span>          <span class="o">=</span> <span class="mi">64</span>
 
 <span class="p">[</span> <span class="n">server_reqext</span> <span class="p">]</span>
@@ -5778,26 +5623,19 @@ In&nbsp;[118]:
 <span class="n">IP</span><span class="o">.</span><span class="mi">1</span> <span class="o">=</span> <span class="mf">10.10</span><span class="o">.</span><span class="mf">10.1</span>
 <span class="n">IP</span><span class="o">.</span><span class="mi">2</span> <span class="o">=</span> <span class="mf">10.20</span><span class="o">.</span><span class="mf">20.1</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">Overwriting /tmp/pki/ca/conf/dev-server-ca.conf
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -5811,19 +5649,15 @@ In&nbsp;[118]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[117]:
+In [117]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pki</span>
 <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="n">ca</span><span class="o">/</span><span class="n">dev</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span> <span class="n">ca</span><span class="o">/</span><span class="n">dev</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span><span class="n">private</span> <span class="n">ca</span><span class="o">/</span><span class="n">dev</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span><span class="n">db</span> <span class="n">ca</span><span class="o">/</span><span class="n">dev</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span><span class="n">certs</span>
 </pre></div>
-
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -5855,7 +5689,7 @@ $</span> <span class="comment">openssl</span> <span class="comment">req</span> <
 <span class="comment">4</span>. <span class="comment">Organization</span> <span class="comment">Name</span>        <span class="comment">(eg</span>, <span class="comment">company)</span>   <span class="title">[</span><span class="title">]</span><span class="comment">:dornea</span>.<span class="comment">nu</span>
 <span class="comment">5</span>. <span class="comment">Organizational</span> <span class="comment">Unit</span> <span class="comment">Name</span> <span class="comment">(eg</span>, <span class="comment">section)</span>   <span class="title">[</span><span class="title">]</span><span class="comment">:dev</span>.<span class="comment">dornea</span>.<span class="comment">nu</span>
 <span class="comment">6</span>. <span class="comment">Common</span> <span class="comment">Name</span>              <span class="comment">(eg</span>, <span class="comment">FQDN)</span>      <span class="title">[</span><span class="title">]</span><span class="comment">:dev</span>.<span class="comment">dornea</span>.<span class="comment">nu
-</code></pre>
+</span></code></pre>
 </div>
 </div>
 </div>
@@ -5914,17 +5748,15 @@ issuer=/C=NU/O=dornea<span class="preprocessor">.nu</span>/OU=dornea<span class=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Create-TLS-client-certificate">Create TLS client certificate<a class="anchor-link" href="#Create-TLS-client-certificate">&#182;</a></h2>
+<h2 id="Create-TLS-client-certificate">Create TLS client certificate<a class="anchor-link" href="#Create-TLS-client-certificate">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[17]:
+In [17]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">blockdiag</span>
@@ -5939,15 +5771,15 @@ In&nbsp;[17]:
   <span class="k">class</span> <span class="nc">active</span> <span class="p">[</span><span class="n">color</span> <span class="o">=</span> <span class="n">lightgreen</span><span class="p">];</span>
   <span class="k">class</span> <span class="nc">inactive</span> <span class="p">[</span><span class="n">color</span> <span class="o">=</span> <span class="n">lightgrey</span><span class="p">];</span> 
 
-  <span class="n">Root_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;dornea.nu root CA&quot;</span><span class="p">];</span>
-  <span class="n">Signing_CA2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;dev.dornea.nu CA&quot;</span><span class="p">];</span>
-  <span class="n">Signing_CA3</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;vpn.dornea.nu CA&quot;</span><span class="p">];</span>
-  <span class="n">TLS_Server_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;TLS Server Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">TLS_Client_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">active</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;TLS Client Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">VPN_Server_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VPN Server Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">VPN_Client_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VPN Client Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">Root_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"dornea.nu root CA"</span><span class="p">];</span>
+  <span class="n">Signing_CA2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"dev.dornea.nu CA"</span><span class="p">];</span>
+  <span class="n">Signing_CA3</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"vpn.dornea.nu CA"</span><span class="p">];</span>
+  <span class="n">TLS_Server_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"TLS Server Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">TLS_Client_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">active</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"TLS Client Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">VPN_Server_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"VPN Server Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">VPN_Client_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">inactive</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"VPN Client Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
     
-  <span class="n">dev_client_victor</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">active</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;CN: Victor Dorneanu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">];</span>
+  <span class="n">dev_client_victor</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">active</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"CN: Victor Dorneanu</span><span class="se">\n</span><span class="s">"</span><span class="p">];</span>
 
   <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Signing_CA2</span><span class="p">;</span>
   <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Signing_CA3</span><span class="p">;</span>
@@ -5961,21 +5793,14 @@ In&nbsp;[17]:
   <span class="n">TLS_Client_CA</span> <span class="o">-&gt;</span> <span class="n">dev_client_victor</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
-
-
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0AAAAFoCAYAAAB+A5swAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0AAAAFoCAYAAAB+A5swAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACAASURB
 VHic7N15XFRV/wfwz8ywgxgq7iCKmRtqkkqG4YIgimuRGZmUqaUlavakPqaUrfqUPi5ZT7kvP1Nz
 Sc00S1PRUFNzKxcWZRNUBGSHmfv7Y7iXO8MMbsDI3M/79ZrXLPdy58zwnXPme865ZwAiIiIiIiIi
@@ -6441,15 +6266,11 @@ U9zS3YczWYugdPcpfgAAjsQODuAuQ43oDFX00Fc4Q6Yixl4ADff3AADIO+zUAO40VNunX3CXoYob
 Ch8AgOOwowOAfgBWFD0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAABz//j+MX4UNHfecYwAAAABJRU5ErkJggg==
-"
->
-</div>
-
-</div>
-
+">
+</img></div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -6463,19 +6284,15 @@ AAAAAAAAAAAAAAAAABz//j+MX4UNHfecYwAAAABJRU5ErkJggg==
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[135]:
+In [135]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pki</span>
 <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="n">ca</span><span class="o">/</span><span class="n">dev</span><span class="o">-</span><span class="n">client</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span> <span class="n">ca</span><span class="o">/</span><span class="n">dev</span><span class="o">-</span><span class="n">client</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span> <span class="n">ca</span><span class="o">/</span><span class="n">dev</span><span class="o">-</span><span class="n">client</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span><span class="n">db</span> <span class="n">ca</span><span class="o">/</span><span class="n">dev</span><span class="o">-</span><span class="n">client</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span><span class="n">certs</span>
 </pre></div>
-
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -6489,38 +6306,30 @@ In&nbsp;[135]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[136]:
+In [136]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">writefile</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">ca</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">dev</span><span class="o">-</span><span class="n">client</span><span class="o">-</span><span class="n">ca</span><span class="o">.</span><span class="n">conf</span><span class="err">↔</span>
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">Overwriting /tmp/pki/ca/conf/dev-client-ca.conf
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now I&#39;ll create a new CSR for the user <strong>victor</strong>:</p>
+<p>Now I'll create a new CSR for the user <strong>victor</strong>:</p>
 <pre><code class="language-.bash"><span class="comment">$</span> <span class="comment">openssl</span> <span class="comment">req</span> <span class="literal">-</span><span class="comment">new</span> <span class="comment">\</span>
             <span class="literal">-</span><span class="comment">config</span> <span class="comment">ca/conf/dev</span>-<span class="comment">client</span>-<span class="comment">ca</span>.<span class="comment">conf</span> <span class="comment">\</span>
             <span class="literal">-</span><span class="comment">out</span> <span class="comment">ca/dev</span>-<span class="comment">client</span>-<span class="comment">ca/certs/victor</span>.<span class="comment">csr</span> <span class="comment">\</span>
@@ -6546,7 +6355,7 @@ In&nbsp;[136]:
 <span class="comment">5</span>. <span class="comment">Organizational</span> <span class="comment">Unit</span> <span class="comment">Name</span> <span class="comment">(eg</span>, <span class="comment">section)</span>   <span class="title">[</span><span class="title">]</span><span class="comment">:dev</span> <span class="comment">dornea</span>.<span class="comment">nu</span>
 <span class="comment">6</span>. <span class="comment">Common</span> <span class="comment">Name</span>              <span class="comment">(eg</span>, <span class="comment">full</span> <span class="comment">name)</span> <span class="title">[</span><span class="title">]</span><span class="comment">:Victor</span> <span class="comment">Dorneanu</span>
 <span class="comment">7</span>. <span class="comment">Email</span> <span class="comment">Address</span>            <span class="comment">(eg</span>, <span class="comment">name@fqdn)</span> <span class="title">[</span><span class="title">]</span><span class="comment">:blabla@dornea</span>.<span class="comment">nu
-</code></pre>
+</span></code></pre>
 <p>Now create the TLS client certificate:</p>
 <pre><code class="language-.bash"><span class="variable">$ </span>openssl ca -config ca/conf/dev-ca.conf \
             -<span class="keyword">in</span> ca/dev-client-ca/certs/victor.csr \
@@ -6619,7 +6428,7 @@ In&nbsp;[136]:
 <span class="comment">Enter</span> <span class="comment">pass</span> <span class="comment">phrase</span> <span class="comment">for</span> <span class="comment">ca/dev</span>-<span class="comment">client</span>-<span class="comment">ca/certs/victor</span>.<span class="comment">key:</span>
 <span class="comment">Enter</span> <span class="comment">Export</span> <span class="comment">Password:</span>
 <span class="comment">Verifying</span> <span class="literal">-</span> <span class="comment">Enter</span> <span class="comment">Export</span> <span class="comment">Password:
-</code></pre>
+</span></code></pre>
 <p>Now <em>verify</em> the bundle:</p>
 <pre><code class="language-.bash">$ openssl pkcs12 -<span class="keyword">in</span> ca/dev-client-ca/certs/victor<span class="preprocessor">.p</span>12 -info | egrep -e <span class="string">"issuer"</span> -e <span class="string">"subject"</span>
 Enter Import Password:
@@ -6649,7 +6458,7 @@ issuer=/C=NU/O=dornea<span class="preprocessor">.nu</span>/OU=dornea<span class=
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="issue-vpn-ca-certificates">Issue vpn-CA certificates</h1>
-<p>We&#39;ll now create <strong>VPN</strong> <em>server</em> and <em>client</em> certificates.</p>
+<p>We'll now create <strong>VPN</strong> <em>server</em> and <em>client</em> certificates.</p>
 <h2 id="create-vpn-server-certificate">Create VPN server certificate</h2>
 </div>
 </div>
@@ -6657,9 +6466,8 @@ issuer=/C=NU/O=dornea<span class="preprocessor">.nu</span>/OU=dornea<span class=
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[8]:
+In [8]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">blockdiag</span>
@@ -6672,13 +6480,13 @@ In&nbsp;[8]:
   <span class="k">class</span> <span class="nc">active</span> <span class="p">[</span><span class="n">color</span> <span class="o">=</span> <span class="n">lightgreen</span><span class="p">];</span>
   <span class="k">class</span> <span class="nc">inactive</span> <span class="p">[</span><span class="n">color</span> <span class="o">=</span> <span class="n">lightgrey</span><span class="p">];</span> 
 
-  <span class="n">Root_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;dornea.nu root CA&quot;</span><span class="p">];</span>
-  <span class="n">Signing_CA2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;dev.dornea.nu CA&quot;</span><span class="p">];</span>
-  <span class="n">Signing_CA3</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;vpn.dornea.nu CA&quot;</span><span class="p">];</span>
-  <span class="n">TLS_Server_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;TLS Server Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">TLS_Client_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;TLS Client Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">VPN_Server_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">active</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VPN Server Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">VPN_Client_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VPN Client Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">Root_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"dornea.nu root CA"</span><span class="p">];</span>
+  <span class="n">Signing_CA2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"dev.dornea.nu CA"</span><span class="p">];</span>
+  <span class="n">Signing_CA3</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"vpn.dornea.nu CA"</span><span class="p">];</span>
+  <span class="n">TLS_Server_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"TLS Server Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">TLS_Client_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"TLS Client Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">VPN_Server_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">active</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"VPN Server Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">VPN_Client_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"VPN Client Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
     
 
   <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Signing_CA2</span><span class="p">;</span>
@@ -6691,21 +6499,14 @@ In&nbsp;[8]:
   <span class="n">Signing_CA3</span> <span class="o">-&gt;</span> <span class="n">VPN_Client_CA</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
-
-
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0AAAAEYCAYAAAB1IZbxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0AAAAEYCAYAAAB1IZbxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACAASURB
 VHic7N15XFTl/gfwzwyroKAICSK44K6gQioqruGCmqlFlriQazdLb8u9ardfoXWzbpulli2KW7dy
 vWam5ZJLqOCSuebCoiAqyg7DOnN+fwzncGbDDRiZ83m/XvOa5RzOPDN85/vM9zznPAMQERERERER
@@ -7081,39 +6882,30 @@ z4rPcnW4X6O2vtE3ifybgfy3Bvk3A/lvDfJvBvLfAELbPD47M9DgW4P8m4H8twb5NwP5bw3ybwby
 DwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEH3/
 Bz7NvLeOuHuHAAAAAElFTkSuQmCC
-"
->
-</div>
-
-</div>
-
+">
+</img></div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[9]:
+In [9]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pki</span>
 <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="n">ca</span><span class="o">/</span><span class="n">vpn</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">vpn</span><span class="o">-</span><span class="n">server</span>
 </pre></div>
-
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[10]:
+In [10]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">writefile</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">ca</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">vpn</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">cert</span><span class="o">.</span><span class="n">conf</span>
@@ -7132,13 +6924,13 @@ In&nbsp;[10]:
 <span class="n">req_extensions</span>          <span class="o">=</span> <span class="n">vpn_server_reqext</span>       <span class="c"># Desired extensions</span>
 
 <span class="p">[</span> <span class="n">vpn_server_dn</span> <span class="p">]</span>
-<span class="n">countryName</span>             <span class="o">=</span> <span class="s">&quot;1. Country Name (2 letters) (eg, US)       &quot;</span>
+<span class="n">countryName</span>             <span class="o">=</span> <span class="s">"1. Country Name (2 letters) (eg, US)       "</span>
 <span class="n">countryName_max</span>         <span class="o">=</span> <span class="mi">2</span>
-<span class="n">stateOrProvinceName</span>     <span class="o">=</span> <span class="s">&quot;2. State or Province Name   (eg, region)   &quot;</span>
-<span class="n">localityName</span>            <span class="o">=</span> <span class="s">&quot;3. Locality Name            (eg, city)     &quot;</span>
-<span class="n">organizationName</span>        <span class="o">=</span> <span class="s">&quot;4. Organization Name        (eg, company)  &quot;</span>
-<span class="n">organizationalUnitName</span>  <span class="o">=</span> <span class="s">&quot;5. Organizational Unit Name (eg, section)  &quot;</span>
-<span class="n">commonName</span>              <span class="o">=</span> <span class="s">&quot;6. Common Name              (eg, full name)&quot;</span>
+<span class="n">stateOrProvinceName</span>     <span class="o">=</span> <span class="s">"2. State or Province Name   (eg, region)   "</span>
+<span class="n">localityName</span>            <span class="o">=</span> <span class="s">"3. Locality Name            (eg, city)     "</span>
+<span class="n">organizationName</span>        <span class="o">=</span> <span class="s">"4. Organization Name        (eg, company)  "</span>
+<span class="n">organizationalUnitName</span>  <span class="o">=</span> <span class="s">"5. Organizational Unit Name (eg, section)  "</span>
+<span class="n">commonName</span>              <span class="o">=</span> <span class="s">"6. Common Name              (eg, full name)"</span>
 <span class="n">commonName_max</span>          <span class="o">=</span> <span class="mi">64</span>
 
 <span class="p">[</span> <span class="n">vpn_server_reqext</span> <span class="p">]</span>
@@ -7146,26 +6938,19 @@ In&nbsp;[10]:
 <span class="n">extendedKeyUsage</span>        <span class="o">=</span> <span class="n">critical</span><span class="p">,</span><span class="n">codeSigning</span>
 <span class="n">subjectKeyIdentifier</span>    <span class="o">=</span> <span class="nb">hash</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">Overwriting /tmp/pki/ca/conf/vpn-server-cert.conf
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -7202,7 +6987,7 @@ In&nbsp;[10]:
 <span class="comment">4</span>. <span class="comment">Organization</span> <span class="comment">Name</span>        <span class="comment">(eg</span>, <span class="comment">company)</span>   <span class="title">[</span><span class="title">]</span><span class="comment">:dornea</span>.<span class="comment">nu</span>
 <span class="comment">5</span>. <span class="comment">Organizational</span> <span class="comment">Unit</span> <span class="comment">Name</span> <span class="comment">(eg</span>, <span class="comment">section)</span>   <span class="title">[</span><span class="title">]</span><span class="comment">:VPN</span>
 <span class="comment">6</span>. <span class="comment">Common</span> <span class="comment">Name</span>              <span class="comment">(eg</span>, <span class="comment">full</span> <span class="comment">name)</span> <span class="title">[</span><span class="title">]</span><span class="comment">:vpn</span>.<span class="comment">dornea</span>.<span class="comment">nu
-</code></pre>
+</span></code></pre>
 <h3 id="sign-certificate">Sign certificate</h3>
 <p>Now use the <strong>VPN-CA</strong> to issue the <strong>CRT</strong> (Code Signing Certificate):</p>
 <pre><code class="language-.bash"><span class="variable">$ </span>openssl ca -config ca/conf/vpn-ca.conf \                                                               <span class="number">1</span> ↵
@@ -7268,7 +7053,7 @@ In&nbsp;[10]:
 <span class="comment">Enter</span> <span class="comment">pass</span> <span class="comment">phrase</span> <span class="comment">for</span> <span class="comment">ca/vpn</span>-<span class="comment">ca/certs/vpn</span>-<span class="comment">server/raspberry_pi</span>.<span class="comment">key:</span>
 <span class="comment">Enter</span> <span class="comment">Export</span> <span class="comment">Password:</span>
 <span class="comment">Verifying</span> <span class="literal">-</span> <span class="comment">Enter</span> <span class="comment">Export</span> <span class="comment">Password:
-</code></pre>
+</span></code></pre>
 </div>
 </div>
 </div>
@@ -7277,17 +7062,15 @@ In&nbsp;[10]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Create-VPN-client-certificate">Create VPN client certificate<a class="anchor-link" href="#Create-VPN-client-certificate">&#182;</a></h2>
+<h2 id="Create-VPN-client-certificate">Create VPN client certificate<a class="anchor-link" href="#Create-VPN-client-certificate">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[12]:
+In [12]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">blockdiag</span>
@@ -7302,13 +7085,13 @@ In&nbsp;[12]:
   <span class="k">class</span> <span class="nc">active</span> <span class="p">[</span><span class="n">color</span> <span class="o">=</span> <span class="n">lightgreen</span><span class="p">];</span>
   <span class="k">class</span> <span class="nc">inactive</span> <span class="p">[</span><span class="n">color</span> <span class="o">=</span> <span class="n">lightgrey</span><span class="p">];</span> 
 
-  <span class="n">Root_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;dornea.nu root CA&quot;</span><span class="p">];</span>
-  <span class="n">Signing_CA2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;dev.dornea.nu CA&quot;</span><span class="p">];</span>
-  <span class="n">Signing_CA3</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;vpn.dornea.nu CA&quot;</span><span class="p">];</span>
-  <span class="n">TLS_Server_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;TLS Server Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">TLS_Client_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;TLS Client Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">VPN_Server_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VPN Server Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
-  <span class="n">VPN_Client_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">active</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VPN Client Cert&quot;</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">Root_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"dornea.nu root CA"</span><span class="p">];</span>
+  <span class="n">Signing_CA2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"dev.dornea.nu CA"</span><span class="p">];</span>
+  <span class="n">Signing_CA3</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"vpn.dornea.nu CA"</span><span class="p">];</span>
+  <span class="n">TLS_Server_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"TLS Server Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">TLS_Client_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"TLS Client Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">VPN_Server_CA</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"VPN Server Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
+  <span class="n">VPN_Client_CA</span> <span class="p">[</span><span class="k">class</span> <span class="err">= </span><span class="nc">active</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"VPN Client Cert"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">flowchart</span><span class="o">.</span><span class="n">terminator</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">dotted</span><span class="p">];</span>
     
 
   <span class="n">Root_CA</span> <span class="o">-&gt;</span> <span class="n">Signing_CA2</span><span class="p">;</span>
@@ -7321,21 +7104,14 @@ In&nbsp;[12]:
   <span class="n">Signing_CA3</span> <span class="o">-&gt;</span> <span class="n">VPN_Client_CA</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
-
-
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0AAAAEYCAYAAAB1IZbxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0AAAAEYCAYAAAB1IZbxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACAASURB
 VHic7N13WBTX+gfw7y5VQLBgxAJiiY2iEQsq1oCKLViIiahgizcx0cSbe6M3uRFTzC/FxBhLmmLN
 NWo0Ro0mamLDgsTYO6ggiA0B6bA7vz+WGWYbooILO9/P8+yzZWZnz8K75+x7zpmzABERERERERER
@@ -7708,39 +7484,30 @@ W1/0dSL/ZiD/jUH+zUD+G4P8m4H814DQ1o/PzgwUfGOQfzOQ/8Yg/2Yg/41B/s1A/gEAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOLv/4YklmYT8s/U
 AAAAAElFTkSuQmCC
-"
->
-</div>
-
-</div>
-
+">
+</img></div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[13]:
+In [13]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pki</span>
 <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="n">ca</span><span class="o">/</span><span class="n">vpn</span><span class="o">-</span><span class="n">ca</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">vpn</span><span class="o">-</span><span class="n">client</span>
 </pre></div>
-
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[14]:
+In [14]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">writefile</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">ca</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">vpn</span><span class="o">-</span><span class="n">client</span><span class="o">-</span><span class="n">cert</span><span class="o">.</span><span class="n">conf</span>
@@ -7759,15 +7526,15 @@ In&nbsp;[14]:
 <span class="n">req_extensions</span>          <span class="o">=</span> <span class="n">client_reqext</span>         <span class="c"># Desired extensions</span>
 
 <span class="p">[</span> <span class="n">client_dn</span> <span class="p">]</span>
-<span class="n">countryName</span>             <span class="o">=</span> <span class="s">&quot;1. Country Name (2 letters) (eg, US)       &quot;</span>
+<span class="n">countryName</span>             <span class="o">=</span> <span class="s">"1. Country Name (2 letters) (eg, US)       "</span>
 <span class="n">countryName_max</span>         <span class="o">=</span> <span class="mi">2</span>
-<span class="n">stateOrProvinceName</span>     <span class="o">=</span> <span class="s">&quot;2. State or Province Name   (eg, region)   &quot;</span>
-<span class="n">localityName</span>            <span class="o">=</span> <span class="s">&quot;3. Locality Name            (eg, city)     &quot;</span>
-<span class="n">organizationName</span>        <span class="o">=</span> <span class="s">&quot;4. Organization Name        (eg, company)  &quot;</span>
-<span class="n">organizationalUnitName</span>  <span class="o">=</span> <span class="s">&quot;5. Organizational Unit Name (eg, section)  &quot;</span>
-<span class="n">commonName</span>              <span class="o">=</span> <span class="s">&quot;6. Common Name              (eg, full name)&quot;</span>
+<span class="n">stateOrProvinceName</span>     <span class="o">=</span> <span class="s">"2. State or Province Name   (eg, region)   "</span>
+<span class="n">localityName</span>            <span class="o">=</span> <span class="s">"3. Locality Name            (eg, city)     "</span>
+<span class="n">organizationName</span>        <span class="o">=</span> <span class="s">"4. Organization Name        (eg, company)  "</span>
+<span class="n">organizationalUnitName</span>  <span class="o">=</span> <span class="s">"5. Organizational Unit Name (eg, section)  "</span>
+<span class="n">commonName</span>              <span class="o">=</span> <span class="s">"6. Common Name              (eg, full name)"</span>
 <span class="n">commonName_max</span>          <span class="o">=</span> <span class="mi">64</span>
-<span class="n">emailAddress</span>            <span class="o">=</span> <span class="s">&quot;7. Email Address            (eg, name@fqdn)&quot;</span>
+<span class="n">emailAddress</span>            <span class="o">=</span> <span class="s">"7. Email Address            (eg, name@fqdn)"</span>
 <span class="n">emailAddress_max</span>        <span class="o">=</span> <span class="mi">40</span>
 
 <span class="p">[</span> <span class="n">client_reqext</span> <span class="p">]</span>
@@ -7776,26 +7543,19 @@ In&nbsp;[14]:
 <span class="n">subjectKeyIdentifier</span>    <span class="o">=</span> <span class="nb">hash</span>
 <span class="n">subjectAltName</span>          <span class="o">=</span> <span class="n">email</span><span class="p">:</span><span class="n">move</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">Overwriting /tmp/pki/ca/conf/vpn-client-cert.conf
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -7830,7 +7590,7 @@ In&nbsp;[14]:
 <span class="comment">5</span>. <span class="comment">Organizational</span> <span class="comment">Unit</span> <span class="comment">Name</span> <span class="comment">(eg</span>, <span class="comment">section)</span>   <span class="title">[</span><span class="title">]</span><span class="comment">:vpn</span>.<span class="comment">dornea</span>.<span class="comment">nu</span>
 <span class="comment">6</span>. <span class="comment">Common</span> <span class="comment">Name</span>              <span class="comment">(eg</span>, <span class="comment">full</span> <span class="comment">name)</span> <span class="title">[</span><span class="title">]</span><span class="comment">:Victor</span> <span class="comment">Dorneanu</span>
 <span class="comment">7</span>. <span class="comment">Email</span> <span class="comment">Address</span>            <span class="comment">(eg</span>, <span class="comment">name@fqdn)</span> <span class="title">[</span><span class="title">]</span><span class="comment">:bla@nsa</span>.<span class="comment">gov
-</code></pre>
+</span></code></pre>
 <h3 id="sign-the-csr">Sign the CSR</h3>
 <p>Sign the <strong>CSR</strong> using <strong>VPN-CA</strong>:</p>
 <pre><code class="language-.bash"><span class="variable">$ </span>openssl ca -config ca/conf/vpn-ca.conf \
@@ -7898,7 +7658,7 @@ In&nbsp;[14]:
 <span class="comment">Enter</span> <span class="comment">pass</span> <span class="comment">phrase</span> <span class="comment">for</span> <span class="comment">ca/vpn</span>-<span class="comment">ca/certs/vpn</span>-<span class="comment">client/victor</span>.<span class="comment">key:</span>
 <span class="comment">Enter</span> <span class="comment">Export</span> <span class="comment">Password:</span>
 <span class="comment">Verifying</span> <span class="literal">-</span> <span class="comment">Enter</span> <span class="comment">Export</span> <span class="comment">Password:
-</code></pre>
+</span></code></pre>
 </div>
 </div>
 </div>
@@ -7923,11 +7683,11 @@ In&nbsp;[14]:
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2015/05/24/validating-and-pinning-x509-certificates">Validating and pinning X.509 certificates</a></li>
         <li><a href="http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids">OpenVPN for paranoids</a></li>
+        <li><a href="http://blog.dornea.nu/2015/05/24/validating-and-pinning-x509-certificates">Validating and pinning X.509 certificates</a></li>
         <li><a href="http://blog.dornea.nu/2014/07/01/on-java-openssl-crypto-blowfish-and-stuff">On Java, OpenSSL, Crypto, Blowfish and stuff</a></li>
-        <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump">24h Android sniffing using tcpdump</a></li>
-        <li><a href="http://blog.dornea.nu/2014/06/18/migrate-this-blog-from-octopress-to-pelican">Migrate this blog from Octopress to Pelican</a></li>
+        <li><a href="http://blog.dornea.nu/2014/08/06/web-application-survey-tutorial">Web Application Survey Tutorial</a></li>
+        <li><a href="http://blog.dornea.nu/2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer">Basic Layer 2 Switching using Cisco Packet Tracer</a></li>
     </ul>
 </section>
     <hr />

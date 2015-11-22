@@ -1721,47 +1721,42 @@ blog.dornea.nu            </a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>This time I&#8217;d like to give you a short usage description of <a href="http://dornea.nu/projects/icmpknock">icmpKNOCK</a> that was recently released. The main reason I wrote it was lack of security measurements on my boxes. I didn&#8217;t want any sophisticated IDS tools nor complicated monitoring services. I wanted to implement something which will run on (almost) any platform without any external toolsb. Since the ping utility is available on most modern systems using ICMP packets to communicate with the server was the most reasonable approach. There are plenty of other <strong>port knocking</strong> tools but these are mostly binaries. These have to be first compiled on the running system which is bad. So the second thought was to use a programming language powerful enough to fulfill my needs and be portable. It had to be Python <img src="http://dornea.nu/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley" /> <!--more--></p>
+                <p>This time I’d like to give you a short usage description of <a href="http://dornea.nu/projects/icmpknock">icmpKNOCK</a> that was recently released. The main reason I wrote it was lack of security measurements on my boxes. I didn’t want any sophisticated IDS tools nor complicated monitoring services. I wanted to implement something which will run on (almost) any platform without any external toolsb. Since the ping utility is available on most modern systems using ICMP packets to communicate with the server was the most reasonable approach. There are plenty of other <strong>port knocking</strong> tools but these are mostly binaries. These have to be first compiled on the running system which is bad. So the second thought was to use a programming language powerful enough to fulfill my needs and be portable. It had to be Python <img alt=":)" class="wp-smiley img-responsive" src="http://dornea.nu/wp-includes/images/smilies/icon_smile.gif"/> <!--more--></p>
 <!--break-->
-
-<div id="toc_container" class="toc_wrap_right toc_transparent no_bullets">
-  <p class="toc_title">
+<div class="toc_wrap_right toc_transparent no_bullets" id="toc_container">
+<p class="toc_title">
     Contents
   </p>
-
-  <ul class="toc_list">
-    <li>
-      <a href="#i"><span class="toc_number toc_depth_1">1</span>   </a><ul>
-        <li>
-          <a href="#Getting_started"><span class="toc_number toc_depth_2">1.1</span> Getting started</a>
-        </li>
-        <li>
-          <a href="#Generate_hex_sequences"><span class="toc_number toc_depth_2">1.2</span> Generate hex sequences</a>
-        </li>
-      </ul>
-    </li>
-
-    <li>
-      <a href="#i-2"><span class="toc_number toc_depth_1">2</span>  </a><ul>
-        <li>
-          <a href="#Define_actions"><span class="toc_number toc_depth_2">2.1</span> Define actions</a>
-        </li>
-      </ul>
-    </li>
-
-    <li>
-      <a href="#i-3"><span class="toc_number toc_depth_1">3</span>  </a><ul>
-        <li>
-          <a href="#Prepare_your_scripts"><span class="toc_number toc_depth_2">3.1</span> Prepare your scripts</a>
-        </li>
-      </ul>
-    </li>
-  </ul>
+<ul class="toc_list">
+<li>
+<a href="#i"><span class="toc_number toc_depth_1">1</span>   </a><ul>
+<li>
+<a href="#Getting_started"><span class="toc_number toc_depth_2">1.1</span> Getting started</a>
+</li>
+<li>
+<a href="#Generate_hex_sequences"><span class="toc_number toc_depth_2">1.2</span> Generate hex sequences</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#i-2"><span class="toc_number toc_depth_1">2</span>  </a><ul>
+<li>
+<a href="#Define_actions"><span class="toc_number toc_depth_2">2.1</span> Define actions</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#i-3"><span class="toc_number toc_depth_1">3</span>  </a><ul>
+<li>
+<a href="#Prepare_your_scripts"><span class="toc_number toc_depth_2">3.1</span> Prepare your scripts</a>
+</li>
+</ul>
+</li>
+</ul>
 </div>
-
 <h1 id="_1"><span id="i"><span style="display: none;"> </span><span id="cke_bm_336S" style="display: none;"> </span></span></h1>
 <h2 id="getting-started"><span id="Getting_started">Getting started</span></h2>
-<p>First you&#8217;ll have to get the latest version of icmpKNOCK. Please check the SVN download <a href="http://dl.dornea.nu/svn/icmpKNOCK">link</a> for the newest packages. Then make sure to upload the package to your server and copy it to a secret place where nobody &#8211; besides you &#8211; has read permissions on the actions file. Why is that important? Because the actions file contains your &#8220;secret&#8221; hex sequences used to trigger certain actions. So you don&#8217;t want anybody to know these ones. In that case potential attackers might manipulate the behaviour of your system without noticing it.</p>
+<p>First you’ll have to get the latest version of icmpKNOCK. Please check the SVN download <a href="http://dl.dornea.nu/svn/icmpKNOCK">link</a> for the newest packages. Then make sure to upload the package to your server and copy it to a secret place where nobody – besides you – has read permissions on the actions file. Why is that important? Because the actions file contains your “secret” hex sequences used to trigger certain actions. So you don’t want anybody to know these ones. In that case potential attackers might manipulate the behaviour of your system without noticing it.</p>
 <pre class="brush:plain;">~/icmpknock/v0.2.r9# ls -l
 total 32
 -rw-r--r-- 1 root root   35 Sep  9 13:45 AUTHORS
@@ -1771,9 +1766,8 @@ drwxr-xr-x 2 root root 4096 Sep 30 16:33 conf
 -rwxr-xr-x 1 root root 4575 Sep  9 13:45 icmpKNOCK.py
 drwxr-xr-x 2 root root 4096 Sep 30 16:11 modules
 drwxr-xr-x 2 root root 4096 Sep 30 16:11 scripts</pre>
-
 <h2 id="generate-hex-sequences"><span id="Generate_hex_sequences">Generate hex sequences</span></h2>
-<p>Now you&#8217;ll have to generate your keys. You could use MD4, MD5, SHA-1 etc hashes. This is what I did:</p>
+<p>Now you’ll have to generate your keys. You could use MD4, MD5, SHA-1 etc hashes. This is what I did:</p>
 <pre class="brush:bash;">$ for i in `seq 1 10`; 
 do pwgen 20 1 | md5; 
 done        
@@ -1787,26 +1781,23 @@ cfdff084e3442c5b8613ac75aa5147ad
 d047732f4c0b083f8f322437f0071bb9
 56bb53f69f701975db0977f316cd6402
 b124d903a6c510fbba2b1ccb23a11f2d</pre>
-
-<p>That should do the work. Now you&#8217;ll have to edit your actions file (conf/actions.conf) and copy these values to it. Please have a look at the descriptive text inside the file for further information.</p>
+<p>That should do the work. Now you’ll have to edit your actions file (conf/actions.conf) and copy these values to it. Please have a look at the descriptive text inside the file for further information.</p>
 <h1 id="_2"><span id="i-2"> </span></h1>
 <h2 id="define-actions"><span id="Define_actions">Define actions</span></h2>
-<p>This is the most interesting part. In this HowTo I&#8217;ll give you an example how to block/open SSH port 22 using icmpKNOCK. Therefor I&#8217;ll be using iptables which should be available within every Linux distribution. So let&#8217;s start&#8230;</p>
-<p>For this tutorial the SSH port should be always closed. Let&#8217;s define the action describing that:</p>
+<p>This is the most interesting part. In this HowTo I’ll give you an example how to block/open SSH port 22 using icmpKNOCK. Therefor I’ll be using iptables which should be available within every Linux distribution. So let’s start…</p>
+<p>For this tutorial the SSH port should be always closed. Let’s define the action describing that:</p>
 <pre class="brush:plain;">[stop_ssh]
 keys = &lt;your secret keys here&gt;
 payload = iptables -A INPUT -p tcp --dport 22 -j REJECT --reject-with tcp-reset</pre>
-
 <p>Everytime the server receives the secret hex sequences it will close port 22 to block any external connections. What about opening it?</p>
 <pre class="brush:plain;">[start_ssh]
 keys = &lt;your secret keys here&gt;
 payload = iptables -D INPUT -p tcp --dport 22 -j REJECT --reject-with tcp-reset</pre>
-
 <p>In that case you simply delete the previously created rule. Afterwards port 22 should be open again.</p>
-<p>Of course: There are lot of other possible configurations. Perhaps it is a better idea to define only 1 action which allows you to connect to port 22 within 20 seconds, close the port again after 20 seconds and keep the established connections. Feel free to use your brain <img src="http://dornea.nu/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley" /> </p>
+<p>Of course: There are lot of other possible configurations. Perhaps it is a better idea to define only 1 action which allows you to connect to port 22 within 20 seconds, close the port again after 20 seconds and keep the established connections. Feel free to use your brain <img alt=":)" class="wp-smiley img-responsive" src="http://dornea.nu/wp-includes/images/smilies/icon_smile.gif"/> </p>
 <h1 id="_3"><span id="i-3"> </span></h1>
 <h2 id="prepare-your-scripts"><span id="Prepare_your_scripts">Prepare your scripts</span></h2>
-<p>Your server &#8211; along with the Python application &#8211; will listen for incoming ICMP packets. Your client will be the ping utility as described above. In order to send your sequences to the server you&#8217;ll need a small bash script which will do the rest for you:</p>
+<p>Your server – along with the Python application – will listen for incoming ICMP packets. Your client will be the ping utility as described above. In order to send your sequences to the server you’ll need a small bash script which will do the rest for you:</p>
 <pre class="brush:bash;">#!/bin/sh
 
 HOST=&lt;your host here&gt;
@@ -1816,9 +1807,8 @@ for k in $keys
 do
    ping -c 1 -p $k $HOST
 done</pre>
-
-<p>That&#8217;s all. Just name your script something like &#8220;start_ssh.sh&#8221; and run it every time you you&#8217;ll connect to the server. The same applies to &#8220;cllosing the port&#8221;.</p>
-<p>&nbsp;</p>
+<p>That’s all. Just name your script something like “start_ssh.sh” and run it every time you you’ll connect to the server. The same applies to “cllosing the port”.</p>
+<p> </p>
 <p><strong>For any comments, new features or simply feedback, please use the comment functionality or drop me a mail.</strong></p>
             </div>
             <!-- /.entry-content -->
@@ -1826,10 +1816,10 @@ done</pre>
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="http://blog.dornea.nu/2010/10/13/howto-build-your-own-wifi-wlan-hotspot-using-hostap">HowTo: Build your own Wifi WLAN hotspot using hostap</a></li>
-        <li><a href="http://blog.dornea.nu/2010/09/13/icmpknock-v02-released">icmpKNOCK v0.2 released</a></li>
-        <li><a href="http://blog.dornea.nu/2011/03/19/my-own-cheap-nas-the-openwrt-way">My own cheap NAS &#8211; the OpenWRT way</a></li>
-        <li><a href="http://blog.dornea.nu/2009/08/05/howto-ssh-tunnel-over-corkscrew-using-tor">HowTo: SSH-Tunnel over CorkScrew using Tor</a></li>
+        <li><a href="http://blog.dornea.nu/2011/11/09/thank-god-there-is-iodine-ipv4-over-dns">Thank God there is iodine! IPv4 over DNS</a></li>
+        <li><a href="http://blog.dornea.nu/2011/04/02/block-facebook-with-iptables-on-openwrt">Block facebook with iptables on OpenWrt</a></li>
         <li><a href="http://blog.dornea.nu/2011/03/07/howto-full-encrypt-data-using-gentooluks-and-initramfs">HowTo: Full-Encrypt data using Gentoo,Luks and initramfs</a></li>
+        <li><a href="http://blog.dornea.nu/2011/03/19/my-own-cheap-nas-the-openwrt-way">My own cheap NAS &#8211; the OpenWRT way</a></li>
     </ul>
 </section>
     <hr />

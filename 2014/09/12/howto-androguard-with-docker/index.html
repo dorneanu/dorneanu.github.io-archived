@@ -1739,7 +1739,7 @@ blog.dornea.nu            </a>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Meanwhile I think I&#39;ve felt in love with <em>Androguard</em>. I love its Pythonic way handling things and its visualizations features. As many of you have noticed, you can run Androguard inside a <em>Docker</em> container. I&#39;ve never used Docker before so it was about time. You can find some general information about the installation process on Arch Linux at <a href="https://docs.docker.com/installation/archlinux/">this</a> address.</p>
+<p>Meanwhile I think I've felt in love with <em>Androguard</em>. I love its Pythonic way handling things and its visualizations features. As many of you have noticed, you can run Androguard inside a <em>Docker</em> container. I've never used Docker before so it was about time. You can find some general information about the installation process on Arch Linux at <a href="https://docs.docker.com/installation/archlinux/">this</a> address.</p>
 </div>
 </div>
 </div>
@@ -1748,17 +1748,15 @@ blog.dornea.nu            </a>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Extensions">Extensions<a class="anchor-link" href="#Extensions">&#182;</a></h3>
+<h3 id="Extensions">Extensions<a class="anchor-link" href="#Extensions">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[3]:
+In [3]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Install extensions</span>
@@ -1767,16 +1765,11 @@ In&nbsp;[3]:
 <span class="c"># Then load extensions</span>
 <span class="o">%</span><span class="k">load_ext</span> <span class="n">diagmagic</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">Installed diagmagic.py. To use it, type:
@@ -1786,65 +1779,55 @@ The diagmagic extension is already loaded. To reload it, use:
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>On my main pentest machine (kudoz to @blackarch) I&#39;ve installed docker and followed these instructions. Here is my service file:</p>
+<p>On my main pentest machine (kudoz to @blackarch) I've installed docker and followed these instructions. Here is my service file:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[3]:
+In [3]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>cat /etc/systemd/system/docker.service
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">.include /usr/lib/systemd/system/docker.service
 [Service]
-# assume 192.168.1.1 is your proxy server, don&apos;t use 127.0.0.1
-#Environment=&quot;http_proxy=192.168.1.1:3128&quot;
+# assume 192.168.1.1 is your proxy server, don&amp;apos;t use 127.0.0.1
+#Environment="http_proxy=192.168.1.1:3128"
 ExecStart=
 ExecStart=/usr/bin/docker -d -g /home/cyneox/work/docker
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I&#39;ve added myself to the <em>docker</em> group in order to be able to start docker as a regular user:</p>
+<p>I've added myself to the <em>docker</em> group in order to be able to start docker as a regular user:</p>
 <pre><code class="language-shell"># su<span class="operator"><span class="keyword">do</span> gpasswd -a cyneox docker
-</code></pre>
+</span></code></pre>
 <p>Afterwards make sure you enable the service:</p>
 <pre><code class="language-shell"># su<span class="operator"><span class="keyword">do</span> systemctl enable docker
-</code></pre>
+</span></code></pre>
 <p>Now make sure you do a reboot (Windows style :D).</p>
 </div>
 </div>
@@ -1852,53 +1835,39 @@ ExecStart=/usr/bin/docker -d -g /home/cyneox/work/docker
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[4]:
+In [4]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="c"># Check if docker is running</span>
 <span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">start</span> <span class="n">docker</span>
 <span class="n">ps</span> <span class="o">-</span><span class="n">ax</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">docker</span>
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">  836 ?        Ssl    0:00 /usr/bin/docker -d -g /home/cyneox/work/docker
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[5]:
+In [5]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>docker info
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">Containers: 0
@@ -1919,21 +1888,18 @@ WARNING: No swap limit support
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Install-Androguard">Install Androguard<a class="anchor-link" href="#Install-Androguard">&#182;</a></h2>
+<h2 id="Install-Androguard">Install Androguard<a class="anchor-link" href="#Install-Androguard">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -1945,31 +1911,25 @@ WARNING: No swap limit support
 <li><a href="https://github.com/dweinstein/dockerfile-androguard">https://github.com/dweinstein/dockerfile-androguard</a></li>
 <li><a href="https://github.com/aikinci/androguard">https://github.com/aikinci/androguard</a></li>
 </ol>
-<p>The <a href="https://github.com/dweinstein/dockerfile-androguard">2nd</a> one started automatically <em>androguard</em> so you couldn&#39;t tweak the underlying system. So I&#39;ve decided to look at <a href="https://github.com/aikinci">@aikinci</a>&#39;s androguard docker container. </p>
+<p>The <a href="https://github.com/dweinstein/dockerfile-androguard">2nd</a> one started automatically <em>androguard</em> so you couldn't tweak the underlying system. So I've decided to look at <a href="https://github.com/aikinci">@aikinci</a>'s androguard docker container. </p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[1]:
+In [1]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>docker run -it -v ~/samples/:/root/samples/ honeynet/androguard 
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
-<pre class="ipynb">Unable to find image &apos;honeynet/androguard&apos; locally
+<pre class="ipynb">Unable to find image &amp;apos;honeynet/androguard&amp;apos; locally
 Pulling repository honeynet/androguard
 
 [1B
@@ -2012,49 +1972,39 @@ Pulling repository honeynet/androguard
 ]0;root@de3fbe90bdde: ~root@de3fbe90bdde:~# </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It must say that was pretty <strong>fast</strong>. And <strong>easy</strong> to do! In the end you&#39;ll get a root bash prompt. Since the image does not provide all the tools I need, you&#39;ll have to install them manually. After you have <code>exit</code>ed from the container you can attach it again. But first lets see which container are currently active:</p>
+<p>It must say that was pretty <strong>fast</strong>. And <strong>easy</strong> to do! In the end you'll get a root bash prompt. Since the image does not provide all the tools I need, you'll have to install them manually. After you have <code>exit</code>ed from the container you can attach it again. But first lets see which container are currently active:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[2]:
+In [2]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>docker ps -a
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">CONTAINER ID        IMAGE                        COMMAND             CREATED             STATUS              PORTS               NAMES
-de3fbe90bdde        honeynet/androguard:latest   &quot;/bin/bash&quot;         5 minutes ago       Up 5 minutes                            sleepy_lalande      
+de3fbe90bdde        honeynet/androguard:latest   "/bin/bash"         5 minutes ago       Up 5 minutes                            sleepy_lalande      
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -2065,7 +2015,7 @@ de3fbe90bdde        honeynet/androguard:latest   &quot;/bin/bash&quot;         5
 <pre><code class="language-shell"><span class="comment"># docker attach de3fbe90bdde</span>
 root<span class="variable">@de3fbe90bdde</span><span class="symbol">:~</span><span class="comment">#</span>
 </code></pre>
-<p>Now I&#39;ve installed some additional packages:</p>
+<p>Now I've installed some additional packages:</p>
 <pre><code class="language-shell">root@de3fbe90bdde:~<span class="comment"># apt-get install openssh-server ipython ipython-notebook vim</span>
 <span class="keyword">...</span>
 </code></pre>
@@ -2077,9 +2027,9 @@ root<span class="variable">@de3fbe90bdde</span><span class="symbol">:~</span><sp
 <pre><code class="language-shell">root@de3fbe90bdde:~<span class="comment"># /etc/init.d/sshd start</span>
 <span class="keyword">...</span>
 </code></pre>
-<p>Now <strong>most important</strong>: You&#39;ll have to <strong>commit</strong> your change to the image otherwise all changes will be lost on next start. On the maching running docker run:</p>
+<p>Now <strong>most important</strong>: You'll have to <strong>commit</strong> your change to the image otherwise all changes will be lost on next start. On the maching running docker run:</p>
 <pre><code class="language-shell"># docker <span class="operator"><span class="keyword">commit</span> de3fbe90bdde
-</code></pre>
+</span></code></pre>
 </div>
 </div>
 </div>
@@ -2088,11 +2038,10 @@ root<span class="variable">@de3fbe90bdde</span><span class="symbol">:~</span><sp
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Network-with-docker">Network with docker<a class="anchor-link" href="#Network-with-docker">&#182;</a></h2>
+<h2 id="Network-with-docker">Network with docker<a class="anchor-link" href="#Network-with-docker">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -2105,21 +2054,15 @@ root<span class="variable">@de3fbe90bdde</span><span class="symbol">:~</span><sp
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[3]:
+In [3]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>ifconfig docker0
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">docker0: flags=4099&lt;UP,BROADCAST,MULTICAST&gt;  mtu 1500
@@ -2134,10 +2077,8 @@ In&nbsp;[3]:
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -2178,21 +2119,15 @@ eth0      <span class="class">Link</span> <span class="method">encap:</span><spa
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[5]:
+In [5]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>ping -c <span class="m">4</span> 172.17.0.2
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">PING 172.17.0.2 (172.17.0.2) 56(84) bytes of data.
@@ -2207,10 +2142,8 @@ rtt min/avg/max/mdev = 0.086/0.108/0.131/0.020 ms
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -2226,17 +2159,15 @@ rtt min/avg/max/mdev = 0.086/0.108/0.131/0.020 ms
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Pentest-setup">Pentest setup<a class="anchor-link" href="#Pentest-setup">&#182;</a></h2>
+<h2 id="Pentest-setup">Pentest setup<a class="anchor-link" href="#Pentest-setup">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[5]:
+In [5]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">blockdiag</span>
@@ -2244,35 +2175,35 @@ In&nbsp;[5]:
 <span class="n">blockdiag</span> <span class="n">admin</span> <span class="p">{</span>
     <span class="o">//</span> <span class="n">A</span> <span class="ow">and</span> <span class="n">B</span> <span class="n">belong</span> <span class="n">to</span> <span class="n">first</span> <span class="n">group</span><span class="o">.</span>
     <span class="n">group</span> <span class="n">first_group</span> <span class="p">{</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s">&quot;#FFF&quot;</span><span class="p">;</span>
-        <span class="n">Arch</span><span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;Arch Linux Host&quot;</span><span class="p">];</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s">"#FFF"</span><span class="p">;</span>
+        <span class="n">Arch</span><span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"Arch Linux Host"</span><span class="p">];</span>
         <span class="n">group</span> <span class="n">kvm_group</span> <span class="p">{</span>
-            <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;KVM/QEMU&quot;</span><span class="p">;</span>
-            <span class="n">textcolor</span> <span class="o">=</span> <span class="s">&quot;#FF0000&quot;</span><span class="p">;</span>
-            <span class="n">color</span> <span class="o">=</span> <span class="s">&quot;#EFEFEF&quot;</span><span class="p">;</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="s">"KVM/QEMU"</span><span class="p">;</span>
+            <span class="n">textcolor</span> <span class="o">=</span> <span class="s">"#FF0000"</span><span class="p">;</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="s">"#EFEFEF"</span><span class="p">;</span>
     
 
-            <span class="n">KaliLinux</span><span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;Kali Linux&quot;</span><span class="p">];</span>
-            <span class="n">Windows</span><span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;Windows Pentest&quot;</span><span class="p">];</span>
+            <span class="n">KaliLinux</span><span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"Kali Linux"</span><span class="p">];</span>
+            <span class="n">Windows</span><span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"Windows Pentest"</span><span class="p">];</span>
             <span class="n">shape</span> <span class="o">=</span> <span class="n">line</span><span class="p">;</span>
             <span class="n">style</span> <span class="o">=</span> <span class="n">dashed</span><span class="p">;</span>
             
             <span class="n">group</span> <span class="n">blackarch</span> <span class="p">{</span>
-                <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
-                <span class="n">textcolor</span> <span class="o">=</span> <span class="s">&quot;#FF0000&quot;</span><span class="p">;</span>
-                <span class="n">color</span> <span class="o">=</span> <span class="s">&quot;#EFEFEF&quot;</span><span class="p">;</span>
-                <span class="n">BlackArch</span><span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;BlackArch Host&quot;</span><span class="p">];</span>
+                <span class="n">label</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span>
+                <span class="n">textcolor</span> <span class="o">=</span> <span class="s">"#FF0000"</span><span class="p">;</span>
+                <span class="n">color</span> <span class="o">=</span> <span class="s">"#EFEFEF"</span><span class="p">;</span>
+                <span class="n">BlackArch</span><span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"BlackArch Host"</span><span class="p">];</span>
     
                <span class="n">group</span> <span class="n">docker</span> <span class="p">{</span>
                   <span class="o">//</span> <span class="n">Set</span> <span class="n">group</span><span class="o">-</span><span class="n">label</span>
-                  <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+                  <span class="n">label</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span>
 
                   <span class="o">//</span> <span class="n">Set</span> <span class="n">background</span><span class="o">-</span><span class="n">color</span> <span class="n">to</span> <span class="n">this</span> <span class="n">group</span><span class="o">.</span>
-                  <span class="n">color</span> <span class="o">=</span> <span class="s">&quot;#77FF77&quot;</span><span class="p">;</span>
+                  <span class="n">color</span> <span class="o">=</span> <span class="s">"#77FF77"</span><span class="p">;</span>
 
                   <span class="o">//</span> <span class="n">Set</span> <span class="n">textcolor</span> <span class="n">to</span> <span class="n">this</span> <span class="n">group</span>
-                  <span class="n">textcolor</span> <span class="o">=</span> <span class="s">&quot;#FF0000&quot;</span><span class="p">;</span>
+                  <span class="n">textcolor</span> <span class="o">=</span> <span class="s">"#FF0000"</span><span class="p">;</span>
                   <span class="n">shape</span> <span class="o">=</span> <span class="n">line</span><span class="p">;</span>
 
                   <span class="n">Docker</span><span class="p">;</span>
@@ -2294,21 +2225,14 @@ In&nbsp;[5]:
     
 <span class="p">}</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
-
-
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0AAAAG4CAYAAABsPYcfAABANklEQVR4nO3dT4srW5rv9+dZa4Wk
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0AAAAG4CAYAAABsPYcfAABANklEQVR4nO3dT4srW5rv9+dZa4Wk
 SOXZR1nndrtPV/WFNtyBBw2+BhsbQ/m+AYNfhylsbBpu082FC5ema9DYYGp8X4BHPfLEo66JDbbp
 gh6Yvg3lQdU9m3OqdqVyn53/pFjr8UARmZGxJaW0tzJDivX9gEj9DS2lHinWL1bEkpqZCgAAAABk
 wPXdAAAAAAB4LQQgAAAAANkgAAEAAADIBgEIAAAAQDYIQAAAAACyQQACAAAAkA0CEAAAAIBsEIAA
@@ -2598,15 +2522,11 @@ OaaABgAAAJANAhAAAACAbBCAAAAAAGSDAAQAAAAgGwQgAAAAANkgAAEAAADIBgEIAAAAQDYIQAAA
 AACyQQACAAAAkA0CEAAAAIBsEIAAAAAAZIMABAAAACAbBCAAAAAA2SAAAQAAAMgGAQgAAABANghA
 AAAAALJBAAIAAACQDQIQAAAAgGwQgAAAAABkgwAEAAAAIBsEIAAAAADZIAABAAAAyAYBCAAAAEA2
 /n/cNXzzDvJR/wAAAABJRU5ErkJggg==
-"
->
-</div>
-
-</div>
-
+">
+</img></div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -2627,11 +2547,10 @@ AAAAALJBAAIAAACQDQIQAAAAgGwQgAAAAABkgwAEAAAAIBsEIAAAAADZIAABAAAAyAYBCAAAAEA2
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="A-little-bit-of-networking">A little bit of networking<a class="anchor-link" href="#A-little-bit-of-networking">&#182;</a></h2>
+<h2 id="A-little-bit-of-networking">A little bit of networking<a class="anchor-link" href="#A-little-bit-of-networking">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -2643,38 +2562,30 @@ AAAAALJBAAIAAACQDQIQAAAAgGwQgAAAAABkgwAEAAAAIBsEIAAAAADZIAABAAAAyAYBCAAAAEA2
 <li>Be able to access <code>Androguard</code> from <code>BlackArch Host</code></li>
 <li>Be able to access the <em>Internet</em> from <code>Androguard</code></li>
 </ol>
-<p>The first one is the most important to me, since I want to access the Androguard container <strong>directly</strong> - preferably through SSH. Since the Àndroguard machine gets a private IP address, it&#39;s obvious I can&#39;t access it - yet. The packets must be routed though <code>BlackArch Host</code>. Let&#39;s check IPv4 forwarding:</p>
+<p>The first one is the most important to me, since I want to access the Androguard container <strong>directly</strong> - preferably through SSH. Since the Àndroguard machine gets a private IP address, it's obvious I can't access it - yet. The packets must be routed though <code>BlackArch Host</code>. Let's check IPv4 forwarding:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[7]:
+In [7]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>sysctl net.ipv4.conf.all.forwarding
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">net.ipv4.conf.all.forwarding = 1
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -2683,30 +2594,24 @@ In&nbsp;[7]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Ok for now. The Docker <a href="https://docs.docker.com/articles/networking/">documentation</a> states:</p>
 <blockquote>
-<p>By default Docker containers can make connections to the outside world, but the outside world cannot connect to containers. Each outgoing connection will appear to originate from one of the host machine&#39;s own IP addresses thanks to an iptables masquerading rule on the host machine that the Docker server creates when it starts</p>
+<p>By default Docker containers can make connections to the outside world, but the outside world cannot connect to containers. Each outgoing connection will appear to originate from one of the host machine's own IP addresses thanks to an iptables masquerading rule on the host machine that the Docker server creates when it starts</p>
 </blockquote>
-<p>After starting the Androguard container, let&#39;s check the firewall rules:</p>
+<p>After starting the Androguard container, let's check the firewall rules:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[12]:
+In [12]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>sudo iptables -t nat -L
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">Chain PREROUTING (policy ACCEPT)
@@ -2729,17 +2634,15 @@ target     prot opt source               destination
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Having a futher look at the documentaton, I&#39;ve found this:</p>
+<p>Having a futher look at the documentaton, I've found this:</p>
 <blockquote>
 <p>More convenient is the -p SPEC or --publish=SPEC option which lets you be explicit about exactly which external port on the Docker server — which can be any port at all, not just those in the 49000–49900 block — you want mapped to which port in the container.</p>
 </blockquote>
@@ -2751,60 +2654,46 @@ target     prot opt source               destination
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, let&#39;s stop the container and restart it again with the <code>-p</code> paramater:</p>
+<p>Now, let's stop the container and restart it again with the <code>-p</code> paramater:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[21]:
+In [21]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>docker ps -a
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">CONTAINER ID        IMAGE                        COMMAND             CREATED             STATUS                     PORTS               NAMES
-534dc09cc451        honeynet/androguard:latest   &quot;/bin/bash&quot;         14 seconds ago      Exited (0) 8 seconds ago                       sleepy_mcclintock   
+534dc09cc451        honeynet/androguard:latest   "/bin/bash"         14 seconds ago      Exited (0) 8 seconds ago                       sleepy_mcclintock   
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[22]:
+In [22]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">docker</span> <span class="n">stop</span> <span class="mi">534</span><span class="n">dc09cc451</span>
 <span class="n">docker</span> <span class="n">rm</span> <span class="mi">534</span><span class="n">dc09cc451</span>
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">534dc09cc451
@@ -2812,58 +2701,42 @@ In&nbsp;[22]:
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[23]:
+In [23]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>docker ps -a
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[24]:
+In [24]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>docker run -t -i -p <span class="m">22</span> honeynet/androguard 
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">]0;root@469eced649c1: ~root@469eced649c1:~# ^C
@@ -2871,38 +2744,30 @@ In&nbsp;[24]:
 ]0;root@469eced649c1: ~root@469eced649c1:~# </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now let&#39;s check iptables again:</p>
+<p>Now let's check iptables again:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[26]:
+In [26]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>sudo iptables -t nat -L
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">Chain PREROUTING (policy ACCEPT)
@@ -2926,10 +2791,8 @@ DNAT       tcp  --  anywhere             anywhere             tcp dpt:49154 to:1
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -2954,11 +2817,10 @@ Connection closed by foreign host.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Accessing-IPython-on-Androguard">Accessing IPython on Androguard<a class="anchor-link" href="#Accessing-IPython-on-Androguard">&#182;</a></h2>
+<h2 id="Accessing-IPython-on-Androguard">Accessing IPython on Androguard<a class="anchor-link" href="#Accessing-IPython-on-Androguard">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -2989,7 +2851,7 @@ applicable law.
 
 root@<span class="number">469</span>eced649c1:~<span class="comment">#</span>
 </code></pre>
-<p>As you can see I&#39;ve successfully logged in into the <code>Androguard</code> machine through <code>BlackArch Host</code> using <a href="http://en.wikipedia.org/wiki/Network_address_translation#DNAT">DNAT</a>. On <code>ArchLinux Host</code> I can open the browser and point to <code>http://localhost:7777</code> which connects to <code>IPython</code> on the <code>Androguard</code> machine. </p>
+<p>As you can see I've successfully logged in into the <code>Androguard</code> machine through <code>BlackArch Host</code> using <a href="http://en.wikipedia.org/wiki/Network_address_translation#DNAT">DNAT</a>. On <code>ArchLinux Host</code> I can open the browser and point to <code>http://localhost:7777</code> which connects to <code>IPython</code> on the <code>Androguard</code> machine. </p>
 </div>
 </div>
 </div></p>
@@ -3000,9 +2862,9 @@ root@<span class="number">469</span>eced649c1:~<span class="comment">#</span>
     <ul>
         <li><a href="http://blog.dornea.nu/2014/08/05/android-dynamic-code-analysis-mastering-droidbox">Android Dynamic Code Analysis - Mastering DroidBox</a></li>
         <li><a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a></li>
-        <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump">24h Android sniffing using tcpdump</a></li>
-        <li><a href="http://blog.dornea.nu/2014/12/02/howto-proxy-non-proxy-aware-android-applications-through-burp">HowTo: Proxy Non-Proxy-Aware Android Applications through Burp</a></li>
         <li><a href="http://blog.dornea.nu/2015/07/01/debugging-android-native-shared-libraries">Debugging Android native shared libraries</a></li>
+        <li><a href="http://blog.dornea.nu/2014/12/02/howto-proxy-non-proxy-aware-android-applications-through-burp">HowTo: Proxy Non-Proxy-Aware Android Applications through Burp</a></li>
+        <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump">24h Android sniffing using tcpdump</a></li>
     </ul>
 </section>
     <hr />

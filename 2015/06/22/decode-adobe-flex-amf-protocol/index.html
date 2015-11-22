@@ -1743,23 +1743,17 @@ Content-Length: 1373
 <span class="nt">&lt;81&gt;</span>^SOflex.messaging.messages.RemotingMessage^Msource^Soperation       body^QclientId^SmessageId^Oheaders^UtimeToLive^Stimestamp^Wdestination^A^F^]generateReport      ^K^A    ^M^A
 ...
 </pre></div>
-
-
 <p>Well you can save the response body to some file and then analyze the contents. Using <a href="https://github.com/hydralabs/pyamf">pyamf</a> 
 I was able to decode the AMF data in way I could easily understand its inner structure. First <em>install</em> pyamf:</p>
 <div class="highlight"><pre>$ pip install pyamf
 </pre></div>
-
-
 <p>Then read the request data:</p>
 <div class="highlight"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">pyamf</span>
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;/home/victor/tmp/neu.req&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'/home/victor/tmp/neu.req'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
        <span class="o">...</span><span class="p">:</span>
 </pre></div>
-
-
 <p>And finally decode that data:</p>
 <div class="highlight"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">pyamf</span> <span class="kn">import</span> <span class="n">remoting</span>
 
@@ -1771,11 +1765,9 @@ I was able to decode the AMF data in way I could easily understand its inner str
 <span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="n">decoded</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">11</span><span class="p">]:</span> 
 <span class="o">&lt;</span><span class="n">Envelope</span> <span class="n">amfVersion</span><span class="o">=</span><span class="mi">3</span><span class="o">&gt;</span>
- <span class="p">(</span><span class="s">u&#39;/46&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">Request</span> <span class="n">target</span><span class="o">=</span><span class="s">u&#39;null&#39;</span><span class="o">&gt;</span><span class="p">[</span><span class="o">&lt;</span><span class="n">RemotingMessage</span>  <span class="n">body</span><span class="o">=</span><span class="p">[[{</span><span class="s">u&#39;paramValue&#39;</span><span class="p">:</span> <span class="s">u&#39;1A2B4C7E-93B0-4502-878A-9BE40D2A25C4&#39;</span><span class="p">,</span> <span class="s">u&#39;identifier&#39;</span><span class="p">:</span> <span class="s">u&#39;ExternalListGUID&#39;</span><span class="p">,</span> <span class="s">u&#39;type&#39;</span><span class="p">:</span> <span class="s">u&#39;SINGLE_SELECT_DEFAULT&#39;</span><span class="p">,</span> <span class="s">u&#39;name&#39;</span><span class="p">:</span> <span class="s">u&#39;Options&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s">u&#39;paramValue&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s">u&#39;identifier&#39;</span><span class="p">:</span> <span class="s">u&#39;projectversionid&#39;</span><span class="p">,</span> <span class="s">u&#39;type&#39;</span><span class="p">:</span> <span class="s">u&#39;SINGLE_PROJECT&#39;</span><span class="p">,</span> <span class="s">u&#39;name&#39;</span><span class="p">:</span> <span class="s">u&#39;Project Version&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s">u&#39;paramValue&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s">u&#39;identifier&#39;</span><span class="p">:</span> <span class="s">u&#39;SecurityIssueDetails&#39;</span><span class="p">,</span> <span class="s">u&#39;type&#39;</span><span class="p">:</span> <span class="s">u&#39;BOOLEAN&#39;</span><span class="p">,</span> <span class="s">u&#39;name&#39;</span><span class="p">:</span> <span class="s">u&#39;Detailed Report&#39;</span><span class="p">}</span>
+ <span class="p">(</span><span class="s">u'/46'</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">Request</span> <span class="n">target</span><span class="o">=</span><span class="s">u'null'</span><span class="o">&gt;</span><span class="p">[</span><span class="o">&lt;</span><span class="n">RemotingMessage</span>  <span class="n">body</span><span class="o">=</span><span class="p">[[{</span><span class="s">u'paramValue'</span><span class="p">:</span> <span class="s">u'1A2B4C7E-93B0-4502-878A-9BE40D2A25C4'</span><span class="p">,</span> <span class="s">u'identifier'</span><span class="p">:</span> <span class="s">u'ExternalListGUID'</span><span class="p">,</span> <span class="s">u'type'</span><span class="p">:</span> <span class="s">u'SINGLE_SELECT_DEFAULT'</span><span class="p">,</span> <span class="s">u'name'</span><span class="p">:</span> <span class="s">u'Options'</span><span class="p">},</span> <span class="p">{</span><span class="s">u'paramValue'</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s">u'identifier'</span><span class="p">:</span> <span class="s">u'projectversionid'</span><span class="p">,</span> <span class="s">u'type'</span><span class="p">:</span> <span class="s">u'SINGLE_PROJECT'</span><span class="p">,</span> <span class="s">u'name'</span><span class="p">:</span> <span class="s">u'Project Version'</span><span class="p">},</span> <span class="p">{</span><span class="s">u'paramValue'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s">u'identifier'</span><span class="p">:</span> <span class="s">u'SecurityIssueDetails'</span><span class="p">,</span> <span class="s">u'type'</span><span class="p">:</span> <span class="s">u'BOOLEAN'</span><span class="p">,</span> <span class="s">u'name'</span><span class="p">:</span> <span class="s">u'Detailed Report'</span><span class="p">}</span>
  <span class="o">...</span>
 </pre></div>
-
-
 <p>I hope that helped!</p>
             </div>
             <!-- /.entry-content -->
@@ -1784,9 +1776,9 @@ I was able to decode the AMF data in way I could easily understand its inner str
     <ul>
         <li><a href="http://blog.dornea.nu/2013/08/02/howto-automate-burp-using-burp-extender-api">HowTo: Automate Burp using Burp Extender API</a></li>
         <li><a href="http://blog.dornea.nu/2014/08/06/web-application-survey-tutorial">Web Application Survey Tutorial</a></li>
-        <li><a href="http://blog.dornea.nu/2014/12/03/import-burp-cert-into-android">Import Burp cert into Android</a></li>
-        <li><a href="http://blog.dornea.nu/2015/02/19/redirect-androids-traffic-to-burp">Redirect Androids traffic to Burp</a></li>
+        <li><a href="http://blog.dornea.nu/2014/08/06/python-for-data-analysis">Python for Data Analysis</a></li>
         <li><a href="http://blog.dornea.nu/2015/02/20/android-remote-sniffing-using-tcpdump-nc-and-wireshark">Android remote sniffing using Tcpdump, nc and Wireshark</a></li>
+        <li><a href="http://blog.dornea.nu/2014/12/03/import-burp-cert-into-android">Import Burp cert into Android</a></li>
     </ul>
 </section>
     <hr />

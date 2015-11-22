@@ -1728,16 +1728,15 @@ blog.dornea.nu            </a>
 <li><strong>udev</strong> is the device manager for the Linux kernel. Primarily, it manages device nodes in <tt>/dev</tt> and handles all user space actions when adding/removing devices. Also have a look at <a href="http://www.gentoo.org/proj/en/eudev" rel="nofollow">eudev</a> a gentoo fork of udev. (Source: <a href="http://wiki.gentoo.org/wiki/Udev">http://wiki.gentoo.org/wiki/Udev)</a></li>
 </ul>
 <!--more-->
-
-<p>At first look they don&#8217;t seem to have sth in common. These are some other facts:</p>
+<p>At first look they don’t seem to have sth in common. These are some other facts:</p>
 <ul>
-<li><em>systemd</em> and <em>udev</em> don&#8217;t like each other</li>
+<li><em>systemd</em> and <em>udev</em> don’t like each other</li>
 <li><em>systemd</em> conflicts with <em>consolekit</em></li>
 <li><em>consolekit</em> is not longer maintained</li>
 <li><em>systemd</em> *is* <em>udev</em> (as systemd somehow includes udev)</li>
 <li><em>polkit</em> depends on <em>consolekit</em> and they will both pull eath other</li>
 <li><em>consolekit</em> has been replaced by logind which is being provided by <em>systemd</em></li>
-<li>&#8230;and top of that <em>OpenRC</em> is somehow also involved in this whole thing.</li>
+<li>…and top of that <em>OpenRC</em> is somehow also involved in this whole thing.</li>
 </ul>
 <p>As you may have noticed: THIS IS A WHOLE BUNCH OF BULLSHIT GOING ON! I just wanted to update my Gentoo system and got stucked in some stupid conflicts between the mentioned packets. It took about one day to solve it (after reading lots of forum threads of people complaining about the same thing). Check:</p>
 <ul>
@@ -1745,13 +1744,13 @@ blog.dornea.nu            </a>
 <li><a href="http://forums.gentoo.org/viewtopic-t-917584.html">Want to get rid of *kits. What should I be careful about?</a></li>
 <li><a href="http://forums.gentoo.org/viewtopic-p-7367906.html">SOLVED gnome3 systemd udev and many other things</a></li>
 </ul>
-<p>Be sure you read them. They&#8217;ve helped me a lot to understand this whole topic. So after all this is how I was able to solve it:</p>
+<p>Be sure you read them. They’ve helped me a lot to understand this whole topic. So after all this is how I was able to solve it:</p>
 <ul>
 <li>
 <p>Remove all USE flags related to consolekit: <pre class="lang:sh decode:true"># euse -D consolekit policykit upower udisks</pre></p>
 </li>
 <li>
-<p>Make sure you have a &#8220;clean&#8221; /etc/make.conf. Here is mine: <pre class="lang:sh decode:true "># These settings were set by the catalyst build script that automatically</p>
+<p>Make sure you have a “clean” /etc/make.conf. Here is mine: <pre class="lang:sh decode:true "># These settings were set by the catalyst build script that automatically</pre></p>
 </li>
 </ul>
 <h1 id="built-this-stage">built this stage.</h1>
@@ -1780,7 +1779,7 @@ FEATURES="-userfetch"</p>
 <h1 id="gentoo-bashcomp-bug-478444">gentoo-bashcomp - bug #478444</h1>
 <h1 id="euse-bug-474574">euse - bug #474574</h1>
 <h1 id="euses-and-ufed-bug-478318">euses and ufed - bug #478318</h1>
-<p>PORTDIR="/usr/portage"</pre></p>
+<p>PORTDIR="/usr/portage"</p>
 <ul>
 <li>
 <p>Make sure you have selected the right profile <pre class="lang:default decode:true "># eselect profile list
@@ -1801,14 +1800,14 @@ Available profile symlink targets:
   [14]  hardened/linux/uclibc/amd64</pre></p>
 </li>
 <li>
-<p>Adjust profile settings <pre class="lang:default decode:true"># cd /etc/portage/profile</p>
+<p>Adjust profile settings <pre class="lang:default decode:true"># cd /etc/portage/profile</pre></p>
 </li>
 </ul>
 <h1 id="cat-useforce">cat use.force</h1>
 <p>-consolekit</p>
 <h1 id="cat-usemask">cat use.mask</h1>
 <p>consolekit
--systemd</pre></p>
+-systemd</p>
 <ul>
 <li>
 <p>Remove udev, consolekit and polkit <pre class="lang:default decode:true"># emerge -aC udev consolekit polkit</pre></p>
@@ -1821,25 +1820,25 @@ Available profile symlink targets:
 </li>
 <li>
 <p><pre class="lang:default decode:true"># emerge --keep-going --jobs 4 --update --newuse --ask --deep --with-bdeps=y @world</pre></p>
-<p>&nbsp;</li> </ul> 
-Additional steps to clean up your system:</p>
-<p><pre class="lang:sh decode:true"># emerge -a --depclean</p>
-<h1 id="revdep-rebuild-q-keep-going">revdep-rebuild -- -q --keep-going</pre></h1>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-</li>
-</ul>
+<p> </p></li> </ul> 
+Additional steps to clean up your system:
+<p><pre class="lang:sh decode:true"># emerge -a --depclean</pre></p>
+<h1 id="revdep-rebuild-q-keep-going">revdep-rebuild -- -q --keep-going</h1>
+<p> </p>
+<p> </p>
+<p> </p>
+
+
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2010/06/08/linuxtag-2010-representing-netbsd">LinuxTag 2010 &#8211; Representing NetBSD</a></li>
         <li><a href="http://blog.dornea.nu/2013/05/20/spotify-on-raspberry-pi-using-spotimc">Spotify on Raspberry Pi using spotimc</a></li>
-        <li><a href="http://blog.dornea.nu/2011/03/19/my-own-cheap-nas-the-openwrt-way">My own cheap NAS &#8211; the OpenWRT way</a></li>
-        <li><a href="http://blog.dornea.nu/2008/11/26/mod2exec-execute-modules-german">Mod2Exec &#8211; Execute modules (german)</a></li>
-        <li><a href="http://blog.dornea.nu/2009/09/13/damn-botnets">Damn botnets!</a></li>
+        <li><a href="http://blog.dornea.nu/2010/06/08/linuxtag-2010-representing-netbsd">LinuxTag 2010 &#8211; Representing NetBSD</a></li>
+        <li><a href="http://blog.dornea.nu/2009/06/26/rest-in-peace-king-of-pop">Rest in peace KING OF POP!</a></li>
+        <li><a href="http://blog.dornea.nu/2008/11/26/viral-infections-on-linux-german">Viral Infections on Linux (german)</a></li>
+        <li><a href="http://blog.dornea.nu/2009/04/24/turn-vim-into-your-favourite-ide">Turn VIM into your favourite IDE</a></li>
     </ul>
 </section>
     <hr />

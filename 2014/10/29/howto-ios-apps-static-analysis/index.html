@@ -1740,7 +1740,7 @@ blog.dornea.nu            </a>
 <ul>
 <li><strong>SSH</strong> - For connecting to the device</li>
 <li><strong>ipainstaller</strong> - Install <a href="http://en.wikipedia.org/wiki/.ipa_%28file_extension%29">IPA</a> files</li>
-<li><strong>otool</strong> - object file displaying <a href="http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/otool.1.html">tool</a>  </li>
+<li><strong>otool</strong> - object file displaying <a href="http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/otool.1.html">tool</a> </li>
 <li><a href="https://github.com/nygard/class-dump"><strong>class-dump-z</strong></a> -  Examine Mach-O files and dump segments as Objective-C declarations</li>
 <li>Dump encrypted app<ul>
 <li><a href="https://github.com/stefanesser/dumpdecrypted"><strong>dumpdecrypted</strong></a> - Dumps decrypted mach-o files from encrypted iPhone applications from memory to disk</li>
@@ -1750,19 +1750,17 @@ blog.dornea.nu            </a>
 </ul>
 <h2 id="ipa">IPA</h2>
 <p><strong>ipa</strong> files are archive files which are usually encrypted using Apple's FairPlay DRM. In a nutshell an ipa file consists of:</p>
-<p><img width="600" title="IPA-File" alt="IPA-File" src="http://oi60.tinypic.com/15q2ici.jpg" height="200"></p>
+<p><img alt="IPA-File" class="img-responsive" height="200" src="http://oi60.tinypic.com/15q2ici.jpg" title="IPA-File" width="600"/></p>
 <p>The <strong>App binary</strong> is the target to be analyzed. It's compiled for ARM and used the <strong>Mach-O</strong>(mach object) file format. Check out next section for more detailed information.</p>
 <h4 id="installing-the-app">Installing the App</h4>
 <p>Usually you can manually install apps by using <strong>ipainstaller</strong>:</p>
 <div class="highlight"><pre># ipainstaller &lt;ipa file&gt;
 ...
 </pre></div>
-
-
 <p>This will install your app under <code>/var/mobile/Applications</code>. Just do a <code>grep</code> to find out to which folder your app was copied to.</p>
 <h2 id="mach-o">Mach-O</h2>
 <p>The Mach-O binary consists of 3 components:</p>
-<p><img height="200" width="600" alt="Mach-O Mach-O" title="Mach-O Mach-O" src="https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/MachORuntime/art/mach_o_segments.gif"></p>
+<p><img alt="Mach-O Mach-O" class="img-responsive" height="200" src="https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/MachORuntime/art/mach_o_segments.gif" title="Mach-O Mach-O" width="600"/></p>
 <h4 id="header">Header</h4>
 <p>The <strong>header</strong> contains basic file type information like architecture and several flags. Using <strong>otool</strong> you can have a look a the headers:</p>
 <div class="highlight"><pre># otool -h BINARY
@@ -1771,8 +1769,6 @@ Mach header
       magic cputype cpusubtype  caps    filetype ncmds sizeofcmds      flags
  0xfeedfacf 16777228          0  0x00          2    29       3832 0x00200085
 </pre></div>
-
-
 <p>Sometimes you'll get an application that is built for multiple architectures. These applications then consist of multiple Mach-O files and are called <strong>fat</strong> or <strong>universal</strong> binaries. Mach-O fat binaries not only group completely different CPU architectures (PowerPC, Intel) but also 32- or 64-bit versions of an architecture. Besides that you'll also get different CPU subtypes bundled in one binary. The device running the binary will choose the "part" of the binary it can best support. Also have a look at this great <a href="http://wanderingcoder.net/2010/07/19/ought-arm/">article</a>.</p>
 <p>Here is an example of a fat binary:</p>
 <div class="highlight"><pre># otool -arch all -h PewPew 
@@ -1785,8 +1781,6 @@ Mach header
       magic cputype cpusubtype  caps    filetype ncmds sizeofcmds      flags
  0xfeedface      12         11  0x00          2    29       3544 0x00210085
 </pre></div>
-
-
 <h4 id="load-commands">Load commands</h4>
 <p>The <a href="https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/MachORuntime/index.html#//apple_ref/doc/uid/20001298-89026">load commands</a> are located directly after the header and specify the logical structure of the binary (as a file) and it's representation in the virtual memory (using offsets). Besides that you'll be able to get:</p>
 <ul>
@@ -1794,13 +1788,11 @@ Mach header
 <li>shared library details</li>
 </ul>
 <p>For my understanding it's pretty much the same as ELFs segments and sections:</p>
-<p><img height="200" width="600" alt="ELF ELF" title="ELF ELF" src="http://oi59.tinypic.com/3478ltk.jpg"></p>
+<p><img alt="ELF ELF" class="img-responsive" height="200" src="http://oi59.tinypic.com/3478ltk.jpg" title="ELF ELF" width="600"/></p>
 <p>Load commands also define whether an application is encrypted or not. To have a look at the those run:</p>
 <div class="highlight"><pre># otool -Vl BINARY
 ...
 </pre></div>
-
-
 <h4 id="raw-segment-data">Raw segment data</h4>
 <p>In the Mach-O file you'll also have <a href="https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/MachOTopics/0-Introduction/introduction.html">raw data</a> for the segments specified in the load commands. One segment can consist of multiple sections.</p>
 <h2 id="runtime-protection-features">Runtime protection features</h2>
@@ -1864,21 +1856,15 @@ architecture 1
     size 3213664
     align 2^14 (16384)
 </pre></div>
-
-
 <p>Or using old-school <code>file</code>:</p>
 <div class="highlight"><pre># file BINARY
 PM: Mach-O fat file with 2 architectures
 </pre></div>
-
-
 <p>Also have a look at this cool <a href="http://blakespot.com/ios_device_specifications_grid.html">list</a>.</p>
 <h4 id="encryption">Encryption</h4>
 <p>Usually the <code>ipa</code> file will be decrypted at runtime by the kernel's mach loader. If the binary is encrypted or not is easily found out using:</p>
 <div class="highlight"><pre># otool -l BINARY | grep -A 4 LC_ENCRYPTION_INFO
 </pre></div>
-
-
 <p>In this case the binary file is <strong>not</strong> encrypted. Let me show an example where the binary <strong>is</strong> encrypted:</p>
 <div class="highlight"><pre># otool -l OTHER_BINARY | grep -A 4 LC_ENCRYPTION_INFO                            
           cmd LC_ENCRYPTION_INFO
@@ -1887,8 +1873,6 @@ PM: Mach-O fat file with 2 architectures
  cryptsize 10502144
  cryptid   1
 </pre></div>
-
-
 <h3 id="runtime-protections-mechanisms">Runtime protections mechanisms</h3>
 <p>This time I'll show you how to extract some valuable information from the binary itself regarding some runtime protection mechanisms:</p>
 <ul>
@@ -1903,8 +1887,6 @@ Mach header
       magic cputype cpusubtype  caps    filetype ncmds sizeofcmds      flags
    MH_MAGIC     ARM          9  0x00     EXECUTE    45       4684   NOUNDEFS DYLDLINK TWOLEVEL BINDS_TO_WEAK PIE
 </pre></div>
-
-
 <p>Have you noticed the <code>PIE</code> flag at the end of the list?</p>
 <ul>
 <li><strong>Stack Smashing Protection</strong><ul>
@@ -1916,8 +1898,6 @@ Mach header
 <div class="highlight"><pre># otool -v -l BINARY | grep stack
 ...
 </pre></div>
-
-
 <ul>
 <li><strong>Automatic Reference Couting</strong><ul>
 <li>this option can be enabled by activating the compiler option "Objective-C Automatic Reference Counting"</li>
@@ -1950,8 +1930,6 @@ Mach header
 0x00a130f0 241341 __Block_release
 0x00a13200 241551 _dispatch_release
 </pre></div>
-
-
 <h4 id="dangerous-functions">Dangerous functions</h4>
 <p>Beside the previosly mentioned symbols we can also seek for symbols aimed at (classical) memory management mechanisms like <code>malloc</code> and <code>free</code>. Their presence indicate that the application has its own memory management which is the opposite to <strong>ARC</strong>. While this is not always a bad thing it could easily lead to some memory related vulnerabilities if not handled properly.</p>
 <div class="highlight"><pre># otool -v -I BINARY  | grep malloc
@@ -1964,8 +1942,6 @@ Mach header
 0x00a13280 241583 _free
 0x00a13284 241584 _freeifaddrs
 </pre></div>
-
-
 <blockquote>
 <p>Sometimes you'll find goodies like <code>strcpy</code> :)</p>
 </blockquote>
@@ -1995,8 +1971,6 @@ Warning: Part of this binary is encrypted. Usually, the result will be not meani
 -(?)XXEncryptedMethod_93c784;
 -(?)XXEncryptedMethod_93c697;
 </pre></div>
-
-
 <p>Every class name seems to be encrypted. That's a good hint you should decrypt the binary in case you haven't done so yet. </p>
 <h3 id="decrypt-binary">Decrypt binary</h3>
 <p>Since every application downloaded from the AppStore is encrypted using Apple's FairPlay DRM you'll have to decrypt them before starting your analysis. For this step I'll be using <code>clutch</code> to dump the relevant data from memory to disk.</p>
@@ -2021,21 +1995,17 @@ dumping binary: performing dump
 dumping binary: patched cryptid
 dumping binary: writing new checksum
 Censoring iTunesMetadata.plist...
-warning: iTunesMetadata.plist item named &#39;asset-info&#39; is unrecognized
-warning: iTunesMetadata.plist item named &#39;product-type&#39; is unrecognized
-warning: iTunesMetadata.plist item named &#39;bundleDisplayName&#39; is unrecognized
+warning: iTunesMetadata.plist item named 'asset-info' is unrecognized
+warning: iTunesMetadata.plist item named 'product-type' is unrecognized
+warning: iTunesMetadata.plist item named 'bundleDisplayName' is unrecognized
 Packaging IPA file...
 Compressing second stage payload (2/2)...
     /var/root/Documents/Cracked/MyAPP.ipa
 </pre></div>
-
-
 <p>Now that you have decrypted to binary and got a fresh new IPA file, you're ready to unpack it:</p>
 <div class="highlight"><pre># unzip -d MyAPP MyAPP.ipa
 ...
 </pre></div>
-
-
 <p>Afterwards you can have a look at the new binary using <code>class-dump-z</code>:</p>
 <div class="highlight"><pre># class-dump-z BINARY  | head -n 20
 /**
@@ -2059,8 +2029,6 @@ typedef struct CGSize {
 
 typedef struct CGRect {
 </pre></div>
-
-
 <p>Much better, isn't it? :)</p>
 <h3 id="disassemble-binary">Disassemble binary</h3>
 <p>I don't want to be too specific and go into too much detail. A good <em>disassembler</em> could save you a <strong>lot</strong> of time. I really like <a href="http://www.hopperapp.com/">Hopper</a> because it's <em>free</em> and <em>easy</em> to use. For the geeks out there feel free to throw your binary into <a href="https://www.hex-rays.com/products/ida/">IDA</a> and let the bin rock. Particularly noteworthy is also <a href="http://www.radare.org/y/">radare2</a> which is unix-like reverse engineering framework. </p>
@@ -2080,9 +2048,9 @@ typedef struct CGRect {
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="http://blog.dornea.nu/2013/08/02/howto-automate-burp-using-burp-extender-api">HowTo: Automate Burp using Burp Extender API</a></li>
+        <li><a href="http://blog.dornea.nu/2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms">HowTo: Debug Android APKs with Eclipse and DDMS</a></li>
+        <li><a href="http://blog.dornea.nu/2015/07/01/debugging-android-native-shared-libraries">Debugging Android native shared libraries</a></li>
         <li><a href="http://blog.dornea.nu/2013/05/02/overthewire-vortex-level2">OverTheWire: Vortex Level2</a></li>
-        <li><a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a></li>
-        <li><a href="http://blog.dornea.nu/2014/12/02/howto-proxy-non-proxy-aware-android-applications-through-burp">HowTo: Proxy Non-Proxy-Aware Android Applications through Burp</a></li>
         <li><a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a></li>
     </ul>
 </section>

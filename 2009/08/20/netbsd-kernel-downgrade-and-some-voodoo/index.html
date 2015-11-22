@@ -1712,23 +1712,22 @@ blog.dornea.nu            </a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>I don&#8217;t know if you still remember my ACPI suspend/resume problems a few months ago. I once suspended my Linux system to RAM and forgotten to make a proper shutdown. After a while the battery discharged and my laptop was out of power. After some reboots (there were about 15 tries) I finally managed it to boot my system again. Some BIOS error occured every time. That error still keeps my busy. I couldn&#8217;t find out the cause for the strange BIOS error. The fact of matter is that my laptop behaved strange for about 3-4 months: I couldn&#8217;t shutdown properly (I always had to force shutdown by pressing the power-off button) and the suspend functionality didn&#8217;t work well.<!--more--></p>
-<p>Then came the voodoo effect! One night (about 3 weeks ago) I was about to shutdown my system (meanwhile NetBSD 5.0) and surprisingly IT DID SHUTDOWN! No power-off button! Just a smooth shutdown as expected!<br />
+                <p>I don’t know if you still remember my ACPI suspend/resume problems a few months ago. I once suspended my Linux system to RAM and forgotten to make a proper shutdown. After a while the battery discharged and my laptop was out of power. After some reboots (there were about 15 tries) I finally managed it to boot my system again. Some BIOS error occured every time. That error still keeps my busy. I couldn’t find out the cause for the strange BIOS error. The fact of matter is that my laptop behaved strange for about 3-4 months: I couldn’t shutdown properly (I always had to force shutdown by pressing the power-off button) and the suspend functionality didn’t work well.<!--more--></p>
+<p>Then came the voodoo effect! One night (about 3 weeks ago) I was about to shutdown my system (meanwhile NetBSD 5.0) and surprisingly IT DID SHUTDOWN! No power-off button! Just a smooth shutdown as expected!<br/>
 <!--break--></p>
-<p>What the hell happened? It came so suddenly&#8230; However I was very pleased about that. But wait.. The story still goes on! Today I did some kernel downgrade &#8211; from NetBSD-current to NetBSD 5.0.1 &#8211; and enabled the APM (ACPI Power Managment) support for my kernel. I build the new userland, rebooted the system and I was looking for the &#8220;apm&#8221; command in /usr/sbin&#8230; Not found! I quickly joined the #netbsd channel on Freenode and asked for some help.</p>
+<p>What the hell happened? It came so suddenly… However I was very pleased about that. But wait.. The story still goes on! Today I did some kernel downgrade – from NetBSD-current to NetBSD 5.0.1 – and enabled the APM (ACPI Power Managment) support for my kernel. I build the new userland, rebooted the system and I was looking for the “apm” command in /usr/sbin… Not found! I quickly joined the #netbsd channel on Freenode and asked for some help.</p>
 <pre class="brush: bash; toolbar: false;">sysctl -w macdeep.sleep_state=3</pre>
-
-<p>That was the command I was looking for! When ACPI is enabled on your system you can easily suspend/resume your system using the &#8220;sysctl&#8221; utility. Thanks #netbsd and NetBSD for such a great OS!</p>
+<p>That was the command I was looking for! When ACPI is enabled on your system you can easily suspend/resume your system using the “sysctl” utility. Thanks #netbsd and NetBSD for such a great OS!</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2009/05/05/netbsd-rulez">NetBSD rulez!</a></li>
         <li><a href="http://blog.dornea.nu/2009/06/26/netbeans-67-on-netbsd-50-amd64">Netbeans 6.7 on NetBSD 5.0 (Amd64)</a></li>
-        <li><a href="http://blog.dornea.nu/2009/07/22/cowpatty-42-for-netbsd">CoWPAtty 4.2 for NetBSD</a></li>
-        <li><a href="http://blog.dornea.nu/2009/03/18/bye-bye-immobilo">Bye Bye Immobilo!</a></li>
-        <li><a href="http://blog.dornea.nu/2009/04/24/turn-vim-into-your-favourite-ide">Turn VIM into your favourite IDE</a></li>
+        <li><a href="http://blog.dornea.nu/2009/05/05/netbsd-rulez">NetBSD rulez!</a></li>
+        <li><a href="http://blog.dornea.nu/2009/06/26/rest-in-peace-king-of-pop">Rest in peace KING OF POP!</a></li>
+        <li><a href="http://blog.dornea.nu/2009/04/07/why-use-python-the-n00b-mini-review">Why use Python? The n00b mini-review</a></li>
+        <li><a href="http://blog.dornea.nu/2013/06/26/dinge-die-ein-informatikerstudent-niemals-sagen-wa14rde">Dinge, die ein Informatikerstudent niemals sagen wÃ¼rde&#8230;.</a></li>
     </ul>
 </section>
     <hr />

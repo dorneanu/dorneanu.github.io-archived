@@ -1597,13 +1597,13 @@ init_mathjax();
 
         <meta name="author" content="Victor Dorneanu" />
         <meta name="keywords" content="networking,cisco,ccna,layer 2,switch,vlan,vtp,stp,ipython,admin" />
-        <meta name="description" content="Continuing my CCNA journey I&#39;d like to address inter VLAN switching in a more detailed way. In this post I&#39;ll configure my previous topology to use VTP and let STP prevent frame looping and other &#34;anomalies&#34; on Layer 2. Updated network topology¶ In [35]: Expand Code %%blockdiag diagram ..." />
+        <meta name="description" content="Continuing my CCNA journey I&#39;d like to address inter VLAN switching in a more detailed way. In this post I&#39;ll configure my previous topology to use VTP and let STP prevent frame looping and other &#34;anomalies&#34; on Layer 2. Updated network topology¶ In [35]: Expand Code %%blockdiag diagram ..." />
 
         <meta property="og:site_name" content="blog.dornea.nu" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Advanced inter VLAN switching using Cisco"/>
         <meta property="og:url" content="http://blog.dornea.nu/2015/11/06/advanced-inter-vlan-switching-using-cisco"/>
-        <meta property="og:description" content="Continuing my CCNA journey I&#39;d like to address inter VLAN switching in a more detailed way. In this post I&#39;ll configure my previous topology to use VTP and let STP prevent frame looping and other &#34;anomalies&#34; on Layer 2. Updated network topology¶ In [35]: Expand Code %%blockdiag diagram ..."/>
+        <meta property="og:description" content="Continuing my CCNA journey I&#39;d like to address inter VLAN switching in a more detailed way. In this post I&#39;ll configure my previous topology to use VTP and let STP prevent frame looping and other &#34;anomalies&#34; on Layer 2. Updated network topology¶ In [35]: Expand Code %%blockdiag diagram ..."/>
         <meta property="article:published_time" content="2015-11-06" />
             <meta property="article:section" content="blog" />
             <meta property="article:tag" content="networking" />
@@ -1742,7 +1742,7 @@ blog.dornea.nu            </a>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Continuing my <a href="http://blog.dornea.nu/tag/ccna/">CCNA</a> journey I&#39;d like to address <em>inter VLAN switching</em> in a more detailed way. In this post I&#39;ll configure my <a href="http://blog.dornea.nu/2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer/">previous topology</a> to use <strong>VTP</strong> and let <strong>STP</strong> prevent <em>frame looping</em> and other &quot;anomalies&quot; on <em>Layer 2</em>.</p>
+<p>Continuing my <a href="http://blog.dornea.nu/tag/ccna/">CCNA</a> journey I'd like to address <em>inter VLAN switching</em> in a more detailed way. In this post I'll configure my <a href="http://blog.dornea.nu/2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer/">previous topology</a> to use <strong>VTP</strong> and let <strong>STP</strong> prevent <em>frame looping</em> and other "anomalies" on <em>Layer 2</em>.</p>
 </div>
 </div>
 </div>
@@ -1751,71 +1751,62 @@ blog.dornea.nu            </a>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Updated-network-topology">Updated network topology<a class="anchor-link" href="#Updated-network-topology">&#182;</a></h2>
+<h2 id="Updated-network-topology">Updated network topology<a class="anchor-link" href="#Updated-network-topology">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[35]:
+In [35]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">blockdiag</span>
 <span class="n">diagram</span> <span class="n">admin</span> <span class="p">{</span><span class="err">↔</span>
 
-    <span class="n">PC1</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.pc&quot;</span><span class="p">];</span>
-    <span class="n">PC2</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.pc&quot;</span><span class="p">];</span>
-    <span class="n">PC3</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.pc&quot;</span><span class="p">];</span>
-    <span class="n">PC4</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.pc&quot;</span><span class="p">];</span>
-    <span class="n">PC5</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.pc&quot;</span><span class="p">];</span>
-    <span class="n">PC6</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.pc&quot;</span><span class="p">];</span>
+    <span class="n">PC1</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
+    <span class="n">PC2</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
+    <span class="n">PC3</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
+    <span class="n">PC4</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
+    <span class="n">PC5</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
+    <span class="n">PC6</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
 
-    <span class="n">SW4</span> <span class="o">&lt;-&gt;</span> <span class="n">SW1</span><span class="p">,</span> <span class="n">SW2</span><span class="p">,</span> <span class="n">SW3</span> <span class="p">[</span><span class="n">color</span> <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s">&quot;dotted&quot;</span><span class="p">];</span>
+    <span class="n">SW4</span> <span class="o">&lt;-&gt;</span> <span class="n">SW1</span><span class="p">,</span> <span class="n">SW2</span><span class="p">,</span> <span class="n">SW3</span> <span class="p">[</span><span class="n">color</span> <span class="o">=</span> <span class="s">"red"</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s">"dotted"</span><span class="p">];</span>
     <span class="n">SW1</span> <span class="o">&lt;-&gt;</span> <span class="n">SW2</span> <span class="p">[</span><span class="n">folded</span><span class="p">];</span>
     <span class="n">SW2</span> <span class="o">&lt;-&gt;</span> <span class="n">SW3</span> <span class="p">[</span><span class="n">folded</span><span class="p">];</span>
     
     
     <span class="n">group</span> <span class="p">{</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VLAN 10&quot;</span><span class="p">;</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s">&quot;#FFF&quot;</span><span class="p">;</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="s">"VLAN 10"</span><span class="p">;</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s">"#FFF"</span><span class="p">;</span>
         <span class="n">SW1</span> <span class="o">&lt;-&gt;</span> <span class="n">PC1</span><span class="p">;</span>
         <span class="n">SW1</span> <span class="o">&lt;-&gt;</span> <span class="n">PC2</span><span class="p">;</span>
     <span class="p">}</span>
     
     <span class="n">group</span> <span class="p">{</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VLAN 20&quot;</span><span class="p">;</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s">&quot;#FFF&quot;</span><span class="p">;</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="s">"VLAN 20"</span><span class="p">;</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s">"#FFF"</span><span class="p">;</span>
         <span class="n">SW2</span> <span class="o">&lt;-&gt;</span> <span class="n">PC3</span><span class="p">;</span>
         <span class="n">SW2</span> <span class="o">&lt;-&gt;</span> <span class="n">PC4</span><span class="p">;</span>
     <span class="p">}</span>
     
     <span class="n">group</span> <span class="p">{</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VLAN 10 + VLAN 20&quot;</span><span class="p">;</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s">&quot;#FFF&quot;</span><span class="p">;</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="s">"VLAN 10 + VLAN 20"</span><span class="p">;</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s">"#FFF"</span><span class="p">;</span>
         <span class="n">SW3</span> <span class="o">&lt;-&gt;</span> <span class="n">PC5</span><span class="p">;</span>
         <span class="n">SW3</span> <span class="o">&lt;-&gt;</span> <span class="n">PC6</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
-
-
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAIICAYAAAD+Ll+WAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAIICAYAAAD+Ll+WAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACAASURB
 VHic7N17fFTVufj/z1pzyeQyQAKEEJC7KHgtKAqVgsejeKmtVb899qK2VbAeKW1/tdXT06PUC/T0
 p6e1pVo8rb18tRb5tacHL9XWVlKx9QaoWLEKBLlfEpKQ61z2Wr8/9t6TyZCEBBKGyTzv12tIMtkz
@@ -2697,22 +2688,9 @@ Cn4BOfkLMc70C4IBea8LIcTe2S3kjafgF5CLghBZYJBQKIQQop/xGPaEEEIIIYQQQgghhBBCCCGE
 EEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBC
 CCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBijPn/I+EzfFUsP2gA
 AAAASUVORK5CYII=
-"
->
+">
+</img></div>
 </div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The new added component <code>SW4</code> is connected to all other switches (red lines). Since a new switch has been added we&#39;ll have to add the existing <strong>VLANs</strong> to the corresponding interfaces as well. But this time I <strong>won&#39;t</strong> configure the ports manually. Instead I&#39;ll use a Cisco proprietary protocol called <code>VTP</code> to exchange information about VLAN accross all available switches. So called <code>VTP</code> advertisements can be sent over <code>ISL</code> or <code>802.1Q</code> (dot1q). Now let&#39;s have a look at the process of adding <code>VTP</code> to the existing infrastructure.</p>
 </div>
 </div>
 </div>
@@ -2721,11 +2699,19 @@ AAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="VLAN-Trunking-Protocol">VLAN Trunking Protocol<a class="anchor-link" href="#VLAN-Trunking-Protocol">&#182;</a></h2>
+<p>The new added component <code>SW4</code> is connected to all other switches (red lines). Since a new switch has been added we'll have to add the existing <strong>VLANs</strong> to the corresponding interfaces as well. But this time I <strong>won't</strong> configure the ports manually. Instead I'll use a Cisco proprietary protocol called <code>VTP</code> to exchange information about VLAN accross all available switches. So called <code>VTP</code> advertisements can be sent over <code>ISL</code> or <code>802.1Q</code> (dot1q). Now let's have a look at the process of adding <code>VTP</code> to the existing infrastructure.</p>
 </div>
 </div>
 </div>
-
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="VLAN-Trunking-Protocol">VLAN Trunking Protocol<a class="anchor-link" href="#VLAN-Trunking-Protocol">¶</a></h2>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -2753,7 +2739,7 @@ AAAASUVORK5CYII=
 </ul>
 </li>
 </ul>
-<p>For my purpose I&#39;ll chose following setup:</p>
+<p>For my purpose I'll chose following setup:</p>
 <ul>
 <li><code>SW1</code> in VTP <strong>server</strong> mode</li>
 <li>all <strong>others</strong> switches in <strong>client</strong> mode</li>
@@ -2789,7 +2775,7 @@ Configuration <span class="keyword">last</span> modified <span class="keyword">b
 Local updater ID <span class="keyword">is</span> <span class="number">30.30</span><span class="number">.30</span><span class="number">.1</span> <span class="function_start"><span class="keyword">on</span> <span class="title">interface</span></span> Vl30 (lowest numbered VLAN interface found)
 </code></pre>
 <h3 id="configure-vtp-clients">Configure VTP clients</h3>
-<p>The configuration of the remaining switches is pretty straight-forward. Let&#39;s have a look at an example (in this case <code>SW2</code>):</p>
+<p>The configuration of the remaining switches is pretty straight-forward. Let's have a look at an example (in this case <code>SW2</code>):</p>
 <pre><code class="language-.bash">SW2<span class="comment">#conf t</span>
 Enter configuration commands, one per line.  End <span class="keyword">with</span> CNTL/Z.
 SW2(config)<span class="comment">#vtp domain ccna-lab</span>
@@ -2815,7 +2801,7 @@ MD5 digest                      : <span class="number">0xD4</span> <span class="
 Configuration <span class="keyword">last</span> modified <span class="keyword">by</span> <span class="number">30.30</span><span class="number">.30</span><span class="number">.1</span> <span class="keyword">at</span> <span class="number">3</span>-<span class="number">1</span>-<span class="number">93</span> <span class="number">01</span>:<span class="number">04</span>:<span class="number">21</span>
 </code></pre>
 <h3 id="testing-setup">Testing setup</h3>
-<p>In order to test the configuration I&#39;ll add <strong>VLAN 40</strong> (Testing) on <code>SW1</code> and check if that gets advertised:</p>
+<p>In order to test the configuration I'll add <strong>VLAN 40</strong> (Testing) on <code>SW1</code> and check if that gets advertised:</p>
 <pre><code class="language-.bash">SW1(config)<span class="preprocessor">#vlan 40</span>
 SW1(config-vlan)<span class="preprocessor">#name Testing</span>
 </code></pre>
@@ -2848,7 +2834,7 @@ VLAN Name                             Status    Ports
 <span class="comment">1003</span> <span class="comment">token</span>-<span class="comment">ring</span>-<span class="comment">default</span>               <span class="comment">active</span>    
 <span class="comment">1004</span> <span class="comment">fddinet</span>-<span class="comment">default</span>                  <span class="comment">active</span>    
 <span class="comment">1005</span> <span class="comment">trnet</span>-<span class="comment">default</span>                    <span class="comment">active
-</code></pre>
+</span></code></pre>
 </div>
 </div>
 </div>
@@ -2857,26 +2843,24 @@ VLAN Name                             Status    Ports
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Spanning-Tree-Protocol">Spanning Tree Protocol<a class="anchor-link" href="#Spanning-Tree-Protocol">&#182;</a></h2>
+<h2 id="Spanning-Tree-Protocol">Spanning Tree Protocol<a class="anchor-link" href="#Spanning-Tree-Protocol">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Since we now have to deal with <strong>interconnected</strong> switches and <em>frame looping</em> might be an issue, activating <strong>STP</strong> (Spanning Tree Protocol) will help mitigate the impacts of <em>broadcast storms</em> or <em>multiple frame tranmissions</em>. Cisco devices usually use <strong>Per VLAN Spanning Tree Protocol</strong> (PVST+, PVSTP) which is <em>proprietary</em>. The biggest difference to the &quot;normal&quot; STP (<strong>802.1D</strong>) is that PVST+ creates a different topology <em>per VLAN</em>. That means you can elect different roots (and thus different topology) for every available VLAN. Let&#39;s have a look at the desired topology for <code>VLAN 30</code> (Management):</p>
+<p>Since we now have to deal with <strong>interconnected</strong> switches and <em>frame looping</em> might be an issue, activating <strong>STP</strong> (Spanning Tree Protocol) will help mitigate the impacts of <em>broadcast storms</em> or <em>multiple frame tranmissions</em>. Cisco devices usually use <strong>Per VLAN Spanning Tree Protocol</strong> (PVST+, PVSTP) which is <em>proprietary</em>. The biggest difference to the "normal" STP (<strong>802.1D</strong>) is that PVST+ creates a different topology <em>per VLAN</em>. That means you can elect different roots (and thus different topology) for every available VLAN. Let's have a look at the desired topology for <code>VLAN 30</code> (Management):</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[58]:
+In [58]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">blockdiag</span>
@@ -2884,30 +2868,23 @@ In&nbsp;[58]:
 
 
     <span class="n">group</span> <span class="p">{</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VLAN 30 (Management)&quot;</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="s">"VLAN 30 (Management)"</span>
         <span class="n">orientation</span> <span class="o">=</span> <span class="n">portrait</span><span class="p">;</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s">&quot;#FFF&quot;</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s">"#FFF"</span>
         <span class="n">SW4</span> <span class="o">&lt;-&gt;</span> <span class="n">SW1</span><span class="p">,</span> <span class="n">SW2</span><span class="p">,</span> <span class="n">SW3</span><span class="p">;</span>
         <span class="n">SW1</span> <span class="o">&lt;-&gt;</span> <span class="n">SW2</span> <span class="p">[</span><span class="n">folded</span><span class="p">];</span>
         <span class="n">SW2</span> <span class="o">&lt;-&gt;</span> <span class="n">SW3</span> <span class="p">[</span><span class="n">folded</span><span class="p">];</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
-
-
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAADICAYAAAB4WVALAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAADICAYAAAB4WVALAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACAASURB
 VHic7N15fFTV3fjxzzl3ZpLJTlbCviurgqKsglJBqa3W5fGpVfTpy6XWqrW1j621rUtFWy2PW1ux
 drF1aR+rT7XKr9qqBLEKihsKKJHITkISyJ7MzD3n98e9dzLEgIJACPm+X68xycyde88M516/95zz
@@ -3297,15 +3274,11 @@ IiKjVrqWXzIJPNWt4id/xKqhBTBW2qfvGEz2Srt71fInIiIipS2ByWQw+bUqxv0lVUUClGgFhKHJ
 5KckEYxV5XsVERGRsjopyaumxC82aZKiEZJCERERkaJqTPZERERERERERERERERERERERERERERE
 RERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERE
 REREREREREREREREREREKsz/A4COPNM6MUiQAAAAAElFTkSuQmCC
-"
->
-</div>
-
-</div>
-
+">
+</img></div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -3313,53 +3286,52 @@ REREREREREREREREREREKsz/A4COPNM6MUiQAAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="root-s-election">Root(s) election</h3>
-<p>In terms of <strong>STP</strong> <code>SW4</code> will be the <strong>p</strong>rimary (p) and <code>SW2</code> the <strong>s</strong>econdary (s) root. Let&#39;s configure <code>Sw4</code> and <code>Sw2</code>:</p>
+<p>In terms of <strong>STP</strong> <code>SW4</code> will be the <strong>p</strong>rimary (p) and <code>SW2</code> the <strong>s</strong>econdary (s) root. Let's configure <code>Sw4</code> and <code>Sw2</code>:</p>
 <pre><code class="language-.bash">! SW4 configuration
 SW4(config)<span class="preprocessor">#spanning-tree vlan 30 root primary</span>
 
 ! SW2 configuration
 SW2(config)<span class="preprocessor">#spanning-tree vlan 30 root secondary</span>
 </code></pre>
-<p>And now let&#39;s have a look at the <strong>port connectivity</strong> matrix:</p>
-<table cellpadding="0" cellspacing="0" width="100%" border="0">
-  <tr>
-    <th> </th>
-    <th>SW1</th>
-    <th>SW2</th>
-    <th>SW3</th>
-    <th>SW4</th>
-  </tr>
-  <tr>
-    <td>SW1</td>
-    <td>-</td>
-    <td>Fa0/1 - Fa0/1</td>
-    <td>-</td>
-    <td>Fa0/4 - Fa0/1</td>
-  </tr>
-  <tr>
-    <td>SW2</td>
-    <td>Fa0/1 - Fa0/1</td>
-    <td>-</td>
-    <td>Fa0/2 - Fa0/1</td>
-    <td>Fa0/5 - Fa0/3</td>
-  </tr>
-  <tr>
-    <td>SW3</td>
-    <td>-</td>
-    <td>Fa0/1 - Fa0/2</td>
-    <td> - </td>
-    <td>Fa0/4, Fa0/5 - Fa0/2, Fa0/4</td>
-  </tr>
-  <tr>
-    <td>SW4</td>
-    <td>Fa0/1 - Fa0/4</td>
-    <td>Fa0/3 - Fa0/5</td>
-    <td>Fa0/2, Fa0/4 - Fa0/4, Fa0/5</td>
-    <td> - </td>
-  </tr>
+<p>And now let's have a look at the <strong>port connectivity</strong> matrix:</p>
+<table border="0" cellpadding="0" cellspacing="0" class=" table-striped table table-hover" width="100%">
+<tr>
+<th> </th>
+<th>SW1</th>
+<th>SW2</th>
+<th>SW3</th>
+<th>SW4</th>
+</tr>
+<tr>
+<td>SW1</td>
+<td>-</td>
+<td>Fa0/1 - Fa0/1</td>
+<td>-</td>
+<td>Fa0/4 - Fa0/1</td>
+</tr>
+<tr>
+<td>SW2</td>
+<td>Fa0/1 - Fa0/1</td>
+<td>-</td>
+<td>Fa0/2 - Fa0/1</td>
+<td>Fa0/5 - Fa0/3</td>
+</tr>
+<tr>
+<td>SW3</td>
+<td>-</td>
+<td>Fa0/1 - Fa0/2</td>
+<td> - </td>
+<td>Fa0/4, Fa0/5 - Fa0/2, Fa0/4</td>
+</tr>
+<tr>
+<td>SW4</td>
+<td>Fa0/1 - Fa0/4</td>
+<td>Fa0/3 - Fa0/5</td>
+<td>Fa0/2, Fa0/4 - Fa0/4, Fa0/5</td>
+<td> - </td>
+</tr>
 </table>
-
-<p>So <code>SW1</code> (Fa0/1) is connected to <code>SW2</code> (Fa0/1), <code>SW3</code> (Fa0/3) is connected to <code>SW2</code> (Fa0/2) and so on. You may have noticed that <code>SW3</code> and <code>SW4</code> are connected to each other using <strong>4 ports</strong>. In that case we have a <em>redundant</em> connection between both switches. In this case we&#39;ll later on configure the redundant connection as an <a href="https://en.wikipedia.org/wiki/EtherChannel"><strong>EtherChannel</strong></a>. </p>
+<p>So <code>SW1</code> (Fa0/1) is connected to <code>SW2</code> (Fa0/1), <code>SW3</code> (Fa0/3) is connected to <code>SW2</code> (Fa0/2) and so on. You may have noticed that <code>SW3</code> and <code>SW4</code> are connected to each other using <strong>4 ports</strong>. In that case we have a <em>redundant</em> connection between both switches. In this case we'll later on configure the redundant connection as an <a href="https://en.wikipedia.org/wiki/EtherChannel"><strong>EtherChannel</strong></a>. </p>
 </div>
 </div>
 </div>
@@ -3369,7 +3341,7 @@ SW2(config)<span class="preprocessor">#spanning-tree vlan 30 root secondary</spa
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="testing-the-stp-configuration">Testing the STP configuration</h3>
-<p>And now let&#39;s have a look at the STP information:</p>
+<p>And now let's have a look at the STP information:</p>
 <ul>
 <li><code>SW2</code> (secondary root)</li>
 </ul>
@@ -3392,7 +3364,7 @@ SW2(config)<span class="preprocessor">#spanning-tree vlan 30 root secondary</spa
 <span class="comment">Fa0/1</span>            <span class="comment">Desg</span> <span class="comment">FWD</span> <span class="comment">19</span>        <span class="comment">128</span>.<span class="comment">1</span>    <span class="comment">P2p</span>
 <span class="comment">Fa0/2</span>            <span class="comment">Altn</span> <span class="comment">BLK</span> <span class="comment">19</span>        <span class="comment">128</span>.<span class="comment">2</span>    <span class="comment">P2p</span>
 <span class="comment">Fa0/5</span>            <span class="comment">Root</span> <span class="comment">FWD</span> <span class="comment">19</span>        <span class="comment">128</span>.<span class="comment">5</span>    <span class="comment">P2p
-</code></pre>
+</span></code></pre>
 <p>We can notice that:</p>
 <ol>
 <li>The root has a MAC address of <code>00E0.F96C.2E07</code></li>
@@ -3421,10 +3393,10 @@ SW2(config)<span class="preprocessor">#spanning-tree vlan 30 root secondary</spa
 <span class="comment">Fa0/1</span>            <span class="comment">Desg</span> <span class="comment">FWD</span> <span class="comment">19</span>        <span class="comment">128</span>.<span class="comment">1</span>    <span class="comment">P2p</span>
 <span class="comment">Fa0/3</span>            <span class="comment">Desg</span> <span class="comment">FWD</span> <span class="comment">19</span>        <span class="comment">128</span>.<span class="comment">3</span>    <span class="comment">P2p</span>
 <span class="comment">Po1</span>              <span class="comment">Desg</span> <span class="comment">FWD</span> <span class="comment">9</span>         <span class="comment">128</span>.<span class="comment">27</span>   <span class="comment">Shr
-</code></pre>
+</span></code></pre>
 <p>We can notice that:</p>
 <ol>
-<li>This is indeed the root (<strong>&quot;This bridge is the root&quot;</strong>)</li>
+<li>This is indeed the root (<strong>"This bridge is the root"</strong>)</li>
 <li>All available ports are <strong>designated</strong> and in <strong>forwarding</strong> state (the root has <strong>no</strong> root port)</li>
 </ol>
 <ul>
@@ -3448,42 +3420,41 @@ SW2(config)<span class="preprocessor">#spanning-tree vlan 30 root secondary</spa
 <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>
 <span class="comment">Fa0/1</span>            <span class="comment">Desg</span> <span class="comment">FWD</span> <span class="comment">19</span>        <span class="comment">128</span>.<span class="comment">1</span>    <span class="comment">P2p</span>
 <span class="comment">Po2</span>              <span class="comment">Root</span> <span class="comment">FWD</span> <span class="comment">9</span>         <span class="comment">128</span>.<span class="comment">27</span>   <span class="comment">Shr
-</code></pre>
+</span></code></pre>
 <p>We can notice that:</p>
 <ol>
 <li><code>Po2</code> is the <strong>root port</strong> with a cost of 9 and in <strong>forwarding</strong> state</li>
 <li><code>FastEthernet 0/1</code> is a <strong>designated</strong> port with a cost of 19 and in <strong>forwarding</strong> state</li>
 </ol>
 <h3 id="port-cost">Port cost</h3>
-<p>Now you may have noticed the diffrent <strong>port costs</strong>. A port cost is an integer assigned to each interface per VLAN for providing a good way for measuring a port&#39;s connectivity. </p>
-<table cellpadding="0" cellspacing="0" width="100%" border="0">
-  <tr>
-    <th>Ethernet </th>
-    <th>Cost</th>
-  </tr>
-  <tr>
-    <td>10 Mbps</td>
-    <td>100</td>
-  </tr>
-  <tr>
-    <td>100 Mbps</td>
-    <td>19</td>
-  </tr>
-  <tr>
-    <td>1 Gbps</td>
-    <td>4</td>
-  </tr>
-  <tr>
-    <td>10 Gbps</td>
-    <td>2</td>
-  </tr>
+<p>Now you may have noticed the diffrent <strong>port costs</strong>. A port cost is an integer assigned to each interface per VLAN for providing a good way for measuring a port's connectivity. </p>
+<table border="0" cellpadding="0" cellspacing="0" class=" table-striped table table-hover" width="100%">
+<tr>
+<th>Ethernet </th>
+<th>Cost</th>
+</tr>
+<tr>
+<td>10 Mbps</td>
+<td>100</td>
+</tr>
+<tr>
+<td>100 Mbps</td>
+<td>19</td>
+</tr>
+<tr>
+<td>1 Gbps</td>
+<td>4</td>
+</tr>
+<tr>
+<td>10 Gbps</td>
+<td>2</td>
+</tr>
 </table>
-
 <p>So because most of the ports are <em>FastEthernet</em> ports they will get a port cost of 19 (when connected directly to the root). </p>
 <h3 id="etherchannel">EtherChannel</h3>
 <p>As previosuly mentioned there are 2 port links between <code>SW3</code> and <code>SW4</code>. <strong>EtherChannel</strong> provides a way to prevent convergence (STP) when a single port or cable failure occurs. The switches will treat the EtherChannel as a single interface. The big advantage is that if one of the links fails, STP convergence does not have to occur if at least one of the links is up. Besides that the switches will now have a <strong>load-balancing</strong> effect which will spread the traffic load accross the active links in the (Ether)channel.</p>
 <h4 id="manual-etherchannel">Manual EtherChannel</h4>
-<p>So when using EtherChannels STP will operate on the EtherChannel itself rather than on the individual physical links. STP will then either forward or block traffic on the entire logical EtherChannel for a specific VLAN. Probably the most simple way to activate EtherChannel is to put the physical interfaces into the same <strong>channel-group</strong>. Let&#39;s have a look how this is done:</p>
+<p>So when using EtherChannels STP will operate on the EtherChannel itself rather than on the individual physical links. STP will then either forward or block traffic on the entire logical EtherChannel for a specific VLAN. Probably the most simple way to activate EtherChannel is to put the physical interfaces into the same <strong>channel-group</strong>. Let's have a look how this is done:</p>
 <pre><code class="language-.bash">SW3(config)<span class="preprocessor">#int f0/4</span>
 SW3(config-<span class="keyword">if</span>)<span class="preprocessor">#channel-group 1 mode on</span>
 SW3(config-<span class="keyword">if</span>)<span class="preprocessor">#</span>
@@ -3514,7 +3485,7 @@ SW4(config-<span class="keyword">if</span>)<span class="preprocessor">#</span>
 %LINEPROTO-<span class="number">5</span>-UPDOWN: Line <span class="class"><span class="keyword">protocol</span> <span class="id">on</span> <span class="id">Interface</span> <span class="id">Port</span>-<span class="id">channel</span> 1, <span class="id">changed</span> <span class="id">state</span> <span class="id">to</span> <span class="id">down</span></span>
 </code></pre>
 <h4 id="dynamically-configured-etherchannel">Dynamically configured EtherChannel</h4>
-<p>If you don&#39;t want to manually configure the EtherChannel, one can let the switches <em>negotiate</em> the configuration for it. Cisco switches support </p>
+<p>If you don't want to manually configure the EtherChannel, one can let the switches <em>negotiate</em> the configuration for it. Cisco switches support </p>
 <ul>
 <li>Cisco proprietary Port Aggregation Protocol (<strong>PAgP</strong>)<ul>
 <li>Enabled by the keywords <strong>desirable</strong> and <strong>auto</strong></li>
@@ -3525,7 +3496,7 @@ SW4(config-<span class="keyword">if</span>)<span class="preprocessor">#</span>
 </ul>
 </li>
 </ul>
-<p>So when using <strong>PAgP</strong> at least one side must use <strong>desirable</strong> or <strong>active</strong> when using <strong>LACP</strong>. Let&#39;s have some look at one example (PAgP):</p>
+<p>So when using <strong>PAgP</strong> at least one side must use <strong>desirable</strong> or <strong>active</strong> when using <strong>LACP</strong>. Let's have some look at one example (PAgP):</p>
 <ul>
 <li><code>SW3</code></li>
 </ul>
@@ -3543,7 +3514,7 @@ SW4(config-<span class="keyword">if</span>)<span class="comment">#int f0/5</span
 SW4(config-<span class="keyword">if</span>)<span class="comment">#channel-group 1 mode auto</span>
 </code></pre>
 <h3 id="testing-etherchannel-connectivity">Testing EtherChannel connectivity</h3>
-<p>Now let&#39;s see of the <em>port channels</em> are working well:</p>
+<p>Now let's see of the <em>port channels</em> are working well:</p>
 <ul>
 <li><code>SW4</code></li>
 </ul>
@@ -3590,7 +3561,7 @@ SW4(config-<span class="keyword">if</span>)<span class="comment">#channel-group 
 
 <span class="comment">1</span>      <span class="comment">Po1(SD)</span>           <span class="literal">-</span>      
 <span class="comment">2</span>      <span class="comment">Po2(SU)</span>           <span class="literal">-</span>      <span class="comment">Fa0/4(P)</span> <span class="comment">Fa0/5(P)
-</code></pre>
+</span></code></pre>
 <p>Again <code>Po2</code> is a working port-channel and consists of <code>Fa0/4</code> and <code>Fa0/5</code>. 
 You also should have noticed that the ports on each switch belong to different channel groups. You can now treat <code>Po1</code> and <code>Po2</code> as interfaces, bring them up or down. If your port-channel is down, do following:</p>
 <pre><code class="language-.bash">SW4(config)<span class="comment">#int Po1</span>
@@ -3630,17 +3601,16 @@ Po1         <span class="number">10</span>,<span class="number">20</span>,<span 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Troubleshooting">Troubleshooting<a class="anchor-link" href="#Troubleshooting">&#182;</a></h2>
+<h2 id="Troubleshooting">Troubleshooting<a class="anchor-link" href="#Troubleshooting">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Although this is not a complex topology, adding STP to your switches, might increase the troubleshooting steps needed to localize your problem. In my particular case I was able to ping from <code>PC3</code> to <code>PC6</code>, however <code>PC1</code> wasn&#39;t able to reach <code>PC5</code>. After eliminating a list of might-be problems like:</p>
+<p>Although this is not a complex topology, adding STP to your switches, might increase the troubleshooting steps needed to localize your problem. In my particular case I was able to ping from <code>PC3</code> to <code>PC6</code>, however <code>PC1</code> wasn't able to reach <code>PC5</code>. After eliminating a list of might-be problems like:</p>
 <ul>
 <li>port security</li>
 <li>misconfigured trunk ports </li>
@@ -3648,158 +3618,147 @@ Po1         <span class="number">10</span>,<span class="number">20</span>,<span 
 <li>missing IP addresses</li>
 </ul>
 <p>I was able to nail down the problem using STP related information. Furthermore it turned out that the <strong>EtherChannel</strong> was not working at all, causing certain frames to be dropped without reaching their final destination. So how might one <em>guess</em> how data would be routed based on output from the <code>show</code> commands? </p>
-<p>Let&#39;s suppose <code>PC1</code> (10.10.10.101) cannot reach <code>PC5</code> (10.10.10.105). Also keep in mind that both hosts belong to the same <strong>VLAN</strong> (10 = Students). Our simplified topology would look like this:</p>
+<p>Let's suppose <code>PC1</code> (10.10.10.101) cannot reach <code>PC5</code> (10.10.10.105). Also keep in mind that both hosts belong to the same <strong>VLAN</strong> (10 = Students). Our simplified topology would look like this:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[61]:
+In [61]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">dot</span>
 <span class="c"># &lt;!-- collapse=True --&gt;↔</span>
 
-     <span class="n">SW1</span> <span class="o">--</span> <span class="n">SW2</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;Fa0/1 - Fa0/1&quot;</span><span class="p">,</span> <span class="n">arrowhead</span><span class="o">=</span><span class="n">normal</span><span class="p">];</span>
-     <span class="n">SW2</span> <span class="o">--</span> <span class="n">SW3</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;Fa0/2 - Fa0/1&quot;</span><span class="p">,</span> <span class="n">arrowhead</span><span class="o">=</span><span class="n">normal</span><span class="p">];</span>
+     <span class="n">SW1</span> <span class="o">--</span> <span class="n">SW2</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"Fa0/1 - Fa0/1"</span><span class="p">,</span> <span class="n">arrowhead</span><span class="o">=</span><span class="n">normal</span><span class="p">];</span>
+     <span class="n">SW2</span> <span class="o">--</span> <span class="n">SW3</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"Fa0/2 - Fa0/1"</span><span class="p">,</span> <span class="n">arrowhead</span><span class="o">=</span><span class="n">normal</span><span class="p">];</span>
 
-     <span class="n">SW4</span> <span class="o">--</span> <span class="n">SW1</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;Fa0/4 - Fa0/1&quot;</span><span class="p">];</span>
-     <span class="n">SW4</span> <span class="o">--</span> <span class="n">SW2</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;Fa0/3 - Fa0/5&quot;</span><span class="p">];</span>
-     <span class="n">SW4</span> <span class="o">--</span> <span class="n">SW3</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;Po1 - Po2&quot;</span><span class="p">,</span> <span class="n">arrowhead</span><span class="o">=</span><span class="n">normal</span><span class="p">];</span>
+     <span class="n">SW4</span> <span class="o">--</span> <span class="n">SW1</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"Fa0/4 - Fa0/1"</span><span class="p">];</span>
+     <span class="n">SW4</span> <span class="o">--</span> <span class="n">SW2</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s">"Fa0/3 - Fa0/5"</span><span class="p">];</span>
+     <span class="n">SW4</span> <span class="o">--</span> <span class="n">SW3</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s">"Po1 - Po2"</span><span class="p">,</span> <span class="n">arrowhead</span><span class="o">=</span><span class="n">normal</span><span class="p">];</span>
     
-     <span class="n">PC1</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;PC1 [.101]&quot;</span><span class="p">];</span>
-     <span class="n">PC4</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;PC5 [.105]&quot;</span><span class="p">];</span>
+     <span class="n">PC1</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"PC1 [.101]"</span><span class="p">];</span>
+     <span class="n">PC4</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"PC5 [.105]"</span><span class="p">];</span>
         
-     <span class="n">SW1</span> <span class="o">--</span> <span class="n">PC1</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;Fa0/2 - Fa0&quot;</span><span class="p">];</span>
-     <span class="n">SW3</span> <span class="o">--</span> <span class="n">PC4</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;Fa0/3 - Fa0&quot;</span><span class="p">];</span>
+     <span class="n">SW1</span> <span class="o">--</span> <span class="n">PC1</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"Fa0/2 - Fa0"</span><span class="p">];</span>
+     <span class="n">SW3</span> <span class="o">--</span> <span class="n">PC4</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">"Fa0/3 - Fa0"</span><span class="p">];</span>
 
      <span class="p">{</span><span class="n">rank</span> <span class="o">=</span> <span class="n">same</span><span class="p">;</span> <span class="n">SW1</span><span class="p">;</span> <span class="n">SW2</span><span class="p">;</span> <span class="n">SW3</span><span class="p">;}</span>
      <span class="p">{</span><span class="n">rank</span> <span class="o">=</span> <span class="n">same</span><span class="p">;</span> <span class="n">PC1</span><span class="p">;</span> <span class="n">PC4</span><span class="p">;}</span>
  <span class="p">}</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
-
 <div class="output_svg output_subarea ">
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
 <!-- Generated by graphviz version 2.38.0 (20140413.2041)
  -->
 <!-- Title: mylab Pages: 1 -->
-<svg width="688pt" height="292pt"
- viewBox="0.00 0.00 687.60 291.60" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(28.8 262.8)">
+<svg height="292pt" viewbox="0.00 0.00 687.60 291.60" width="688pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g class="graph" id="graph0" transform="scale(1 1) rotate(0) translate(28.8 262.8)">
 <title>mylab</title>
-<polygon fill="white" stroke="none" points="-28.8,28.8 -28.8,-262.8 658.8,-262.8 658.8,28.8 -28.8,28.8"/>
+<polygon fill="white" points="-28.8,28.8 -28.8,-262.8 658.8,-262.8 658.8,28.8 -28.8,28.8" stroke="none"></polygon>
 <!-- SW1 -->
-<g id="node1" class="node"><title>SW1</title>
-<polygon fill="none" stroke="black" points="0,-105.5 0,-128.5 108,-128.5 108,-105.5 0,-105.5"/>
-<text text-anchor="middle" x="54" y="-113.3" font-family="FreeSans" font-size="14.00">SW1</text>
+<g class="node" id="node1"><title>SW1</title>
+<polygon fill="none" points="0,-105.5 0,-128.5 108,-128.5 108,-105.5 0,-105.5" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="14.00" text-anchor="middle" x="54" y="-113.3">SW1</text>
 </g>
 <!-- SW2 -->
-<g id="node2" class="node"><title>SW2</title>
-<polygon fill="none" stroke="black" points="256,-105.5 256,-128.5 364,-128.5 364,-105.5 256,-105.5"/>
-<text text-anchor="middle" x="310" y="-113.3" font-family="FreeSans" font-size="14.00">SW2</text>
+<g class="node" id="node2"><title>SW2</title>
+<polygon fill="none" points="256,-105.5 256,-128.5 364,-128.5 364,-105.5 256,-105.5" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="14.00" text-anchor="middle" x="310" y="-113.3">SW2</text>
 </g>
 <!-- SW1&#45;&#45;SW2 -->
-<g id="edge1" class="edge"><title>SW1&#45;&#45;SW2</title>
-<path fill="none" stroke="black" d="M118.503,-117C157.396,-117 206.765,-117 245.634,-117"/>
-<polygon fill="black" stroke="black" points="118.291,-113.5 108.291,-117 118.291,-120.5 118.291,-113.5"/>
-<polygon fill="black" stroke="black" points="245.787,-120.5 255.787,-117 245.787,-113.5 245.787,-120.5"/>
-<text text-anchor="middle" x="182" y="-123.4" font-family="FreeSans" font-size="12.00">Fa0/1 &#45; Fa0/1</text>
+<g class="edge" id="edge1"><title>SW1--SW2</title>
+<path d="M118.503,-117C157.396,-117 206.765,-117 245.634,-117" fill="none" stroke="black"></path>
+<polygon fill="black" points="118.291,-113.5 108.291,-117 118.291,-120.5 118.291,-113.5" stroke="black"></polygon>
+<polygon fill="black" points="245.787,-120.5 255.787,-117 245.787,-113.5 245.787,-120.5" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="12.00" text-anchor="middle" x="182" y="-123.4">Fa0/1 - Fa0/1</text>
 </g>
 <!-- PC1 -->
-<g id="node5" class="node"><title>PC1</title>
-<polygon fill="none" stroke="black" points="0,-0.5 0,-23.5 108,-23.5 108,-0.5 0,-0.5"/>
-<text text-anchor="middle" x="54" y="-8.3" font-family="FreeSans" font-size="14.00">PC1 [.101]</text>
+<g class="node" id="node5"><title>PC1</title>
+<polygon fill="none" points="0,-0.5 0,-23.5 108,-23.5 108,-0.5 0,-0.5" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="14.00" text-anchor="middle" x="54" y="-8.3">PC1 [.101]</text>
 </g>
 <!-- SW1&#45;&#45;PC1 -->
-<g id="edge6" class="edge"><title>SW1&#45;&#45;PC1</title>
-<path fill="none" stroke="black" d="M54,-95.2445C54,-77.4247 54,-51.8581 54,-33.975"/>
-<polygon fill="black" stroke="black" points="50.5001,-95.3651 54,-105.365 57.5001,-95.3652 50.5001,-95.3651"/>
-<polygon fill="black" stroke="black" points="57.5001,-33.7313 54,-23.7313 50.5001,-33.7314 57.5001,-33.7313"/>
-<text text-anchor="middle" x="86" y="-61.4" font-family="FreeSans" font-size="12.00">Fa0/2 &#45; Fa0</text>
+<g class="edge" id="edge6"><title>SW1--PC1</title>
+<path d="M54,-95.2445C54,-77.4247 54,-51.8581 54,-33.975" fill="none" stroke="black"></path>
+<polygon fill="black" points="50.5001,-95.3651 54,-105.365 57.5001,-95.3652 50.5001,-95.3651" stroke="black"></polygon>
+<polygon fill="black" points="57.5001,-33.7313 54,-23.7313 50.5001,-33.7314 57.5001,-33.7313" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="12.00" text-anchor="middle" x="86" y="-61.4">Fa0/2 - Fa0</text>
 </g>
 <!-- SW3 -->
-<g id="node3" class="node"><title>SW3</title>
-<polygon fill="none" stroke="black" points="512,-105.5 512,-128.5 620,-128.5 620,-105.5 512,-105.5"/>
-<text text-anchor="middle" x="566" y="-113.3" font-family="FreeSans" font-size="14.00">SW3</text>
+<g class="node" id="node3"><title>SW3</title>
+<polygon fill="none" points="512,-105.5 512,-128.5 620,-128.5 620,-105.5 512,-105.5" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="14.00" text-anchor="middle" x="566" y="-113.3">SW3</text>
 </g>
 <!-- SW2&#45;&#45;SW3 -->
-<g id="edge2" class="edge"><title>SW2&#45;&#45;SW3</title>
-<path fill="none" stroke="black" d="M374.503,-117C413.396,-117 462.765,-117 501.634,-117"/>
-<polygon fill="black" stroke="black" points="374.291,-113.5 364.291,-117 374.291,-120.5 374.291,-113.5"/>
-<polygon fill="black" stroke="black" points="501.787,-120.5 511.787,-117 501.787,-113.5 501.787,-120.5"/>
-<text text-anchor="middle" x="438" y="-123.4" font-family="FreeSans" font-size="12.00">Fa0/2 &#45; Fa0/1</text>
+<g class="edge" id="edge2"><title>SW2--SW3</title>
+<path d="M374.503,-117C413.396,-117 462.765,-117 501.634,-117" fill="none" stroke="black"></path>
+<polygon fill="black" points="374.291,-113.5 364.291,-117 374.291,-120.5 374.291,-113.5" stroke="black"></polygon>
+<polygon fill="black" points="501.787,-120.5 511.787,-117 501.787,-113.5 501.787,-120.5" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="12.00" text-anchor="middle" x="438" y="-123.4">Fa0/2 - Fa0/1</text>
 </g>
 <!-- PC4 -->
-<g id="node6" class="node"><title>PC4</title>
-<polygon fill="none" stroke="black" points="512,-0.5 512,-23.5 620,-23.5 620,-0.5 512,-0.5"/>
-<text text-anchor="middle" x="566" y="-8.3" font-family="FreeSans" font-size="14.00">PC5 [.105]</text>
+<g class="node" id="node6"><title>PC4</title>
+<polygon fill="none" points="512,-0.5 512,-23.5 620,-23.5 620,-0.5 512,-0.5" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="14.00" text-anchor="middle" x="566" y="-8.3">PC5 [.105]</text>
 </g>
 <!-- SW3&#45;&#45;PC4 -->
-<g id="edge7" class="edge"><title>SW3&#45;&#45;PC4</title>
-<path fill="none" stroke="black" d="M566,-95.2445C566,-77.4247 566,-51.8581 566,-33.975"/>
-<polygon fill="black" stroke="black" points="562.5,-95.3651 566,-105.365 569.5,-95.3652 562.5,-95.3651"/>
-<polygon fill="black" stroke="black" points="569.5,-33.7313 566,-23.7313 562.5,-33.7314 569.5,-33.7313"/>
-<text text-anchor="middle" x="598" y="-61.4" font-family="FreeSans" font-size="12.00">Fa0/3 &#45; Fa0</text>
+<g class="edge" id="edge7"><title>SW3--PC4</title>
+<path d="M566,-95.2445C566,-77.4247 566,-51.8581 566,-33.975" fill="none" stroke="black"></path>
+<polygon fill="black" points="562.5,-95.3651 566,-105.365 569.5,-95.3652 562.5,-95.3651" stroke="black"></polygon>
+<polygon fill="black" points="569.5,-33.7313 566,-23.7313 562.5,-33.7314 569.5,-33.7313" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="12.00" text-anchor="middle" x="598" y="-61.4">Fa0/3 - Fa0</text>
 </g>
 <!-- SW4 -->
-<g id="node4" class="node"><title>SW4</title>
-<polygon fill="none" stroke="black" points="256,-210.5 256,-233.5 364,-233.5 364,-210.5 256,-210.5"/>
-<text text-anchor="middle" x="310" y="-218.3" font-family="FreeSans" font-size="14.00">SW4</text>
+<g class="node" id="node4"><title>SW4</title>
+<polygon fill="none" points="256,-210.5 256,-233.5 364,-233.5 364,-210.5 256,-210.5" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="14.00" text-anchor="middle" x="310" y="-218.3">SW4</text>
 </g>
 <!-- SW4&#45;&#45;SW1 -->
-<g id="edge3" class="edge"><title>SW4&#45;&#45;SW1</title>
-<path fill="none" stroke="black" d="M274.045,-206.534C225.235,-186.895 138.52,-152.006 89.7935,-132.401"/>
-<polygon fill="black" stroke="black" points="272.984,-209.879 283.568,-210.365 275.597,-203.385 272.984,-209.879"/>
-<polygon fill="black" stroke="black" points="90.8722,-129.063 80.2885,-128.577 88.2593,-135.557 90.8722,-129.063"/>
-<text text-anchor="middle" x="236" y="-166.4" font-family="FreeSans" font-size="12.00">Fa0/4 &#45; Fa0/1</text>
+<g class="edge" id="edge3"><title>SW4--SW1</title>
+<path d="M274.045,-206.534C225.235,-186.895 138.52,-152.006 89.7935,-132.401" fill="none" stroke="black"></path>
+<polygon fill="black" points="272.984,-209.879 283.568,-210.365 275.597,-203.385 272.984,-209.879" stroke="black"></polygon>
+<polygon fill="black" points="90.8722,-129.063 80.2885,-128.577 88.2593,-135.557 90.8722,-129.063" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="12.00" text-anchor="middle" x="236" y="-166.4">Fa0/4 - Fa0/1</text>
 </g>
 <!-- SW4&#45;&#45;SW2 -->
-<g id="edge4" class="edge"><title>SW4&#45;&#45;SW2</title>
-<path fill="none" stroke="black" d="M310,-200.245C310,-182.425 310,-156.858 310,-138.975"/>
-<polygon fill="black" stroke="black" points="306.5,-200.365 310,-210.365 313.5,-200.365 306.5,-200.365"/>
-<polygon fill="black" stroke="black" points="313.5,-138.731 310,-128.731 306.5,-138.731 313.5,-138.731"/>
-<text text-anchor="middle" x="348" y="-166.4" font-family="FreeSans" font-size="12.00">Fa0/3 &#45; Fa0/5</text>
+<g class="edge" id="edge4"><title>SW4--SW2</title>
+<path d="M310,-200.245C310,-182.425 310,-156.858 310,-138.975" fill="none" stroke="black"></path>
+<polygon fill="black" points="306.5,-200.365 310,-210.365 313.5,-200.365 306.5,-200.365" stroke="black"></polygon>
+<polygon fill="black" points="313.5,-138.731 310,-128.731 306.5,-138.731 313.5,-138.731" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="12.00" text-anchor="middle" x="348" y="-166.4">Fa0/3 - Fa0/5</text>
 </g>
 <!-- SW4&#45;&#45;SW3 -->
-<g id="edge5" class="edge"><title>SW4&#45;&#45;SW3</title>
-<path fill="none" stroke="black" d="M345.955,-206.534C394.765,-186.895 481.48,-152.006 530.206,-132.401"/>
-<polygon fill="black" stroke="black" points="344.403,-203.385 336.432,-210.365 347.016,-209.879 344.403,-203.385"/>
-<polygon fill="black" stroke="black" points="531.741,-135.557 539.712,-128.577 529.128,-129.063 531.741,-135.557"/>
-<text text-anchor="middle" x="482" y="-166.4" font-family="FreeSans" font-size="12.00">Po1 &#45; Po2</text>
+<g class="edge" id="edge5"><title>SW4--SW3</title>
+<path d="M345.955,-206.534C394.765,-186.895 481.48,-152.006 530.206,-132.401" fill="none" stroke="black"></path>
+<polygon fill="black" points="344.403,-203.385 336.432,-210.365 347.016,-209.879 344.403,-203.385" stroke="black"></polygon>
+<polygon fill="black" points="531.741,-135.557 539.712,-128.577 529.128,-129.063 531.741,-135.557" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="12.00" text-anchor="middle" x="482" y="-166.4">Po1 - Po2</text>
 </g>
 </g>
 </svg>
-
-</div>
-
-</div>
-
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>There are several way how frames from <code>PC1</code> would reach <code>PC5</code>. However when dealing with <strong>STP</strong> some ports will in be <strong>blocking</strong> state. Let&#39;s check that out:</p>
+<p>There are several way how frames from <code>PC1</code> would reach <code>PC5</code>. However when dealing with <strong>STP</strong> some ports will in be <strong>blocking</strong> state. Let's check that out:</p>
 <ul>
 <li><code>SW1</code></li>
 </ul>
@@ -3813,7 +3772,7 @@ In&nbsp;[61]:
 <span class="comment">Fa0/2</span>            <span class="comment">Desg</span> <span class="comment">FWD</span> <span class="comment">19</span>        <span class="comment">128</span>.<span class="comment">2</span>    <span class="comment">P2p</span>
 <span class="comment">Fa0/3</span>            <span class="comment">Desg</span> <span class="comment">FWD</span> <span class="comment">19</span>        <span class="comment">128</span>.<span class="comment">3</span>    <span class="comment">P2p</span>
 <span class="comment">Fa0/4</span>            <span class="comment">Root</span> <span class="comment">FWD</span> <span class="comment">19</span>        <span class="comment">128</span>.<span class="comment">4</span>    <span class="comment">P2p
-</code></pre>
+</span></code></pre>
 <ul>
 <li><code>SW2</code></li>
 </ul>
@@ -3827,7 +3786,7 @@ In&nbsp;[61]:
 <span class="comment">Fa0/2</span>            <span class="comment">Root</span> <span class="comment">FWD</span> <span class="comment">19</span>        <span class="comment">128</span>.<span class="comment">2</span>    <span class="comment">P2p</span>
 <span class="comment">Fa0/5</span>            <span class="comment">Altn</span> <span class="comment">BLK</span> <span class="comment">19</span>        <span class="comment">128</span>.<span class="comment">5</span>    <span class="comment">P2p</span>
 <span class="comment">Fa0/6</span>            <span class="comment">Desg</span> <span class="comment">FWD</span> <span class="comment">19</span>        <span class="comment">128</span>.<span class="comment">6</span>    <span class="comment">P2p
-</code></pre>
+</span></code></pre>
 <ul>
 <li><code>SW3</code></li>
 </ul>
@@ -3839,7 +3798,7 @@ In&nbsp;[61]:
 <span class="comment">Fa0/1</span>            <span class="comment">Desg</span> <span class="comment">FWD</span> <span class="comment">19</span>        <span class="comment">128</span>.<span class="comment">1</span>    <span class="comment">P2p</span>
 <span class="comment">Fa0/3</span>            <span class="comment">Desg</span> <span class="comment">FWD</span> <span class="comment">19</span>        <span class="comment">128</span>.<span class="comment">3</span>    <span class="comment">P2p</span>
 <span class="comment">Po2</span>              <span class="comment">Desg</span> <span class="comment">FWD</span> <span class="comment">9</span>         <span class="comment">128</span>.<span class="comment">27</span>   <span class="comment">Shr
-</code></pre>
+</span></code></pre>
 <ul>
 <li><code>SW4</code></li>
 </ul>
@@ -3852,7 +3811,7 @@ In&nbsp;[61]:
 <span class="comment">Fa0/3</span>            <span class="comment">Desg</span> <span class="comment">FWD</span> <span class="comment">19</span>        <span class="comment">128</span>.<span class="comment">3</span>    <span class="comment">P2p</span>
 <span class="comment">Fa0/5</span>            <span class="comment">Desg</span> <span class="comment">FWD</span> <span class="comment">19</span>        <span class="comment">128</span>.<span class="comment">5</span>    <span class="comment">P2p</span>
 <span class="comment">Po1</span>              <span class="comment">Root</span> <span class="comment">FWD</span> <span class="comment">9</span>         <span class="comment">128</span>.<span class="comment">27</span>   <span class="comment">Shr
-</code></pre>
+</span></code></pre>
 <p>Based of the previous outputs our topology now looks like this:</p>
 </div>
 </div>
@@ -3860,9 +3819,8 @@ In&nbsp;[61]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[59]:
+In [59]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">dot</span>
@@ -3875,8 +3833,8 @@ In&nbsp;[59]:
      <span class="n">SW4</span> <span class="o">--</span> <span class="n">SW2</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">arrowhead</span><span class="o">=</span><span class="n">box</span><span class="p">];</span>
      <span class="n">SW4</span> <span class="o">--</span> <span class="n">SW3</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">arrowhead</span><span class="o">=</span><span class="n">normal</span><span class="p">];</span>
     
-     <span class="n">PC1</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;PC1 [.101]&quot;</span><span class="p">];</span>
-     <span class="n">PC4</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;PC5 [.105]&quot;</span><span class="p">];</span>
+     <span class="n">PC1</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"PC1 [.101]"</span><span class="p">];</span>
+     <span class="n">PC4</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"PC5 [.105]"</span><span class="p">];</span>
         
      <span class="n">SW1</span> <span class="o">--</span> <span class="n">PC1</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">];</span>
      <span class="n">SW3</span> <span class="o">--</span> <span class="n">PC4</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">];</span>
@@ -3885,114 +3843,104 @@ In&nbsp;[59]:
      <span class="p">{</span><span class="n">rank</span> <span class="o">=</span> <span class="n">same</span><span class="p">;</span> <span class="n">PC1</span><span class="p">;</span> <span class="n">PC4</span><span class="p">;}</span>
  <span class="p">}</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
-
 <div class="output_svg output_subarea ">
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
 <!-- Generated by graphviz version 2.38.0 (20140413.2041)
  -->
 <!-- Title: mylab Pages: 1 -->
-<svg width="526pt" height="264pt"
- viewBox="0.00 0.00 525.60 263.60" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(28.8 234.8)">
+<svg height="264pt" viewbox="0.00 0.00 525.60 263.60" width="526pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g class="graph" id="graph0" transform="scale(1 1) rotate(0) translate(28.8 234.8)">
 <title>mylab</title>
-<polygon fill="white" stroke="none" points="-28.8,28.8 -28.8,-234.8 496.8,-234.8 496.8,28.8 -28.8,28.8"/>
+<polygon fill="white" points="-28.8,28.8 -28.8,-234.8 496.8,-234.8 496.8,28.8 -28.8,28.8" stroke="none"></polygon>
 <!-- SW1 -->
-<g id="node1" class="node"><title>SW1</title>
-<polygon fill="none" stroke="black" points="0,-91.5 0,-114.5 108,-114.5 108,-91.5 0,-91.5"/>
-<text text-anchor="middle" x="54" y="-99.3" font-family="FreeSans" font-size="14.00">SW1</text>
+<g class="node" id="node1"><title>SW1</title>
+<polygon fill="none" points="0,-91.5 0,-114.5 108,-114.5 108,-91.5 0,-91.5" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="14.00" text-anchor="middle" x="54" y="-99.3">SW1</text>
 </g>
 <!-- SW2 -->
-<g id="node2" class="node"><title>SW2</title>
-<polygon fill="none" stroke="black" points="180,-91.5 180,-114.5 288,-114.5 288,-91.5 180,-91.5"/>
-<text text-anchor="middle" x="234" y="-99.3" font-family="FreeSans" font-size="14.00">SW2</text>
+<g class="node" id="node2"><title>SW2</title>
+<polygon fill="none" points="180,-91.5 180,-114.5 288,-114.5 288,-91.5 180,-91.5" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="14.00" text-anchor="middle" x="234" y="-99.3">SW2</text>
 </g>
 <!-- SW1&#45;&#45;SW2 -->
-<g id="edge1" class="edge"><title>SW1&#45;&#45;SW2</title>
-<path fill="none" stroke="black" d="M118.235,-103C135.423,-103 152.611,-103 169.8,-103"/>
-<polygon fill="black" stroke="black" points="108.141,-107 108.141,-99 116.141,-99.0001 116.141,-107 108.141,-107"/>
-<polyline fill="none" stroke="black" points="116.141,-103 118.141,-103 "/>
-<polygon fill="black" stroke="black" points="169.92,-106.5 179.92,-103 169.92,-99.5001 169.92,-106.5"/>
+<g class="edge" id="edge1"><title>SW1--SW2</title>
+<path d="M118.235,-103C135.423,-103 152.611,-103 169.8,-103" fill="none" stroke="black"></path>
+<polygon fill="black" points="108.141,-107 108.141,-99 116.141,-99.0001 116.141,-107 108.141,-107" stroke="black"></polygon>
+<polyline fill="none" points="116.141,-103 118.141,-103 " stroke="black"></polyline>
+<polygon fill="black" points="169.92,-106.5 179.92,-103 169.92,-99.5001 169.92,-106.5" stroke="black"></polygon>
 </g>
 <!-- PC1 -->
-<g id="node5" class="node"><title>PC1</title>
-<polygon fill="none" stroke="black" points="0,-0.5 0,-23.5 108,-23.5 108,-0.5 0,-0.5"/>
-<text text-anchor="middle" x="54" y="-8.3" font-family="FreeSans" font-size="14.00">PC1 [.101]</text>
+<g class="node" id="node5"><title>PC1</title>
+<polygon fill="none" points="0,-0.5 0,-23.5 108,-23.5 108,-0.5 0,-0.5" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="14.00" text-anchor="middle" x="54" y="-8.3">PC1 [.101]</text>
 </g>
 <!-- SW1&#45;&#45;PC1 -->
-<g id="edge6" class="edge"><title>SW1&#45;&#45;PC1</title>
-<path fill="none" stroke="black" d="M54,-81.3129C54,-67.0477 54,-48.1547 54,-33.8537"/>
-<polygon fill="black" stroke="black" points="50.5001,-81.441 54,-91.441 57.5001,-81.4411 50.5001,-81.441"/>
-<polygon fill="black" stroke="black" points="57.5001,-33.5452 54,-23.5452 50.5001,-33.5453 57.5001,-33.5452"/>
+<g class="edge" id="edge6"><title>SW1--PC1</title>
+<path d="M54,-81.3129C54,-67.0477 54,-48.1547 54,-33.8537" fill="none" stroke="black"></path>
+<polygon fill="black" points="50.5001,-81.441 54,-91.441 57.5001,-81.4411 50.5001,-81.441" stroke="black"></polygon>
+<polygon fill="black" points="57.5001,-33.5452 54,-23.5452 50.5001,-33.5453 57.5001,-33.5452" stroke="black"></polygon>
 </g>
 <!-- SW3 -->
-<g id="node3" class="node"><title>SW3</title>
-<polygon fill="none" stroke="black" points="360,-91.5 360,-114.5 468,-114.5 468,-91.5 360,-91.5"/>
-<text text-anchor="middle" x="414" y="-99.3" font-family="FreeSans" font-size="14.00">SW3</text>
+<g class="node" id="node3"><title>SW3</title>
+<polygon fill="none" points="360,-91.5 360,-114.5 468,-114.5 468,-91.5 360,-91.5" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="14.00" text-anchor="middle" x="414" y="-99.3">SW3</text>
 </g>
 <!-- SW2&#45;&#45;SW3 -->
-<g id="edge2" class="edge"><title>SW2&#45;&#45;SW3</title>
-<path fill="none" stroke="black" d="M298.235,-103C315.423,-103 332.611,-103 349.8,-103"/>
-<polygon fill="black" stroke="black" points="298.141,-99.5001 288.141,-103 298.141,-106.5 298.141,-99.5001"/>
-<polygon fill="black" stroke="black" points="349.92,-106.5 359.92,-103 349.92,-99.5001 349.92,-106.5"/>
+<g class="edge" id="edge2"><title>SW2--SW3</title>
+<path d="M298.235,-103C315.423,-103 332.611,-103 349.8,-103" fill="none" stroke="black"></path>
+<polygon fill="black" points="298.141,-99.5001 288.141,-103 298.141,-106.5 298.141,-99.5001" stroke="black"></polygon>
+<polygon fill="black" points="349.92,-106.5 359.92,-103 349.92,-99.5001 349.92,-106.5" stroke="black"></polygon>
 </g>
 <!-- PC4 -->
-<g id="node6" class="node"><title>PC4</title>
-<polygon fill="none" stroke="black" points="360,-0.5 360,-23.5 468,-23.5 468,-0.5 360,-0.5"/>
-<text text-anchor="middle" x="414" y="-8.3" font-family="FreeSans" font-size="14.00">PC5 [.105]</text>
+<g class="node" id="node6"><title>PC4</title>
+<polygon fill="none" points="360,-0.5 360,-23.5 468,-23.5 468,-0.5 360,-0.5" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="14.00" text-anchor="middle" x="414" y="-8.3">PC5 [.105]</text>
 </g>
 <!-- SW3&#45;&#45;PC4 -->
-<g id="edge7" class="edge"><title>SW3&#45;&#45;PC4</title>
-<path fill="none" stroke="black" d="M414,-81.3129C414,-67.0477 414,-48.1547 414,-33.8537"/>
-<polygon fill="black" stroke="black" points="410.5,-81.441 414,-91.441 417.5,-81.4411 410.5,-81.441"/>
-<polygon fill="black" stroke="black" points="417.5,-33.5452 414,-23.5452 410.5,-33.5453 417.5,-33.5452"/>
+<g class="edge" id="edge7"><title>SW3--PC4</title>
+<path d="M414,-81.3129C414,-67.0477 414,-48.1547 414,-33.8537" fill="none" stroke="black"></path>
+<polygon fill="black" points="410.5,-81.441 414,-91.441 417.5,-81.4411 410.5,-81.441" stroke="black"></polygon>
+<polygon fill="black" points="417.5,-33.5452 414,-23.5452 410.5,-33.5453 417.5,-33.5452" stroke="black"></polygon>
 </g>
 <!-- SW4 -->
-<g id="node4" class="node"><title>SW4</title>
-<polygon fill="none" stroke="black" points="180,-182.5 180,-205.5 288,-205.5 288,-182.5 180,-182.5"/>
-<text text-anchor="middle" x="234" y="-190.3" font-family="FreeSans" font-size="14.00">SW4</text>
+<g class="node" id="node4"><title>SW4</title>
+<polygon fill="none" points="180,-182.5 180,-205.5 288,-205.5 288,-182.5 180,-182.5" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="14.00" text-anchor="middle" x="234" y="-190.3">SW4</text>
 </g>
 <!-- SW4&#45;&#45;SW1 -->
-<g id="edge3" class="edge"><title>SW4&#45;&#45;SW1</title>
-<path fill="none" stroke="black" d="M203.482,-177.911C170.335,-161.521 117.694,-135.493 84.5389,-119.1"/>
-<polygon fill="black" stroke="black" points="202.129,-181.146 212.645,-182.441 205.232,-174.871 202.129,-181.146"/>
-<polygon fill="black" stroke="black" points="85.8428,-115.84 75.3274,-114.545 82.7402,-122.115 85.8428,-115.84"/>
+<g class="edge" id="edge3"><title>SW4--SW1</title>
+<path d="M203.482,-177.911C170.335,-161.521 117.694,-135.493 84.5389,-119.1" fill="none" stroke="black"></path>
+<polygon fill="black" points="202.129,-181.146 212.645,-182.441 205.232,-174.871 202.129,-181.146" stroke="black"></polygon>
+<polygon fill="black" points="85.8428,-115.84 75.3274,-114.545 82.7402,-122.115 85.8428,-115.84" stroke="black"></polygon>
 </g>
 <!-- SW4&#45;&#45;SW2 -->
-<g id="edge4" class="edge"><title>SW4&#45;&#45;SW2</title>
-<path fill="none" stroke="black" d="M234,-172.313C234,-158.048 234,-139.155 234,-124.854"/>
-<polygon fill="black" stroke="black" points="230.5,-172.441 234,-182.441 237.5,-172.441 230.5,-172.441"/>
-<polygon fill="black" stroke="black" points="230,-114.545 238,-114.545 238,-122.545 230,-122.545 230,-114.545"/>
-<polyline fill="none" stroke="black" points="234,-122.545 234,-124.545 "/>
+<g class="edge" id="edge4"><title>SW4--SW2</title>
+<path d="M234,-172.313C234,-158.048 234,-139.155 234,-124.854" fill="none" stroke="black"></path>
+<polygon fill="black" points="230.5,-172.441 234,-182.441 237.5,-172.441 230.5,-172.441" stroke="black"></polygon>
+<polygon fill="black" points="230,-114.545 238,-114.545 238,-122.545 230,-122.545 230,-114.545" stroke="black"></polygon>
+<polyline fill="none" points="234,-122.545 234,-124.545 " stroke="black"></polyline>
 </g>
 <!-- SW4&#45;&#45;SW3 -->
-<g id="edge5" class="edge"><title>SW4&#45;&#45;SW3</title>
-<path fill="none" stroke="black" d="M264.518,-177.911C297.665,-161.521 350.306,-135.493 383.461,-119.1"/>
-<polygon fill="black" stroke="black" points="262.768,-174.871 255.355,-182.441 265.871,-181.146 262.768,-174.871"/>
-<polygon fill="black" stroke="black" points="385.26,-122.115 392.673,-114.545 382.157,-115.84 385.26,-122.115"/>
+<g class="edge" id="edge5"><title>SW4--SW3</title>
+<path d="M264.518,-177.911C297.665,-161.521 350.306,-135.493 383.461,-119.1" fill="none" stroke="black"></path>
+<polygon fill="black" points="262.768,-174.871 255.355,-182.441 265.871,-181.146 262.768,-174.871" stroke="black"></polygon>
+<polygon fill="black" points="385.26,-122.115 392.673,-114.545 382.157,-115.84 385.26,-122.115" stroke="black"></polygon>
 </g>
 </g>
 </svg>
-
-</div>
-
-</div>
-
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -4012,9 +3960,8 @@ In&nbsp;[59]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[62]:
+In [62]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">dot</span>
@@ -4023,135 +3970,125 @@ In&nbsp;[62]:
      <span class="n">SW1</span> <span class="o">--</span> <span class="n">SW2</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">arrowtail</span><span class="o">=</span><span class="n">box</span><span class="p">];</span>
      <span class="n">SW2</span> <span class="o">--</span> <span class="n">SW3</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">arrowhead</span><span class="o">=</span><span class="n">normal</span><span class="p">];</span>
 
-     <span class="n">SW4</span> <span class="o">--</span> <span class="n">SW1</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">];</span>
+     <span class="n">SW4</span> <span class="o">--</span> <span class="n">SW1</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">"red"</span><span class="p">];</span>
      <span class="n">SW4</span> <span class="o">--</span> <span class="n">SW2</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">arrowhead</span><span class="o">=</span><span class="n">box</span><span class="p">];</span>
-     <span class="n">SW4</span> <span class="o">--</span> <span class="n">SW3</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">arrowhead</span><span class="o">=</span><span class="n">normal</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">];</span>
+     <span class="n">SW4</span> <span class="o">--</span> <span class="n">SW3</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">arrowhead</span><span class="o">=</span><span class="n">normal</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">"red"</span><span class="p">];</span>
     
-     <span class="n">PC1</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;PC1 [.101]&quot;</span><span class="p">];</span>
-     <span class="n">PC4</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;PC5 [.105]&quot;</span><span class="p">];</span>
+     <span class="n">PC1</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"PC1 [.101]"</span><span class="p">];</span>
+     <span class="n">PC4</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"PC5 [.105]"</span><span class="p">];</span>
         
-     <span class="n">SW1</span> <span class="o">--</span> <span class="n">PC1</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">];</span>
-     <span class="n">SW3</span> <span class="o">--</span> <span class="n">PC4</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">];</span>
+     <span class="n">SW1</span> <span class="o">--</span> <span class="n">PC1</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">"red"</span><span class="p">];</span>
+     <span class="n">SW3</span> <span class="o">--</span> <span class="n">PC4</span> <span class="p">[</span><span class="nb">dir</span><span class="o">=</span><span class="n">both</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">"red"</span><span class="p">];</span>
 
      <span class="p">{</span><span class="n">rank</span> <span class="o">=</span> <span class="n">same</span><span class="p">;</span> <span class="n">SW1</span><span class="p">;</span> <span class="n">SW2</span><span class="p">;</span> <span class="n">SW3</span><span class="p">;}</span>
      <span class="p">{</span><span class="n">rank</span> <span class="o">=</span> <span class="n">same</span><span class="p">;</span> <span class="n">PC1</span><span class="p">;</span> <span class="n">PC4</span><span class="p">;}</span>
  <span class="p">}</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
-
 <div class="output_svg output_subarea ">
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
 <!-- Generated by graphviz version 2.38.0 (20140413.2041)
  -->
 <!-- Title: mylab Pages: 1 -->
-<svg width="526pt" height="264pt"
- viewBox="0.00 0.00 525.60 263.60" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(28.8 234.8)">
+<svg height="264pt" viewbox="0.00 0.00 525.60 263.60" width="526pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g class="graph" id="graph0" transform="scale(1 1) rotate(0) translate(28.8 234.8)">
 <title>mylab</title>
-<polygon fill="white" stroke="none" points="-28.8,28.8 -28.8,-234.8 496.8,-234.8 496.8,28.8 -28.8,28.8"/>
+<polygon fill="white" points="-28.8,28.8 -28.8,-234.8 496.8,-234.8 496.8,28.8 -28.8,28.8" stroke="none"></polygon>
 <!-- SW1 -->
-<g id="node1" class="node"><title>SW1</title>
-<polygon fill="none" stroke="black" points="0,-91.5 0,-114.5 108,-114.5 108,-91.5 0,-91.5"/>
-<text text-anchor="middle" x="54" y="-99.3" font-family="FreeSans" font-size="14.00">SW1</text>
+<g class="node" id="node1"><title>SW1</title>
+<polygon fill="none" points="0,-91.5 0,-114.5 108,-114.5 108,-91.5 0,-91.5" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="14.00" text-anchor="middle" x="54" y="-99.3">SW1</text>
 </g>
 <!-- SW2 -->
-<g id="node2" class="node"><title>SW2</title>
-<polygon fill="none" stroke="black" points="180,-91.5 180,-114.5 288,-114.5 288,-91.5 180,-91.5"/>
-<text text-anchor="middle" x="234" y="-99.3" font-family="FreeSans" font-size="14.00">SW2</text>
+<g class="node" id="node2"><title>SW2</title>
+<polygon fill="none" points="180,-91.5 180,-114.5 288,-114.5 288,-91.5 180,-91.5" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="14.00" text-anchor="middle" x="234" y="-99.3">SW2</text>
 </g>
 <!-- SW1&#45;&#45;SW2 -->
-<g id="edge1" class="edge"><title>SW1&#45;&#45;SW2</title>
-<path fill="none" stroke="black" d="M118.235,-103C135.423,-103 152.611,-103 169.8,-103"/>
-<polygon fill="black" stroke="black" points="108.141,-107 108.141,-99 116.141,-99.0001 116.141,-107 108.141,-107"/>
-<polyline fill="none" stroke="black" points="116.141,-103 118.141,-103 "/>
-<polygon fill="black" stroke="black" points="169.92,-106.5 179.92,-103 169.92,-99.5001 169.92,-106.5"/>
+<g class="edge" id="edge1"><title>SW1--SW2</title>
+<path d="M118.235,-103C135.423,-103 152.611,-103 169.8,-103" fill="none" stroke="black"></path>
+<polygon fill="black" points="108.141,-107 108.141,-99 116.141,-99.0001 116.141,-107 108.141,-107" stroke="black"></polygon>
+<polyline fill="none" points="116.141,-103 118.141,-103 " stroke="black"></polyline>
+<polygon fill="black" points="169.92,-106.5 179.92,-103 169.92,-99.5001 169.92,-106.5" stroke="black"></polygon>
 </g>
 <!-- PC1 -->
-<g id="node5" class="node"><title>PC1</title>
-<polygon fill="none" stroke="black" points="0,-0.5 0,-23.5 108,-23.5 108,-0.5 0,-0.5"/>
-<text text-anchor="middle" x="54" y="-8.3" font-family="FreeSans" font-size="14.00">PC1 [.101]</text>
+<g class="node" id="node5"><title>PC1</title>
+<polygon fill="none" points="0,-0.5 0,-23.5 108,-23.5 108,-0.5 0,-0.5" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="14.00" text-anchor="middle" x="54" y="-8.3">PC1 [.101]</text>
 </g>
 <!-- SW1&#45;&#45;PC1 -->
-<g id="edge6" class="edge"><title>SW1&#45;&#45;PC1</title>
-<path fill="none" stroke="red" d="M54,-81.3129C54,-67.0477 54,-48.1547 54,-33.8537"/>
-<polygon fill="red" stroke="red" points="50.5001,-81.441 54,-91.441 57.5001,-81.4411 50.5001,-81.441"/>
-<polygon fill="red" stroke="red" points="57.5001,-33.5452 54,-23.5452 50.5001,-33.5453 57.5001,-33.5452"/>
+<g class="edge" id="edge6"><title>SW1--PC1</title>
+<path d="M54,-81.3129C54,-67.0477 54,-48.1547 54,-33.8537" fill="none" stroke="red"></path>
+<polygon fill="red" points="50.5001,-81.441 54,-91.441 57.5001,-81.4411 50.5001,-81.441" stroke="red"></polygon>
+<polygon fill="red" points="57.5001,-33.5452 54,-23.5452 50.5001,-33.5453 57.5001,-33.5452" stroke="red"></polygon>
 </g>
 <!-- SW3 -->
-<g id="node3" class="node"><title>SW3</title>
-<polygon fill="none" stroke="black" points="360,-91.5 360,-114.5 468,-114.5 468,-91.5 360,-91.5"/>
-<text text-anchor="middle" x="414" y="-99.3" font-family="FreeSans" font-size="14.00">SW3</text>
+<g class="node" id="node3"><title>SW3</title>
+<polygon fill="none" points="360,-91.5 360,-114.5 468,-114.5 468,-91.5 360,-91.5" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="14.00" text-anchor="middle" x="414" y="-99.3">SW3</text>
 </g>
 <!-- SW2&#45;&#45;SW3 -->
-<g id="edge2" class="edge"><title>SW2&#45;&#45;SW3</title>
-<path fill="none" stroke="black" d="M298.235,-103C315.423,-103 332.611,-103 349.8,-103"/>
-<polygon fill="black" stroke="black" points="298.141,-99.5001 288.141,-103 298.141,-106.5 298.141,-99.5001"/>
-<polygon fill="black" stroke="black" points="349.92,-106.5 359.92,-103 349.92,-99.5001 349.92,-106.5"/>
+<g class="edge" id="edge2"><title>SW2--SW3</title>
+<path d="M298.235,-103C315.423,-103 332.611,-103 349.8,-103" fill="none" stroke="black"></path>
+<polygon fill="black" points="298.141,-99.5001 288.141,-103 298.141,-106.5 298.141,-99.5001" stroke="black"></polygon>
+<polygon fill="black" points="349.92,-106.5 359.92,-103 349.92,-99.5001 349.92,-106.5" stroke="black"></polygon>
 </g>
 <!-- PC4 -->
-<g id="node6" class="node"><title>PC4</title>
-<polygon fill="none" stroke="black" points="360,-0.5 360,-23.5 468,-23.5 468,-0.5 360,-0.5"/>
-<text text-anchor="middle" x="414" y="-8.3" font-family="FreeSans" font-size="14.00">PC5 [.105]</text>
+<g class="node" id="node6"><title>PC4</title>
+<polygon fill="none" points="360,-0.5 360,-23.5 468,-23.5 468,-0.5 360,-0.5" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="14.00" text-anchor="middle" x="414" y="-8.3">PC5 [.105]</text>
 </g>
 <!-- SW3&#45;&#45;PC4 -->
-<g id="edge7" class="edge"><title>SW3&#45;&#45;PC4</title>
-<path fill="none" stroke="red" d="M414,-81.3129C414,-67.0477 414,-48.1547 414,-33.8537"/>
-<polygon fill="red" stroke="red" points="410.5,-81.441 414,-91.441 417.5,-81.4411 410.5,-81.441"/>
-<polygon fill="red" stroke="red" points="417.5,-33.5452 414,-23.5452 410.5,-33.5453 417.5,-33.5452"/>
+<g class="edge" id="edge7"><title>SW3--PC4</title>
+<path d="M414,-81.3129C414,-67.0477 414,-48.1547 414,-33.8537" fill="none" stroke="red"></path>
+<polygon fill="red" points="410.5,-81.441 414,-91.441 417.5,-81.4411 410.5,-81.441" stroke="red"></polygon>
+<polygon fill="red" points="417.5,-33.5452 414,-23.5452 410.5,-33.5453 417.5,-33.5452" stroke="red"></polygon>
 </g>
 <!-- SW4 -->
-<g id="node4" class="node"><title>SW4</title>
-<polygon fill="none" stroke="black" points="180,-182.5 180,-205.5 288,-205.5 288,-182.5 180,-182.5"/>
-<text text-anchor="middle" x="234" y="-190.3" font-family="FreeSans" font-size="14.00">SW4</text>
+<g class="node" id="node4"><title>SW4</title>
+<polygon fill="none" points="180,-182.5 180,-205.5 288,-205.5 288,-182.5 180,-182.5" stroke="black"></polygon>
+<text font-family="FreeSans" font-size="14.00" text-anchor="middle" x="234" y="-190.3">SW4</text>
 </g>
 <!-- SW4&#45;&#45;SW1 -->
-<g id="edge3" class="edge"><title>SW4&#45;&#45;SW1</title>
-<path fill="none" stroke="red" d="M203.482,-177.911C170.335,-161.521 117.694,-135.493 84.5389,-119.1"/>
-<polygon fill="red" stroke="red" points="202.129,-181.146 212.645,-182.441 205.232,-174.871 202.129,-181.146"/>
-<polygon fill="red" stroke="red" points="85.8428,-115.84 75.3274,-114.545 82.7402,-122.115 85.8428,-115.84"/>
+<g class="edge" id="edge3"><title>SW4--SW1</title>
+<path d="M203.482,-177.911C170.335,-161.521 117.694,-135.493 84.5389,-119.1" fill="none" stroke="red"></path>
+<polygon fill="red" points="202.129,-181.146 212.645,-182.441 205.232,-174.871 202.129,-181.146" stroke="red"></polygon>
+<polygon fill="red" points="85.8428,-115.84 75.3274,-114.545 82.7402,-122.115 85.8428,-115.84" stroke="red"></polygon>
 </g>
 <!-- SW4&#45;&#45;SW2 -->
-<g id="edge4" class="edge"><title>SW4&#45;&#45;SW2</title>
-<path fill="none" stroke="black" d="M234,-172.313C234,-158.048 234,-139.155 234,-124.854"/>
-<polygon fill="black" stroke="black" points="230.5,-172.441 234,-182.441 237.5,-172.441 230.5,-172.441"/>
-<polygon fill="black" stroke="black" points="230,-114.545 238,-114.545 238,-122.545 230,-122.545 230,-114.545"/>
-<polyline fill="none" stroke="black" points="234,-122.545 234,-124.545 "/>
+<g class="edge" id="edge4"><title>SW4--SW2</title>
+<path d="M234,-172.313C234,-158.048 234,-139.155 234,-124.854" fill="none" stroke="black"></path>
+<polygon fill="black" points="230.5,-172.441 234,-182.441 237.5,-172.441 230.5,-172.441" stroke="black"></polygon>
+<polygon fill="black" points="230,-114.545 238,-114.545 238,-122.545 230,-122.545 230,-114.545" stroke="black"></polygon>
+<polyline fill="none" points="234,-122.545 234,-124.545 " stroke="black"></polyline>
 </g>
 <!-- SW4&#45;&#45;SW3 -->
-<g id="edge5" class="edge"><title>SW4&#45;&#45;SW3</title>
-<path fill="none" stroke="red" d="M264.518,-177.911C297.665,-161.521 350.306,-135.493 383.461,-119.1"/>
-<polygon fill="red" stroke="red" points="262.768,-174.871 255.355,-182.441 265.871,-181.146 262.768,-174.871"/>
-<polygon fill="red" stroke="red" points="385.26,-122.115 392.673,-114.545 382.157,-115.84 385.26,-122.115"/>
+<g class="edge" id="edge5"><title>SW4--SW3</title>
+<path d="M264.518,-177.911C297.665,-161.521 350.306,-135.493 383.461,-119.1" fill="none" stroke="red"></path>
+<polygon fill="red" points="262.768,-174.871 255.355,-182.441 265.871,-181.146 262.768,-174.871" stroke="red"></polygon>
+<polygon fill="red" points="385.26,-122.115 392.673,-114.545 382.157,-115.84 385.26,-122.115" stroke="red"></polygon>
 </g>
 </g>
 </svg>
-
-</div>
-
-</div>
-
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In the next posts I&#39;ll deal with <strong>IP routing</strong> on <strong>Layer 3</strong>.</p>
+<p>In the next posts I'll deal with <strong>IP routing</strong> on <strong>Layer 3</strong>.</p>
 </div>
 </div>
 </div></p>
@@ -4162,9 +4099,9 @@ In&nbsp;[62]:
     <ul>
         <li><a href="http://blog.dornea.nu/2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer">Basic Layer 2 Switching using Cisco Packet Tracer</a></li>
         <li><a href="http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids">OpenVPN for paranoids</a></li>
-        <li><a href="http://blog.dornea.nu/2015/06/03/usd-ag-hacker-day-in-hamburg">usd AG Hacker Day in Hamburg</a></li>
-        <li><a href="http://blog.dornea.nu/2014/08/05/android-dynamic-code-analysis-mastering-droidbox">Android Dynamic Code Analysis - Mastering DroidBox</a></li>
-        <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump-ipython-notebook-version">24h Android sniffing using tcpdump - IPython Notebook Version</a></li>
+        <li><a href="http://blog.dornea.nu/2010/10/13/howto-build-your-own-wifi-wlan-hotspot-using-hostap">HowTo: Build your own Wifi WLAN hotspot using hostap</a></li>
+        <li><a href="http://blog.dornea.nu/2011/04/02/block-facebook-with-iptables-on-openwrt">Block facebook with iptables on OpenWrt</a></li>
+        <li><a href="http://blog.dornea.nu/2015/10/02/manage-pki-using-openssl">Manage PKI using OpenSSL</a></li>
     </ul>
 </section>
     <hr />

@@ -1740,7 +1740,7 @@ After hours of wild googling these are the steps to make your APK debuggable und
 <h2 id="dump-the-apk">Dump the APK</h2>
 <p>First of all make sure you'll have the latest version of <code>apktool</code>. I've compiled it by myself:</p>
 <div class="highlight"><pre><span class="c"># git clone git://github.com/iBotPeaches/Apktool.git</span>
-oCloning into <span class="s1">&#39;Apktool&#39;</span>...    
+oCloning into <span class="s1">'Apktool'</span>...    
 remote: Counting objects: 9605, <span class="k">done</span>.
 remote: Compressing objects: 100% <span class="o">(</span>3622/3622<span class="o">)</span>, <span class="k">done</span>.
 remote: Total <span class="m">9605</span> <span class="o">(</span>delta 4556<span class="o">)</span>, reused <span class="m">9494</span> <span class="o">(</span>delta 4502<span class="o">)</span>
@@ -1752,16 +1752,12 @@ Checking connectivity... <span class="k">done</span>.
 <span class="c"># ./gradlew build fatJar</span>
 <span class="o">[</span>o...<span class="o">]</span>
 </pre></div>
-
-
 <p>Afterwards you'll get a new fresh <code>apktool</code> to use within the next steps:</p>
-<div class="highlight"><pre><span class="c"># find . -name &quot;apktool-cli.jar&quot;</span>
+<div class="highlight"><pre><span class="c"># find . -name "apktool-cli.jar"</span>
 ./obrut.apktool/apktool-cli/build/libs/apktool-cli.jar
 
 <span class="c"># cp ./brut.apktool/apktool-cli/build/libs/apktool-cli.jar /tmp</span>
 </pre></div>
-
-
 <p>After having installed the right tool it's time to dump the APK contents:</p>
 <div class="highlight"><pre><span class="c"># java -jar /tmp/apktool-cli.jar d -d FakeBanker.apk -o source</span>
 I: Using Apktool 2.0.0-3d2e93-SNAPSHOT on FakeBanker.apk
@@ -1777,8 +1773,6 @@ I: Copying assets and libs...
 I: Copying unknown files...
 I: Copying original files...
 </pre></div>
-
-
 <p>Afterwards I got following file structure:</p>
 <div class="highlight"><pre>tree -L <span class="m">2</span> <span class="nb">source </span>
 <span class="nb">source</span>
@@ -1802,8 +1796,6 @@ I: Copying original files...
 
 <span class="m">14</span> directories, <span class="m">3</span> files
 </pre></div>
-
-
 <h2 id="make-apk-debuggable">Make APK debuggable</h2>
 <p>After dumping the APK now you'll have to mark your APK as debuggable. There are several ways in order to achieve that:</p>
 <ul>
@@ -1812,11 +1804,9 @@ I: Copying original files...
 </ul>
 <p>If you want to do it manually open the <code>AndroidManifest.xml</code> file and search for the <code>application</code> tag. Then insert new attribute <code>android:debuggable='true'</code> like I did:</p>
 <div class="highlight"><pre>...
-<span class="nt">&lt;application</span> <span class="na">android:theme=</span><span class="s">&quot;@style/AppTheme&quot;</span> <span class="na">android:label=</span><span class="s">&quot;@string/app_name&quot;</span> <span class="na">android:icon=</span><span class="s">&quot;@drawable/ic_launcher1&quot;</span> <span class="na">android:debuggable=</span><span class="s">&quot;true&quot;</span> <span class="na">android:allowBackup=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;application</span> <span class="na">android:theme=</span><span class="s">"@style/AppTheme"</span> <span class="na">android:label=</span><span class="s">"@string/app_name"</span> <span class="na">android:icon=</span><span class="s">"@drawable/ic_launcher1"</span> <span class="na">android:debuggable=</span><span class="s">"true"</span> <span class="na">android:allowBackup=</span><span class="s">"false"</span><span class="nt">&gt;</span>
 ...
 </pre></div>
-
-
 <h2 id="build-new-app">Build new APP</h2>
 <p>Now you're ready to build you new debuggable APK using <code>apktool</code>:</p>
 <div class="highlight"><pre>java -jar /tmp/apktool-cli.jar b -d <span class="nb">source </span>FakeBanker.Debug.apk
@@ -1828,8 +1818,6 @@ I: Building resources...
 Warning: AndroidManifest.xml already defines debuggable <span class="o">(</span>in http://schemas.android.com/apk/res/android<span class="o">)</span><span class="p">;</span> using existing value in manifest.
 I: Building apk file...
 </pre></div>
-
-
 <p>A few explanations regarding the parameters:</p>
 <ul>
 <li><code>b</code></li>
@@ -1856,33 +1844,25 @@ Archive:  FakeBanker.Debug.apk
   inflating: unpacked/classes.dex    
   inflating: unpacked/resources.arsc  
 </pre></div>
-
-
 <p>Let <code>dex2jar</code> do its job:</p>
 <div class="highlight"><pre><span class="c"># cd unpacked</span>
 <span class="c"># dex2jar classes.dex</span>
 dex2jar classes.dex -&gt; classes-dex2jar.jar
 </pre></div>
-
-
 <p>Now open the jar file using <code>jd-gui</code> and save the sources as zip like I did:</p>
-<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/jd-gui.png"></p>
+<p><img class="img-responsive" src="http://dl.dornea.nu/img/2014/eclipse-ddms/jd-gui.png"/></p>
 <h2 id="sign-the-apk">Sign the APK</h2>
 <p>In order to push your APK to the device you'll have to <strong>sign</strong> it. I'll therefor using a test <a href="http://developer.android.com/tools/publishing/app-signing.html">certificate</a>:</p>
 <div class="highlight"><pre><span class="c"># git clone https://github.com/appium/sign</span>
-Cloning into <span class="s1">&#39;sign&#39;</span>...
+Cloning into <span class="s1">'sign'</span>...
 remote: Counting objects: 49, <span class="k">done</span>.
 remote: Total <span class="m">49</span> <span class="o">(</span>delta 0<span class="o">)</span>, reused <span class="m">0</span> <span class="o">(</span>delta 0<span class="o">)</span>
 Unpacking objects: 100% <span class="o">(</span>49/49<span class="o">)</span>, <span class="k">done</span>.
 Checking connectivity... <span class="k">done</span>.
 </pre></div>
-
-
 <p>Now let's sign it:</p>
 <div class="highlight"><pre><span class="c"># java -jar sign/dist/signapk.jar sign/testkey.x509.pem sign/testkey.pk8 FakeBanker.Debug.apk FakeBanker.Debug.Signed.apk          </span>
 </pre></div>
-
-
 <h2 id="install-the-apk">Install the APK</h2>
 <p>Having signed the APK now you're ready to push it to your device and have some fun.</p>
 <div class="highlight"><pre><span class="c"># adb devices -l  </span>
@@ -1894,9 +1874,7 @@ emulator-5554          device product:sdk model:sdk device:generic
     pkg: /data/local/tmp/FakeBanker.Debug.Signed.apk
 Success
 </pre></div>
-
-
-<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/app_installed.png"></p>
+<p><img class="img-responsive" src="http://dl.dornea.nu/img/2014/eclipse-ddms/app_installed.png"/></p>
 <h2 id="add-sources">Add sources</h2>
 <p>We'll add the Java sources to the <code>source</code> directory structure:</p>
 <div class="highlight"><pre><span class="c"># mkdir source/src</span>
@@ -1906,8 +1884,6 @@ Archive:  classes-dex2jar.src.zip
    creating: <span class="nb">source</span>/src/android/support/
 ...
 </pre></div>
-
-
 <p>The new directory structure will be:</p>
 <div class="highlight"><pre><span class="c"># tree -L 2 source </span>
 <span class="nb">source</span>
@@ -1941,23 +1917,21 @@ Archive:  classes-dex2jar.src.zip
 
 <span class="m">23</span> directories, <span class="m">4</span> files
 </pre></div>
-
-
 <h2 id="debug-settings">Debug settings</h2>
 <p>I had to active the debug settings for my targeted app. Go to <code>Device Settings</code> -&gt; <code>Select debug app</code>. Also make sure you have <code>Wait for debugger</code> activated. 
 This will prevent your app starting before any debugger gets connected to it.</p>
-<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/app_select_debug_app.png"></p>
+<p><img class="img-responsive" src="http://dl.dornea.nu/img/2014/eclipse-ddms/app_select_debug_app.png"/></p>
 <h2 id="setup-eclipse">Setup Eclipse</h2>
 <p>First of all make sure you have the <a href="http://developer.android.com/tools/sdk/eclipse-adt.html">ADT</a> along with the <a href="http://developer.android.com/sdk/index.html">Android SDK</a> installed. Now let's move on:</p>
 <h4 id="create-new-java-project">Create new Java project</h4>
 <p>First create a new <em>Java</em> project and use <code>source</code> as the location of the project.</p>
-<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_create_java_project.png"></p>
+<p><img class="img-responsive" src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_create_java_project.png"/></p>
 <h4 id="add-src-folder-to-build-path">Add src folder to build path</h4>
 <p>Make sure the <code>src</code> folder is added as a source location to the build path.</p>
-<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_project_src.png"></p>
+<p><img class="img-responsive" src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_project_src.png"/></p>
 <h4 id="check-project-properties">Check project properties</h4>
 <p>You could also check the project properties by clicking on it and then <code>ALT+Enter</code>. You should have sth similar to:</p>
-<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_project_properties_build_path.png"></p>
+<p><img class="img-responsive" src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_project_properties_build_path.png"/></p>
 <h2 id="set-breakpoints">Set breakpoints</h2>
 <p>Having set up the Eclipse environment let's add some breakpoints. </p>
 <h3 id="update-2014-12-09">UPDATE 2014-12-09</h3>
@@ -1968,38 +1942,38 @@ This will prevent your app starting before any debugger gets connected to it.</p
 <p>So be careful whet choosing your breakpoints otherwise you might ask yourself why your code doesn't get debugged.</p>
 <h3 id="debug-oncreate">Debug onCreate</h3>
 <p>First search for <strong>onCreate</strong> in all files:</p>
-<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_search_on_create.png"></p>
+<p><img class="img-responsive" src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_search_on_create.png"/></p>
 <p>Eclipse found several matches:</p>
-<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_found_oncreate.png"></p>
+<p><img class="img-responsive" src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_found_oncreate.png"/></p>
 <p>We'll now concentrate on <code>MainActivity.java</code> and set a breakpoint:</p>
-<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_set_breakpoint.png"></p>
+<p><img class="img-responsive" src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_set_breakpoint.png"/></p>
 <p>Switching the perspective to <code>Debug</code> you should be able to see your breakpoints (marked in red):</p>
-<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_view_breakpoints.png"></p>
+<p><img class="img-responsive" src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_view_breakpoints.png"/></p>
 <h2 id="run-application">Run application</h2>
 <p>Before running our application we'll have a look at the already running processes on the device:</p>
-<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_running_processes.png"></p>
+<p><img class="img-responsive" src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_running_processes.png"/></p>
 <p>After starting the application in the <code>AVD</code> you'll notice a new process:</p>
-<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_running_processes_after_app_start.png"></p>
+<p><img class="img-responsive" src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_running_processes_after_app_start.png"/></p>
 <p>The red "bug" indicates that the process isn't being debugged yet. Meanwhile the app waits for some debugger
 to get connected:</p>
-<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/app_waiting_for_debugger.png"></p>
+<p><img class="img-responsive" src="http://dl.dornea.nu/img/2014/eclipse-ddms/app_waiting_for_debugger.png"/></p>
 <h4 id="debug-configuration">Debug configuration</h4>
 <p>In order to be able to debug process you'll have to add a new debug configuration:</p>
-<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_debug_configuration.png"></p>
+<p><img class="img-responsive" src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_debug_configuration.png"/></p>
 <p>When setting up the configuration pay attention to the <strong>port</strong> your debugger should connect to. Make sure it matches with the port pair previously 
 seen in the running process list (marked in red):</p>
-<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_debug_set_port.png"></p>
+<p><img class="img-responsive" src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_debug_set_port.png"/></p>
 <p>Now click on <strong>Debug</strong> and you're ready to go. Take a look at the running processes. You'll notice sth changed:</p>
-<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_debug_running.png"></p>
+<p><img class="img-responsive" src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_debug_running.png"/></p>
 <p>The bug is now "green" meaning you're ready to debug your application.</p>
 <h2 id="trigger-breakpoint">Trigger breakpoint</h2>
 <p>We've previously set a breakpoint at the <code>onCreate</code> method. Now that the application is running I had to "trigger" that breakpoint. Switching to my AVD I took 
 a look at the application and filled in the fields:</p>
-<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/app_enter_click.png"></p>
+<p><img class="img-responsive" src="http://dl.dornea.nu/img/2014/eclipse-ddms/app_enter_click.png"/></p>
 <p>Afterwards I've clicked <em>Enter</em>. Switching back to Eclipse I got following picture:</p>
-<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_hold_on_breakpoint.png"></p>
+<p><img class="img-responsive" src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_hold_on_breakpoint.png"/></p>
 <p>The execution stopped at the breakpoint. Success! Now I've typed F6 (Step over) and the execution moved on:</p>
-<p><img src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_debug_stepin.png"></p>
+<p><img class="img-responsive" src="http://dl.dornea.nu/img/2014/eclipse-ddms/eclipse_debug_stepin.png"/></p>
 <h2 id="conclusion">Conclusion</h2>
 <p>Using great tools like <code>apktool</code> and <code>dex2jar</code> you can prepare your APK to inspect it dynamically in Eclipse. I think Eclipse (along with ADT) is a very powerful tool 
 when it comes to dynamic analysis. I can easily switch between code parts and analyze the execution flow. Keep in mind that when the original is <em>obfuscated</em> you may 
@@ -2016,9 +1990,9 @@ below.     </p>
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="http://blog.dornea.nu/2014/12/02/howto-proxy-non-proxy-aware-android-applications-through-burp">HowTo: Proxy Non-Proxy-Aware Android Applications through Burp</a></li>
+        <li><a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a></li>
         <li><a href="http://blog.dornea.nu/2014/08/05/android-dynamic-code-analysis-mastering-droidbox">Android Dynamic Code Analysis - Mastering DroidBox</a></li>
         <li><a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a></li>
-        <li><a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a></li>
         <li><a href="http://blog.dornea.nu/2014/10/29/howto-ios-apps-static-analysis">HowTo: iOS Apps - Static analysis</a></li>
     </ul>
 </section>

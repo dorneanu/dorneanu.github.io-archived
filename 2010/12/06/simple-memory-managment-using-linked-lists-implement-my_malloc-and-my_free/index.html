@@ -1715,19 +1715,16 @@ blog.dornea.nu            </a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>Suppose you were a Linux developer and you&#8217;re about to implement the well known system calls:  <strong>malloc</strong> and <strong>free</strong>. How would you start? Which (already implemented) functions would you use? How would you <strong>organize</strong> your (free) <strong>memory</strong>? Which information would you like to have about certain memory regions? Those are the minimal problems you&#8217;re about to face with. What about <strong>memory fragmentation</strong>? Speaking of memory: How would you implement this thing called &#8220;memory&#8221;? And so on..</p>
-<p>The same task caused me a few weeks ago a lot of head scratching. Although I had a framework I could work with, it was more sophisticated than I thought. But let&#8217;s start with simple things and have a look at the memory I was supposed to use:</p>
+                <p>Suppose you were a Linux developer and you’re about to implement the well known system calls:  <strong>malloc</strong> and <strong>free</strong>. How would you start? Which (already implemented) functions would you use? How would you <strong>organize</strong> your (free) <strong>memory</strong>? Which information would you like to have about certain memory regions? Those are the minimal problems you’re about to face with. What about <strong>memory fragmentation</strong>? Speaking of memory: How would you implement this thing called “memory”? And so on..</p>
+<p>The same task caused me a few weeks ago a lot of head scratching. Although I had a framework I could work with, it was more sophisticated than I thought. But let’s start with simple things and have a look at the memory I was supposed to use:</p>
 <p class="rtecenter">
-  <a href="http://static.dornea.nu/img/2010/942cafa21bb2985cdce157d9cbae284f.png"><img style="width: 532px; height: 118px;" alt="char memory" src="http://static.dornea.nu/img/2010/942cafa21bb2985cdce157d9cbae284f.png" width="445" height="100" /></a>
+<a href="http://static.dornea.nu/img/2010/942cafa21bb2985cdce157d9cbae284f.png"><img alt="char memory" class="img-responsive" height="100" src="http://static.dornea.nu/img/2010/942cafa21bb2985cdce157d9cbae284f.png" style="width: 532px; height: 118px;" width="445"/></a>
 </p>
-
 <div class="rtecenter">
-  <em>Figure1: Memory representation<!--more--></em>
+<em>Figure1: Memory representation<!--more--></em>
 </div>
-
 <!--break-->
-
-<p>So that&#8217;s my memory: a simple char array of BUFFSIZE elements. My code is supposed to use this range of memory in an intelligent way. Therefore we&#8217;ll have to split the memory into multiple <strong>fragments</strong>. Each fragment has a certain size (they don&#8217;t have to be at the same size) and coresponds to memory that has been allocated to a variable.</p>
+<p>So that’s my memory: a simple char array of BUFFSIZE elements. My code is supposed to use this range of memory in an intelligent way. Therefore we’ll have to split the memory into multiple <strong>fragments</strong>. Each fragment has a certain size (they don’t have to be at the same size) and coresponds to memory that has been allocated to a variable.</p>
 <pre class="brush:plain;gutter:false;">int *a = (int*)my_malloc(sizeof(int));
 *a = 5;
 
@@ -1738,9 +1735,8 @@ b[1] = 'o';
 b[2] = 'o';
 b[3] = 'l';
 b[4] = '�';</pre>
-
-<p><strong>my_malloc(int size)</strong> returns the address of the fragment that has been assigned to variable a or b. When there is no more space left on the memory, NULL will be returned. The same applies when free fragments can&#8217;t be merged together to a bigger one &#8211; in this case we&#8217;ll have to remap the fragments in order to have enough space for later memory allocations.  Furthermore you can tell<em> my_malloc</em> how much space to allocate.</p>
-<p>So there must be a way how to organize our fragments inside the memory. By using only pointer to certain addresses within the memory space we have no information about its size, the data size it is storing or the next fragment. That&#8217;s why a so called <strong>memoryBlock</strong> will be used to store this information. Given a <strong>head</strong> block a linked list should allow us to access all blocks in the memory.</p>
+<p><strong>my_malloc(int size)</strong> returns the address of the fragment that has been assigned to variable a or b. When there is no more space left on the memory, NULL will be returned. The same applies when free fragments can’t be merged together to a bigger one – in this case we’ll have to remap the fragments in order to have enough space for later memory allocations.  Furthermore you can tell<em> my_malloc</em> how much space to allocate.</p>
+<p>So there must be a way how to organize our fragments inside the memory. By using only pointer to certain addresses within the memory space we have no information about its size, the data size it is storing or the next fragment. That’s why a so called <strong>memoryBlock</strong> will be used to store this information. Given a <strong>head</strong> block a linked list should allow us to access all blocks in the memory.</p>
 <pre class="brush:plain;">enum memBlockState{not_allocated=0, allocated=1};
 
 // memory block
@@ -1755,30 +1751,24 @@ typedef struct _memoryblock {
 
 // First block in the list
 memoryBlock* head;</pre>
-
 <p>And this is the graphical representation:</p>
 <p class="rtecenter">
-  <a href="http://static.dornea.nu/img/2010/d19f451223e5ab7758afdbd54256e538.png"><img style="width: 590px; height: 168px;" alt="Head" src="http://static.dornea.nu/img/2010/d19f451223e5ab7758afdbd54256e538.png" width="582" height="151" /></a>
+<a href="http://static.dornea.nu/img/2010/d19f451223e5ab7758afdbd54256e538.png"><img alt="Head" class="img-responsive" height="151" src="http://static.dornea.nu/img/2010/d19f451223e5ab7758afdbd54256e538.png" style="width: 590px; height: 168px;" width="582"/></a>
 </p>
-
 <div class="rtecenter">
-  <em>Figure 2: Memory Block(s) inside memory</em>
+<em>Figure 2: Memory Block(s) inside memory</em>
 </div>
-
-<p><span style="display: none;"> </span>Now we&#8217;ll have to inter-connect the memory blocks. Therefor we&#8217;ll be using a <strong>pointer</strong> to next block. In that way we can iterate the blocks, (re)move them or find a suitable place where to place a new block.</p>
+<p><span style="display: none;"> </span>Now we’ll have to inter-connect the memory blocks. Therefor we’ll be using a <strong>pointer</strong> to next block. In that way we can iterate the blocks, (re)move them or find a suitable place where to place a new block.</p>
 <p class="rtecenter">
-  <a href="http://static.dornea.nu/img/2010/47f7693e3cbd2e179e04b68009ba81f2.png"><img style="width: 582px; height: 166px;" alt="Head nextBlick" src="http://static.dornea.nu/img/2010/47f7693e3cbd2e179e04b68009ba81f2.png" width="582" height="166" /></a>
+<a href="http://static.dornea.nu/img/2010/47f7693e3cbd2e179e04b68009ba81f2.png"><img alt="Head nextBlick" class="img-responsive" height="166" src="http://static.dornea.nu/img/2010/47f7693e3cbd2e179e04b68009ba81f2.png" style="width: 582px; height: 166px;" width="582"/></a>
 </p>
-
 <div class="rtecenter">
-  <em>Figure 3: nextBlock pointer</em>
+<em>Figure 3: nextBlock pointer</em>
 </div>
-
 <p class="rtecenter">
-  <span style="display: none;"> </span>
+<span style="display: none;"> </span>
 </p>
-
-<p><span style="display: none;"> </span>So those are the most important programm structures. Let&#8217;s have a look at the main function within the C-code (see appendix):</p>
+<p><span style="display: none;"> </span>So those are the most important programm structures. Let’s have a look at the main function within the C-code (see appendix):</p>
 <pre class="brush:plain;">// my_alloc will try to allocate &lt;byteCount&gt; bytes within our char memory. 
 // The function will return the address of the allocated memory.
 void* my_malloc(int byteCount)
@@ -1801,7 +1791,6 @@ void* my_malloc(int byteCount)
     // Return the address of data (see memoryBlock structure)
     return tmp-&gt;data;
 }</pre>
-
 <p>Before beeing able to allocate some memory, the <strong>head</strong> block must be initialized.</p>
 <pre class="brush:plain;">void initialize()
 {
@@ -1821,10 +1810,9 @@ void* my_malloc(int byteCount)
         head-&gt;nextBlock = NULL;
     }
 }</pre>
-
 <p>I think the most interesting part of the allocation process is the <strong>splitBlock</strong> function. It searches for the proper block that has to be splitted into 2 parts:</p>
 <ul>
-<li>a smaller unused/unallocated memory block (new size = old size &#8211; byteCount)</li>
+<li>a smaller unused/unallocated memory block (new size = old size – byteCount)</li>
 <li>an allocated memory block (size = byteCount)</li>
 </ul>
 <pre class="brush:plain;">memoryBlock *splitBlock(memoryBlock* block, int byteCount)
@@ -1855,30 +1843,24 @@ void* my_malloc(int byteCount)
     return new_block;
 
 }</pre>
-
-<p>After some dry runs &#8211; allocating memory for some integer/string variables (check out <em>test_mm.c</em>) &#8211; the memory could end up like this:</p>
+<p>After some dry runs – allocating memory for some integer/string variables (check out <em>test_mm.c</em>) – the memory could end up like this:</p>
 <p class="rtecenter">
-  <a href="http://static.dornea.nu/img/2010/8030796f71fb1c1d8eb7e2942670bb9d.png"><img style="width: 582px; height: 150px;" alt="Buffer fragmentation" src="http://static.dornea.nu/img/2010/8030796f71fb1c1d8eb7e2942670bb9d.png" width="582" height="150" /></a>
+<a href="http://static.dornea.nu/img/2010/8030796f71fb1c1d8eb7e2942670bb9d.png"><img alt="Buffer fragmentation" class="img-responsive" height="150" src="http://static.dornea.nu/img/2010/8030796f71fb1c1d8eb7e2942670bb9d.png" style="width: 582px; height: 150px;" width="582"/></a>
 </p>
-
 <div class="rtecenter">
-  <em>Figure 4: Memory fragmentation</em>
+<em>Figure 4: Memory fragmentation</em>
 </div>
-
 <p class="rtecenter">
-  <span style="display: none;"> </span>
+<span style="display: none;"> </span>
 </p>
-
-<p>As you see we could re-arrange the allocated regions in order to get more unused/free memory space. Since this wasn&#8217;t part of the task &#8211; although you could have a look at my_free() too &#8211;   I&#8217;ll leave it to you to google for some dynamic memory allocation algorithms.</p>
-<p>In the end I&#8217;d like to show you some debugging stuff I&#8217;ve made with <strong>ddd</strong>. As you see each (allocated) portion of memory has its memory header (consisting of the memoryBlock structure) plus a (void *) pointer  to an address inside the memory, where data is stored.</p>
+<p>As you see we could re-arrange the allocated regions in order to get more unused/free memory space. Since this wasn’t part of the task – although you could have a look at my_free() too –   I’ll leave it to you to google for some dynamic memory allocation algorithms.</p>
+<p>In the end I’d like to show you some debugging stuff I’ve made with <strong>ddd</strong>. As you see each (allocated) portion of memory has its memory header (consisting of the memoryBlock structure) plus a (void *) pointer  to an address inside the memory, where data is stored.</p>
 <p class="rtecenter">
-  <a href="http://static.dornea.nu/img/2010/9094e1e96dac5744fe6ebcaf6a7aed44.png">n<img class="trigger_lightbox" style="width: 590px; height: 430px;" alt="DDD Session" src="http://static.dornea.nu/img/2010/9094e1e96dac5744fe6ebcaf6a7aed44.png" width="1022" height="745" /></a>
+<a href="http://static.dornea.nu/img/2010/9094e1e96dac5744fe6ebcaf6a7aed44.png">n<img alt="DDD Session" class="img-responsive trigger_lightbox" height="745" src="http://static.dornea.nu/img/2010/9094e1e96dac5744fe6ebcaf6a7aed44.png" style="width: 590px; height: 430px;" width="1022"/></a>
 </p>
-
 <div class="rtecenter">
-  <em>Figure 5: DDD session</em>
+<em>Figure 5: DDD session</em>
 </div>
-
 <p>Finally some output generated by the programm:</p>
 <pre class="brush:plain;gutter:false;">Uebersicht des Speichers: 10216 / 10240 Speicher frei
 ------------------------------------------------
@@ -1974,51 +1956,45 @@ Uebersicht des Speichers: 10216 / 10240 Speicher frei
 #  at            allocated       space   data                   next block
 1  0x5024a0      FALSE           10216   [0x5026e0,0x504ec7]    0x0
 
-Press any key to continue...(Where's the 'any' key btw? <img src="http://dornea.nu/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley" /> </pre>
-
-<p>&nbsp;</p>
+Press any key to continue...(Where's the 'any' key btw? <img alt=":)" class="wp-smiley img-responsive" src="http://dornea.nu/wp-includes/images/smilies/icon_smile.gif"/> </pre>
+<p> </p>
 <p><strong>Download material:</strong></p>
-<table style="width: 100%;" border="1" cellspacing="1" cellpadding="1">
-  <tr>
-    <td class="rtecenter" style="background-color: #9999ff;" colspan="2">
-      <strong>mm.c</strong>
-    </td>
-
-    <td style="border-color: #000000;">
-      <a href="http://dl.dornea.nu/svn/studium/wise2010-2011/ti3/exercises/0x4/Aufgabe_4/mm.c">http://dl.dornea.nu/svn/studium/wise2010-2011/ti3/exercises/0&#215;4/Aufgabe_4/mm.c</a>
-    </td>
-  </tr>
-
-  <tr>
-    <td class="rtecenter" style="background-color: #9999ff;" colspan="2">
-      <strong>mm.h</strong>
-    </td>
-
-    <td style="border-color: #000000;">
-      <a href="http://dl.dornea.nu/svn/studium/wise2010-2011/ti3/exercises/0x4/Aufgabe_4/mm.h">http://dl.dornea.nu/svn/studium/wise2010-2011/ti3/exercises/0&#215;4/Aufgabe_4/mm.h</a>
-    </td>
-  </tr>
-
-  <tr>
-    <td class="rtecenter" style="background-color: #9999ff;" colspan="2">
-      <strong>test_mm.c</strong>
-    </td>
-
-    <td style="border-color: #000000;">
-      <a href="http://dl.dornea.nu/svn/studium/wise2010-2011/ti3/exercises/0x4/Aufgabe_4/test_mm.c">http://dl.dornea.nu/svn/studium/wise2010-2011/ti3/exercises/0&#215;4/Aufgabe_4/test_mm.c</a>
-    </td>
-  </tr>
+<table border="1" cellpadding="1" cellspacing="1" class=" table-striped table table-hover" style="width: 100%;">
+<tr>
+<td class="rtecenter" colspan="2" style="background-color: #9999ff;">
+<strong>mm.c</strong>
+</td>
+<td style="border-color: #000000;">
+<a href="http://dl.dornea.nu/svn/studium/wise2010-2011/ti3/exercises/0x4/Aufgabe_4/mm.c">http://dl.dornea.nu/svn/studium/wise2010-2011/ti3/exercises/0×4/Aufgabe_4/mm.c</a>
+</td>
+</tr>
+<tr>
+<td class="rtecenter" colspan="2" style="background-color: #9999ff;">
+<strong>mm.h</strong>
+</td>
+<td style="border-color: #000000;">
+<a href="http://dl.dornea.nu/svn/studium/wise2010-2011/ti3/exercises/0x4/Aufgabe_4/mm.h">http://dl.dornea.nu/svn/studium/wise2010-2011/ti3/exercises/0×4/Aufgabe_4/mm.h</a>
+</td>
+</tr>
+<tr>
+<td class="rtecenter" colspan="2" style="background-color: #9999ff;">
+<strong>test_mm.c</strong>
+</td>
+<td style="border-color: #000000;">
+<a href="http://dl.dornea.nu/svn/studium/wise2010-2011/ti3/exercises/0x4/Aufgabe_4/test_mm.c">http://dl.dornea.nu/svn/studium/wise2010-2011/ti3/exercises/0×4/Aufgabe_4/test_mm.c</a>
+</td>
+</tr>
 </table>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2010/09/13/icmpknock-v02-released">icmpKNOCK v0.2 released</a></li>
-        <li><a href="http://blog.dornea.nu/2013/12/04/convert-ip-ranges-to-list">Convert IP ranges to list</a></li>
         <li><a href="http://blog.dornea.nu/2015/04/30/gethostbyname-vs-getaddrinfo">gethostbyname vs. getaddrinfo</a></li>
+        <li><a href="http://blog.dornea.nu/2013/12/04/convert-ip-ranges-to-list">Convert IP ranges to list</a></li>
+        <li><a href="http://blog.dornea.nu/2010/09/13/icmpknock-v02-released">icmpKNOCK v0.2 released</a></li>
         <li><a href="http://blog.dornea.nu/2015/04/21/coming-back-to-cc-after-2-years">Coming back to C/C++ after 2 years</a></li>
-        <li><a href="http://blog.dornea.nu/2011/04/04/vnc-connect-to-current-desktop-session-using-x11vnc-and-ssh">VNC: Connect to current desktop session using x11vnc and ssh</a></li>
+        <li><a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a></li>
     </ul>
 </section>
     <hr />

@@ -1709,12 +1709,11 @@ blog.dornea.nu            </a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>Today I had the big opportunity to setup an OpenBSD based gateway. I&#8217;ve never used OpenBSD before and I was really excited about. All in one: Really clean (almost spartanic), secure 4.4BSD. Although I had some problems during the partitioning process &#8211; I didn&#8217;t thought they have such a l33t partitioning tool &#8211; the installation went smooth. Afterwards I&#8217;ve fetched the <a href="http://www.openbsd.org/faq/faq15.html">ports</a> and installed some common utilities: No compilation errors etc.<!--more--></p>
+                <p>Today I had the big opportunity to setup an OpenBSD based gateway. I’ve never used OpenBSD before and I was really excited about. All in one: Really clean (almost spartanic), secure 4.4BSD. Although I had some problems during the partitioning process – I didn’t thought they have such a l33t partitioning tool – the installation went smooth. Afterwards I’ve fetched the <a href="http://www.openbsd.org/faq/faq15.html">ports</a> and installed some common utilities: No compilation errors etc.<!--more--></p>
 <p>Here some pics:</p>
-<p><a href="http://static.dornea.nu/img/2011/6dde6e591db723750d71c03b201a7aef.jpg"><img class="trigger_lightbox" style="width: 590px; height: 443px;" alt="image description" src="http://static.dornea.nu/img/2011/6dde6e591db723750d71c03b201a7aef.jpg" width="900" height="675" /></a></p>
+<p><a href="http://static.dornea.nu/img/2011/6dde6e591db723750d71c03b201a7aef.jpg"><img alt="image description" class="img-responsive trigger_lightbox" height="675" src="http://static.dornea.nu/img/2011/6dde6e591db723750d71c03b201a7aef.jpg" style="width: 590px; height: 443px;" width="900"/></a></p>
 <!--break-->
-
-<p><a href="http://static.dornea.nu/img/2011/912f83c1bcced26812d0c03a53ad4c89.jpg"><img class="trigger_lightbox" style="width: 590px; height: 443px;" alt="image description" src="http://static.dornea.nu/img/2011/912f83c1bcced26812d0c03a53ad4c89.jpg" width="900" height="675" /></a></p>
+<p><a href="http://static.dornea.nu/img/2011/912f83c1bcced26812d0c03a53ad4c89.jpg"><img alt="image description" class="img-responsive trigger_lightbox" height="675" src="http://static.dornea.nu/img/2011/912f83c1bcced26812d0c03a53ad4c89.jpg" style="width: 590px; height: 443px;" width="900"/></a></p>
 <p>Then my first ipf configuration:</p>
 <pre class="brush:plain;"># Set network interfaces
 ext_if=sk0 #internet
@@ -1740,13 +1739,11 @@ pass quick on $int_if
 
 # No spoofing
 antispoof quick for { lo $int_if }</pre>
-
-<p>Quite easy, isn&#8217;t it? <img src="http://dornea.nu/wp-includes/images/smilies/icon_biggrin.gif" alt=":D" class="wp-smiley" /> </p>
+<p>Quite easy, isn’t it? <img alt=":D" class="wp-smiley img-responsive" src="http://dornea.nu/wp-includes/images/smilies/icon_biggrin.gif"/> </p>
 <p><strong>[Update: 2011-02-17]</strong></p>
 <p>As stated <a href="http://www.openbsd.org/faq/upgrade47.html">here</a> there have been some changes made to the pf syntax in 4.8.</p>
 <pre class="brush:plain;"># Perform NAT on external interface
 nat on $ext_if from $int_if:network -&gt; ($ext_if:0)</pre>
-
 <p>should be changed to</p>
 <pre class="brush:plain;">...
 match out on $ext_if from $int_if nat-to ($ext_if)

@@ -1722,7 +1722,7 @@ blog.dornea.nu            </a>
 </footer><!-- /.post-info -->                    </div>
                 </div>
                 <p>I always knew DNS/ICMP traffic is mostly allowed and un-monitored. It was about time to setup some DNS server on my vServer which would allow me to break free! Thanks God there is <a href="http://code.kryo.se/iodine/">iodine</a> which allows you to route IP traffic over DNS.</p>
-<p>I was recently at some cafe and thought it would be a great ideea to test my configuration. I&#8217;ve setup the iodine server a few weeks before.This is what I did:<!--more--></p>
+<p>I was recently at some cafe and thought it would be a great ideea to test my configuration. I’ve setup the iodine server a few weeks before.This is what I did:<!--more--></p>
 <pre class="lang:default decode:true"># iodine -fP (insert password here) *.*136.116 *.mooo.com
 Opened dns0
 Opened UDP socket
@@ -1745,29 +1745,26 @@ Autoprobing max downstream fragment size... (skip with -m fragsize)
 768 ok.. ...1152 not ok.. 960 ok.. ...1056 not ok.. 1008 ok.. 1032 ok.. 1044 ok.. will use 1044-2=1042
 Setting downstream fragment size to max 1042...
 Connection setup complete, transmitting data.</pre>
-
 <!-- break -->
-
 <p>Then setup the SSH connection:</p>
 <pre class="lang:default decode:true"># ssh -CD 9999 user@10.0.0.1 -p 1337 </pre>
-
 <p>This will create a <strong>local socket</strong> which can be used for further connections.</p>
 <p><strong>Traffic redirection</strong></p>
-<p>I use <strong>proxychains</strong> (but there is also socat, socksify, tsocks etc.) for traffic redirection. Simply add 127.0.0.1:9999 to your /etc/proxychains.conf and you&#8217;ll have your desired traffic control.</p>
+<p>I use <strong>proxychains</strong> (but there is also socat, socksify, tsocks etc.) for traffic redirection. Simply add 127.0.0.1:9999 to your /etc/proxychains.conf and you’ll have your desired traffic control.</p>
 <p><strong>Screenshots</strong></p>
-<p><a href="http://static.dornea.nu/img/2011/6bfde6b20545d915b28a4b994ad6cc32.jpg"><img title="Iodine" alt="Iodine" src="http://static.dornea.nu/img/2011/6bfde6b20545d915b28a4b994ad6cc32.jpg" width="100%" height="361" /></a></p>
-<p><a href="http://static.dornea.nu/img/2011/c76b6a562efa2d63d79cb20479894fa4.jpg"><img title="Iodine traffic control" alt="Iodine traffic control" src="http://static.dornea.nu/img/2011/c76b6a562efa2d63d79cb20479894fa4.jpg" width="100%" height="734" /></a></p>
-<p><a href="http://static.dornea.nu/img/2011/cb3ed790b0768a9096037b9df343d1c2.jpg"><img alt="Iodine" src="http://static.dornea.nu/img/2011/cb3ed790b0768a9096037b9df343d1c2.jpg" width="100%" height="247" /></a></p>
+<p><a href="http://static.dornea.nu/img/2011/6bfde6b20545d915b28a4b994ad6cc32.jpg"><img alt="Iodine" class="img-responsive" height="361" src="http://static.dornea.nu/img/2011/6bfde6b20545d915b28a4b994ad6cc32.jpg" title="Iodine" width="100%"/></a></p>
+<p><a href="http://static.dornea.nu/img/2011/c76b6a562efa2d63d79cb20479894fa4.jpg"><img alt="Iodine traffic control" class="img-responsive" height="734" src="http://static.dornea.nu/img/2011/c76b6a562efa2d63d79cb20479894fa4.jpg" title="Iodine traffic control" width="100%"/></a></p>
+<p><a href="http://static.dornea.nu/img/2011/cb3ed790b0768a9096037b9df343d1c2.jpg"><img alt="Iodine" class="img-responsive" height="247" src="http://static.dornea.nu/img/2011/cb3ed790b0768a9096037b9df343d1c2.jpg" width="100%"/></a></p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2010/09/13/icmpknock-v02-released">icmpKNOCK v0.2 released</a></li>
-        <li><a href="http://blog.dornea.nu/2015/06/03/usd-ag-hacker-day-in-hamburg">usd AG Hacker Day in Hamburg</a></li>
         <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump-ipython-notebook-version">24h Android sniffing using tcpdump - IPython Notebook Version</a></li>
-        <li><a href="http://blog.dornea.nu/2014/08/05/android-dynamic-code-analysis-mastering-droidbox">Android Dynamic Code Analysis - Mastering DroidBox</a></li>
         <li><a href="http://blog.dornea.nu/2009/08/05/howto-ssh-tunnel-over-corkscrew-using-tor">HowTo: SSH-Tunnel over CorkScrew using Tor</a></li>
+        <li><a href="http://blog.dornea.nu/2010/10/03/howto-secure-your-server-using-icmpknock">HowTo: Secure your server using icmpKNOCK</a></li>
+        <li><a href="http://blog.dornea.nu/2014/08/05/android-dynamic-code-analysis-mastering-droidbox">Android Dynamic Code Analysis - Mastering DroidBox</a></li>
+        <li><a href="http://blog.dornea.nu/2015/06/03/usd-ag-hacker-day-in-hamburg">usd AG Hacker Day in Hamburg</a></li>
     </ul>
 </section>
     <hr />

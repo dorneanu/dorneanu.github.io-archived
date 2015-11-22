@@ -1751,7 +1751,7 @@ blog.dornea.nu            </a>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this article I&#39;ll have a a closer look at <a href="https://code.google.com/p/droidbox/">DroidBox</a> which provides a mobile sandbox to look at Android applications. In the previous <a href="/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis/">post</a> I&#39;ve dealt with <em>static code analysis</em>. This time will start running our malicious application and look at the &quot;noise&quot; it generates. That would be:</p>
+<p>In this article I'll have a a closer look at <a href="https://code.google.com/p/droidbox/">DroidBox</a> which provides a mobile sandbox to look at Android applications. In the previous <a href="/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis/">post</a> I've dealt with <em>static code analysis</em>. This time will start running our malicious application and look at the "noise" it generates. That would be:</p>
 <ul>
 <li>file system access</li>
 <li>network activity</li>
@@ -1759,7 +1759,7 @@ blog.dornea.nu            </a>
 <li>interaction with other applications</li>
 <li>etc.</li>
 </ul>
-<p><em>DroidBox</em> is very easy to use and consists of an own system image and kernel meant to log one applications activities. Using <code>adb logcat</code> <em>DroidBox</em> will look for certain debug messages and collect anything related to the monitored app. However I must say that loged data isn&#39;t always complete. Sometimes you&#39;ll get only a <em>striped</em> version of the data which caused the activity. In that case it&#39;s almost impossible e.g. to have a deep look at the network traffic (especially HTTP). You won&#39;t be able to construct a full request-response-sequence due to missing data. Nevertheless you can use DroidBox to get an overview of malicious activities triggered by the app. For a more technical analysis of the data you&#39;ll need additional tools (more to come in future posts).</p>
+<p><em>DroidBox</em> is very easy to use and consists of an own system image and kernel meant to log one applications activities. Using <code>adb logcat</code> <em>DroidBox</em> will look for certain debug messages and collect anything related to the monitored app. However I must say that loged data isn't always complete. Sometimes you'll get only a <em>striped</em> version of the data which caused the activity. In that case it's almost impossible e.g. to have a deep look at the network traffic (especially HTTP). You won't be able to construct a full request-response-sequence due to missing data. Nevertheless you can use DroidBox to get an overview of malicious activities triggered by the app. For a more technical analysis of the data you'll need additional tools (more to come in future posts).</p>
 </div>
 </div>
 </div>
@@ -1768,20 +1768,19 @@ blog.dornea.nu            </a>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Requirements-for-DroidBox">Requirements for DroidBox<a class="anchor-link" href="#Requirements-for-DroidBox">&#182;</a></h3>
+<h3 id="Requirements-for-DroidBox">Requirements for DroidBox<a class="anchor-link" href="#Requirements-for-DroidBox">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>First you&#39;ll have to install some requirements DroidBox needs. First make sure you have the system relevant packages installed:</p>
+<p>First you'll have to install some requirements DroidBox needs. First make sure you have the system relevant packages installed:</p>
 <pre><code class="language-shell">root<span class="variable">@kali</span><span class="symbol">:~</span><span class="comment"># apt-get install python-virtualenv libatlas-dev liblapack-dev libblas-dev</span>
 </code></pre>
-<p>You&#39;ll need those in order to use <code>scipy</code>, <code>matplotlib</code> and <code>numpy</code> along with Droidbox. Now create a virtual environment and install <em>python</em> dependencies:</p>
+<p>You'll need those in order to use <code>scipy</code>, <code>matplotlib</code> and <code>numpy</code> along with Droidbox. Now create a virtual environment and install <em>python</em> dependencies:</p>
 <pre><code class="language-shell">root<span class="variable">@kali</span><span class="symbol">:~/work/apk</span><span class="comment"># mkdir env</span>
 root<span class="variable">@kali</span><span class="symbol">:~/work/apk</span><span class="comment"># virtualenv env</span>
 ...
@@ -1796,11 +1795,10 @@ root<span class="variable">@kali</span><span class="symbol">:~/work/apk</span><s
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Install-Droidbox">Install Droidbox<a class="anchor-link" href="#Install-Droidbox">&#182;</a></h3>
+<h3 id="Install-Droidbox">Install Droidbox<a class="anchor-link" href="#Install-Droidbox">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -1817,51 +1815,44 @@ root<span class="variable">@kali</span><span class="symbol">:~/work/apk</span><s
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Setup-PATH">Setup PATH<a class="anchor-link" href="#Setup-PATH">&#182;</a></h3>
+<h3 id="Setup-PATH">Setup PATH<a class="anchor-link" href="#Setup-PATH">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[2]:
+In [2]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
 <span class="c"># Setup new PATH</span>
-<span class="n">old_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;PATH&#39;</span><span class="p">]</span>
-<span class="n">new_path</span> <span class="o">=</span> <span class="n">old_path</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="s">&quot;/root/work/apk/SDK/android-sdk-linux/tools:/root/work/apk/SDK/android-sdk-linux/platform-tools:/root/work/apk/SDK/android-sdk-linux/build-tools/19.1.0&quot;</span>
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_path</span>
+<span class="n">old_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">'PATH'</span><span class="p">]</span>
+<span class="n">new_path</span> <span class="o">=</span> <span class="n">old_path</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="s">"/root/work/apk/SDK/android-sdk-linux/tools:/root/work/apk/SDK/android-sdk-linux/platform-tools:/root/work/apk/SDK/android-sdk-linux/build-tools/19.1.0"</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">'PATH'</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_path</span>
 
 <span class="c"># Change working directory</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s">&quot;/root/work/apk/DroidBox_4.1.1/&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s">"/root/work/apk/DroidBox_4.1.1/"</span><span class="p">)</span>
 </pre></div>
-
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Setup-IPython-settings">Setup IPython settings<a class="anchor-link" href="#Setup-IPython-settings">&#182;</a></h3>
+<h3 id="Setup-IPython-settings">Setup IPython settings<a class="anchor-link" href="#Setup-IPython-settings">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[415]:
+In [415]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">pylab</span> <span class="n">inline</span>
 <span class="kn">import</span> <span class="nn">binascii</span>
@@ -1878,22 +1869,17 @@ In&nbsp;[415]:
 <span class="kn">import</span> <span class="nn">jinja2</span>
 
 <span class="c"># Ipython settings</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">&#39;display.height&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">&#39;display.width&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">&#39;display.column_space&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.height'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.max_rows'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.max_columns'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.max_colwidth'</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.width'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.column_space'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">Populating the interactive namespace from numpy and matplotlib
@@ -1902,27 +1888,23 @@ height has been deprecated.
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="External-extensions">External extensions<a class="anchor-link" href="#External-extensions">&#182;</a></h3>
+<h3 id="External-extensions">External extensions<a class="anchor-link" href="#External-extensions">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[5]:
+In [5]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Install</span>
 <span class="o">%</span><span class="k">install_ext</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">dorneanu</span><span class="o">/</span><span class="n">ipython</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">extensions</span><span class="o">/</span><span class="n">diagmagic</span><span class="o">.</span><span class="n">py</span>
@@ -1930,15 +1912,10 @@ In&nbsp;[5]:
 <span class="c"># Then load extensions</span>
 <span class="o">%</span><span class="k">load_ext</span> <span class="n">diagmagic</span>
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">Installed diagmagic.py. To use it, type:
@@ -1946,27 +1923,23 @@ In&nbsp;[5]:
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Utilities">Utilities<a class="anchor-link" href="#Utilities">&#182;</a></h3>
+<h3 id="Utilities">Utilities<a class="anchor-link" href="#Utilities">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[416]:
+In [416]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">display</span>
@@ -1974,7 +1947,7 @@ In&nbsp;[416]:
 <span class="kn">import</span> <span class="nn">jinja2</span>
 
 <span class="k">def</span> <span class="nf">df2table</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Outputs a DataFrame as a table using ipy_table &quot;&quot;&quot;</span>
+    <span class="sd">""" Outputs a DataFrame as a table using ipy_table """</span>
     <span class="n">entries</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">itertuples</span><span class="p">()]</span>
     
     <span class="c"># Extract table header</span>
@@ -1991,14 +1964,14 @@ In&nbsp;[416]:
 <span class="c"># Create jinja cell magic (http://nbviewer.ipython.org/urls/gist.github.com/bj0/5343292/raw/23a0845ee874827e3635edb0bf5701710a537bfc/jinja2.ipynb)</span>
 <span class="nd">@magics_class</span>
 <span class="k">class</span> <span class="nc">JinjaMagics</span><span class="p">(</span><span class="n">Magics</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Magics class containing the jinja2 magic and state&#39;&#39;&#39;</span>
+    <span class="sd">'''Magics class containing the jinja2 magic and state'''</span>
     
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shell</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">JinjaMagics</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">shell</span><span class="p">)</span>
         
         <span class="c"># create a jinja2 environment to use for rendering</span>
         <span class="c"># this can be modified for desired effects (ie: using different variable syntax)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="n">jinja2</span><span class="o">.</span><span class="n">Environment</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">jinja2</span><span class="o">.</span><span class="n">FileSystemLoader</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="n">jinja2</span><span class="o">.</span><span class="n">Environment</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">jinja2</span><span class="o">.</span><span class="n">FileSystemLoader</span><span class="p">(</span><span class="s">'.'</span><span class="p">))</span>
         
         <span class="c"># possible output types</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">display_functions</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">html</span><span class="o">=</span><span class="n">display</span><span class="o">.</span><span class="n">HTML</span><span class="p">,</span> 
@@ -2010,17 +1983,17 @@ In&nbsp;[416]:
     
     <span class="nd">@cell_magic</span>
     <span class="k">def</span> <span class="nf">jinja</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">cell</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">'''</span>
 <span class="sd">        jinja2 cell magic function.  Contents of cell are rendered by jinja2, and </span>
 <span class="sd">        the line can be used to specify output type.</span>
 
-<span class="sd">        ie: &quot;%%jinja html&quot; will return the rendered cell wrapped in an HTML object.</span>
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        ie: "%%jinja html" will return the rendered cell wrapped in an HTML object.</span>
+<span class="sd">        '''</span>
         <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">display_functions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">display</span><span class="o">.</span><span class="n">display</span><span class="p">)</span>
         
         <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
         <span class="n">rend</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="nb">dict</span><span class="p">((</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">user_ns</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> 
-                                        <span class="k">if</span> <span class="ow">not</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;_&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">user_ns_hidden</span><span class="p">))</span>
+                                        <span class="k">if</span> <span class="ow">not</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">'_'</span><span class="p">)</span> <span class="ow">and</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">user_ns_hidden</span><span class="p">))</span>
         
         <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">rend</span><span class="p">)</span>
         
@@ -2028,57 +2001,47 @@ In&nbsp;[416]:
 <span class="n">ip</span> <span class="o">=</span> <span class="n">get_ipython</span><span class="p">()</span>
 <span class="n">ip</span><span class="o">.</span><span class="n">register_magics</span><span class="p">(</span><span class="n">JinjaMagics</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Create-Android-Virtual-Device-(ADV)">Create Android Virtual Device (ADV)<a class="anchor-link" href="#Create-Android-Virtual-Device-(ADV)">&#182;</a></h2>
+<h2 id="Create-Android-Virtual-Device-(ADV)">Create Android Virtual Device (ADV)<a class="anchor-link" href="#Create-Android-Virtual-Device-(ADV)">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now you&#39;ll have to install an Android device virtually in order to analyze the APK. Supposing you have installed the SDK in the previous step now you should have some <em>targets</em> available on your machine. If not (that was my case) then make sure you have a X session running and run <code>android</code> from the console. In my case I&#39;ve fired up <code>vnc</code> and connected to the Kali machine. </p>
-<p>This is what I&#39;ve got:</p>
+<p>Now you'll have to install an Android device virtually in order to analyze the APK. Supposing you have installed the SDK in the previous step now you should have some <em>targets</em> available on your machine. If not (that was my case) then make sure you have a X session running and run <code>android</code> from the console. In my case I've fired up <code>vnc</code> and connected to the Kali machine. </p>
+<p>This is what I've got:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[22]:
+In [22]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">android</span> <span class="nb">list</span> <span class="n">targets</span> <span class="o">|</span> <span class="n">head</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span>
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">Available Android targets:
 ----------
-id: 1 or &quot;android-16&quot;
+id: 1 or "android-16"
      Name: Android 4.1.2
      Type: Platform
      API level: 16
@@ -2089,10 +2052,8 @@ id: 1 or &quot;android-16&quot;
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -2103,7 +2064,7 @@ id: 1 or &quot;android-16&quot;
 <pre><code># android create avd --abi default/armeabi-v7a -n android-4.1.2-droidbox -t 1 -c 1000M
 Android 4.1.2 is a basic Android platform.
 Do you wish to create a custom hardware profile [no]
-Created AVD &#39;android-4.1.2-droidbox&#39; based on Android 4.1.2, ARM (armeabi-v7a) processor,
+Created AVD 'android-4.1.2-droidbox' based on Android 4.1.2, ARM (armeabi-v7a) processor,
 with the following hardware config:
 hw.lcd.density=240
 hw.ramSize=512
@@ -2116,22 +2077,16 @@ vm.heapSize=48
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[14]:
+In [14]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">android</span> <span class="nb">list</span> <span class="n">avd</span>
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">Available Android Virtual Devices:
@@ -2144,49 +2099,40 @@ In&nbsp;[14]:
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Start-the-emulator">Start the emulator<a class="anchor-link" href="#Start-the-emulator">&#182;</a></h3>
+<h3 id="Start-the-emulator">Start the emulator<a class="anchor-link" href="#Start-the-emulator">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In <code>DroidBox</code>s package directory you&#39;ll find <code>startemu.sh</code>. Open it and add your favourite parameters.</p>
+<p>In <code>DroidBox</code>s package directory you'll find <code>startemu.sh</code>. Open it and add your favourite parameters.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[5]:
+In [5]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cat</span> <span class="n">startemu</span><span class="o">.</span><span class="n">sh</span>
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">#!/usr/bin/env bash
@@ -2195,10 +2141,8 @@ emulator -avd $1 -system images/system.img -ramdisk images/ramdisk.img -wipe-dat
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -2226,35 +2170,28 @@ emulator -avd $1 -system images/system.img -ramdisk images/ramdisk.img -wipe-dat
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Run-DroidBox">Run DroidBox<a class="anchor-link" href="#Run-DroidBox">&#182;</a></h3>
+<h3 id="Run-DroidBox">Run DroidBox<a class="anchor-link" href="#Run-DroidBox">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[10]:
+In [10]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>./droidbox.sh /root/work/apk/DroidBox_4.1.1/APK/FakeBanker.apk
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">[H[2J ____                        __  ____
-/\  _&#96;\               __    /\ \/\  _&#96;\
+/\  _`\               __    /\ \/\  _`\
 \ \ \/\ \  _ __  ___ /\_\   \_\ \ \ \L\ \   ___   __  _
- \ \ \ \ \/\&#96;&apos;__\ __&#96;\/\ \  /&apos;_&#96; \ \  _ &lt;&apos; / __&#96;\/\ \/&apos;\
+ \ \ \ \ \/\`&amp;apos;__\ __`\/\ \  /&amp;apos;_` \ \  _ &lt;&amp;apos; / __`\/\ \/&amp;apos;\
   \ \ \_\ \ \ \/\ \L\ \ \ \/\ \L\ \ \ \L\ \ \L\ \/&gt;  &lt;/
    \ \____/\ \_\ \____/\ \_\ \___,_\ \____/ \____//\_/\_\
     \/___/  \/_/\/___/  \/_/\/__,_ /\/___/ \/___/ \//\/_/
@@ -2268,10 +2205,8 @@ Analyzing the application during infinite time seconds...
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -2290,7 +2225,7 @@ Analyzing the application during infinite time seconds...
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Meanwhile I was interacting with the APP and saw that DroidBox was collecting the logs during the interacttions.
-DroidBox will output its results as a JSON file. <strong>I&#39;ve uploaded the results to <a href="http://pastebin.com/7YSb3EMW">pastebin.com</a></strong>. Now let&#39;s have some fun and take a look at the results.</p>
+DroidBox will output its results as a JSON file. <strong>I've uploaded the results to <a href="http://pastebin.com/7YSb3EMW">pastebin.com</a></strong>. Now let's have some fun and take a look at the results.</p>
 <p>Before starting analyzing the output keep in mind that:</p>
 <blockquote>
 <p>[...] all data received/sent, read/written are shown in hexadecimal since the handled data can contain binary data. </p>
@@ -2304,31 +2239,29 @@ DroidBox will output its results as a JSON file. <strong>I&#39;ve uploaded the r
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Results-analysis">Results analysis<a class="anchor-link" href="#Results-analysis">&#182;</a></h2>
+<h2 id="Results-analysis">Results analysis<a class="anchor-link" href="#Results-analysis">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>First let&#39;s download the data and let python parse it</p>
+<p>First let's download the data and let python parse it</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[27]:
+In [27]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">urllib</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s">&quot;http://pastebin.com/raw.php?i=7YSb3EMW&quot;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"http://pastebin.com/raw.php?i=7YSb3EMW"</span>
 
 <span class="c"># Load data</span>
 <span class="n">jsonurl</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
@@ -2337,49 +2270,30 @@ In&nbsp;[27]:
 <span class="c"># Show dictionary keys</span>
 <span class="n">result</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt output_prompt">
     Out[27]:</div>
-
-
-<pre class="ipynb">[u&apos;apkName&apos;,
- u&apos;enfperm&apos;,
- u&apos;opennet&apos;,
- u&apos;cryptousage&apos;,
- u&apos;sendsms&apos;,
- u&apos;servicestart&apos;,
- u&apos;sendnet&apos;,
- u&apos;closenet&apos;,
- u&apos;accessedfiles&apos;,
- u&apos;fdaccess&apos;,
- u&apos;dataleaks&apos;,
- u&apos;recvnet&apos;,
- u&apos;dexclass&apos;,
- u&apos;hashes&apos;,
- u&apos;recvsaction&apos;,
- u&apos;phonecalls&apos;]</pre>
-
+<pre class="ipynb">[u&amp;apos;apkName&amp;apos;,
+ u&amp;apos;enfperm&amp;apos;,
+ u&amp;apos;opennet&amp;apos;,
+ u&amp;apos;cryptousage&amp;apos;,
+ u&amp;apos;sendsms&amp;apos;,
+ u&amp;apos;servicestart&amp;apos;,
+ u&amp;apos;sendnet&amp;apos;,
+ u&amp;apos;closenet&amp;apos;,
+ u&amp;apos;accessedfiles&amp;apos;,
+ u&amp;apos;fdaccess&amp;apos;,
+ u&amp;apos;dataleaks&amp;apos;,
+ u&amp;apos;recvnet&amp;apos;,
+ u&amp;apos;dexclass&amp;apos;,
+ u&amp;apos;hashes&amp;apos;,
+ u&amp;apos;recvsaction&amp;apos;,
+ u&amp;apos;phonecalls&amp;apos;]</pre>
 </div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>So we have diffenrent categories of activities we can look at. After analyzing the JSON content I&#39;ve come to following most important activities.</p>
 </div>
 </div>
 </div>
@@ -2388,350 +2302,335 @@ In&nbsp;[27]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="File-system-activities">File system activities<a class="anchor-link" href="#File-system-activities">&#182;</a></h2>
+<p>So we have diffenrent categories of activities we can look at. After analyzing the JSON content I've come to following most important activities.</p>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let&#39;s have a look at the file system access actions triggered by the application. Due to DroidBox limitations I couldn&#39;t have a look at the <strong>complete</strong> raw data.</p>
+<h2 id="File-system-activities">File system activities<a class="anchor-link" href="#File-system-activities">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's have a look at the file system access actions triggered by the application. Due to DroidBox limitations I couldn't have a look at the <strong>complete</strong> raw data.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[421]:
+In [421]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Convert timestamps to human readable time delta</span>
-<span class="n">timestamps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">))))))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">&#39;fdaccess&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+<span class="n">timestamps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))))))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">'fdaccess'</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
 
 <span class="c"># Create list of accessed files entries</span>
-<span class="n">accessed_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">&#39;fdaccess&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+<span class="n">accessed_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">'fdaccess'</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
 
 <span class="c"># Create dataframe</span>
 <span class="n">df_accessedfiles</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">accessed_files</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">timestamps</span><span class="p">)</span>
 <span class="n">df_accessedfiles</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">df_accessedfiles</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Timestamp&#39;</span>
+<span class="n">df_accessedfiles</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s">'Timestamp'</span>
 
 <span class="c"># Unhexlify data</span>
-<span class="n">unhexed_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">df_accessedfiles</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]]</span>
-<span class="n">df_accessedfiles</span><span class="p">[</span><span class="s">&#39;rawdata&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unhexed_data</span>
+<span class="n">unhexed_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">df_accessedfiles</span><span class="p">[</span><span class="s">'data'</span><span class="p">]]</span>
+<span class="n">df_accessedfiles</span><span class="p">[</span><span class="s">'rawdata'</span><span class="p">]</span> <span class="o">=</span> <span class="n">unhexed_data</span>
 
-<span class="n">df2table</span><span class="p">(</span><span class="n">df_accessedfiles</span><span class="p">[[</span><span class="s">&#39;operation&#39;</span><span class="p">,</span> <span class="s">&#39;path&#39;</span><span class="p">,</span> <span class="s">&#39;rawdata&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">())</span>
-<span class="c">#ipy_table.apply_theme(&#39;basic&#39;)</span>
-<span class="n">df_accessedfiles</span><span class="p">[[</span><span class="s">&#39;operation&#39;</span><span class="p">,</span> <span class="s">&#39;path&#39;</span><span class="p">,</span> <span class="s">&#39;rawdata&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df2table</span><span class="p">(</span><span class="n">df_accessedfiles</span><span class="p">[[</span><span class="s">'operation'</span><span class="p">,</span> <span class="s">'path'</span><span class="p">,</span> <span class="s">'rawdata'</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">())</span>
+<span class="c">#ipy_table.apply_theme('basic')</span>
+<span class="n">df_accessedfiles</span><span class="p">[[</span><span class="s">'operation'</span><span class="p">,</span> <span class="s">'path'</span><span class="p">,</span> <span class="s">'rawdata'</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt output_prompt">
     Out[421]:</div>
-
 <div class="output_html rendered_html output_subarea output_pyout">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Timestamp</th>
-      <th>operation</th>
-      <th>path</th>
-      <th>rawdata</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0 </th>
-      <td> 0:00:03</td>
-      <td>  read</td>
-      <td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
-      <td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;string name="DOWNLOADDOMAIN"&gt;c...</td>
-    </tr>
-    <tr>
-      <th>1 </th>
-      <td> 0:00:04</td>
-      <td>  read</td>
-      <td>                                   /proc/1184/cmdline</td>
-      <td> com.gmail.xpack                                                             p/FakeBanker.apk ain...</td>
-    </tr>
-    <tr>
-      <th>2 </th>
-      <td> 0:00:04</td>
-      <td>  read</td>
-      <td>                                   /proc/1197/cmdline</td>
-      <td> logcat DroidBox:W dalvikvm:W ActivityManager:I                              p/FakeBanker.apk ain...</td>
-    </tr>
-    <tr>
-      <th>3 </th>
-      <td> 0:00:08</td>
-      <td>  read</td>
-      <td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
-      <td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;string name="DOWNLOADDOMAIN"&gt;c...</td>
-    </tr>
-    <tr>
-      <th>4 </th>
-      <td> 0:00:09</td>
-      <td> write</td>
-      <td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
-      <td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;string name="DOWNLOADDOMAIN"&gt;c...</td>
-    </tr>
-    <tr>
-      <th>5 </th>
-      <td> 0:00:10</td>
-      <td> write</td>
-      <td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
-      <td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;string name="DOWNLOADDOMAIN"&gt;c...</td>
-    </tr>
-    <tr>
-      <th>6 </th>
-      <td> 0:00:10</td>
-      <td>  read</td>
-      <td>                                   /proc/1205/cmdline</td>
-      <td> com.gmail.xpack:remote                                                      p/FakeBanker.apk ain...</td>
-    </tr>
-    <tr>
-      <th>7 </th>
-      <td> 0:00:36</td>
-      <td> write</td>
-      <td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
-      <td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;int name="PASSADDED" value="10...</td>
-    </tr>
-    <tr>
-      <th>8 </th>
-      <td> 0:00:36</td>
-      <td>  read</td>
-      <td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
-      <td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;string name="DOWNLOADDOMAIN"&gt;c...</td>
-    </tr>
-    <tr>
-      <th>9 </th>
-      <td> 0:01:05</td>
-      <td>  read</td>
-      <td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
-      <td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;int name="PASSADDED" value="10...</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td> 0:15:06</td>
-      <td> write</td>
-      <td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
-      <td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;int name="PASSADDED" value="10...</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td> 0:15:06</td>
-      <td> write</td>
-      <td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
-      <td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;int name="PASSADDED" value="10...</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td> 0:15:24</td>
-      <td>  read</td>
-      <td>                                         /dev/urandom</td>
-      <td>                                                                                E0 �2qV���4!=�Nd��V</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td> 0:15:27</td>
-      <td>  read</td>
-      <td>                                   /proc/1239/cmdline</td>
-      <td> com.android.exchange                                                        p/FakeBanker.apk ain...</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td> 0:15:35</td>
-      <td>  read</td>
-      <td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
-      <td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;int name="PASSADDED" value="10...</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td> 0:15:37</td>
-      <td> write</td>
-      <td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
-      <td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;int name="PASSADDED" value="10...</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td> 0:15:37</td>
-      <td> write</td>
-      <td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
-      <td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;int name="PASSADDED" value="10...</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td> 0:15:58</td>
-      <td>  read</td>
-      <td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
-      <td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;int name="PASSADDED" value="10...</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td> 0:16:00</td>
-      <td> write</td>
-      <td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
-      <td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;int name="PASSADDED" value="10...</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td> 0:16:01</td>
-      <td> write</td>
-      <td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
-      <td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;int name="PASSADDED" value="10...</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td> 0:16:10</td>
-      <td>  read</td>
-      <td>                                      /proc/wakelocks</td>
-      <td> name\tcount\texpire_count\twake_count\tactive_since\ttotal_time\tsleep_time\tmax_time\tlast_chan...</td>
-    </tr>
-  </tbody>
+<table border="1" class=" table-striped table table-hover dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Timestamp</th>
+<th>operation</th>
+<th>path</th>
+<th>rawdata</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0 </th>
+<td> 0:00:03</td>
+<td>  read</td>
+<td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
+<td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;string name="DOWNLOADDOMAIN"&gt;c...</td>
+</tr>
+<tr>
+<th>1 </th>
+<td> 0:00:04</td>
+<td>  read</td>
+<td>                                   /proc/1184/cmdline</td>
+<td> com.gmail.xpack                                                             p/FakeBanker.apk ain...</td>
+</tr>
+<tr>
+<th>2 </th>
+<td> 0:00:04</td>
+<td>  read</td>
+<td>                                   /proc/1197/cmdline</td>
+<td> logcat DroidBox:W dalvikvm:W ActivityManager:I                              p/FakeBanker.apk ain...</td>
+</tr>
+<tr>
+<th>3 </th>
+<td> 0:00:08</td>
+<td>  read</td>
+<td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
+<td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;string name="DOWNLOADDOMAIN"&gt;c...</td>
+</tr>
+<tr>
+<th>4 </th>
+<td> 0:00:09</td>
+<td> write</td>
+<td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
+<td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;string name="DOWNLOADDOMAIN"&gt;c...</td>
+</tr>
+<tr>
+<th>5 </th>
+<td> 0:00:10</td>
+<td> write</td>
+<td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
+<td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;string name="DOWNLOADDOMAIN"&gt;c...</td>
+</tr>
+<tr>
+<th>6 </th>
+<td> 0:00:10</td>
+<td>  read</td>
+<td>                                   /proc/1205/cmdline</td>
+<td> com.gmail.xpack:remote                                                      p/FakeBanker.apk ain...</td>
+</tr>
+<tr>
+<th>7 </th>
+<td> 0:00:36</td>
+<td> write</td>
+<td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
+<td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;int name="PASSADDED" value="10...</td>
+</tr>
+<tr>
+<th>8 </th>
+<td> 0:00:36</td>
+<td>  read</td>
+<td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
+<td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;string name="DOWNLOADDOMAIN"&gt;c...</td>
+</tr>
+<tr>
+<th>9 </th>
+<td> 0:01:05</td>
+<td>  read</td>
+<td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
+<td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;int name="PASSADDED" value="10...</td>
+</tr>
+<tr>
+<th>10</th>
+<td> 0:15:06</td>
+<td> write</td>
+<td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
+<td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;int name="PASSADDED" value="10...</td>
+</tr>
+<tr>
+<th>11</th>
+<td> 0:15:06</td>
+<td> write</td>
+<td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
+<td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;int name="PASSADDED" value="10...</td>
+</tr>
+<tr>
+<th>12</th>
+<td> 0:15:24</td>
+<td>  read</td>
+<td>                                         /dev/urandom</td>
+<td>                                                                                E0 �2qV���4!=�Nd��V</td>
+</tr>
+<tr>
+<th>13</th>
+<td> 0:15:27</td>
+<td>  read</td>
+<td>                                   /proc/1239/cmdline</td>
+<td> com.android.exchange                                                        p/FakeBanker.apk ain...</td>
+</tr>
+<tr>
+<th>14</th>
+<td> 0:15:35</td>
+<td>  read</td>
+<td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
+<td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;int name="PASSADDED" value="10...</td>
+</tr>
+<tr>
+<th>15</th>
+<td> 0:15:37</td>
+<td> write</td>
+<td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
+<td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;int name="PASSADDED" value="10...</td>
+</tr>
+<tr>
+<th>16</th>
+<td> 0:15:37</td>
+<td> write</td>
+<td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
+<td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;int name="PASSADDED" value="10...</td>
+</tr>
+<tr>
+<th>17</th>
+<td> 0:15:58</td>
+<td>  read</td>
+<td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
+<td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;int name="PASSADDED" value="10...</td>
+</tr>
+<tr>
+<th>18</th>
+<td> 0:16:00</td>
+<td> write</td>
+<td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
+<td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;int name="PASSADDED" value="10...</td>
+</tr>
+<tr>
+<th>19</th>
+<td> 0:16:01</td>
+<td> write</td>
+<td> /data/data/com.gmail.xpack/shared_prefs/MainPref.xml</td>
+<td> &lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;int name="PASSADDED" value="10...</td>
+</tr>
+<tr>
+<th>20</th>
+<td> 0:16:10</td>
+<td>  read</td>
+<td>                                      /proc/wakelocks</td>
+<td> name\tcount\texpire_count\twake_count\tactive_since\ttotal_time\tsleep_time\tmax_time\tlast_chan...</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Network-activities">Network activities<a class="anchor-link" href="#Network-activities">&#182;</a></h2>
+<h2 id="Network-activities">Network activities<a class="anchor-link" href="#Network-activities">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Opened-connections-(opennet)">Opened connections (opennet)<a class="anchor-link" href="#Opened-connections-(opennet)">&#182;</a></h3>
+<h3 id="Opened-connections-(opennet)">Opened connections (opennet)<a class="anchor-link" href="#Opened-connections-(opennet)">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[405]:
+In [405]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Convert timestamps to human readable time delta</span>
-<span class="n">timestamps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">))))))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">&#39;opennet&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+<span class="n">timestamps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))))))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">'opennet'</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
 
 <span class="c"># Create list of accessed files entries</span>
-<span class="n">open_net</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">&#39;opennet&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+<span class="n">open_net</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">'opennet'</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
 
 <span class="c"># Create dataframe</span>
 <span class="n">df_opennet</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">open_net</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">timestamps</span><span class="p">)</span>
 <span class="n">df_opennet</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">df_opennet</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Timestamp&#39;</span>
+<span class="n">df_opennet</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s">'Timestamp'</span>
 
 
 <span class="c">#df2table(df_opennet)</span>
-<span class="c">#ipy_table.apply_theme(&#39;basic&#39;)</span>
+<span class="c">#ipy_table.apply_theme('basic')</span>
 <span class="n">df_opennet</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt output_prompt">
     Out[405]:</div>
-
 <div class="output_html rendered_html output_subarea output_pyout">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Timestamp</th>
-      <th>desthost</th>
-      <th>destport</th>
-      <th>fd</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td> 0:00:08</td>
-      <td> 80.74.128.17</td>
-      <td> 80</td>
-      <td> 17</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td> 0:15:06</td>
-      <td> 80.74.128.17</td>
-      <td> 80</td>
-      <td> 23</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td> 0:15:36</td>
-      <td> 80.74.128.17</td>
-      <td> 80</td>
-      <td> 28</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td> 0:16:00</td>
-      <td> 80.74.128.17</td>
-      <td> 80</td>
-      <td> 33</td>
-    </tr>
-  </tbody>
+<table border="1" class=" table-striped table table-hover dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Timestamp</th>
+<th>desthost</th>
+<th>destport</th>
+<th>fd</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td> 0:00:08</td>
+<td> 80.74.128.17</td>
+<td> 80</td>
+<td> 17</td>
+</tr>
+<tr>
+<th>1</th>
+<td> 0:15:06</td>
+<td> 80.74.128.17</td>
+<td> 80</td>
+<td> 23</td>
+</tr>
+<tr>
+<th>2</th>
+<td> 0:15:36</td>
+<td> 80.74.128.17</td>
+<td> 80</td>
+<td> 28</td>
+</tr>
+<tr>
+<th>3</th>
+<td> 0:16:00</td>
+<td> 80.74.128.17</td>
+<td> 80</td>
+<td> 33</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Sent-data-(sendnet)">Sent data (sendnet)<a class="anchor-link" href="#Sent-data-(sendnet)">&#182;</a></h3>
+<h3 id="Sent-data-(sendnet)">Sent data (sendnet)<a class="anchor-link" href="#Sent-data-(sendnet)">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -2744,258 +2643,236 @@ In&nbsp;[405]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[404]:
+In [404]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Convert timestamps to human readable time delta</span>
-<span class="n">timestamps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">))))))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">&#39;sendnet&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+<span class="n">timestamps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))))))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">'sendnet'</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
 <span class="c"># Create list of accessed files entries</span>
-<span class="n">send_net</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">&#39;sendnet&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+<span class="n">send_net</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">'sendnet'</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
 
 <span class="c"># Create dataframe</span>
 <span class="n">df_sendnet</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">send_net</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">timestamps</span><span class="p">)</span>
 <span class="n">df_sendnet</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">df_sendnet</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Timestamp&#39;</span>
+<span class="n">df_sendnet</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s">'Timestamp'</span>
 
 <span class="c"># Unhexlify data</span>
-<span class="n">unhexed_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">df_sendnet</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]]</span>
-<span class="n">df_sendnet</span><span class="p">[</span><span class="s">&#39;rawdata&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unhexed_data</span>
+<span class="n">unhexed_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">df_sendnet</span><span class="p">[</span><span class="s">'data'</span><span class="p">]]</span>
+<span class="n">df_sendnet</span><span class="p">[</span><span class="s">'rawdata'</span><span class="p">]</span> <span class="o">=</span> <span class="n">unhexed_data</span>
 
-<span class="c">#df2table(df_sendnet[[&#39;desthost&#39;, &#39;destport&#39;, &#39;fd&#39;, &#39;operation&#39;, &#39;type&#39;, &#39;rawdata&#39;]])</span>
-<span class="c">#ipy_table.apply_theme(&#39;basic&#39;)</span>
-<span class="n">df_sendnet</span><span class="p">[[</span><span class="s">&#39;desthost&#39;</span><span class="p">,</span> <span class="s">&#39;destport&#39;</span><span class="p">,</span> <span class="s">&#39;fd&#39;</span><span class="p">,</span> <span class="s">&#39;operation&#39;</span><span class="p">,</span> <span class="s">&#39;type&#39;</span><span class="p">,</span> <span class="s">&#39;rawdata&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="c">#df2table(df_sendnet[['desthost', 'destport', 'fd', 'operation', 'type', 'rawdata']])</span>
+<span class="c">#ipy_table.apply_theme('basic')</span>
+<span class="n">df_sendnet</span><span class="p">[[</span><span class="s">'desthost'</span><span class="p">,</span> <span class="s">'destport'</span><span class="p">,</span> <span class="s">'fd'</span><span class="p">,</span> <span class="s">'operation'</span><span class="p">,</span> <span class="s">'type'</span><span class="p">,</span> <span class="s">'rawdata'</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt output_prompt">
     Out[404]:</div>
-
 <div class="output_html rendered_html output_subarea output_pyout">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Timestamp</th>
-      <th>desthost</th>
-      <th>destport</th>
-      <th>fd</th>
-      <th>operation</th>
-      <th>type</th>
-      <th>rawdata</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td> 0:00:08</td>
-      <td> 80.74.128.17</td>
-      <td> 80</td>
-      <td> 17</td>
-      <td> send</td>
-      <td> net write</td>
-      <td> POST /images/1.php HTTP/1.1\r\nUser-agent: Mozilla/4.76 (Java; U;Linux armv7l 2.6.29-gc497e41; r...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td> 0:15:06</td>
-      <td> 80.74.128.17</td>
-      <td> 80</td>
-      <td> 23</td>
-      <td> send</td>
-      <td> net write</td>
-      <td> POST /images/1.php HTTP/1.1\r\nUser-agent: Mozilla/4.76 (Java; U;Linux armv7l 2.6.29-gc497e41; r...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td> 0:15:36</td>
-      <td> 80.74.128.17</td>
-      <td> 80</td>
-      <td> 28</td>
-      <td> send</td>
-      <td> net write</td>
-      <td> POST /images/1.php HTTP/1.1\r\nUser-agent: Mozilla/4.76 (Java; U;Linux armv7l 2.6.29-gc497e41; r...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td> 0:16:00</td>
-      <td> 80.74.128.17</td>
-      <td> 80</td>
-      <td> 33</td>
-      <td> send</td>
-      <td> net write</td>
-      <td> POST /images/1.php HTTP/1.1\r\nUser-agent: Mozilla/4.76 (Java; U;Linux armv7l 2.6.29-gc497e41; r...</td>
-    </tr>
-  </tbody>
+<table border="1" class=" table-striped table table-hover dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Timestamp</th>
+<th>desthost</th>
+<th>destport</th>
+<th>fd</th>
+<th>operation</th>
+<th>type</th>
+<th>rawdata</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td> 0:00:08</td>
+<td> 80.74.128.17</td>
+<td> 80</td>
+<td> 17</td>
+<td> send</td>
+<td> net write</td>
+<td> POST /images/1.php HTTP/1.1\r\nUser-agent: Mozilla/4.76 (Java; U;Linux armv7l 2.6.29-gc497e41; r...</td>
+</tr>
+<tr>
+<th>1</th>
+<td> 0:15:06</td>
+<td> 80.74.128.17</td>
+<td> 80</td>
+<td> 23</td>
+<td> send</td>
+<td> net write</td>
+<td> POST /images/1.php HTTP/1.1\r\nUser-agent: Mozilla/4.76 (Java; U;Linux armv7l 2.6.29-gc497e41; r...</td>
+</tr>
+<tr>
+<th>2</th>
+<td> 0:15:36</td>
+<td> 80.74.128.17</td>
+<td> 80</td>
+<td> 28</td>
+<td> send</td>
+<td> net write</td>
+<td> POST /images/1.php HTTP/1.1\r\nUser-agent: Mozilla/4.76 (Java; U;Linux armv7l 2.6.29-gc497e41; r...</td>
+</tr>
+<tr>
+<th>3</th>
+<td> 0:16:00</td>
+<td> 80.74.128.17</td>
+<td> 80</td>
+<td> 33</td>
+<td> send</td>
+<td> net write</td>
+<td> POST /images/1.php HTTP/1.1\r\nUser-agent: Mozilla/4.76 (Java; U;Linux armv7l 2.6.29-gc497e41; r...</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Received-data-(recvnet)">Received data (recvnet)<a class="anchor-link" href="#Received-data-(recvnet)">&#182;</a></h3>
+<h3 id="Received-data-(recvnet)">Received data (recvnet)<a class="anchor-link" href="#Received-data-(recvnet)">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[403]:
+In [403]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Convert timestamps to human readable time delta</span>
-<span class="n">timestamps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">))))))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">&#39;recvnet&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+<span class="n">timestamps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))))))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">'recvnet'</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
 
 <span class="c"># Create list of accessed files entries</span>
-<span class="n">recv_net</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">&#39;recvnet&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+<span class="n">recv_net</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">'recvnet'</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
 
 <span class="c"># Create dataframe</span>
 <span class="n">df_recvnet</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">recv_net</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">timestamps</span><span class="p">)</span>
 <span class="n">df_recvnet</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">df_recvnet</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Timestamp&#39;</span>
+<span class="n">df_recvnet</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s">'Timestamp'</span>
 
 <span class="c"># Unhexlify data</span>
-<span class="n">unhexed_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">df_recvnet</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]]</span>
-<span class="n">df_recvnet</span><span class="p">[</span><span class="s">&#39;rawdata&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unhexed_data</span>
+<span class="n">unhexed_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">df_recvnet</span><span class="p">[</span><span class="s">'data'</span><span class="p">]]</span>
+<span class="n">df_recvnet</span><span class="p">[</span><span class="s">'rawdata'</span><span class="p">]</span> <span class="o">=</span> <span class="n">unhexed_data</span>
 
-<span class="c">#df2table(df_recvnet[[&#39;host&#39;, &#39;port&#39;, &#39;type&#39;, &#39;rawdata&#39;]])</span>
-<span class="c">#ipy_table.apply_theme(&#39;basic&#39;)</span>
-<span class="n">df_recvnet</span><span class="p">[[</span><span class="s">&#39;host&#39;</span><span class="p">,</span> <span class="s">&#39;port&#39;</span><span class="p">,</span> <span class="s">&#39;type&#39;</span><span class="p">,</span> <span class="s">&#39;rawdata&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="c">#df2table(df_recvnet[['host', 'port', 'type', 'rawdata']])</span>
+<span class="c">#ipy_table.apply_theme('basic')</span>
+<span class="n">df_recvnet</span><span class="p">[[</span><span class="s">'host'</span><span class="p">,</span> <span class="s">'port'</span><span class="p">,</span> <span class="s">'type'</span><span class="p">,</span> <span class="s">'rawdata'</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt output_prompt">
     Out[403]:</div>
-
 <div class="output_html rendered_html output_subarea output_pyout">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Timestamp</th>
-      <th>host</th>
-      <th>port</th>
-      <th>type</th>
-      <th>rawdata</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td> 0:00:08</td>
-      <td> 80.74.128.17</td>
-      <td> 80</td>
-      <td> net read</td>
-      <td> HTTP/1.1 406 Not Acceptable\r\nDate: Mon, 28 Jul 2014 13:29:38 GMT\r\nServer: Apache\r\nContent-...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td> 0:00:08</td>
-      <td> 80.74.128.17</td>
-      <td> 80</td>
-      <td> net read</td>
-      <td> x=10\r\nConnection: Keep-Alive\r\nContent-Type: text/html; charset=iso-8859-1\r\n\r\n&lt;!DOCTYPE H...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td> 0:15:06</td>
-      <td> 80.74.128.17</td>
-      <td> 80</td>
-      <td> net read</td>
-      <td> x=10\r\nConnection: Keep-Alive\r\nContent-Type: text/html; charset=iso-8859-1\r\n\r\n&lt;!DOCTYPE H...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td> 0:15:06</td>
-      <td> 80.74.128.17</td>
-      <td> 80</td>
-      <td> net read</td>
-      <td> HTTP/1.1 406 Not Acceptable\r\nDate: Mon, 28 Jul 2014 13:44:36 GMT\r\nServer: Apache\r\nContent-...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td> 0:15:36</td>
-      <td> 80.74.128.17</td>
-      <td> 80</td>
-      <td> net read</td>
-      <td> HTTP/1.1 406 Not Acceptable\r\nDate: Mon, 28 Jul 2014 13:45:06 GMT\r\nServer: Apache\r\nContent-...</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td> 0:15:36</td>
-      <td> 80.74.128.17</td>
-      <td> 80</td>
-      <td> net read</td>
-      <td> x=10\r\nConnection: Keep-Alive\r\nContent-Type: text/html; charset=iso-8859-1\r\n\r\n&lt;!DOCTYPE H...</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td> 0:16:00</td>
-      <td> 80.74.128.17</td>
-      <td> 80</td>
-      <td> net read</td>
-      <td> HTTP/1.1 406 Not Acceptable\r\nDate: Mon, 28 Jul 2014 13:45:30 GMT\r\nServer: Apache\r\nContent-...</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td> 0:16:00</td>
-      <td> 80.74.128.17</td>
-      <td> 80</td>
-      <td> net read</td>
-      <td> x=10\r\nConnection: Keep-Alive\r\nContent-Type: text/html; charset=iso-8859-1\r\n\r\n&lt;!DOCTYPE H...</td>
-    </tr>
-  </tbody>
+<table border="1" class=" table-striped table table-hover dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Timestamp</th>
+<th>host</th>
+<th>port</th>
+<th>type</th>
+<th>rawdata</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td> 0:00:08</td>
+<td> 80.74.128.17</td>
+<td> 80</td>
+<td> net read</td>
+<td> HTTP/1.1 406 Not Acceptable\r\nDate: Mon, 28 Jul 2014 13:29:38 GMT\r\nServer: Apache\r\nContent-...</td>
+</tr>
+<tr>
+<th>1</th>
+<td> 0:00:08</td>
+<td> 80.74.128.17</td>
+<td> 80</td>
+<td> net read</td>
+<td> x=10\r\nConnection: Keep-Alive\r\nContent-Type: text/html; charset=iso-8859-1\r\n\r\n&lt;!DOCTYPE H...</td>
+</tr>
+<tr>
+<th>2</th>
+<td> 0:15:06</td>
+<td> 80.74.128.17</td>
+<td> 80</td>
+<td> net read</td>
+<td> x=10\r\nConnection: Keep-Alive\r\nContent-Type: text/html; charset=iso-8859-1\r\n\r\n&lt;!DOCTYPE H...</td>
+</tr>
+<tr>
+<th>3</th>
+<td> 0:15:06</td>
+<td> 80.74.128.17</td>
+<td> 80</td>
+<td> net read</td>
+<td> HTTP/1.1 406 Not Acceptable\r\nDate: Mon, 28 Jul 2014 13:44:36 GMT\r\nServer: Apache\r\nContent-...</td>
+</tr>
+<tr>
+<th>4</th>
+<td> 0:15:36</td>
+<td> 80.74.128.17</td>
+<td> 80</td>
+<td> net read</td>
+<td> HTTP/1.1 406 Not Acceptable\r\nDate: Mon, 28 Jul 2014 13:45:06 GMT\r\nServer: Apache\r\nContent-...</td>
+</tr>
+<tr>
+<th>5</th>
+<td> 0:15:36</td>
+<td> 80.74.128.17</td>
+<td> 80</td>
+<td> net read</td>
+<td> x=10\r\nConnection: Keep-Alive\r\nContent-Type: text/html; charset=iso-8859-1\r\n\r\n&lt;!DOCTYPE H...</td>
+</tr>
+<tr>
+<th>6</th>
+<td> 0:16:00</td>
+<td> 80.74.128.17</td>
+<td> 80</td>
+<td> net read</td>
+<td> HTTP/1.1 406 Not Acceptable\r\nDate: Mon, 28 Jul 2014 13:45:30 GMT\r\nServer: Apache\r\nContent-...</td>
+</tr>
+<tr>
+<th>7</th>
+<td> 0:16:00</td>
+<td> 80.74.128.17</td>
+<td> 80</td>
+<td> net read</td>
+<td> x=10\r\nConnection: Keep-Alive\r\nContent-Type: text/html; charset=iso-8859-1\r\n\r\n&lt;!DOCTYPE H...</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Requests-sequence">Requests sequence<a class="anchor-link" href="#Requests-sequence">&#182;</a></h2>
+<h2 id="Requests-sequence">Requests sequence<a class="anchor-link" href="#Requests-sequence">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -3008,38 +2885,30 @@ In&nbsp;[403]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[73]:
+In [73]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">seqdiag</span>
 <span class="n">seqdiag</span> <span class="p">{</span>
-  <span class="n">application</span>  <span class="o">-&gt;</span> <span class="n">citroen</span><span class="o">-</span><span class="n">club</span><span class="o">.</span><span class="n">ch</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;POST /images/1.php HTTP/1.1&quot;</span><span class="p">];</span>
-  <span class="n">application</span> <span class="o">&lt;--</span> <span class="n">citroen</span><span class="o">-</span><span class="n">club</span><span class="o">.</span><span class="n">ch</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;HTTP/1.1 406 Not Acceptable&quot;</span><span class="p">,</span> <span class="n">leftnote</span><span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">];</span>
-  <span class="n">application</span> <span class="o">--&gt;</span> <span class="n">best</span><span class="o">-</span><span class="n">invest</span><span class="o">-</span><span class="nb">int</span><span class="o">.</span><span class="n">com</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;POST /gallery/3.php HTTP/1.1&quot;</span><span class="p">,</span> <span class="n">note</span> <span class="o">=</span> <span class="s">&quot;POST data=U2ltU3RhdGUgPSBOT1QgUkVBRFkgCg%3D%3D%0A&amp;rid=25&quot;</span><span class="p">];</span>
-  <span class="n">application</span> <span class="o">&lt;--</span> <span class="n">best</span><span class="o">-</span><span class="n">invest</span><span class="o">-</span><span class="nb">int</span><span class="o">.</span><span class="n">com</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;HTTP/1.1 403 Forbidden&quot;</span><span class="p">];</span>
-  <span class="n">application</span> <span class="o">--&gt;</span> <span class="n">best</span><span class="o">-</span><span class="n">invest</span><span class="o">-</span><span class="nb">int</span><span class="o">.</span><span class="n">com</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;POST /gallery/4.php HTTP/1.1&quot;</span><span class="p">,</span> <span class="n">note</span> <span class="o">=</span> <span class="s">&quot;POST data=U2ltU3RhdGUgPSBOT1QgUkVBRFkgCg%3D%3D%0A&amp;LogCode=CONF&amp;LogText=Get+config+data+from+server&quot;</span><span class="p">];</span>
-  <span class="n">application</span> <span class="o">&lt;--</span> <span class="n">best</span><span class="o">-</span><span class="n">invest</span><span class="o">-</span><span class="nb">int</span><span class="o">.</span><span class="n">com</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;HTTP/1.1 403 Forbidden&quot;</span><span class="p">];</span>
-  <span class="n">application</span> <span class="o">--&gt;</span> <span class="n">best</span><span class="o">-</span><span class="n">invest</span><span class="o">-</span><span class="nb">int</span><span class="o">.</span><span class="n">com</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;POST /gallery/4.php HTTP/1.1&quot;</span><span class="p">,</span> <span class="n">note</span> <span class="o">=</span> <span class="s">&quot;POST data=U2ltU3RhdGUgPSBOT1QgUkVBRFkgCg%3D%3D%0A&amp;LogCode=DATA&amp;LogText=Send+data+to+server&amp;&quot;</span><span class="p">];</span>
-  <span class="n">application</span> <span class="o">&lt;--</span> <span class="n">best</span><span class="o">-</span><span class="n">invest</span><span class="o">-</span><span class="nb">int</span><span class="o">.</span><span class="n">com</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;...&quot;</span><span class="p">];</span>
+  <span class="n">application</span>  <span class="o">-&gt;</span> <span class="n">citroen</span><span class="o">-</span><span class="n">club</span><span class="o">.</span><span class="n">ch</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"POST /images/1.php HTTP/1.1"</span><span class="p">];</span>
+  <span class="n">application</span> <span class="o">&lt;--</span> <span class="n">citroen</span><span class="o">-</span><span class="n">club</span><span class="o">.</span><span class="n">ch</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"HTTP/1.1 406 Not Acceptable"</span><span class="p">,</span> <span class="n">leftnote</span><span class="o">=</span> <span class="s">""</span><span class="p">];</span>
+  <span class="n">application</span> <span class="o">--&gt;</span> <span class="n">best</span><span class="o">-</span><span class="n">invest</span><span class="o">-</span><span class="nb">int</span><span class="o">.</span><span class="n">com</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"POST /gallery/3.php HTTP/1.1"</span><span class="p">,</span> <span class="n">note</span> <span class="o">=</span> <span class="s">"POST data=U2ltU3RhdGUgPSBOT1QgUkVBRFkgCg%3D%3D%0A&amp;rid=25"</span><span class="p">];</span>
+  <span class="n">application</span> <span class="o">&lt;--</span> <span class="n">best</span><span class="o">-</span><span class="n">invest</span><span class="o">-</span><span class="nb">int</span><span class="o">.</span><span class="n">com</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"HTTP/1.1 403 Forbidden"</span><span class="p">];</span>
+  <span class="n">application</span> <span class="o">--&gt;</span> <span class="n">best</span><span class="o">-</span><span class="n">invest</span><span class="o">-</span><span class="nb">int</span><span class="o">.</span><span class="n">com</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"POST /gallery/4.php HTTP/1.1"</span><span class="p">,</span> <span class="n">note</span> <span class="o">=</span> <span class="s">"POST data=U2ltU3RhdGUgPSBOT1QgUkVBRFkgCg%3D%3D%0A&amp;LogCode=CONF&amp;LogText=Get+config+data+from+server"</span><span class="p">];</span>
+  <span class="n">application</span> <span class="o">&lt;--</span> <span class="n">best</span><span class="o">-</span><span class="n">invest</span><span class="o">-</span><span class="nb">int</span><span class="o">.</span><span class="n">com</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"HTTP/1.1 403 Forbidden"</span><span class="p">];</span>
+  <span class="n">application</span> <span class="o">--&gt;</span> <span class="n">best</span><span class="o">-</span><span class="n">invest</span><span class="o">-</span><span class="nb">int</span><span class="o">.</span><span class="n">com</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"POST /gallery/4.php HTTP/1.1"</span><span class="p">,</span> <span class="n">note</span> <span class="o">=</span> <span class="s">"POST data=U2ltU3RhdGUgPSBOT1QgUkVBRFkgCg%3D%3D%0A&amp;LogCode=DATA&amp;LogText=Send+data+to+server&amp;"</span><span class="p">];</span>
+  <span class="n">application</span> <span class="o">&lt;--</span> <span class="n">best</span><span class="o">-</span><span class="n">invest</span><span class="o">-</span><span class="nb">int</span><span class="o">.</span><span class="n">com</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"..."</span><span class="p">];</span>
 <span class="p">}</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
-
-
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABIQAAAL9CAYAAABaL70FAABVOklEQVR4nO3dy5LrSIIeaHdceDtx
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABIQAAAL9CAYAAABaL70FAABVOklEQVR4nO3dy5LrSIIeaHdceDtx
 Tl2yJ7tLXdmSNrMoq4WW2uU+a6mn0QvoSWozC1ltpnMry3foVZnNjGQpVXapKivzXOLCG3wWQZ5k
 MgESZDCCEfTvMws7DAB0OEAPHuCHwxFTSjEAAAAAkI3i3BUAAAAA4GkJhAAAAAAyIxACAAAAyIxA
 CAAAACAzAiEAAACAzAiEAAAAADIjEAIAAADIjEAIAAAAIDMCIQAAAIDMCIQAAAAAMiMQAgAAAMiM
@@ -3423,15 +3292,11 @@ AACAExIIZWYrFEohhLC6fSyGEGL4IfjZfNS8MAgAAAAuiEAoQxuhUArhvkdQSmlzfggbg0cLgwAA
 AOCyxFXPEDLW1gaEQAAAAHC5BEIAAAAAmSnOXQEAAAAAnpZACAAAACAzAiEAAACAzAiEAAAAADIj
 EAIAAADIjEAIAAAAIDMCIQAAAIDMCIQAAAAAMiMQAgAAAMiMQAgAAAAgMwIhAAAAgMwIhAAAAAAy
 IxACAAAAyIxACAAAACAzAiEAAACAzPz/9O9I6P6EuXQAAAAASUVORK5CYII=
-"
->
-</div>
-
-</div>
-
+">
+</img></div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -3458,7 +3323,7 @@ Content-Length: 299
 Connection: close
 Content-Type: text/html; charset=iso-8859-1
 
-&lt;!DOCTYPE HTML PUBLIC &quot;-//IETF//DTD HTML 2.0//EN&quot;&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;403 Forbidden&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Forbidden&lt;/h1&gt;&lt;p&gt;You don&#39;t have permission to access /gallery/4.phpon this server.&lt;/p&gt;&lt;hr&gt;&lt;address&gt;Apache/2.2.3 (CentOS) Server at best-invest-int.com Port 80&lt;/address&gt;&lt;/body&gt;&lt;/html&gt;
+&lt;!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN"&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;403 Forbidden&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Forbidden&lt;/h1&gt;&lt;p&gt;You don't have permission to access /gallery/4.phpon this server.&lt;/p&gt;&lt;hr&gt;&lt;address&gt;Apache/2.2.3 (CentOS) Server at best-invest-int.com Port 80&lt;/address&gt;&lt;/body&gt;&lt;/html&gt;
 </code></pre>
 </div>
 </div>
@@ -3468,452 +3333,430 @@ Content-Type: text/html; charset=iso-8859-1
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Crypto-activities">Crypto activities<a class="anchor-link" href="#Crypto-activities">&#182;</a></h2>
+<h2 id="Crypto-activities">Crypto activities<a class="anchor-link" href="#Crypto-activities">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[417]:
+In [417]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Convert timestamps to human readable time delta</span>
-<span class="n">timestamps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">))))))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">&#39;cryptousage&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+<span class="n">timestamps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))))))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">'cryptousage'</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
 
 <span class="c"># Create list of accessed files entries</span>
-<span class="n">crypto_usage</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">&#39;cryptousage&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+<span class="n">crypto_usage</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">'cryptousage'</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
 
 <span class="c"># Create dataframe</span>
 <span class="n">df_cryptousage</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">crypto_usage</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">timestamps</span><span class="p">)</span>
 <span class="n">df_cryptousage</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">df_cryptousage</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Timestamp&#39;</span>
+<span class="n">df_cryptousage</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s">'Timestamp'</span>
 
 <span class="c"># Unhexlify data</span>
-<span class="c">#unhexed_data = [binascii.unhexlify(d) for d in df_recvnet[&#39;data&#39;]]</span>
-<span class="c">#df_recvnet[&#39;rawdata&#39;] = unhexed_data</span>
+<span class="c">#unhexed_data = [binascii.unhexlify(d) for d in df_recvnet['data']]</span>
+<span class="c">#df_recvnet['rawdata'] = unhexed_data</span>
 
-<span class="c">#df_recvnet[[&#39;host&#39;, &#39;port&#39;, &#39;type&#39;, &#39;rawdata&#39;]]</span>
+<span class="c">#df_recvnet[['host', 'port', 'type', 'rawdata']]</span>
 <span class="n">df_cryptousage</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt output_prompt">
     Out[417]:</div>
-
 <div class="output_html rendered_html output_subarea output_pyout">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Timestamp</th>
-      <th>algorithm</th>
-      <th>key</th>
-      <th>operation</th>
-      <th>type</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td> 0:00:09</td>
-      <td> Blowfish</td>
-      <td> 52, 101, 54, 54, 55, 54, 54, 101, 54, 98, 54, 97, 54, 99, 54, 101, 55, 54, 54, 98, 54, 97, 52, 9...</td>
-      <td> keyalgo</td>
-      <td> crypto</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td> 0:15:06</td>
-      <td> Blowfish</td>
-      <td> 52, 101, 54, 54, 55, 54, 54, 101, 54, 98, 54, 97, 54, 99, 54, 101, 55, 54, 54, 98, 54, 97, 52, 9...</td>
-      <td> keyalgo</td>
-      <td> crypto</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td> 0:15:36</td>
-      <td> Blowfish</td>
-      <td> 52, 101, 54, 54, 55, 54, 54, 101, 54, 98, 54, 97, 54, 99, 54, 101, 55, 54, 54, 98, 54, 97, 52, 9...</td>
-      <td> keyalgo</td>
-      <td> crypto</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td> 0:16:00</td>
-      <td> Blowfish</td>
-      <td> 52, 101, 54, 54, 55, 54, 54, 101, 54, 98, 54, 97, 54, 99, 54, 101, 55, 54, 54, 98, 54, 97, 52, 9...</td>
-      <td> keyalgo</td>
-      <td> crypto</td>
-    </tr>
-  </tbody>
+<table border="1" class=" table-striped table table-hover dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Timestamp</th>
+<th>algorithm</th>
+<th>key</th>
+<th>operation</th>
+<th>type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td> 0:00:09</td>
+<td> Blowfish</td>
+<td> 52, 101, 54, 54, 55, 54, 54, 101, 54, 98, 54, 97, 54, 99, 54, 101, 55, 54, 54, 98, 54, 97, 52, 9...</td>
+<td> keyalgo</td>
+<td> crypto</td>
+</tr>
+<tr>
+<th>1</th>
+<td> 0:15:06</td>
+<td> Blowfish</td>
+<td> 52, 101, 54, 54, 55, 54, 54, 101, 54, 98, 54, 97, 54, 99, 54, 101, 55, 54, 54, 98, 54, 97, 52, 9...</td>
+<td> keyalgo</td>
+<td> crypto</td>
+</tr>
+<tr>
+<th>2</th>
+<td> 0:15:36</td>
+<td> Blowfish</td>
+<td> 52, 101, 54, 54, 55, 54, 54, 101, 54, 98, 54, 97, 54, 99, 54, 101, 55, 54, 54, 98, 54, 97, 52, 9...</td>
+<td> keyalgo</td>
+<td> crypto</td>
+</tr>
+<tr>
+<th>3</th>
+<td> 0:16:00</td>
+<td> Blowfish</td>
+<td> 52, 101, 54, 54, 55, 54, 54, 101, 54, 98, 54, 97, 54, 99, 54, 101, 55, 54, 54, 98, 54, 97, 52, 9...</td>
+<td> keyalgo</td>
+<td> crypto</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Activities-chart">Activities chart<a class="anchor-link" href="#Activities-chart">&#182;</a></h2>
+<h2 id="Activities-chart">Activities chart<a class="anchor-link" href="#Activities-chart">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now let&#39;s have a look in which <em>order</em> the several activities took place. Below you&#39;ll find a table containing the timestamp, operation and category of each specific activity (e.g. file system access, network read/write etc.)</p>
+<p>Now let's have a look in which <em>order</em> the several activities took place. Below you'll find a table containing the timestamp, operation and category of each specific activity (e.g. file system access, network read/write etc.)</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[418]:
+In [418]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Create df</span>
-<span class="n">df_activities</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[[</span><span class="s">&#39;Timestamp&#39;</span><span class="p">,</span> <span class="s">&#39;Operation&#39;</span><span class="p">,</span> <span class="s">&#39;Category&#39;</span><span class="p">]])</span>
+<span class="n">df_activities</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[[</span><span class="s">'Timestamp'</span><span class="p">,</span> <span class="s">'Operation'</span><span class="p">,</span> <span class="s">'Category'</span><span class="p">]])</span>
 
 <span class="c"># file system access</span>
 <span class="n">accessed_files</span> <span class="o">=</span> <span class="n">df_accessedfiles</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">]]</span>
-<span class="n">accessed_files</span><span class="p">[</span><span class="s">&#39;Category&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;file system&quot;</span>
-<span class="n">accessed_files</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Timestamp&#39;</span><span class="p">,</span> <span class="s">&#39;Operation&#39;</span><span class="p">,</span> <span class="s">&#39;Category&#39;</span><span class="p">]</span>
+<span class="n">accessed_files</span><span class="p">[</span><span class="s">'Category'</span><span class="p">]</span> <span class="o">=</span> <span class="s">"file system"</span>
+<span class="n">accessed_files</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Timestamp'</span><span class="p">,</span> <span class="s">'Operation'</span><span class="p">,</span> <span class="s">'Category'</span><span class="p">]</span>
 
 <span class="c"># network activities</span>
 <span class="n">network_open</span> <span class="o">=</span> <span class="n">df_opennet</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()[[</span><span class="mi">0</span><span class="p">]]</span>
-<span class="n">network_open</span><span class="p">[</span><span class="s">&#39;Operation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;net open&#39;</span>
-<span class="n">network_open</span><span class="p">[</span><span class="s">&#39;Category&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;network&#39;</span>
-<span class="n">network_open</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Timestamp&#39;</span><span class="p">,</span> <span class="s">&#39;Operation&#39;</span><span class="p">,</span> <span class="s">&#39;Category&#39;</span><span class="p">]</span>
+<span class="n">network_open</span><span class="p">[</span><span class="s">'Operation'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'net open'</span>
+<span class="n">network_open</span><span class="p">[</span><span class="s">'Category'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'network'</span>
+<span class="n">network_open</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Timestamp'</span><span class="p">,</span> <span class="s">'Operation'</span><span class="p">,</span> <span class="s">'Category'</span><span class="p">]</span>
 
 <span class="n">network_sent</span> <span class="o">=</span> <span class="n">df_sendnet</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">]]</span>
-<span class="n">network_sent</span><span class="p">[</span><span class="s">&#39;Category&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;network&quot;</span>
-<span class="n">network_sent</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Timestamp&#39;</span><span class="p">,</span> <span class="s">&#39;Operation&#39;</span><span class="p">,</span> <span class="s">&#39;Category&#39;</span><span class="p">]</span>
+<span class="n">network_sent</span><span class="p">[</span><span class="s">'Category'</span><span class="p">]</span> <span class="o">=</span> <span class="s">"network"</span>
+<span class="n">network_sent</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Timestamp'</span><span class="p">,</span> <span class="s">'Operation'</span><span class="p">,</span> <span class="s">'Category'</span><span class="p">]</span>
 
 <span class="n">network_recv</span> <span class="o">=</span> <span class="n">df_recvnet</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">]]</span>
-<span class="n">network_recv</span><span class="p">[</span><span class="s">&#39;Category&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;network&quot;</span>
-<span class="n">network_recv</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Timestamp&#39;</span><span class="p">,</span> <span class="s">&#39;Operation&#39;</span><span class="p">,</span> <span class="s">&#39;Category&#39;</span><span class="p">]</span>
+<span class="n">network_recv</span><span class="p">[</span><span class="s">'Category'</span><span class="p">]</span> <span class="o">=</span> <span class="s">"network"</span>
+<span class="n">network_recv</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Timestamp'</span><span class="p">,</span> <span class="s">'Operation'</span><span class="p">,</span> <span class="s">'Category'</span><span class="p">]</span>
 
 <span class="c"># crpyto usage</span>
 <span class="n">crypto_usage</span> <span class="o">=</span> <span class="n">df_cryptousage</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
-<span class="n">crypto_usage</span><span class="p">[</span><span class="s">&#39;Category&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;crypto&quot;</span>
-<span class="n">crypto_usage</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Timestamp&#39;</span><span class="p">,</span> <span class="s">&#39;Operation&#39;</span><span class="p">,</span> <span class="s">&#39;Category&#39;</span><span class="p">]</span>
+<span class="n">crypto_usage</span><span class="p">[</span><span class="s">'Category'</span><span class="p">]</span> <span class="o">=</span> <span class="s">"crypto"</span>
+<span class="n">crypto_usage</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Timestamp'</span><span class="p">,</span> <span class="s">'Operation'</span><span class="p">,</span> <span class="s">'Category'</span><span class="p">]</span>
 
 <span class="c"># Merge data frames</span>
 <span class="n">df_activities</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">accessed_files</span><span class="p">,</span> <span class="n">network_open</span><span class="p">,</span> <span class="n">network_sent</span><span class="p">,</span> <span class="n">network_recv</span><span class="p">,</span> <span class="n">crypto_usage</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">df_activities</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s">&#39;Timestamp&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">df_activities</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s">'Timestamp'</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 <span class="c"># Convert to JSON</span>
-<span class="n">d</span> <span class="o">=</span> <span class="n">df_activities</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s">&#39;records&#39;</span><span class="p">)</span>
-<span class="n">json_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">df_activities</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s">'records'</span><span class="p">)</span>
+<span class="n">json_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span>
 
 <span class="n">df_activities</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt output_prompt">
     Out[418]:</div>
-
 <div class="output_html rendered_html output_subarea output_pyout">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Timestamp</th>
-      <th>Operation</th>
-      <th>Category</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0 </th>
-      <td> 0:00:03</td>
-      <td>      read</td>
-      <td> file system</td>
-    </tr>
-    <tr>
-      <th>1 </th>
-      <td> 0:00:04</td>
-      <td>      read</td>
-      <td> file system</td>
-    </tr>
-    <tr>
-      <th>2 </th>
-      <td> 0:00:04</td>
-      <td>      read</td>
-      <td> file system</td>
-    </tr>
-    <tr>
-      <th>3 </th>
-      <td> 0:00:08</td>
-      <td>      read</td>
-      <td> file system</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td> 0:00:08</td>
-      <td>  net open</td>
-      <td>     network</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td> 0:00:08</td>
-      <td> net write</td>
-      <td>     network</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td> 0:00:08</td>
-      <td>  net read</td>
-      <td>     network</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td> 0:00:08</td>
-      <td>  net read</td>
-      <td>     network</td>
-    </tr>
-    <tr>
-      <th>4 </th>
-      <td> 0:00:09</td>
-      <td>     write</td>
-      <td> file system</td>
-    </tr>
-    <tr>
-      <th>37</th>
-      <td> 0:00:09</td>
-      <td>  Blowfish</td>
-      <td>      crypto</td>
-    </tr>
-    <tr>
-      <th>5 </th>
-      <td> 0:00:10</td>
-      <td>     write</td>
-      <td> file system</td>
-    </tr>
-    <tr>
-      <th>6 </th>
-      <td> 0:00:10</td>
-      <td>      read</td>
-      <td> file system</td>
-    </tr>
-    <tr>
-      <th>7 </th>
-      <td> 0:00:36</td>
-      <td>     write</td>
-      <td> file system</td>
-    </tr>
-    <tr>
-      <th>8 </th>
-      <td> 0:00:36</td>
-      <td>      read</td>
-      <td> file system</td>
-    </tr>
-    <tr>
-      <th>9 </th>
-      <td> 0:01:05</td>
-      <td>      read</td>
-      <td> file system</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td> 0:15:06</td>
-      <td>     write</td>
-      <td> file system</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td> 0:15:06</td>
-      <td>     write</td>
-      <td> file system</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td> 0:15:06</td>
-      <td>  net open</td>
-      <td>     network</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td> 0:15:06</td>
-      <td> net write</td>
-      <td>     network</td>
-    </tr>
-    <tr>
-      <th>31</th>
-      <td> 0:15:06</td>
-      <td>  net read</td>
-      <td>     network</td>
-    </tr>
-    <tr>
-      <th>32</th>
-      <td> 0:15:06</td>
-      <td>  net read</td>
-      <td>     network</td>
-    </tr>
-    <tr>
-      <th>38</th>
-      <td> 0:15:06</td>
-      <td>  Blowfish</td>
-      <td>      crypto</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td> 0:15:24</td>
-      <td>      read</td>
-      <td> file system</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td> 0:15:27</td>
-      <td>      read</td>
-      <td> file system</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td> 0:15:35</td>
-      <td>      read</td>
-      <td> file system</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td> 0:15:36</td>
-      <td>  net open</td>
-      <td>     network</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td> 0:15:36</td>
-      <td> net write</td>
-      <td>     network</td>
-    </tr>
-    <tr>
-      <th>33</th>
-      <td> 0:15:36</td>
-      <td>  net read</td>
-      <td>     network</td>
-    </tr>
-    <tr>
-      <th>34</th>
-      <td> 0:15:36</td>
-      <td>  net read</td>
-      <td>     network</td>
-    </tr>
-    <tr>
-      <th>39</th>
-      <td> 0:15:36</td>
-      <td>  Blowfish</td>
-      <td>      crypto</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td> 0:15:37</td>
-      <td>     write</td>
-      <td> file system</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td> 0:15:37</td>
-      <td>     write</td>
-      <td> file system</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td> 0:15:58</td>
-      <td>      read</td>
-      <td> file system</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td> 0:16:00</td>
-      <td>     write</td>
-      <td> file system</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td> 0:16:00</td>
-      <td>  net open</td>
-      <td>     network</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td> 0:16:00</td>
-      <td> net write</td>
-      <td>     network</td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td> 0:16:00</td>
-      <td>  net read</td>
-      <td>     network</td>
-    </tr>
-    <tr>
-      <th>36</th>
-      <td> 0:16:00</td>
-      <td>  net read</td>
-      <td>     network</td>
-    </tr>
-    <tr>
-      <th>40</th>
-      <td> 0:16:00</td>
-      <td>  Blowfish</td>
-      <td>      crypto</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td> 0:16:01</td>
-      <td>     write</td>
-      <td> file system</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td> 0:16:10</td>
-      <td>      read</td>
-      <td> file system</td>
-    </tr>
-  </tbody>
+<table border="1" class=" table-striped table table-hover dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Timestamp</th>
+<th>Operation</th>
+<th>Category</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0 </th>
+<td> 0:00:03</td>
+<td>      read</td>
+<td> file system</td>
+</tr>
+<tr>
+<th>1 </th>
+<td> 0:00:04</td>
+<td>      read</td>
+<td> file system</td>
+</tr>
+<tr>
+<th>2 </th>
+<td> 0:00:04</td>
+<td>      read</td>
+<td> file system</td>
+</tr>
+<tr>
+<th>3 </th>
+<td> 0:00:08</td>
+<td>      read</td>
+<td> file system</td>
+</tr>
+<tr>
+<th>21</th>
+<td> 0:00:08</td>
+<td>  net open</td>
+<td>     network</td>
+</tr>
+<tr>
+<th>25</th>
+<td> 0:00:08</td>
+<td> net write</td>
+<td>     network</td>
+</tr>
+<tr>
+<th>29</th>
+<td> 0:00:08</td>
+<td>  net read</td>
+<td>     network</td>
+</tr>
+<tr>
+<th>30</th>
+<td> 0:00:08</td>
+<td>  net read</td>
+<td>     network</td>
+</tr>
+<tr>
+<th>4 </th>
+<td> 0:00:09</td>
+<td>     write</td>
+<td> file system</td>
+</tr>
+<tr>
+<th>37</th>
+<td> 0:00:09</td>
+<td>  Blowfish</td>
+<td>      crypto</td>
+</tr>
+<tr>
+<th>5 </th>
+<td> 0:00:10</td>
+<td>     write</td>
+<td> file system</td>
+</tr>
+<tr>
+<th>6 </th>
+<td> 0:00:10</td>
+<td>      read</td>
+<td> file system</td>
+</tr>
+<tr>
+<th>7 </th>
+<td> 0:00:36</td>
+<td>     write</td>
+<td> file system</td>
+</tr>
+<tr>
+<th>8 </th>
+<td> 0:00:36</td>
+<td>      read</td>
+<td> file system</td>
+</tr>
+<tr>
+<th>9 </th>
+<td> 0:01:05</td>
+<td>      read</td>
+<td> file system</td>
+</tr>
+<tr>
+<th>10</th>
+<td> 0:15:06</td>
+<td>     write</td>
+<td> file system</td>
+</tr>
+<tr>
+<th>11</th>
+<td> 0:15:06</td>
+<td>     write</td>
+<td> file system</td>
+</tr>
+<tr>
+<th>22</th>
+<td> 0:15:06</td>
+<td>  net open</td>
+<td>     network</td>
+</tr>
+<tr>
+<th>26</th>
+<td> 0:15:06</td>
+<td> net write</td>
+<td>     network</td>
+</tr>
+<tr>
+<th>31</th>
+<td> 0:15:06</td>
+<td>  net read</td>
+<td>     network</td>
+</tr>
+<tr>
+<th>32</th>
+<td> 0:15:06</td>
+<td>  net read</td>
+<td>     network</td>
+</tr>
+<tr>
+<th>38</th>
+<td> 0:15:06</td>
+<td>  Blowfish</td>
+<td>      crypto</td>
+</tr>
+<tr>
+<th>12</th>
+<td> 0:15:24</td>
+<td>      read</td>
+<td> file system</td>
+</tr>
+<tr>
+<th>13</th>
+<td> 0:15:27</td>
+<td>      read</td>
+<td> file system</td>
+</tr>
+<tr>
+<th>14</th>
+<td> 0:15:35</td>
+<td>      read</td>
+<td> file system</td>
+</tr>
+<tr>
+<th>23</th>
+<td> 0:15:36</td>
+<td>  net open</td>
+<td>     network</td>
+</tr>
+<tr>
+<th>27</th>
+<td> 0:15:36</td>
+<td> net write</td>
+<td>     network</td>
+</tr>
+<tr>
+<th>33</th>
+<td> 0:15:36</td>
+<td>  net read</td>
+<td>     network</td>
+</tr>
+<tr>
+<th>34</th>
+<td> 0:15:36</td>
+<td>  net read</td>
+<td>     network</td>
+</tr>
+<tr>
+<th>39</th>
+<td> 0:15:36</td>
+<td>  Blowfish</td>
+<td>      crypto</td>
+</tr>
+<tr>
+<th>15</th>
+<td> 0:15:37</td>
+<td>     write</td>
+<td> file system</td>
+</tr>
+<tr>
+<th>16</th>
+<td> 0:15:37</td>
+<td>     write</td>
+<td> file system</td>
+</tr>
+<tr>
+<th>17</th>
+<td> 0:15:58</td>
+<td>      read</td>
+<td> file system</td>
+</tr>
+<tr>
+<th>18</th>
+<td> 0:16:00</td>
+<td>     write</td>
+<td> file system</td>
+</tr>
+<tr>
+<th>24</th>
+<td> 0:16:00</td>
+<td>  net open</td>
+<td>     network</td>
+</tr>
+<tr>
+<th>28</th>
+<td> 0:16:00</td>
+<td> net write</td>
+<td>     network</td>
+</tr>
+<tr>
+<th>35</th>
+<td> 0:16:00</td>
+<td>  net read</td>
+<td>     network</td>
+</tr>
+<tr>
+<th>36</th>
+<td> 0:16:00</td>
+<td>  net read</td>
+<td>     network</td>
+</tr>
+<tr>
+<th>40</th>
+<td> 0:16:00</td>
+<td>  Blowfish</td>
+<td>      crypto</td>
+</tr>
+<tr>
+<th>19</th>
+<td> 0:16:01</td>
+<td>     write</td>
+<td> file system</td>
+</tr>
+<tr>
+<th>20</th>
+<td> 0:16:10</td>
+<td>      read</td>
+<td> file system</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -3927,59 +3770,52 @@ In&nbsp;[418]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[419]:
+In [419]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">jinja</span> <span class="n">html</span>
 <span class="o">&lt;</span><span class="err">!</span><span class="o">--</span> <span class="n">collapse</span><span class="o">=</span><span class="bp">True</span> <span class="o">--&gt;</span>
 <span class="o">&lt;</span><span class="n">html</span><span class="o">&gt;</span>
 <span class="o">&lt;</span><span class="n">head</span><span class="o">&gt;</span>
-  <span class="o">&lt;</span><span class="n">script</span> <span class="n">src</span><span class="o">=</span><span class="s">&quot;http://d3js.org/d3.v3.min.js&quot;</span><span class="o">&gt;&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
-  <span class="o">&lt;</span><span class="n">script</span> <span class="n">src</span><span class="o">=</span><span class="s">&quot;http://dimplejs.org/dist/dimple.v2.1.0.min.js&quot;</span><span class="o">&gt;&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">script</span> <span class="n">src</span><span class="o">=</span><span class="s">"http://d3js.org/d3.v3.min.js"</span><span class="o">&gt;&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">script</span> <span class="n">src</span><span class="o">=</span><span class="s">"http://dimplejs.org/dist/dimple.v2.1.0.min.js"</span><span class="o">&gt;&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
 <span class="o">&lt;</span><span class="n">title</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">title</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">title</span><span class="o">&gt;</span>
 <span class="o">&lt;/</span><span class="n">head</span><span class="o">&gt;</span>
 <span class="o">&lt;</span><span class="n">body</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="n">div</span> <span class="nb">id</span><span class="o">=</span><span class="s">&quot;bar_chart&quot;</span><span class="o">&gt;&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
-  <span class="o">&lt;</span><span class="n">script</span> <span class="nb">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">div</span> <span class="nb">id</span><span class="o">=</span><span class="s">"bar_chart"</span><span class="o">&gt;&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">script</span> <span class="nb">type</span><span class="o">=</span><span class="s">"text/javascript"</span><span class="o">&gt;</span>
     <span class="n">var</span> <span class="n">json_data</span>  <span class="o">=</span> <span class="p">{{</span> <span class="n">json_data</span> <span class="p">}};</span>
-    <span class="n">var</span> <span class="n">svg</span> <span class="o">=</span> <span class="n">dimple</span><span class="o">.</span><span class="n">newSvg</span><span class="p">(</span><span class="s">&quot;#bar_chart&quot;</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">800</span><span class="p">);</span>
+    <span class="n">var</span> <span class="n">svg</span> <span class="o">=</span> <span class="n">dimple</span><span class="o">.</span><span class="n">newSvg</span><span class="p">(</span><span class="s">"#bar_chart"</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">800</span><span class="p">);</span>
     <span class="n">var</span> <span class="n">myChart</span> <span class="o">=</span> <span class="n">new</span> <span class="n">dimple</span><span class="o">.</span><span class="n">chart</span><span class="p">(</span><span class="n">svg</span><span class="p">,</span> <span class="n">json_data</span><span class="p">);</span>
     <span class="n">myChart</span><span class="o">.</span><span class="n">setBounds</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mi">680</span><span class="p">)</span>
-    <span class="n">myChart</span><span class="o">.</span><span class="n">addCategoryAxis</span><span class="p">(</span><span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;Category&quot;</span><span class="p">,</span> <span class="s">&quot;Operation&quot;</span><span class="p">]);</span>
-    <span class="n">myChart</span><span class="o">.</span><span class="n">addCategoryAxis</span><span class="p">(</span><span class="s">&quot;y&quot;</span><span class="p">,</span> <span class="s">&quot;Timestamp&quot;</span><span class="p">);</span>
-    <span class="n">myChart</span><span class="o">.</span><span class="n">addSeries</span><span class="p">(</span><span class="s">&quot;Operation&quot;</span><span class="p">,</span> <span class="n">dimple</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">);</span>
-    <span class="n">myChart</span><span class="o">.</span><span class="n">addLegend</span><span class="p">(</span><span class="mi">170</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">630</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="s">&quot;right&quot;</span><span class="p">);</span>
+    <span class="n">myChart</span><span class="o">.</span><span class="n">addCategoryAxis</span><span class="p">(</span><span class="s">"x"</span><span class="p">,</span> <span class="p">[</span><span class="s">"Category"</span><span class="p">,</span> <span class="s">"Operation"</span><span class="p">]);</span>
+    <span class="n">myChart</span><span class="o">.</span><span class="n">addCategoryAxis</span><span class="p">(</span><span class="s">"y"</span><span class="p">,</span> <span class="s">"Timestamp"</span><span class="p">);</span>
+    <span class="n">myChart</span><span class="o">.</span><span class="n">addSeries</span><span class="p">(</span><span class="s">"Operation"</span><span class="p">,</span> <span class="n">dimple</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">);</span>
+    <span class="n">myChart</span><span class="o">.</span><span class="n">addLegend</span><span class="p">(</span><span class="mi">170</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">630</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="s">"right"</span><span class="p">);</span>
     <span class="n">myChart</span><span class="o">.</span><span class="n">draw</span><span class="p">();</span>
   <span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
 <span class="o">&lt;/</span><span class="n">body</span><span class="o">&gt;</span>
 <span class="o">&lt;/</span><span class="n">html</span><span class="o">&gt;</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt output_prompt">
     Out[419]:</div>
-
 <div class="output_html rendered_html output_subarea output_pyout">
 <!-- collapse=True -->
 <html>
 <head>
-  <script src="http://d3js.org/d3.v3.min.js"></script>
-  <script src="http://dimplejs.org/dist/dimple.v2.1.0.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://dimplejs.org/dist/dimple.v2.1.0.min.js"></script>
 <title></title>
 </head>
 <body>
 <div id="bar_chart"></div>
-  <script type="text/javascript">
+<script type="text/javascript">
     var json_data  = [{"Category": "file system", "Timestamp": "0:00:03", "Operation": "read"}, {"Category": "file system", "Timestamp": "0:00:04", "Operation": "read"}, {"Category": "file system", "Timestamp": "0:00:04", "Operation": "read"}, {"Category": "file system", "Timestamp": "0:00:08", "Operation": "read"}, {"Category": "network", "Timestamp": "0:00:08", "Operation": "net open"}, {"Category": "network", "Timestamp": "0:00:08", "Operation": "net write"}, {"Category": "network", "Timestamp": "0:00:08", "Operation": "net read"}, {"Category": "network", "Timestamp": "0:00:08", "Operation": "net read"}, {"Category": "file system", "Timestamp": "0:00:09", "Operation": "write"}, {"Category": "crypto", "Timestamp": "0:00:09", "Operation": "Blowfish"}, {"Category": "file system", "Timestamp": "0:00:10", "Operation": "write"}, {"Category": "file system", "Timestamp": "0:00:10", "Operation": "read"}, {"Category": "file system", "Timestamp": "0:00:36", "Operation": "write"}, {"Category": "file system", "Timestamp": "0:00:36", "Operation": "read"}, {"Category": "file system", "Timestamp": "0:01:05", "Operation": "read"}, {"Category": "file system", "Timestamp": "0:15:06", "Operation": "write"}, {"Category": "file system", "Timestamp": "0:15:06", "Operation": "write"}, {"Category": "network", "Timestamp": "0:15:06", "Operation": "net open"}, {"Category": "network", "Timestamp": "0:15:06", "Operation": "net write"}, {"Category": "network", "Timestamp": "0:15:06", "Operation": "net read"}, {"Category": "network", "Timestamp": "0:15:06", "Operation": "net read"}, {"Category": "crypto", "Timestamp": "0:15:06", "Operation": "Blowfish"}, {"Category": "file system", "Timestamp": "0:15:24", "Operation": "read"}, {"Category": "file system", "Timestamp": "0:15:27", "Operation": "read"}, {"Category": "file system", "Timestamp": "0:15:35", "Operation": "read"}, {"Category": "network", "Timestamp": "0:15:36", "Operation": "net open"}, {"Category": "network", "Timestamp": "0:15:36", "Operation": "net write"}, {"Category": "network", "Timestamp": "0:15:36", "Operation": "net read"}, {"Category": "network", "Timestamp": "0:15:36", "Operation": "net read"}, {"Category": "crypto", "Timestamp": "0:15:36", "Operation": "Blowfish"}, {"Category": "file system", "Timestamp": "0:15:37", "Operation": "write"}, {"Category": "file system", "Timestamp": "0:15:37", "Operation": "write"}, {"Category": "file system", "Timestamp": "0:15:58", "Operation": "read"}, {"Category": "file system", "Timestamp": "0:16:00", "Operation": "write"}, {"Category": "network", "Timestamp": "0:16:00", "Operation": "net open"}, {"Category": "network", "Timestamp": "0:16:00", "Operation": "net write"}, {"Category": "network", "Timestamp": "0:16:00", "Operation": "net read"}, {"Category": "network", "Timestamp": "0:16:00", "Operation": "net read"}, {"Category": "crypto", "Timestamp": "0:16:00", "Operation": "Blowfish"}, {"Category": "file system", "Timestamp": "0:16:01", "Operation": "write"}, {"Category": "file system", "Timestamp": "0:16:10", "Operation": "read"}];
     var svg = dimple.newSvg("#bar_chart", 800, 800);
     var myChart = new dimple.chart(svg, json_data);
@@ -3993,12 +3829,9 @@ In&nbsp;[419]:
 </body>
 </html>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -4018,21 +3851,20 @@ In&nbsp;[419]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h2>
+<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I think <code>DroidBox</code> is a very good tool to deal with Android APKs and analyze their behaviour during run-time. It comes with a working mobile sandbox meant to inspect and monitor an applications activities. However during my analysis I had to rely on previous analysis since the results didn&#39;t contain the full details. Not only the network traffic but also the contents read from files weren&#39;t complete. In order to fully unterstand one malware I need complete details about its behaviour.  For example I had following response from the server which is completely useless:</p>
+<p>I think <code>DroidBox</code> is a very good tool to deal with Android APKs and analyze their behaviour during run-time. It comes with a working mobile sandbox meant to inspect and monitor an applications activities. However during my analysis I had to rely on previous analysis since the results didn't contain the full details. Not only the network traffic but also the contents read from files weren't complete. In order to fully unterstand one malware I need complete details about its behaviour.  For example I had following response from the server which is completely useless:</p>
 <pre><code>HTTP/1.1 406 Not Acceptable\r\nDate: Mon, 28 Jul 2014 13:29:38 GMT\r\nServer: Apache\r\nContent-...
 </code></pre><p>Besides that I was indeed able to see that the application is reading from some file. But the delivered content was once again striped:</p>
-<pre><code>&lt;?xml version=&#39;1.0&#39; encoding=&#39;utf-8&#39; standalone=&#39;yes&#39; ?&gt;\n&lt;map&gt;\n&lt;string name=&quot;DOWNLOADDOMAIN&quot;&gt;c...
-</code></pre><p>I hope the developers will see this as a vital necessity and update as soon as possible. Furthermore I&#39;ll look forward to other mobile sandboxes which have data instrumentation capabilities. Next time I&#39;ll have a deeper look at Androids <a href="http://developer.android.com/tools/debugging/ddms.html">DDMS</a>.</p>
+<pre><code>&lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;string name="DOWNLOADDOMAIN"&gt;c...
+</code></pre><p>I hope the developers will see this as a vital necessity and update as soon as possible. Furthermore I'll look forward to other mobile sandboxes which have data instrumentation capabilities. Next time I'll have a deeper look at Androids <a href="http://developer.android.com/tools/debugging/ddms.html">DDMS</a>.</p>
 </div>
 </div>
 </div></p>
@@ -4042,10 +3874,10 @@ In&nbsp;[419]:
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a></li>
-        <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump-ipython-notebook-version">24h Android sniffing using tcpdump - IPython Notebook Version</a></li>
         <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump">24h Android sniffing using tcpdump</a></li>
-        <li><a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a></li>
         <li><a href="http://blog.dornea.nu/2015/07/01/debugging-android-native-shared-libraries">Debugging Android native shared libraries</a></li>
+        <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump-ipython-notebook-version">24h Android sniffing using tcpdump - IPython Notebook Version</a></li>
+        <li><a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a></li>
     </ul>
 </section>
     <hr />

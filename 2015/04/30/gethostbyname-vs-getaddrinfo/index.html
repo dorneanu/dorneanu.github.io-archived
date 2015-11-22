@@ -1722,8 +1722,6 @@ the main page states:</p>
 <div class="highlight"><pre>The gethostbyname*(), gethostbyaddr*(), herror(), and hstrerror() functions are obsolete.  
 Applications should use getaddrinfo(3), getnameinfo(3), and gai_strerror(3) instead.
 </pre></div>
-
-
 <p>The really bad thing about <strong>gethostbyname</strong> is the fact that it doesn't support IPv6. Besides that you would then load
 the results into a <em>struct sockaddr_in</em>  and use it for your futher calls. A better option is <strong>getaddrinfo()</strong> which 
 supports IPv4 and IPv6 as well, does the DNS lookup and fills your structures. Perfect! </p>
@@ -1733,16 +1731,12 @@ supports IPv4 and IPv6 as well, does the DNS lookup and fills your structures. P
 <span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="o">*</span><span class="n">remote</span><span class="p">;</span>
 <span class="k">struct</span> <span class="n">addrinfo</span> <span class="n">hints</span><span class="p">,</span> <span class="o">*</span><span class="n">res</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
 </pre></div>
-
-
 <p>And then the call:</p>
 <div class="highlight"><pre><span class="k">if</span> <span class="p">((</span><span class="n">status</span><span class="o">=</span><span class="n">getaddrinfo</span><span class="p">(</span><span class="n">server_hostname</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">res</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">log_err</span><span class="p">(</span><span class="s">&quot;getaddrinfo failed: %s&quot;</span><span class="p">,</span> <span class="n">gai_strerror</span><span class="p">(</span><span class="n">status</span><span class="p">));</span>
+    <span class="n">log_err</span><span class="p">(</span><span class="s">"getaddrinfo failed: %s"</span><span class="p">,</span> <span class="n">gai_strerror</span><span class="p">(</span><span class="n">status</span><span class="p">));</span>
     <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-
-
 <p><code>res</code> is a linked list which has to be looped to fetch the results:</p>
 <div class="highlight"><pre><span class="k">while</span> <span class="p">(</span><span class="n">p</span> <span class="o">=</span> <span class="n">res</span><span class="p">;</span> <span class="n">p</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">ai_next</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">void</span> <span class="o">*</span><span class="n">addr</span><span class="p">;</span>
@@ -1752,14 +1746,12 @@ supports IPv4 and IPv6 as well, does the DNS lookup and fills your structures. P
     <span class="c1">// Convert IP to string</span>
     <span class="n">inet_ntop</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">ai_family</span><span class="p">,</span> <span class="n">addr</span><span class="p">,</span> <span class="n">ip_addr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ip_addr</span><span class="p">));</span>
 
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">ip_addr</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">ip_addr</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
-
-
 <p>Now you could create your socket, connect to the host, read data and so on:</p>
 <div class="highlight"><pre><span class="k">if</span> <span class="p">((</span><span class="n">socketfd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">res</span><span class="o">-&gt;</span><span class="n">ai_family</span><span class="p">,</span> <span class="n">res</span><span class="o">-&gt;</span><span class="n">ai_socktype</span><span class="p">,</span> <span class="n">res</span><span class="o">-&gt;</span><span class="n">ai_protocol</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">log_err</span><span class="p">(</span><span class="s">&quot;Failed creating socket!&quot;</span><span class="p">);</span>
+    <span class="n">log_err</span><span class="p">(</span><span class="s">"Failed creating socket!"</span><span class="p">);</span>
     <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
@@ -1771,8 +1763,8 @@ supports IPv4 and IPv6 as well, does the DNS lookup and fills your structures. P
         <li><a href="http://blog.dornea.nu/2015/04/21/coming-back-to-cc-after-2-years">Coming back to C/C++ after 2 years</a></li>
         <li><a href="http://blog.dornea.nu/2015/05/06/adding-concurrency-to-smalisca">Adding concurrency to smalisca</a></li>
         <li><a href="http://blog.dornea.nu/2010/12/06/simple-memory-managment-using-linked-lists-implement-my_malloc-and-my_free">Simple memory managment using linked lists (implement my_malloc and my_free)</a></li>
-        <li><a href="http://blog.dornea.nu/2010/09/13/icmpknock-v02-released">icmpKNOCK v0.2 released</a></li>
-        <li><a href="http://blog.dornea.nu/2013/08/02/howto-automate-burp-using-burp-extender-api">HowTo: Automate Burp using Burp Extender API</a></li>
+        <li><a href="http://blog.dornea.nu/2008/11/26/mod2exec-execute-modules-german">Mod2Exec &#8211; Execute modules (german)</a></li>
+        <li><a href="http://blog.dornea.nu/2009/09/15/some-drupal-peculiarities">Some Drupal peculiarities</a></li>
     </ul>
 </section>
     <hr />

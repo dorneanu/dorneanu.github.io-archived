@@ -1724,8 +1724,6 @@ blog.dornea.nu            </a>
 will take an <em>UR</em>L and optionally a <em>proxy</em> as arguments:</p>
 <div class="highlight"><pre>$ ./main -u http://blog.dornea.nu/ -p http://username:password@localhost:8080
 </pre></div>
-
-
 <p>The very first problem I've encountered was <strong>parsing</strong>. While in Python you usually have pretty good
 string operations you can apply on your string, in C you have to take of everything. In my case
 I had to parse the proxy argument for its specific parts:</p>
@@ -1744,17 +1742,13 @@ I had to parse the proxy argument for its specific parts:</p>
     <span class="c1">// This is was ok</span>
 <span class="p">}</span>
 </pre></div>
-
-
 <p>Ok. What about <strong>logging</strong>? I remember having implemented some <strong>macros</strong> in the past and finally found this:</p>
-<div class="highlight"><pre><span class="cp">#define log_err(M, ...) fprintf(stderr, &quot;ERROR: \t(%s:%d: errno: %s) &quot; M &quot;\n&quot;,\     </span>
+<div class="highlight"><pre><span class="cp">#define log_err(M, ...) fprintf(stderr, "ERROR: \t(%s:%d: errno: %s) " M "\n",\     </span>
                        <span class="n">__FILE__</span><span class="p">,</span> <span class="n">__LINE__</span><span class="p">,</span> <span class="n">clean_errno</span><span class="p">(),</span> <span class="err">##</span><span class="n">__VA_ARGS__</span><span class="p">)</span>
 
-<span class="cp">#define log_warn(M, ...) fprintf(stderr, &quot;WARN: \t(%s:%d: errno: %s) &quot; M &quot;\n&quot;,\</span>
+<span class="cp">#define log_warn(M, ...) fprintf(stderr, "WARN: \t(%s:%d: errno: %s) " M "\n",\</span>
 <span class="cp">                        __FILE__, __LINE__, clean_errno(), ##__VA_ARGS__)</span>
 </pre></div>
-
-
 <p>Great! At that point if was able to pass arguments to my executable and do some string parsing. </p>
 <h3 id="pointers-and-more-pointers">Pointers .. and more pointers</h3>
 <p>I do know some pointers arithmetics. But coming back from <strong>objects</strong> to <strong>pointers</strong> was a big 
@@ -1777,8 +1771,6 @@ I'm using to collect information and store global accessible data:</p>
 
 <span class="p">}</span> <span class="n">globalargs</span><span class="p">;</span>
 </pre></div>
-
-
 <p>So we've got pointers everywhere. I use this struct to collect the CLI arguments using <code>getopt</code>. Besides that
 I'm using <code>globalargs</code> to store information which should be available in all "modules" (I don't have any yet but
 just for the explanation ...). But let me explain this using some example:</p>
@@ -1791,48 +1783,44 @@ just for the explanation ...). But let me explain this using some example:</p>
 <span class="p">}</span> <span class="n">myStruct</span><span class="p">;</span>
 
 <span class="kt">void</span> <span class="nf">change_username1</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">username</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">char</span> <span class="o">*</span><span class="n">tmp_username</span> <span class="o">=</span> <span class="s">&quot;username1&quot;</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">tmp_username</span> <span class="o">=</span> <span class="s">"username1"</span><span class="p">;</span>
     <span class="n">username</span> <span class="o">=</span> <span class="n">tmp_username</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="kt">void</span> <span class="nf">change_username2</span> <span class="p">(</span><span class="kt">char</span> <span class="o">**</span><span class="n">username</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">char</span> <span class="o">*</span><span class="n">tmp_username</span> <span class="o">=</span> <span class="s">&quot;username2&quot;</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">tmp_username</span> <span class="o">=</span> <span class="s">"username2"</span><span class="p">;</span>
     <span class="o">*</span><span class="n">username</span> <span class="o">=</span> <span class="n">tmp_username</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="kt">int</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">myStruct</span> <span class="o">*</span><span class="n">ms</span><span class="p">;</span>
-    <span class="kt">char</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="s">&quot;username0&quot;</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="s">"username0"</span><span class="p">;</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">ms</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">myStruct</span><span class="p">))))</span> <span class="p">{</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Failed allocating memory!&quot;</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Failed allocating memory!"</span><span class="p">);</span>
         <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
     <span class="p">}</span>
 
     <span class="n">ms</span><span class="o">-&gt;</span><span class="n">username</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Username: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">-&gt;</span><span class="n">username</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Username: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">ms</span><span class="o">-&gt;</span><span class="n">username</span><span class="p">);</span>
 
     <span class="c1">// First change</span>
     <span class="n">change_username1</span><span class="p">(</span><span class="n">ms</span><span class="o">-&gt;</span><span class="n">username</span><span class="p">);</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Username: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">-&gt;</span><span class="n">username</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Username: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">ms</span><span class="o">-&gt;</span><span class="n">username</span><span class="p">);</span>
 
     <span class="c1">// 2nd change</span>
     <span class="n">change_username2</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ms</span><span class="o">-&gt;</span><span class="n">username</span><span class="p">);</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Username: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">-&gt;</span><span class="n">username</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Username: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">ms</span><span class="o">-&gt;</span><span class="n">username</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-
-
 <p>When compiled and executed this produces following output:</p>
 <div class="highlight"><pre>$ gcc -Wall -o n n.c &amp;&amp; ./n
 Username: username0
 Username: username0
 Username: username2
 </pre></div>
-
-
 <p>As you might have noticed <code>change_usernam1</code> doesn't really change the <code>username</code> in the <code>myStruct</code> structure.
 Using <strong>pointers to pointers</strong> I was able to make my desired change. What did I learn from this particular case?
 I should definitely improve my pointer arithmetics :)</p>
@@ -1842,13 +1830,11 @@ by just creating a new instance of a new object, in C everything has to be done 
 for <code>myStruct</code> should be easy and straight forward:</p>
 <div class="highlight"><pre><span class="p">...</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">ms</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">myStruct</span><span class="p">))))</span> <span class="p">{</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Failed allocating memory!&quot;</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Failed allocating memory!"</span><span class="p">);</span>
         <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">...</span>
 </pre></div>
-
-
 <p>And don't forget to <code>free</code> your memory! That's it for now. Now happy (C) coding!</p>
             </div>
             <!-- /.entry-content -->
@@ -1858,8 +1844,8 @@ for <code>myStruct</code> should be easy and straight forward:</p>
         <li><a href="http://blog.dornea.nu/2015/04/30/gethostbyname-vs-getaddrinfo">gethostbyname vs. getaddrinfo</a></li>
         <li><a href="http://blog.dornea.nu/2015/05/06/adding-concurrency-to-smalisca">Adding concurrency to smalisca</a></li>
         <li><a href="http://blog.dornea.nu/2010/12/06/simple-memory-managment-using-linked-lists-implement-my_malloc-and-my_free">Simple memory managment using linked lists (implement my_malloc and my_free)</a></li>
-        <li><a href="http://blog.dornea.nu/2010/09/13/icmpknock-v02-released">icmpKNOCK v0.2 released</a></li>
-        <li><a href="http://blog.dornea.nu/2013/08/02/howto-automate-burp-using-burp-extender-api">HowTo: Automate Burp using Burp Extender API</a></li>
+        <li><a href="http://blog.dornea.nu/2008/11/26/mod2exec-execute-modules-german">Mod2Exec &#8211; Execute modules (german)</a></li>
+        <li><a href="http://blog.dornea.nu/2009/09/15/some-drupal-peculiarities">Some Drupal peculiarities</a></li>
     </ul>
 </section>
     <hr />

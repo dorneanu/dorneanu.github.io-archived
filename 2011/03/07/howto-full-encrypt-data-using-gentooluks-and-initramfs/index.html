@@ -1724,57 +1724,48 @@ blog.dornea.nu            </a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p><a href="http://static.dornea.nu/img/2011/0da33a2b7f96741b4d379ce62da56e04.jpg"><img class="trigger_lightbox" style="height: 96px; width: 150px; margin-top: 1px; margin-bottom: 1px; padding-right: 5px;" alt="Naked Data" src="http://static.dornea.nu/img/2011/0da33a2b7f96741b4d379ce62da56e04.jpg" width="800" height="510" /></a></p>
-<p>Since last post many things have changed. No more NetBSD on my laptop (this has to do with several things, I&#8217;ll write about in a future post): I had to fall in love with Gentoo! I&#8217;ll try to give you some quick overview related to this posts title: Encryption under Gentoo using Luks.</p>
-<p>There are serveral (good!) tutorials out there. Among these I&#8217;ve used:<!--more--></p>
-<table style="width: 100%;" border="1" cellspacing="1" cellpadding="1">
-  <tr>
-    <td>
-      <a href="http://en.gentoo-wiki.com/wiki/DM-Crypt_with_LUKS">http://en.gentoo-wiki.com/wiki/DM-Crypt_with_LUKS</a>
+                <p><a href="http://static.dornea.nu/img/2011/0da33a2b7f96741b4d379ce62da56e04.jpg"><img alt="Naked Data" class="img-responsive trigger_lightbox" height="510" src="http://static.dornea.nu/img/2011/0da33a2b7f96741b4d379ce62da56e04.jpg" style="height: 96px; width: 150px; margin-top: 1px; margin-bottom: 1px; padding-right: 5px;" width="800"/></a></p>
+<p>Since last post many things have changed. No more NetBSD on my laptop (this has to do with several things, I’ll write about in a future post): I had to fall in love with Gentoo! I’ll try to give you some quick overview related to this posts title: Encryption under Gentoo using Luks.</p>
+<p>There are serveral (good!) tutorials out there. Among these I’ve used:<!--more--></p>
+<table border="1" cellpadding="1" cellspacing="1" class=" table-striped table table-hover" style="width: 100%;">
+<tr>
+<td>
+<a href="http://en.gentoo-wiki.com/wiki/DM-Crypt_with_LUKS">http://en.gentoo-wiki.com/wiki/DM-Crypt_with_LUKS</a>
+</td>
+<td>
+      There you’ll get a lot of information related to the topic. I’ve basically followed the same steps as described in the HowTo. However I didn’t get any functionable system at all. Especially the initramfs part seems to be buggy. Therefore: Follow the steps ín the article <strong>except</strong> the initramfs part!
     </td>
-
-    <td>
-      There you&#8217;ll get a lot of information related to the topic. I&#8217;ve basically followed the same steps as described in the HowTo. However I didn&#8217;t get any functionable system at all. Especially the initramfs part seems to be buggy. Therefore: Follow the steps ín the article <strong>except</strong> the initramfs part!
-    </td>
-  </tr>
-
-  <tr>
-    <td>
-      <a href="http://de.gentoo-wiki.com/wiki/DM-Crypt">http://de.gentoo-wiki.com/wiki/DM-Crypt</a> <strong>(german)</strong>
-    </td>
-
-    <td>
+</tr>
+<tr>
+<td>
+<a href="http://de.gentoo-wiki.com/wiki/DM-Crypt">http://de.gentoo-wiki.com/wiki/DM-Crypt</a> <strong>(german)</strong>
+</td>
+<td>
       Really good explanations. If you want some technical background to this whole thing, this is the place to be.
     </td>
-  </tr>
-
-  <tr>
-    <td>
-      <a href="http://djamc.ath.cx/2008/01/20/howto-gentoo-vollverschlusselung-mit-cryptsetup-und-initramfs-bei-der-installation/">http://djamc.ath.cx/2008/01/20/howto-gentoo-vollverschlusselung-mit-cryptsetup-und-initramfs-bei-der-installation/</a> <strong>(german)</strong>
+</tr>
+<tr>
+<td>
+<a href="http://djamc.ath.cx/2008/01/20/howto-gentoo-vollverschlusselung-mit-cryptsetup-und-initramfs-bei-der-installation/">http://djamc.ath.cx/2008/01/20/howto-gentoo-vollverschlusselung-mit-cryptsetup-und-initramfs-bei-der-installation/</a> <strong>(german)</strong>
+</td>
+<td>
+      Another nice howto I’ve found.
     </td>
-
-    <td>
-      Another nice howto I&#8217;ve found.
+</tr>
+<tr>
+<td>
+<a href="http://en.gentoo-wiki.com/wiki/Initramfs">http://en.gentoo-wiki.com/wiki/Initramfs</a>
+</td>
+<td>
+      As already mentioned above, you’ll get into troubles if you don’t have a working initramfs. Follow this link to get detailed information how to create your own – as I did! – initramfs and how to adapt it to your needs.
     </td>
-  </tr>
-
-  <tr>
-    <td>
-      <a href="http://en.gentoo-wiki.com/wiki/Initramfs">http://en.gentoo-wiki.com/wiki/Initramfs</a>
-    </td>
-
-    <td>
-      As already mentioned above, you&#8217;ll get into troubles if you don&#8217;t have a working initramfs. Follow this link to get detailed information how to create your own &#8211; as I did! &#8211; initramfs and how to adapt it to your needs.
-    </td>
-  </tr>
+</tr>
 </table>
-
-<p>There is no need for additional explanations! Just follow the instructions in the tutorial and you&#8217;re done.</p>
-<p>&nbsp;</p>
+<p>There is no need for additional explanations! Just follow the instructions in the tutorial and you’re done.</p>
+<p> </p>
 <!--break-->
-
 <h2 id="my-initramfs"><strong>My initramfs</strong></h2>
-<p>Here is my initramfs structure I&#8217;m using:</p>
+<p>Here is my initramfs structure I’m using:</p>
 <pre class="brush:plain;">$ tree
 .
 â”œâ”€â”€ bin
@@ -1801,7 +1792,6 @@ blog.dornea.nu            </a>
     â””â”€â”€ bin
 
 15 directories, 7 files</pre>
-
 <p>Make sure all <strong>binaries</strong> are <strong>statically</strong> linked. And this is my <strong>init script</strong>:</p>
 <pre class="brush:plain;">$ cat init 
 #!/bin/busybox sh
@@ -1847,22 +1837,20 @@ umount -l /sys
 
 # Start new system
 exec switch_root /new-root /sbin/init || rescue_shell</pre>
-
-<p>Don&#8217;t forget to copy your <strong>keys</strong> to <em>/root/keys/ </em>and rename them properly. Afterwards all you have to do is to create the initramfs file:</p>
+<p>Don’t forget to copy your <strong>keys</strong> to <em>/root/keys/ </em>and rename them properly. Afterwards all you have to do is to create the initramfs file:</p>
 <pre class="brush:plain;">$ cd /usr/src/initramfs
 $ find . -print0 | cpio --null -ov --format=newc | gzip -9 &gt; /boot/initramfs.cpio.gz</pre>
-
-<p>That&#8217;s all!</p>
+<p>That’s all!</p>
 <p><strong>BTW</strong>: I was kind enough to provide my initramfs: <a href="http://dl.dornea.nu/svn/misc/boot/initramfs/">http://dl.dornea.nu/svn/misc/boot/initramfs/</a></p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2010/10/03/howto-secure-your-server-using-icmpknock">HowTo: Secure your server using icmpKNOCK</a></li>
         <li><a href="http://blog.dornea.nu/2010/10/13/howto-build-your-own-wifi-wlan-hotspot-using-hostap">HowTo: Build your own Wifi WLAN hotspot using hostap</a></li>
         <li><a href="http://blog.dornea.nu/2009/06/25/howto-rsyncrypto-the-backup-jewel">HowTo: RsynCrypto &#8211; The backup jewel</a></li>
-        <li><a href="http://blog.dornea.nu/2011/03/19/my-own-cheap-nas-the-openwrt-way">My own cheap NAS &#8211; the OpenWRT way</a></li>
+        <li><a href="http://blog.dornea.nu/2010/10/03/howto-secure-your-server-using-icmpknock">HowTo: Secure your server using icmpKNOCK</a></li>
+        <li><a href="http://blog.dornea.nu/2012/01/26/howto-have-a-web-performance-boost-with-nginx">HowTo: Have a web performance boost with Nginx</a></li>
         <li><a href="http://blog.dornea.nu/2014/10/29/howto-ios-apps-static-analysis">HowTo: iOS Apps - Static analysis</a></li>
     </ul>
 </section>

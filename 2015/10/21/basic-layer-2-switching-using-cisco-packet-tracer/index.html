@@ -1736,7 +1736,7 @@ blog.dornea.nu            </a>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As a pseudo-preparation for my <a href="http://www.cisco.com/web/learning/certifications/associate/ccna/index.html">CCNA</a> exam I wanted to sum up some of the <em>basic</em> configuration steps related to <strong>Cisco</strong> switches. Although I won&#39;t handle <em>every</em> topic related to Layer 2, I will assume you have already some network knowledge. The main reason for this post is to show how to setup a <em>really</em> small network infrastructure and <em>configure</em> its components. For my purposes I have used <a href="http://www.packettracernetwork.com">Cisco&#39;s Packet Tracer</a> to simulate the network which I highly recommend. I know there is sth like <a href="http://www.gns3.com">GNS3</a> but I didn&#39;t have (yet) the time to look at it.</p>
+<p>As a pseudo-preparation for my <a href="http://www.cisco.com/web/learning/certifications/associate/ccna/index.html">CCNA</a> exam I wanted to sum up some of the <em>basic</em> configuration steps related to <strong>Cisco</strong> switches. Although I won't handle <em>every</em> topic related to Layer 2, I will assume you have already some network knowledge. The main reason for this post is to show how to setup a <em>really</em> small network infrastructure and <em>configure</em> its components. For my purposes I have used <a href="http://www.packettracernetwork.com">Cisco's Packet Tracer</a> to simulate the network which I highly recommend. I know there is sth like <a href="http://www.gns3.com">GNS3</a> but I didn't have (yet) the time to look at it.</p>
 </div>
 </div>
 </div>
@@ -1745,44 +1745,35 @@ blog.dornea.nu            </a>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Configure-the-Switches">Configure the Switches<a class="anchor-link" href="#Configure-the-Switches">&#182;</a></h2>
+<h2 id="Configure-the-Switches">Configure the Switches<a class="anchor-link" href="#Configure-the-Switches">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[45]:
+In [45]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">blockdiag</span>
 <span class="n">diagram</span> <span class="n">admin</span> <span class="p">{</span>
-    <span class="n">SW1</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.layer_2_remote_switch&quot;</span><span class="p">];</span>
-    <span class="n">SW2</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.layer_2_remote_switch&quot;</span><span class="p">];</span>
-    <span class="n">SW3</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.layer_2_remote_switch&quot;</span><span class="p">];</span>
+    <span class="n">SW1</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.layer_2_remote_switch"</span><span class="p">];</span>
+    <span class="n">SW2</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.layer_2_remote_switch"</span><span class="p">];</span>
+    <span class="n">SW3</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.layer_2_remote_switch"</span><span class="p">];</span>
 
     <span class="n">SW1</span> <span class="o">&lt;-&gt;</span> <span class="n">SW2</span><span class="p">;</span>
     <span class="n">SW2</span> <span class="o">&lt;-&gt;</span> <span class="n">SW3</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
-
-
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAB4CAYAAABik0N+AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAB4CAYAAABik0N+AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAB2TSURB
 VHic7d15mFxXfebx7zn3Vu8ttdraJcuyZQkLG2PjBZvNxhACPAkDwUkGSFieBw8zARzDBBjALBPH
 BjIh2MzAE5ZkBgI4CZCEZQgYBgQEvGAbL3iXLdval24tvVfVPb/545xb3RIt0a3Fvb2f52mp1VV1
@@ -1918,22 +1909,18 @@ RERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERE
 RERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERE
 RERERERERERERERERERERERERERERERERERERERERERERERERERERKa5/w9B1tkymMidCgAAAABJ
 RU5ErkJggg==
-"
->
-</div>
-
-</div>
-
+">
+</img></div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We&#39;ll have 3 switches connected to each other: <strong>SW1</strong>, <strong>SW2</strong> and <strong>SW3</strong>. Each of these switches (<a href="http://www.cisco.com/c/en/us/products/collateral/switches/catalyst-2960-series-switches/prod_bulletin0900aecd80322c22.html">Cisco Catalyst 2960 series</a>) will have one or several <strong>VLANs</strong> assigned. But first let&#39;s do some <em>house keeping</em> and configure each switch properly. For every switch I&#39;ll do:</p>
+<p>We'll have 3 switches connected to each other: <strong>SW1</strong>, <strong>SW2</strong> and <strong>SW3</strong>. Each of these switches (<a href="http://www.cisco.com/c/en/us/products/collateral/switches/catalyst-2960-series-switches/prod_bulletin0900aecd80322c22.html">Cisco Catalyst 2960 series</a>) will have one or several <strong>VLANs</strong> assigned. But first let's do some <em>house keeping</em> and configure each switch properly. For every switch I'll do:</p>
 <ol>
 <li>Restrict access<ul>
 <li>Add local user</li>
@@ -2010,12 +1997,12 @@ SW1(config-line)<span class="preprocessor">#exit</span>
 <pre><code class="language-.bash">SW1#<span class="operator"><span class="keyword">show</span> ssh
 %<span class="keyword">No</span> SSHv2 server connections running.
 %<span class="keyword">No</span> SSHv1 server connections running.
-</code></pre>
+</span></code></pre>
 <p>And now store the configuration by replacing the <strong>startup-config</strong> by the <strong>running-config</strong>:</p>
 <pre><code class="language-.bash">SW1<span class="comment">#copy running-config startup-config </span>
 Destination filename<span class="sqbracket"> [startup-config]? 
 Building configuration...
-</code></pre>
+</span></code></pre>
 <p>Now we will apply the same configuration (with slightly different modifications) to <code>SW2</code> and <code>SW3</code>.</p>
 </div>
 </div>
@@ -2026,71 +2013,63 @@ Building configuration...
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="configure-ports">Configure ports</h3>
-<p>Let&#39;s have a look at the next step and how our small network should look like:</p>
+<p>Let's have a look at the next step and how our small network should look like:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[53]:
+In [53]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">blockdiag</span>
 <span class="n">diagram</span> <span class="n">admin</span> <span class="p">{</span>
-    <span class="n">SW1</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.layer_2_remote_switch&quot;</span><span class="p">];</span>
-    <span class="n">SW2</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.layer_2_remote_switch&quot;</span><span class="p">];</span>
-    <span class="n">SW3</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.layer_2_remote_switch&quot;</span><span class="p">];</span>
+    <span class="n">SW1</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.layer_2_remote_switch"</span><span class="p">];</span>
+    <span class="n">SW2</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.layer_2_remote_switch"</span><span class="p">];</span>
+    <span class="n">SW3</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.layer_2_remote_switch"</span><span class="p">];</span>
 
-    <span class="n">PC1</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.pc&quot;</span><span class="p">];</span>
-    <span class="n">PC2</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.pc&quot;</span><span class="p">];</span>
-    <span class="n">PC3</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.pc&quot;</span><span class="p">];</span>
-    <span class="n">PC4</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.pc&quot;</span><span class="p">];</span>
-    <span class="n">PC5</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.pc&quot;</span><span class="p">];</span>
-    <span class="n">PC6</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.pc&quot;</span><span class="p">];</span>
+    <span class="n">PC1</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
+    <span class="n">PC2</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
+    <span class="n">PC3</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
+    <span class="n">PC4</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
+    <span class="n">PC5</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
+    <span class="n">PC6</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
 
-    <span class="n">SW1</span> <span class="o">&lt;-&gt;</span> <span class="n">SW2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;F0/1   -   F0/1&quot;</span><span class="p">];</span>
-    <span class="n">SW2</span> <span class="o">&lt;-&gt;</span> <span class="n">SW3</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;F0/2   -   F0/1&quot;</span><span class="p">];</span>
+    <span class="n">SW1</span> <span class="o">&lt;-&gt;</span> <span class="n">SW2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"F0/1   -   F0/1"</span><span class="p">];</span>
+    <span class="n">SW2</span> <span class="o">&lt;-&gt;</span> <span class="n">SW3</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"F0/2   -   F0/1"</span><span class="p">];</span>
     
     <span class="n">group</span> <span class="p">{</span>
         <span class="n">orientation</span> <span class="o">=</span> <span class="n">portrait</span><span class="p">;</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s">&quot;#FFF&quot;</span><span class="p">;</span>
-        <span class="n">SW1</span> <span class="o">&lt;-&gt;</span> <span class="n">PC1</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;F0/2 - F0&quot;</span><span class="p">];</span>
-        <span class="n">SW1</span> <span class="o">&lt;-&gt;</span> <span class="n">PC2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;F0/3 - F0&quot;</span><span class="p">];</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s">"#FFF"</span><span class="p">;</span>
+        <span class="n">SW1</span> <span class="o">&lt;-&gt;</span> <span class="n">PC1</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"F0/2 - F0"</span><span class="p">];</span>
+        <span class="n">SW1</span> <span class="o">&lt;-&gt;</span> <span class="n">PC2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"F0/3 - F0"</span><span class="p">];</span>
     <span class="p">}</span>
     
     <span class="n">group</span> <span class="p">{</span>
         <span class="n">orientation</span> <span class="o">=</span> <span class="n">portrait</span><span class="p">;</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s">&quot;#FFF&quot;</span><span class="p">;</span>
-        <span class="n">SW2</span> <span class="o">&lt;-&gt;</span> <span class="n">PC3</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;F0/3 - F0&quot;</span><span class="p">];</span>
-        <span class="n">SW2</span> <span class="o">&lt;-&gt;</span> <span class="n">PC4</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;F0/4 - F0&quot;</span><span class="p">];</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s">"#FFF"</span><span class="p">;</span>
+        <span class="n">SW2</span> <span class="o">&lt;-&gt;</span> <span class="n">PC3</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"F0/3 - F0"</span><span class="p">];</span>
+        <span class="n">SW2</span> <span class="o">&lt;-&gt;</span> <span class="n">PC4</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"F0/4 - F0"</span><span class="p">];</span>
     <span class="p">}</span>
     
     <span class="n">group</span> <span class="p">{</span>
         <span class="n">orientation</span> <span class="o">=</span> <span class="n">portrait</span><span class="p">;</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s">&quot;#FFF&quot;</span><span class="p">;</span>
-        <span class="n">SW3</span> <span class="o">&lt;-&gt;</span> <span class="n">PC5</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;F0/3 - F0&quot;</span><span class="p">];</span>
-        <span class="n">SW3</span> <span class="o">&lt;-&gt;</span> <span class="n">PC6</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;F0/4 - F0&quot;</span><span class="p">];</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s">"#FFF"</span><span class="p">;</span>
+        <span class="n">SW3</span> <span class="o">&lt;-&gt;</span> <span class="n">PC5</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"F0/3 - F0"</span><span class="p">];</span>
+        <span class="n">SW3</span> <span class="o">&lt;-&gt;</span> <span class="n">PC6</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"F0/4 - F0"</span><span class="p">];</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
-
-
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABMAAAADICAYAAAAOVp3oAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABMAAAADICAYAAAAOVp3oAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACAASURB
 VHic7N15nFxVgff/z7lV1fuS7mydBbI1SxZDAgQSEJOoLEYRxmCURcEZEHhG4vI4ahyBgJMgvxkG
 I4iAKIuIP2BGTVhEREhEkCgJmxKykH3rpJckvXdX3fP8cW9VL+kOvVdX3e/79SrS3bXcc7tOfU9z
@@ -2440,15 +2419,11 @@ m9tBDW/4mifxHgAcw7CZ9RvcQU3vzO37L/8BjkX+A9Rp9Pl/EpMK/3dphMPrcpfrAGpwUBMbLo2+
 a3byH+Bw5D9AnaaW/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsGb/BymIVCnhlbQ3
 AAAAAElFTkSuQmCC
-"
->
-</div>
-
-</div>
-
+">
+</img></div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -2456,53 +2431,51 @@ AAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Following table shows the links between the switches and the PCs and which <strong>switch ports</strong> are being used:</p>
-<table cellpadding="0" cellspacing="0" width="100%" border="0">
-  <tr>
-    <th>PC</th>
-    <th>SW1</th>
-    <th>SW2</th>
-    <th>SW3</th>
-  </tr>
-  <tr>
-    <td>PC1</td>
-    <td>F0/2</td>
-    <td></td>
-    <td></td>
-  </tr>
-    <tr>
-    <td>PC2</td>
-    <td>F0/3</td>
-    <td></td>
-    <td></td><br>  </tr>
-    <tr>
-    <td>PC3</td>
-    <td></td>
-    <td>F0/3</td>
-    <td></td>
-  </tr>
-   <tr>
-    <td>PC4</td>
-    <td></td>
-    <td>F0/4</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>PC5</td>
-    <td></td>
-    <td></td>
-    <td>F0/3</td>
-  </tr>
-  <tr>
-    <td>PC6</td>
-    <td></td>
-    <td></td>
-    <td>F0/4</td>
-  </tr>
+<table border="0" cellpadding="0" cellspacing="0" class=" table-striped table table-hover" width="100%">
+<tr>
+<th>PC</th>
+<th>SW1</th>
+<th>SW2</th>
+<th>SW3</th>
+</tr>
+<tr>
+<td>PC1</td>
+<td>F0/2</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PC2</td>
+<td>F0/3</td>
+<td></td>
+<td></td><br> </br></tr>
+<tr>
+<td>PC3</td>
+<td></td>
+<td>F0/3</td>
+<td></td>
+</tr>
+<tr>
+<td>PC4</td>
+<td></td>
+<td>F0/4</td>
+<td></td>
+</tr>
+<tr>
+<td>PC5</td>
+<td></td>
+<td></td>
+<td>F0/3</td>
+</tr>
+<tr>
+<td>PC6</td>
+<td></td>
+<td></td>
+<td>F0/4</td>
+</tr>
 </table>
-
-
 <h3 id="configure-links-between-switches">Configure links between switches</h3>
-<p>Now I&#39;ll configure the ports on between <code>SW1</code> and <code>SW2</code>:</p>
+<p>Now I'll configure the ports on between <code>SW1</code> and <code>SW2</code>:</p>
 <ul>
 <li>Set duplex and link speed:</li>
 </ul>
@@ -2579,7 +2552,7 @@ FastEthernet0/<span class="number">1</span> is up, line protocol is up (connecte
 </code></pre>
 <p>Now we should have a working <strong>trunk</strong> between <code>SW1</code> and <code>SW2</code>. The link between <code>Sw2</code> and <code>Sw3</code> should be then configured as well.</p>
 <h3 id="add-vlans">Add VLANs</h3>
-<p>Now I&#39;ll create 2 VLANs:</p>
+<p>Now I'll create 2 VLANs:</p>
 <ul>
 <li>VLAN <strong>Students</strong><ul>
 <li>ID: 10</li>
@@ -2595,112 +2568,103 @@ FastEthernet0/<span class="number">1</span> is up, line protocol is up (connecte
 </li>
 </ul>
 <p>Additionally every host PC gets following IP addresss:</p>
-<table cellpadding="0" cellspacing="0" width="100%" border="0">
-  <tr>
-    <th>Host</th>
-    <th>IP</th>
-    <th>VLAN</th>
-  </tr>
-  <tr>
-    <td>PC1</td>
-    <td>10.10.10.101</td>
-    <td>Students</td>
-  </tr>
-  <tr>
-    <td>PC2</td>
-    <td>10.10.10.102</td>
-    <td>Students</td>
-  </tr>
-  <tr>
-    <td>PC3</td>
-    <td>20.20.20.103</td>
-    <td>Teachers</td>
-  </tr>
-  <tr>
-    <td>PC4</td>
-    <td>20.20.20.104</td>
-    <td>Teachers</td>
-  </tr>
-  <tr>
-    <td>PC5</td>
-    <td>10.10.10.105</td>
-    <td>Students</td>
-  </tr>
-  <tr>
-    <td>PC6</td>
-    <td>20.20.20.106</td>
-    <td>Teachers</td>
-  </tr>
+<table border="0" cellpadding="0" cellspacing="0" class=" table-striped table table-hover" width="100%">
+<tr>
+<th>Host</th>
+<th>IP</th>
+<th>VLAN</th>
+</tr>
+<tr>
+<td>PC1</td>
+<td>10.10.10.101</td>
+<td>Students</td>
+</tr>
+<tr>
+<td>PC2</td>
+<td>10.10.10.102</td>
+<td>Students</td>
+</tr>
+<tr>
+<td>PC3</td>
+<td>20.20.20.103</td>
+<td>Teachers</td>
+</tr>
+<tr>
+<td>PC4</td>
+<td>20.20.20.104</td>
+<td>Teachers</td>
+</tr>
+<tr>
+<td>PC5</td>
+<td>10.10.10.105</td>
+<td>Students</td>
+</tr>
+<tr>
+<td>PC6</td>
+<td>20.20.20.106</td>
+<td>Teachers</td>
+</tr>
 </table>
-
-<p>Now let&#39;s have a look at our topology:</p>
+<p>Now let's have a look at our topology:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[54]:
+In [54]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">blockdiag</span>
 <span class="n">diagram</span> <span class="n">admin</span> <span class="p">{</span>
-    <span class="n">SW1</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.layer_2_remote_switch&quot;</span><span class="p">];</span>
-    <span class="n">SW2</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.layer_2_remote_switch&quot;</span><span class="p">];</span>
-    <span class="n">SW3</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.layer_2_remote_switch&quot;</span><span class="p">];</span>
+    <span class="n">SW1</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.layer_2_remote_switch"</span><span class="p">];</span>
+    <span class="n">SW2</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.layer_2_remote_switch"</span><span class="p">];</span>
+    <span class="n">SW3</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.layer_2_remote_switch"</span><span class="p">];</span>
 
-    <span class="n">PC1</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.pc&quot;</span><span class="p">];</span>
-    <span class="n">PC2</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.pc&quot;</span><span class="p">];</span>
-    <span class="n">PC3</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.pc&quot;</span><span class="p">];</span>
-    <span class="n">PC4</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.pc&quot;</span><span class="p">];</span>
-    <span class="n">PC5</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.pc&quot;</span><span class="p">];</span>
-    <span class="n">PC6</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">&quot;cisco.pc&quot;</span><span class="p">];</span>
+    <span class="n">PC1</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
+    <span class="n">PC2</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
+    <span class="n">PC3</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
+    <span class="n">PC4</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
+    <span class="n">PC5</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
+    <span class="n">PC6</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
 
     <span class="n">SW1</span> <span class="o">&lt;-&gt;</span> <span class="n">SW2</span><span class="p">;</span>
     <span class="n">SW2</span> <span class="o">&lt;-&gt;</span> <span class="n">SW3</span><span class="p">;</span>
     
     <span class="n">group</span> <span class="p">{</span>
         <span class="n">orientation</span> <span class="o">=</span> <span class="n">portrait</span><span class="p">;</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VLAN 10&quot;</span><span class="p">;</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s">&quot;#FFF000&quot;</span><span class="p">;</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="s">"VLAN 10"</span><span class="p">;</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s">"#FFF000"</span><span class="p">;</span>
         <span class="n">SW1</span> <span class="o">&lt;-&gt;</span> <span class="n">PC1</span><span class="p">;</span>
         <span class="n">SW1</span> <span class="o">&lt;-&gt;</span> <span class="n">PC2</span><span class="p">;</span>
     <span class="p">}</span>
     
     <span class="n">group</span> <span class="p">{</span>
         <span class="n">orientation</span> <span class="o">=</span> <span class="n">portrait</span><span class="p">;</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VLAN 20&quot;</span><span class="p">;</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s">&quot;#FFFEEE&quot;</span><span class="p">;</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="s">"VLAN 20"</span><span class="p">;</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s">"#FFFEEE"</span><span class="p">;</span>
         <span class="n">SW2</span> <span class="o">&lt;-&gt;</span> <span class="n">PC3</span><span class="p">;</span>
         <span class="n">SW2</span> <span class="o">&lt;-&gt;</span> <span class="n">PC4</span><span class="p">;</span>
     <span class="p">}</span>
     
     <span class="n">group</span> <span class="p">{</span>
         <span class="n">orientation</span> <span class="o">=</span> <span class="n">portrait</span><span class="p">;</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;VLAN 10 + VLAN 20&quot;</span><span class="p">;</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s">&quot;#FFFDDD&quot;</span><span class="p">;</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="s">"VLAN 10 + VLAN 20"</span><span class="p">;</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s">"#FFFDDD"</span><span class="p">;</span>
         <span class="n">SW3</span> <span class="o">&lt;-&gt;</span> <span class="n">PC5</span><span class="p">;</span>
         <span class="n">SW3</span> <span class="o">&lt;-&gt;</span> <span class="n">PC6</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
-
-
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABMAAAADICAYAAAAOVp3oAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABMAAAADICAYAAAAOVp3oAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACAASURB
 VHic7N13gBTl/cfx9/PMzO7e7XU60hUrioigoAiKAvYajcaI+cUSE0vML7ZEo8SexFhiNBqDXX8a
 YxJjTKImCkoQFWvUKE2kycHdAVe3zPP8/nhm75bjQFDKHfd96XJ7u7OzMyt+np2nghBCCCGEEEII
@@ -3243,24 +3207,20 @@ iIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiI
 iIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiI
 iIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiI
 iIiIjLP/DwnHj9AhfM5rAAAAAElFTkSuQmCC
-"
->
-</div>
-
-</div>
-
+">
+</img></div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Keep in mind that the switches don&#39;t really belong to any VLANs at all.</strong></p>
+<p><strong>Keep in mind that the switches don't really belong to any VLANs at all.</strong></p>
 <h3 id="add-vlan-students">Add VLAN Students</h3>
-<p>Adding the VLAN configuration has to be done on every switch. I could have used <code>VTP</code> (VLAN Trunking Protocol) but for the sake of exercise I&#39;ll do it manually, beginning with <code>SW1</code>:</p>
+<p>Adding the VLAN configuration has to be done on every switch. I could have used <code>VTP</code> (VLAN Trunking Protocol) but for the sake of exercise I'll do it manually, beginning with <code>SW1</code>:</p>
 <pre><code class="language-.bash">SW1(config)<span class="comment">#vlan 10</span>
 SW1(config-vlan)<span class="comment">#name Students</span>
 SW1(config-vlan)<span class="comment">#exit</span>
@@ -3298,13 +3258,13 @@ SW3(config-<span class="keyword">if</span>)<span class="comment">#switchport mod
 SW3(config-<span class="keyword">if</span>)<span class="comment">#switchport access vlan 20</span>
 SW3(config-<span class="keyword">if</span>)<span class="comment">#no shutdown</span>
 </code></pre>
-<p>Don&#39;t forget to add the VLAN config to <code>SW1</code> as well:</p>
+<p>Don't forget to add the VLAN config to <code>SW1</code> as well:</p>
 <pre><code class="language-.bash">SW1(config)<span class="preprocessor">#vlan 20</span>
 SW1(config-vlan)<span class="preprocessor">#name Teachers</span>
 SW1(config-vlan)<span class="preprocessor">#exit</span>
 </code></pre>
 <h3 id="restrict-vlans-on-trunk-ports">Restrict VLANs on trunk ports</h3>
-<p>If you have a look at the configured trunk ports, you&#39;ll get sth like this:</p>
+<p>If you have a look at the configured trunk ports, you'll get sth like this:</p>
 <pre><code class="language-.bash">SW1<span class="comment">#sh int trunk</span>
 Port        Mode         Encapsulation  Status        Native vlan
 Fa0/<span class="number">1</span>       <span class="function_start"><span class="keyword">on</span> </span>          <span class="number">802.1</span>q         trunking      <span class="number">1</span>
@@ -3318,7 +3278,7 @@ Fa0/<span class="number">1</span>       <span class="number">1</span>,<span clas
 Port        Vlans <span class="keyword">in</span> spanning tree forwarding state <span class="keyword">and</span> <span class="keyword">not</span> pruned
 Fa0/<span class="number">1</span>       <span class="number">1</span>,<span class="number">10</span>,<span class="number">20</span>
 </code></pre>
-<p>You&#39;ll notice that the <strong>allowed VLANs</strong> on the trunk ports range from <code>1-1005</code>. Actually (and due to security reasons) we want to restrict the VLANs which should be forwarded by the switches:</p>
+<p>You'll notice that the <strong>allowed VLANs</strong> on the trunk ports range from <code>1-1005</code>. Actually (and due to security reasons) we want to restrict the VLANs which should be forwarded by the switches:</p>
 <pre><code class="language-.bash">SW1(config)<span class="comment">#int f0/1</span>
 SW1(config-<span class="keyword">if</span>)<span class="comment">#switchport trunk allowed vlan 10,20</span>
 </code></pre>
@@ -3342,30 +3302,29 @@ Fa0/<span class="number">2</span>       <span class="number">10</span>,<span cla
 </code></pre>
 <h3 id="configure-switch-virtual-interfaces">Configure Switch Virtual Interfaces</h3>
 <p>Traditionally switches operate on <em>Layer 2</em>. By using <strong>SVI</strong>s (Switch Virtual Interface) the switches uses a virtual <em>Layer 3</em> interface to route traffic to other <em>Layer 3</em> interface without any physical router. VLANs divide networks into smaller segments which keep traffic inside the VLAN. And because each VLAN has its own domain, a mechanism is needed to pass data to other VLANs.</p>
-<p>In our case we&#39;ll have to add each switch to some VLAN and assign some SVI a valid routable IP address.</p>
-<table cellpadding="0" cellspacing="0" width="100%" border="0">
-  <tr>
-    <th>Switch </th>
-    <th>IP address</th>
-    <th>VLAN</th>
-  </tr>
-  <tr>
-    <td>SW1</td>
-    <td>30.30.30.1</td>
-    <td>Management</td>
-  </tr>
-  <tr>
-    <td>SW2</td>
-    <td>30.30.30.2</td>
-    <td>Management</td>
-  </tr>
-  <tr>
-    <td>SW3</td>
-    <td>30.30.30.3</td>
-    <td>Management</td>
-  </tr>
+<p>In our case we'll have to add each switch to some VLAN and assign some SVI a valid routable IP address.</p>
+<table border="0" cellpadding="0" cellspacing="0" class=" table-striped table table-hover" width="100%">
+<tr>
+<th>Switch </th>
+<th>IP address</th>
+<th>VLAN</th>
+</tr>
+<tr>
+<td>SW1</td>
+<td>30.30.30.1</td>
+<td>Management</td>
+</tr>
+<tr>
+<td>SW2</td>
+<td>30.30.30.2</td>
+<td>Management</td>
+</tr>
+<tr>
+<td>SW3</td>
+<td>30.30.30.3</td>
+<td>Management</td>
+</tr>
 </table>
-
 <ul>
 <li>Configure <code>SW1</code>:</li>
 </ul>
@@ -3412,7 +3371,7 @@ SW3<span class="comment">#sh ip int brief</span>
 <span class="keyword">...</span>
 Vlan30                 <span class="number">30.30</span><span class="number">.30</span><span class="number">.3</span>      YES manual up                    down
 </code></pre>
-<p>As you can see the interfaces are all in <strong>up/down</strong> state which is generally a <strong>Layer 2</strong> problem. If you remember correctly we have configured the <em>trunk</em> ports previously. We also allowed only <em>specific</em> VLANs to pass through these trunks. In this case we&#39;ll have to allow VLAN <strong>Management</strong> as well. Just an example for <code>SW2</code>:</p>
+<p>As you can see the interfaces are all in <strong>up/down</strong> state which is generally a <strong>Layer 2</strong> problem. If you remember correctly we have configured the <em>trunk</em> ports previously. We also allowed only <em>specific</em> VLANs to pass through these trunks. In this case we'll have to allow VLAN <strong>Management</strong> as well. Just an example for <code>SW2</code>:</p>
 <pre><code class="language-.bash">SW2(config)#<span class="typename">int</span> <span class="keyword">range</span> f0<span class="number">/1</span> -<span class="number"> 2</span>
 SW2(config-<span class="keyword">if</span>-<span class="keyword">range</span>)#switchport trunk allowed vlan<span class="number"> 10</span><span class="number">,20</span><span class="number">,30</span>
 </code></pre>
@@ -3441,7 +3400,7 @@ Vlan30                 <span class="number">30.30</span><span class="number">.30
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="connectivity">Connectivity</h2>
 <h3 id="ping-between-pcs">Ping between PCs</h3>
-<p>Now let&#39;s check the connectivity between the posts:</p>
+<p>Now let's check the connectivity between the posts:</p>
 <ul>
 <li><code>PC1</code> -&gt; <code>PC2</code>:</li>
 </ul>
@@ -3504,7 +3463,7 @@ Sending <span class="number">5</span>, <span class="number">100</span>-byte ICMP
 ..!!!
 Success rate <span class="keyword">is</span> <span class="number">60</span> percent (<span class="number">3</span>/<span class="number">5</span>), <span class="command">round</span>-trip min/avg/max = <span class="number">0</span>/<span class="number">0</span>/<span class="number">0</span> ms
 </code></pre>
-<p>The first 2 ICMP Echo Requests were not successful because <code>SW3</code> and <code>SW2</code> didn&#39;t have yet the MAC address of <code>SW1</code>. The 2nd ping command will therefore have 100% connectivity rate since the MAC address table has been updated:</p>
+<p>The first 2 ICMP Echo Requests were not successful because <code>SW3</code> and <code>SW2</code> didn't have yet the MAC address of <code>SW1</code>. The 2nd ping command will therefore have 100% connectivity rate since the MAC address table has been updated:</p>
 <pre><code class="language-.bash">SW3<span class="comment">#ping 30.30.30.1</span>
 
 Type escape sequence <span class="keyword">to</span> abort.
@@ -3549,7 +3508,7 @@ SW1<span class="comment">#</span>
   <span class="comment">20</span>    <span class="comment">0030</span>.<span class="comment">a319</span>.<span class="comment">da0b</span>    <span class="comment">DYNAMIC</span>     <span class="comment">Fa0/4</span>
   <span class="comment">20</span>    <span class="comment">0030</span>.<span class="comment">a341</span>.<span class="comment">e901</span>    <span class="comment">DYNAMIC</span>     <span class="comment">Fa0/2</span>
   <span class="comment">20</span>    <span class="comment">0060</span>.<span class="comment">7079</span>.<span class="comment">8692</span>    <span class="comment">DYNAMIC</span>     <span class="comment">Fa0/2
-</code></pre>
+</span></code></pre>
 </div>
 </div>
 </div>
@@ -3611,9 +3570,9 @@ Security Violation Count   : <span class="number">0</span>
     <ul>
         <li><a href="http://blog.dornea.nu/2015/11/06/advanced-inter-vlan-switching-using-cisco">Advanced inter VLAN switching using Cisco</a></li>
         <li><a href="http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids">OpenVPN for paranoids</a></li>
-        <li><a href="http://blog.dornea.nu/2015/06/03/usd-ag-hacker-day-in-hamburg">usd AG Hacker Day in Hamburg</a></li>
-        <li><a href="http://blog.dornea.nu/2011/03/19/my-own-cheap-nas-the-openwrt-way">My own cheap NAS &#8211; the OpenWRT way</a></li>
-        <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump-ipython-notebook-version">24h Android sniffing using tcpdump - IPython Notebook Version</a></li>
+        <li><a href="http://blog.dornea.nu/2010/10/13/howto-build-your-own-wifi-wlan-hotspot-using-hostap">HowTo: Build your own Wifi WLAN hotspot using hostap</a></li>
+        <li><a href="http://blog.dornea.nu/2011/04/02/block-facebook-with-iptables-on-openwrt">Block facebook with iptables on OpenWrt</a></li>
+        <li><a href="http://blog.dornea.nu/2015/10/02/manage-pki-using-openssl">Manage PKI using OpenSSL</a></li>
     </ul>
 </section>
     <hr />

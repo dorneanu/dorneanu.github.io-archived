@@ -1709,16 +1709,13 @@ blog.dornea.nu            </a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>Due to NetBSD&#8217;s great packaging system, software gets updated very frequently. It is very important to have a clean and safe system running and no outdated packages on your system. They might be vulnerable to recently discovered bugs and affect your systems&#8217;s security and performance. After updating the package tree (see <a href="http://www.netbsd.org/docs/pkgsrc/using.html">documentation</a>), I usually update my whole system by running:<!--more--></p>
+                <p>Due to NetBSD’s great packaging system, software gets updated very frequently. It is very important to have a clean and safe system running and no outdated packages on your system. They might be vulnerable to recently discovered bugs and affect your systems’s security and performance. After updating the package tree (see <a href="http://www.netbsd.org/docs/pkgsrc/using.html">documentation</a>), I usually update my whole system by running:<!--more--></p>
 <pre class="brush: plain; toolbar: false;">$ pkg_chk -su
 </pre>
-
 <p>Actually there is nothing wrong about that. Yet there is one big problem, which caused me to seek for another updating mechanism.</p>
 <!--break-->
-
 <pre class="brush: plain; toolbar: false;">$ pkg_chk -sun &gt; pkg_chk.log
 </pre>
-
 <p>The log file might look like this:</p>
 <pre class="brush: bash">archivers/gtar-base - gtar-base-1.20 &lt; gtar-base-1.22
 WARNING: No archivers/lzma-utils/Makefile - package moved or obsolete?
@@ -1754,25 +1751,23 @@ devel/autoconf - autoconf-2.63 &lt; autoconf-2.64
 
 [ Rechecking packages after deletions ]
 </pre>
-
-<p>So before updating any package &#8220;pkg_chk&#8221; will first delete the package AND its dependencies. This will take a lot of time when you&#8217;ll have to update big packages, e.g. Firefox. All its dependencies will be first updated and then the main package (in this case Firefox).</p>
-<p>If you want to save time and effort, you should better use another utility called &#8220;pkg_rolling-replace&#8221;. This will rebuild or update packages using &#8220;make replace&#8221; in tsorted order. For more information click <a href="http://pkgsrc.se/pkgtools/pkg_rolling-replace">here</a>.</p>
+<p>So before updating any package “pkg_chk” will first delete the package AND its dependencies. This will take a lot of time when you’ll have to update big packages, e.g. Firefox. All its dependencies will be first updated and then the main package (in this case Firefox).</p>
+<p>If you want to save time and effort, you should better use another utility called “pkg_rolling-replace”. This will rebuild or update packages using “make replace” in tsorted order. For more information click <a href="http://pkgsrc.se/pkgtools/pkg_rolling-replace">here</a>.</p>
 <p>In order to update all packages on my system and ensure correct shared library dependencies, I run following commando:</p>
 <pre class="brush: plain; toolbar: false;">$ pkg_rolling-replace -rsuv
 </pre>
-
-<p>&nbsp;</p>
+<p> </p>
 <p>Keep it up2date!</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2014/05/20/howto-write-pentest-reports-the-easy-way">HowTo: Write pentest reports the easy way</a></li>
-        <li><a href="http://blog.dornea.nu/2009/04/24/turn-vim-into-your-favourite-ide">Turn VIM into your favourite IDE</a></li>
-        <li><a href="http://blog.dornea.nu/2013/05/25/berlinsides-0x04">BerlinSides 0&#215;04</a></li>
-        <li><a href="http://blog.dornea.nu/2009/07/08/ganxtaville52-la14becker-hood">Ganxtaville52 &#8211; LÃ¼becker Hood</a></li>
-        <li><a href="http://blog.dornea.nu/2010/05/03/torrents-over-tor-dont">Torrents over TOR?! Don&#8217;t!</a></li>
+        <li><a href="http://blog.dornea.nu/2009/05/07/der-buschfunk-kommt">Der Buschfunk kommt&#8230;</a></li>
+        <li><a href="http://blog.dornea.nu/2009/06/26/netbeans-67-on-netbsd-50-amd64">Netbeans 6.7 on NetBSD 5.0 (Amd64)</a></li>
+        <li><a href="http://blog.dornea.nu/2009/05/05/netbsd-rulez">NetBSD rulez!</a></li>
+        <li><a href="http://blog.dornea.nu/2010/07/24/page-rank-1">Page rank 1!</a></li>
+        <li><a href="http://blog.dornea.nu/2013/06/26/dinge-die-ein-informatikerstudent-niemals-sagen-wa14rde">Dinge, die ein Informatikerstudent niemals sagen wÃ¼rde&#8230;.</a></li>
     </ul>
 </section>
     <hr />

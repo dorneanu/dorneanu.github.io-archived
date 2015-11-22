@@ -1724,41 +1724,35 @@ blog.dornea.nu            </a>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I thought this might be interesting enough to share with you. Every time I&#39;m working with DataFrames I somehow miss the search feature: I&#39;d like to search for certain patterns inside the columns and rows. I used to use <a href="https://datatables.net">JQuery DataTables</a> for <a href="http://dornea.nu/projects/netgrafio">netgrafio</a>. But I couldn&#39;t find any simple way to integrate it with IPython. Well it was easier than I thought.</p>
+<p>I thought this might be interesting enough to share with you. Every time I'm working with DataFrames I somehow miss the search feature: I'd like to search for certain patterns inside the columns and rows. I used to use <a href="https://datatables.net">JQuery DataTables</a> for <a href="http://dornea.nu/projects/netgrafio">netgrafio</a>. But I couldn't find any simple way to integrate it with IPython. Well it was easier than I thought.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In []:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb">
 </pre></div>
-
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Extensions">Extensions<a class="anchor-link" href="#Extensions">&#182;</a></h2>
+<h2 id="Extensions">Extensions<a class="anchor-link" href="#Extensions">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[236]:
+In [236]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">display</span>
@@ -1768,14 +1762,14 @@ In&nbsp;[236]:
 <span class="c"># Create jinja cell magic (http://nbviewer.ipython.org/urls/gist.github.com/bj0/5343292/raw/23a0845ee874827e3635edb0bf5701710a537bfc/jinja2.ipynb)</span>
 <span class="nd">@magics_class</span>
 <span class="k">class</span> <span class="nc">JinjaMagics</span><span class="p">(</span><span class="n">Magics</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Magics class containing the jinja2 magic and state&#39;&#39;&#39;</span>
+    <span class="sd">'''Magics class containing the jinja2 magic and state'''</span>
     
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shell</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">JinjaMagics</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">shell</span><span class="p">)</span>
         
         <span class="c"># create a jinja2 environment to use for rendering</span>
         <span class="c"># this can be modified for desired effects (ie: using different variable syntax)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="n">jinja2</span><span class="o">.</span><span class="n">Environment</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">jinja2</span><span class="o">.</span><span class="n">FileSystemLoader</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="n">jinja2</span><span class="o">.</span><span class="n">Environment</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">jinja2</span><span class="o">.</span><span class="n">FileSystemLoader</span><span class="p">(</span><span class="s">'.'</span><span class="p">))</span>
         
         <span class="c"># possible output types</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">display_functions</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">html</span><span class="o">=</span><span class="n">display</span><span class="o">.</span><span class="n">HTML</span><span class="p">,</span> 
@@ -1787,17 +1781,17 @@ In&nbsp;[236]:
     
     <span class="nd">@cell_magic</span>
     <span class="k">def</span> <span class="nf">jinja</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">cell</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">'''</span>
 <span class="sd">        jinja2 cell magic function.  Contents of cell are rendered by jinja2, and </span>
 <span class="sd">        the line can be used to specify output type.</span>
 
-<span class="sd">        ie: &quot;%%jinja html&quot; will return the rendered cell wrapped in an HTML object.</span>
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        ie: "%%jinja html" will return the rendered cell wrapped in an HTML object.</span>
+<span class="sd">        '''</span>
         <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">display_functions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">display</span><span class="o">.</span><span class="n">display</span><span class="p">)</span>
         
         <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
         <span class="n">rend</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="nb">dict</span><span class="p">((</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">user_ns</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> 
-                                        <span class="k">if</span> <span class="ow">not</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;_&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">user_ns_hidden</span><span class="p">))</span>
+                                        <span class="k">if</span> <span class="ow">not</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">'_'</span><span class="p">)</span> <span class="ow">and</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">user_ns_hidden</span><span class="p">))</span>
         
         <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">rend</span><span class="p">)</span>
         
@@ -1805,53 +1799,48 @@ In&nbsp;[236]:
 <span class="n">ip</span> <span class="o">=</span> <span class="n">get_ipython</span><span class="p">()</span>
 <span class="n">ip</span><span class="o">.</span><span class="n">register_magics</span><span class="p">(</span><span class="n">JinjaMagics</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="DataTable-function">DataTable function<a class="anchor-link" href="#DataTable-function">&#182;</a></h2>
+<h2 id="DataTable-function">DataTable function<a class="anchor-link" href="#DataTable-function">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[259]:
+In [259]:
 </div>
-
 <div class="collapseheader box-flex1"><span style="">Expand Code</span>
 <div class="input_area box-flex1" style="display:none">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">uuid</span>
 
 <span class="k">def</span> <span class="nf">DataTable</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Prints a pandas.DataFrame as JQuery DataTables &quot;&quot;&quot;</span>
+    <span class="sd">""" Prints a pandas.DataFrame as JQuery DataTables """</span>
     <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
     <span class="c"># Generate random container name</span>
     <span class="n">id_container</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid1</span><span class="p">()</span>
-    <span class="n">output</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">        &lt;div id=&quot;datatable-container-</span><span class="si">%s</span><span class="s">&quot;&gt;</span>
-<span class="s">            &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css&quot;&gt;</span>
-<span class="s">            &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css&quot;&gt;</span>
-<span class="s">            &lt;script type=&quot;text/javascript&quot; charset=&quot;utf8&quot; src=&quot;http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js&quot;&gt;&lt;/script&gt;</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="s">"""</span>
+<span class="s">        &lt;div id="datatable-container-</span><span class="si">%s</span><span class="s">"&gt;</span>
+<span class="s">            &lt;link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css"&gt;</span>
+<span class="s">            &lt;link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css"&gt;</span>
+<span class="s">            &lt;script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"&gt;&lt;/script&gt;</span>
 
-<span class="s">            &lt;script type=&quot;text/javascript&quot;&gt;</span>
+<span class="s">            &lt;script type="text/javascript"&gt;</span>
 <span class="s">                var url = window.location.href;</span>
 <span class="s">                </span>
-<span class="s">                if(url.indexOf(&quot;localhost:9999&quot;) != -1){</span>
-<span class="s">                    $(&#39;#datatable-container-</span><span class="si">%s</span><span class="s"> table.datatable&#39;).dataTable();</span>
+<span class="s">                if(url.indexOf("localhost:9999") != -1){</span>
+<span class="s">                    $('#datatable-container-</span><span class="si">%s</span><span class="s"> table.datatable').dataTable();</span>
 <span class="s">                } else {</span>
-<span class="s">                    $.getScript(&quot;http://code.jquery.com/jquery-1.11.1.min.js&quot;);</span>
+<span class="s">                    $.getScript("http://code.jquery.com/jquery-1.11.1.min.js");</span>
 <span class="s">                    $(document).ready(function() {</span>
-<span class="s">                        $(&#39;#datatable-container-</span><span class="si">%s</span><span class="s"> table.datatable&#39;).dataTable();</span>
+<span class="s">                        $('#datatable-container-</span><span class="si">%s</span><span class="s"> table.datatable').dataTable();</span>
 <span class="s">                    });</span>
 <span class="s">                }</span>
 <span class="s">                </span>
@@ -1859,46 +1848,38 @@ In&nbsp;[259]:
 <span class="s">            &lt;!-- Insert table below --&gt;</span>
 <span class="s">            </span><span class="si">%s</span><span class="s"></span>
 <span class="s">        &lt;/div&gt;</span>
-<span class="s">    &quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">id_container</span><span class="p">,</span> <span class="n">id_container</span><span class="p">,</span> <span class="n">id_container</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="s">&quot;datatable dataframe&quot;</span><span class="p">))</span>
+<span class="s">    """</span> <span class="o">%</span> <span class="p">(</span><span class="n">id_container</span><span class="p">,</span> <span class="n">id_container</span><span class="p">,</span> <span class="n">id_container</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="s">"datatable dataframe"</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">HTML</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[250]:
+In [250]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb">
 </pre></div>
-
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I know the code is not perfect, but at least it works for me. Now let&#39;s create some random DataFrame: </p>
+<p>I know the code is not perfect, but at least it works for me. Now let's create some random DataFrame: </p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[247]:
+In [247]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">urllib2</span>
@@ -1906,345 +1887,321 @@ In&nbsp;[247]:
 
 
 <span class="c"># Fetch list of random URLs (found using Google)</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s">&#39;http://files.ianonavy.com/urls.txt&#39;</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s">'http://files.ianonavy.com/urls.txt'</span><span class="p">)</span>
 <span class="n">targets_row</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
 <span class="c"># Create DataFrame</span>
-<span class="n">targets</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">targets_row</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;Target&quot;</span><span class="p">])</span>
+<span class="n">targets</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">targets_row</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"Target"</span><span class="p">])</span>
 
 <span class="c"># Join root domain + suffix</span>
-<span class="n">extract_root_domain</span> <span class="o">=</span>  <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tldextract</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">extract_root_domain</span> <span class="o">=</span>  <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s">'.'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tldextract</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
 
-<span class="n">target_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;scheme&#39;</span><span class="p">,</span> <span class="s">&#39;userinfo&#39;</span><span class="p">,</span> <span class="s">&#39;host&#39;</span><span class="p">,</span> <span class="s">&#39;port&#39;</span><span class="p">,</span> <span class="s">&#39;path&#39;</span><span class="p">,</span> <span class="s">&#39;query&#39;</span><span class="p">,</span> <span class="s">&#39;fragment&#39;</span><span class="p">,</span> <span class="s">&#39;decoded&#39;</span><span class="p">]</span>
-<span class="n">target_component</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">URL</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">[</span><span class="s">&#39;Target&#39;</span><span class="p">]]</span>
+<span class="n">target_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'scheme'</span><span class="p">,</span> <span class="s">'userinfo'</span><span class="p">,</span> <span class="s">'host'</span><span class="p">,</span> <span class="s">'port'</span><span class="p">,</span> <span class="s">'path'</span><span class="p">,</span> <span class="s">'query'</span><span class="p">,</span> <span class="s">'fragment'</span><span class="p">,</span> <span class="s">'decoded'</span><span class="p">]</span>
+<span class="n">target_component</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">URL</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">[</span><span class="s">'Target'</span><span class="p">]]</span>
 
 <span class="c"># Create data frame</span>
 <span class="n">df_targets</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">target_component</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">target_columns</span><span class="p">)</span>
 </pre></div>
-
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Classic-HTML-output">Classic HTML output<a class="anchor-link" href="#Classic-HTML-output">&#182;</a></h3>
+<h3 id="Classic-HTML-output">Classic HTML output<a class="anchor-link" href="#Classic-HTML-output">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[239]:
+In [239]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_targets</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span>
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt output_prompt">
     Out[239]:</div>
-
 <div class="output_html rendered_html output_subarea output_pyout">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>scheme</th>
-      <th>userinfo</th>
-      <th>host</th>
-      <th>port</th>
-      <th>path</th>
-      <th>query</th>
-      <th>fragment</th>
-      <th>decoded</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0 </th>
-      <td> http</td>
-      <td> </td>
-      <td>               www.altpress.org</td>
-      <td> </td>
-      <td>                  /</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <th>1 </th>
-      <td> http</td>
-      <td> </td>
-      <td>           www.nzfortress.co.nz</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <th>2 </th>
-      <td> http</td>
-      <td> </td>
-      <td>         www.evillasforsale.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <th>3 </th>
-      <td> http</td>
-      <td> </td>
-      <td>           www.playingenemy.com</td>
-      <td> </td>
-      <td>                  /</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <th>4 </th>
-      <td> http</td>
-      <td> </td>
-      <td>      www.richardsonscharts.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <th>5 </th>
-      <td> http</td>
-      <td> </td>
-      <td>                 www.xenith.net</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <th>6 </th>
-      <td> http</td>
-      <td> </td>
-      <td>             www.tdbrecords.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <th>7 </th>
-      <td> http</td>
-      <td> </td>
-      <td>   www.electrichumanproject.com</td>
-      <td> </td>
-      <td>                  /</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <th>8 </th>
-      <td> http</td>
-      <td> </td>
-      <td>      tweekerchick.blogspot.com</td>
-      <td> </td>
-      <td>                  /</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <th>9 </th>
-      <td> http</td>
-      <td> </td>
-      <td>                www.besound.com</td>
-      <td> </td>
-      <td> /pushead/home.html</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td> http</td>
-      <td> </td>
-      <td> www.porkchopscreenprinting.com</td>
-      <td> </td>
-      <td>                  /</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td> http</td>
-      <td> </td>
-      <td>           www.kinseyvisual.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td> http</td>
-      <td> </td>
-      <td>             www.rathergood.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td> http</td>
-      <td> </td>
-      <td>                 www.lepoint.fr</td>
-      <td> </td>
-      <td>                  /</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td> http</td>
-      <td> </td>
-      <td>                  www.revhq.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td> http</td>
-      <td> </td>
-      <td>        www.poprocksandcoke.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td> http</td>
-      <td> </td>
-      <td>            www.samuraiblue.com</td>
-      <td> </td>
-      <td>                  /</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td> http</td>
-      <td> </td>
-      <td>                www.openbsd.org</td>
-      <td> </td>
-      <td>   /cgi-bin/man.cgi</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td> http</td>
-      <td> </td>
-      <td>                www.sysblog.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td> http</td>
-      <td> </td>
-      <td>         www.voicesofsafety.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-  </tbody>
+<table border="1" class=" table-striped table table-hover dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>scheme</th>
+<th>userinfo</th>
+<th>host</th>
+<th>port</th>
+<th>path</th>
+<th>query</th>
+<th>fragment</th>
+<th>decoded</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0 </th>
+<td> http</td>
+<td> </td>
+<td>               www.altpress.org</td>
+<td> </td>
+<td>                  /</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<th>1 </th>
+<td> http</td>
+<td> </td>
+<td>           www.nzfortress.co.nz</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<th>2 </th>
+<td> http</td>
+<td> </td>
+<td>         www.evillasforsale.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<th>3 </th>
+<td> http</td>
+<td> </td>
+<td>           www.playingenemy.com</td>
+<td> </td>
+<td>                  /</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<th>4 </th>
+<td> http</td>
+<td> </td>
+<td>      www.richardsonscharts.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<th>5 </th>
+<td> http</td>
+<td> </td>
+<td>                 www.xenith.net</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<th>6 </th>
+<td> http</td>
+<td> </td>
+<td>             www.tdbrecords.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<th>7 </th>
+<td> http</td>
+<td> </td>
+<td>   www.electrichumanproject.com</td>
+<td> </td>
+<td>                  /</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<th>8 </th>
+<td> http</td>
+<td> </td>
+<td>      tweekerchick.blogspot.com</td>
+<td> </td>
+<td>                  /</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<th>9 </th>
+<td> http</td>
+<td> </td>
+<td>                www.besound.com</td>
+<td> </td>
+<td> /pushead/home.html</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<th>10</th>
+<td> http</td>
+<td> </td>
+<td> www.porkchopscreenprinting.com</td>
+<td> </td>
+<td>                  /</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<th>11</th>
+<td> http</td>
+<td> </td>
+<td>           www.kinseyvisual.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<th>12</th>
+<td> http</td>
+<td> </td>
+<td>             www.rathergood.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<th>13</th>
+<td> http</td>
+<td> </td>
+<td>                 www.lepoint.fr</td>
+<td> </td>
+<td>                  /</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<th>14</th>
+<td> http</td>
+<td> </td>
+<td>                  www.revhq.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<th>15</th>
+<td> http</td>
+<td> </td>
+<td>        www.poprocksandcoke.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<th>16</th>
+<td> http</td>
+<td> </td>
+<td>            www.samuraiblue.com</td>
+<td> </td>
+<td>                  /</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<th>17</th>
+<td> http</td>
+<td> </td>
+<td>                www.openbsd.org</td>
+<td> </td>
+<td>   /cgi-bin/man.cgi</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<th>18</th>
+<td> http</td>
+<td> </td>
+<td>                www.sysblog.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<th>19</th>
+<td> http</td>
+<td> </td>
+<td>         www.voicesofsafety.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="JQuery-DataTables-output">JQuery DataTables output<a class="anchor-link" href="#JQuery-DataTables-output">&#182;</a></h3>
+<h3 id="JQuery-DataTables-output">JQuery DataTables output<a class="anchor-link" href="#JQuery-DataTables-output">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[260]:
+In [260]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">DataTable</span><span class="p">(</span><span class="n">df_targets</span><span class="p">[:</span><span class="mi">20</span><span class="p">])</span>
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt output_prompt">
     Out[260]:</div>
-
 <div class="output_html rendered_html output_subarea output_pyout">
-
-        <div id="datatable-container-aab341ae-2f8d-11e4-95d5-52540086692e">
-            <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css">
-            <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css">
-            <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>
-
-            <script type="text/javascript">
+<div id="datatable-container-aab341ae-2f8d-11e4-95d5-52540086692e">
+<link href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+<link href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css" rel="stylesheet" type="text/css">
+<script charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js" type="text/javascript"></script>
+<script type="text/javascript">
                 var url = window.location.href;
                 
                 if(url.indexOf("localhost:9999") != -1){
@@ -2257,558 +2214,526 @@ In&nbsp;[260]:
                 }
                 
             </script>
-            <!-- Insert table below -->
-            <table border="1" class="dataframe datatable dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>scheme</th>
-      <th>userinfo</th>
-      <th>host</th>
-      <th>port</th>
-      <th>path</th>
-      <th>query</th>
-      <th>fragment</th>
-      <th>decoded</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>               www.altpress.org</td>
-      <td> </td>
-      <td>                  /</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>           www.nzfortress.co.nz</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>         www.evillasforsale.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>           www.playingenemy.com</td>
-      <td> </td>
-      <td>                  /</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>      www.richardsonscharts.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>                 www.xenith.net</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>             www.tdbrecords.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>   www.electrichumanproject.com</td>
-      <td> </td>
-      <td>                  /</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>      tweekerchick.blogspot.com</td>
-      <td> </td>
-      <td>                  /</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>                www.besound.com</td>
-      <td> </td>
-      <td> /pushead/home.html</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td> www.porkchopscreenprinting.com</td>
-      <td> </td>
-      <td>                  /</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>           www.kinseyvisual.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>             www.rathergood.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>                 www.lepoint.fr</td>
-      <td> </td>
-      <td>                  /</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>                  www.revhq.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>        www.poprocksandcoke.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>            www.samuraiblue.com</td>
-      <td> </td>
-      <td>                  /</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>                www.openbsd.org</td>
-      <td> </td>
-      <td>   /cgi-bin/man.cgi</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>                www.sysblog.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>         www.voicesofsafety.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-  </tbody>
+<!-- Insert table below -->
+<table border="1" class=" table-striped table table-hover datatable dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>scheme</th>
+<th>userinfo</th>
+<th>host</th>
+<th>port</th>
+<th>path</th>
+<th>query</th>
+<th>fragment</th>
+<th>decoded</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> http</td>
+<td> </td>
+<td>               www.altpress.org</td>
+<td> </td>
+<td>                  /</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>           www.nzfortress.co.nz</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>         www.evillasforsale.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>           www.playingenemy.com</td>
+<td> </td>
+<td>                  /</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>      www.richardsonscharts.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>                 www.xenith.net</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>             www.tdbrecords.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>   www.electrichumanproject.com</td>
+<td> </td>
+<td>                  /</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>      tweekerchick.blogspot.com</td>
+<td> </td>
+<td>                  /</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>                www.besound.com</td>
+<td> </td>
+<td> /pushead/home.html</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td> www.porkchopscreenprinting.com</td>
+<td> </td>
+<td>                  /</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>           www.kinseyvisual.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>             www.rathergood.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>                 www.lepoint.fr</td>
+<td> </td>
+<td>                  /</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>                  www.revhq.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>        www.poprocksandcoke.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>            www.samuraiblue.com</td>
+<td> </td>
+<td>                  /</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>                www.openbsd.org</td>
+<td> </td>
+<td>   /cgi-bin/man.cgi</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>                www.sysblog.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>         www.voicesofsafety.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+</tbody>
 </table>
-        </div>
-    
-</div>
-
-</div>
-
+</link></link></div>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Jinja2-cellmagic">Jinja2 cellmagic<a class="anchor-link" href="#Jinja2-cellmagic">&#182;</a></h3>
+<h3 id="Jinja2-cellmagic">Jinja2 cellmagic<a class="anchor-link" href="#Jinja2-cellmagic">¶</a></h3>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[242]:
+In [242]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">html_output</span> <span class="o">=</span> <span class="n">DataTable</span><span class="p">(</span><span class="n">df_targets</span><span class="p">[:</span><span class="mi">20</span><span class="p">])</span>
 </pre></div>
-
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[211]:
+In [211]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">jinja</span> <span class="n">html</span>
-<span class="o">&lt;</span><span class="n">div</span> <span class="nb">id</span><span class="o">=</span><span class="s">&quot;table-container&quot;</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">div</span> <span class="nb">id</span><span class="o">=</span><span class="s">"table-container"</span><span class="o">&gt;</span>
     <span class="p">{{</span> <span class="n">html_output</span> <span class="p">}}</span>
 <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt output_prompt">
     Out[211]:</div>
-
 <div class="output_html rendered_html output_subarea output_pyout">
 <div id="table-container">
-    <IPython.core.display.HTML object at 0x7f042eaa02d0>
+<ipython.core.display.html 0x7f042eaa02d0="" at="" object="">
+</ipython.core.display.html></div>
 </div>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[243]:
+In [243]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">html_output</span>
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt output_prompt">
     Out[243]:</div>
-
 <div class="output_html rendered_html output_subarea output_pyout">
-
-        <div id="datatable-container-3b6a2692-2f8c-11e4-95d5-52540086692e">
-            <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css">
-            <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css">
-            <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>
-
-            <script type="text/javascript">
+<div id="datatable-container-3b6a2692-2f8c-11e4-95d5-52540086692e">
+<link href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+<link href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css" rel="stylesheet" type="text/css">
+<script charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js" type="text/javascript"></script>
+<script type="text/javascript">
                 $('#datatable-container-3b6a2692-2f8c-11e4-95d5-52540086692e table.datatable').dataTable();
             </script>
-            <!-- Insert table below -->
-            <table border="1" class="dataframe datatable dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>scheme</th>
-      <th>userinfo</th>
-      <th>host</th>
-      <th>port</th>
-      <th>path</th>
-      <th>query</th>
-      <th>fragment</th>
-      <th>decoded</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>               www.altpress.org</td>
-      <td> </td>
-      <td>                  /</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>           www.nzfortress.co.nz</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>         www.evillasforsale.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>           www.playingenemy.com</td>
-      <td> </td>
-      <td>                  /</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>      www.richardsonscharts.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>                 www.xenith.net</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>             www.tdbrecords.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>   www.electrichumanproject.com</td>
-      <td> </td>
-      <td>                  /</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>      tweekerchick.blogspot.com</td>
-      <td> </td>
-      <td>                  /</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>                www.besound.com</td>
-      <td> </td>
-      <td> /pushead/home.html</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td> www.porkchopscreenprinting.com</td>
-      <td> </td>
-      <td>                  /</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>           www.kinseyvisual.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>             www.rathergood.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>                 www.lepoint.fr</td>
-      <td> </td>
-      <td>                  /</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>                  www.revhq.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>        www.poprocksandcoke.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>            www.samuraiblue.com</td>
-      <td> </td>
-      <td>                  /</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>                www.openbsd.org</td>
-      <td> </td>
-      <td>   /cgi-bin/man.cgi</td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>                www.sysblog.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-    <tr>
-      <td> http</td>
-      <td> </td>
-      <td>         www.voicesofsafety.com</td>
-      <td> </td>
-      <td>                   </td>
-      <td> </td>
-      <td> </td>
-      <td> False</td>
-    </tr>
-  </tbody>
+<!-- Insert table below -->
+<table border="1" class=" table-striped table table-hover datatable dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>scheme</th>
+<th>userinfo</th>
+<th>host</th>
+<th>port</th>
+<th>path</th>
+<th>query</th>
+<th>fragment</th>
+<th>decoded</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> http</td>
+<td> </td>
+<td>               www.altpress.org</td>
+<td> </td>
+<td>                  /</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>           www.nzfortress.co.nz</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>         www.evillasforsale.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>           www.playingenemy.com</td>
+<td> </td>
+<td>                  /</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>      www.richardsonscharts.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>                 www.xenith.net</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>             www.tdbrecords.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>   www.electrichumanproject.com</td>
+<td> </td>
+<td>                  /</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>      tweekerchick.blogspot.com</td>
+<td> </td>
+<td>                  /</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>                www.besound.com</td>
+<td> </td>
+<td> /pushead/home.html</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td> www.porkchopscreenprinting.com</td>
+<td> </td>
+<td>                  /</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>           www.kinseyvisual.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>             www.rathergood.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>                 www.lepoint.fr</td>
+<td> </td>
+<td>                  /</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>                  www.revhq.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>        www.poprocksandcoke.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>            www.samuraiblue.com</td>
+<td> </td>
+<td>                  /</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>                www.openbsd.org</td>
+<td> </td>
+<td>   /cgi-bin/man.cgi</td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>                www.sysblog.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+<tr>
+<td> http</td>
+<td> </td>
+<td>         www.voicesofsafety.com</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> False</td>
+</tr>
+</tbody>
 </table>
-        </div>
-    
-</div>
-
-</div>
-
+</link></link></div>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Easy isn&#39;t it? Thx for sharing.</p>
+<p>Easy isn't it? Thx for sharing.</p>
 </div>
 </div>
 </div></p>
@@ -2817,11 +2742,11 @@ In&nbsp;[243]:
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a></li>
-        <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump">24h Android sniffing using tcpdump</a></li>
-        <li><a href="http://blog.dornea.nu/2014/06/18/migrate-this-blog-from-octopress-to-pelican">Migrate this blog from Octopress to Pelican</a></li>
-        <li><a href="http://blog.dornea.nu/2015/05/24/validating-and-pinning-x509-certificates">Validating and pinning X.509 certificates</a></li>
         <li><a href="http://blog.dornea.nu/2014/08/06/web-application-survey-tutorial">Web Application Survey Tutorial</a></li>
+        <li><a href="http://blog.dornea.nu/2015/10/02/manage-pki-using-openssl">Manage PKI using OpenSSL</a></li>
+        <li><a href="http://blog.dornea.nu/2015/07/01/debugging-android-native-shared-libraries">Debugging Android native shared libraries</a></li>
+        <li><a href="http://blog.dornea.nu/2014/08/06/python-for-data-analysis">Python for Data Analysis</a></li>
+        <li><a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a></li>
     </ul>
 </section>
     <hr />

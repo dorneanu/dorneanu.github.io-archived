@@ -1715,9 +1715,8 @@ blog.dornea.nu            </a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>So what&#8217;s this whole thing about? &#8220;<em>The wargames offered by the OverTheWire community can help you to learn and practice security concepts in the form of funfilled games.</em>&#8221; by <a href="http://www.overthewire.org/wargames/">OverTheWire.org</a>. So I started with <a href="http://www.overthewire.org/wargames/vortex/">Vortex</a> and coded an example how to read 4 integers from server, sum them up, send result to server and get the login information back from server again. Sounds quite simple&#8230;I admit I had to refresh my knowledge about linux socket programming and go through some coding examples. And here is my solution for<a href="http://www.overthewire.org/wargames/vortex/level0.shtml"> level0</a>:<!--more--></p>
+                <p>So what’s this whole thing about? “<em>The wargames offered by the OverTheWire community can help you to learn and practice security concepts in the form of funfilled games.</em>” by <a href="http://www.overthewire.org/wargames/">OverTheWire.org</a>. So I started with <a href="http://www.overthewire.org/wargames/vortex/">Vortex</a> and coded an example how to read 4 integers from server, sum them up, send result to server and get the login information back from server again. Sounds quite simple…I admit I had to refresh my knowledge about linux socket programming and go through some coding examples. And here is my solution for<a href="http://www.overthewire.org/wargames/vortex/level0.shtml"> level0</a>:<!--more--></p>
 <!--break-->
-
 <pre class="brush: c">/*
  * ========================================================
  *
@@ -1759,11 +1758,11 @@ int main(int argc, char *argv[]) {
    int i, bytes;
 
    /*  Construct the server addrinfo structure */
-   memset(&hints, 0, sizeof hints);         /*  Clear struct */
+   memset(&amp;hints;, 0, sizeof hints);         /*  Clear struct */
    hints.ai_family = AF_UNSPEC;             /*  IPv4 or IPv6 */
    hints.ai_socktype = SOCK_STREAM;
 
-   if ((rv = getaddrinfo(HOSTNAME, PORT, &hints, &servinfo)) != 0) {
+   if ((rv = getaddrinfo(HOSTNAME, PORT, &amp;hints;, &amp;servinfo;)) != 0) {
         fprintf(stderr, "getaddrinfo: %s
 ", gai_strerror(rv));
         return 1;
@@ -1785,7 +1784,7 @@ int main(int argc, char *argv[]) {
 
    /* Read 4 integers from server */
    for (i = 0; i &lt; 4; i ++) 
-      read(sock, &buffer[i], 4);
+      read(sock, &amp;buffer;[i], 4);
 
    /* Sum up integers */
    received = 0;
@@ -1793,12 +1792,12 @@ int main(int argc, char *argv[]) {
       received += buffer[i];
 
    /*  Send sum to the server */
-   if (send(sock, &received, sizeof(received), 0) != sizeof received) {
+   if (send(sock, &amp;received;, sizeof(received), 0) != sizeof received) {
       die("Mismatch in number of sent bytes");
    }
 
    /* Read login data */
-   if (recv(sock, &login_data, 200, 0) &lt; 1) {
+   if (recv(sock, &amp;login;_data, 200, 0) &lt; 1) {
       die("Mismatch in number of received bytes");
    }
 
@@ -1820,8 +1819,8 @@ int main(int argc, char *argv[]) {
         <li><a href="http://blog.dornea.nu/2013/05/02/overthewire-vortex-level2">OverTheWire: Vortex Level2</a></li>
         <li><a href="http://blog.dornea.nu/2013/05/02/overthewire-vortex-level1">OverTheWire: Vortex Level1</a></li>
         <li><a href="http://blog.dornea.nu/2014/06/02/googles-xss-game-solutions">Googles XSS Game - Solutions</a></li>
-        <li><a href="http://blog.dornea.nu/2010/09/13/icmpknock-v02-released">icmpKNOCK v0.2 released</a></li>
-        <li><a href="http://blog.dornea.nu/2013/08/02/howto-automate-burp-using-burp-extender-api">HowTo: Automate Burp using Burp Extender API</a></li>
+        <li><a href="http://blog.dornea.nu/2008/11/26/mod2exec-execute-modules-german">Mod2Exec &#8211; Execute modules (german)</a></li>
+        <li><a href="http://blog.dornea.nu/2015/04/21/coming-back-to-cc-after-2-years">Coming back to C/C++ after 2 years</a></li>
     </ul>
 </section>
     <hr />

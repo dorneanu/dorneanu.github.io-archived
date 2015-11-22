@@ -1721,7 +1721,7 @@ blog.dornea.nu            </a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>I&#8217;ve been using Lighttpd + Drupal for a long time. In order to have those sexy clean urls, you&#8217;ll have to do some rewrite stuff. A few months ago I found this Lua script, which served its purpose without any complications.<!--more--></p>
+                <p>I’ve been using Lighttpd + Drupal for a long time. In order to have those sexy clean urls, you’ll have to do some rewrite stuff. A few months ago I found this Lua script, which served its purpose without any complications.<!--more--></p>
 <pre class="lang:default decode:true">-- little helper function
 function file_exists(path)
 local attr = lighty.stat(path)
@@ -1738,44 +1738,41 @@ end
 -- prefix without the trailing slash
 local prefix = ''
 
--- the magic <img src="http://dornea.nu/wp-includes/images/smilies/icon_wink.gif" alt=";)" class="wp-smiley" /> 
+-- the magic <img alt=";)" class="wp-smiley img-responsive" src="http://dornea.nu/wp-includes/images/smilies/icon_wink.gif"/> 
 if (not file_exists(lighty.env["physical.path"])) then
 -- file still missing. pass it to the fastcgi backend
 request_uri = removePrefix(lighty.env["uri.path"], prefix)
 if request_uri then
 lighty.env["uri.path"] = prefix .. "/index.php"
 local uriquery = lighty.env["uri.query"] or ""
-lighty.env["uri.query"] = uriquery .. (uriquery ~= "" and "&" or "") .. "q=" .. request_uri
+lighty.env["uri.query"] = uriquery .. (uriquery ~= "" and "&amp;" or "") .. "q=" .. request_uri
 lighty.env["physical.rel-path"] = lighty.env["uri.path"]
 lighty.env["request.orig-uri"] = lighty.env["request.uri"]
 lighty.env["physical.path"] = lighty.env["physical.doc-root"] .. lighty.env["physical.rel-path"]
 end
 end
 -- fallthrough will put it back into the lighty request loop
--- that means we get the 304 handling for free. <img src="http://dornea.nu/wp-includes/images/smilies/icon_wink.gif" alt=";)" class="wp-smiley" /> </pre>
-
-<p>Your lighttpd.conf should include &#8211; somewhere! &#8211; this lines:</p>
+-- that means we get the 304 handling for free. <img alt=";)" class="wp-smiley img-responsive" src="http://dornea.nu/wp-includes/images/smilies/icon_wink.gif"/> </pre>
+<p>Your lighttpd.conf should include – somewhere! – this lines:</p>
 <pre class="lang:default decode:true"># Make Drupal's url SEXY
 magnet.attract-physical-path-to = ( "/etc/lighttpd/drupal.lua" )</pre>
-
-<p>Well.. That&#8217;s now history! I found a better way to do that rewritting:<!--break--></p>
+<p>Well.. That’s now history! I found a better way to do that rewritting:<!--break--></p>
 <pre class="lang:default decode:true">url.rewrite-once = (
 "^/system/test/(.*)$" =&gt; "/index.php?q=system/test/$1",
 "^/search/node/(.*)$" =&gt; "/index.php?q=search/node/$1",
-"^/([^.?]*)?(.*)$" =&gt; "/index.php?q=$1&$2",
+"^/([^.?]*)?(.*)$" =&gt; "/index.php?q=$1&amp;$2",
 "^/([^.?]*)$" =&gt; "/index.php?q=$1"
 )</pre>
-
 <p>That should do the work. If any troubles, just let me know!</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2011/11/07/howto-redmine-lighttpd-with-debian">HowTo: Redmine, Lighttpd with Debian</a></li>
-        <li><a href="http://blog.dornea.nu/2009/09/15/some-drupal-peculiarities">Some Drupal peculiarities</a></li>
         <li><a href="http://blog.dornea.nu/2010/09/04/speed-up-drupal-by-preloading-the-page-cache">Speed up Drupal by preloading the page cache</a></li>
-        <li><a href="http://blog.dornea.nu/2013/08/02/howto-automate-burp-using-burp-extender-api">HowTo: Automate Burp using Burp Extender API</a></li>
+        <li><a href="http://blog.dornea.nu/2009/09/15/some-drupal-peculiarities">Some Drupal peculiarities</a></li>
+        <li><a href="http://blog.dornea.nu/2011/11/07/howto-redmine-lighttpd-with-debian">HowTo: Redmine, Lighttpd with Debian</a></li>
+        <li><a href="http://blog.dornea.nu/2009/03/30/howto-get-setof-from-array-in-postgresql">HowTo: Get SETOF from Array in PostgreSQL</a></li>
         <li><a href="http://blog.dornea.nu/2014/03/07/unfancy-dashboard-using-matplotlib">Unfancy dashboard using matplotlib</a></li>
     </ul>
 </section>

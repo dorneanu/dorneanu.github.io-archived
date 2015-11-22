@@ -1718,41 +1718,35 @@ blog.dornea.nu            </a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>I&#8217;d recommend you all using some VPN to keep your identity safe and private. Here&#8217;s some setup:</p>
+                <p>I’d recommend you all using some VPN to keep your identity safe and private. Here’s some setup:</p>
 <pre class="brush: bash;fontsize: 100; first-line: 1;">$ pptpsetup --create vpnde --server pptp.freedevpn.com --username free --password --encrypt 
 $ pptpsetup --create vpnca --server freecavpn.com --username free --password --encrypt 
 $ pptpsetup --create vpnl --server freenlvpn.com --username free --password --encrypt 
 $ pptpsetup --create vpnuk --server freeukvpn.com --username free --password --encrypt</pre>
-
-<p>For the passwords have a look at freenlvpn.com, freedevpn.com, freeukvpn.com, freecavpn.com. The VPN passwords changes every 12 hours, so keep in mind to change whenever the authentication failes. Therefore have a look at /etc/ppp/chap-secrets. Just edit the password there and you&#8217;re ready to go. In order to activate the VPN connection you&#8217;ll have to:<!--more--></p>
+<p>For the passwords have a look at freenlvpn.com, freedevpn.com, freeukvpn.com, freecavpn.com. The VPN passwords changes every 12 hours, so keep in mind to change whenever the authentication failes. Therefore have a look at /etc/ppp/chap-secrets. Just edit the password there and you’re ready to go. In order to activate the VPN connection you’ll have to:<!--more--></p>
 <div style="page-break-after: always;">
-  <span style="display: none;"> </span>
+<span style="display: none;"> </span>
 </div>
-
 <pre class="brush: bash;fontsize: 100; first-line: 1;">$ pon vpn{de, uk, nl, ca}</pre>
-
 <p>Please choose only one them. Have a look at your syslog to check if the connection succeded. If so, then have a look at your [b]ppp device[/b] for the IP. Now you should delete your default route and add a new one. For example we have following in our log:</p>
 <pre style="brush: bash; fontsize: 100; first-line: 1;">Jun 23 23:17:32 BlackTiny pppd[16313]: local IP address 10.32.0.50 
 Jun 23 23:17:32 BlackTiny pppd[16313]: remote IP address 10.32.0.1</pre>
-
 <p>Then you should:</p>
 <pre class="brush: bash;fontsize: 100; first-line: 1;">$ route delete default
 $ route add default gw 10.32.0.1</pre>
-
-<p>That&#8217;s it! Now test the connection using traceroute, ipchicken.com or whatever. To disable the VPN connection just fire up:</p>
+<p>That’s it! Now test the connection using traceroute, ipchicken.com or whatever. To disable the VPN connection just fire up:</p>
 <pre class="brush: bash;fontsize: 100; first-line: 1;">$ poff vpn{de, uk, nl, ca}</pre>
-
-<p>and you&#8217;re done. Keep in mind to <strong>restore the old default route</strong>.</p>
+<p>and you’re done. Keep in mind to <strong>restore the old default route</strong>.</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2010/09/13/icmpknock-v02-released">icmpKNOCK v0.2 released</a></li>
-        <li><a href="http://blog.dornea.nu/2015/06/03/usd-ag-hacker-day-in-hamburg">usd AG Hacker Day in Hamburg</a></li>
+        <li><a href="http://blog.dornea.nu/2011/11/09/thank-god-there-is-iodine-ipv4-over-dns">Thank God there is iodine! IPv4 over DNS</a></li>
+        <li><a href="http://blog.dornea.nu/2010/10/13/howto-build-your-own-wifi-wlan-hotspot-using-hostap">HowTo: Build your own Wifi WLAN hotspot using hostap</a></li>
+        <li><a href="http://blog.dornea.nu/2011/04/02/block-facebook-with-iptables-on-openwrt">Block facebook with iptables on OpenWrt</a></li>
         <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump-ipython-notebook-version">24h Android sniffing using tcpdump - IPython Notebook Version</a></li>
-        <li><a href="http://blog.dornea.nu/2014/08/05/android-dynamic-code-analysis-mastering-droidbox">Android Dynamic Code Analysis - Mastering DroidBox</a></li>
-        <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump">24h Android sniffing using tcpdump</a></li>
+        <li><a href="http://blog.dornea.nu/2015/06/03/usd-ag-hacker-day-in-hamburg">usd AG Hacker Day in Hamburg</a></li>
     </ul>
 </section>
     <hr />

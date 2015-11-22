@@ -1696,7 +1696,7 @@ data back and ...</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Suppose you get a list of some URLs and you are asked to &quot;investigate&quot; them. The list is full of some random URLs related to your company and nobody knows about. You don&#39;t have a clue who is responsible for them nor which applications (if any) are running behind ...</p></div></div></div></p>
+<p>Suppose you get a list of some URLs and you are asked to "investigate" them. The list is full of some random URLs related to your company and nobody knows about. You don't have a clue who is responsible for them nor which applications (if any) are running behind ...</p></div></div></div></p>
                     <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2014/08/06/web-application-survey-tutorial">more ...</a>
                 </div>
             </article>
@@ -1708,8 +1708,6 @@ data back and ...</p>
 <p>This is the most obvious and easiest one. Just insert following code and you're done:</p>
 <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span><span class="nx">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </pre></div>
-
-
 <h2 id="level-2">Level 2</h2>
 <p>Since the <code>script</code> won't work you'll have to think of another tags to ...</p>
                     <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2014/06/02/googles-xss-game-solutions">more ...</a>
@@ -1718,7 +1716,7 @@ data back and ...</p>
             <hr/>
             <article>
                 <h2><a href="http://blog.dornea.nu/2014/03/07/unfancy-dashboard-using-matplotlib">Unfancy dashboard using matplotlib</a></h2>
-                <div class="summary"><p>I was recently playing around with <a href="http://d3js.org/">D3</a>Â and discovered its dashboard posibilities.<a href="http://dashboarddude.com/"> dashboarddude.com</a>Â has a nice compilation of really fancy dashboards (I was mainly interested in D3 but voila&#8230; there are also other ways to do it).Â <!--more--></p>
+                <div class="summary"><p>I was recently playing around with <a href="http://d3js.org/">D3</a>Â and discovered its dashboard posibilities.<a href="http://dashboarddude.com/"> dashboarddude.com</a>Â has a nice compilation of really fancy dashboards (I was mainly interested in D3 but voila… there are also other ways to do it).Â <!--more--></p>
 <p>Meanwhile I was remembered of old good <a href="http://ipython.org/notebook">IPython Notebook ...</a></p>
                     <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2014/03/07/unfancy-dashboard-using-matplotlib">more ...</a>
                 </div>
@@ -1737,48 +1735,46 @@ data back and ...</p>
             <hr/>
             <article>
                 <h2><a href="http://blog.dornea.nu/2013/05/06/hacking-altoro-mutual">Hacking Altoro Mutual</a></h2>
-                <div class="summary"><div id="toc_container" class="toc_wrap_right toc_transparent no_bullets">
-  <p class="toc_title">
+                <div class="summary"><div class="toc_wrap_right toc_transparent no_bullets" id="toc_container">
+<p class="toc_title">
     Contents
   </p>
-
-  <ul class="toc_list">
-    <li>
-      <a href="#Introduction"><span class="toc_number toc_depth_1">1</span> IntroductionÂ </a>
-    </li>
-    <li>
-      <a href="#Vulnerabilities_by_URL"><span class="toc_number toc_depth_1">2</span> Vulnerabilities by URL</a><ul>
-        <li>
-          <a href="#defaultaspxcontent"><span class="toc_number toc_depth_2">2.1</span> /default.aspx?content=</a>
-        </li>
-        <li>
-          <a href="#bank"><span class="toc_number toc_depth_2">2.2</span> /bank</a>
-        </li>
-        <li>
-          <a href="#bankloginaspx"><span class="toc_number toc_depth_2">2.3</span> /bank/login.aspx</a><ul>
-            <li>
-              <a href="#Brute_force_vulnerability"><span class="toc_number toc_depth_3">2.3.1</span> Brute force vulnerability</a>
-            </li>
-            <li>
-              <a href="#SQL_injection_using_POST_parameters"><span class="toc_number toc_depth_3">2.3.2</span> SQL injection using POST parameters</a>
-            </li>
-            <li>
-              <a href="#Base64-encoded_login_credentials"><span class="toc_number toc_depth_3">2.3.3</span> Base64-encoded login credentials</a>
-            </li>
-          </ul>
-        </li>
-
-        <li>
-          <a href="#bankmainaspx"><span class="toc_number toc_depth_2">2.4</span> /bank/main.aspxÂ </a><ul>
-            <li>
-              <a href="#Source_code_disclosure"><span class="toc_number toc_depth_3">2.4.1</span> Source code ...</a></li></ul></li></ul></li></ul></div>
+<ul class="toc_list">
+<li>
+<a href="#Introduction"><span class="toc_number toc_depth_1">1</span> IntroductionÂ </a>
+</li>
+<li>
+<a href="#Vulnerabilities_by_URL"><span class="toc_number toc_depth_1">2</span> Vulnerabilities by URL</a><ul>
+<li>
+<a href="#defaultaspxcontent"><span class="toc_number toc_depth_2">2.1</span> /default.aspx?content=</a>
+</li>
+<li>
+<a href="#bank"><span class="toc_number toc_depth_2">2.2</span> /bank</a>
+</li>
+<li>
+<a href="#bankloginaspx"><span class="toc_number toc_depth_2">2.3</span> /bank/login.aspx</a><ul>
+<li>
+<a href="#Brute_force_vulnerability"><span class="toc_number toc_depth_3">2.3.1</span> Brute force vulnerability</a>
+</li>
+<li>
+<a href="#SQL_injection_using_POST_parameters"><span class="toc_number toc_depth_3">2.3.2</span> SQL injection using POST parameters</a>
+</li>
+<li>
+<a href="#Base64-encoded_login_credentials"><span class="toc_number toc_depth_3">2.3.3</span> Base64-encoded login credentials</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#bankmainaspx"><span class="toc_number toc_depth_2">2.4</span> /bank/main.aspxÂ </a><ul>
+<li>
+<a href="#Source_code_disclosure"><span class="toc_number toc_depth_3">2.4.1</span> Source code ...</a></li></ul></li></ul></li></ul></div>
                     <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2013/05/06/hacking-altoro-mutual">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
                 <h2><a href="http://blog.dornea.nu/2011/11/07/howto-redmine-lighttpd-with-debian">HowTo: Redmine, Lighttpd with Debian</a></h2>
-                <div class="summary"><p>I&#8217;ll just post my lighttpd.conf. The rest can be easily found on the Internet.</p>
+                <div class="summary"><p>I’ll just post my lighttpd.conf. The rest can be easily found on the Internet.</p>
 <pre class="brush:plain">$HTTP["host"] =~ "^dev.dornea.nu$" {
         evhost.path-pattern = "/home/redmine/current/public"
         server.follow-symlink = "enable"
@@ -1800,14 +1796,14 @@ data back and ...</p>
             <hr/>
             <article>
                 <h2><a href="http://blog.dornea.nu/2011/02/10/stay-clean-and-anonymous-with-google-apps">Stay clean and anonymous with Google Apps</a></h2>
-                <div class="summary"><p>I was recently reading some documentary article about the Mexican drug war near USA&#8217;s national border. Actually it was rather an interview with some guy who fights against the (corrupt) authorities and the drugs leaders by running some informative blog. Feel free to activate your investigative mind and find ...</p>
+                <div class="summary"><p>I was recently reading some documentary article about the Mexican drug war near USA’s national border. Actually it was rather an interview with some guy who fights against the (corrupt) authorities and the drugs leaders by running some informative blog. Feel free to activate your investigative mind and find ...</p>
                     <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2011/02/10/stay-clean-and-anonymous-with-google-apps">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
                 <h2><a href="http://blog.dornea.nu/2010/09/07/drupals-clean-urls-using-lighttpd-moved-from-lua-to-rewrite-once">Drupals clean urls using Lighttpd: Moved from Lua to rewrite-once</a></h2>
-                <div class="summary"><p>I&#8217;ve been using Lighttpd + Drupal for a long time. In order to have those sexy clean urls, you&#8217;ll have to do some rewrite stuff. A few months ago I found this Lua script, which served its purpose without any complications.<!--more--></p>
+                <div class="summary"><p>I’ve been using Lighttpd + Drupal for a long time. In order to have those sexy clean urls, you’ll have to do some rewrite stuff. A few months ago I found this Lua script, which served its purpose without any complications.<!--more--></p>
 <pre class="lang:default decode:true">-- little helper function
 function file_exists(path)
 local attr ...</pre>
@@ -1817,7 +1813,7 @@ local attr ...</pre>
             <hr/>
             <article>
                 <h2><a href="http://blog.dornea.nu/2010/09/04/speed-up-drupal-by-preloading-the-page-cache">Speed up Drupal by preloading the page cache</a></h2>
-                <div class="summary"><p>If you need some technical background, have a look <a href="http://nadeausoftware.com/node/98">here</a>. The preload cache script I&#8217;ve been using for a couple a months:<!--more--></p>
+                <div class="summary"><p>If you need some technical background, have a look <a href="http://nadeausoftware.com/node/98">here</a>. The preload cache script I’ve been using for a couple a months:<!--more--></p>
 <pre class="lang:default decode:true">#!/bin/bash
 #
 # Preload a web site's cache
@@ -1837,7 +1833,7 @@ rm -rf $tmp ...</pre>
             <hr/>
             <article>
                 <h2><a href="http://blog.dornea.nu/2009/09/15/some-drupal-peculiarities">Some Drupal peculiarities</a></h2>
-                <div class="summary"><p>Add Lightbox2 functionalities to WYSIWYG editor TinyMCE &#8211; who thought this would cost me about 6 hours of work? In fact that was the easiest part: I just followed the instructions on <a href="http://drupal.org/node/252153">http://drupal.org/node/252153</a> and everything worked well! Before being able to do that, some upgrades were necessary ...</p>
+                <div class="summary"><p>Add Lightbox2 functionalities to WYSIWYG editor TinyMCE – who thought this would cost me about 6 hours of work? In fact that was the easiest part: I just followed the instructions on <a href="http://drupal.org/node/252153">http://drupal.org/node/252153</a> and everything worked well! Before being able to do that, some upgrades were necessary ...</p>
                     <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2009/09/15/some-drupal-peculiarities">more ...</a>
                 </div>
             </article>

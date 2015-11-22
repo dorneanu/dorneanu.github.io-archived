@@ -1728,56 +1728,48 @@ blog.dornea.nu            </a>
 </footer><!-- /.post-info -->                    </div>
                 </div>
                 <h1 id="motivation"><span id="Motivation">Motivation</span></h1>
-<p>I&#8217;ve started this little project since I was mainly interested in the data my smartphone isÂ ending all the time without my knowledge. I have a bunch of apps installed on my phone and I have absolutely no ideea which (kind of) data is beeing transfered to the Internet all day long. I thought I&#8217;d be a great ideea to monitor/sniff my data interface (3G, Edge etc. NOT Wifi) for 24h during my normal daily phone usage.</p>
-<p>I have sniffed on a Saturday between 14:00h and 15:00h next day. During this time my phone hasn&#8217;t been shutdown or put into flight modus.<!--more--></p>
+<p>I’ve started this little project since I was mainly interested in the data my smartphone isÂ ending all the time without my knowledge. I have a bunch of apps installed on my phone and I have absolutely no ideea which (kind of) data is beeing transfered to the Internet all day long. I thought I’d be a great ideea to monitor/sniff my data interface (3G, Edge etc. NOT Wifi) for 24h during my normal daily phone usage.</p>
+<p>I have sniffed on a Saturday between 14:00h and 15:00h next day. During this time my phone hasn’t been shutdown or put into flight modus.<!--more--></p>
 <blockquote>
 <p>Also check out the IPython notebook <a href="/2014/01/23/24h-android-sniffing-using-tcpdump-ipython-notebook-version/">article</a></p>
 </blockquote>
 <h1 id="changelog">Changelog</h1>
-<table border="0">
-  <tr align="left">
-    <th>
+<table border="0" class=" table-striped table table-hover">
+<tr align="left">
+<th>
       Date
     </th>
-
-    <th>
+<th>
       Desc
     </th>
-  </tr>
-
-  <tr>
-    <td>
-      <strong>2014-01-24</strong>
-    </td>
-
-    <td>
+</tr>
+<tr>
+<td>
+<strong>2014-01-24</strong>
+</td>
+<td>
       First release
     </td>
-  </tr>
-
-  <tr>
-    <td>
-      <strong>2014-01-27</strong>
+</tr>
+<tr>
+<td>
+<strong>2014-01-27</strong>
+</td>
+<td>
+      Updated “Top 100 Connections”: Note, that the SQL query might be wrong
     </td>
-
-    <td>
-      Updated &#8220;Top 100 Connections&#8221;: Note, that the SQL query might be wrong
+</tr>
+<tr>
+<td>
+<strong>2014-02-02</strong>
+</td>
+<td>
+      Updated “Top 100 Connections”: The SQL query and the table have been updated.
     </td>
-  </tr>
-
-  <tr>
-    <td>
-      <strong>2014-02-02</strong>
-    </td>
-
-    <td>
-      Updated &#8220;Top 100 Connections&#8221;: The SQL query and the table have been updated.
-    </td>
-  </tr>
+</tr>
 </table>
-
 <h1 id="sniff-environment"><span id="Sniff_environment">Sniff environment</span></h1>
-<p>I&#8217;ve used my <a href="/hackinglab/samsung-galaxy-note-n7000">Samsung Note 1 (GT N7000</a>) as sniffing device. At the moment I use a customized ROM (slimbean) with root access. In order to be to use sniffing tools on my phone I had to work in a chrooted environment like <a href="http://sven-ola.dyndns.org/repo/debian-kit-en.html">&#8220;Debian on Android Kit&#8221;</a>. This way I was given access to phones data interfaces and I was ready to go.</p>
+<p>I’ve used my <a href="/hackinglab/samsung-galaxy-note-n7000">Samsung Note 1 (GT N7000</a>) as sniffing device. At the moment I use a customized ROM (slimbean) with root access. In order to be to use sniffing tools on my phone I had to work in a chrooted environment like <a href="http://sven-ola.dyndns.org/repo/debian-kit-en.html">“Debian on Android Kit”</a>. This way I was given access to phones data interfaces and I was ready to go.</p>
 <pre class="theme:ado font:ubuntu-mono lang:sh highlight:0 decode:true" title="Connect to the Android device">u0_a99@android:/ $ deb
 e2fsck 1.41.11 (14-Mar-2010)
 /storage/sdcard1/debian-kit/debian.img: recovering journal
@@ -1790,8 +1782,7 @@ RX packets:37490 errors:0 dropped:0 overruns:0 frame:0
 TX packets:30841 errors:0 dropped:0 overruns:0 carrier:0
 collisions:0 txqueuelen:1000
 RX bytes:34233580 (32.6 MiB) TX bytes:5906191 (5.6 MiB)</pre>
-
-<p>Initially I wanted to use tshark for the sniffing part but it didn&#8217;t work quite well. So I came back to old school tcpdump.
+<p>Initially I wanted to use tshark for the sniffing part but it didn’t work quite well. So I came back to old school tcpdump.
 Since my data interface was going done all the time I had to make sure that tcpdump was restarted as soon as the data interface was online again. I used the following script:</p>
 <pre class="theme:ado font:ubuntu-mono lang:sh decode:true" title="Sniff script">root@debian-on-android:~# cat monitor.sh
 #!/bin/bash
@@ -1802,8 +1793,7 @@ while true;
 do
 tcpdump -i rmnet0 -np -w output-`date +"%Y-%m-%d-%s"`.pcap; sleep 10
 done</pre>
-
-<p>I&#8217;ve fired up my script and after 24 hours I had these outputs:</p>
+<p>I’ve fired up my script and after 24 hours I had these outputs:</p>
 <pre class="theme:ado font:ubuntu-mono lang:sh decode:true" title="Sniff output">root@debian-on-android:~# ls -l output-2014-01-1*
 -rw-r--r--. 1 root root 24907 Jan 18 12:53 output-2014-01-18-1390049466.pcap
 -rw-r--r--. 1 root root 2881 Jan 18 12:55 output-2014-01-18-1390049736.pcap
@@ -1811,12 +1801,10 @@ done</pre>
 -rw-r--r--. 1 root root 54695690 Jan 19 14:03 output-2014-01-18-1390053867.pcap
 -rw-r--r--. 1 root root 12492822 Jan 19 16:27 output-2014-01-19-1390140216.pcap
 root@debian-on-android:~#</pre>
-
 <h1 id="extract-information-from-pcap-files"><span id="Extract_information_from_pcap_files">Extract information from pcap files</span></h1>
-<p>I did this analysis using <a href="http://ipython.org/notebook.html">IPython Notebook</a>. This tool is everything worth mentioning. I was fascinated by the simplicity and the Pythonic way to handle/manipulate data. You should defnitely also have look at <a href="http://pandas.pydata.org/">Pandas</a>. Ok, back to sniffing <img src="http://dornea.nu/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley" /></p>
+<p>I did this analysis using <a href="http://ipython.org/notebook.html">IPython Notebook</a>. This tool is everything worth mentioning. I was fascinated by the simplicity and the Pythonic way to handle/manipulate data. You should defnitely also have look at <a href="http://pandas.pydata.org/">Pandas</a>. Ok, back to sniffing <img alt=":)" class="wp-smiley img-responsive" src="http://dornea.nu/wp-includes/images/smilies/icon_smile.gif"/></p>
 <p>and First I had to merge the pcap files to one piece:</p>
 <pre class="theme:ado font:ubuntu-mono lang:sh decode:true" title="Merge pcap files">$ mergecap -F libpcap -a output-* -w merged.pcap</pre>
-
 <p>Next step was to extract valuable information from the merged pcap file. I thought following information would be from interest:</p>
 <ul>
 <li>Which DNS queries have been made?</li>
@@ -1840,13 +1828,11 @@ connections = !tshark -r $PCAP_FILE -E header=y -T fields -e frame.number \
 http_traffic = !tshark -r $PCAP_FILE -Y "http.request" -E header=y -T fields \
               -e frame.number -e frame.time -e ip.dst -e http.request.method -e http.request.uri -e http.user_agent \
               -e http.response.code  -e http.response.phrase -e http.content_length -e data -e text &gt; $HTTP_TRAFFIC</pre>
-
 <h1 id="import-data-into-sqlite3-db"><span id="Import_data_into_SQLite3_DB">Import data into SQLite3 DB</span></h1>
 <p>Now that we have all necessary data, all we have to do is to import it into some RDMS so we can analyze it.</p>
 <pre class="theme:ado font:ubuntu-mono lang:python decode:true" title="Create SQLite3 DB in memory">import sqlite3 as sql
 con = sql.connect(":memory:")
 cur = con.cursor()</pre>
-
 <p>Â In the next step the CSV data would be read into some Pandas DataFrames and then exported to our newly created DB.Â </p>
 <pre class="theme:ado font:ubuntu-mono lang:python decode:true" title="Read CSV data and write to Sqlite">import binascii
 import numpy as np
@@ -1889,65 +1875,54 @@ http_df['data'] = http_df['data'].apply(convert_data)
 pdsql.write_frame(dns_df, name="dns", con=con, if_exists="delete")
 pdsql.write_frame(con_df, name="connection", con=con, if_exists="delete")
 pdsql.write_frame(http_df, name="http", con=con, if_exists="delete")</pre>
-
-<p>Â Now we&#8217;re ready to do the analysis.</p>
+<p>Â Now we’re ready to do the analysis.</p>
 <h1 id="results"><span id="Results">Results</span></h1>
-<p>It was a lot of fun doing this kind of analysis. I had <strong>80 MB </strong>of pcap data and <strong>138515</strong>Â framesÂ to be analyzed.Â Â I&#8217;m aware of the fact that this analysis is far from being complete. Since I wanted to get a rough overview over the connections initiated by my smartphone I think the results below are quite promising. If you have any suggestions for further &#8220;investigations&#8221;, feel free to drop a comment below.</p>
-<p>As you may notice in the results below Google and Facebook had the most connections, which doesn&#8217;t really surprise me. Although I don&#8217;t use Facebook on a regular daily basis the numbers are pretty high.Â </p>
-<p>And speaking of Google&#8230; It is also no surprise that a lot of data is collected through ads. A few examples (from section &#8216;GET Requests&#8217;):</p>
-<table style="table-layout: fixed; width: 100%;" border="0">
-  <tr>
-    <th style="width: 100px;">
+<p>It was a lot of fun doing this kind of analysis. I had <strong>80 MB </strong>of pcap data and <strong>138515</strong>Â framesÂ to be analyzed.Â Â I’m aware of the fact that this analysis is far from being complete. Since I wanted to get a rough overview over the connections initiated by my smartphone I think the results below are quite promising. If you have any suggestions for further “investigations”, feel free to drop a comment below.</p>
+<p>As you may notice in the results below Google and Facebook had the most connections, which doesn’t really surprise me. Although I don’t use Facebook on a regular daily basis the numbers are pretty high.Â </p>
+<p>And speaking of Google… It is also no surprise that a lot of data is collected through ads. A few examples (from section ‘GET Requests’):</p>
+<table border="0" class=" table-striped table table-hover" style="table-layout: fixed; width: 100%;">
+<tr>
+<th style="width: 100px;">
       Host
     </th>
-
-    <th>
+<th>
       GET Request
     </th>
-  </tr>
-
-  <tr>
-    <td>
+</tr>
+<tr>
+<td>
       adx.fe02-sl.manage.com
     </td>
-
-    <td>
-      /2/win?_bi=4bq4p7Cn9VXzc3XTEz1wocSUpKU%3D&_ei=10411&_ecost1000000_adx=Utq7uQAM5S8K3tKEAABJJbJHrnHwdXabfQqUjg&-mf=2&-fi=86400&age=0&app=&appi=&appv=&pt=app&pi=<span style="background-color: #00ff00;">com.iudesk.android.photo.editor</span>&p=com.iudesk.android.photo.editor&zid=&pcat=&lat=&lon=&country=DEU&gender=%3F&isp=carrier&netspd=dial-up&model=<span style="background-color: #00ff00;">gt-n7000&os=Android&osv=4.3.1&</span>region=&zip=&dma=0&si=4&_ua=Mozilla%2F5.0+%28Linux%3B+U%3B+Android+4.3.1%3B+de-de%3B+GT-N7000+Build%2FJLS36I%29+AppleWebKit%2F534.30+%28KHTML%2C+like+Gecko%29+Version%2F4.0+Mobile+Safari%2F534.30+%28Mobile%3B+afma-sdk-a-v6.4.1%29%2Cgzip%28gfe%29&_uh=xid%3ACAESEDLJ4tolP4xNFA9ZOWuBZNM&idx=2&ai=209646&_bid=0.00117&sub5=fe02-sl
+<td>
+      /2/win?_bi=4bq4p7Cn9VXzc3XTEz1wocSUpKU%3D&amp;_ei=10411&amp;_ecost1000000_adx=Utq7uQAM5S8K3tKEAABJJbJHrnHwdXabfQqUjg&amp;-mf=2&amp;-fi=86400&amp;age;=0&amp;app;=&amp;appi;=&amp;appv;=&amp;pt;=appπ=<span style="background-color: #00ff00;">com.iudesk.android.photo.editor</span>&amp;p;=com.iudesk.android.photo.editor&amp;zid;=&amp;pcat;=&amp;lat;=&amp;lon;=&amp;country;=DEU&amp;gender;=%3F&amp;isp;=carrier&amp;netspd;=dial-up&amp;model;=<span style="background-color: #00ff00;">gt-n7000&amp;os;=Android&amp;osv;=4.3.1&amp;</span>region=&amp;zip;=&amp;dma;=0&amp;si;=4&amp;_ua=Mozilla%2F5.0+%28Linux%3B+U%3B+Android+4.3.1%3B+de-de%3B+GT-N7000+Build%2FJLS36I%29+AppleWebKit%2F534.30+%28KHTML%2C+like+Gecko%29+Version%2F4.0+Mobile+Safari%2F534.30+%28Mobile%3B+afma-sdk-a-v6.4.1%29%2Cgzip%28gfe%29&amp;_uh=xid%3ACAESEDLJ4tolP4xNFA9ZOWuBZNM&amp;idx;=2&amp;ai;=209646&amp;_bid=0.00117&amp;sub5;=fe02-sl
     </td>
-  </tr>
-
-  <tr>
-    <td>
+</tr>
+<tr>
+<td>
       api.geo.kontagent.net
     </td>
-
-    <td>
-      /api/v1/0d868f5ce9434bdcafd869f2b11adae8/cpu/?os=android_18&v_maj=4.4.2.254&d=<span style="background-color: #00ff00;">GT-N7000</span>&ts=1390065565&s=218949477293337144&c=<span style="background-color: #00ff00;">o2+-+de&kt_v=a1.3.1&m=samsung</span>
-    </td>
-  </tr>
-
-  <tr>
-    <td>
+<td>
+      /api/v1/0d868f5ce9434bdcafd869f2b11adae8/cpu/?os=android_18&amp;v;_maj=4.4.2.254&amp;d;=<span style="background-color: #00ff00;">GT-N7000</span>&amp;ts;=1390065565&amp;s;=218949477293337144&amp;c;=<span style="background-color: #00ff00;">o2+-+de&amp;kt;_v=a1.3.1&amp;m;=samsung</span>
+</td>
+</tr>
+<tr>
+<td>
       googleads.g.doubleclick.net
     </td>
-
-    <td>
-      /mads/gma?preqs=0&session_id=17592708045346502934&u_sd=1.6750001&seq_num=1&u_w=477&msid=com.iudesk.android.photo.editor&js=afma-sdk-a-v6.4.1&ms=nb-L0MAMQe8GvfY_GF6rij7OVhr7yp8iklRfdZEsobLfPN2V1HAwhr3fZaYYsV8OvnBAI7zvDSK59SGWlN8KYfs6k4fUhLp8gwe1zJEHx3aqI1SDtGvoMoDutEe208dqebTP_5d2Ydk4yTNoeVXbACMjJRSOmtoMcMr-P84vo-d1J-36mfPUt4gIueReT9-a1nSfXwrGJ2asIUygSe5Z6OG2q805BRqRtNkbyhnefM7MheC_wWGiqgvdJHjrKa5AZu78GZhAyaseI89idFJ7Qm8Tp4ngsn93gewdu0PP_xJnsQp1DTgrzZMJINW9n2AiZO0CZz5d7vxXMqtPlnNReA&mv=80240021.com.android.vending&bas_off=0&format=320x50_mb&oar=0&net=ed&app_name=2014010100.<span style="background-color: #00ff00;">android.com.iudesk.android.photo.editor</span>&hl=de&gnt=8&u_h=764&carrier=26207&bas_on=0&ptime=0&u_audio=3&imbf=8009&u_so=p&output=html&region=mobile_app&u_tz=60&client_sdk=1&ex=1&slotname=a14ecccef2eb8b3&gsb=4g&caps=inlineVideo_interactiveVideo_mraid1_th_mediation_sdkAdmobApiForAds_di&eid=46621027&jsv=66&urll=935
+<td>
+      /mads/gma?preqs=0&amp;session;_id=17592708045346502934&amp;u;_sd=1.6750001&amp;seq;_num=1&amp;u;_w=477&amp;msid;=com.iudesk.android.photo.editor&amp;js;=afma-sdk-a-v6.4.1&amp;ms;=nb-L0MAMQe8GvfY_GF6rij7OVhr7yp8iklRfdZEsobLfPN2V1HAwhr3fZaYYsV8OvnBAI7zvDSK59SGWlN8KYfs6k4fUhLp8gwe1zJEHx3aqI1SDtGvoMoDutEe208dqebTP_5d2Ydk4yTNoeVXbACMjJRSOmtoMcMr-P84vo-d1J-36mfPUt4gIueReT9-a1nSfXwrGJ2asIUygSe5Z6OG2q805BRqRtNkbyhnefM7MheC_wWGiqgvdJHjrKa5AZu78GZhAyaseI89idFJ7Qm8Tp4ngsn93gewdu0PP_xJnsQp1DTgrzZMJINW9n2AiZO0CZz5d7vxXMqtPlnNReA&amp;mv;=80240021.com.android.vending&amp;bas;_off=0&amp;format;=320x50_mb&amp;oar;=0&amp;net;=ed&amp;app;_name=2014010100.<span style="background-color: #00ff00;">android.com.iudesk.android.photo.editor</span>&amp;hl;=de&amp;gnt;=8&amp;u;_h=764&amp;carrier;=26207&amp;bas;_on=0&amp;ptime;=0&amp;u;_audio=3&amp;imbf;=8009&amp;u;_so=p&amp;output;=html&amp;region;=mobile_app&amp;u;_tz=60&amp;client;_sdk=1&amp;ex;=1&amp;slotname;=a14ecccef2eb8b3&amp;gsb;=4g&amp;caps;=inlineVideo_interactiveVideo_mraid1_th_mediation_sdkAdmobApiForAds_di&amp;eid;=46621027&amp;jsv;=66&amp;urll;=935
     </td>
-  </tr>
-
-  <tr>
-    <td>
+</tr>
+<tr>
+<td>
       www.youtube-nocookie.com
     </td>
-
-    <td>
-      device_204?app_anon_id=6988a4be-80bf-4a77-9581-f98c234a176f&firstactive=1389027600&firstactivegeo=DE&firstlogin=1389027600&prevactive=1390003200&prevlogin=1390003200&loginstate=1&cplatform=mobile&c=android&cver=5.3.32&cos=Android&cosver=4.3.1&cbr=<span style="background-color: #00ff00;">com.google.android.youtube&cbrver=5.3.32&cbrand=samsung&cmodel=GT-N7000&cnetwork=o2%20-%20de</span>
-    </td>
-  </tr>
+<td>
+      device_204?app_anon_id=6988a4be-80bf-4a77-9581-f98c234a176f&amp;firstactive;=1389027600&amp;firstactivegeo;=DE&amp;firstlogin;=1389027600&amp;prevactive;=1390003200&amp;prevlogin;=1390003200&amp;loginstate;=1&amp;cplatform;=mobile&amp;c;=android&amp;cver;=5.3.32&amp;cos;=Android&amp;cosver;=4.3.1&amp;cbr;=<span style="background-color: #00ff00;">com.google.android.youtube&amp;cbrver;=5.3.32&amp;cbrand;=samsung&amp;cmodel;=GT-N7000&amp;cnetwork;=o2%20-%20de</span>
+</td>
+</tr>
 </table>
-
-<p>&nbsp;</p>
+<p> </p>
 <h2 id="top-100-dns-queries"><span id="Top_100_DNS_queries">Top 100 DNS queries</span></h2>
 <pre class="theme:ado font:ubuntu-mono lang:python decode:true" title="Top 100 DNS queries">p1 = pdsql.read_frame("""
     SELECT COUNT(dns_response) AS '# DNS Responses', dns_query AS 'DNS to lookup'
@@ -1955,18 +1930,17 @@ pdsql.write_frame(http_df, name="http", con=con, if_exists="delete")</pre>
     ORDER by 1 DESC
 """, con)
 p1.head(100)</pre>
-
-<p><span class="collapseomatic " id="id8643"  title="Click to see Top 100 DNS Queries">Click to see Top 100 DNS Queries</span><div id="target-id8643" class="collapseomatic_content ">
-  </p> <table style="width: 98%;" border="1">
-    <tr>
-      <th align="left">
+<p><span class="collapseomatic " id="id8643" title="Click to see Top 100 DNS Queries">Click to see Top 100 DNS Queries</span><div class="collapseomatic_content " id="target-id8643">
+</div></p> <table border="1" class=" table-striped table table-hover" style="width: 98%;">
+<tr>
+<th align="left">
         Pos
-      </th></p>
-<div class="highlight"><pre>  &lt;th align=&quot;left&quot;&gt;
+      </th></tr></table>
+<div class="highlight"><pre>  &lt;th align="left"&gt;
     # DNS Responses
   &lt;/th&gt;
 
-  &lt;th align=&quot;left&quot;&gt;
+  &lt;th align="left"&gt;
     DNS to lookup
   &lt;/th&gt;
 &lt;/tr&gt;
@@ -3371,26 +3345,21 @@ p1.head(100)</pre>
 &lt;/tr&gt;
 </pre></div>
 
-
-</table>
-
 <p><p>
-    </div> <h2>
-      <span id="Top_100_Connections">Top 100 Connections</span>
-    </h2></p>
+</p></p> <h2>
+<span id="Top_100_Connections">Top 100 Connections</span>
+</h2>
 <div class="highlight"><pre>&lt;p&gt;
-  &lt;span style=&quot;color: #ff0000;&quot;&gt;EDIT [2014-01-27]: There are some errors regarding the following SQL query. These numbers haven&amp;#8217;t been updated yet. I have done some filtering for the domain &amp;#8220;googleapis.com&amp;#8221;:&lt;/span&gt;
+  &lt;span style="color: #ff0000;"&gt;EDIT [2014-01-27]: There are some errors regarding the following SQL query. These numbers haven&amp;#8217;t been updated yet. I have done some filtering for the domain &amp;#8220;googleapis.com&amp;#8221;:&lt;/span&gt;
 &lt;/p&gt;
 
-&lt;pre class=&quot;theme:ado font:ubuntu-mono lang:sh decode:true&quot;&gt;$ dig googleapis.com
+&lt;pre class="theme:ado font:ubuntu-mono lang:sh decode:true"&gt;$ dig googleapis.com
 </pre></div>
-
-
 <p>....
 $ tshark -r merged.pcap -Y "ip.dst==173.194.113.147/24" -E header=y &gt;&gt; googleapis.csv
 $ wc -l googleapis.csv
 3017 googleapis.csv
-</pre></p>
+</p>
 <div class="highlight"><pre>&lt;p&gt;
   So there were only 3016 packets for the domain &amp;#8220;googleapis.com&amp;#8221; and &lt;strong&gt;not&lt;/strong&gt; 5 Mil.Â 
 &lt;/p&gt;
@@ -3400,19 +3369,17 @@ $ wc -l googleapis.csv
 &lt;/p&gt;
 
 &lt;p&gt;
-  &lt;span style=&quot;color: #ff0000;&quot;&gt;EDIT [2014-02-02]: The SQL query has been updated. There was some mistake during the JOIN between the &amp;#8216;dns&amp;#8217; and &amp;#8216;connection&amp;#8217; tables. Below is the new query:&lt;/span&gt;
+  &lt;span style="color: #ff0000;"&gt;EDIT [2014-02-02]: The SQL query has been updated. There was some mistake during the JOIN between the &amp;#8216;dns&amp;#8217; and &amp;#8216;connection&amp;#8217; tables. Below is the new query:&lt;/span&gt;
 &lt;/p&gt;
 
-&lt;pre class=&quot;theme:arduino-ide font:ubuntu-mono lang:python decode:true&quot; title=&quot;Top 100 Connections&quot;&gt;p_testing = pdsql.read_frame(&quot;&quot;&quot;
+&lt;pre class="theme:arduino-ide font:ubuntu-mono lang:python decode:true" title="Top 100 Connections"&gt;p_testing = pdsql.read_frame("""
 SELECT COUNT(*), (SELECT dns_query FROM dns WHERE dns_response=c.dst LIMIT 1) as DNS, c.dstport, c.frame_protocols FROM connection AS c
-WHERE c.dst NOT LIKE &quot;10.%&quot;
+WHERE c.dst NOT LIKE "10.%"
 GROUP by 2
 ORDER by 1 DESC
 </pre></div>
-
-
 <p>""", con)
-p_testing.head(100)</pre></p>
+p_testing.head(100)</p>
 <div class="highlight"><pre>&lt;p&gt;
   &amp;nbsp;
 &lt;/p&gt;
@@ -3421,21 +3388,19 @@ p_testing.head(100)</pre></p>
   &lt;strong&gt;Old&lt;/strong&gt; query:
 &lt;/p&gt;
 
-&lt;pre class=&quot;theme:ado font:ubuntu-mono lang:python highlight:0 decode:true&quot; title=&quot;Top 100 Connections&quot;&gt;p2 = pdsql.read_frame(&quot;&quot;&quot;
+&lt;pre class="theme:ado font:ubuntu-mono lang:python highlight:0 decode:true" title="Top 100 Connections"&gt;p2 = pdsql.read_frame("""
 SELECT COUNT(c.dst), d.dns_query, c.dstport, c.frame_protocols FROM connection AS c
 JOIN dns AS d ON c.dst=d.dns_response
-WHERE c.frame_protocols LIKE &quot;sll:ip:tcp:%&quot;
+WHERE c.frame_protocols LIKE "sll:ip:tcp:%"
 GROUP by c.dst
 ORDER by 1 DESC
 </pre></div>
-
-
 <p>""", con)
 p2.head(100)
-</pre></p>
-<div class="highlight"><pre>&lt;span class=&quot;collapseomatic &quot; id=&quot;id6035&quot;  title=&quot;Click to see Top 100 Connections&quot;&gt;Click to see Top 100 Connections&lt;/span&gt;&lt;div id=&quot;target-id6035&quot; class=&quot;collapseomatic_content &quot;&gt;
-  &lt;/p&gt; &lt;table border=&quot;1&quot;&gt;
-    &lt;tr align=&quot;left&quot;&gt;
+</p>
+<div class="highlight"><pre>&lt;span class="collapseomatic " id="id6035"  title="Click to see Top 100 Connections"&gt;Click to see Top 100 Connections&lt;/span&gt;&lt;div id="target-id6035" class="collapseomatic_content "&gt;
+  &lt;/p&gt; &lt;table border="1"&gt;
+    &lt;tr align="left"&gt;
       &lt;th&gt;
         Â 
       &lt;/th&gt;
@@ -5659,31 +5624,29 @@ p2.head(100)
 
   &lt;p&gt;
     &lt;/div&gt; &lt;h2&gt;
-      &lt;span id=&quot;Used_protocols&quot;&gt;Used protocols&lt;/span&gt;
+      &lt;span id="Used_protocols"&gt;Used protocols&lt;/span&gt;
     &lt;/h2&gt;
 
-    &lt;pre class=&quot;theme:ado font:ubuntu-mono lang:python decode:true&quot; title=&quot;Used protocols&quot;&gt;p_proto = pdsql.read_frame(&quot;&quot;&quot;
+    &lt;pre class="theme:ado font:ubuntu-mono lang:python decode:true" title="Used protocols"&gt;p_proto = pdsql.read_frame("""
 SELECT COUNT(frame_protocols), frame_protocols
 FROM connection
 GROUP by frame_protocols
 ORDER BY 1 DESC
 </pre></div>
-
-
 <p>""", con)
-p_proto.head(100)</pre></p>
-<div class="highlight"><pre>    &lt;span class=&quot;collapseomatic &quot; id=&quot;id7672&quot;  title=&quot;Click to see Used Protocols&quot;&gt;Click to see Used Protocols&lt;/span&gt;&lt;div id=&quot;target-id7672&quot; class=&quot;collapseomatic_content &quot;&gt;
-      &lt;/p&gt; &lt;table style=&quot;width: 98%; table-layout: fixed;&quot; border=&quot;1&quot;&gt;
-        &lt;tr style=&quot;word-wrap: break-word;&quot; align=&quot;left&quot;&gt;
-          &lt;th style=&quot;width: 20px;&quot;&gt;
+p_proto.head(100)</p>
+<div class="highlight"><pre>    &lt;span class="collapseomatic " id="id7672"  title="Click to see Used Protocols"&gt;Click to see Used Protocols&lt;/span&gt;&lt;div id="target-id7672" class="collapseomatic_content "&gt;
+      &lt;/p&gt; &lt;table style="width: 98%; table-layout: fixed;" border="1"&gt;
+        &lt;tr style="word-wrap: break-word;" align="left"&gt;
+          &lt;th style="width: 20px;"&gt;
             Â 
           &lt;/th&gt;
 
-          &lt;th style=&quot;width: 60px;&quot;&gt;
+          &lt;th style="width: 60px;"&gt;
             COUNT
           &lt;/th&gt;
 
-          &lt;th style=&quot;word-break: break-all; word-wrap: break-word;&quot;&gt;
+          &lt;th style="word-break: break-all; word-wrap: break-word;"&gt;
             frame_protocols
           &lt;/th&gt;
         &lt;/tr&gt;
@@ -6628,23 +6591,21 @@ p_proto.head(100)</pre></p>
 
       &lt;p&gt;
         &lt;/div&gt; &lt;h2&gt;
-          &lt;span id=&quot;Used_destination_ports&quot;&gt;Used destination ports&lt;/span&gt;
+          &lt;span id="Used_destination_ports"&gt;Used destination ports&lt;/span&gt;
         &lt;/h2&gt;
 
-        &lt;pre class=&quot;theme:ado font:ubuntu-mono lang:python decode:true&quot; title=&quot;Used destination ports&quot;&gt;p_ports = pdsql.read_frame(&quot;&quot;&quot;
+        &lt;pre class="theme:ado font:ubuntu-mono lang:python decode:true" title="Used destination ports"&gt;p_ports = pdsql.read_frame("""
 SELECT COUNT(c.dstport), c.dstport
 FROM connection AS c
 JOIN dns AS d ON c.dst = d.dns_response
 GROUP by c.dstport
 ORDER by 1 DESC
 </pre></div>
-
-
 <p>""", con)
-p_ports.head(100)</pre></p>
-<div class="highlight"><pre>        &lt;span class=&quot;collapseomatic &quot; id=&quot;id9318&quot;  title=&quot;Click to see Destination Ports&quot;&gt;Click to see Destination Ports&lt;/span&gt;&lt;div id=&quot;target-id9318&quot; class=&quot;collapseomatic_content &quot;&gt;
-          &lt;/p&gt; &lt;table style=&quot;width: 98%;&quot; border=&quot;1&quot;&gt;
-            &lt;tr align=&quot;left&quot;&gt;
+p_ports.head(100)</p>
+<div class="highlight"><pre>        &lt;span class="collapseomatic " id="id9318"  title="Click to see Destination Ports"&gt;Click to see Destination Ports&lt;/span&gt;&lt;div id="target-id9318" class="collapseomatic_content "&gt;
+          &lt;/p&gt; &lt;table style="width: 98%;" border="1"&gt;
+            &lt;tr align="left"&gt;
               &lt;th&gt;
                 Â 
               &lt;/th&gt;
@@ -6799,26 +6760,24 @@ p_ports.head(100)</pre></p>
 
           &lt;p&gt;
             &lt;/div&gt; &lt;h2&gt;
-              &lt;span id=&quot;HTTP_Connections&quot;&gt;HTTP Connections&lt;/span&gt;
+              &lt;span id="HTTP_Connections"&gt;HTTP Connections&lt;/span&gt;
             &lt;/h2&gt;
 
             &lt;h3&gt;
-              &lt;span id=&quot;HTTP_Methods&quot;&gt;HTTP Methods&lt;/span&gt;
+              &lt;span id="HTTP_Methods"&gt;HTTP Methods&lt;/span&gt;
             &lt;/h3&gt;
 
-            &lt;pre class=&quot;theme:ado font:ubuntu-mono lang:python decode:true&quot; title=&quot;Used http request methods&quot;&gt;p_http_methods = pdsql.read_frame(&quot;&quot;&quot;
+            &lt;pre class="theme:ado font:ubuntu-mono lang:python decode:true" title="Used http request methods"&gt;p_http_methods = pdsql.read_frame("""
 SELECT COUNT(request_method), request_method
 FROM http
 GROUP by request_method
 ORDER by 1 DESC
 </pre></div>
-
-
 <p>""", con)
-p_http_methods.head(100)</pre></p>
-<div class="highlight"><pre>            &lt;span class=&quot;collapseomatic &quot; id=&quot;id554&quot;  title=&quot;Click to see HTTP Methods&quot;&gt;Click to see HTTP Methods&lt;/span&gt;&lt;div id=&quot;target-id554&quot; class=&quot;collapseomatic_content &quot;&gt;
-              &lt;/p&gt; &lt;table style=&quot;width: 98%;&quot; border=&quot;1&quot;&gt;
-                &lt;tr align=&quot;left&quot;&gt;
+p_http_methods.head(100)</p>
+<div class="highlight"><pre>            &lt;span class="collapseomatic " id="id554"  title="Click to see HTTP Methods"&gt;Click to see HTTP Methods&lt;/span&gt;&lt;div id="target-id554" class="collapseomatic_content "&gt;
+              &lt;/p&gt; &lt;table style="width: 98%;" border="1"&gt;
+                &lt;tr align="left"&gt;
                   &lt;th&gt;
                     Â 
                   &lt;/th&gt;
@@ -6862,22 +6821,20 @@ p_http_methods.head(100)</pre></p>
 
               &lt;p&gt;
                 &lt;/div&gt; &lt;h3&gt;
-                  &lt;span id=&quot;User_agents&quot;&gt;User agents&lt;/span&gt;
+                  &lt;span id="User_agents"&gt;User agents&lt;/span&gt;
                 &lt;/h3&gt;
 
-                &lt;pre class=&quot;theme:ado font:ubuntu-mono lang:python decode:true&quot; title=&quot;HTTP User agents&quot;&gt;p_user_agents = pdsql.read_frame(&quot;&quot;&quot;
+                &lt;pre class="theme:ado font:ubuntu-mono lang:python decode:true" title="HTTP User agents"&gt;p_user_agents = pdsql.read_frame("""
 SELECT COUNT(user_agent), user_agent
 FROM http
 GROUP by user_agent
 ORDER by 1 DESC
 </pre></div>
-
-
 <p>""", con)
-p_user_agents.head(100)</pre></p>
-<div class="highlight"><pre>                &lt;span class=&quot;collapseomatic &quot; id=&quot;id5036&quot;  title=&quot;Click to see HTTP user agents&quot;&gt;Click to see HTTP user agents&lt;/span&gt;&lt;div id=&quot;target-id5036&quot; class=&quot;collapseomatic_content &quot;&gt;
-                  &lt;/p&gt; &lt;table style=&quot;width: 98%;&quot; border=&quot;1&quot;&gt;
-                    &lt;tr align=&quot;left&quot;&gt;
+p_user_agents.head(100)</p>
+<div class="highlight"><pre>                &lt;span class="collapseomatic " id="id5036"  title="Click to see HTTP user agents"&gt;Click to see HTTP user agents&lt;/span&gt;&lt;div id="target-id5036" class="collapseomatic_content "&gt;
+                  &lt;/p&gt; &lt;table style="width: 98%;" border="1"&gt;
+                    &lt;tr align="left"&gt;
                       &lt;th&gt;
                         Â 
                       &lt;/th&gt;
@@ -7186,49 +7143,47 @@ p_user_agents.head(100)</pre></p>
 
                   &lt;p&gt;
                     &lt;/div&gt; &lt;h3&gt;
-                      &lt;span id=&quot;GET_Requests&quot;&gt;GET Requests&lt;/span&gt;
+                      &lt;span id="GET_Requests"&gt;GET Requests&lt;/span&gt;
                     &lt;/h3&gt;
 
-                    &lt;pre class=&quot;theme:ado font:ubuntu-mono lang:python decode:true&quot; title=&quot;Interesting GET requests&quot;&gt;p3 = pdsql.read_frame(&quot;&quot;&quot;
+                    &lt;pre class="theme:ado font:ubuntu-mono lang:python decode:true" title="Interesting GET requests"&gt;p3 = pdsql.read_frame("""
 SELECT h.frame_number, h.ip_dst, d.dns_query, h.request_method, h.request_uri, h.user_agent FROM http AS  h
 JOIN dns AS d ON h.ip_dst = d.dns_response
-WHERE lower(h.request_method) == &#39;get&#39; AND
+WHERE lower(h.request_method) == 'get' AND
     -- Filter all rubish
-    (h.request_uri NOT LIKE &#39;%.gif&#39;  AND
-     h.request_uri NOT LIKE &#39;%.jpg&#39;  AND
-     h.request_uri NOT LIKE &#39;%.jpeg&#39; AND
-     h.request_uri NOT LIKE &#39;%.png&#39;  AND
-     h.request_uri NOT LIKE &#39;%.gif&#39;  AND
-     h.request_uri NOT LIKE &#39;%.css&#39;  AND
-     h.request_uri NOT LIKE &#39;%.html&#39; AND
-     h.request_uri NOT LIKE &#39;%.js&#39;)
+    (h.request_uri NOT LIKE '%.gif'  AND
+     h.request_uri NOT LIKE '%.jpg'  AND
+     h.request_uri NOT LIKE '%.jpeg' AND
+     h.request_uri NOT LIKE '%.png'  AND
+     h.request_uri NOT LIKE '%.gif'  AND
+     h.request_uri NOT LIKE '%.css'  AND
+     h.request_uri NOT LIKE '%.html' AND
+     h.request_uri NOT LIKE '%.js')
 AND
-    (d.dns_query NOT LIKE &#39;%amazon%&#39;   AND
-     d.dns_query NOT LIKE &#39;%fahrinfo%&#39; AND
-     d.dns_query NOT LIKE &#39;%faz.net%&#39;  AND
-     d.dns_query NOT LIKE &#39;%heute.de%&#39; AND
-     d.dns_query NOT LIKE &#39;%twitter%&#39;  AND
-     d.dns_query NOT LIKE &#39;%sueddeutsche%&#39;)
+    (d.dns_query NOT LIKE '%amazon%'   AND
+     d.dns_query NOT LIKE '%fahrinfo%' AND
+     d.dns_query NOT LIKE '%faz.net%'  AND
+     d.dns_query NOT LIKE '%heute.de%' AND
+     d.dns_query NOT LIKE '%twitter%'  AND
+     d.dns_query NOT LIKE '%sueddeutsche%')
 
 GROUP by h.request_uri
 ORDER by d.dns_query
 </pre></div>
-
-
 <p>""", con)
-p3.head(500)</pre></p>
-<div class="highlight"><pre>                    &lt;span class=&quot;collapseomatic &quot; id=&quot;id7091&quot;  title=&quot;Click to see GET Requests&quot;&gt;Click to see GET Requests&lt;/span&gt;&lt;div id=&quot;target-id7091&quot; class=&quot;collapseomatic_content &quot;&gt;
-                      &lt;/p&gt; &lt;table style=&quot;table-layout: fixed; width: 100%;&quot; border=&quot;1&quot;&gt;
-                        &lt;tr align=&quot;left&quot;&gt;
-                          &lt;th style=&quot;width: 30px;&quot; valign=&quot;top&quot;&gt;
+p3.head(500)</p>
+<div class="highlight"><pre>                    &lt;span class="collapseomatic " id="id7091"  title="Click to see GET Requests"&gt;Click to see GET Requests&lt;/span&gt;&lt;div id="target-id7091" class="collapseomatic_content "&gt;
+                      &lt;/p&gt; &lt;table style="table-layout: fixed; width: 100%;" border="1"&gt;
+                        &lt;tr align="left"&gt;
+                          &lt;th style="width: 30px;" valign="top"&gt;
                             Â 
                           &lt;/th&gt;
 
-                          &lt;th style=&quot;word-wrap: break-word; width: 200px;&quot; valign=&quot;top&quot;&gt;
+                          &lt;th style="word-wrap: break-word; width: 200px;" valign="top"&gt;
                             destination
                           &lt;/th&gt;
 
-                          &lt;th style=&quot;word-wrap: break-word;&quot;&gt;
+                          &lt;th style="word-wrap: break-word;"&gt;
                             request_uri
                           &lt;/th&gt;
                         &lt;/tr&gt;
@@ -7270,7 +7225,7 @@ p3.head(500)</pre></p>
                           &lt;/td&gt;
 
                           &lt;td&gt;
-                            /2/win?_bi=4bq4p7Cn9VXzc3XTEz1wocSUpKU%3D&amp;_ei=10411&amp;_ecost1000000_adx=Utq7uQAM5S8K3tKEAABJJbJHrnHwdXabfQqUjg&amp;-mf=2&amp;-fi=86400&amp;age=0&amp;app=&amp;appi=&amp;appv=&amp;pt=app&amp;pi=&lt;span style=&quot;background-color: #00ff00;&quot;&gt;com.iudesk.android.photo.edito&lt;/span&gt;r&amp;p=com.iudesk.android.photo.editor&amp;zid=&amp;pcat=&amp;lat=&amp;lon=&amp;country=DEU&amp;gender=%3F&amp;isp=carrier&amp;netspd=dial-up&amp;model=&lt;span style=&quot;background-color: #00ff00;&quot;&gt;gt-n7000&lt;/span&gt;&amp;&lt;span style=&quot;background-color: #00ff00;&quot;&gt;os=Android&amp;osv=4.3.&lt;/span&gt;1&amp;region=&amp;zip=&amp;dma=0&amp;si=4&amp;_ua=&lt;span style=&quot;background-color: #00ff00;&quot;&gt;Mozilla%2F5.0+%28Linux%3B+U%3B+Android+4.3.1&lt;/span&gt;%3B+de-de%3B+GT-N7000+Build%2FJLS36I%29+AppleWebKit%2F534.30+%28KHTML%2C+like+Gecko%29+Version%2F4.0+Mobile+Safari%2F534.30+%28Mobile%3B+afma-sdk-a-v6.4.1%29%2Cgzip%28gfe%29&amp;_uh=xid%3ACAESEDLJ4tolP4xNFA9ZOWuBZNM&amp;idx=2&amp;ai=209646&amp;_bid=0.00117&amp;sub5=fe02-sl
+                            /2/win?_bi=4bq4p7Cn9VXzc3XTEz1wocSUpKU%3D&amp;_ei=10411&amp;_ecost1000000_adx=Utq7uQAM5S8K3tKEAABJJbJHrnHwdXabfQqUjg&amp;-mf=2&amp;-fi=86400&amp;age=0&amp;app=&amp;appi=&amp;appv=&amp;pt=app&amp;pi=&lt;span style="background-color: #00ff00;"&gt;com.iudesk.android.photo.edito&lt;/span&gt;r&amp;p=com.iudesk.android.photo.editor&amp;zid=&amp;pcat=&amp;lat=&amp;lon=&amp;country=DEU&amp;gender=%3F&amp;isp=carrier&amp;netspd=dial-up&amp;model=&lt;span style="background-color: #00ff00;"&gt;gt-n7000&lt;/span&gt;&amp;&lt;span style="background-color: #00ff00;"&gt;os=Android&amp;osv=4.3.&lt;/span&gt;1&amp;region=&amp;zip=&amp;dma=0&amp;si=4&amp;_ua=&lt;span style="background-color: #00ff00;"&gt;Mozilla%2F5.0+%28Linux%3B+U%3B+Android+4.3.1&lt;/span&gt;%3B+de-de%3B+GT-N7000+Build%2FJLS36I%29+AppleWebKit%2F534.30+%28KHTML%2C+like+Gecko%29+Version%2F4.0+Mobile+Safari%2F534.30+%28Mobile%3B+afma-sdk-a-v6.4.1%29%2Cgzip%28gfe%29&amp;_uh=xid%3ACAESEDLJ4tolP4xNFA9ZOWuBZNM&amp;idx=2&amp;ai=209646&amp;_bid=0.00117&amp;sub5=fe02-sl
                           &lt;/td&gt;
                         &lt;/tr&gt;
 
@@ -7326,7 +7281,7 @@ p3.head(500)</pre></p>
                           &lt;/td&gt;
 
                           &lt;td&gt;
-                            /api/v1/0d868f5ce9434bdcafd869f2b11adae8/cpu/?os=android_18&amp;v_maj=4.4.2.254&amp;d=&lt;span style=&quot;color: #000000; background-color: #00ff00;&quot;&gt;GT-N7000&lt;/span&gt;&amp;ts=1390065565&amp;s=218949477293337144&amp;c=o2+-+de&amp;kt_v=a1.3.1&amp;m=samsung
+                            /api/v1/0d868f5ce9434bdcafd869f2b11adae8/cpu/?os=android_18&amp;v_maj=4.4.2.254&amp;d=&lt;span style="color: #000000; background-color: #00ff00;"&gt;GT-N7000&lt;/span&gt;&amp;ts=1390065565&amp;s=218949477293337144&amp;c=o2+-+de&amp;kt_v=a1.3.1&amp;m=samsung
                           &lt;/td&gt;
                         &lt;/tr&gt;
 
@@ -7354,7 +7309,7 @@ p3.head(500)</pre></p>
                           &lt;/td&gt;
 
                           &lt;td&gt;
-                            /api/v1/0d868f5ce9434bdcafd869f2b11adae8/evt/?n=&lt;span style=&quot;background-color: #00ff00;&quot;&gt;Keyboard_Total_Daily_Time&amp;ts=1390065565&amp;s=218949477293337144&amp;kt_v=a1.3.1&amp;st1=KeyboardUses&lt;/span&gt;
+                            /api/v1/0d868f5ce9434bdcafd869f2b11adae8/evt/?n=&lt;span style="background-color: #00ff00;"&gt;Keyboard_Total_Daily_Time&amp;ts=1390065565&amp;s=218949477293337144&amp;kt_v=a1.3.1&amp;st1=KeyboardUses&lt;/span&gt;
                           &lt;/td&gt;
                         &lt;/tr&gt;
 
@@ -8138,7 +8093,7 @@ p3.head(500)</pre></p>
                           &lt;/td&gt;
 
                           &lt;td&gt;
-                            /mads/gma?preqs=0&amp;session_id=17592708045346502934&amp;u_sd=1.6750001&amp;seq_num=1&amp;u_w=477&amp;msid=&lt;span style=&quot;background-color: #00ff00;&quot;&gt;com.iudesk.android.photo.editor&lt;/span&gt;&amp;js=afma-sdk-a-v6.4.1&amp;ms=nb-L0MAMQe8GvfY_GF6rij7OVhr7yp8iklRfdZEsobLfPN2V1HAwhr3fZaYYsV8OvnBAI7zvDSK59SGWlN8KYfs6k4fUhLp8gwe1zJEHx3aqI1SDtGvoMoDutEe208dqebTP_5d2Ydk4yTNoeVXbACMjJRSOmtoMcMr-P84vo-d1J-36mfPUt4gIueReT9-a1nSfXwrGJ2asIUygSe5Z6OG2q805BRqRtNkbyhnefM7MheC_wWGiqgvdJHjrKa5AZu78GZhAyaseI89idFJ7Qm8Tp4ngsn93gewdu0PP_xJnsQp1DTgrzZMJINW9n2AiZO0CZz5d7vxXMqtPlnNReA&amp;mv=&lt;span style=&quot;background-color: #00ff00;&quot;&gt;80240021.com.android.vending&lt;/span&gt;&amp;bas_off=0&amp;format=320x50_mb&amp;oar=0&amp;net=ed&amp;app_name=&lt;span style=&quot;background-color: #00ff00;&quot;&gt;2014010100.android.com.iudesk.android.photo.editor&lt;/span&gt;&amp;hl=de&amp;gnt=8&amp;u_h=764&amp;carrier=26207&amp;bas_on=0&amp;ptime=0&amp;u_audio=3&amp;imbf=8009&amp;u_so=p&amp;output=html&amp;region=mobile_app&amp;u_tz=60&amp;client_sdk=1&amp;ex=1&amp;slotname=a14ecccef2eb8b3&amp;gsb=4g&amp;caps=inlineVideo_interactiveVideo_mraid1_th_mediation_sdkAdmobApiForAds_di&amp;eid=46621027&amp;jsv=66&amp;urll=935
+                            /mads/gma?preqs=0&amp;session_id=17592708045346502934&amp;u_sd=1.6750001&amp;seq_num=1&amp;u_w=477&amp;msid=&lt;span style="background-color: #00ff00;"&gt;com.iudesk.android.photo.editor&lt;/span&gt;&amp;js=afma-sdk-a-v6.4.1&amp;ms=nb-L0MAMQe8GvfY_GF6rij7OVhr7yp8iklRfdZEsobLfPN2V1HAwhr3fZaYYsV8OvnBAI7zvDSK59SGWlN8KYfs6k4fUhLp8gwe1zJEHx3aqI1SDtGvoMoDutEe208dqebTP_5d2Ydk4yTNoeVXbACMjJRSOmtoMcMr-P84vo-d1J-36mfPUt4gIueReT9-a1nSfXwrGJ2asIUygSe5Z6OG2q805BRqRtNkbyhnefM7MheC_wWGiqgvdJHjrKa5AZu78GZhAyaseI89idFJ7Qm8Tp4ngsn93gewdu0PP_xJnsQp1DTgrzZMJINW9n2AiZO0CZz5d7vxXMqtPlnNReA&amp;mv=&lt;span style="background-color: #00ff00;"&gt;80240021.com.android.vending&lt;/span&gt;&amp;bas_off=0&amp;format=320x50_mb&amp;oar=0&amp;net=ed&amp;app_name=&lt;span style="background-color: #00ff00;"&gt;2014010100.android.com.iudesk.android.photo.editor&lt;/span&gt;&amp;hl=de&amp;gnt=8&amp;u_h=764&amp;carrier=26207&amp;bas_on=0&amp;ptime=0&amp;u_audio=3&amp;imbf=8009&amp;u_so=p&amp;output=html&amp;region=mobile_app&amp;u_tz=60&amp;client_sdk=1&amp;ex=1&amp;slotname=a14ecccef2eb8b3&amp;gsb=4g&amp;caps=inlineVideo_interactiveVideo_mraid1_th_mediation_sdkAdmobApiForAds_di&amp;eid=46621027&amp;jsv=66&amp;urll=935
                           &lt;/td&gt;
                         &lt;/tr&gt;
 
@@ -8614,7 +8569,7 @@ p3.head(500)</pre></p>
                           &lt;/td&gt;
 
                           &lt;td&gt;
-                            /mads/gma?preqs=0&amp;u_sd=1.6750001&amp;u_h=764&amp;u_w=477&amp;msid=com.icecoldapps.sshserver&amp;js=afma-sdk-a-v4.1.1&amp;format=320x50_mb&amp;net=ed&amp;app_name=&lt;span style=&quot;background-color: #00ff00;&quot;&gt;6.android.com.icecoldapps.sshserver&lt;/span&gt;&amp;u_audio=3&amp;hl=de&amp;u_so=p&amp;output=html&amp;region=mobile_app&amp;u_tz=60&amp;client_sdk=1&amp;ex=1&amp;slotname=a1503fa97c18f71&amp;caps=th_sdkAdmobApiForAds_di&amp;eid=46621027&amp;eisu=YqvG8bb1HRSjHT6fGSlcIGDpDNkVBUb9f6gFzqmi9KKfTIqGDqHqvKRVSjVInYJT89PFhEXFazxoGTMgh8XJGbsG3oecaOzbv8-2l35NcfO9gAwABQhGCOMtM6TYYwID&amp;et=16&amp;jsv=66&amp;urll=499
+                            /mads/gma?preqs=0&amp;u_sd=1.6750001&amp;u_h=764&amp;u_w=477&amp;msid=com.icecoldapps.sshserver&amp;js=afma-sdk-a-v4.1.1&amp;format=320x50_mb&amp;net=ed&amp;app_name=&lt;span style="background-color: #00ff00;"&gt;6.android.com.icecoldapps.sshserver&lt;/span&gt;&amp;u_audio=3&amp;hl=de&amp;u_so=p&amp;output=html&amp;region=mobile_app&amp;u_tz=60&amp;client_sdk=1&amp;ex=1&amp;slotname=a1503fa97c18f71&amp;caps=th_sdkAdmobApiForAds_di&amp;eid=46621027&amp;eisu=YqvG8bb1HRSjHT6fGSlcIGDpDNkVBUb9f6gFzqmi9KKfTIqGDqHqvKRVSjVInYJT89PFhEXFazxoGTMgh8XJGbsG3oecaOzbv8-2l35NcfO9gAwABQhGCOMtM6TYYwID&amp;et=16&amp;jsv=66&amp;urll=499
                           &lt;/td&gt;
                         &lt;/tr&gt;
 
@@ -9524,7 +9479,7 @@ p3.head(500)</pre></p>
                           &lt;/td&gt;
 
                           &lt;td&gt;
-                            /__utm.gif?utmwv=4.8.1ma&amp;utmn=319752051&amp;&lt;span style=&quot;background-color: #00ff00;&quot;&gt;utme=8(1!clientType*2!feedlyVersion*3!wave*4!logged*5!transition)9(1!android.1*2!18.0.4*3!2013.17*4!yes*5!stack)11(1!1*2!1*3!1*4!1*5!1)&amp;utmcs=UTF-&lt;/span&gt;8&amp;utmsr=800&amp;#215;1280&amp;utmul=de-DE&amp;utmp=%2Fmy&amp;utmac=UA-46940058-1&amp;utmcc=__utma%3D1.580923361.1368709109.1389969064.1390050791.142%3B&amp;utmhid=1408137172&amp;aip=1&amp;utmht=1390050791286&amp;utmqt=10062
+                            /__utm.gif?utmwv=4.8.1ma&amp;utmn=319752051&amp;&lt;span style="background-color: #00ff00;"&gt;utme=8(1!clientType*2!feedlyVersion*3!wave*4!logged*5!transition)9(1!android.1*2!18.0.4*3!2013.17*4!yes*5!stack)11(1!1*2!1*3!1*4!1*5!1)&amp;utmcs=UTF-&lt;/span&gt;8&amp;utmsr=800&amp;#215;1280&amp;utmul=de-DE&amp;utmp=%2Fmy&amp;utmac=UA-46940058-1&amp;utmcc=__utma%3D1.580923361.1368709109.1389969064.1390050791.142%3B&amp;utmhid=1408137172&amp;aip=1&amp;utmht=1390050791286&amp;utmqt=10062
                           &lt;/td&gt;
                         &lt;/tr&gt;
 
@@ -9538,7 +9493,7 @@ p3.head(500)</pre></p>
                           &lt;/td&gt;
 
                           &lt;td&gt;
-                            /__utm.gif?utmwv=5.4.6&amp;utms=1&amp;utmn=1693448053&amp;utmhn=&lt;span style=&quot;background-color: #00ff00;&quot;&gt;intelcrawler.com&lt;/span&gt;&amp;utmcs=UTF-8&amp;u&lt;span style=&quot;background-color: #00ff00;&quot;&gt;tmsr=800&amp;#215;1280&lt;/span&gt;&amp;utmvp=479&amp;#215;710&amp;utmsc=32-bit&amp;utmul=de-de&amp;utmje=0&amp;utmfl=-&amp;utmdt=IntelCrawler%20-%20Multi-tier%20Intelligence%20Aggregator%20-%20%22Decebal%22%20Point-of-Sale%20Malware%20-%20400%20lines%20of%20VBScript%20code%20from%20Romania%2C%20researchers%20warns%20about%20evolution%20of%20threats%20and%20interests%20to%20modern%20retailers&amp;utmhid=622979055&amp;utmr=http%3A%2F%2Fflipboard.com%2Fredirect%3Furl%3Dhttp%253A%252F%252Fintelcrawler.com%252Fabout%252Fpress07&amp;utmp=%2Fabout%2Fpress07&amp;utmht=1390051703933&amp;utmac=UA-12964573-5&amp;utmcc=__utma%3D238268888.570751254.1390051692.1390051704.1390051704.1%3B%2B__utmz%3D238268888.1390051704.1.1.utmcsr%3Dflipboard.com%7Cutmccn%3D(referral)%7Cutmcmd%3Dreferral%7Cutmcct%3D%2Fredirect%3B&amp;utmu=CAAgAAAAACAAAAAAAAAB~
+                            /__utm.gif?utmwv=5.4.6&amp;utms=1&amp;utmn=1693448053&amp;utmhn=&lt;span style="background-color: #00ff00;"&gt;intelcrawler.com&lt;/span&gt;&amp;utmcs=UTF-8&amp;u&lt;span style="background-color: #00ff00;"&gt;tmsr=800&amp;#215;1280&lt;/span&gt;&amp;utmvp=479&amp;#215;710&amp;utmsc=32-bit&amp;utmul=de-de&amp;utmje=0&amp;utmfl=-&amp;utmdt=IntelCrawler%20-%20Multi-tier%20Intelligence%20Aggregator%20-%20%22Decebal%22%20Point-of-Sale%20Malware%20-%20400%20lines%20of%20VBScript%20code%20from%20Romania%2C%20researchers%20warns%20about%20evolution%20of%20threats%20and%20interests%20to%20modern%20retailers&amp;utmhid=622979055&amp;utmr=http%3A%2F%2Fflipboard.com%2Fredirect%3Furl%3Dhttp%253A%252F%252Fintelcrawler.com%252Fabout%252Fpress07&amp;utmp=%2Fabout%2Fpress07&amp;utmht=1390051703933&amp;utmac=UA-12964573-5&amp;utmcc=__utma%3D238268888.570751254.1390051692.1390051704.1390051704.1%3B%2B__utmz%3D238268888.1390051704.1.1.utmcsr%3Dflipboard.com%7Cutmccn%3D(referral)%7Cutmcmd%3Dreferral%7Cutmcct%3D%2Fredirect%3B&amp;utmu=CAAgAAAAACAAAAAAAAAB~
                           &lt;/td&gt;
                         &lt;/tr&gt;
 
@@ -10168,7 +10123,7 @@ p3.head(500)</pre></p>
                           &lt;/td&gt;
 
                           &lt;td&gt;
-                            /device_204?app_anon_id=6988a4be-80bf-4a77-9581-f98c234a176f&amp;firstactive=1389027600&amp;firstactivegeo=DE&amp;firstlogin=1389027600&amp;prevactive=1390003200&amp;prevlogin=1390003200&amp;loginstate=1&amp;cplatform=mobile&amp;c=android&amp;cver=5.3.32&amp;cos=Android&amp;cosver=4.3.1&amp;cbr=&lt;span style=&quot;background-color: #00ff00;&quot;&gt;com.google.android.youtube&lt;/span&gt;&amp;&lt;span style=&quot;background-color: #00ff00;&quot;&gt;cbrver=5.3.32&amp;cbrand=samsung&amp;cmodel=GT-N7000&amp;cnetwork=o2%20-%20de&lt;/span&gt;
+                            /device_204?app_anon_id=6988a4be-80bf-4a77-9581-f98c234a176f&amp;firstactive=1389027600&amp;firstactivegeo=DE&amp;firstlogin=1389027600&amp;prevactive=1390003200&amp;prevlogin=1390003200&amp;loginstate=1&amp;cplatform=mobile&amp;c=android&amp;cver=5.3.32&amp;cos=Android&amp;cosver=4.3.1&amp;cbr=&lt;span style="background-color: #00ff00;"&gt;com.google.android.youtube&lt;/span&gt;&amp;&lt;span style="background-color: #00ff00;"&gt;cbrver=5.3.32&amp;cbrand=samsung&amp;cmodel=GT-N7000&amp;cnetwork=o2%20-%20de&lt;/span&gt;
                           &lt;/td&gt;
                         &lt;/tr&gt;
 
@@ -10217,23 +10172,21 @@ p3.head(500)</pre></p>
 
                       &lt;p&gt;
                         &lt;/div&gt; &lt;h3&gt;
-                          &lt;span id=&quot;POST_Requests&quot;&gt;POST Requests&lt;/span&gt;
+                          &lt;span id="POST_Requests"&gt;POST Requests&lt;/span&gt;
                         &lt;/h3&gt;
 
-                        &lt;pre class=&quot;theme:ado font:ubuntu-mono lang:python decode:true&quot; title=&quot;POST requests&quot;&gt;p3 = pdsql.read_frame(&quot;&quot;&quot;
+                        &lt;pre class="theme:ado font:ubuntu-mono lang:python decode:true" title="POST requests"&gt;p3 = pdsql.read_frame("""
 SELECT h.frame_number, d.dns_query, h.request_uri, h.data, h.text FROM http AS  h
 JOIN dns AS d ON h.ip_dst = d.dns_response
-WHERE lower(h.request_method) == &#39;post&#39;
+WHERE lower(h.request_method) == 'post'
 ORDER by h.ip_dst
 </pre></div>
-
-
 <p>""", con)
-p3.head(500)</pre></p>
-<div class="highlight"><pre>                        &lt;span class=&quot;collapseomatic &quot; id=&quot;id8666&quot;  title=&quot;Click to see POST requests&quot;&gt;Click to see POST requests&lt;/span&gt;&lt;div id=&quot;target-id8666&quot; class=&quot;collapseomatic_content &quot;&gt;
-                          &lt;/p&gt; &lt;table style=&quot;table-layout: fixed; width: 100%;&quot; border=&quot;1&quot;&gt;
-                            &lt;tr align=&quot;left&quot;&gt;
-                              &lt;th style=&quot;width: 40px;&quot;&gt;
+p3.head(500)</p>
+<div class="highlight"><pre>                        &lt;span class="collapseomatic " id="id8666"  title="Click to see POST requests"&gt;Click to see POST requests&lt;/span&gt;&lt;div id="target-id8666" class="collapseomatic_content "&gt;
+                          &lt;/p&gt; &lt;table style="table-layout: fixed; width: 100%;" border="1"&gt;
+                            &lt;tr align="left"&gt;
+                              &lt;th style="width: 40px;"&gt;
                                 Â 
                               &lt;/th&gt;
 
@@ -13716,10 +13669,10 @@ p3.head(500)</pre></p>
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump-ipython-notebook-version">24h Android sniffing using tcpdump - IPython Notebook Version</a></li>
-        <li><a href="http://blog.dornea.nu/2014/08/05/android-dynamic-code-analysis-mastering-droidbox">Android Dynamic Code Analysis - Mastering DroidBox</a></li>
-        <li><a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a></li>
         <li><a href="http://blog.dornea.nu/2015/07/01/debugging-android-native-shared-libraries">Debugging Android native shared libraries</a></li>
+        <li><a href="http://blog.dornea.nu/2014/08/05/android-dynamic-code-analysis-mastering-droidbox">Android Dynamic Code Analysis - Mastering DroidBox</a></li>
+        <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump-ipython-notebook-version">24h Android sniffing using tcpdump - IPython Notebook Version</a></li>
+        <li><a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a></li>
         <li><a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a></li>
     </ul>
 </section>

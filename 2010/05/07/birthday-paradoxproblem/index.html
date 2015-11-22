@@ -1712,9 +1712,9 @@ blog.dornea.nu            </a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p><img alt="image description" src="http://static.dornea.nu/img/2010/be4472de1eeb3cb6a45cc6556488dbec.png" width="800" height="490" />&#8220;In probability theory, the birthday problem, or birthday paradox pertains to the probability that in a set of randomly chosen people some pair of them will have the same birthday. In a group of at least 23 randomly chosen people, there is more than 50% probability that some pair of them will have the same birthday. Such a result is counter-intuitive to many.</p>
-<p>For 57 or more people, the probability is more than 99%, and it reaches 100% when, ignoring leap-years, the number of people reaches 366 (by the pigeonhole principle). The mathematics behind this problem led to a well-known cryptographic attack called the birthday attack.&#8221; [Source: <a href="http://en.wikipedia.org/wiki/Birthday_problem">wikipedia</a>]<!--more--></p>
-<p>Well I tried to show that using empirical methods: I randomly generated groups of &#8220;persons&#8221; and calculated the probability that 2 people will have the same birthday. Therefor I&#8217;ve been using Python due to its simplicity and clean coding style. Here is my code:<!--break--></p>
+                <p><img alt="image description" class="img-responsive" height="490" src="http://static.dornea.nu/img/2010/be4472de1eeb3cb6a45cc6556488dbec.png" width="800"/>“In probability theory, the birthday problem, or birthday paradox pertains to the probability that in a set of randomly chosen people some pair of them will have the same birthday. In a group of at least 23 randomly chosen people, there is more than 50% probability that some pair of them will have the same birthday. Such a result is counter-intuitive to many.</p>
+<p>For 57 or more people, the probability is more than 99%, and it reaches 100% when, ignoring leap-years, the number of people reaches 366 (by the pigeonhole principle). The mathematics behind this problem led to a well-known cryptographic attack called the birthday attack.” [Source: <a href="http://en.wikipedia.org/wiki/Birthday_problem">wikipedia</a>]<!--more--></p>
+<p>Well I tried to show that using empirical methods: I randomly generated groups of “persons” and calculated the probability that 2 people will have the same birthday. Therefor I’ve been using Python due to its simplicity and clean coding style. Here is my code:<!--break--></p>
 <pre>def birthday_paradox():
 """ We calculate the probability that 2 persons will have the same
 birthday.
@@ -1774,7 +1774,6 @@ print("Number of persons:",i, " Probability: ",experiment(c,i))
 
 if __name__ == "__main__":
 birthday_paradox()</pre>
-
 <p>Simple run will show:</p>
 <pre>$ python3.1 birthday_paradox.py
 Number of persons: 0 Probability: 0.0
@@ -1807,18 +1806,17 @@ Number of persons: 26 Probability: 0.5978
 Number of persons: 27 Probability: 0.6261
 Number of persons: 28 Probability: 0.6486
 ...</pre>
-
 <p>As we, see we need<strong> at least 23 persons</strong> in order to have a <strong>probability greather-equal 50%</strong>.</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2013/08/02/howto-automate-burp-using-burp-extender-api">HowTo: Automate Burp using Burp Extender API</a></li>
-        <li><a href="http://blog.dornea.nu/2015/05/06/adding-concurrency-to-smalisca">Adding concurrency to smalisca</a></li>
         <li><a href="http://blog.dornea.nu/2014/05/04/howto-create-docs-with-sphinx">HowTo: Create docs with sphinx</a></li>
+        <li><a href="http://blog.dornea.nu/2015/05/06/adding-concurrency-to-smalisca">Adding concurrency to smalisca</a></li>
+        <li><a href="http://blog.dornea.nu/2013/08/02/howto-automate-burp-using-burp-extender-api">HowTo: Automate Burp using Burp Extender API</a></li>
         <li><a href="http://blog.dornea.nu/2015/05/24/validating-and-pinning-x509-certificates">Validating and pinning X.509 certificates</a></li>
-        <li><a href="http://blog.dornea.nu/2010/09/13/icmpknock-v02-released">icmpKNOCK v0.2 released</a></li>
+        <li><a href="http://blog.dornea.nu/2008/11/26/mod2exec-execute-modules-german">Mod2Exec &#8211; Execute modules (german)</a></li>
     </ul>
 </section>
     <hr />

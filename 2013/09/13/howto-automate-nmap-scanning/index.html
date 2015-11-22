@@ -1715,40 +1715,38 @@ blog.dornea.nu            </a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>Recently a <a href="http://nullsecurity.net/about.html">colleague</a> of mine at <a href="http://nullsecurity.net/">nullsecurity.net</a> released a new scanning tool called <a href="http://nullsecurity.net/tools/automation/wnmap-0.1.tar.gz">wnmap</a>. Basically it&#8217;s a wrapper around nmap which helps automating the scanning process by using simple configuration files. Let&#8217;s have a look at it..</p>
-<div id="toc_container" class="toc_wrap_right toc_transparent no_bullets">
-  <p class="toc_title">
+                <p>Recently a <a href="http://nullsecurity.net/about.html">colleague</a> of mine at <a href="http://nullsecurity.net/">nullsecurity.net</a> released a new scanning tool called <a href="http://nullsecurity.net/tools/automation/wnmap-0.1.tar.gz">wnmap</a>. Basically it’s a wrapper around nmap which helps automating the scanning process by using simple configuration files. Let’s have a look at it..</p>
+<div class="toc_wrap_right toc_transparent no_bullets" id="toc_container">
+<p class="toc_title">
     Contents
   </p>
-
-  <ul class="toc_list">
-    <li>
-      <a href="#i"><span class="toc_number toc_depth_1">1</span> </a>
-    </li>
-    <li>
-      <a href="#Configuration"><span class="toc_number toc_depth_1">2</span> Configuration</a>
-    </li>
-    <li>
-      <a href="#i-2"><span class="toc_number toc_depth_1">3</span> </a>
-    </li>
-    <li>
-      <a href="#Running_the_tool"><span class="toc_number toc_depth_1">4</span> Running the tool</a>
-    </li>
-    <li>
-      <a href="#i-3"><span class="toc_number toc_depth_1">5</span> </a>
-    </li>
-    <li>
-      <a href="#Add_new_mode"><span class="toc_number toc_depth_1">6</span> Add new mode</a>
-    </li>
-    <li>
-      <a href="#i-4"><span class="toc_number toc_depth_1">7</span> </a>
-    </li>
-    <li>
-      <a href="#Combine_modes"><span class="toc_number toc_depth_1">8</span> Combine modes</a>
-    </li>
-  </ul>
+<ul class="toc_list">
+<li>
+<a href="#i"><span class="toc_number toc_depth_1">1</span> </a>
+</li>
+<li>
+<a href="#Configuration"><span class="toc_number toc_depth_1">2</span> Configuration</a>
+</li>
+<li>
+<a href="#i-2"><span class="toc_number toc_depth_1">3</span> </a>
+</li>
+<li>
+<a href="#Running_the_tool"><span class="toc_number toc_depth_1">4</span> Running the tool</a>
+</li>
+<li>
+<a href="#i-3"><span class="toc_number toc_depth_1">5</span> </a>
+</li>
+<li>
+<a href="#Add_new_mode"><span class="toc_number toc_depth_1">6</span> Add new mode</a>
+</li>
+<li>
+<a href="#i-4"><span class="toc_number toc_depth_1">7</span> </a>
+</li>
+<li>
+<a href="#Combine_modes"><span class="toc_number toc_depth_1">8</span> Combine modes</a>
+</li>
+</ul>
 </div>
-
 <h1 id="_1"><span id="i"><!--more--></span></h1>
 <h1 id="configuration"><span id="Configuration">Configuration</span></h1>
 <p>Make sure you you have downloaded the archive and open <strong>src/core/wnmap.conf</strong> in order to edit:</p>
@@ -1759,7 +1757,7 @@ blog.dornea.nu            </a>
 </ul>
 <h1 id="_2"><span id="i-2"></span></h1>
 <h1 id="running-the-tool"><span id="Running_the_tool">Running the tool</span></h1>
-<p>Now the obligatory &#8211;help message:</p>
+<p>Now the obligatory –help message:</p>
 <pre class="lang:sh decode:true">--==[ wnmap by nrz@nullsecurity.net ]==--
 Usage: wnmap [options] &lt;target specification&gt; | &lt;misc&gt;
 TARGET SPECIFICATION:
@@ -1786,7 +1784,6 @@ EXAMPLES:
     wnmap -C scanme.nmap.org # give it all you got
     wnmap -a "-I;iddle-scan;-P0 -p- -sI sweet.host.com;true"
     wnmap -e # edit modes</pre>
-
 <p>As you can see the tool comes along with several <strong>predefined </strong>running modes. You can easily edit them at <strong>src/core/wmodes.conf:</strong></p>
 <pre class="lang:sh decode:true" title="wnmap modes">% cat src/core/wmodes.conf
 # SAMPLE FILE !!! DEFINE YOUR OWN MAGIC !!!
@@ -1796,17 +1793,15 @@ EXAMPLES:
 -V;version;-sV -version-trace;false
 -O;os;-O --osscan-guess;true
 -M;script_malware;-script malware;false</pre>
-
-<p>Quite handy, isn&#8217;t it? You can <strong>chain</strong> the modes using <strong>-C. </strong></p>
+<p>Quite handy, isn’t it? You can <strong>chain</strong> the modes using <strong>-C. </strong></p>
 <h1 id="_3"><span id="i-3"></span></h1>
 <h1 id="add-new-mode"><span id="Add_new_mode"><strong>Add new mode</strong></span></h1>
-<p>Let&#8217;s say I want to add a new mode, which will scan all hosts at port 80 and 443 for web services. In particular I want to the the supported HTTP methods at those ports.<br />
+<p>Let’s say I want to add a new mode, which will scan all hosts at port 80 and 443 for web services. In particular I want to the the supported HTTP methods at those ports.<br/>
 You can easily use the command line to insert the new mode:</p>
 <pre class="lang:sh decode:true" title="insert new mode">% ./wnmap -a "-H;http-methods;-P0 --script=http-methods.nse -p 80,443;false"
 --==[ wnmap by nrz@nullsecurity.net ]==--
 [+] New mode added!</pre>
-
-<p>or edit <strong>src/core/wmodes.conf </strong>directly.Â  Now let&#8217;s scan a host using the newly inserted mode:</p>
+<p>or edit <strong>src/core/wmodes.conf </strong>directly.Â  Now let’s scan a host using the newly inserted mode:</p>
 <pre class="lang:sh decode:true" title="Scan scanme.nmap.org for web services">% ./wnmap -H scanme.nmap.org
 --==[ wnmap by nrz@nullsecurity.net ]==--
 [+] Creating scanme.nmap.org/http-methods
@@ -1820,20 +1815,17 @@ PORT    STATE  SERVICE REASON
 |_http-methods: GET HEAD POST OPTIONS
 443/tcp closed https   conn-refused
 Nmap done: 1 IP address (1 host up) scanned in 0.69 seconds</pre>
-
 <p>Now you should see a directory called <strong>scanme.nmap.org</strong> inside your working directory. The output of the scan was saved as a regular nmap file and as XML.</p>
 <pre class="lang:sh decode:true " title="Results output"># tree scanme.nmap.org
 scanme.nmap.org
 `-- http-methods
     |-- scanme.nmap.org.nmap
     `-- scanme.nmap.org.xml</pre>
-
 <h1 id="_4"><span id="i-4"></span></h1>
 <h1 id="combine-modes"><span id="Combine_modes">Combine modes</span></h1>
 <p>You could now combine the modes:</p>
 <pre class="lang:sh decode:true " title="Combine modes">% ./wnmap -H -F scanme.nmap.org</pre>
-
-<p>And you&#8217;ll get:</p>
+<p>And you’ll get:</p>
 <pre class="lang:sh decode:true " title="Output results modes combination "># tree scanme.nmap.org 
 scanme.nmap.org
 |-- fast
@@ -1848,10 +1840,10 @@ scanme.nmap.org
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="http://blog.dornea.nu/2009/08/05/howto-ssh-tunnel-over-corkscrew-using-tor">HowTo: SSH-Tunnel over CorkScrew using Tor</a></li>
-        <li><a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a></li>
-        <li><a href="http://blog.dornea.nu/2015/06/03/usd-ag-hacker-day-in-hamburg">usd AG Hacker Day in Hamburg</a></li>
+        <li><a href="http://blog.dornea.nu/2011/11/09/thank-god-there-is-iodine-ipv4-over-dns">Thank God there is iodine! IPv4 over DNS</a></li>
+        <li><a href="http://blog.dornea.nu/2010/11/25/howto-snatip-masquerade-between-2-wlan-cards-on-linux">HowTo: SNAT/IP Masquerade between 2 wlan cards on Linux</a></li>
+        <li><a href="http://blog.dornea.nu/2010/10/13/howto-build-your-own-wifi-wlan-hotspot-using-hostap">HowTo: Build your own Wifi WLAN hotspot using hostap</a></li>
         <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump-ipython-notebook-version">24h Android sniffing using tcpdump - IPython Notebook Version</a></li>
-        <li><a href="http://blog.dornea.nu/2011/04/04/vnc-connect-to-current-desktop-session-using-x11vnc-and-ssh">VNC: Connect to current desktop session using x11vnc and ssh</a></li>
     </ul>
 </section>
     <hr />

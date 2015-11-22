@@ -1718,16 +1718,12 @@ blog.dornea.nu            </a>
 telekom.de.     <span class="m">86346</span>   IN  A   46.29.100.76
 ...
 </pre></div>
-
-
 <p>Now let's find out the ASN:</p>
 <div class="highlight"><pre><span class="nv">$ </span>whois 46.29.100.76 <span class="p">|</span> grep origin            
 origin:         AS34086
 </pre></div>
-
-
 <p>Now ask <a href="http://ripe.net">RIPE</a> for the IP ranges:</p>
-<div class="highlight"><pre><span class="nv">$ </span>whois -h whois.ripe.net -T route AS34086 -i origin <span class="p">|</span> egrep <span class="s2">&quot;route: &quot;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $NF}&#39;</span>   
+<div class="highlight"><pre><span class="nv">$ </span>whois -h whois.ripe.net -T route AS34086 -i origin <span class="p">|</span> egrep <span class="s2">"route: "</span> <span class="p">|</span> awk <span class="s1">'{print $NF}'</span>   
 145.225.1.0/24
 151.136.0.0/16
 185.9.216.0/22
@@ -1740,8 +1736,6 @@ origin:         AS34086
 93.188.240.0/21
 94.100.240.0/20
 </pre></div>
-
-
 <p>Now for every IP range let's generate all <em>possible</em> IP addresses. Therefore I've wrote a simple python script. </p>
 <blockquote>
 <p>I know there is <a href="www.cpan.org/authors/id/R/RA/RAYNERLUC/cidr2range-0.9.pl">cidr2range</a> but that didn't work for certain blocks like <strong>145.225.1.0/24</strong>.</p>
@@ -1752,17 +1746,15 @@ origin:         AS34086
 import sys
 from netaddr import IPNetwork
 
-<span class="k">if</span> <span class="nv">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span>:
+<span class="k">if</span> <span class="nv">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span>:
     <span class="k">if</span> len<span class="o">(</span>sys.argv<span class="o">)</span> !<span class="o">=</span> 2:
-        print <span class="s2">&quot;Usage: %s &lt;CIDR Block&gt;\n&quot;</span> % sys.argv<span class="o">[</span>0<span class="o">]</span>
+        print <span class="s2">"Usage: %s &lt;CIDR Block&gt;\n"</span> % sys.argv<span class="o">[</span>0<span class="o">]</span>
     <span class="k">else</span>:
         <span class="k">for</span> ip in IPNetwork<span class="o">(</span>sys.argv<span class="o">[</span>1<span class="o">])</span>:
-            print <span class="s1">&#39;%s&#39;</span> % ip
+            print <span class="s1">'%s'</span> % ip
 </pre></div>
-
-
 <p>Now let's generate the lists:</p>
-<div class="highlight"><pre><span class="nv">$ </span>whois -h whois.ripe.net -T route AS34086 -i origin <span class="p">|</span> egrep <span class="s2">&quot;route: &quot;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $NF}&#39;</span>  &gt;&gt; /tmp/ip-ranges.txt
+<div class="highlight"><pre><span class="nv">$ </span>whois -h whois.ripe.net -T route AS34086 -i origin <span class="p">|</span> egrep <span class="s2">"route: "</span> <span class="p">|</span> awk <span class="s1">'{print $NF}'</span>  &gt;&gt; /tmp/ip-ranges.txt
 <span class="nv">$ </span>cat /tmp/ip-ranges.txt <span class="p">|</span> xargs -n1 ./cidr2list.py &gt; /tmp/ip-lists.txt
 <span class="nv">$ </span> head -n <span class="m">10</span> /tmp/ip-lists.txt 
 145.225.1.0
@@ -1778,19 +1770,17 @@ from netaddr import IPNetwork
 <span class="nv">$ </span>wc -l /tmp/ip-lists.txt 
 <span class="m">81920</span> /tmp/ip-lists.txt
 </pre></div>
-
-
 <p>Voila! :) </p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2015/06/03/usd-ag-hacker-day-in-hamburg">usd AG Hacker Day in Hamburg</a></li>
-        <li><a href="http://blog.dornea.nu/2014/08/05/android-dynamic-code-analysis-mastering-droidbox">Android Dynamic Code Analysis - Mastering DroidBox</a></li>
+        <li><a href="http://blog.dornea.nu/2011/11/09/thank-god-there-is-iodine-ipv4-over-dns">Thank God there is iodine! IPv4 over DNS</a></li>
+        <li><a href="http://blog.dornea.nu/2013/09/13/howto-automate-nmap-scanning">HowTo: Automate nmap scanning</a></li>
         <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump-ipython-notebook-version">24h Android sniffing using tcpdump - IPython Notebook Version</a></li>
+        <li><a href="http://blog.dornea.nu/2015/06/03/usd-ag-hacker-day-in-hamburg">usd AG Hacker Day in Hamburg</a></li>
         <li><a href="http://blog.dornea.nu/2009/08/05/howto-ssh-tunnel-over-corkscrew-using-tor">HowTo: SSH-Tunnel over CorkScrew using Tor</a></li>
-        <li><a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a></li>
     </ul>
 </section>
     <hr />

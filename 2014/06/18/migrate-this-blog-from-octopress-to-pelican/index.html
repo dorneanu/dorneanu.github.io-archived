@@ -1727,8 +1727,8 @@ blog.dornea.nu            </a>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>A few weeks ago I&#39;be migrated my whole blog from Wordpress to Octopress. Meanwhile I&#39;ve discovered <code>Pelican</code> which is the Pythonic alternative to Octopress. To be honest: The main reason I&#39;m using Pelican instead of Octopress is the ability to import/include <code>IPython notebooks</code>. </p>
-<p>After I&#39;ve set up my blog using Octopress I only had a bunge of <code>Markdown</code> files. So let&#39;s get started.</p>
+<p>A few weeks ago I'be migrated my whole blog from Wordpress to Octopress. Meanwhile I've discovered <code>Pelican</code> which is the Pythonic alternative to Octopress. To be honest: The main reason I'm using Pelican instead of Octopress is the ability to import/include <code>IPython notebooks</code>. </p>
+<p>After I've set up my blog using Octopress I only had a bunge of <code>Markdown</code> files. So let's get started.</p>
 </div>
 </div>
 </div>
@@ -1737,46 +1737,35 @@ blog.dornea.nu            </a>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Generate-metadata-for-content">Generate metadata for content<a class="anchor-link" href="#Generate-metadata-for-content">&#182;</a></h2>
+<h2 id="Generate-metadata-for-content">Generate metadata for content<a class="anchor-link" href="#Generate-metadata-for-content">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[8]:
+In [8]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cp</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">octopress</span><span class="o">/</span><span class="n">source</span><span class="o">/</span><span class="n">_posts</span><span class="o">/*.</span><span class="n">markdown</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">markdown</span><span class="o">/</span>
 </pre></div>
-
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[9]:
+In [9]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">ls</span> <span class="o">-</span><span class="n">c</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">markdown</span><span class="o">/</span> <span class="o">|</span> <span class="n">head</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span>
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">2014-05-27-berlinsides-0x05.markdown
@@ -1792,27 +1781,23 @@ In&nbsp;[9]:
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="AWK-script-for-doing-the-main-job">AWK script for doing the main job<a class="anchor-link" href="#AWK-script-for-doing-the-main-job">&#182;</a></h2>
+<h2 id="AWK-script-for-doing-the-main-job">AWK script for doing the main job<a class="anchor-link" href="#AWK-script-for-doing-the-main-job">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[21]:
+In [21]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">writefile</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">transform</span><span class="o">.</span><span class="n">awk</span>
 <span class="p">{</span>
@@ -1820,25 +1805,25 @@ In&nbsp;[21]:
     <span class="k">if</span> <span class="p">(</span> <span class="err">$</span><span class="mi">0</span> <span class="o">~</span> <span class="o">/^</span><span class="n">date</span><span class="p">(</span><span class="o">.*</span><span class="p">)</span><span class="err">$</span><span class="o">/</span> <span class="p">)</span> <span class="p">{</span>
         <span class="c"># Get date</span>
         <span class="n">match</span><span class="p">(</span><span class="err">$</span><span class="mi">0</span><span class="p">,</span> <span class="o">/^</span><span class="n">date</span><span class="p">:</span> <span class="p">([</span><span class="mi">0</span><span class="o">-</span><span class="mi">9</span><span class="p">]{</span><span class="mi">4</span><span class="p">}</span>\<span class="o">-</span><span class="p">[</span><span class="mi">0</span><span class="o">-</span><span class="mi">9</span><span class="p">]{</span><span class="mi">2</span><span class="p">}</span>\<span class="o">-</span><span class="p">[</span><span class="mi">0</span><span class="o">-</span><span class="mi">9</span><span class="p">]{</span><span class="mi">2</span><span class="p">})</span><span class="o">.*</span><span class="err">$</span><span class="o">/</span><span class="p">,</span> <span class="n">ary</span><span class="p">)</span>
-        <span class="k">print</span> <span class="s">&quot;Date: &quot;</span> <span class="n">ary</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> 
+        <span class="k">print</span> <span class="s">"Date: "</span> <span class="n">ary</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> 
 
     <span class="c"># Title </span>
     <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span> <span class="err">$</span><span class="mi">0</span> <span class="o">~</span> <span class="o">/^</span><span class="n">title</span><span class="p">(</span><span class="o">.*</span><span class="p">)</span><span class="err">$</span><span class="o">/</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">match</span><span class="p">(</span><span class="err">$</span><span class="mi">0</span><span class="p">,</span> <span class="o">/^</span><span class="n">title</span><span class="p">:</span> <span class="p">(</span><span class="o">.*</span><span class="p">)</span><span class="err">$</span><span class="o">/</span><span class="p">,</span> <span class="n">ary</span><span class="p">)</span>
 
         <span class="c"># Remove single/double quotes</span>
-        <span class="n">gsub</span><span class="p">(</span><span class="o">/</span><span class="s">&#39;/, &quot;&quot;, ary[1]);</span>
-        <span class="n">gsub</span><span class="p">(</span><span class="o">/</span><span class="s">&quot;/, &quot;&quot;, ary[1]);</span>
-        <span class="k">print</span> <span class="s">&quot;Title: &quot;</span> <span class="n">ary</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">gsub</span><span class="p">(</span><span class="o">/</span><span class="s">'/, "", ary[1]);</span>
+        <span class="n">gsub</span><span class="p">(</span><span class="o">/</span><span class="s">"/, "", ary[1]);</span>
+        <span class="k">print</span> <span class="s">"Title: "</span> <span class="n">ary</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
 
     <span class="c"># Author</span>
     <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span> <span class="err">$</span><span class="mi">0</span> <span class="o">~</span> <span class="o">/^</span><span class="n">author</span><span class="p">(</span><span class="o">.*</span><span class="p">)</span><span class="err">$</span><span class="o">/</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">match</span><span class="p">(</span><span class="err">$</span><span class="mi">0</span><span class="p">,</span> <span class="o">/^</span><span class="n">author</span><span class="p">:</span> <span class="p">(</span><span class="o">.*</span><span class="p">)</span><span class="err">$</span><span class="o">/</span><span class="p">,</span> <span class="n">ary</span><span class="p">)</span>
-        <span class="k">print</span> <span class="s">&quot;Author: &quot;</span> <span class="n">ary</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+        <span class="k">print</span> <span class="s">"Author: "</span> <span class="n">ary</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
 
     <span class="c"># Handle available categories as tags</span>
     <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="err">$</span><span class="mi">0</span> <span class="o">~</span> <span class="o">/^</span><span class="n">categories</span><span class="p">:</span><span class="o">.*</span><span class="err">$</span><span class="o">/</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">printf</span> <span class="s">&quot;Tags: &quot;</span>
+        <span class="n">printf</span> <span class="s">"Tags: "</span>
         
         <span class="c"># Array index</span>
         <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -1847,21 +1832,21 @@ In&nbsp;[21]:
         <span class="k">while</span> <span class="p">((</span><span class="n">getline</span> <span class="n">line</span> <span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
             <span class="c"># Read until new meta tag is found</span>
             <span class="k">if</span> <span class="p">((</span><span class="n">line</span> <span class="err">!</span><span class="o">~</span> <span class="o">/^.*</span>\<span class="o">-.*</span><span class="err">$</span><span class="o">/</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">line</span> <span class="o">~</span> <span class="o">/^</span>\<span class="o">-</span>\<span class="o">-</span>\<span class="o">-</span><span class="err">$</span><span class="o">/</span><span class="p">))</span> <span class="p">{</span>
-                <span class="n">output_string</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+                <span class="n">output_string</span> <span class="o">=</span> <span class="s">""</span>
                 <span class="c"># Print categories and the next exit loop</span>
                 <span class="k">for</span> <span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">i</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
                     
                     <span class="c"># Is this the last category</span>
                     <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="n">i</span><span class="p">)</span> 
-                        <span class="n">output_string</span> <span class="o">=</span> <span class="n">output_string</span> <span class="n">tolower</span><span class="p">(</span><span class="n">categories</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="s">&quot;, &quot;</span>
+                        <span class="n">output_string</span> <span class="o">=</span> <span class="n">output_string</span> <span class="n">tolower</span><span class="p">(</span><span class="n">categories</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="s">", "</span>
 
                     <span class="c"># Last category</span>
                     <span class="k">else</span>
                         <span class="n">output_string</span> <span class="o">=</span> <span class="n">output_string</span> <span class="n">tolower</span><span class="p">(</span><span class="n">categories</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
        
-                <span class="c"># Remove last &quot;,&quot; and add default category</span>
-                <span class="n">printf</span> <span class="s">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">output_string</span>
-                <span class="n">printf</span> <span class="s">&quot;Category: blog</span><span class="se">\n\n</span><span class="s">&quot;</span>
+                <span class="c"># Remove last "," and add default category</span>
+                <span class="n">printf</span> <span class="s">"</span><span class="si">%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">output_string</span>
+                <span class="n">printf</span> <span class="s">"Category: blog</span><span class="se">\n\n</span><span class="s">"</span>
                 <span class="k">break</span>
             <span class="p">}</span>
 
@@ -1876,42 +1861,33 @@ In&nbsp;[21]:
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">Overwriting /home/victor/work/blog/pelican/content/transform.awk
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Extract-the-metdata-and-generate-the-meta-files">Extract the metdata and generate the meta files<a class="anchor-link" href="#Extract-the-metdata-and-generate-the-meta-files">&#182;</a></h2>
+<h2 id="Extract-the-metdata-and-generate-the-meta-files">Extract the metdata and generate the meta files<a class="anchor-link" href="#Extract-the-metdata-and-generate-the-meta-files">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[22]:
+In [22]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span>
@@ -1921,15 +1897,10 @@ In&nbsp;[22]:
 
 <span class="n">ls</span> <span class="o">-</span><span class="n">c</span> <span class="n">content</span><span class="o">/</span><span class="n">markdown</span><span class="o">/*-</span><span class="n">meta</span> <span class="o">|</span> <span class="n">head</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span>
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">content/markdown/blogging-with-the-ipython-notebook-example.markdown-meta
@@ -1945,40 +1916,31 @@ content/markdown/2014-01-31-links-of-the-week-25-2.markdown-meta
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Sample-meta-data-output">Sample meta data output<a class="anchor-link" href="#Sample-meta-data-output">&#182;</a></h2>
+<h2 id="Sample-meta-data-output">Sample meta data output<a class="anchor-link" href="#Sample-meta-data-output">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[25]:
+In [25]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">find</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">markdown</span><span class="o">/*-</span><span class="n">meta</span> <span class="o">-</span><span class="n">name</span> <span class="s">&quot;2014-05-*&quot;</span> <span class="o">-</span><span class="k">exec</span> <span class="n">cat</span> <span class="p">{}</span> \<span class="p">;</span>
+<span class="n">find</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">markdown</span><span class="o">/*-</span><span class="n">meta</span> <span class="o">-</span><span class="n">name</span> <span class="s">"2014-05-*"</span> <span class="o">-</span><span class="k">exec</span> <span class="n">cat</span> <span class="p">{}</span> \<span class="p">;</span>
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">Title: HowTo: Create docs with sphinx
@@ -2005,56 +1967,47 @@ Category: blog
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Delete-old-metadata">Delete old metadata<a class="anchor-link" href="#Delete-old-metadata">&#182;</a></h2>
+<h2 id="Delete-old-metadata">Delete old metadata<a class="anchor-link" href="#Delete-old-metadata">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[26]:
+In [26]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">markdown</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="o">*.</span><span class="n">markdown</span><span class="p">;</span> <span class="n">do</span>
-    <span class="n">cat</span> <span class="err">$</span><span class="n">i</span> <span class="o">|</span> <span class="n">sed</span> <span class="s">&#39;/^---$/,/^---$/d&#39;</span> <span class="o">&gt;</span> <span class="err">$</span><span class="n">i</span><span class="o">-</span><span class="n">sed</span>
+    <span class="n">cat</span> <span class="err">$</span><span class="n">i</span> <span class="o">|</span> <span class="n">sed</span> <span class="s">'/^---$/,/^---$/d'</span> <span class="o">&gt;</span> <span class="err">$</span><span class="n">i</span><span class="o">-</span><span class="n">sed</span>
 <span class="n">done</span>
 </pre></div>
-
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Insert-new-metadata-info-file">Insert new metadata info file<a class="anchor-link" href="#Insert-new-metadata-info-file">&#182;</a></h2>
+<h2 id="Insert-new-metadata-info-file">Insert new metadata info file<a class="anchor-link" href="#Insert-new-metadata-info-file">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[27]:
+In [27]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">markdown</span>
@@ -2062,42 +2015,32 @@ In&nbsp;[27]:
     <span class="n">cat</span> <span class="err">$</span><span class="n">i</span><span class="o">-</span><span class="n">meta</span> <span class="o">&gt;</span> <span class="err">$</span><span class="n">i</span><span class="o">-</span><span class="n">final</span><span class="p">;</span> <span class="n">cat</span> <span class="err">$</span><span class="n">i</span><span class="o">-</span><span class="n">sed</span> <span class="o">&gt;&gt;</span> <span class="err">$</span><span class="n">i</span><span class="o">-</span><span class="n">final</span><span class="p">;</span>
 <span class="n">done</span>
 </pre></div>
-
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Sample-final-output">Sample final output<a class="anchor-link" href="#Sample-final-output">&#182;</a></h2>
+<h2 id="Sample-final-output">Sample final output<a class="anchor-link" href="#Sample-final-output">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[31]:
+In [31]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">markdown</span>
-<span class="n">find</span> <span class="o">.</span> <span class="o">-</span><span class="n">name</span> <span class="s">&quot;2014-05*.markdown-final&quot;</span> <span class="o">-</span><span class="k">exec</span> <span class="n">head</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span> <span class="p">{}</span> \<span class="p">;</span>
+<span class="n">find</span> <span class="o">.</span> <span class="o">-</span><span class="n">name</span> <span class="s">"2014-05*.markdown-final"</span> <span class="o">-</span><span class="k">exec</span> <span class="n">head</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span> <span class="p">{}</span> \<span class="p">;</span>
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">Title: Test2
@@ -2109,7 +2052,7 @@ Category: blog
 
 # Motivation
 
-I&apos;ve started this little project since I was mainly interested in the data my
+I&amp;apos;ve started this little project since I was mainly interested in the data my
 Title: HowTo: Create docs with sphinx
 Author: Victor
 Date: 2014-05-04
@@ -2126,9 +2069,9 @@ Tags:
 Category: blog
 
 
-In this post I&apos;ll try to share an idea I&apos;ve had regarding pentest reports. Most of you surely have
+In this post I&amp;apos;ll try to share an idea I&amp;apos;ve had regarding pentest reports. Most of you surely have
 their own methods and tools to create nice looking reports after have done some pentesting.
-Since I try to keep things simple I&apos;ll give you a rough idea how this could be done without Excel &amp; Co.
+Since I try to keep things simple I&amp;apos;ll give you a rough idea how this could be done without Excel &amp; Co.
 
 Title: BerlinSides 0x05
 Date: 2014-05-27
@@ -2136,65 +2079,56 @@ Tags: events, hacking, security
 Category: blog
 
 
-The [**BerlinSides**](http://berlinsides.org/) is a conference from hacker for hacker. This years motto was: **...you ain&apos;t listening**.
+The [**BerlinSides**](http://berlinsides.org/) is a conference from hacker for hacker. This years motto was: **...you ain&amp;apos;t listening**.
 All my greetings go to:
 
 * [nullsecurity.net](http://nullsecurity.net)
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Replace-some-strings">Replace some strings<a class="anchor-link" href="#Replace-some-strings">&#182;</a></h2>
+<h2 id="Replace-some-strings">Replace some strings<a class="anchor-link" href="#Replace-some-strings">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[32]:
+In [32]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">markdown</span>
 
 <span class="c"># Insert some dummy text for missing attributes in img tags</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="o">*.</span><span class="n">markdown</span><span class="o">-</span><span class="n">final</span><span class="p">;</span> <span class="n">do</span>
-    <span class="n">sed</span> <span class="o">-</span><span class="n">i</span> <span class="s">&#39;s/alt=</span><span class="se">\&quot;\&quot;</span><span class="s">/alt=</span><span class="se">\&quot;</span><span class="s">image description</span><span class="se">\&quot;</span><span class="s">/g&#39;</span> <span class="err">$</span><span class="n">i</span>
+    <span class="n">sed</span> <span class="o">-</span><span class="n">i</span> <span class="s">'s/alt=</span><span class="se">\"\"</span><span class="s">/alt=</span><span class="se">\"</span><span class="s">image description</span><span class="se">\"</span><span class="s">/g'</span> <span class="err">$</span><span class="n">i</span>
 <span class="n">done</span>
 </pre></div>
-
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Rename-files-and-delete-bullshit">Rename files and delete bullshit<a class="anchor-link" href="#Rename-files-and-delete-bullshit">&#182;</a></h2>
+<h2 id="Rename-files-and-delete-bullshit">Rename files and delete bullshit<a class="anchor-link" href="#Rename-files-and-delete-bullshit">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[33]:
+In [33]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">markdown</span>
@@ -2203,25 +2137,21 @@ In&nbsp;[33]:
 <span class="n">rm</span> <span class="o">*.</span><span class="n">markdown</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="o">*.</span><span class="n">markdown</span><span class="o">-</span><span class="n">final</span><span class="p">;</span> <span class="n">do</span>
-    <span class="n">mv</span> <span class="err">$</span><span class="n">i</span> <span class="sb">`basename $i &quot;.markdown-final&quot;`</span><span class="o">.</span><span class="n">markdown</span>
+    <span class="n">mv</span> <span class="err">$</span><span class="n">i</span> <span class="sb">`basename $i ".markdown-final"`</span><span class="o">.</span><span class="n">markdown</span>
 <span class="n">done</span>
 </pre></div>
-
 </div>
-
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Generate-new-content">Generate new content<a class="anchor-link" href="#Generate-new-content">&#182;</a></h2>
+<h2 id="Generate-new-content">Generate new content<a class="anchor-link" href="#Generate-new-content">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -2234,9 +2164,8 @@ In&nbsp;[33]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[37]:
+In [37]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">pelican</span><span class="o">/</span>
@@ -2244,15 +2173,10 @@ In&nbsp;[37]:
 <span class="n">source</span> <span class="n">env</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
 <span class="n">make</span> <span class="n">html</span>
 </pre></div>
-
 </div>
-
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre class="ipynb">pelican /home/victor/work/blog/pelican/content -o /home/victor/work/blog/pelican/output -s /home/victor/work/blog/pelican/pelicanconf.py 
@@ -2263,27 +2187,24 @@ Done: Processed 124 articles and 1 pages in 6.38 seconds.
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="The-End">The End<a class="anchor-link" href="#The-End">&#182;</a></h2>
+<h2 id="The-End">The End<a class="anchor-link" href="#The-End">¶</a></h2>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I hope you have enjoyed this one. If you have any questions regarding the process, don&#39;t hesitate and leave a comment.</p>
+<p>I hope you have enjoyed this one. If you have any questions regarding the process, don't hesitate and leave a comment.</p>
 </div>
 </div>
 </div></p>
@@ -2292,11 +2213,11 @@ Done: Processed 124 articles and 1 pages in 6.38 seconds.
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2014/08/28/using-jquery-datatables-with-ipython">Using JQuery DataTables with IPython</a></li>
-        <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump">24h Android sniffing using tcpdump</a></li>
-        <li><a href="http://blog.dornea.nu/2015/05/24/validating-and-pinning-x509-certificates">Validating and pinning X.509 certificates</a></li>
         <li><a href="http://blog.dornea.nu/2014/08/06/web-application-survey-tutorial">Web Application Survey Tutorial</a></li>
-        <li><a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a></li>
+        <li><a href="http://blog.dornea.nu/2015/10/02/manage-pki-using-openssl">Manage PKI using OpenSSL</a></li>
+        <li><a href="http://blog.dornea.nu/2015/07/01/debugging-android-native-shared-libraries">Debugging Android native shared libraries</a></li>
+        <li><a href="http://blog.dornea.nu/2014/08/06/python-for-data-analysis">Python for Data Analysis</a></li>
+        <li><a href="http://blog.dornea.nu/2014/11/13/using-graphviz-with-pelican-and-liquid-tags">Using Graphviz with Pelican and liquid tags</a></li>
     </ul>
 </section>
     <hr />

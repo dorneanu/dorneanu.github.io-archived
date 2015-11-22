@@ -1721,46 +1721,41 @@ blog.dornea.nu            </a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>In this tutorial I&#8217;d like to give you some useful examples how to configure network when using Qemu as virtualization machine. The videos in this HowTo were taken on a NetBSD-5_STABLE/amd64 machine using  Qemu 0.11.1. <strong>Attention: </strong>On my system I&#8217;ve used a patched version of Qemu as reported <a href="http://mail-index.netbsd.org/pkgsrc-bugs/2009/12/18/msg035190.html">here</a>. However you can use the &#8220;fd=&#8221; option to specify an open socket to be used. Example:<!--more--></p>
+                <p>In this tutorial I’d like to give you some useful examples how to configure network when using Qemu as virtualization machine. The videos in this HowTo were taken on a NetBSD-5_STABLE/amd64 machine using  Qemu 0.11.1. <strong>Attention: </strong>On my system I’ve used a patched version of Qemu as reported <a href="http://mail-index.netbsd.org/pkgsrc-bugs/2009/12/18/msg035190.html">here</a>. However you can use the “fd=” option to specify an open socket to be used. Example:<!--more--></p>
 <pre class="brush: plain; toolbar: false;">$ qemu -cdrom [iso file] 
      -net nic -net tap,fd=3 3&lt;&gt;/dev/tap0
 </pre>
-
-<p>Using this example &#8220;tap0&#8243; should be created before the qemu command. The shown examples might work on other platforms too. Be sure to have TUN/TAP device support built-in and the Qemu suite installed. Check out <a name="References"></a>References for further information.</p>
+<p>Using this example “tap0″ should be created before the qemu command. The shown examples might work on other platforms too. Be sure to have TUN/TAP device support built-in and the Qemu suite installed. Check out <a name="References"></a>References for further information.</p>
 <!--break-->
-
-<div id="toc_container" class="toc_wrap_right toc_transparent no_bullets">
-  <p class="toc_title">
+<div class="toc_wrap_right toc_transparent no_bullets" id="toc_container">
+<p class="toc_title">
     Contents
   </p>
-
-  <ul class="toc_list">
-    <li>
-      <a href="#1_Usermode_network_stack"><span class="toc_number toc_depth_1">1</span> 1) Usermode network stack</a>
-    </li>
-    <li>
-      <a href="#2_Connecting_VLANs"><span class="toc_number toc_depth_1">2</span> 2) Connecting VLANs</a>
-    </li>
-    <li>
-      <a href="#3_Connecting_VLANs_to_TAP_device_1_host"><span class="toc_number toc_depth_1">3</span> 3) Connecting VLANs to TAP device (1 host)</a>
-    </li>
-    <li>
-      <a href="#31_Connecting_VLANs_to_TAP_devices_2_hosts"><span class="toc_number toc_depth_1">4</span> 3.1) Connecting VLANs to TAP devices (2 hosts)</a>
-    </li>
-    <li>
-      <a href="#4_References"><span class="toc_number toc_depth_1">5</span> 4) References</a>
-    </li>
-  </ul>
+<ul class="toc_list">
+<li>
+<a href="#1_Usermode_network_stack"><span class="toc_number toc_depth_1">1</span> 1) Usermode network stack</a>
+</li>
+<li>
+<a href="#2_Connecting_VLANs"><span class="toc_number toc_depth_1">2</span> 2) Connecting VLANs</a>
+</li>
+<li>
+<a href="#3_Connecting_VLANs_to_TAP_device_1_host"><span class="toc_number toc_depth_1">3</span> 3) Connecting VLANs to TAP device (1 host)</a>
+</li>
+<li>
+<a href="#31_Connecting_VLANs_to_TAP_devices_2_hosts"><span class="toc_number toc_depth_1">4</span> 3.1) Connecting VLANs to TAP devices (2 hosts)</a>
+</li>
+<li>
+<a href="#4_References"><span class="toc_number toc_depth_1">5</span> 4) References</a>
+</li>
+</ul>
 </div>
-
 <h2 style="text-decoration: underline;">
-  <span id="1_Usermode_network_stack"><span style="font-weight: bold;">1) Usermode network stack</span></span>
+<span id="1_Usermode_network_stack"><span style="font-weight: bold;">1) Usermode network stack</span></span>
 </h2>
-
 <p>Probably the simplest method of connecting your host and the guest system. In this mode Qemu will create a :</p>
 <ul>
 <li>virtual network (10.0.2.0)</li>
-<li>fiirewall which doesn&#8217;t allow any external connections</li>
+<li>fiirewall which doesn’t allow any external connections</li>
 <li>DHCP-Server (10.0.2.2)</li>
 <li>gateway (10.0.2.2)</li>
 </ul>
@@ -1770,63 +1765,54 @@ blog.dornea.nu            </a>
 </ol>
 <pre class="brush: plain; toolbar: false;">$ qemu -net nic -net user -cdrom [iso file]
 </pre>
-
-<p>&nbsp;</p>
+<p> </p>
 <ol>
 <li>[ guest system] Get an IP address:</li>
 </ol>
 <pre class="brush: plain; toolbar: false;">$ dhclient [interface]</pre>
-
-<p>&nbsp;</p>
+<p> </p>
 <ol>
 <li>[ guest system] Check settings and Internet connectivity:</li>
 </ol>
 <pre class="brush: plain; toolbar: false;">$ ifconfig [interface]
 $ ftp [ftp site]
 </pre>
-
-<p>On my system the firewall was blocking any ICMP packets so ping might not work. But don&#8217;t get disoriented (like I did). Try to ssh or ftp any known host to check the connection.</p>
-<p>&nbsp;</p>
+<p>On my system the firewall was blocking any ICMP packets so ping might not work. But don’t get disoriented (like I did). Try to ssh or ftp any known host to check the connection.</p>
+<p> </p>
 <h2 style="text-decoration: underline;">
-  <span id="2_Connecting_VLANs">2) Connecting VLANs</span>
+<span id="2_Connecting_VLANs">2) Connecting VLANs</span>
 </h2>
-
-<p>This is a quite simple step. You&#8217;ll have to set up a Qemu process listening for incoming connection(s) on  a certain socket. The second Qemu process will connect to the listening socket. Whenever a frame/packet appears on the VLAN of the first Qemu process, it will be forwarded to the second one and <span style="font-style: italic;">vice versa</span>.</p>
-<p>Here&#8217;s our configuration:</p>
+<p>This is a quite simple step. You’ll have to set up a Qemu process listening for incoming connection(s) on  a certain socket. The second Qemu process will connect to the listening socket. Whenever a frame/packet appears on the VLAN of the first Qemu process, it will be forwarded to the second one and <span style="font-style: italic;">vice versa</span>.</p>
+<p>Here’s our configuration:</p>
 <ul>
 <li>Guest <span style="font-weight: bold;">A</span>: listen for connections on localhost:8010</li>
-<li>Guest <span style="font-weight: bold;">B</span>: connect to &#8216;Guest <span style="font-weight: bold;">A</span>&#8216; through localhost:8010</li>
+<li>Guest <span style="font-weight: bold;">B</span>: connect to ‘Guest <span style="font-weight: bold;">A</span>‘ through localhost:8010</li>
 </ul>
 <p>Host <strong>A</strong> will listen for incomming connections on port 8010 and host <strong>B</strong> will be configured to connect to host <strong>A</strong>.</p>
 <p>Create host <strong>A</strong>:</p>
 <pre class="brush: plain; toolbar: false;">$ qemu  -net nic,macaddr=52:54:00:12:34:57 -net socket,listen=:8010  
       -cdrom [iso file]
 </pre>
-
-<p>&nbsp;</p>
+<p> </p>
 <p>Create host <strong>B</strong>:</p>
 <pre class="brush: plain; toolbar: false;">$ qemu  -net nic,vlan=2,macaddr=52:54:00:12:34:56 
       -net socket,vlan=2,connect=127.0.0.1:8010 
       -cdrom [iso file]
 </pre>
-
-<p>&nbsp;</p>
+<p> </p>
 <p>Configure host <strong>A</strong>:</p>
 <pre class="brush: plain; toolbar: false;">$ ifconfig [interface] 10.0.2.100 netmask 255.255.255.0 up</pre>
-
-<p>&nbsp;</p>
+<p> </p>
 <p>Configure host <strong>B</strong>:</p>
 <pre class="brush: plain; toolbar: false;">$ ifconfig [interface] 10.0.2.101 netmask 255.255.255.0 up</pre>
-
-<p>&nbsp;</p>
+<p> </p>
 <p>Using this configuration you should be able to access host <strong>B</strong> from host <strong>A</strong> and vice versa.</p>
 <p><em> </em></p>
 <h2 style="text-decoration: underline;">
-  <span id="3_Connecting_VLANs_to_TAP_device_1_host"><span style="font-weight: bold;">3) Connecting VLANs to TAP device (1 host)</span></span>
+<span id="3_Connecting_VLANs_to_TAP_device_1_host"><span style="font-weight: bold;">3) Connecting VLANs to TAP device (1 host)</span></span>
 </h2>
-
-<p>There is another option to create VLANs: Using a virtual Ethernet device (tap device). Any frames transmitted through this device will also appear on the VLAN of your guest OS. Of course any frames sent to guest&#8217;s VLAN will be also received by the TAP device.</p>
-<p><a class="trigger_lightbox" href="http://static.dornea.nu/img/2010/f391a6d4ddc3b7529bb985925061366c.png"><img class="trigger_lightbox mceItem" style="float: left; padding-right: 10px;" title="Connecting VLANs to TAP device (1 host)" alt="Connecting VLANs to TAP device (1 host)" src="http://static.dornea.nu/img/2010/f391a6d4ddc3b7529bb985925061366c.png" width="273" height="78" /></a>Using the kernel TAP/TUN device driver applications are allowed to interact with a network device using a simple file descriptor. Any data sent over the file descriptor will be received on both sides. That means that applications running on the guest system(s) will be able to access and connect to applications running on the host system. If port forwarding is allowed, guest applications can also access the Internet.</p>
+<p>There is another option to create VLANs: Using a virtual Ethernet device (tap device). Any frames transmitted through this device will also appear on the VLAN of your guest OS. Of course any frames sent to guest’s VLAN will be also received by the TAP device.</p>
+<p><a class="trigger_lightbox" href="http://static.dornea.nu/img/2010/f391a6d4ddc3b7529bb985925061366c.png"><img alt="Connecting VLANs to TAP device (1 host)" class="img-responsive mceItem trigger_lightbox" height="78" src="http://static.dornea.nu/img/2010/f391a6d4ddc3b7529bb985925061366c.png" style="float: left; padding-right: 10px;" title="Connecting VLANs to TAP device (1 host)" width="273"/></a>Using the kernel TAP/TUN device driver applications are allowed to interact with a network device using a simple file descriptor. Any data sent over the file descriptor will be received on both sides. That means that applications running on the guest system(s) will be able to access and connect to applications running on the host system. If port forwarding is allowed, guest applications can also access the Internet.</p>
 <p>First we create a TAP device:</p>
 <pre class="brush: plain; toolbar: false;">$ ifconfig tap0 create
 $ ifconfig tap0
@@ -1835,20 +1821,17 @@ tap0: flags=8802  mtu 1500
         media: Ethernet autoselect
 $ ifconfig tap0 10.0.2.100 netmask 255.255.255.0 up
 </pre>
-
 <p>Launch Qemu process:</p>
 <pre class="brush: plain; toolbar: false;">$ qemu -net nic,vlan=0 -net tap,vlan=0,ifname=tap0 
       -cdrom  [iso file]
 </pre>
-
-<p>&nbsp;</p>
+<p> </p>
 <p>Configure virtual host:</p>
 <pre class="brush: plain; toolbar: false;">$ ifconfig [interface] 10.0.2.101 netmask 255.255.255.0 up</pre>
-
 <p>You should now be able to access your Qemu host from your guest host (ping 10.0.2.101). 10.0.100 (guest system) should be also accessible from your Qemu process.</p>
-<p>&nbsp;</p>
+<p> </p>
 <h2 id="31-connecting-vlans-to-tap-devices-2-hosts"><span id="31_Connecting_VLANs_to_TAP_devices_2_hosts"><span style="font-weight: bold;">3.1) Connecting VLANs to TAP devices (2 hosts)</span></span></h2>
-<p><span style="font-weight: bold;"><a href="http://static.dornea.nu/img/2010/f391a6d4ddc3b7529bb985925061366c.png"><img class="trigger_lightbox mceItem" style="float: left; padding-right: 10px;" title="Connecting VLANs to TAP device (2 hosts)" alt="Connecting VLANs to TAP device (2 hosts)" src="http://static.dornea.nu/img/2010/f391a6d4ddc3b7529bb985925061366c.png" width="275" height="119" /></a></span>In this example we&#8217;ll have 2 guests (= 2 TAP devices). Each guest is connected to the host system by a TAP device. In order to allow inter-connectivity the gust system should have a bridge between both TAP devices. The bridge will act as a central network node between the guest and both virtual hosts. For Internet access IP forwarding should be enabled (disabled by default). First we&#8217;ll have to create the TAP devices:</p>
+<p><span style="font-weight: bold;"><a href="http://static.dornea.nu/img/2010/f391a6d4ddc3b7529bb985925061366c.png"><img alt="Connecting VLANs to TAP device (2 hosts)" class="img-responsive mceItem trigger_lightbox" height="119" src="http://static.dornea.nu/img/2010/f391a6d4ddc3b7529bb985925061366c.png" style="float: left; padding-right: 10px;" title="Connecting VLANs to TAP device (2 hosts)" width="275"/></a></span>In this example we’ll have 2 guests (= 2 TAP devices). Each guest is connected to the host system by a TAP device. In order to allow inter-connectivity the gust system should have a bridge between both TAP devices. The bridge will act as a central network node between the guest and both virtual hosts. For Internet access IP forwarding should be enabled (disabled by default). First we’ll have to create the TAP devices:</p>
 <pre class="brush: plain; toolbar: false;">$ ifconfig tap0 create
 $ ifconfig tap1 create
 $ ifconfig tap0
@@ -1860,35 +1843,28 @@ tap1: flags=8802 mtu 1500
         address: f2:0b:a4:86:61:01
         media: Ethernet autoselect
 </pre>
-
 <p>Launch guest <strong>A</strong>:</p>
 <pre class="brush: plain; toolbar: false;">$ qemu  -net nic,macaddr=52:54:00:12:34:56 -net tap,ifname=tap0 
       -cdrom [iso file]
 </pre>
-
-<p>&nbsp;</p>
+<p> </p>
 <p>Launch guest <strong>B</strong>:</p>
 <pre class="brush: plain; toolbar: false;">$ qemu  -net nic,macaddr=52:54:00:12:34:57 -net tap,ifname=tap1 
       -cdrom [iso file]
 </pre>
-
-<p>&nbsp;</p>
+<p> </p>
 <p>Setup TAP devices networking settings:</p>
 <pre class="brush: plain; toolbar: false;">$ ifconfig tap0 10.0.2.100 netmask 255.255.255.0 up
 $ ifconfig tap1 10.0.3.100 netmask 255.255.255.0 up</pre>
-
-<p>&nbsp;</p>
+<p> </p>
 <p>Create bridge interface:</p>
-<pre class="brush: plain; toolbar: false;">$ ifconfig bridge0 create<br />$ brconfig bridge0 add tap0 add tap1 up</pre>
-
-<p>&nbsp;</p>
+<pre class="brush: plain; toolbar: false;">$ ifconfig bridge0 create<br/>$ brconfig bridge0 add tap0 add tap1 up</pre>
+<p> </p>
 <p>Setup network settings for guest <strong>A</strong>:</p>
 <pre class="brush: plain; toolbar: false;">$ ifconfig [interface] 10.0.2.101 netmask 255.255.0.0 up</pre>
-
-<p>&nbsp;</p>
+<p> </p>
 <p>Setup network settings for guest <strong>B</strong>:</p>
 <pre class="brush: plain; toolbar: false;">$ ifconfig [interface] 10.0.3.101 netmask 255.255.0.0 up</pre>
-
 <p>Now try following:</p>
 <ol>
 <li>From your host system: ping 10.0.2.101; ping 10.0.3.101</li>
@@ -1897,9 +1873,8 @@ $ ifconfig tap1 10.0.3.100 netmask 255.255.255.0 up</pre>
 </ol>
 <p>For Internet access the guest system should be connected to the Internet and allow IP forwarding:</p>
 <pre class="brush: plain; toolbar: false;">$ sysctl -w net.inet.ip.forwarding=1</pre>
-
 <p>In all cases you should be able to ping/access any system no matter what system you operate on. </p>
-<p>&nbsp;</p>
+<p> </p>
 <h2 id="4-references"><span id="4_References"><span style="font-weight: bold;"><a name="References"></a>4) References</span></span></h2>
 <p>a) <a href="http://wiki.qemu.org/Main_Page">http://wiki.qemu.org/Main_Page</a></p>
 <p>b)<a href="http://qemu-buch.de/de/index.php/QEMU-KVM-Buch/_Netzwerkoptionen/_Virtuelle_Netzwerke_konfigurieren"> http://qemu-buch.de/de/index.php/QEMU-KVM-Buch/_Netzwerkoptionen/_Virtuelle_Netzwerke_konfigurieren</a></p>
@@ -1913,8 +1888,8 @@ $ ifconfig tap1 10.0.3.100 netmask 255.255.255.0 up</pre>
         <li><a href="http://blog.dornea.nu/2009/11/14/netbsd-linux-xen-does-it-work">NetBSD, Linux &#038; Xen &#8211; Does it work?</a></li>
         <li><a href="http://blog.dornea.nu/2010/03/22/howto-create-new-debian-domu-using-xen-on-bsd">HowTo: Create new Debian domU using Xen on *BSD</a></li>
         <li><a href="http://blog.dornea.nu/2011/03/21/openbsd-freebsd-netbsd-i-do-love-beasts">OpenBSD, FreeBSD, NetBSD &#8211; I do love beasts!</a></li>
-        <li><a href="http://blog.dornea.nu/2011/03/19/my-own-cheap-nas-the-openwrt-way">My own cheap NAS &#8211; the OpenWRT way</a></li>
-        <li><a href="http://blog.dornea.nu/2011/04/02/block-facebook-with-iptables-on-openwrt">Block facebook with iptables on OpenWrt</a></li>
+        <li><a href="http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids">OpenVPN for paranoids</a></li>
+        <li><a href="http://blog.dornea.nu/2010/10/13/howto-build-your-own-wifi-wlan-hotspot-using-hostap">HowTo: Build your own Wifi WLAN hotspot using hostap</a></li>
     </ul>
 </section>
     <hr />

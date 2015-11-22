@@ -1718,48 +1718,42 @@ blog.dornea.nu            </a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>Nowadays it is essential to backup your data and keep it safe in case of a data loss event. The most common way to backup (private) data is to use a remote server where you can upload your data. Certainly you want to keep it safe and <span style="text-decoration: underline;">private</span>. So how do you want to guarantee the privacy of the files stored? Upload it to the server and encrypt it afterwards?! Somehow you want to automate this backup process so you don&#8217;t have to do nothing than running the backup script. Suppose you have a huge amount of data (GB / TB) you&#8217;ll have to backup every day. Then you&#8217;ll have to upload the data completely to the server and do the encryption stuff. So your next question in mind should be: How to save bandwidth usage and keep it to a minimum?<!--more--> Apparently you&#8217;ll have to encrypt your data first and then commit the in-file changes to the server. This works similar to the CVS/SVN versioning systems. So here are the steps:</p>
+                <p>Nowadays it is essential to backup your data and keep it safe in case of a data loss event. The most common way to backup (private) data is to use a remote server where you can upload your data. Certainly you want to keep it safe and <span style="text-decoration: underline;">private</span>. So how do you want to guarantee the privacy of the files stored? Upload it to the server and encrypt it afterwards?! Somehow you want to automate this backup process so you don’t have to do nothing than running the backup script. Suppose you have a huge amount of data (GB / TB) you’ll have to backup every day. Then you’ll have to upload the data completely to the server and do the encryption stuff. So your next question in mind should be: How to save bandwidth usage and keep it to a minimum?<!--more--> Apparently you’ll have to encrypt your data first and then commit the in-file changes to the server. This works similar to the CVS/SVN versioning systems. So here are the steps:</p>
 <!--break-->
-
 <ol>
 <li>Encrypt data using rsyncrypto</li>
 <li>Transfer data (changes) to server using rsync</li>
 </ol>
-<p>Quite simple, isn&#8217;t it? Let&#8217;s start by configuring and installing the required tools. (For the next steps I&#8217;ll be using NetBSD 5.0. But most Unix systems include rsync and rsyncrypto in their packaging systems.)  </p>
-<div id="toc_container" class="toc_wrap_right toc_transparent no_bullets">
-  <p class="toc_title">
+<p>Quite simple, isn’t it? Let’s start by configuring and installing the required tools. (For the next steps I’ll be using NetBSD 5.0. But most Unix systems include rsync and rsyncrypto in their packaging systems.)  </p>
+<div class="toc_wrap_right toc_transparent no_bullets" id="toc_container">
+<p class="toc_title">
     Contents
   </p>
-
-  <ul class="toc_list">
-    <li>
-      <a href="#Installing_required_tools"><span class="toc_number toc_depth_1">1</span> Installing required tools</a>
-    </li>
-    <li>
-      <a href="#Generate_backup_keys"><span class="toc_number toc_depth_1">2</span> Generate backup keys</a>
-    </li>
-    <li>
-      <a href="#Encrypt_data"><span class="toc_number toc_depth_1">3</span> Encrypt data</a>
-    </li>
-    <li>
-      <a href="#Finito"><span class="toc_number toc_depth_1">4</span> Finito!</a>
-    </li>
-  </ul>
+<ul class="toc_list">
+<li>
+<a href="#Installing_required_tools"><span class="toc_number toc_depth_1">1</span> Installing required tools</a>
+</li>
+<li>
+<a href="#Generate_backup_keys"><span class="toc_number toc_depth_1">2</span> Generate backup keys</a>
+</li>
+<li>
+<a href="#Encrypt_data"><span class="toc_number toc_depth_1">3</span> Encrypt data</a>
+</li>
+<li>
+<a href="#Finito"><span class="toc_number toc_depth_1">4</span> Finito!</a>
+</li>
+</ul>
 </div>
-
 <h2 id="installing-required-tools"><span id="Installing_required_tools">Installing required tools</span></h2>
 <pre class="brush: sql">cd /usr/pkgsrc/net/rsync
 make install clean CLEANDEPENDS=1</pre>
-
-<p>If you don&#8217;t find rsync in your packages list, then you&#8217;ll have to download it and from <a href="http://www.samba.org/rsync/">here</a>. I couldn&#8217;t find rsyncrypto in NetBSDs package tree so I&#8217;ve downloaded it from <a href="http://rsyncrypto.lingnu.com/index.php/Home_Page">here</a>. Be carefull when configuring the package on NetBSD:</p>
+<p>If you don’t find rsync in your packages list, then you’ll have to download it and from <a href="http://www.samba.org/rsync/">here</a>. I couldn’t find rsyncrypto in NetBSDs package tree so I’ve downloaded it from <a href="http://rsyncrypto.lingnu.com/index.php/Home_Page">here</a>. Be carefull when configuring the package on NetBSD:</p>
 <pre class="brush: sql">$ LDFLAGS=-L/usr/pkg/lib CPPFLAGS=-I/usr/pkg/include ./configure</pre>
-
 <p>Now both tools shoud work and execute properly.</p>
 <h2 id="generate-backup-keys"><span id="Generate_backup_keys">Generate backup keys</span></h2>
-<p>Therefore we&#8217;ll be using OpenSSL. We&#8217;ll generate a backup key and a certificate used for encryption. Remeber: Keep these files safe and don&#8217;t lose them!</p>
+<p>Therefore we’ll be using OpenSSL. We’ll generate a backup key and a certificate used for encryption. Remeber: Keep these files safe and don’t lose them!</p>
 <pre class="brush: c">openssl req -nodes -newkey rsa:2046 -x509 
     -keyout /backup/openssl/backup.key -out /backup/openssl/backup.crt</pre>
-
 <p>Check out the man page for parameters explication.</p>
 <h2 id="encrypt-data"><span id="Encrypt_data">Encrypt data</span></h2>
 <p>Let us now encrypt our data.</p>
@@ -1768,8 +1762,7 @@ make install clean CLEANDEPENDS=1</pre>
          /encrypted/ /tmp/enc 
          /encrypted/backup/enc.keys 
          /encrypted/keys/openssl/backup.crt</pre>
-
-<p>Quite simple, isn&#8217;t it? Hehe.. Here is a quick explanation:</p>
+<p>Quite simple, isn’t it? Hehe.. Here is a quick explanation:</p>
 <pre class="brush: c">Main syntax of rsyncrypto: 
 rsyncrypto [options] src dst key master key
 In our case:
@@ -1779,22 +1772,20 @@ In our case:
 "/tmp/enc"       -- Where to store encrypted data temporarily
 "enc.keys"      --  Keys file or directory
 "backup.crt"    -- Master key (public key certificate or private key)</pre>
-
 <p>Now all we have to do is to rsync the encrypted data to some remote server.</p>
 <pre class="brush: sql">rsync --progress --delete -ave /tmp/enc user@host:/dir/where/to/store/data</pre>
-
 <h2 id="finito"><span id="Finito">Finito!</span></h2>
-<p>That&#8217;s all. Cya next time!</p>
+<p>That’s all. Cya next time!</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids">OpenVPN for paranoids</a></li>
-        <li><a href="http://blog.dornea.nu/2011/03/07/howto-full-encrypt-data-using-gentooluks-and-initramfs">HowTo: Full-Encrypt data using Gentoo,Luks and initramfs</a></li>
-        <li><a href="http://blog.dornea.nu/2010/10/03/howto-secure-your-server-using-icmpknock">HowTo: Secure your server using icmpKNOCK</a></li>
         <li><a href="http://blog.dornea.nu/2010/10/13/howto-build-your-own-wifi-wlan-hotspot-using-hostap">HowTo: Build your own Wifi WLAN hotspot using hostap</a></li>
         <li><a href="http://blog.dornea.nu/2011/03/19/my-own-cheap-nas-the-openwrt-way">My own cheap NAS &#8211; the OpenWRT way</a></li>
+        <li><a href="http://blog.dornea.nu/2011/03/07/howto-full-encrypt-data-using-gentooluks-and-initramfs">HowTo: Full-Encrypt data using Gentoo,Luks and initramfs</a></li>
+        <li><a href="http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids">OpenVPN for paranoids</a></li>
+        <li><a href="http://blog.dornea.nu/2010/10/03/howto-secure-your-server-using-icmpknock">HowTo: Secure your server using icmpKNOCK</a></li>
     </ul>
 </section>
     <hr />

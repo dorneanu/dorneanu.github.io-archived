@@ -1721,15 +1721,13 @@ blog.dornea.nu            </a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p><strong>x11vnc</strong> allows you to connect to real X displays without creating any new X session (fluxbox, twm, gnome etc.). It allows you to control the mouse, keyboard and X events remotely. I usually use it when friends of mine need help and I want to see what exactly they're doing.&nbsp;</p>
-<p>Make sure any <strong>ssh server </strong>is running on <em>remote-host&nbsp;</em>and you have a vnc client installed on your <em>localhost</em>. Also make sure <em>remote-host</em> has x11vnc otherwise this won't make sense at all.Then run:</p>
+                <p><strong>x11vnc</strong> allows you to connect to real X displays without creating any new X session (fluxbox, twm, gnome etc.). It allows you to control the mouse, keyboard and X events remotely. I usually use it when friends of mine need help and I want to see what exactly they're doing. </p>
+<p>Make sure any <strong>ssh server </strong>is running on <em>remote-host </em>and you have a vnc client installed on your <em>localhost</em>. Also make sure <em>remote-host</em> has x11vnc otherwise this won't make sense at all.Then run:</p>
 <pre class="brush:plain;">[remote-host] &gt; x11vnc -display :0
 [localhost] &gt; ssh -t -L 5900:localhost:5900 [remote-user]@[remote-host]</pre>
-
-<p><span style="display: none">&nbsp;</span></p>
+<p><span style="display: none"> </span></p>
 <p>Now the whole connection is encrypted via ssh. Now open new terminal and run</p>
 <pre class="brush:java;">[localhost] &gt; vncviewer localhost:5900</pre>
-
 <p>That's all!</p>
 <!--break-->
             </div>
@@ -1738,10 +1736,10 @@ blog.dornea.nu            </a>
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="http://blog.dornea.nu/2009/08/05/howto-ssh-tunnel-over-corkscrew-using-tor">HowTo: SSH-Tunnel over CorkScrew using Tor</a></li>
-        <li><a href="http://blog.dornea.nu/2014/12/02/howto-proxy-non-proxy-aware-android-applications-through-burp">HowTo: Proxy Non-Proxy-Aware Android Applications through Burp</a></li>
-        <li><a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a></li>
-        <li><a href="http://blog.dornea.nu/2010/10/03/howto-secure-your-server-using-icmpknock">HowTo: Secure your server using icmpKNOCK</a></li>
         <li><a href="http://blog.dornea.nu/2010/10/13/howto-build-your-own-wifi-wlan-hotspot-using-hostap">HowTo: Build your own Wifi WLAN hotspot using hostap</a></li>
+        <li><a href="http://blog.dornea.nu/2013/09/13/howto-automate-nmap-scanning">HowTo: Automate nmap scanning</a></li>
+        <li><a href="http://blog.dornea.nu/2011/03/19/my-own-cheap-nas-the-openwrt-way">My own cheap NAS &#8211; the OpenWRT way</a></li>
+        <li><a href="http://blog.dornea.nu/2009/06/25/howto-rsyncrypto-the-backup-jewel">HowTo: RsynCrypto &#8211; The backup jewel</a></li>
     </ul>
 </section>
     <hr />

@@ -1737,31 +1737,29 @@ blog.dornea.nu            </a>
 <li>Have a look at the results</li>
 <li>Save/export the results</li>
 </ol>
-<p>Well these are a lot of steps which have to be done manually. We all know that necessity is the mother of invention so I&#8217;ve started looking for some concepts how to automate those steps. This is what I&#8217;ve found&#8230;<br />
+<p>Well these are a lot of steps which have to be done manually. We all know that necessity is the mother of invention so I’ve started looking for some concepts how to automate those steps. This is what I’ve found…<br/>
 <!--more--></p>
-<div id="toc_container" class="toc_wrap_right toc_transparent no_bullets">
-  <p class="toc_title">
+<div class="toc_wrap_right toc_transparent no_bullets" id="toc_container">
+<p class="toc_title">
     Contents
   </p>
-
-  <ul class="toc_list">
-    <li>
-      <a href="#Requirements"><span class="toc_number toc_depth_1">1</span> Requirements</a>
-    </li>
-    <li>
-      <a href="#Google_found8230"><span class="toc_number toc_depth_1">2</span> Google found&#8230;</a>
-    </li>
-    <li>
-      <a href="#Jython_Burp_API"><span class="toc_number toc_depth_1">3</span> Jython Burp API</a>
-    </li>
-    <li>
-      <a href="#Automation"><span class="toc_number toc_depth_1">4</span> Automation</a>
-    </li>
-  </ul>
+<ul class="toc_list">
+<li>
+<a href="#Requirements"><span class="toc_number toc_depth_1">1</span> Requirements</a>
+</li>
+<li>
+<a href="#Google_found8230"><span class="toc_number toc_depth_1">2</span> Google found…</a>
+</li>
+<li>
+<a href="#Jython_Burp_API"><span class="toc_number toc_depth_1">3</span> Jython Burp API</a>
+</li>
+<li>
+<a href="#Automation"><span class="toc_number toc_depth_1">4</span> Automation</a>
+</li>
+</ul>
 </div>
-
 <h1 id="requirements"><span id="Requirements">Requirements</span></h1>
-<p>Before I&#8217;ve started googling for some code I&#8217;ve collected some requirements which <em>should</em> be fulfilled:</p>
+<p>Before I’ve started googling for some code I’ve collected some requirements which <em>should</em> be fulfilled:</p>
 <ul>
 <li>Functional <ul>
 <li>Ability to communicate with Burp using some API</li>
@@ -1781,17 +1779,17 @@ blog.dornea.nu            </a>
 </ul>
 </li>
 </ul>
-<p>Having this written I&#8217;ve started googling.</p>
-<h1 id="google-found"><span id="Google_found8230">Google found&#8230;</span></h1>
+<p>Having this written I’ve started googling.</p>
+<h1 id="google-found"><span id="Google_found8230">Google found…</span></h1>
 <ul>
 <li><a href="http://portswigger.net/burp/help/extender.html">Burp Extender API</a></li>
 </ul>
 <blockquote>
 <p><p style="padding-left: 60px;">
-  Burp Extender lets you load Burp extensions, to extend Burp&#8217;s functionality using your own or third-party code.
+  Burp Extender lets you load Burp extensions, to extend Burp’s functionality using your own or third-party code.
 </p></p>
 <p><p style="padding-left: 60px;">
-  Burp extensions can customize Burp&#8217;s behavior in numerous ways, such as modifying HTTP requests and responses, customizing the UI, adding custom Scanner checks, and accessing key runtime information, including the <a href="http://portswigger.net/burp/help/proxy_history.html">Proxy history</a>, <a href="http://portswigger.net/burp/help/target_sitemap.html">Target site map</a> and <a href="http://portswigger.net/burp/help/scanner_results.html">Scanner results</a>. (Source: <a href="http://portswigger.net/burp/help/extender.html">http://portswigger.net/burp/help/extender.html</a>)
+  Burp extensions can customize Burp’s behavior in numerous ways, such as modifying HTTP requests and responses, customizing the UI, adding custom Scanner checks, and accessing key runtime information, including the <a href="http://portswigger.net/burp/help/proxy_history.html">Proxy history</a>, <a href="http://portswigger.net/burp/help/target_sitemap.html">Target site map</a> and <a href="http://portswigger.net/burp/help/scanner_results.html">Scanner results</a>. (Source: <a href="http://portswigger.net/burp/help/extender.html">http://portswigger.net/burp/help/extender.html</a>)
 </p></p>
 </blockquote>
 <ul>
@@ -1810,16 +1808,15 @@ blog.dornea.nu            </a>
   Jython-Burp-API exposes a Jython interface to the popular Burp Suite web security testing tool, as an alternative to <a href="http://tduehr.github.com/buby/">Buby</a> for those testers who prefer Python over Ruby. (Souce:Â <a href="https://github.com/mwielgoszewski/jython-burp-api">https://github.com/mwielgoszewski/jython-burp-api)</a>
 </p></p>
 </blockquote>
-<p>The Burp Extender API is the main component and plays a crucial role in automating burp. There are a lot of extension (Java, Python, Ruby) and you could easily write your <a href="http://blog.portswigger.net/2012/12/writing-your-first-burp-extension.html">own</a> one. As you might have noticed there are 3 main supported languages: Java, Ruby and Python. And because I love the pythonic way of life I had closer look at the Jython Burp API. As stated on the github page you can get a jython console to interact with Burp. That&#8217;s crazy! And this was one of my main requirements.</p>
+<p>The Burp Extender API is the main component and plays a crucial role in automating burp. There are a lot of extension (Java, Python, Ruby) and you could easily write your <a href="http://blog.portswigger.net/2012/12/writing-your-first-burp-extension.html">own</a> one. As you might have noticed there are 3 main supported languages: Java, Ruby and Python. And because I love the pythonic way of life I had closer look at the Jython Burp API. As stated on the github page you can get a jython console to interact with Burp. That’s crazy! And this was one of my main requirements.</p>
 <h1 id="jython-burp-api"><span id="Jython_Burp_API">Jython Burp API</span></h1>
-<p>First I&#8217;ve cloned the github repo and copied Burp into the<em> jython-burp-api </em>folder as described in the README.</p>
+<p>First I’ve cloned the github repo and copied Burp into the<em> jython-burp-api </em>folder as described in the README.</p>
 <pre class="lang:sh decode:true">$ ls -l
 total 13173
 drwxr-xr-x 3 vd vd     1024 2013-07-31 14:50 custom-modules
 drwxr-xr-x 4 vd vd     1024 2013-08-02 11:27 jython-burp-api-master
 lrwxrwxrwx 1 vd vd       28 2013-07-31 14:19 jython.jar -&gt; jython-standalone-2.7-b1.jar
 -rw-r--r-- 1 vd vd 13432713 2013-07-31 13:49 jython-standalone-2.7-b1.jar</pre>
-
 <p>I <em>cd </em>into<em> jython-burp-api-master, </em>copied Burp into it and compiled the Burp Extender files:</p>
 <pre class="lang:sh decode:true">$ ls -l
 total 9068
@@ -1832,7 +1829,6 @@ drwxr-xr-x 3 vd vd    1024 2013-07-31 15:39 Lib
 -rw-r--r-- 1 vd vd    3592 2013-07-31 15:30 run.py
 
 $ javac -cp ../jython.jar java/src/*.java java/src/burp/*.java</pre>
-
 <p>Afterwards I tried to start Burp (as described in the README) using:</p>
 <pre class="lang:sh decode:true">$ java -Xmx1g -jar ../jython.jar run.py -i -d -B burpsuite_pro_v1.5.11.jar
 Traceback (most recent call last):
@@ -1841,8 +1837,7 @@ Traceback (most recent call last):
   File "run.py", line 15, in start_burp
     from burp_extender import BurpExtender as MyBurpExtender, ConsoleThread
 ImportError: No module named burp_extender</pre>
-
-<p>Hmmm.. Strange. I&#8217;ve created this <a href="https://github.com/mwielgoszewski/jython-burp-api/issues/7">issue</a> and informed the developer about the bug. Finally I was able to solve it by myself. The problem was that jython didn&#8217;t know where to find the module <em>burp_extender. </em>So the class path had to be changed:</p>
+<p>Hmmm.. Strange. I’ve created this <a href="https://github.com/mwielgoszewski/jython-burp-api/issues/7">issue</a> and informed the developer about the bug. Finally I was able to solve it by myself. The problem was that jython didn’t know where to find the module <em>burp_extender. </em>So the class path had to be changed:</p>
 <pre class="lang:sh decode:true">$ java -jar ../jython.jar -Dpython.path=Lib/ run.py -B burpsuite_pro_v1.5.11.jar -i -d -v
 
 Jython 2.7b1 (default:ac42d59644e9, Feb 9 2013, 15:24:52) 
@@ -1853,12 +1848,10 @@ Jython 2.7b1 (default:ac42d59644e9, Feb 9 2013, 15:24:52)
 help
 &gt;&gt;&gt; Burp
 &gt;&gt;&gt;</pre>
-
 <p>Ahh there we go! Now you should have Burp fired up and a jython console to interact with. Check out <a href="https://github.com/mwielgoszewski/jython-burp-api#examples">examples</a> for some commands.</p>
 <h1 id="automation"><span id="Automation">Automation</span></h1>
 <p>Having this done the next step was to automate the scanning process. The jython console is very helpful but I somehow have to automate Burp with one command. Sth like:</p>
 <pre class="lang:sh decode:true">$ java -jar ../jython.jar -Dpython.path=Lib/  run.py -B burpsuite_pro_v1.5.11.jar --send-to-spider http://dornea.nu --add-to-scope http://dornea.nu -i</pre>
-
 <p>Well I had some closer look at the <em>run.py </em>and modified it a little bit. This is what came out (own modifications have been highlighted):</p>
 <pre class="lang:python mark:12-30,133,134,96,97 decode:true"># -*- coding: utf-8 -*-
 from java.lang import System
@@ -2003,7 +1996,6 @@ if __name__ == '__main__':
         sys.exit(1)
 
     start_burp(opt, *args)</pre>
-
 <p>Now I can easily automate following steps:</p>
 <ul>
 <li>send some URL to the spider</li>
@@ -2013,25 +2005,24 @@ if __name__ == '__main__':
 [--] Added new scope ...
 [--] Starting spider ...
 ...</pre>
-
-<p>The above code is just a PoC. Maybe I&#8217;ll extend it to some features like</p>
+<p>The above code is just a PoC. Maybe I’ll extend it to some features like</p>
 <ul>
 <li>logging (specify format)</li>
 <li>tamper requests before being sent</li>
 <li>export results (XML)</li>
 <li>write results to some DB</li>
 </ul>
-<p>&nbsp;</p>
+<p> </p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="http://blog.dornea.nu/2014/10/29/howto-ios-apps-static-analysis">HowTo: iOS Apps - Static analysis</a></li>
+        <li><a href="http://blog.dornea.nu/2014/05/04/howto-create-docs-with-sphinx">HowTo: Create docs with sphinx</a></li>
         <li><a href="http://blog.dornea.nu/2014/08/06/web-application-survey-tutorial">Web Application Survey Tutorial</a></li>
         <li><a href="http://blog.dornea.nu/2013/05/02/overthewire-vortex-level2">OverTheWire: Vortex Level2</a></li>
-        <li><a href="http://blog.dornea.nu/2014/12/02/howto-proxy-non-proxy-aware-android-applications-through-burp">HowTo: Proxy Non-Proxy-Aware Android Applications through Burp</a></li>
-        <li><a href="http://blog.dornea.nu/2014/05/04/howto-create-docs-with-sphinx">HowTo: Create docs with sphinx</a></li>
+        <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump">24h Android sniffing using tcpdump</a></li>
     </ul>
 </section>
     <hr />

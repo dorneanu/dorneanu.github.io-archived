@@ -1724,8 +1724,8 @@ blog.dornea.nu            </a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>This time I&#8217;m going to show you how to build your own wi-fi hotspot in less than 10 minutes. There is no need of sophisticated software like FreeRadius or Chilispot. Using common tools you&#8217;ll be able to set up your WLAN AP (Access Point) and allow others to connect to it. Therefore we&#8217;ll be using our own DHCP server to manage the clients and their IP addresses. In this tutorial I&#8217;ll be using <a href="http://dornea.nu/about-blacktiny">BlackTiny</a> again since mobility was the main reason for writing this: There were a lot of situations where I wanted to share my Internet connectivity but I couldn&#8217;t do that due to misconfigurations and false network settings. I&#8217;d like to share my experience with you and help you easily configure your AP.</p>
-<h2 id="before-we-start"><strong>Before we start &#8230;<!--more--></strong></h2>
+                <p>This time I’m going to show you how to build your own wi-fi hotspot in less than 10 minutes. There is no need of sophisticated software like FreeRadius or Chilispot. Using common tools you’ll be able to set up your WLAN AP (Access Point) and allow others to connect to it. Therefore we’ll be using our own DHCP server to manage the clients and their IP addresses. In this tutorial I’ll be using <a href="http://dornea.nu/about-blacktiny">BlackTiny</a> again since mobility was the main reason for writing this: There were a lot of situations where I wanted to share my Internet connectivity but I couldn’t do that due to misconfigurations and false network settings. I’d like to share my experience with you and help you easily configure your AP.</p>
+<h2 id="before-we-start"><strong>Before we start …<!--more--></strong></h2>
 <p>Some technical info</p>
 <ul>
 <li><em>General</em>: Linux debian <strong>2.6.32-5-amd64</strong> #1 SMP x86_64 GNU/Linux</li>
@@ -1734,7 +1734,7 @@ blog.dornea.nu            </a>
 <li><em>hostap-utils version</em>: 0.4.7-1</li>
 <li><em>DHCP server version</em>: 4.1.1-P1-9</li>
 </ul>
-<p>Make sure &#8230;</p>
+<p>Make sure …</p>
 <ul>
 <li>your card supports <a href="http://en.wikipedia.org/wiki/Promiscuous_mode">promiscous mode</a></li>
 <li>proper card kernel module is up and running (<strong>ath5k</strong> in my case)</li>
@@ -1742,8 +1742,8 @@ blog.dornea.nu            </a>
 <li>you have <strong>hostapd</strong> installed</li>
 <li>a <strong>DHCP</strong> server is running on your system (see below)</li>
 </ul>
-<p>&nbsp;</p>
-<h2 id="go-up-in-the-air-configure-hostapd"><strong>Go &#8216;Up in the air&#8217; / configure hostapd</strong></h2>
+<p> </p>
+<h2 id="go-up-in-the-air-configure-hostapd"><strong>Go ‘Up in the air’ / configure hostapd</strong></h2>
 <pre class="brush:plain;"># hostapd -h
 hostapd v0.6.10
 User space daemon for IEEE 802.11 AP management,
@@ -1761,8 +1761,7 @@ options:
    -t   include timestamps in some debug messages
    -v   show hostapd version
 </pre>
-
-<p>So we&#8217;ll need a configuration. Mine was located at <strong>/etc/hostapd/hostapd.conf</strong>. You should now open it using your editor (vim still rocks! ^^) and read it. Don&#8217;t try to skim over it. You&#8217;ll end up in misconfiguring hostapd and getting crazy error messages. So these are the main important settings:</p>
+<p>So we’ll need a configuration. Mine was located at <strong>/etc/hostapd/hostapd.conf</strong>. You should now open it using your editor (vim still rocks! ^^) and read it. Don’t try to skim over it. You’ll end up in misconfiguring hostapd and getting crazy error messages. So these are the main important settings:</p>
 <pre class="brush:bash;"># Which interface should be used
 interface=wlan1
 
@@ -1797,9 +1796,8 @@ auth_algs=3
 # The own IP address of the access point (used as NAS-IP-Address)
 own_ip_addr=127.0.0.1
 </pre>
-
-<p>You won&#8217;t need any authentication settings since this is supposed to be a free hotspot.</p>
-<p>Now let&#8217;s try our configuration:</p>
+<p>You won’t need any authentication settings since this is supposed to be a free hotspot.</p>
+<p>Now let’s try our configuration:</p>
 <pre class="brush:plain;"># hostapd -d /etc/hostapd/hostapd.conf 
 Configuration file: /etc/hostapd/hostapd.conf
 ctrl_interface_group=0
@@ -1823,20 +1821,19 @@ mgmt::proberesp cb
 MGMT (TX callback) ACK
 mgmt::proberesp cb
 </pre>
-
-<p>It&#8217;s working! Let&#8217;s go to the next step.</p>
+<p>It’s working! Let’s go to the next step.</p>
 <h2 id="configure-network-stuff"><strong>Configure network stuff</strong></h2>
-<p>First let&#8217;s have a look at some debug messages.</p>
+<p>First let’s have a look at some debug messages.</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2010/10/03/howto-secure-your-server-using-icmpknock">HowTo: Secure your server using icmpKNOCK</a></li>
         <li><a href="http://blog.dornea.nu/2010/11/25/howto-snatip-masquerade-between-2-wlan-cards-on-linux">HowTo: SNAT/IP Masquerade between 2 wlan cards on Linux</a></li>
         <li><a href="http://blog.dornea.nu/2011/03/19/my-own-cheap-nas-the-openwrt-way">My own cheap NAS &#8211; the OpenWRT way</a></li>
+        <li><a href="http://blog.dornea.nu/2010/10/03/howto-secure-your-server-using-icmpknock">HowTo: Secure your server using icmpKNOCK</a></li>
         <li><a href="http://blog.dornea.nu/2010/03/22/howto-create-new-debian-domu-using-xen-on-bsd">HowTo: Create new Debian domU using Xen on *BSD</a></li>
-        <li><a href="http://blog.dornea.nu/2009/08/05/howto-ssh-tunnel-over-corkscrew-using-tor">HowTo: SSH-Tunnel over CorkScrew using Tor</a></li>
+        <li><a href="http://blog.dornea.nu/2011/04/02/block-facebook-with-iptables-on-openwrt">Block facebook with iptables on OpenWrt</a></li>
     </ul>
 </section>
     <hr />

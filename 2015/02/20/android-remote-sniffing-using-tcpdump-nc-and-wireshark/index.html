@@ -1732,28 +1732,18 @@ to your Android device and switch to the Debian environment:</p>
 # deb
 root@debian:/#
 </pre></div>
-
-
 <p>Now you can start <code>tcpdump</code> and pipe its output to <code>netcat</code>:</p>
 <div class="highlight"><pre>root@debian:/# tcpdump -i wlan0 -s0 -w - | nc -l -p 11111
 </pre></div>
-
-
 <p>Afterwards you want to access port <code>11111</code> on the Android device using port forwarding:</p>
 <div class="highlight"><pre>victor@delia:/$ adb forward tcp:11111 tcp:11111
 </pre></div>
-
-
 <p>On your laptop/pentest machine you can run <code>tshark</code>:</p>
 <div class="highlight"><pre>victor@delia:/$ nc localhost 11111 | tshark -i -
 </pre></div>
-
-
 <p>Using <code>wireshark</code> that'd be:</p>
 <div class="highlight"><pre>victor@delia:/$ nc localhost 11111 | wireshark -k -S -i -
 </pre></div>
-
-
 <p>Happy hacking!</p>
             </div>
             <!-- /.entry-content -->
@@ -1761,10 +1751,10 @@ root@debian:/#
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="http://blog.dornea.nu/2015/02/19/redirect-androids-traffic-to-burp">Redirect Androids traffic to Burp</a></li>
-        <li><a href="http://blog.dornea.nu/2015/01/15/android-hackers-handbook">Android Hacker's Handbook</a></li>
-        <li><a href="http://blog.dornea.nu/2015/07/01/debugging-android-native-shared-libraries">Debugging Android native shared libraries</a></li>
+        <li><a href="http://blog.dornea.nu/2014/12/03/import-burp-cert-into-android">Import Burp cert into Android</a></li>
         <li><a href="http://blog.dornea.nu/2014/12/02/re-root-nexus-10-4x">Re-Root Nexus 10 4.x</a></li>
-        <li><a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a></li>
+        <li><a href="http://blog.dornea.nu/2014/09/12/howto-androguard-with-docker">HowTo: Androguard with Docker</a></li>
+        <li><a href="http://blog.dornea.nu/2015/06/22/decode-adobe-flex-amf-protocol">Decode Adobe Flex AMF protocol</a></li>
     </ul>
 </section>
     <hr />

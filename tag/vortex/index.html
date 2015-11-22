@@ -1673,20 +1673,20 @@ blog.dornea.nu            </a>
     </ol>
             <article>
                 <h2><a href="http://blog.dornea.nu/2013/05/02/overthewire-vortex-level1">OverTheWire: Vortex Level1</a></h2>
-                <div class="summary"><p>Solution for <a href="http://www.overthewire.org/wargames/vortex/vortex1.shtml">http://www.overthewire.org/wargames/vortex/vortex1.shtml.</a> Here&#8217;s the code they have used:</p>
+                <div class="summary"><p>Solution for <a href="http://www.overthewire.org/wargames/vortex/vortex1.shtml">http://www.overthewire.org/wargames/vortex/vortex1.shtml.</a> Here’s the code they have used:</p>
 <pre>#include 
 #include 
 #include 
 #include
 
-#define e(); if(((unsigned int)ptr & 0xff000000)==0xca000000) { setresuid(geteuid(), geteuid(), geteuid()); execlp("/bin/sh", "sh", "-i", NULL); }
+#define e(); if(((unsigned int)ptr &amp; 0xff000000)==0xca000000) { setresuid(geteuid(), geteuid(), geteuid()); execlp("/bin/sh", "sh", "-i", NULL); }
 
 void print(unsigned char *buf, int len)
 {
         int i;
 
         printf("[ ");
-        for(i=0; i &lt; len; i++) printf ...</pre>
+        for ...</pre>
                     <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2013/05/02/overthewire-vortex-level1">more ...</a>
                 </div>
             </article>
@@ -1696,7 +1696,7 @@ void print(unsigned char *buf, int len)
                 <div class="summary"><p>Solution for <a href="http://www.overthewire.org/wargames/vortex/vortex2.shtml">level2</a>:</p>
 <p>Here is the code:</p>
 <div>
-  <pre class="lang:default decode:true ">#include &lt;stdlib.h&gt;
+<pre class="lang:default decode:true ">#include &lt;stdlib.h&gt;
 #include &lt;stdio.h&gt;
 #include &lt;sys/types.h&gt;
 
@@ -1705,12 +1705,10 @@ int main(int argc, char **argv)
         char *args[] = { "/bin/tar", "cf", "/tmp/ownership.$$.tar", argv[1], argv[2], argv[3] };
         execv(args[0], args);
 }</pre>
-
-  <p>
+<p>
     Â <!--more-->
-  </p>
+</p>
 </div>
-
 <p><strong>$$</strong> expands to the process ID of the shell ...</p>
                     <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2013/05/02/overthewire-vortex-level2">more ...</a>
                 </div>
@@ -1718,7 +1716,7 @@ int main(int argc, char **argv)
             <hr/>
             <article>
                 <h2><a href="http://blog.dornea.nu/2009/05/21/overthewire-vortex-level0">OverTheWire: Vortex Level0</a></h2>
-                <div class="summary"><p>So what&#8217;s this whole thing about? &#8220;<em>The wargames offered by the OverTheWire community can help you to learn and practice security concepts in the form of funfilled games.</em>&#8221; by <a href="http://www.overthewire.org/wargames/">OverTheWire.org</a>. So I started with <a href="http://www.overthewire.org/wargames/vortex/">Vortex</a> and coded an example how to read 4 integers from server, sum them ...</p>
+                <div class="summary"><p>So what’s this whole thing about? “<em>The wargames offered by the OverTheWire community can help you to learn and practice security concepts in the form of funfilled games.</em>” by <a href="http://www.overthewire.org/wargames/">OverTheWire.org</a>. So I started with <a href="http://www.overthewire.org/wargames/vortex/">Vortex</a> and coded an example how to read 4 integers from server, sum them ...</p>
                     <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2009/05/21/overthewire-vortex-level0">more ...</a>
                 </div>
             </article>

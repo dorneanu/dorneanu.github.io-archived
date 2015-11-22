@@ -1709,27 +1709,24 @@ blog.dornea.nu            </a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>If you ever had in mind to &#8220;rm -rf /&#8221;: DON&#8217;T! Even for its funny aspect, it isn&#8217;t worth doing such a stupid thing. Well I did it..At least not intentionally. I remember I was going to remove some ordinary directory and then I must have misspelled the last argument (directory name). Luckily I was able to notice the tragedy  and cancel the command by ^C. &#8220;F***! What should I now?!&#8221;, was my first thought. I remembered there was a dir called backups somewhere. Indeed, there was &#8220;/var/backups&#8221; but I wasn&#8217;t able to restore my data completely. And what about &#8220;/dev&#8221; ?! I knew I had to reinstall the NetBSD distribution; just to be sure everything is there. So I ran<!--more--></p>
+                <p>If you ever had in mind to “rm -rf /”: DON’T! Even for its funny aspect, it isn’t worth doing such a stupid thing. Well I did it..At least not intentionally. I remember I was going to remove some ordinary directory and then I must have misspelled the last argument (directory name). Luckily I was able to notice the tragedy  and cancel the command by ^C. “F***! What should I now?!”, was my first thought. I remembered there was a dir called backups somewhere. Indeed, there was “/var/backups” but I wasn’t able to restore my data completely. And what about “/dev” ?! I knew I had to reinstall the NetBSD distribution; just to be sure everything is there. So I ran<!--more--></p>
 <pre class="lang:default decode:true">$ ./build.sh -u distribution install=/</pre>
-
 <p>and hoped for the best. Finally the installation was done and I did a fresh reboot. And then it happened: BOOM!<!--break--></p>
 <pre class="lang:default decode:true">...panic: init died (signal 0, exit 12)Stopped in pid 1.1 (init) at netbsd:cpu_Debugger+0x4: bx r14</pre>
-
-<p>(for more details read <a href="http://mail-index.netbsd.org/tech-kern/2009/03/18/msg004607.html">this</a>). At that moment I knew I&#8217;ve screwed it up. Apparently the init process couldn&#8217;t create the devices, since there was no MAKEDEV in /dev. I don&#8217;t have a clue how that happened. So I booted Linux, mounted the UFS partition and looked up for the MAKEDEV file. I found it in &#8220;/mnt//usr/obj/destdir.amd64/dev&#8221;. I tried to copy it to &#8220;/mnt/dev/&#8221; but then BAM! The partition was mounted read-only. Ok, I ran</p>
+<p>(for more details read <a href="http://mail-index.netbsd.org/tech-kern/2009/03/18/msg004607.html">this</a>). At that moment I knew I’ve screwed it up. Apparently the init process couldn’t create the devices, since there was no MAKEDEV in /dev. I don’t have a clue how that happened. So I booted Linux, mounted the UFS partition and looked up for the MAKEDEV file. I found it in “/mnt//usr/obj/destdir.amd64/dev”. I tried to copy it to “/mnt/dev/” but then BAM! The partition was mounted read-only. Ok, I ran</p>
 <pre class="lang:default decode:true">$ mount -o rw /mnt</pre>
-
-<p>and the kernel said there was no write support for UFS. My second &#8220;F*** YOU!&#8221; was just about to enter /dev/stdout but then I tried to stay calm and search for the solution. The solution: Recompile Linux kernel with UFS write suppport enabled. I found this <a href="http://ghantoos.org/2009/04/04/mounting-ufs-in-readwrite-under-linux/">short tutorial</a> (BTW: Really great howto!) and was able to enable write support for UFS. I rebooted, mounted the NetBSD partition with write support, copied MAKEDEV into &#8220;/dev&#8221; and rebooted again. No kernel panic anymore! I was on cloud nine!</p>
-<p>So what did I learned during this adventure?! &#8220;<strong>Think before you type!</strong>&#8221; That should apply to all of us <img src="http://dornea.nu/wp-includes/images/smilies/icon_smile.gif" alt=":-)" class="wp-smiley" /></p>
+<p>and the kernel said there was no write support for UFS. My second “F*** YOU!” was just about to enter /dev/stdout but then I tried to stay calm and search for the solution. The solution: Recompile Linux kernel with UFS write suppport enabled. I found this <a href="http://ghantoos.org/2009/04/04/mounting-ufs-in-readwrite-under-linux/">short tutorial</a> (BTW: Really great howto!) and was able to enable write support for UFS. I rebooted, mounted the NetBSD partition with write support, copied MAKEDEV into “/dev” and rebooted again. No kernel panic anymore! I was on cloud nine!</p>
+<p>So what did I learned during this adventure?! “<strong>Think before you type!</strong>” That should apply to all of us <img alt=":-)" class="wp-smiley img-responsive" src="http://dornea.nu/wp-includes/images/smilies/icon_smile.gif"/></p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2013/08/10/gentoo-systemd-consolekit-udev-and-some-failed-system-update">Gentoo, systemd, consolekit, udev and some failed system update</a></li>
-        <li><a href="http://blog.dornea.nu/2011/11/12/die-stinkenden-informatiker">Die stinkenden Informatiker</a></li>
-        <li><a href="http://blog.dornea.nu/2009/09/13/damn-botnets">Damn botnets!</a></li>
-        <li><a href="http://blog.dornea.nu/2011/01/31/the-most-stupid-hacker-ive-ever-seen">The most stupid &#8220;hacker&#8221; I&#8217;ve ever seen</a></li>
         <li><a href="http://blog.dornea.nu/2011/12/19/need-any-sh3ll">Need any sh3ll?</a></li>
+        <li><a href="http://blog.dornea.nu/2010/09/17/the-ac1db1tch3z-exploit-and-robert-you-suck-thingie">The Ac1db1tch3z exploit and &#8220;Robert you suck&#8221; thingie</a></li>
+        <li><a href="http://blog.dornea.nu/2010/09/02/funniest-ad-on-aids">Funniest ad on aids!</a></li>
+        <li><a href="http://blog.dornea.nu/2010/09/27/deadf700-stuxnet">DEADF700? Stuxnet!</a></li>
+        <li><a href="http://blog.dornea.nu/2010/09/30/how-to-compile-robert-you-suck">How to compile Robert you suck ^^</a></li>
     </ul>
 </section>
     <hr />

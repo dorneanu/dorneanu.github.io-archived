@@ -1725,8 +1725,6 @@ use <strong>gethostbyname()</strong>. I've used this function in all my previous
 <p>This is the most obvious and easiest one. Just insert following code and you're done:</p>
 <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span><span class="nx">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </pre></div>
-
-
 <h2 id="level-2">Level 2</h2>
 <p>Since the <code>script</code> won't work you'll have to think of another tags to ...</p>
                     <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2014/06/02/googles-xss-game-solutions">more ...</a>
@@ -1735,7 +1733,7 @@ use <strong>gethostbyname()</strong>. I've used this function in all my previous
             <hr/>
             <article>
                 <h2><a href="http://blog.dornea.nu/2014/05/04/howto-create-docs-with-sphinx">HowTo: Create docs with sphinx</a></h2>
-                <div class="summary"><p>In this post I&#8217;d like to show some handy way to improve your process of documentating your project.
+                <div class="summary"><p>In this post I’d like to show some handy way to improve your process of documentating your project.
 Since we all know documentation is a <strong>must</strong> you might have wondered how to handle that
 without any big efforts. In fact it would be great if you could write your ...</p>
                     <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2014/05/04/howto-create-docs-with-sphinx">more ...</a>
@@ -1744,7 +1742,7 @@ without any big efforts. In fact it would be great if you could write your ...</
             <hr/>
             <article>
                 <h2><a href="http://blog.dornea.nu/2014/03/07/unfancy-dashboard-using-matplotlib">Unfancy dashboard using matplotlib</a></h2>
-                <div class="summary"><p>I was recently playing around with <a href="http://d3js.org/">D3</a>Â and discovered its dashboard posibilities.<a href="http://dashboarddude.com/"> dashboarddude.com</a>Â has a nice compilation of really fancy dashboards (I was mainly interested in D3 but voila&#8230; there are also other ways to do it).Â <!--more--></p>
+                <div class="summary"><p>I was recently playing around with <a href="http://d3js.org/">D3</a>Â and discovered its dashboard posibilities.<a href="http://dashboarddude.com/"> dashboarddude.com</a>Â has a nice compilation of really fancy dashboards (I was mainly interested in D3 but voila… there are also other ways to do it).Â <!--more--></p>
 <p>Meanwhile I was remembered of old good <a href="http://ipython.org/notebook">IPython Notebook ...</a></p>
                     <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2014/03/07/unfancy-dashboard-using-matplotlib">more ...</a>
                 </div>
@@ -1780,20 +1778,20 @@ while True:
             <hr/>
             <article>
                 <h2><a href="http://blog.dornea.nu/2013/05/02/overthewire-vortex-level1">OverTheWire: Vortex Level1</a></h2>
-                <div class="summary"><p>Solution for <a href="http://www.overthewire.org/wargames/vortex/vortex1.shtml">http://www.overthewire.org/wargames/vortex/vortex1.shtml.</a> Here&#8217;s the code they have used:</p>
+                <div class="summary"><p>Solution for <a href="http://www.overthewire.org/wargames/vortex/vortex1.shtml">http://www.overthewire.org/wargames/vortex/vortex1.shtml.</a> Here’s the code they have used:</p>
 <pre>#include 
 #include 
 #include 
 #include
 
-#define e(); if(((unsigned int)ptr & 0xff000000)==0xca000000) { setresuid(geteuid(), geteuid(), geteuid()); execlp("/bin/sh", "sh", "-i", NULL); }
+#define e(); if(((unsigned int)ptr &amp; 0xff000000)==0xca000000) { setresuid(geteuid(), geteuid(), geteuid()); execlp("/bin/sh", "sh", "-i", NULL); }
 
 void print(unsigned char *buf, int len)
 {
         int i;
 
         printf("[ ");
-        for(i=0; i &lt; len; i++) printf ...</pre>
+        for ...</pre>
                     <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2013/05/02/overthewire-vortex-level1">more ...</a>
                 </div>
             </article>
@@ -1803,7 +1801,7 @@ void print(unsigned char *buf, int len)
                 <div class="summary"><p>Solution for <a href="http://www.overthewire.org/wargames/vortex/vortex2.shtml">level2</a>:</p>
 <p>Here is the code:</p>
 <div>
-  <pre class="lang:default decode:true ">#include &lt;stdlib.h&gt;
+<pre class="lang:default decode:true ">#include &lt;stdlib.h&gt;
 #include &lt;stdio.h&gt;
 #include &lt;sys/types.h&gt;
 
@@ -1812,12 +1810,10 @@ int main(int argc, char **argv)
         char *args[] = { "/bin/tar", "cf", "/tmp/ownership.$$.tar", argv[1], argv[2], argv[3] };
         execv(args[0], args);
 }</pre>
-
-  <p>
+<p>
     Â <!--more-->
-  </p>
+</p>
 </div>
-
 <p><strong>$$</strong> expands to the process ID of the shell ...</p>
                     <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2013/05/02/overthewire-vortex-level2">more ...</a>
                 </div>
@@ -1825,21 +1821,21 @@ int main(int argc, char **argv)
             <hr/>
             <article>
                 <h2><a href="http://blog.dornea.nu/2010/12/06/simple-memory-managment-using-linked-lists-implement-my_malloc-and-my_free">Simple memory managment using linked lists (implement my_malloc and my_free)</a></h2>
-                <div class="summary"><p>Suppose you were a Linux developer and you&#8217;re about to implement the well known system calls:  <strong>malloc</strong> and <strong>free</strong>. How would you start? Which (already implemented) functions would you use? How would you <strong>organize</strong> your (free) <strong>memory</strong>? Which information would you like to have about certain memory regions? Those ...</p>
+                <div class="summary"><p>Suppose you were a Linux developer and you’re about to implement the well known system calls:  <strong>malloc</strong> and <strong>free</strong>. How would you start? Which (already implemented) functions would you use? How would you <strong>organize</strong> your (free) <strong>memory</strong>? Which information would you like to have about certain memory regions? Those ...</p>
                     <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2010/12/06/simple-memory-managment-using-linked-lists-implement-my_malloc-and-my_free">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
                 <h2><a href="http://blog.dornea.nu/2010/09/13/icmpknock-v02-released">icmpKNOCK v0.2 released</a></h2>
-                <div class="summary"><p><a class="trigger_lightbox" href="http://static.dornea.nu/img/2010/d9460f34c23c6a5bf113744417d324b5.png"><img class="trigger_lightbox" style="padding-right: 10px;" title="icmpKNOCK v0.2" alt="icmpKNOCK v0.2" src="http://static.dornea.nu/img/2010/d9460f34c23c6a5bf113744417d324b5.png" width="159" height="116" /></a>I&#8217;d like to announce the second main release of <a href="http://dornea.nu/projects/icmpknock">icmpKNOCK</a>. I thought it was about time to release a new improved version. I&#8217;ve mainly focused on the actions mechanism and tried to implement some flexible way of defining actions, adding key pattern and setting payloads. Besides that I ...</p>
+                <div class="summary"><p><a class="trigger_lightbox" href="http://static.dornea.nu/img/2010/d9460f34c23c6a5bf113744417d324b5.png"><img alt="icmpKNOCK v0.2" class="img-responsive trigger_lightbox" height="116" src="http://static.dornea.nu/img/2010/d9460f34c23c6a5bf113744417d324b5.png" style="padding-right: 10px;" title="icmpKNOCK v0.2" width="159"/></a>I’d like to announce the second main release of <a href="http://dornea.nu/projects/icmpknock">icmpKNOCK</a>. I thought it was about time to release a new improved version. I’ve mainly focused on the actions mechanism and tried to implement some flexible way of defining actions, adding key pattern and setting payloads. Besides that I ...</p>
                     <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2010/09/13/icmpknock-v02-released">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
                 <h2><a href="http://blog.dornea.nu/2010/09/07/drupals-clean-urls-using-lighttpd-moved-from-lua-to-rewrite-once">Drupals clean urls using Lighttpd: Moved from Lua to rewrite-once</a></h2>
-                <div class="summary"><p>I&#8217;ve been using Lighttpd + Drupal for a long time. In order to have those sexy clean urls, you&#8217;ll have to do some rewrite stuff. A few months ago I found this Lua script, which served its purpose without any complications.<!--more--></p>
+                <div class="summary"><p>I’ve been using Lighttpd + Drupal for a long time. In order to have those sexy clean urls, you’ll have to do some rewrite stuff. A few months ago I found this Lua script, which served its purpose without any complications.<!--more--></p>
 <pre class="lang:default decode:true">-- little helper function
 function file_exists(path)
 local attr ...</pre>

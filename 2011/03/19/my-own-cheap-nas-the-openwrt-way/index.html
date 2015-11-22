@@ -1724,10 +1724,9 @@ blog.dornea.nu            </a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>Introducing my <strong>TP-Link TL-WR1043ND</strong> &#8230;</p>
-<p><a href="http://static.dornea.nu/img/2011/6451cc078252b490477421fba4c28f04.jpg"><img class="trigger_lightbox" style="height: 400px; width: 600px;" alt="Front" src="http://static.dornea.nu/img/2011/6451cc078252b490477421fba4c28f04.jpg" width="900" height="600" /></a><!--more--></p>
+                <p>Introducing my <strong>TP-Link TL-WR1043ND</strong> …</p>
+<p><a href="http://static.dornea.nu/img/2011/6451cc078252b490477421fba4c28f04.jpg"><img alt="Front" class="img-responsive trigger_lightbox" height="600" src="http://static.dornea.nu/img/2011/6451cc078252b490477421fba4c28f04.jpg" style="height: 400px; width: 600px;" width="900"/></a><!--more--></p>
 <!--break-->
-
 <p>Summary:</p>
 <ul>
 <li><strong>OS</strong>: Linux <strong>OpenWrt</strong> 2.6.32.25 #1 Fri Nov 19 20:27:50 PST 2010 mips GNU/Linux</li>
@@ -1748,35 +1747,32 @@ mini_fo:/overlay          2.1M      2.1M         0 100% /</pre></p>
 </li>
 </ul>
 <p>As you can see a USB-Hub is attached along with a 2GB USB-Stick. I used it to store my rootfs on external storage <a href="http://static.dornea.nu/img/2011/6451cc078252b490477421fba4c28f04.jpg">1</a>. Additionally my 2TB external hard drived is attached to the device so I can access the data per NFS <a href="http://static.dornea.nu/img/2011/b811a194f59c0eeb1dd8238b43346be9.jpg">2</a>.</p>
-<p><a href="http://static.dornea.nu/img/2011/b811a194f59c0eeb1dd8238b43346be9.jpg"><img class="trigger_lightbox" style="width: 600px; height: 400px;" alt="Front 2" src="http://static.dornea.nu/img/2011/b811a194f59c0eeb1dd8238b43346be9.jpg" width="900" height="600" /></a></p>
-<div id="toc_container" class="toc_wrap_right toc_transparent no_bullets">
-  <p class="toc_title">
+<p><a href="http://static.dornea.nu/img/2011/b811a194f59c0eeb1dd8238b43346be9.jpg"><img alt="Front 2" class="img-responsive trigger_lightbox" height="600" src="http://static.dornea.nu/img/2011/b811a194f59c0eeb1dd8238b43346be9.jpg" style="width: 600px; height: 400px;" width="900"/></a></p>
+<div class="toc_wrap_right toc_transparent no_bullets" id="toc_container">
+<p class="toc_title">
     Contents
   </p>
-
-  <ul class="toc_list">
-    <li>
-      <a href="#i"><span class="toc_number toc_depth_1">1</span>  </a>
-    </li>
-    <li>
-      <a href="#Firewall"><span class="toc_number toc_depth_1">2</span> Firewall</a>
-    </li>
-    <li>
-      <a href="#What_about_speed"><span class="toc_number toc_depth_1">3</span> What about speed?</a>
-    </li>
-    <li>
-      <a href="#Conclusion"><span class="toc_number toc_depth_1">4</span> Conclusion</a>
-    </li>
-    <li>
-      <a href="#Links"><span class="toc_number toc_depth_1">5</span> Links</a>
-    </li>
-  </ul>
+<ul class="toc_list">
+<li>
+<a href="#i"><span class="toc_number toc_depth_1">1</span>  </a>
+</li>
+<li>
+<a href="#Firewall"><span class="toc_number toc_depth_1">2</span> Firewall</a>
+</li>
+<li>
+<a href="#What_about_speed"><span class="toc_number toc_depth_1">3</span> What about speed?</a>
+</li>
+<li>
+<a href="#Conclusion"><span class="toc_number toc_depth_1">4</span> Conclusion</a>
+</li>
+<li>
+<a href="#Links"><span class="toc_number toc_depth_1">5</span> Links</a>
+</li>
+</ul>
 </div>
-
 <h2 id="_1"><span id="i"> </span></h2>
 <h2 id="firewall"><span id="Firewall"><strong>Firewall</strong></span></h2>
-<hr align="left" noshade="noshade" size="1" width="98%" />
-
+<hr align="left" noshade="noshade" size="1" width="98%"/>
 <p>These are my firewall <a href="http://static.dornea.nu/img/2011/5e7babbac5fe70fb92187d6c152c4b6b.png">3</a> rules:</p>
 <pre class="brush:plain;">root@OpenWrt:~# cat /etc/firewall.user 
 # This file is interpreted as shell script.
@@ -1800,21 +1796,17 @@ $IPT -I INPUT -j ACCEPT -i eth0.1 -s $NET_LAN -p udp --dport 32777:32780
 # minidlna
 $IPT -I INPUT -j ACCEPT -i eth0.2 -s $NET_LAN -p tcp --dport 8200
 $IPT -I INPUT -j ACCEPT -i eth0.2 -s $NET_LAN -p udp --dport 8200</pre>
-
-<p>&nbsp;</p>
+<p> </p>
 <h2 id="what-about-speed"><span id="What_about_speed"><strong>What about speed?</strong></span></h2>
-<hr align="left" noshade="noshade" size="1" width="98%" />
-
-<p><a href="http://static.dornea.nu/img/2011/5e7babbac5fe70fb92187d6c152c4b6b.png"><img class="trigger_lightbox" style="height: 317px; width: 600px;" alt="rsync on NFS" src="http://static.dornea.nu/img/2011/5e7babbac5fe70fb92187d6c152c4b6b.png" width="900" height="476" /></a></p>
-<p>In general you won&#8217;t get more than <strong>5.60MB/s</strong>. It depends on your drives read/write speed and the connection. In my case I was using WLAN which was slower than normal LAN connectivity.  But that&#8217;s fine with me.</p>
+<hr align="left" noshade="noshade" size="1" width="98%"/>
+<p><a href="http://static.dornea.nu/img/2011/5e7babbac5fe70fb92187d6c152c4b6b.png"><img alt="rsync on NFS" class="img-responsive trigger_lightbox" height="476" src="http://static.dornea.nu/img/2011/5e7babbac5fe70fb92187d6c152c4b6b.png" style="height: 317px; width: 600px;" width="900"/></a></p>
+<p>In general you won’t get more than <strong>5.60MB/s</strong>. It depends on your drives read/write speed and the connection. In my case I was using WLAN which was slower than normal LAN connectivity.  But that’s fine with me.</p>
 <h2 id="conclusion"><span id="Conclusion"><strong>Conclusion</strong></span></h2>
-<hr align="left" noshade="noshade" size="1" width="98%" />
-
+<hr align="left" noshade="noshade" size="1" width="98%"/>
 <p><strong>Awesome device with great features! </strong>Check out <a href="http://openwrt.org">openwrt.org</a>  for more information. The devices price is about <strong>50€</strong> which is a fair one.</p>
-<p>&nbsp;</p>
+<p> </p>
 <h2 id="links"><span id="Links"><strong>Links</strong></span></h2>
-<hr align="left" noshade="noshade" size="1" width="98%" />
-
+<hr align="left" noshade="noshade" size="1" width="98%"/>
 <p><a href="http://static.dornea.nu/img/2011/6451cc078252b490477421fba4c28f04.jpg">1</a> <a href="http://wiki.openwrt.org/doc/howto/extroot">http://wiki.openwrt.org/doc/howto/extroot</a></p>
 <p><a href="http://static.dornea.nu/img/2011/b811a194f59c0eeb1dd8238b43346be9.jpg">2</a> <a href="http://wiki.openwrt.org/doc/howto/nfs.server">http://wiki.openwrt.org/doc/howto/nfs.server</a></p>
 <p><a href="http://static.dornea.nu/img/2011/5e7babbac5fe70fb92187d6c152c4b6b.png">3</a> <a href="http://wiki.openwrt.org/doc/uci/firewall?s">http://wiki.openwrt.org/doc/uci/firewall?s</a></p>
@@ -1825,9 +1817,9 @@ $IPT -I INPUT -j ACCEPT -i eth0.2 -s $NET_LAN -p udp --dport 8200</pre>
     <ul>
         <li><a href="http://blog.dornea.nu/2010/10/13/howto-build-your-own-wifi-wlan-hotspot-using-hostap">HowTo: Build your own Wifi WLAN hotspot using hostap</a></li>
         <li><a href="http://blog.dornea.nu/2010/03/22/howto-create-new-debian-domu-using-xen-on-bsd">HowTo: Create new Debian domU using Xen on *BSD</a></li>
+        <li><a href="http://blog.dornea.nu/2010/11/25/howto-snatip-masquerade-between-2-wlan-cards-on-linux">HowTo: SNAT/IP Masquerade between 2 wlan cards on Linux</a></li>
         <li><a href="http://blog.dornea.nu/2011/04/02/block-facebook-with-iptables-on-openwrt">Block facebook with iptables on OpenWrt</a></li>
-        <li><a href="http://blog.dornea.nu/2014/12/02/howto-proxy-non-proxy-aware-android-applications-through-burp">HowTo: Proxy Non-Proxy-Aware Android Applications through Burp</a></li>
-        <li><a href="http://blog.dornea.nu/2010/10/03/howto-secure-your-server-using-icmpknock">HowTo: Secure your server using icmpKNOCK</a></li>
+        <li><a href="http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids">OpenVPN for paranoids</a></li>
     </ul>
 </section>
     <hr />
