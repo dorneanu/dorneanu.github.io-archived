@@ -1747,9 +1747,28 @@ blog.dornea.nu            </a>
 <li>prevent information leaks when the VPN tunnel is down</li>
 </ul>
 <p>At least for the last one some additional steps are required to route your traffic <strong>only</strong> through the VPN tunnel. As a client you don't want your connection to be "downgraded" (in terms of security) without even realizing it. That's why you might want to restrict your routes and allow outbound connection only through the (virtual) interface dedicated to the VPN. How this is done and which methods exist, is covered later on.</p>
-</div>
-</div>
-</div>
+<h2 id="revision">Revision</h2>
+<table border="0" cellpadding="0" cellspacing="0" class="table table-hover table-striped" width="100%">
+<tr>
+<th><b>Date</b></th>
+<th><b>Description</b></th>
+</tr>
+<tr>
+<td>2015-11-17</td>
+<td>First release</td>
+</tr>
+<tr>
+<td>2015-11-19</td>
+<td>Improved <b>ufw</b> script</td></tr></table></div></div></div></p>
+
+<tr>
+<td>2015-11-24</td>
+<td>Added <b>iptables</b> and <b>initialization</b> script. The firewall rules are now set by iptables.</td></tr>
+
+
+
+
+
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -3630,6 +3649,11 @@ push <span class="string">"dhcp-option DNS 208.67.222.222"</span>
 push <span class="string">"dhcp-option DNS 8.8.8.8"</span>
 <span class="keyword">...</span>
 </code></pre>
+<p><strong>[Update 2015-11-24]</strong>: The <code>update-resolv-conf</code> is now called from <a href="https://gist.github.com/dorneanu/9303dca4a81898b74fa6#file-init-sh">another script</a> (see below). The config file should now look like this:</p>
+<pre><code class="language-.bash"><span class="comment"># Run scripts after tunnel is up or down</span>
+<span class="title">up</span> <span class="string">"./init.sh -u"</span>
+down <span class="string">"./init.sh -d"</span>
+</code></pre>
 <h2 id="denial-of-service">Denial of Service</h2>
 <p>In the case of our VPN connection DoS attacks would bring down the TCP stream which in turn will cause the virtual interface go down and finally also removing all routing information. In the worst case the client won't have any protection at all (otherwise provided by the VPN tunnel). But first let's have a look at what happens when a client connects to the VPN server:</p>
 <pre><code class="language-.bash"><span class="number">1</span>) Fri Nov <span class="number">13</span> <span class="number">13</span>:<span class="number">17</span>:<span class="number">13</span> <span class="number">2015</span> /usr/bin/ip link <span class="keyword">set</span> dev tun0 up mtu <span class="number">1500</span>
@@ -3762,6 +3786,7 @@ rtt min/avg/max/mdev = <span class="number">27.817</span>/<span class="number">3
 <h3 id="conclusion">Conclusion</h3>
 <p>This solution seems to be very clever, however I've had <strong>performance</strong> issues and also multiple <strong>routing</strong> problems. Perhaps will somebody see and comment what I'm doing wrong. </p>
 <h2 id="use-of-firewall-rules">Use of firewall rules</h2>
+<h3 id="uncomplicated-firewall-ufw-">Uncomplicated Firewall (ufw)</h3>
 <p>I'll be using <a href="https://launchpad.net/ufw">ufw</a> for setting up my firewall. First add these lines to <code>/etc/ufw/before.rules</code> before the "filer* line:</p>
 <pre><code class="language-.bash"><span class="comment"># NAT (Network Address Translation) table rules</span>
 *nat
@@ -3781,25 +3806,27 @@ Firewall <span class="keyword">is</span> active <span class="keyword">and</span>
 Status: active
 </code></pre>
 <p>... add some <strong>ufw</strong> rules:</p>
-<pre><code class="language-.bash"># Default policies
+<pre><code class="language-.bash">SERVER=`host &lt;vpn-server&gt; | awk <span class="string">'{ print $4; }'</span>`
+
+# Default policies
 ufw <span class="keyword">default</span> deny incoming
 ufw <span class="keyword">default</span> deny outgoing
 
-# Openvpn <span class="class"><span class="keyword">interface</span> (<span class="title">adjust</span> <span class="title">interface</span> <span class="title">accordingly</span> <span class="title">to</span> <span class="title">your</span> <span class="title">configuration</span>)
+# OpenVPN <span class="class"><span class="keyword">interface</span> (<span class="title">adjust</span> <span class="title">interface</span> <span class="title">accordingly</span> <span class="title">to</span> <span class="title">your</span> <span class="title">configuration</span>)
 <span class="title">ufw</span> <span class="title">allow</span> <span class="title">in</span> <span class="title">on</span> <span class="title">tun0</span>
 <span class="title">ufw</span> <span class="title">allow</span> <span class="title">out</span> <span class="title">on</span> <span class="title">tun0</span>
 
-# <span class="title">Local</span> <span class="title">Network</span> (<span class="title">adjust</span> <span class="title">ip</span> <span class="title">accordingly</span> <span class="title">to</span> <span class="title">your</span> <span class="title">configuration</span>)
+# <span class="title">Deny</span> <span class="title">any</span> <span class="title">TCP</span>/<span class="title">UDP</span> <span class="title">connections</span> <span class="title">on</span> <span class="title">wlan0</span>
+<span class="title">ufw</span> <span class="title">deny</span> <span class="title">out</span> <span class="title">on</span> <span class="title">wlan0</span>
+<span class="title">ufw</span> <span class="title">deny</span> <span class="title">in</span> <span class="title">on</span> <span class="title">wlan0</span>
+
+# <span class="title">Allow</span> <span class="title">local</span> <span class="title">LAN</span> <span class="title">on</span> <span class="title">wlan0</span> (<span class="title">adjust</span> <span class="title">ip</span> <span class="title">accordingly</span> <span class="title">to</span> <span class="title">your</span> <span class="title">configuration</span>)
 <span class="title">ufw</span> <span class="title">allow</span> <span class="title">in</span> <span class="title">on</span> <span class="title">wlan0</span> <span class="title">from</span> 192.168.0.0/16
 <span class="title">ufw</span> <span class="title">allow</span> <span class="title">out</span> <span class="title">on</span> <span class="title">wlan0</span> <span class="title">to</span> 192.168.0.0/16
 
-# <span class="title">Deny</span> <span class="title">any</span> <span class="title">TCP</span>/<span class="title">UDP</span> <span class="title">connections</span>
-<span class="title">ufw</span> <span class="title">deny</span> <span class="title">out</span> <span class="title">on</span> <span class="title">wlan0</span>
-
-# <span class="title">Openvpn</span> (<span class="title">adjust</span> <span class="title">port</span> <span class="title">accordingly</span> <span class="title">to</span> <span class="title">your</span> <span class="title">configuration</span>)
-# <span class="title">Supposing</span> <span class="title">your</span> <span class="title">VPN</span> <span class="title">server</span> <span class="title">listens</span> <span class="title">on</span> :80/<span class="title">udp</span>
-<span class="title">ufw</span> <span class="title">allow</span> <span class="title">out</span> <span class="title">on</span> <span class="title">wlan0</span> <span class="title">to</span> <span class="title">any</span> <span class="title">port</span> 80 <span class="title">proto</span> <span class="title">udp</span>
-<span class="title">ufw</span> <span class="title">allow</span> <span class="title">in</span> <span class="title">on</span> <span class="title">wlan0</span> <span class="title">from</span> <span class="title">any</span> <span class="title">port</span> 80 <span class="title">proto</span> <span class="title">udp</span>
+# <span class="title">Over</span> <span class="title">wlan0</span> <span class="title">allow</span> <span class="title">only</span> <span class="title">traffic</span> <span class="title">to</span> <span class="title">VPN</span> <span class="title">server</span> (:80/<span class="title">udp</span>)
+<span class="title">ufw</span> <span class="title">allow</span> <span class="title">in</span> <span class="title">on</span> <span class="title">wlan0</span> <span class="title">from</span> $SERVER port 80 proto udp
+ufw allow out on wlan0 from $<span class="title">SERVER</span> <span class="title">port</span> 80 <span class="title">proto</span> <span class="title">udp</span>
 
 # <span class="title">DNS</span>
 <span class="title">ufw</span> <span class="title">allow</span> <span class="title">in</span> <span class="title">from</span> <span class="title">any</span> <span class="title">to</span> <span class="title">any</span> <span class="title">port</span> 53
@@ -3808,23 +3835,70 @@ ufw <span class="keyword">default</span> deny outgoing
 <p>Check that:</p>
 <pre><code class="language-.bash">$ ufw status verbose
 Status: active
-Logging: <span class="function_start"><span class="keyword">on</span> <span class="params">(low)</span></span>
-Default: deny (incoming), deny (outgoing), allow (routed)
-New profiles: skip
 
 To                         Action      From
 <span class="comment">--                         ------      ----</span>
-Anywhere <span class="function_start"><span class="keyword">on</span> <span class="title">tun0</span></span>           ALLOW IN    Anywhere
-Anywhere <span class="function_start"><span class="keyword">on</span> <span class="title">wlan0</span></span>          ALLOW IN    <span class="number">192.168</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">16</span>
-Anywhere <span class="function_start"><span class="keyword">on</span> <span class="title">wlan0</span></span>          ALLOW IN    <span class="number">80</span>/udp
-<span class="number">53</span>                         ALLOW IN    Anywhere
+Anywhere <span class="function_start"><span class="keyword">on</span> <span class="title">tun0</span></span>           ALLOW       Anywhere
+Anywhere <span class="function_start"><span class="keyword">on</span> <span class="title">wlan0</span></span>          DENY        Anywhere
+Anywhere <span class="function_start"><span class="keyword">on</span> <span class="title">wlan0</span></span>          ALLOW       <span class="number">192.168</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">16</span>
+Anywhere <span class="function_start"><span class="keyword">on</span> <span class="title">wlan0</span></span>          ALLOW       &lt;vpn-server&gt; <span class="number">80</span>/udp
+<span class="number">53</span>                         ALLOW       Anywhere
 
 Anywhere                   ALLOW OUT   Anywhere <span class="function_start"><span class="keyword">on</span> <span class="title">tun0</span></span>
-<span class="number">192.168</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">16</span>             ALLOW OUT   Anywhere <span class="function_start"><span class="keyword">on</span> <span class="title">wlan0</span></span>
 Anywhere                   DENY OUT    Anywhere <span class="function_start"><span class="keyword">on</span> <span class="title">wlan0</span></span>
-<span class="number">80</span>/udp                     ALLOW OUT   Anywhere <span class="function_start"><span class="keyword">on</span> <span class="title">wlan0</span></span>
+<span class="number">192.168</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">16</span>             ALLOW OUT   Anywhere <span class="function_start"><span class="keyword">on</span> <span class="title">wlan0</span></span>
+Anywhere                   ALLOW OUT   &lt;vpn-server&gt; <span class="number">80</span>/udp <span class="function_start"><span class="keyword">on</span> <span class="title">wlan0</span></span>
 <span class="number">53</span>                         ALLOW OUT   Anywhere
 </code></pre>
+<p><strong>[Update 2014-11-24]</strong>: The <a href="https://gist.github.com/dorneanu/9303dca4a81898b74fa6#file-init-sh">initialization script</a> called by OpenVPN uses <code>iptables</code>. But feel free to adapt if you want to stick with <code>ufw</code>.</p>
+<h3 id="using-iptables-prefered-">Using iptables (prefered)</h3>
+<p><strong>[Update 2015-11-24]</strong>: If you don't want any fancy firewall frameworks, you can of course stick to <code>iptables</code>. </p>
+<pre><code class="language-.bash"># VPN server address
+VPN_SERVER=&lt;vpn-server&gt;
+
+# Local LAN subnet
+LOCAL_LAN=<span class="number">192.168</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">16</span>
+
+# Interface where your local LAN <span class="keyword">is</span> accessibble
+GW_INT=wlan0
+
+# The VPN virtual <span class="class"><span class="keyword">interface</span>
+<span class="title">VPN_INT</span>=<span class="title">tun0</span>
+
+# <span class="title">Do</span> <span class="title">NATing</span> <span class="title">from</span> <span class="title">VPN</span> <span class="title">interface</span> <span class="title">to</span> <span class="title">gateway</span> <span class="title">interface</span>
+<span class="title">iptables</span> -<span class="title">t</span> <span class="title">nat</span> -<span class="title">P</span> <span class="title">POSTROUTING</span> <span class="title">ACCEPT</span>
+<span class="title">iptables</span> -<span class="title">t</span> <span class="title">nat</span> -<span class="title">A</span> <span class="title">POSTROUTING</span> -<span class="title">s</span> $VPN_LAN -o $<span class="title">GW_INT</span> -<span class="title">j</span> <span class="title">MASQUERADE</span>
+
+# <span class="title">Allow</span> <span class="title">all</span> <span class="title">traffic</span> <span class="title">on</span> <span class="title">VPN</span> <span class="title">interface</span>
+<span class="title">iptables</span> -<span class="title">A</span> <span class="title">OUTPUT</span> -<span class="title">o</span> $VPN_INT -j ACCEPT
+iptables -A INPUT  -i $<span class="title">VPN_INT</span> -<span class="title">j</span> <span class="title">ACCEPT</span>
+
+# <span class="title">Allow</span> <span class="title">traffic</span> <span class="title">to</span>/<span class="title">from</span> <span class="title">VPN</span> <span class="title">server</span>
+<span class="title">iptables</span> -<span class="title">A</span> <span class="title">INPUT</span>  -<span class="title">i</span> $GW_INT -s $<span class="title">VPN_SERVER</span> -<span class="title">p</span> <span class="title">udp</span> --<span class="title">sport</span> 80 -<span class="title">m</span> <span class="title">state</span> --<span class="title">state</span> <span class="title">NEW</span>,<span class="title">ESTABLISHED</span> -<span class="title">j</span> <span class="title">ACCEPT</span>
+<span class="title">iptables</span> -<span class="title">A</span> <span class="title">OUTPUT</span> -<span class="title">o</span> $GW_INT -d $<span class="title">VPN_SERVER</span> -<span class="title">p</span> <span class="title">udp</span> --<span class="title">dport</span> 80 -<span class="title">m</span> <span class="title">state</span> --<span class="title">state</span> <span class="title">ESTABLISHED</span> -<span class="title">j</span> <span class="title">ACCEPT</span>
+
+# <span class="title">Allow</span> <span class="title">local</span> <span class="title">traffic</span>
+<span class="title">iptables</span> -<span class="title">A</span> <span class="title">OUTPUT</span> -<span class="title">o</span> $GW_INT -d $<span class="title">LOCAL_LAN</span> -<span class="title">s</span> $LOCAL_LAN -j ACCEPT
+iptables -A INPUT  -i $<span class="title">GW_INT</span> -<span class="title">s</span> $LOCAL_LAN -d $<span class="title">LOCAL_LAN</span> -<span class="title">j</span> <span class="title">ACCEPT</span>
+
+# <span class="title">Define</span> <span class="title">here</span> <span class="title">other</span> <span class="title">exceptions</span>
+# ...
+
+# <span class="title">Deny</span> <span class="title">all</span> <span class="title">traffic</span> <span class="title">on</span> <span class="title">gateway</span> <span class="title">interface</span> <span class="title">by</span> <span class="title">default</span>
+<span class="title">iptables</span> -<span class="title">A</span> <span class="title">INPUT</span> -<span class="title">i</span> $GW_INT -j DROP
+iptables -A OUTPUT -o $<span class="title">GW_INT</span> -<span class="title">j</span> <span class="title">DROP</span>
+
+# <span class="title">Block</span> <span class="title">IPv6</span> <span class="title">traffic</span>
+<span class="title">ip6tables</span> -<span class="title">P</span> <span class="title">INPUT</span> <span class="title">DROP</span>
+<span class="title">ip6tables</span> -<span class="title">P</span> <span class="title">OUTPUT</span> <span class="title">DROP</span>
+<span class="title">ip6tables</span> -<span class="title">P</span> <span class="title">FORWARD</span> <span class="title">DROP</span>
+</span></code></pre>
+<p>All these rules are part of <a href="https://gist.github.com/dorneanu/9303dca4a81898b74fa6#file-init-sh">this script</a> which is called by OpenVPN (up/down commands):</p>
+<pre><code class="language-.bash"><span class="comment"># Run scripts after tunnel is up or down</span>
+<span class="title">up</span> <span class="string">"./init.sh -u"</span>
+down <span class="string">"./init.sh -d"</span>
+</code></pre>
+<p>Have a look at the <a href="https://gist.github.com/dorneanu/9303dca4a81898b74fa6#file-init-sh">script</a> and add your own actions to be executed when the tunnel is up or down. Also make sure you save the script in the same directory where the configuration files resides.</p>
 <p>That't it! Now you should have no <strong>leaks</strong> if your VPN is down. Let's check that out</p>
 <ul>
 <li>Before establishing the VPN tunnel</li>
@@ -3856,10 +3930,11 @@ Anywhere                   DENY OUT    Anywhere <span class="function_start"><sp
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="download-configs">Download configs</h1>
-<p>You can download my <strong>server</strong> and <strong>client</strong> config from follwoing gists:</p>
+<p>You can download my <strong>server</strong>/<strong>client</strong> configs and the <strong>initialization</strong> script and from following gists:</p>
 <ul>
 <li><a href="https://gist.github.com/dorneanu/9303dca4a81898b74fa6#file-server-conf">server.conf</a></li>
 <li><a href="https://gist.github.com/dorneanu/9303dca4a81898b74fa6#file-client-conf">client.conf</a></li>
+<li><a href="https://gist.github.com/dorneanu/9303dca4a81898b74fa6#file-init-sh">init.sh</a></li>
 </ul>
 </div>
 </div>
@@ -3897,7 +3972,7 @@ Anywhere                   DENY OUT    Anywhere <span class="function_start"><sp
 </ul>
 </div>
 </div>
-</div></p>
+</div>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
@@ -3906,8 +3981,8 @@ Anywhere                   DENY OUT    Anywhere <span class="function_start"><sp
         <li><a href="http://blog.dornea.nu/2015/10/02/manage-pki-using-openssl">Manage PKI using OpenSSL</a></li>
         <li><a href="http://blog.dornea.nu/2015/05/24/validating-and-pinning-x509-certificates">Validating and pinning X.509 certificates</a></li>
         <li><a href="http://blog.dornea.nu/2014/07/01/on-java-openssl-crypto-blowfish-and-stuff">On Java, OpenSSL, Crypto, Blowfish and stuff</a></li>
-        <li><a href="http://blog.dornea.nu/2011/04/02/block-facebook-with-iptables-on-openwrt">Block facebook with iptables on OpenWrt</a></li>
         <li><a href="http://blog.dornea.nu/2011/03/19/my-own-cheap-nas-the-openwrt-way">My own cheap NAS &#8211; the OpenWRT way</a></li>
+        <li><a href="http://blog.dornea.nu/2009/06/25/howto-rsyncrypto-the-backup-jewel">HowTo: RsynCrypto &#8211; The backup jewel</a></li>
     </ul>
 </section>
     <hr />
