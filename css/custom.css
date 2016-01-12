@@ -166,6 +166,10 @@ div .graphviz img, .output_png img {
     max-width: 700px;
 }
 
+div .blockdiag img {
+    max-width: 95%;
+}
+
 #content .entry-content a:link {
     color: #3399f3;
 }
