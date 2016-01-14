@@ -1593,7 +1593,7 @@ init_mathjax();
 
 
 
-<link rel="canonical" href="../../../../2015/11/06/advanced-inter-vlan-switching-using-cisco">
+<link rel="canonical" href="http://blog.dornea.nu/2015/11/06/advanced-inter-vlan-switching-using-cisco">
 
         <meta name="author" content="Victor Dorneanu" />
         <meta name="keywords" content="networking,cisco,ccna,layer 2,switch,vlan,vtp,stp,ipython,admin" />
@@ -1602,7 +1602,7 @@ init_mathjax();
         <meta property="og:site_name" content="blog.dornea.nu" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Advanced inter VLAN switching using Cisco"/>
-        <meta property="og:url" content="../../../../2015/11/06/advanced-inter-vlan-switching-using-cisco"/>
+        <meta property="og:url" content="http://blog.dornea.nu/2015/11/06/advanced-inter-vlan-switching-using-cisco"/>
         <meta property="og:description" content="Continuing my CCNA journey I&#39;d like to address inter VLAN switching in a more detailed way. In this post I&#39;ll configure my previous topology to use VTP and let STP prevent frame looping and other &#34;anomalies&#34; on Layer 2. Updated network topology¶ In [35]: Expand Code %%blockdiag diagram ..."/>
         <meta property="article:published_time" content="2015-11-06" />
             <meta property="article:section" content="blog" />
@@ -1621,17 +1621,17 @@ init_mathjax();
     <meta name="twitter:card" content="summary">
         <meta name="twitter:site" content="@victordorneanu">
         <meta name="twitter:creator" content="@victordorneanu">
-    <meta name="twitter:domain" content="../../../..">
+    <meta name="twitter:domain" content="http://blog.dornea.nu">
 
     <!-- Bootstrap -->
-        <link rel="stylesheet" href="../../../../theme/css/bootstrap.spacelab.min.css" type="text/css"/>
-    <link href="../../../../theme/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/bootstrap.spacelab.min.css" type="text/css"/>
+    <link href="http://blog.dornea.nu/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="../../../../theme/css/pygments/native.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../../../theme/css/style.css" type="text/css"/>
-        <link href="../../../../css/custom.css" rel="stylesheet">
+    <link href="http://blog.dornea.nu/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/style.css" type="text/css"/>
+        <link href="http://blog.dornea.nu/css/custom.css" rel="stylesheet">
 
-        <link href="../../../../feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+        <link href="http://blog.dornea.nu/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
               title="blog.dornea.nu ATOM Feed"/>
 
 
@@ -1649,27 +1649,27 @@ init_mathjax();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="../../../../" class="navbar-brand">
+            <a href="http://blog.dornea.nu/" class="navbar-brand">
 blog.dornea.nu            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                     <li><a href="/archives">Archives</a></li>
                     <li><a href="http://dornea.nu">About</a></li>
-                         <li><a href="../../../../pages/books">
+                         <li><a href="http://blog.dornea.nu/pages/books">
                              Books
                           </a></li>
                         <li class="active">
-                            <a href="../../../../category/blog">Blog</a>
+                            <a href="http://blog.dornea.nu/category/blog">Blog</a>
                         </li>
                         <li >
-                            <a href="../../../../category/notes">Notes</a>
+                            <a href="http://blog.dornea.nu/category/notes">Notes</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="../../../../archives"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
-              <li><a href="../../../../feeds/all.atom.xml"><i class="fa fa-rss"></i><span class="icon-label">Atom</span></a></li>
-              <li><a href="../../../../feeds/rss.xml"><i class="fa fa-rss"></i><span class="icon-label">RSS</span></a></li>
+              <li><a href="http://blog.dornea.nu/archives"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+              <li><a href="http://blog.dornea.nu/feeds/all.atom.xml"><i class="fa fa-rss"></i><span class="icon-label">Atom</span></a></li>
+              <li><a href="http://blog.dornea.nu/feeds/rss.xml"><i class="fa fa-rss"></i><span class="icon-label">RSS</span></a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -1681,15 +1681,15 @@ blog.dornea.nu            </a>
     <div class="row">
         <div class="col-sm-9">
             <ol class="breadcrumb">
-                <li><a href="../../../.." title="blog.dornea.nu"><i class="fa fa-home fa-lg"></i></a></li>
-                <li><a href="../../../../category/blog" title="blog">blog</a></li>
+                <li><a href="http://blog.dornea.nu" title="blog.dornea.nu"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="http://blog.dornea.nu/category/blog" title="blog">blog</a></li>
                 <li class="active">Advanced inter VLAN switching using Cisco</li>
             </ol>
     <section id="content">
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="../../../../2015/11/06/advanced-inter-vlan-switching-using-cisco"
+                    <a href="http://blog.dornea.nu/2015/11/06/advanced-inter-vlan-switching-using-cisco"
                        rel="bookmark"
                        title="Permalink to Advanced inter VLAN switching using Cisco">
                         Advanced inter VLAN switching using Cisco
@@ -1707,32 +1707,32 @@ blog.dornea.nu            </a>
 
 
             <span class="label label-default">By</span>
-            <a href="../../../../author/victor-dorneanu.html"><i class="fa fa-user"></i> Victor Dorneanu</a>
+            <a href="http://blog.dornea.nu/author/victor-dorneanu.html"><i class="fa fa-user"></i> Victor Dorneanu</a>
 
         <span class="label label-default">Category</span>
-        <a href="../../../../category/blog">blog</a>
+        <a href="http://blog.dornea.nu/category/blog">blog</a>
 
 
 <span class="label label-default">Tags</span>
-	<a href="../../../../tag/networking/">networking</a>
+	<a href="http://blog.dornea.nu/tag/networking/">networking</a>
         /
-	<a href="../../../../tag/cisco/">cisco</a>
+	<a href="http://blog.dornea.nu/tag/cisco/">cisco</a>
         /
-	<a href="../../../../tag/ccna/">ccna</a>
+	<a href="http://blog.dornea.nu/tag/ccna/">ccna</a>
         /
-	<a href="../../../../tag/layer-2/">layer 2</a>
+	<a href="http://blog.dornea.nu/tag/layer-2/">layer 2</a>
         /
-	<a href="../../../../tag/switch/">switch</a>
+	<a href="http://blog.dornea.nu/tag/switch/">switch</a>
         /
-	<a href="../../../../tag/vlan/">vlan</a>
+	<a href="http://blog.dornea.nu/tag/vlan/">vlan</a>
         /
-	<a href="../../../../tag/vtp/">vtp</a>
+	<a href="http://blog.dornea.nu/tag/vtp/">vtp</a>
         /
-	<a href="../../../../tag/stp/">stp</a>
+	<a href="http://blog.dornea.nu/tag/stp/">stp</a>
         /
-	<a href="../../../../tag/ipython/">ipython</a>
+	<a href="http://blog.dornea.nu/tag/ipython/">ipython</a>
         /
-	<a href="../../../../tag/admin/">admin</a>
+	<a href="http://blog.dornea.nu/tag/admin/">admin</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -4097,11 +4097,11 @@ In [62]:
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="../../../../2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer">Basic Layer 2 Switching using Cisco Packet Tracer</a></li>
-        <li><a href="../../../../2015/11/17/openvpn-for-paranoids">OpenVPN for paranoids</a></li>
-        <li><a href="../../../../2015/06/03/usd-ag-hacker-day-in-hamburg">usd AG Hacker Day in Hamburg</a></li>
-        <li><a href="../../../../2014/08/05/android-dynamic-code-analysis-mastering-droidbox">Android Dynamic Code Analysis - Mastering DroidBox</a></li>
-        <li><a href="../../../../2010/10/13/howto-build-your-own-wifi-wlan-hotspot-using-hostap">HowTo: Build your own Wifi WLAN hotspot using hostap</a></li>
+        <li><a href="http://blog.dornea.nu/2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer">Basic Layer 2 Switching using Cisco Packet Tracer</a></li>
+        <li><a href="http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids">OpenVPN for paranoids</a></li>
+        <li><a href="http://blog.dornea.nu/2011/03/19/my-own-cheap-nas-the-openwrt-way">My own cheap NAS &#8211; the OpenWRT way</a></li>
+        <li><a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis">Disect Android APKs like a Pro - Static code analysis</a></li>
+        <li><a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump-ipython-notebook-version">24h Android sniffing using tcpdump - IPython Notebook Version</a></li>
     </ul>
 </section>
     <hr />
@@ -4123,7 +4123,7 @@ In [62]:
             var disqus_shortname = 'dorneanu'; // required: replace example with your forum shortname
 
                     var disqus_identifier = 'advanced-inter-vlan-switching-using-cisco';
-                var disqus_url = '../../../../2015/11/06/advanced-inter-vlan-switching-using-cisco';
+                var disqus_url = 'http://blog.dornea.nu/2015/11/06/advanced-inter-vlan-switching-using-cisco';
 
             var disqus_config = function () {
                 this.language = "en";
@@ -4190,59 +4190,59 @@ In [62]:
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
                 <ul class="list-group" id="recentposts">
                     <li class="list-group-item">
-                        <a href="../../../../2016/01/15/howto-put-nginx-and-php-to-jail-in-debian-8">
+                        <a href="http://blog.dornea.nu/2016/01/15/howto-put-nginx-and-php-to-jail-in-debian-8">
                             HowTo: Put nginx and PHP to jail in Debian 8
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="../../../../2016/01/08/video-editing-with-ffmpeg-and-kdenlive">
+                        <a href="http://blog.dornea.nu/2016/01/08/video-editing-with-ffmpeg-and-kdenlive">
                             Video editing with ffmpeg and kdenlive
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="../../../../2015/11/17/openvpn-for-paranoids">
+                        <a href="http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids">
                             OpenVPN for paranoids
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="../../../../2015/11/06/advanced-inter-vlan-switching-using-cisco">
+                        <a href="http://blog.dornea.nu/2015/11/06/advanced-inter-vlan-switching-using-cisco">
                             Advanced inter VLAN switching using Cisco
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="../../../../2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer">
+                        <a href="http://blog.dornea.nu/2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer">
                             Basic Layer 2 Switching using Cisco Packet Tracer
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="../../../../2015/10/02/manage-pki-using-openssl">
+                        <a href="http://blog.dornea.nu/2015/10/02/manage-pki-using-openssl">
                             Manage PKI using OpenSSL
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="../../../../2015/09/17/organizing-and-visualizing-knowledge">
+                        <a href="http://blog.dornea.nu/2015/09/17/organizing-and-visualizing-knowledge">
                             Organizing and visualizing knowledge
                         </a>
                     </li>
                 </ul>
             </li>
 
-            <li class="list-group-item"><a href="../../../../"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4></a>
+            <li class="list-group-item"><a href="http://blog.dornea.nu/"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4></a>
                 <ul class="list-group" id="categories">
                     <li class="list-group-item">
-                        <a href="../../../../category/blog">
+                        <a href="http://blog.dornea.nu/category/blog">
                             <i class="fa fa-folder-open fa-lg"></i> blog
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="../../../../category/notes">
+                        <a href="http://blog.dornea.nu/category/notes">
                             <i class="fa fa-folder-open fa-lg"></i> notes
                         </a>
                     </li>
                 </ul>
             </li>
 
-            <li class="list-group-item"><a href="../../../../"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+            <li class="list-group-item"><a href="http://blog.dornea.nu/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group list-inline tagcloud" id="tags">
                 </ul>
             </li>
@@ -4304,18 +4304,18 @@ In [62]:
       </div>
    </div>
 </footer>
-<script src="../../../../theme/js/jquery.min.js"></script>
+<script src="http://blog.dornea.nu/theme/js/jquery.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../../../../theme/js/bootstrap.min.js"></script>
+<script src="http://blog.dornea.nu/theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="../../../../theme/js/respond.min.js"></script>
+<script src="http://blog.dornea.nu/theme/js/respond.min.js"></script>
 
-    <script src="../../../../theme/js/bodypadding.js"></script>
+    <script src="http://blog.dornea.nu/theme/js/bodypadding.js"></script>
 
 <!-- Custom JavaScript -->
-<script src="../../../../js/custom.js"></script>
+<script src="http://blog.dornea.nu/js/custom.js"></script>
 
     <!-- GitHub JS -->
     <script type="text/javascript">
@@ -4323,7 +4323,7 @@ In [62]:
             if (!window.jXHR) {
                 var jxhr = document.createElement('script');
                 jxhr.type = 'text/javascript';
-                jxhr.src = '../../../../theme/js/jXHR.js';
+                jxhr.src = 'http://blog.dornea.nu/theme/js/jXHR.js';
                 var s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(jxhr, s);
             }
@@ -4336,7 +4336,7 @@ In [62]:
             });
         });
     </script>
-    <script src="../../../../theme/js/github.js" type="text/javascript"></script>
+    <script src="http://blog.dornea.nu/theme/js/github.js" type="text/javascript"></script>
     <!-- End GitHub JS Code -->
     <!-- Disqus -->
     <script type="text/javascript">
