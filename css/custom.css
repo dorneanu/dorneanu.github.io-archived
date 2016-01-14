@@ -186,6 +186,15 @@ div .blockdiag img {
     color: #3399f3;
 } 
 
+#content .entry-content h1, 
+#content .entry-content .h1, 
+#content .entry-content h2, 
+#content .entry-content .h2,
+#content .entry-content h3,
+#content .entry-content .h3 {
+    margin-bottom: 10px;
+    margin-top: 50px;
+}
 
 blockquote{
   display:block;

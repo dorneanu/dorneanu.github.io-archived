@@ -1601,23 +1601,23 @@ init_mathjax();
         <meta property="og:site_name" content="blog.dornea.nu" />
         <meta property="og:type" content="website"/>
         <meta property="og:title" content="blog.dornea.nu"/>
-        <meta property="og:url" content="http://blog.dornea.nu"/>
+        <meta property="og:url" content="../.."/>
         <meta property="og:description" content="blog.dornea.nu"/>
 
     <meta name="twitter:card" content="summary">
         <meta name="twitter:site" content="@victordorneanu">
         <meta name="twitter:creator" content="@victordorneanu">
-    <meta name="twitter:domain" content="http://blog.dornea.nu">
+    <meta name="twitter:domain" content="../..">
 
     <!-- Bootstrap -->
-        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/bootstrap.spacelab.min.css" type="text/css"/>
-    <link href="http://blog.dornea.nu/theme/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../theme/css/bootstrap.spacelab.min.css" type="text/css"/>
+    <link href="../../theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="http://blog.dornea.nu/theme/css/pygments/native.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/style.css" type="text/css"/>
-        <link href="http://blog.dornea.nu/css/custom.css" rel="stylesheet">
+    <link href="../../theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../theme/css/style.css" type="text/css"/>
+        <link href="../../css/custom.css" rel="stylesheet">
 
-        <link href="http://blog.dornea.nu/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+        <link href="../../feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
               title="blog.dornea.nu ATOM Feed"/>
 
 
@@ -1635,27 +1635,27 @@ init_mathjax();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="http://blog.dornea.nu/" class="navbar-brand">
+            <a href="../../" class="navbar-brand">
 blog.dornea.nu            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                     <li><a href="/archives">Archives</a></li>
                     <li><a href="http://dornea.nu">About</a></li>
-                         <li><a href="http://blog.dornea.nu/pages/books">
+                         <li><a href="../../pages/books">
                              Books
                           </a></li>
                         <li >
-                            <a href="http://blog.dornea.nu/category/blog">Blog</a>
+                            <a href="../../category/blog">Blog</a>
                         </li>
                         <li >
-                            <a href="http://blog.dornea.nu/category/notes">Notes</a>
+                            <a href="../../category/notes">Notes</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="http://blog.dornea.nu/archives"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
-              <li><a href="http://blog.dornea.nu/feeds/all.atom.xml"><i class="fa fa-rss"></i><span class="icon-label">Atom</span></a></li>
-              <li><a href="http://blog.dornea.nu/feeds/rss.xml"><i class="fa fa-rss"></i><span class="icon-label">RSS</span></a></li>
+              <li><a href="../../archives"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+              <li><a href="../../feeds/all.atom.xml"><i class="fa fa-rss"></i><span class="icon-label">Atom</span></a></li>
+              <li><a href="../../feeds/rss.xml"><i class="fa fa-rss"></i><span class="icon-label">RSS</span></a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -1667,53 +1667,73 @@ blog.dornea.nu            </a>
     <div class="row">
         <div class="col-sm-9">
     <ol class="breadcrumb">
-        <li><a href="http://blog.dornea.nu" title="blog.dornea.nu"><i class="fa fa-home fa-lg"></i></a></li>
-        <li><a href="http://blog.dornea.nu/" title="Tags">Tags</a></li>
+        <li><a href="../.." title="blog.dornea.nu"><i class="fa fa-home fa-lg"></i></a></li>
+        <li><a href="../../" title="Tags">Tags</a></li>
         <li class="active">admin</li>
     </ol>
             <article>
-                <h2><a href="http://blog.dornea.nu/2010/03/22/howto-create-new-debian-domu-using-xen-on-bsd">HowTo: Create new Debian domU using Xen on *BSD</a></h2>
+                <h2><a href="../../2010/09/04/speed-up-drupal-by-preloading-the-page-cache">Speed up Drupal by preloading the page cache</a></h2>
+                <div class="summary"><p>If you need some technical background, have a look <a href="http://nadeausoftware.com/node/98">here</a>. The preload cache script I’ve been using for a couple a months:<!--more--></p>
+<pre class="lang:default decode:true">#!/bin/bash
+#
+# Preload a web site's cache
+#
+
+site="dornea.nu"
+tmp="downloads"
+log="log.txt"
+
+echo "Crawling $site."
+
+# Remove any prior downloaded files.
+rm -rf $tmp ...</pre>
+                    <a class="btn btn-default btn-xs" href="../../2010/09/04/speed-up-drupal-by-preloading-the-page-cache">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../../2010/03/22/howto-create-new-debian-domu-using-xen-on-bsd">HowTo: Create new Debian domU using Xen on *BSD</a></h2>
                 <div class="summary"><p><img alt="Xen - Debian + NetBSd" class="img-responsive mceItem trigger_lightbox" height="113" id="__mce" src="http://static.dornea.nu/img/2010/4f84fcd0c434884b03a50531499c541c.jpg" style="float: left; padding-right: 10px;" title="Xen - Debian + NetBSd" width="150"/>In this tutorial you’ll get detailed information how to setup a fully functionable Debian Lenny system using virtualization software <a href="http://xen.org/">Xen</a>. This entry was written due to high frustration caused by unreliable/outdated articles on the Internet and uncompleted tutorials. This here should be an attempt to describe the installation ...</p>
-                    <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2010/03/22/howto-create-new-debian-domu-using-xen-on-bsd">more ...</a>
+                    <a class="btn btn-default btn-xs" href="../../2010/03/22/howto-create-new-debian-domu-using-xen-on-bsd">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="http://blog.dornea.nu/2010/03/01/howto-qemu-networking-on-netbsd">HowTo: Qemu networking on NetBSD</a></h2>
+                <h2><a href="../../2010/03/01/howto-qemu-networking-on-netbsd">HowTo: Qemu networking on NetBSD</a></h2>
                 <div class="summary"><p>In this tutorial I’d like to give you some useful examples how to configure network when using Qemu as virtualization machine. The videos in this HowTo were taken on a NetBSD-5_STABLE/amd64 machine using  Qemu 0.11.1. <strong>Attention: </strong>On my system I’ve used a patched version of ...</p>
-                    <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2010/03/01/howto-qemu-networking-on-netbsd">more ...</a>
+                    <a class="btn btn-default btn-xs" href="../../2010/03/01/howto-qemu-networking-on-netbsd">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="http://blog.dornea.nu/2009/11/14/netbsd-linux-xen-does-it-work">NetBSD, Linux &#038; Xen &#8211; Does it work?</a></h2>
+                <h2><a href="../../2009/11/14/netbsd-linux-xen-does-it-work">NetBSD, Linux &#038; Xen &#8211; Does it work?</a></h2>
                 <div class="summary"><p>In this article I’d like to share my impressions I made with Xen during the last weeks. I met Xen a few months ago but due to general lack of interest I didn’t have the chance to give it a try.Para-virtualization – why bother at all? There were ...</p>
-                    <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2009/11/14/netbsd-linux-xen-does-it-work">more ...</a>
+                    <a class="btn btn-default btn-xs" href="../../2009/11/14/netbsd-linux-xen-does-it-work">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="http://blog.dornea.nu/2009/06/25/howto-rsyncrypto-the-backup-jewel">HowTo: RsynCrypto &#8211; The backup jewel</a></h2>
+                <h2><a href="../../2009/06/25/howto-rsyncrypto-the-backup-jewel">HowTo: RsynCrypto &#8211; The backup jewel</a></h2>
                 <div class="summary"><p>Nowadays it is essential to backup your data and keep it safe in case of a data loss event. The most common way to backup (private) data is to use a remote server where you can upload your data. Certainly you want to keep it safe and <span style="text-decoration: underline;">private</span>. So how ...</p>
-                    <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2009/06/25/howto-rsyncrypto-the-backup-jewel">more ...</a>
+                    <a class="btn btn-default btn-xs" href="../../2009/06/25/howto-rsyncrypto-the-backup-jewel">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="http://blog.dornea.nu/2009/03/30/howto-get-setof-from-array-in-postgresql">HowTo: Get SETOF from Array in PostgreSQL</a></h2>
+                <h2><a href="../../2009/03/30/howto-get-setof-from-array-in-postgresql">HowTo: Get SETOF from Array in PostgreSQL</a></h2>
                 <div class="summary"><p>The use of so called ‘procedural languages’ in PostgreSQL allows the user to write user-defined functions in other languages than SQL or C. Since every query is sent to the server, the database server has to know how to interpret and handle function statements. As the PostgreSQL documentation describes, the ...</p>
-                    <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2009/03/30/howto-get-setof-from-array-in-postgresql">more ...</a>
+                    <a class="btn btn-default btn-xs" href="../../2009/03/30/howto-get-setof-from-array-in-postgresql">more ...</a>
                 </div>
             </article>
             <hr/>
 
         <ul class="pagination">
-                <li class="prev"><a href="http://blog.dornea.nu/tag/admin/index.html">&laquo;</a>
+                <li class="prev"><a href="../../tag/admin/index.html">&laquo;</a>
                 </li>
                     <li class=""><a
-                            href="http://blog.dornea.nu/tag/admin/.html">1</a></li>
+                            href="../../tag/admin/.html">1</a></li>
                     <li class="active"><a
-                            href="http://blog.dornea.nu/tag/admin/2.html">2</a></li>
+                            href="../../tag/admin/2.html">2</a></li>
                 <li class="next disabled"><a href="#">&raquo;</a></li>
         </ul>
         </div>
@@ -1760,59 +1780,59 @@ blog.dornea.nu            </a>
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
                 <ul class="list-group" id="recentposts">
                     <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids">
+                        <a href="../../2016/01/15/howto-put-nginx-and-php-to-jail-in-debian-8">
+                            HowTo: Put nginx and PHP to jail in Debian 8
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="../../2015/11/17/openvpn-for-paranoids">
                             OpenVPN for paranoids
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/2015/11/06/advanced-inter-vlan-switching-using-cisco">
+                        <a href="../../2015/11/06/advanced-inter-vlan-switching-using-cisco">
                             Advanced inter VLAN switching using Cisco
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer">
+                        <a href="../../2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer">
                             Basic Layer 2 Switching using Cisco Packet Tracer
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/2015/10/02/manage-pki-using-openssl">
+                        <a href="../../2015/10/02/manage-pki-using-openssl">
                             Manage PKI using OpenSSL
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/2012/01/26/howto-have-a-web-performance-boost-with-nginx">
+                        <a href="../../2012/01/26/howto-have-a-web-performance-boost-with-nginx">
                             HowTo: Have a web performance boost with Nginx
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/2011/11/07/howto-redmine-lighttpd-with-debian">
+                        <a href="../../2011/11/07/howto-redmine-lighttpd-with-debian">
                             HowTo: Redmine, Lighttpd with Debian
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/2011/04/02/block-facebook-with-iptables-on-openwrt">
-                            Block facebook with iptables on OpenWrt
                         </a>
                     </li>
                 </ul>
             </li>
 
-            <li class="list-group-item"><a href="http://blog.dornea.nu/"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4></a>
+            <li class="list-group-item"><a href="../../"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4></a>
                 <ul class="list-group" id="categories">
                     <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/category/blog">
+                        <a href="../../category/blog">
                             <i class="fa fa-folder-open fa-lg"></i> blog
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/category/notes">
+                        <a href="../../category/notes">
                             <i class="fa fa-folder-open fa-lg"></i> notes
                         </a>
                     </li>
                 </ul>
             </li>
 
-            <li class="list-group-item"><a href="http://blog.dornea.nu/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+            <li class="list-group-item"><a href="../../"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group list-inline tagcloud" id="tags">
                 </ul>
             </li>
@@ -1866,7 +1886,7 @@ blog.dornea.nu            </a>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 Victor Dorneanu
+         <div class="col-xs-10">&copy; 2016 Victor Dorneanu
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
@@ -1874,18 +1894,18 @@ blog.dornea.nu            </a>
       </div>
    </div>
 </footer>
-<script src="http://blog.dornea.nu/theme/js/jquery.min.js"></script>
+<script src="../../theme/js/jquery.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="http://blog.dornea.nu/theme/js/bootstrap.min.js"></script>
+<script src="../../theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="http://blog.dornea.nu/theme/js/respond.min.js"></script>
+<script src="../../theme/js/respond.min.js"></script>
 
-    <script src="http://blog.dornea.nu/theme/js/bodypadding.js"></script>
+    <script src="../../theme/js/bodypadding.js"></script>
 
 <!-- Custom JavaScript -->
-<script src="http://blog.dornea.nu/js/custom.js"></script>
+<script src="../../js/custom.js"></script>
 
     <!-- GitHub JS -->
     <script type="text/javascript">
@@ -1893,7 +1913,7 @@ blog.dornea.nu            </a>
             if (!window.jXHR) {
                 var jxhr = document.createElement('script');
                 jxhr.type = 'text/javascript';
-                jxhr.src = 'http://blog.dornea.nu/theme/js/jXHR.js';
+                jxhr.src = '../../theme/js/jXHR.js';
                 var s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(jxhr, s);
             }
@@ -1906,7 +1926,7 @@ blog.dornea.nu            </a>
             });
         });
     </script>
-    <script src="http://blog.dornea.nu/theme/js/github.js" type="text/javascript"></script>
+    <script src="../../theme/js/github.js" type="text/javascript"></script>
     <!-- End GitHub JS Code -->
     <!-- Disqus -->
     <script type="text/javascript">
