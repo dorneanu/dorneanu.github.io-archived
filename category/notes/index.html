@@ -1672,6 +1672,17 @@ blog.dornea.nu            </a>
         <li class="active">notes</li>
     </ol>
             <article>
+                <h2><a href="http://blog.dornea.nu/2016/01/20/no-dnat-to-localhost">No DNAT to localhost</a></h2>
+                <div class="summary"><p>Doing a simple <strong>port forwarding</strong> is actually a simple task:</p>
+<div class="highlight"><pre><span class="nv">$ </span>iptables -A PREROUTING -p tcp --dport <span class="m">80</span> -j REDIRECT --to-ports 8080
+</pre></div>
+<p>This would redirect all traffic from <code>80</code> to <code>8080</code>. But if you have some <strong>firewall</strong> activated, you'll have to <strong>allow</strong> both ports:</p>
+<div class="highlight"><pre><span class="nv">$ </span>iptables -A INPUT -p tcp --dport ...</pre></div>
+                    <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2016/01/20/no-dnat-to-localhost">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="http://blog.dornea.nu/2016/01/08/video-editing-with-ffmpeg-and-kdenlive">Video editing with ffmpeg and kdenlive</a></h2>
                 <div class="summary"><p>Having recently bought a brand new <a href="http://www.sony.net/Products/actioncam/en-us/support/cameras/HDR-AS200V/">Sony Action Cam HDR-AS200v</a> I wanted to do some video editing. I've used <a href="https://www.blender.org">Blender</a> before but at some point of time it was to over-bloated and to complicated for some video editing tasks. So I've had a look at <a href="https://kdenlive.org">kdenlive</a>.</p>
 <p>Due to ...</p>
@@ -1794,6 +1805,11 @@ while True:
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
                 <ul class="list-group" id="recentposts">
                     <li class="list-group-item">
+                        <a href="http://blog.dornea.nu/2016/01/20/no-dnat-to-localhost">
+                            No DNAT to localhost
+                        </a>
+                    </li>
+                    <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2016/01/08/video-editing-with-ffmpeg-and-kdenlive">
                             Video editing with ffmpeg and kdenlive
                         </a>
@@ -1821,11 +1837,6 @@ while True:
                     <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2014/12/02/re-root-nexus-10-4x">
                             Re-Root Nexus 10 4.x
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/2013/12/04/convert-ip-ranges-to-list">
-                            Convert IP ranges to list
                         </a>
                     </li>
                 </ul>

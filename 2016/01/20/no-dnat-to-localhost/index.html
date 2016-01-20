@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Links of the Week #14 - blog.dornea.nu</title>
+    <title>No DNAT to localhost - blog.dornea.nu</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -1593,21 +1593,24 @@ init_mathjax();
 
 
 
-<link rel="canonical" href="http://blog.dornea.nu/2013/10/25/links-of-the-week-14">
+<link rel="canonical" href="http://blog.dornea.nu/2016/01/20/no-dnat-to-localhost">
 
-        <meta name="author" content="Victor" />
-        <meta name="keywords" content="low" />
-        <meta name="description" content="FBI Tor Malware Analysis Intro into Reverse Engineering Course Dear undergraduated hacker Penetration Testing Practice Lab / Vulnerable Apps/Systems How Offensive Cyber Security is Changing the Industry" />
+        <meta name="author" content="Victor Dorneanu" />
+        <meta name="keywords" content="note,iptables,linux,networking" />
+        <meta name="description" content="Doing a simple port forwarding is actually a simple task: $ iptables -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080 This would redirect all traffic from 80 to 8080. But if you have some firewall activated, you&#39;ll have to allow both ports: $ iptables -A INPUT -p tcp --dport ..." />
 
         <meta property="og:site_name" content="blog.dornea.nu" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Links of the Week #14"/>
-        <meta property="og:url" content="http://blog.dornea.nu/2013/10/25/links-of-the-week-14"/>
-        <meta property="og:description" content="FBI Tor Malware Analysis Intro into Reverse Engineering Course Dear undergraduated hacker Penetration Testing Practice Lab / Vulnerable Apps/Systems How Offensive Cyber Security is Changing the Industry"/>
-        <meta property="article:published_time" content="2013-10-25" />
-            <meta property="article:section" content="blog" />
-            <meta property="article:tag" content="low" />
-            <meta property="article:author" content="Victor" />
+        <meta property="og:title" content="No DNAT to localhost"/>
+        <meta property="og:url" content="http://blog.dornea.nu/2016/01/20/no-dnat-to-localhost"/>
+        <meta property="og:description" content="Doing a simple port forwarding is actually a simple task: $ iptables -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080 This would redirect all traffic from 80 to 8080. But if you have some firewall activated, you&#39;ll have to allow both ports: $ iptables -A INPUT -p tcp --dport ..."/>
+        <meta property="article:published_time" content="2016-01-20" />
+            <meta property="article:section" content="notes" />
+            <meta property="article:tag" content="note" />
+            <meta property="article:tag" content="iptables" />
+            <meta property="article:tag" content="linux" />
+            <meta property="article:tag" content="networking" />
+            <meta property="article:author" content="Victor Dorneanu" />
 
     <meta name="twitter:card" content="summary">
         <meta name="twitter:site" content="@victordorneanu">
@@ -1650,10 +1653,10 @@ blog.dornea.nu            </a>
                          <li><a href="http://blog.dornea.nu/pages/books">
                              Books
                           </a></li>
-                        <li class="active">
+                        <li >
                             <a href="http://blog.dornea.nu/category/blog">Blog</a>
                         </li>
-                        <li >
+                        <li class="active">
                             <a href="http://blog.dornea.nu/category/notes">Notes</a>
                         </li>
             </ul>
@@ -1673,17 +1676,17 @@ blog.dornea.nu            </a>
         <div class="col-sm-9">
             <ol class="breadcrumb">
                 <li><a href="http://blog.dornea.nu" title="blog.dornea.nu"><i class="fa fa-home fa-lg"></i></a></li>
-                <li><a href="http://blog.dornea.nu/category/blog" title="blog">blog</a></li>
-                <li class="active">Links of the Week #14</li>
+                <li><a href="http://blog.dornea.nu/category/notes" title="notes">notes</a></li>
+                <li class="active">No DNAT to localhost</li>
             </ol>
     <section id="content">
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="http://blog.dornea.nu/2013/10/25/links-of-the-week-14"
+                    <a href="http://blog.dornea.nu/2016/01/20/no-dnat-to-localhost"
                        rel="bookmark"
-                       title="Permalink to Links of the Week #14">
-                        Links of the Week #14
+                       title="Permalink to No DNAT to localhost">
+                        No DNAT to localhost
                     </a>
                 </h1>
             </header>
@@ -1693,40 +1696,62 @@ blog.dornea.nu            </a>
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2013-10-25T00:00:00+02:00"> Fri 25 October 2013</time>
+        <i class="fa fa-calendar"></i><time datetime="2016-01-20T00:00:00+01:00"> Wed 20 January 2016</time>
     </span>
 
 
             <span class="label label-default">By</span>
-            <a href="http://blog.dornea.nu/author/victor.html"><i class="fa fa-user"></i> Victor</a>
+            <a href="http://blog.dornea.nu/author/victor-dorneanu.html"><i class="fa fa-user"></i> Victor Dorneanu</a>
 
         <span class="label label-default">Category</span>
-        <a href="http://blog.dornea.nu/category/blog">blog</a>
+        <a href="http://blog.dornea.nu/category/notes">notes</a>
 
 
 <span class="label label-default">Tags</span>
-	<a href="http://blog.dornea.nu/tag/low/">low</a>
+	<a href="http://blog.dornea.nu/tag/note/">note</a>
+        /
+	<a href="http://blog.dornea.nu/tag/iptables/">iptables</a>
+        /
+	<a href="http://blog.dornea.nu/tag/linux/">linux</a>
+        /
+	<a href="http://blog.dornea.nu/tag/networking/">networking</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <ol>
-<li><a href="http://oweng.myweb.port.ac.uk/fbi-tor-malware-analysis/">FBI Tor Malware Analysis</a></li>
-<li><a href="http://opensecuritytraining.info/IntroductionToReverseEngineering_files/2013IntroRE.pdf">Intro into Reverse Engineering Course</a></li>
-<li><a href="https://news.ycombinator.com/item?id=6577860">Dear undergraduated hacker</a></li>
-<li><a href="http://www.amanhardikar.com/mindmaps/Practice.html">Penetration Testing Practice Lab / Vulnerable Apps/Systems</a></li>
-<li><a href="https://communities.intel.com/community/itpeernetwork/blog/2013/10/08/how-offensive-cyber-security-is-changing-the-industry">How Offensive Cyber Security is Changing the Industry</a></li>
-</ol>
-<!--more-->
+                <p>Doing a simple <strong>port forwarding</strong> is actually a simple task:</p>
+<div class="highlight"><pre><span class="nv">$ </span>iptables -A PREROUTING -p tcp --dport <span class="m">80</span> -j REDIRECT --to-ports 8080
+</pre></div>
+<p>This would redirect all traffic from <code>80</code> to <code>8080</code>. But if you have some <strong>firewall</strong> activated, you'll have to <strong>allow</strong> both ports:</p>
+<div class="highlight"><pre><span class="nv">$ </span>iptables -A INPUT -p tcp --dport <span class="m">80</span> -j ALLOW
+<span class="nv">$ </span>iptables -A INPUT -p tcp --dport <span class="m">8080</span> -j ALLOW
+</pre></div>
+<p>Otherwise the port forwarding won't work. But this is not the use case you want to achieve. In most cases you want to <strong>redirect</strong> 
+traffic from one port (let's say <code>80</code>) from an external interface to another IP address (let's say <code>10.0.0.1:8080</code>). Using <strong>DNAT</strong> this 
+actually pretty easy to implement:</p>
+<div class="highlight"><pre><span class="nv">$ </span>iptables -t nat -A PREROUTING -p tcp --dport <span class="m">80</span> -j DNAT --to-destination 10.0.0.1:8080
+</pre></div>
+<p>For a full example have a look at <a href="http://stackoverflow.com/questions/14212807/iptables-forward-request-on-different-interfaces-and-port?answertab=votes#tab-top">this stackoverflow</a>.
+However in my case I wanted to do DNAT to the <strong>loopback</strong> interface which didn't work (<a href="http://lists.netfilter.org/pipermail/netfilter/2004-August/055074.html">this answer</a> confirms this). Using <strong>REDIRECT</strong> is also a pretty bad idea since I had to allow access to both ports (which is kind of stupid). </p>
+<p>So... How to solve the problem? Using <a href="https://en.wikipedia.org/wiki/Inetdhttps://en.wikipedia.org/wiki/Inetd">inetd</a>. I've installed <a href="http://www.boutell.com/rinetd/">rinetd</a> and configured the port forwarding:</p>
+<div class="highlight"><pre><span class="nv">$ </span>apt-get install rinetd
+<span class="nv">$ </span>cat /etc/rinetd.conf
+<span class="o">[</span>...<span class="o">]</span>
+<span class="c"># bindadress    bindport  connectaddress  connectport</span>
+&lt;external ip&gt;   <span class="m">80</span>          127.0.0.1       8080
+<span class="o">[</span>...<span class="o">]</span>
+<span class="nv">$ </span>service rinetd restart
+</pre></div>
+<p>I hope this would prevent others from spending their whole day on doing DNAT to localhost. </p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://blog.dornea.nu/2013/12/20/links-of-the-week-22">Links of the Week #22</a></li>
-        <li><a href="http://blog.dornea.nu/2013/05/24/links-of-the-week-2">Links of the Week #2</a></li>
-        <li><a href="http://blog.dornea.nu/2014/01/17/links-of-the-week-23">Links of the Week #23</a></li>
-        <li><a href="http://blog.dornea.nu/2013/11/29/links-of-the-week-19">Links of the Week #19</a></li>
-        <li><a href="http://blog.dornea.nu/2014/01/31/links-of-the-week-25">Links of the Week #25</a></li>
+        <li><a href="http://blog.dornea.nu/2011/03/19/my-own-cheap-nas-the-openwrt-way">My own cheap NAS &#8211; the OpenWRT way</a></li>
+        <li><a href="http://blog.dornea.nu/2015/02/19/redirect-androids-traffic-to-burp">Redirect Androids traffic to Burp</a></li>
+        <li><a href="http://blog.dornea.nu/2011/04/02/block-facebook-with-iptables-on-openwrt">Block facebook with iptables on OpenWrt</a></li>
+        <li><a href="http://blog.dornea.nu/2010/10/13/howto-build-your-own-wifi-wlan-hotspot-using-hostap">HowTo: Build your own Wifi WLAN hotspot using hostap</a></li>
+        <li><a href="http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids">OpenVPN for paranoids</a></li>
     </ul>
 </section>
     <hr />
@@ -1747,8 +1772,8 @@ blog.dornea.nu            </a>
             /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
             var disqus_shortname = 'dorneanu'; // required: replace example with your forum shortname
 
-                    var disqus_identifier = 'links-of-the-week-14';
-                var disqus_url = 'http://blog.dornea.nu/2013/10/25/links-of-the-week-14';
+                    var disqus_identifier = 'no-dnat-to-localhost';
+                var disqus_url = 'http://blog.dornea.nu/2016/01/20/no-dnat-to-localhost';
 
             var disqus_config = function () {
                 this.language = "en";

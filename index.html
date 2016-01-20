@@ -1679,6 +1679,17 @@ blog.dornea.nu            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="http://blog.dornea.nu/2016/01/20/no-dnat-to-localhost">No DNAT to localhost</a></h2>
+                <div class="summary"><p>Doing a simple <strong>port forwarding</strong> is actually a simple task:</p>
+<div class="highlight"><pre><span class="nv">$ </span>iptables -A PREROUTING -p tcp --dport <span class="m">80</span> -j REDIRECT --to-ports 8080
+</pre></div>
+<p>This would redirect all traffic from <code>80</code> to <code>8080</code>. But if you have some <strong>firewall</strong> activated, you'll have to <strong>allow</strong> both ports:</p>
+<div class="highlight"><pre><span class="nv">$ </span>iptables -A INPUT -p tcp --dport ...</pre></div>
+                    <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2016/01/20/no-dnat-to-localhost">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="http://blog.dornea.nu/2016/01/15/howto-put-nginx-and-php-to-jail-in-debian-8">HowTo: Put nginx and PHP to jail in Debian 8</a></h2>
                 <div class="summary"><p>Although I thought this would be an easy task, it turned out that <strong>chrooting</strong> daemons takes more than copying config files and libraries. There are donzens of tutorials out there how to do it, but the devil lies in detail - as always. Setting up a chroot environment is easy. But ...</p>
                     <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2016/01/15/howto-put-nginx-and-php-to-jail-in-debian-8">more ...</a>
@@ -1851,31 +1862,6 @@ use <strong>gethostbyname()</strong>. I've used this function in all my previous
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="http://blog.dornea.nu/2015/03/18/usd-ag-hacker-challenge-2015-solutions">usd AG Hacker challenge 2015 - Solutions</a></h2>
-                <div class="summary"><p>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="https://www.usd.de">usd AG</a> has announced a <a href="https://www.usd.de/usd-hackertag-2015/">hacking challenge</a> I have participated at. The target system was available at <a href="http://82.195.79.41/">http://82.195.79.41/</a>. Now let me sum up thg steps that have been required in order to get <strong>all</strong> 6 tokens.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In [122]:
-</div>
-<div class="collapseheader box-flex1"><span style="">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">sqlite3 ...</span></pre></div></div></div></div></div></p>
-                    <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2015/03/18/usd-ag-hacker-challenge-2015-solutions">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev disabled"><a href="#">&laquo;</a></li>
@@ -1948,6 +1934,11 @@ In [122]:
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
                 <ul class="list-group" id="recentposts">
                     <li class="list-group-item">
+                        <a href="http://blog.dornea.nu/2016/01/20/no-dnat-to-localhost">
+                            No DNAT to localhost
+                        </a>
+                    </li>
+                    <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2016/01/15/howto-put-nginx-and-php-to-jail-in-debian-8">
                             HowTo: Put nginx and PHP to jail in Debian 8
                         </a>
@@ -1975,11 +1966,6 @@ In [122]:
                     <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2015/10/02/manage-pki-using-openssl">
                             Manage PKI using OpenSSL
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="http://blog.dornea.nu/2015/09/17/organizing-and-visualizing-knowledge">
-                            Organizing and visualizing knowledge
                         </a>
                     </li>
                 </ul>

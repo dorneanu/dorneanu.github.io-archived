@@ -1672,6 +1672,17 @@ blog.dornea.nu            </a>
         <li class="active">iptables</li>
     </ol>
             <article>
+                <h2><a href="http://blog.dornea.nu/2016/01/20/no-dnat-to-localhost">No DNAT to localhost</a></h2>
+                <div class="summary"><p>Doing a simple <strong>port forwarding</strong> is actually a simple task:</p>
+<div class="highlight"><pre><span class="nv">$ </span>iptables -A PREROUTING -p tcp --dport <span class="m">80</span> -j REDIRECT --to-ports 8080
+</pre></div>
+<p>This would redirect all traffic from <code>80</code> to <code>8080</code>. But if you have some <strong>firewall</strong> activated, you'll have to <strong>allow</strong> both ports:</p>
+<div class="highlight"><pre><span class="nv">$ </span>iptables -A INPUT -p tcp --dport ...</pre></div>
+                    <a class="btn btn-default btn-xs" href="http://blog.dornea.nu/2016/01/20/no-dnat-to-localhost">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids">OpenVPN for paranoids</a></h2>
                 <div class="summary"><p>
 <div class="cell border-box-sizing text_cell rendered">
@@ -1778,6 +1789,11 @@ Filesystem                Size      Used ...</pre></p></li></ul></!--break-->
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
                 <ul class="list-group" id="recentposts">
                     <li class="list-group-item">
+                        <a href="http://blog.dornea.nu/2016/01/20/no-dnat-to-localhost">
+                            No DNAT to localhost
+                        </a>
+                    </li>
+                    <li class="list-group-item">
                         <a href="http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids">
                             OpenVPN for paranoids
                         </a>
@@ -1869,7 +1885,7 @@ Filesystem                Size      Used ...</pre></p></li></ul></!--break-->
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 Victor Dorneanu
+         <div class="col-xs-10">&copy; 2016 Victor Dorneanu
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
