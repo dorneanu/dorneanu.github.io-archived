@@ -1,30 +1,58 @@
-.container img {
-    display: block;
-    /* margin: auto; */
-    max-width: 65%;
-}
-
-.output_svg {
+#banner {
+    background-attachment: scroll;
+    background-color: #c4c4c4;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 0 20px;
+    padding: 70px 0;
     position: relative;
-    width: 100%;
-    padding: 0;
-    padding-bottom: 100%; 
 }
 
-.output_svg svg {
+#banner .copy {
+    background: rgba(0, 0, 0, 0.7) none repeat scroll 0 0;
+    display: inline;
+    float: left;
+    max-width: 700px;
+    padding: 20px;
     position: relative;
-    width: 80%;
-    left: 0;
-    top: 0;
+    z-index: 1;
 }
 
-#banner h1 {
-    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+#banner h2 {
+    color: #fff;
+    font-family: font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 50px;
+    font-stretch: condensed;
+    font-weight: 700;
+    line-height: 0.9;
+    margin: 0;
+    text-transform: uppercase;
 }
 
-#sidebar {
+#banner .intro {
+    color: #fff;
+    font-size: 21px;
+    opacity: 0.75;
 }
 
+.navbar a {
+	color: #FD0000;
+}
+
+a.navbar-brand {
+    color: #FFA500;
+}
+
+.navbar-inverse {
+    background-color: #1c1c1c;
+    border-color: #080808;
+}
+
+#content-heading {
+    padding-top: 0px;
+	padding-bottom: 10px;
+}
 
 div.collapseheader {
     width=98%;
@@ -33,226 +61,13 @@ div.collapseheader {
     cursor: pointer;
     font-size: 14px;
     font-family:Arial, sans-serif;
-}                  
-
-#blog-archives {
-color:#777
 }
 
-#blog-archives article {
-padding:1em 0;
-position:relative;
-background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAABCAYAAACsXeyTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAFUlEQVQIHWNIS0sr/v//PwMMDzY+ADqMahlW4J91AAAAAElFTkSuQmCC) bottom left repeat-x
+div.input_prompt {
+    display: none;
 }
 
-#blog-archives article:last-child {
-background:none
-}
-
-#blog-archives article footer {
-padding:0;
-margin:0
-}
-
-#blog-archives h1 {
-color:#333;
-margin-bottom:.3em
-}
-
-#blog-archives h2 {
-display:none
-}
-
-#blog-archives h1 {
-font-size:1.5em
-}
-
-#blog-archives h1 a {
-text-decoration:none;
-color:inherit;
-font-weight:400;
-display:inline-block
-}
-
-#blog-archives h1 a:hover {
-text-decoration:underline;
-color:#0181eb
-}
-
-#blog-archives a.category,#blog-archives time {
-color:#777
-}
-
-#blog-archives .entry-content {
-display:none
-}
-
-#blog-archives time {
-font-size:.9em;
-line-height:1.2em
-}
-
-#blog-archives time .month,#blog-archives time .day {
-display:inline-block
-}
-
-#blog-archives time .month {
-text-transform:uppercase
-}
-
-#blog-archives p {
-margin-bottom:1em
-}
-
-#blog-archives a,#blog-archives .entry-content a {
-color:inherit
-}
-
-#blog-archives a:hover,#blog-archives .entry-content a:hover {
-color:#0181eb
-}
-
-#blog-archives a:hover {
-color:#0181eb
-}
-
-@media only screen and (min-width: 550px) {
-#blog-archives article {
-margin-left:10em
-}
-
-#blog-archives h2 {
-margin-bottom:.3em;
-font-weight:400;
-display:inline-block;
-position:relative;
-top:-1px;
-float:left;
-margin-right: 20px;
-}
-
-#blog-archives h2:first-child {
-}
-
-#blog-archives time {
-position:absolute;
-text-align:right;
-left:0;
-top:1.8em
-}
-
-#blog-archives .year {
-display:none
-}
-
-#blog-archives article {
-padding-left:4.5em;
-padding-bottom:.7em
-}
-
-#blog-archives a.category {
-line-height:1.1em
-}
-
-pre {
-    font-size: 17px;
-}
-
-#content ul, #content ol, #content p {
-    font-size: 19px;
-}
-
-div .graphviz img, .output_png img {
-    max-width: 700px;
-}
-
-div .blockdiag img {
-    max-width: 95%;
-}
-
-#content .entry-content a:link {
-    color: #3399f3;
-}
-
-#content .entry-content a:visited {
-    color: #3399f3;
-}
-
-#content .entry-content a:hover {
-    background-color: yellow;
-}
-
-#content .entry-content a:active {
-    color: #3399f3;
-} 
-
-#content .entry-content h1, 
-#content .entry-content .h1, 
-#content .entry-content h2, 
-#content .entry-content .h2,
-#content .entry-content h3,
-#content .entry-content .h3 {
-    margin-bottom: 10px;
-    margin-top: 50px;
-}
-
-blockquote{
-  display:block;
-  background: #fff;
-  padding: 15px 20px 15px 45px;
-  margin: 0 0 20px;
-  position: relative;
-  
-  /*Font*/
-  font-family: Georgia, serif;
-  font-size: 16px;
-  line-height: 1.2;
-  color: #666;
-  text-align: justify;
-  
-  /*Borders - (Optional)*/
-  border-left: 15px solid #c76c0c;
-  border-right: 2px solid #c76c0c;
-  
-  /*Box Shadow - (Optional)*/
-  -moz-box-shadow: 2px 2px 15px #ccc;
-  -webkit-box-shadow: 2px 2px 15px #ccc;
-  box-shadow: 2px 2px 15px #ccc;
-}
-
-blockquote::before{
-  content: "\201C"; /*Unicode for Left Double Quote*/
-  
-  /*Font*/
-  font-family: Georgia, serif;
-  font-size: 60px;
-  font-weight: bold;
-  color: #999;
-  
-  /*Positioning*/
-  position: absolute;
-  left: 10px;
-  top:5px;
-}
-
-blockquote::after{
-  /*Reset to make sure*/
-  content: "";
-}
-
-blockquote a{
-  text-decoration: none;
-  background: #eee;
-  cursor: pointer;
-  padding: 0 3px;
-  color: #c76c0c;
-}
-
-blockquote a:hover{
- color: #666;
-}
-
-blockquote em{
-  font-style: italic;
+div.cell a.anchor-link {
+    display: none;
 }
 

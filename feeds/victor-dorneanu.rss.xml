@@ -27,7 +27,7 @@ are avoided. One of those security nightmare - and in my own oppinion the most c
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Updated-network-topology"&gt;Updated network topology&lt;a class="anchor-link" href="#Updated-network-topology"&gt;¶&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="7dfe9f8b72b6b867a15156adb302c9cc"&gt;Updated network topology&lt;a class="anchor-link" href="#Updated-network-topology"&gt;¶&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -36,7 +36,7 @@ are avoided. One of those security nightmare - and in my own oppinion the most c
 &lt;div class="prompt input_prompt"&gt;
 In [35]:
 &lt;/div&gt;
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style=""&gt;Expand Code&lt;/span&gt;
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-weight: bold;"&gt;Expand Code&lt;/span&gt;
 &lt;div class="input_area box-flex1" style="display:none"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;blockdiag&lt;/span&gt;
 &lt;span class="n"&gt;diagram ...&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Victor Dorneanu</dc:creator><pubDate>Fri, 06 Nov 2015 00:00:00 +0100</pubDate><guid>tag:blog.dornea.nu,2015-11-06:2015/11/06/advanced-inter-vlan-switching-using-cisco</guid><category>networking</category><category>cisco</category><category>ccna</category><category>layer 2</category><category>switch</category><category>vlan</category><category>vtp</category><category>stp</category><category>ipython</category><category>admin</category></item><item><title>Basic Layer 2 Switching using Cisco Packet Tracer</title><link>http://blog.dornea.nu/2015/10/21/basic-layer-2-switching-using-cisco-packet-tracer</link><description>&lt;p&gt;
@@ -79,7 +79,7 @@ executing Python bytecodes at once. Nevertheless you may want to apply &lt;a hre
 at some basic network stuff like: &lt;strong&gt;socket()&lt;/strong&gt;, &lt;strong&gt;connect()&lt;/strong&gt; etc. In order to resolve domain names, one was used to 
 use &lt;strong&gt;gethostbyname()&lt;/strong&gt;. I've used this function in all my previous C projects but this one seems to be out-dated ...&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Victor Dorneanu</dc:creator><pubDate>Thu, 30 Apr 2015 00:00:00 +0200</pubDate><guid>tag:blog.dornea.nu,2015-04-30:2015/04/30/gethostbyname-vs-getaddrinfo</guid><category>c</category><category>coding</category><category>programming</category></item><item><title>Coming back to C/C++ after 2 years</title><link>http://blog.dornea.nu/2015/04/21/coming-back-to-cc-after-2-years</link><description>&lt;p&gt;After years of &lt;a href="http://blog.dornea.nu/tag/python/"&gt;python&lt;/a&gt; hacking and all kind of projects (like
 &lt;a href="https://github.com/dorneanu/netgrafio"&gt;netgrafio&lt;/a&gt; or &lt;a href="https://github.com/dorneanu/smalisca"&gt;smalisca&lt;/a&gt;) I wanted to do more low-level stuff and refresh my C/C++ skills. I'll try to describe how it feels like coming back to C/C++ after 2 years of coding abstinence.&lt;/p&gt;
-&lt;h3 id="its-low-very-low"&gt;It's low ...&lt;/h3&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Victor Dorneanu</dc:creator><pubDate>Tue, 21 Apr 2015 00:00:00 +0200</pubDate><guid>tag:blog.dornea.nu,2015-04-21:2015/04/21/coming-back-to-cc-after-2-years</guid><category>c</category><category>coding</category><category>programming</category></item><item><title>usd AG Hacker challenge 2015 - Solutions</title><link>http://blog.dornea.nu/2015/03/18/usd-ag-hacker-challenge-2015-solutions</link><description>&lt;p&gt;
+&lt;h3 id="a3ced014885bd6e2e6679c5c297c914d"&gt;It's low ...&lt;/h3&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Victor Dorneanu</dc:creator><pubDate>Tue, 21 Apr 2015 00:00:00 +0200</pubDate><guid>tag:blog.dornea.nu,2015-04-21:2015/04/21/coming-back-to-cc-after-2-years</guid><category>c</category><category>coding</category><category>programming</category></item><item><title>usd AG Hacker challenge 2015 - Solutions</title><link>http://blog.dornea.nu/2015/03/18/usd-ag-hacker-challenge-2015-solutions</link><description>&lt;p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -94,7 +94,7 @@ use &lt;strong&gt;gethostbyname()&lt;/strong&gt;. I've used this function in all
 &lt;div class="prompt input_prompt"&gt;
 In [122]:
 &lt;/div&gt;
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style=""&gt;Expand Code&lt;/span&gt;
+&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-weight: bold;"&gt;Expand Code&lt;/span&gt;
 &lt;div class="input_area box-flex1" style="display:none"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sqlite3 ...&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Victor Dorneanu</dc:creator><pubDate>Wed, 18 Mar 2015 00:00:00 +0100</pubDate><guid>tag:blog.dornea.nu,2015-03-18:2015/03/18/usd-ag-hacker-challenge-2015-solutions</guid><category>android</category><category>hacking</category><category>networking</category><category>security</category><category>ipython</category><category>ctf</category><category>usd</category><category>wargames</category></item><item><title>The iOS 8.1.3 fiasco</title><link>http://blog.dornea.nu/2015/02/26/the-ios-813-fiasco</link><description>&lt;p&gt;From time to time we all seem to ignore the "voice of reason" and tend to 
@@ -147,7 +147,7 @@ telekom.de.     &lt;span class="m"&gt;86346&lt;/span&gt;   IN  A   46.29.100.76 
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;I thought this might be interesting enough to share with you. Every time I'm working with DataFrames I somehow miss the search feature: I'd like to search for certain patterns inside the columns and rows. I used to use &lt;a href="https://datatables.net"&gt;JQuery DataTables&lt;/a&gt; for &lt;a href="http://dornea.nu/projects/netgrafio"&gt;netgrafio&lt;/a&gt;. But I couldn't find ...&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Victor Dorneanu</dc:creator><pubDate>Thu, 28 Aug 2014 00:00:00 +0200</pubDate><guid>tag:blog.dornea.nu,2014-08-28:2014/08/28/using-jquery-datatables-with-ipython</guid><category>ipython</category><category>python</category><category>jquery</category><category>javascript</category></item><item><title>HowTo: Debug Android APKs with Eclipse and DDMS</title><link>http://blog.dornea.nu/2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms</link><description>&lt;p&gt;Simply out of necessity I've written this mini-tutorial how debug android APKs using Eclipse and &lt;a href="http://developer.android.com/tools/debugging/ddms.html"&gt;DDMS&lt;/a&gt;. 
 After hours of wild googling these are the steps to make your APK debuggable under Eclipse. I'll be using the &lt;code&gt;FakeBanker&lt;/code&gt; APK reverse-engineered in previous &lt;a href="http://blog.dornea.nu/tag/android/"&gt;articles&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id="revisions"&gt;Revisions&lt;/h2&gt;
+&lt;h2 id="fd88b11cfde6aa5e3c7ff0553b534885"&gt;Revisions&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;&lt;em&gt;UPDATE 2014-12-09&lt;/em&gt;&lt;/strong&gt;: &lt;/li&gt;
 &lt;/ul&gt;
@@ -182,11 +182,11 @@ After hours of wild googling these are the steps to make your APK debuggable und
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;A few weeks ago I'be migrated my whole blog from Wordpress to Octopress. Meanwhile I've discovered &lt;code&gt;Pelican&lt;/code&gt; which is the Pythonic alternative to Octopress. To be honest: The main reason I'm using Pelican instead of Octopress is the ability to import/include &lt;code&gt;IPython notebooks&lt;/code&gt;. &lt;/p&gt;
 &lt;p&gt;After I've ...&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Victor Dorneanu</dc:creator><pubDate>Wed, 18 Jun 2014 00:00:00 +0200</pubDate><guid>tag:blog.dornea.nu,2014-06-18:2014/06/18/migrate-this-blog-from-octopress-to-pelican</guid><category>blog</category><category>ipython</category><category>python</category><category>pelican</category><category>octopress</category></item><item><title>Googles XSS Game - Solutions</title><link>http://blog.dornea.nu/2014/06/02/googles-xss-game-solutions</link><description>&lt;p&gt;These are my steps how I've solved the &lt;a href="https://xss-game.appspot.com/"&gt;XSS Game&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id="level-1"&gt;Level 1&lt;/h2&gt;
+&lt;h2 id="5afaf1679ad0887adebaddb40e0bd3f7"&gt;Level 1&lt;/h2&gt;
 &lt;p&gt;This is the most obvious and easiest one. Just insert following code and you're done:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;script&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nx"&gt;alert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="err"&gt;/script&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id="level-2"&gt;Level 2&lt;/h2&gt;
+&lt;h2 id="228e9da47384bacde793a2b78d488bb0"&gt;Level 2&lt;/h2&gt;
 &lt;p&gt;Since the &lt;code&gt;script&lt;/code&gt; won't work you'll have to think of another tags to ...&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Victor Dorneanu</dc:creator><pubDate>Mon, 02 Jun 2014 00:00:00 +0200</pubDate><guid>tag:blog.dornea.nu,2014-06-02:2014/06/02/googles-xss-game-solutions</guid><category>web</category><category>wargames</category><category>security</category><category>coding</category><category>hacking</category></item><item><title>BerlinSides 0x05</title><link>http://blog.dornea.nu/2014/05/27/berlinsides-0x05</link><description>&lt;p&gt;The &lt;a href="http://berlinsides.org/"&gt;&lt;strong&gt;BerlinSides&lt;/strong&gt;&lt;/a&gt; is a conference from hacker for hacker. This years motto was: &lt;strong&gt;...you ain't listening&lt;/strong&gt;.
 All my greetings go to:&lt;/p&gt;
 &lt;ul&gt;
@@ -204,7 +204,7 @@ Since I try to keep things simple I'll give you a rough idea ...&lt;/p&gt;</desc
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h1 id="Motivation"&gt;Motivation&lt;a class="anchor-link" href="#Motivation"&gt;¶&lt;/a&gt;&lt;/h1&gt;
+&lt;h1 id="614db13e08f135ac46011bb440aaa3a1"&gt;Motivation&lt;a class="anchor-link" href="#Motivation"&gt;¶&lt;/a&gt;&lt;/h1&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
