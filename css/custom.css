@@ -63,11 +63,30 @@ div.collapseheader {
     font-family:Arial, sans-serif;
 }
 
+/*
 div.input_prompt {
     display: none;
 }
+*/
 
 div.cell a.anchor-link {
     display: none;
 }
 
+/* Ipython settings */
+pre.ipynb {
+    font-size: 11px;
+}
+
+.img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+    width: 100%;
+}
+
+div.svg_output {
+    height: auto;
+	max-width: 100%;
+	width: 100%;
+}
