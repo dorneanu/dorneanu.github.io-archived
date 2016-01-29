@@ -13,7 +13,7 @@
     background: rgba(0, 0, 0, 0.7) none repeat scroll 0 0;
     display: inline;
     float: left;
-    max-width: 700px;
+    max-width: 100%;
     padding: 20px;
     position: relative;
     z-index: 1;
@@ -36,6 +36,10 @@
     opacity: 0.75;
 }
 
+h1 {
+    margin-bottom: 10px;
+}
+
 .navbar a {
 	color: #FD0000;
 }
@@ -55,12 +59,15 @@ a.navbar-brand {
 }
 
 div.collapseheader {
-    width=98%;
+    width=88%;
     background-color: #cccccc;
     padding: 2px;
     cursor: pointer;
-    font-size: 14px;
-    font-family:Arial, sans-serif;
+    font-size: 13px;
+}
+
+div.collapseheader .input_area {
+    max-width: 100%;
 }
 
 /*
@@ -89,4 +96,55 @@ div.svg_output {
     height: auto;
 	max-width: 100%;
 	width: 100%;
+}
+
+div.entry-content {
+  overflow: visible;
+  padding: 8px;
+}
+.input_area {
+  padding: 0.2em;
+}
+
+a.heading-anchor {
+ white-space: normal;
+}
+
+.rendered_html
+code {
+ font-size: .8em;
+}
+
+pre.ipynb {
+  color: black;
+  background: #f7f7f7;
+  border: none;
+  box-shadow: none;
+  margin-bottom: 0;
+  padding: 0;
+  margin: 0px;
+  font-size: 11px;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* remove the prompt div from text cells */
+div.text_cell .prompt {
+    display: none;
+}
+
+/* remove horizontal padding from text cells, */
+/* so it aligns with outer body text */
+div.text_cell_render {
+    padding: 0.5em 0em;
+}
+
+img.anim_icon{padding:0; border:0; vertical-align:middle; -webkit-box-shadow:none; -box-shadow:none}
+
+div.collapseheader {
+    width=100%;
+    background-color:#d3d3d3;
+    padding: 2px;
+    cursor: pointer;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
