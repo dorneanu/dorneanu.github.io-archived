@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="keywords" content="hacking, networking, security, dns, icmp">
+        <meta name="keywords" content="hacking, networking, security, dns, icmp, ipv4, tools">
         <meta name="description" content="I always knew DNS/ICMP traffic is mostly allowed and un-monitored. It was about time to setup some DNS server on my vServer which would allow me to break free! Thanks God there is iodine which allows you to route IP traffic over DNS. I was recently at some cafe ...">
         <title>Thank God there is iodine! IPv4 over DNS - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
@@ -57,10 +57,13 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
+                                      (101)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
                                <li><a href="http://blog.dornea.nu/category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (18)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -115,39 +118,40 @@
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
                     <p>I always knew DNS/ICMP traffic is mostly allowed and un-monitored. It was about time to setup some DNS server on my vServer which would allow me to break free! Thanks God there is <a href="http://code.kryo.se/iodine/">iodine</a> which allows you to route IP traffic over DNS.</p>
-<p>I was recently at some cafe and thought it would be a great ideea to test my configuration. I’ve setup the iodine server a few weeks before.This is what I did:<!--more--></p>
-<pre class="lang:default decode:true"># iodine -fP (insert password here) *.*136.116 *.mooo.com
+<p>I was recently at some cafe and thought it would be a great ideea to test my configuration. I've setup the iodine server a few weeks before.This is what I did:</p>
+<div class="highlight"><pre><span class="c"># iodine -fP (insert password here) *.*136.116 *.mooo.com</span>
 Opened dns0
 Opened UDP socket
-Sending DNS queries for tunnel.syngres.mooo.com to *.*.136.116
-Autodetecting DNS query type (use -T to override).
-Using DNS type NULL queries
-Version ok, both using protocol v 0x00000502. You are user #0
+Sending DNS queries <span class="k">for</span> tunnel.syngres.mooo.com to *.*.136.116
+Autodetecting DNS query <span class="nb">type</span> <span class="o">(</span>use -T to override<span class="o">)</span>.
+Using DNS <span class="nb">type </span>NULL queries
+Version ok, both using protocol v 0x00000502. You are user <span class="c">#0</span>
 Setting IP of dns0 to 10.0.0.2
 Setting MTU of dns0 to 1130
 Server tunnel IP is 10.0.0.1
-Testing raw UDP data to the server (skip with -r)
+Testing raw UDP data to the server <span class="o">(</span>skip with -r<span class="o">)</span>
 Server is at 178.77.98.100, trying raw login: ....failed
 Using EDNS0 extension
 Switching upstream to codec Base128
 Server switched upstream to codec Base128
-No alternative downstream codec available, using default (Raw)
-Switching to lazy mode for low-latency
+No alternative downstream codec available, using default <span class="o">(</span>Raw<span class="o">)</span>
+Switching to lazy mode <span class="k">for</span> low-latency
 Server switched to lazy mode
-Autoprobing max downstream fragment size... (skip with -m fragsize)
-768 ok.. ...1152 not ok.. 960 ok.. ...1056 not ok.. 1008 ok.. 1032 ok.. 1044 ok.. will use 1044-2=1042
+Autoprobing max downstream fragment size... <span class="o">(</span>skip with -m fragsize<span class="o">)</span>
+<span class="m">768</span> ok.. ...1152 not ok.. <span class="m">960</span> ok.. ...1056 not ok.. <span class="m">1008</span> ok.. <span class="m">1032</span> ok.. <span class="m">1044</span> ok.. will use 1044-2<span class="o">=</span>1042
 Setting downstream fragment size to max 1042...
-Connection setup complete, transmitting data.</pre>
-<!-- break -->
+Connection setup <span class="nb">complete</span>, transmitting data.
+</pre></div>
 <p>Then setup the SSH connection:</p>
-<pre class="lang:default decode:true"># ssh -CD 9999 user@10.0.0.1 -p 1337 </pre>
+<div class="highlight"><pre><span class="c"># ssh -CD 9999 user@10.0.0.1 -p 1337</span>
+</pre></div>
 <p>This will create a <strong>local socket</strong> which can be used for further connections.</p>
-<p><strong>Traffic redirection</strong></p>
-<p>I use <strong>proxychains</strong> (but there is also socat, socksify, tsocks etc.) for traffic redirection. Simply add 127.0.0.1:9999 to your /etc/proxychains.conf and you’ll have your desired traffic control.</p>
-<p><strong>Screenshots</strong></p>
-<p><a href="http://static.dornea.nu/img/2011/6bfde6b20545d915b28a4b994ad6cc32.jpg"><img alt="Iodine" class="img-responsive" height="361" src="http://static.dornea.nu/img/2011/6bfde6b20545d915b28a4b994ad6cc32.jpg" title="Iodine" width="100%"/></a></p>
-<p><a href="http://static.dornea.nu/img/2011/c76b6a562efa2d63d79cb20479894fa4.jpg"><img alt="Iodine traffic control" class="img-responsive" height="734" src="http://static.dornea.nu/img/2011/c76b6a562efa2d63d79cb20479894fa4.jpg" title="Iodine traffic control" width="100%"/></a></p>
-<p><a href="http://static.dornea.nu/img/2011/cb3ed790b0768a9096037b9df343d1c2.jpg"><img alt="Iodine" class="img-responsive" height="247" src="http://static.dornea.nu/img/2011/cb3ed790b0768a9096037b9df343d1c2.jpg" width="100%"/></a></p>
+<h2 id="95798f1537fc1c471f316bc841bab70c">Traffic redirection</h2>
+<p>I use <strong>proxychains</strong> (but there is also socat, socksify, tsocks etc.) for traffic redirection. Simply add 127.0.0.1:9999 to your /etc/proxychains.conf and you'll have your desired traffic control.</p>
+<h2 id="46fa564bb1eed5cd3992cac85e8f094b">Screenshots</h2>
+<p><img alt="" class="img-responsive" src="http://dl.dornea.nu/img/2011/261/iodine1.png"/></p>
+<p><img alt="" class="img-responsive" src="http://dl.dornea.nu/img/2011/261/iodine2.png"/></p>
+<p><img alt="" class="img-responsive" src="http://dl.dornea.nu/img/2011/261/iodine3.png"/></p>
                 </div>
 <hr/>
 <div style="float:left;">
@@ -188,10 +192,12 @@ Connection setup complete, transmitting data.</pre>
                     <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/hacking/">hacking</a><sup>20</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>33</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/security/">security</a><sup>29</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>37</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/security/">security</a><sup>33</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/dns/">dns</a><sup>1</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/icmp/">icmp</a><sup>4</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ipv4/">ipv4</a><sup>2</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/tools/">tools</a><sup>11</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -200,7 +206,7 @@ Connection setup complete, transmitting data.</pre>
                     </div>
                     <ul id="niu2-sidebar-toc-list">
                         <li><a href="#content-heading">Thank God there is iodine! IPv4 over DNS</a></li>
-                        
+                        <li><a href='#95798f1537fc1c471f316bc841bab70c'>Traffic redirection</a></li><li><a href='#46fa564bb1eed5cd3992cac85e8f094b'>Screenshots</a></li>
                         <li><a href="#content-comments">Comments</a></li>
                     </ul>
                 </div>

@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="keywords" content="video">
+        <meta name="keywords" content="video, media, howto, tools">
         <meta name="description" content="Since I wasn't able to find any acceptable Howto, I thought I'd write my own one. Initial situation I have some videos taken with my Panasonic Lumix DMC-TZ10 in AVCHD Lite format (MTS). All I want to do is to convert these files into some more handy format ...">
         <title>HowTo: Convert MTS to MKV using tsMuxeR and ffmpeg - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
@@ -57,10 +57,13 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
+                                      (101)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
                                <li><a href="http://blog.dornea.nu/category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (18)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -115,84 +118,77 @@
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
                     <p>Since I wasn't able to find any acceptable Howto, I thought I'd write my own one.</p>
-<p><strong>Initial situation</strong></p>
-<hr align="left" color="#1c1c1c" noshade="noshade" size="1" width="98%"/>
+<h2 id="6f6d0babc7a22bedf119e306b16a1ab5">Initial situation</h2>
 <p>I have some videos taken with my <strong>Panasonic Lumix DMC-TZ10</strong> in AVCHD Lite format (MTS). All I want to do is to convert these files into some more handy format like MKV (Matroska).</p>
-<!--more-->
-<p><strong>Demuxing</strong></p>
-<hr align="left" color="#1c1c1c" noshade="noshade" size="1" width="98%"/>
+<h2 id="8790020bbbd6a5e5ca614321ccd7b366">Demuxing</h2>
 <p>I've used <strong>tsMuxeR</strong> from SmartLabs to demux the files. Here's what I did:</p>
-<p><a href="http://dl.dornea.nu/img/2011/253/tsmuxer.png"><img alt="tsMuxeR" class="img-responsive trigger_lightbox" src="http://dl.dornea.nu/img/2011/253/tsmuxer.png" style="width: 590px; height: 426px;"/></a></p>
-<div style="page-break-after: always;">
-<span style="display: none;"> </span>
-</div>
+<p><img alt="tsmuxer" class="img-responsive" src="http://dl.dornea.nu/img/2011/253/tsmuxer.png"/></p>
 <p>Now you should have following files on your disk:</p>
-<pre class="brush:plain;"># ls -ltr 00001.*
--rwxr-xr-x 1 root root 1259520 Jun 27 21:31 00001.MTS
--rw-r----- 1 root root    8906 Jun 28 10:09 00001.track_4608.sup
--rw-r----- 1 root root   25344 Jun 28 10:09 00001.track_4352.ac3
--rw-r----- 1 root root 1150138 Jun 28 10:09 00001.track_4113.264
-</pre>
-<p><strong>Put things together</strong></p>
-<hr align="left" color="#1c1c1c" noshade="noshade" size="1" width="98%"/>
-<p>Now using <strong>ffmpeg</strong> let's create some MKV from previously demuxed files. Make sure you have ffmpeg with libx264 built-in support ("–enable-libx264" when configuring). For Gentoo users this are my USE flags:</p>
-<pre class="brush:plain;"># eix -e ffmpeg
-[I] media-video/ffmpeg
+<div class="highlight"><pre><span class="c"># ls -ltr 00001.*</span>
+-rwxr-xr-x <span class="m">1</span> root root <span class="m">1259520</span> Jun <span class="m">27</span> 21:31 00001.MTS
+-rw-r----- <span class="m">1</span> root root    <span class="m">8906</span> Jun <span class="m">28</span> 10:09 00001.track_4608.sup
+-rw-r----- <span class="m">1</span> root root   <span class="m">25344</span> Jun <span class="m">28</span> 10:09 00001.track_4352.ac3
+-rw-r----- <span class="m">1</span> root root <span class="m">1150138</span> Jun <span class="m">28</span> 10:09 00001.track_4113.264
+</pre></div>
+<h2 id="efa784a8e910b1ca142d95e680813457">Put things together</h2>
+<p>Now using <strong>ffmpeg</strong> let's create some MKV from previously demuxed files. Make sure you have ffmpeg with libx264 built-in support ("-enable-libx264" when configuring). For Gentoo users this are my USE flags:</p>
+<div class="highlight"><pre><span class="c"># eix -e ffmpeg</span>
+<span class="o">[</span>I<span class="o">]</span> media-video/ffmpeg
 ...
-     Installed versions:  0.7_rc1(09:28:59 PM 06/27/2011)(3dnow 3dnowext X alsa avx bzip2 encode hardcoded-tables mmx mmxext ssse3 truetype v4l v4l2 x264 xvid zlib -aac -altivec -amr -bindist -celt -cpudetection -custom-cflags -debug -dirac -doc -faac -frei0r -gsm -ieee1394 -jack -jpeg2k -mp3 -network -oss -pic -qt-faststart -rtmp -schroedinger -sdl -speex -static-libs -test -theora -threads -vaapi -vdpau -video_cards_nvidia -vorbis -vpx)
-</pre>
+     Installed versions:  0.7_rc1<span class="o">(</span>09:28:59 PM 06/27/2011<span class="o">)(</span>3dnow 3dnowext X alsa avx bzip2 encode hardcoded-tables mmx mmxext ssse3 truetype v4l v4l2 x264 xvid zlib -aac -altivec -amr -bindist -celt -cpudetection -custom-cflags -debug -dirac -doc -faac -frei0r -gsm -ieee1394 -jack -jpeg2k -mp3 -network -oss -pic -qt-faststart -rtmp -schroedinger -sdl -speex -static-libs -test -theora -threads -vaapi -vdpau -video_cards_nvidia -vorbis -vpx<span class="o">)</span>
+</pre></div>
 <p>Now all you have to do is to type:</p>
-<pre class="brush:plain;">ffmpeg -i 00001.*.264 -i 00001.*.ac3 -vcodec libx264 -acodec ac3 -b 2000k output.mkv
-</pre>
+<div class="highlight"><pre><span class="nv">$ </span>ffmpeg -i 00001.*.264 -i 00001.*.ac3 -vcodec libx264 -acodec ac3 -b 2000k output.mkv
+</pre></div>
 <p>You should get some crazy output like:</p>
-<pre class="brush:plain;">ffmpeg version 0.7-rc1, Copyright (c) 2000-2011 the FFmpeg developers
-  built on Jun 27 2011 21:28:51 with gcc 4.4.4
-  configuration: --prefix=/usr --libdir=/usr/lib64 --shlibdir=/usr/lib64 --mandir=/usr/share/man --enable-shared --cc=x86_64-pc-linux-gnu-gcc --disable-static --enable-gpl --enable-postproc --enable-avfilter --disable-stripping --disable-debug --disable-doc --disable-network --disable-vaapi --disable-ffplay --disable-vdpau --enable-libx264 --enable-libxvid --disable-indev=oss --disable-indev=jack --enable-x11grab --disable-outdev=oss --enable-libfreetype --disable-altivec --enable-hardcoded-tables
-  libavutil    50. 40. 1 / 50. 40. 1
-  libavcodec   52.120. 0 / 52.120. 0
-  libavformat  52.108. 0 / 52.108. 0
-  libavdevice  52.  4. 0 / 52.  4. 0
-  libavfilter   1. 77. 0 /  1. 77. 0
-  libswscale    0. 13. 0 /  0. 13. 0
-  libpostproc  51.  2. 0 / 51.  2. 0
-[h264 @ 0x24266a0] Estimating duration from bitrate, this may be inaccurate
+<div class="highlight"><pre>ffmpeg version 0.7-rc1, Copyright <span class="o">(</span>c<span class="o">)</span> 2000-2011 the FFmpeg developers
+  built on Jun <span class="m">27</span> <span class="m">2011</span> 21:28:51 with gcc 4.4.4
+  configuration: --prefix<span class="o">=</span>/usr --libdir<span class="o">=</span>/usr/lib64 --shlibdir<span class="o">=</span>/usr/lib64 --mandir<span class="o">=</span>/usr/share/man --enable-shared --cc<span class="o">=</span>x86_64-pc-linux-gnu-gcc --disable-static --enable-gpl --enable-postproc --enable-avfilter --disable-stripping --disable-debug --disable-doc --disable-network --disable-vaapi --disable-ffplay --disable-vdpau --enable-libx264 --enable-libxvid --disable-indev<span class="o">=</span>oss --disable-indev<span class="o">=</span>jack --enable-x11grab --disable-outdev<span class="o">=</span>oss --enable-libfreetype --disable-altivec --enable-hardcoded-tables
+  libavutil    50. 40. <span class="m">1</span> / 50. 40. 1
+  libavcodec   52.120. <span class="m">0</span> / 52.120. 0
+  libavformat  52.108. <span class="m">0</span> / 52.108. 0
+  libavdevice  52.  4. <span class="m">0</span> / 52.  4. 0
+  libavfilter   1. 77. <span class="m">0</span> /  1. 77. 0
+  libswscale    0. 13. <span class="m">0</span> /  0. 13. 0
+  libpostproc  51.  2. <span class="m">0</span> / 51.  2. 0
+<span class="o">[</span>h264 @ 0x24266a0<span class="o">]</span> Estimating duration from bitrate, this may be inaccurate
 
-Seems stream 0 codec frame rate differs from container frame rate: 100.00 (100/1) -&gt; 50.00 (100/2)
-Input #0, h264, from '00001.track_4113.264':
+Seems stream <span class="m">0</span> codec frame rate differs from container frame rate: 100.00 <span class="o">(</span>100/1<span class="o">)</span> -&gt; 50.00 <span class="o">(</span>100/2<span class="o">)</span>
+Input <span class="c">#0, h264, from &amp;#39;00001.track_4113.264&amp;#39;:</span>
   Duration: N/A, bitrate: N/A
-    Stream #0.0: Video: h264 (High), yuv420p, 1280x720 [PAR 1:1 DAR 16:9], 25 fps, 50 tbr, 1200k tbn, 100 tbc
-[ac3 @ 0x2427960] Estimating duration from bitrate, this may be inaccurate
-Input #1, ac3, from '00001.track_4352.ac3':
-  Duration: 00:00:01.05, start: 0.000000, bitrate: 192 kb/s
-    Stream #1.0: Audio: ac3, 48000 Hz, stereo, s16, 192 kb/s
-File 'output.mkv' already exists. Overwrite ? [y/N] y
-[buffer @ 0x242d7d0] w:1280 h:720 pixfmt:yuv420p
-[libx264 @ 0x245aa20] Default settings detected, using medium profile
-[libx264 @ 0x245aa20] using SAR=1/1
-[libx264 @ 0x245aa20] using cpu capabilities: MMX2 SSE2Fast SSSE3 FastShuffle SSE4.1 Cache64
-[libx264 @ 0x245aa20] profile High, level 3.2
-[libx264 @ 0x245aa20] 264 - core 107 - H.264/MPEG-4 AVC codec - Copyleft 2003-2010 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=abr mbtree=1 bitrate=2000 ratetol=1.0 qcomp=0.60 qpmin=10 qpmax=51 qpstep=4 ip_ratio=1.40 aq=1:1.00
-Output #0, matroska, to 'output.mkv':
+    Stream <span class="c">#0.0: Video: h264 (High), yuv420p, 1280x720 [PAR 1:1 DAR 16:9], 25 fps, 50 tbr, 1200k tbn, 100 tbc</span>
+<span class="o">[</span>ac3 @ 0x2427960<span class="o">]</span> Estimating duration from bitrate, this may be inaccurate
+Input <span class="c">#1, ac3, from &amp;#39;00001.track_4352.ac3&amp;#39;:</span>
+  Duration: 00:00:01.05, start: 0.000000, bitrate: <span class="m">192</span> kb/s
+    Stream <span class="c">#1.0: Audio: ac3, 48000 Hz, stereo, s16, 192 kb/s</span>
+File <span class="p">&amp;</span><span class="c">#39;output.mkv&amp;#39; already exists. Overwrite ? [y/N] y</span>
+<span class="o">[</span>buffer @ 0x242d7d0<span class="o">]</span> w:1280 h:720 pixfmt:yuv420p
+<span class="o">[</span>libx264 @ 0x245aa20<span class="o">]</span> Default settings detected, using medium profile
+<span class="o">[</span>libx264 @ 0x245aa20<span class="o">]</span> using <span class="nv">SAR</span><span class="o">=</span>1/1
+<span class="o">[</span>libx264 @ 0x245aa20<span class="o">]</span> using cpu capabilities: MMX2 SSE2Fast SSSE3 FastShuffle SSE4.1 Cache64
+<span class="o">[</span>libx264 @ 0x245aa20<span class="o">]</span> profile High, level 3.2
+<span class="o">[</span>libx264 @ 0x245aa20<span class="o">]</span> <span class="m">264</span> - core <span class="m">107</span> - H.264/MPEG-4 AVC codec - Copyleft 2003-2010 - http://www.videolan.org/x264.html - options: <span class="nv">cabac</span><span class="o">=</span><span class="m">1</span> <span class="nv">ref</span><span class="o">=</span><span class="m">3</span> <span class="nv">deblock</span><span class="o">=</span>1:0:0 <span class="nv">analyse</span><span class="o">=</span>0x3:0x113 <span class="nv">me</span><span class="o">=</span>hex <span class="nv">subme</span><span class="o">=</span><span class="m">7</span> <span class="nv">psy</span><span class="o">=</span><span class="m">1</span> <span class="nv">psy_rd</span><span class="o">=</span>1.00:0.00 <span class="nv">mixed_ref</span><span class="o">=</span><span class="m">1</span> <span class="nv">me_range</span><span class="o">=</span><span class="m">16</span> <span class="nv">chroma_me</span><span class="o">=</span><span class="m">1</span> <span class="nv">trellis</span><span class="o">=</span><span class="m">1</span> <span class="nv">8x8dct</span><span class="o">=</span><span class="m">1</span> <span class="nv">cqm</span><span class="o">=</span><span class="m">0</span> <span class="nv">deadzone</span><span class="o">=</span>21,11 <span class="nv">fast_pskip</span><span class="o">=</span><span class="m">1</span> <span class="nv">chroma_qp_offset</span><span class="o">=</span>-2 <span class="nv">threads</span><span class="o">=</span><span class="m">1</span> <span class="nv">sliced_threads</span><span class="o">=</span><span class="m">0</span> <span class="nv">nr</span><span class="o">=</span><span class="m">0</span> <span class="nv">decimate</span><span class="o">=</span><span class="m">1</span> <span class="nv">interlaced</span><span class="o">=</span><span class="m">0</span> <span class="nv">constrained_intra</span><span class="o">=</span><span class="m">0</span> <span class="nv">bframes</span><span class="o">=</span><span class="m">3</span> <span class="nv">b_pyramid</span><span class="o">=</span><span class="m">2</span> <span class="nv">b_adapt</span><span class="o">=</span><span class="m">1</span> <span class="nv">b_bias</span><span class="o">=</span><span class="m">0</span> <span class="nv">direct</span><span class="o">=</span><span class="m">1</span> <span class="nv">weightb</span><span class="o">=</span><span class="m">1</span> <span class="nv">open_gop</span><span class="o">=</span><span class="m">0</span> <span class="nv">weightp</span><span class="o">=</span><span class="m">2</span> <span class="nv">keyint</span><span class="o">=</span><span class="m">250</span> <span class="nv">keyint_min</span><span class="o">=</span><span class="m">25</span> <span class="nv">scenecut</span><span class="o">=</span><span class="m">40</span> <span class="nv">intra_refresh</span><span class="o">=</span><span class="m">0</span> <span class="nv">rc_lookahead</span><span class="o">=</span><span class="m">40</span> <span class="nv">rc</span><span class="o">=</span>abr <span class="nv">mbtree</span><span class="o">=</span><span class="m">1</span> <span class="nv">bitrate</span><span class="o">=</span><span class="m">2000</span> <span class="nv">ratetol</span><span class="o">=</span>1.0 <span class="nv">qcomp</span><span class="o">=</span>0.60 <span class="nv">qpmin</span><span class="o">=</span><span class="m">10</span> <span class="nv">qpmax</span><span class="o">=</span><span class="m">51</span> <span class="nv">qpstep</span><span class="o">=</span><span class="m">4</span> <span class="nv">ip_ratio</span><span class="o">=</span>1.40 <span class="nv">aq</span><span class="o">=</span>1:1.00
+Output <span class="c">#0, matroska, to &amp;#39;output.mkv&amp;#39;:</span>
   Metadata:
     encoder         : Lavf52.108.0
-    Stream #0.0: Video: libx264, yuv420p, 1280x720 [PAR 1:1 DAR 16:9], q=2-31, 2000 kb/s, 1k tbn, 50 tbc
-    Stream #0.1: Audio: ac3, 48000 Hz, stereo, s16, 64 kb/s
+    Stream <span class="c">#0.0: Video: libx264, yuv420p, 1280x720 [PAR 1:1 DAR 16:9], q=2-31, 2000 kb/s, 1k tbn, 50 tbc</span>
+    Stream <span class="c">#0.1: Audio: ac3, 48000 Hz, stereo, s16, 64 kb/s</span>
 Stream mapping:
-  Stream #0.0 -&gt; #0.0
-  Stream #1.0 -&gt; #0.1
-Press [q] to stop encoding
-^Came=   22 fps=  0 q=0.0 size=       1kB time=10000000000.00 bitrate=   0.0kbits/s    
-</pre>
+  Stream <span class="c">#0.0 -&gt; #0.0</span>
+  Stream <span class="c">#1.0 -&gt; #0.1</span>
+Press <span class="o">[</span>q<span class="o">]</span> to stop encoding
+^Came<span class="o">=</span>   <span class="m">22</span> <span class="nv">fps</span><span class="o">=</span>  <span class="m">0</span> <span class="nv">q</span><span class="o">=</span>0.0 <span class="nv">size</span><span class="o">=</span>       1kB <span class="nb">time</span><span class="o">=</span>10000000000.00 <span class="nv">bitrate</span><span class="o">=</span>   0.0kbits/s    
+</pre></div>
                 </div>
 <hr/>
 <div style="float:left;">
-	Prev: <a href="http://blog.dornea.nu/2011/06/24/free-pptp-vpn-servers" align='left'>
-	 Free PPTP VPN servers
+	Prev: <a href="http://blog.dornea.nu/2011/04/04/vnc-connect-to-current-desktop-session-using-x11vnc-and-ssh" align='left'>
+	 VNC: Connect to current desktop session using x11vnc and ssh
 	</a>
 </div>
 <div style="float:right;">
-    Next: <a href="http://blog.dornea.nu/2011/07/28/howto-keep-your-passwords-safe-using-sqlite-and-sqlcipher" align='right'>
-	 HowTo: Keep your passwords safe using SQLite and SQLCipher
+    Next: <a href="http://blog.dornea.nu/2011/11/30/add-namecheap-mail-account-ox-mail-to-thunderbird" align='right'>
+	 Add Namecheap Mail account (OX Mail) to Thunderbird
 	</a>
 </div>
 </p>
@@ -219,10 +215,13 @@ Press [q] to stop encoding
                 <div id="niu2-sidebar-meta" class="niu2-sidebar">
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>Published:</div>
                     <div class="niu2-sidebar-value">2011-06-28 00:00</div>
-                    <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
-                    <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
+                    <div class="niu2-sidebar-label"><i class="icon-book"></i>category:</div>
+                    <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/notes">notes</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/video/">video</a><sup>3</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/video/">video</a><sup>2</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/media/">media</a><sup>2</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/howto/">howto</a><sup>22</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/tools/">tools</a><sup>11</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -231,7 +230,7 @@ Press [q] to stop encoding
                     </div>
                     <ul id="niu2-sidebar-toc-list">
                         <li><a href="#content-heading">HowTo: Convert MTS to MKV using tsMuxeR and ffmpeg</a></li>
-                        
+                        <li><a href='#6f6d0babc7a22bedf119e306b16a1ab5'>Initial situation</a></li><li><a href='#8790020bbbd6a5e5ca614321ccd7b366'>Demuxing</a></li><li><a href='#efa784a8e910b1ca142d95e680813457'>Put things together</a></li>
                         <li><a href="#content-comments">Comments</a></li>
                     </ul>
                 </div>

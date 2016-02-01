@@ -3,8 +3,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="keywords" content="howto, web, lighttpd, admin">
-        <meta name="description" content="I’ll just post my lighttpd.conf. The rest can be easily found on the Internet. $HTTP["host"] =~ "^dev.dornea.nu$" { evhost.path-pattern = "/home/redmine/current/public" server.follow-symlink = "enable" server.indexfiles = ( "dispatch.fcgi" ) server.error-handler-404 = "/dispatch.fcgi" #dir-listing.activate = "enable" url.rewrite-once = ( "^/(.*..+(?!html))$" => "$0", "^/(.*).(.*)" => "$0", ) fastcgi.server = ( ".fcgi" => ( "redmine ...">
+        <meta name="keywords" content="howto, web, lighttpd, admin, debian">
+        <meta name="description" content="I'll just post my lighttpd.conf. The rest can be easily found on the Internet. $HTTP["host"] =~ "^dev.dornea.nu$" { evhost.path-pattern = "/home/redmine/current/public" server.follow-symlink = "enable" server.indexfiles = ( "dispatch.fcgi" ) server.error-handler-404 = "/dispatch.fcgi" #dir-listing.activate = "enable" url.rewrite-once = ( "^/(.*..+(?!html))$" =&gt; "$0", "^/(.*).(.*)" =&gt; "$0", ) fastcgi.server ...">
         <title>HowTo: Redmine, Lighttpd with Debian - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
         <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
@@ -57,10 +57,13 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
+                                      (101)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
                                <li><a href="http://blog.dornea.nu/category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (18)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -114,36 +117,32 @@
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <p>I’ll just post my lighttpd.conf. The rest can be easily found on the Internet.</p>
-<pre class="brush:plain">$HTTP["host"] =~ "^dev.dornea.nu$" {
-        evhost.path-pattern = "/home/redmine/current/public"
-        server.follow-symlink = "enable"
+                    <p>I'll just post my <code>lighttpd.conf</code>. The rest can be easily found on the Internet.</p>
+<div class="highlight"><pre><span class="nv">$HTTP</span><span class="o">[</span><span class="s2">"host"</span><span class="o">]</span> <span class="o">=</span>~ <span class="s2">"^dev.dornea.nu</span><span class="nv">$"</span><span class="s2"> {</span>
+<span class="s2">        evhost.path-pattern = "</span>/home/redmine/current/public<span class="s2">"</span>
+<span class="s2">        server.follow-symlink = "</span><span class="nb">enable</span><span class="s2">"</span>
 
-        server.indexfiles = ( "dispatch.fcgi" )
-        server.error-handler-404 = "/dispatch.fcgi"
+<span class="s2">        server.indexfiles = ( "</span>dispatch.fcgi<span class="s2">" )</span>
+<span class="s2">        server.error-handler-404 = "</span>/dispatch.fcgi<span class="s2">"</span>
 
-        #dir-listing.activate = "enable"
+<span class="s2">        #dir-listing.activate = "</span><span class="nb">enable</span><span class="s2">"</span>
 
-        url.rewrite-once = (
-            "^/(.*..+(?!html))$" =&gt; "$0",
-            "^/(.*).(.*)"        =&gt; "$0",
-        )
+<span class="s2">        url.rewrite-once = (</span>
+<span class="s2">            "</span>^/<span class="o">(</span>.*..+<span class="o">(</span>?!html<span class="o">))</span><span class="s2">$" =&amp;gt; "</span><span class="nv">$0</span><span class="s2">",</span>
+<span class="s2">            "</span>^/<span class="o">(</span>.*<span class="o">)</span>.<span class="o">(</span>.*<span class="o">)</span><span class="s2">"        =&amp;gt; "</span><span class="nv">$0</span><span class="s2">",</span>
+<span class="s2">        )</span>
 
-        fastcgi.server      = ( ".fcgi" =&gt; ( "redmine" =&gt; (
-                "min-procs"       =&gt; 1,
-                "max-procs"       =&gt; 5,
-                "socket" =&gt; "/tmp/redmine.socket",
-                "bin-path" =&gt; "/usr/bin/ruby /home/redmine/current/public/dispatch.fcgi",
-                "bin-environment" =&gt; ( "RAILS_ENV" =&gt; "production" )
-        ) ) )
+<span class="s2">        fastcgi.server      = ( "</span>.fcgi<span class="s2">" =&amp;gt; ( "</span>redmine<span class="s2">" =&amp;gt; (</span>
+<span class="s2">                "</span>min-procs<span class="s2">"       =&amp;gt; 1,</span>
+<span class="s2">                "</span>max-procs<span class="s2">"       =&amp;gt; 5,</span>
+<span class="s2">                "</span>socket<span class="s2">" =&amp;gt; "</span>/tmp/redmine.socket<span class="s2">",</span>
+<span class="s2">                "</span>bin-path<span class="s2">" =&amp;gt; "</span>/usr/bin/ruby /home/redmine/current/public/dispatch.fcgi<span class="s2">",</span>
+<span class="s2">                "</span>bin-environment<span class="s2">" =&amp;gt; ( "</span>RAILS_ENV<span class="s2">" =&amp;gt; "</span>production<span class="s2">" )</span>
+<span class="s2">        ) ) )</span>
 
-    }
-</pre>
+<span class="s2">    }</span>
+</pre></div>
 <p>My redmine installation can be found under <strong>/home/redmine/current</strong></p>
-<div style="page-break-after: always;">
-<span style="display: none;"> </span>
-</div>
-<p> </p>
                 </div>
 <hr/>
 <div style="float:left;">
@@ -183,10 +182,11 @@
                     <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
                     <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/howto/">howto</a><sup>20</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/web/">web</a><sup>13</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/howto/">howto</a><sup>22</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/web/">web</a><sup>14</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/lighttpd/">lighttpd</a><sup>2</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/admin/">admin</a><sup>21</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/admin/">admin</a><sup>22</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/debian/">debian</a><sup>2</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">

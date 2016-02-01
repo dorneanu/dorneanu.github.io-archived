@@ -3,8 +3,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="keywords" content="howto, networking, security, icmp, admin">
-        <meta name="description" content="This time I’d like to give you a short usage description of icmpKNOCK that was recently released. The main reason I wrote it was lack of security measurements on my boxes. I didn’t want any sophisticated IDS tools nor complicated monitoring services. I wanted to implement something which ...">
+        <meta name="keywords" content="howto, networking, security, icmp, admin, icmpknock">
+        <meta name="description" content="This time I'd like to give you a short usage description of icmpKNOCK that was recently released. The main reason I wrote it was lack of security measurements on my boxes. I didn't want any sophisticated IDS tools nor complicated monitoring services. I wanted to implement something which ...">
         <title>HowTo: Secure your server using icmpKNOCK - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
         <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
@@ -57,10 +57,13 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
+                                      (101)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
                                <li><a href="http://blog.dornea.nu/category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (18)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -114,56 +117,24 @@
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <p>This time I’d like to give you a short usage description of <a href="http://dornea.nu/projects/icmpknock">icmpKNOCK</a> that was recently released. The main reason I wrote it was lack of security measurements on my boxes. I didn’t want any sophisticated IDS tools nor complicated monitoring services. I wanted to implement something which will run on (almost) any platform without any external toolsb. Since the ping utility is available on most modern systems using ICMP packets to communicate with the server was the most reasonable approach. There are plenty of other <strong>port knocking</strong> tools but these are mostly binaries. These have to be first compiled on the running system which is bad. So the second thought was to use a programming language powerful enough to fulfill my needs and be portable. It had to be Python <img alt=":)" class="wp-smiley img-responsive" src="http://dornea.nu/wp-includes/images/smilies/icon_smile.gif"/> <!--more--></p>
-<!--break-->
-<div class="toc_wrap_right toc_transparent no_bullets" id="toc_container">
-<p class="toc_title">
-    Contents
-  </p>
-<ul class="toc_list">
-<li>
-<a href="#i"><span class="toc_number toc_depth_1">1</span>   </a><ul>
-<li>
-<a href="#Getting_started"><span class="toc_number toc_depth_2">1.1</span> Getting started</a>
-</li>
-<li>
-<a href="#Generate_hex_sequences"><span class="toc_number toc_depth_2">1.2</span> Generate hex sequences</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="#i-2"><span class="toc_number toc_depth_1">2</span>  </a><ul>
-<li>
-<a href="#Define_actions"><span class="toc_number toc_depth_2">2.1</span> Define actions</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="#i-3"><span class="toc_number toc_depth_1">3</span>  </a><ul>
-<li>
-<a href="#Prepare_your_scripts"><span class="toc_number toc_depth_2">3.1</span> Prepare your scripts</a>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-<h1 id="7f313c24536ddba8cb4835ff02a5cb6d"><span id="i"><span style="display: none;"> </span><span id="cke_bm_336S" style="display: none;"> </span></span></h1>
-<h2 id="cb59b87e00d11222bfd9159d0d23836f"><span id="Getting_started">Getting started</span></h2>
-<p>First you’ll have to get the latest version of icmpKNOCK. Please check the SVN download <a href="http://dl.dornea.nu/svn/icmpKNOCK">link</a> for the newest packages. Then make sure to upload the package to your server and copy it to a secret place where nobody – besides you – has read permissions on the actions file. Why is that important? Because the actions file contains your “secret” hex sequences used to trigger certain actions. So you don’t want anybody to know these ones. In that case potential attackers might manipulate the behaviour of your system without noticing it.</p>
-<pre class="brush:plain;">~/icmpknock/v0.2.r9# ls -l
+                    <p>This time I'd like to give you a short usage description of <a href="http://github.com/dorneanu/icmpKNOCK">icmpKNOCK</a> that was recently released. The main reason I wrote it was lack of security measurements on my boxes. I didn't want any sophisticated IDS tools nor complicated monitoring services. I wanted to implement something which will run on (almost) any platform without any external toolsb. Since the ping utility is available on most modern systems using ICMP packets to communicate with the server was the most reasonable approach. There are plenty of other <strong>port knocking</strong> tools but these are mostly binaries. These have to be first compiled on the running system which is bad. So the second thought was to use a programming language powerful enough to fulfill my needs and be portable. It had to be Python. </p>
+<h2 id="cb59b87e00d11222bfd9159d0d23836f">Getting started</h2>
+<p>First you'll have to get the latest version of icmpKNOCK. Please check the SVN download <a href="http://github.com/dorneanu/icmpKNOCK">link</a> for the newest packages. Then make sure to upload the package to your server and copy it to a secret place where nobody - besides you - has read permissions on the actions file. Why is that important? Because the actions file contains your <code>secret</code> hex sequences used to trigger certain actions. So you don't want anybody to know these ones. In that case potential attackers might manipulate the behaviour of your system without noticing it.</p>
+<div class="highlight"><pre>~/icmpknock/v0.2.r9# ls -l
 total 32
--rw-r--r-- 1 root root   35 Sep  9 13:45 AUTHORS
--rw-r--r-- 1 root root  340 Sep  9 14:19 CHANGELOG
--rw-r--r-- 1 root root 1074 Sep 13 13:54 README
-drwxr-xr-x 2 root root 4096 Sep 30 16:33 conf
--rwxr-xr-x 1 root root 4575 Sep  9 13:45 icmpKNOCK.py
-drwxr-xr-x 2 root root 4096 Sep 30 16:11 modules
-drwxr-xr-x 2 root root 4096 Sep 30 16:11 scripts</pre>
-<h2 id="ecb9027bcc8c0d5d9f6cb2e2f54bddbc"><span id="Generate_hex_sequences">Generate hex sequences</span></h2>
-<p>Now you’ll have to generate your keys. You could use MD4, MD5, SHA-1 etc hashes. This is what I did:</p>
-<pre class="brush:bash;">$ for i in `seq 1 10`; 
-do pwgen 20 1 | md5; 
-done        
+-rw-r--r-- <span class="m">1</span> root root   <span class="m">35</span> Sep  <span class="m">9</span> 13:45 AUTHORS
+-rw-r--r-- <span class="m">1</span> root root  <span class="m">340</span> Sep  <span class="m">9</span> 14:19 CHANGELOG
+-rw-r--r-- <span class="m">1</span> root root <span class="m">1074</span> Sep <span class="m">13</span> 13:54 README
+drwxr-xr-x <span class="m">2</span> root root <span class="m">4096</span> Sep <span class="m">30</span> 16:33 conf
+-rwxr-xr-x <span class="m">1</span> root root <span class="m">4575</span> Sep  <span class="m">9</span> 13:45 icmpKNOCK.py
+drwxr-xr-x <span class="m">2</span> root root <span class="m">4096</span> Sep <span class="m">30</span> 16:11 modules
+drwxr-xr-x <span class="m">2</span> root root <span class="m">4096</span> Sep <span class="m">30</span> 16:11 scripts
+</pre></div>
+<h2 id="ecb9027bcc8c0d5d9f6cb2e2f54bddbc">Generate hex sequences</h2>
+<p>Now you'll have to generate your keys. You could use MD4, MD5, SHA-1 etc hashes. This is what I did:</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="k">for</span> i in <span class="sb">`</span>seq <span class="m">1</span> 10<span class="sb">`</span><span class="p">;</span> 
+<span class="k">do</span> pwgen <span class="m">20</span> <span class="m">1</span> <span class="p">|</span> md5<span class="p">;</span> 
+<span class="k">done</span>        
 bf6e1e0c0ce8fedb43146e50d1b281f9                                                
 d3ed14fb017c3b0afb8b2329fb010756
 2ab616e0b85ff5e80a8bd274745d530f
@@ -173,36 +144,37 @@ c2a565c9132b4931f1c5cd20c1498604
 cfdff084e3442c5b8613ac75aa5147ad
 d047732f4c0b083f8f322437f0071bb9
 56bb53f69f701975db0977f316cd6402
-b124d903a6c510fbba2b1ccb23a11f2d</pre>
-<p>That should do the work. Now you’ll have to edit your actions file (conf/actions.conf) and copy these values to it. Please have a look at the descriptive text inside the file for further information.</p>
-<h1 id="8df6fbcc43d31d99e5112eb009ed8a2d"><span id="i-2"> </span></h1>
-<h2 id="eec2cbe3d51558ec93ea3014ecfbf4c7"><span id="Define_actions">Define actions</span></h2>
-<p>This is the most interesting part. In this HowTo I’ll give you an example how to block/open SSH port 22 using icmpKNOCK. Therefor I’ll be using iptables which should be available within every Linux distribution. So let’s start…</p>
-<p>For this tutorial the SSH port should be always closed. Let’s define the action describing that:</p>
-<pre class="brush:plain;">[stop_ssh]
-keys = &lt;your secret keys here&gt;
-payload = iptables -A INPUT -p tcp --dport 22 -j REJECT --reject-with tcp-reset</pre>
+b124d903a6c510fbba2b1ccb23a11f2d
+</pre></div>
+<p>That should do the work. Now you'll have to edit your actions file (conf/actions.conf) and copy these values to it. Please have a look at the descriptive text inside the file for further information.</p>
+<h2 id="eec2cbe3d51558ec93ea3014ecfbf4c7">Define actions</h2>
+<p>This is the most interesting part. In this HowTo I'll give you an example how to block/open SSH port 22 using icmpKNOCK. Therefor I'll be using iptables which should be available within every Linux distribution. So let's start...</p>
+<p>For this tutorial the SSH port should be always closed. Let's define the action describing that:</p>
+<div class="highlight"><pre><span class="o">[</span>stop_ssh<span class="o">]</span>
+<span class="nv">keys</span> <span class="o">=</span> &lt;your secret keys here&gt;
+<span class="nv">payload</span> <span class="o">=</span> iptables -A INPUT -p tcp --dport <span class="m">22</span> -j REJECT --reject-with tcp-reset
+</pre></div>
 <p>Everytime the server receives the secret hex sequences it will close port 22 to block any external connections. What about opening it?</p>
-<pre class="brush:plain;">[start_ssh]
-keys = &lt;your secret keys here&gt;
-payload = iptables -D INPUT -p tcp --dport 22 -j REJECT --reject-with tcp-reset</pre>
+<div class="highlight"><pre><span class="o">[</span>start_ssh<span class="o">]</span>
+<span class="nv">keys</span> <span class="o">=</span> &lt;your secret keys here&gt;
+<span class="nv">payload</span> <span class="o">=</span> iptables -D INPUT -p tcp --dport <span class="m">22</span> -j REJECT --reject-with tcp-reset
+</pre></div>
 <p>In that case you simply delete the previously created rule. Afterwards port 22 should be open again.</p>
-<p>Of course: There are lot of other possible configurations. Perhaps it is a better idea to define only 1 action which allows you to connect to port 22 within 20 seconds, close the port again after 20 seconds and keep the established connections. Feel free to use your brain <img alt=":)" class="wp-smiley img-responsive" src="http://dornea.nu/wp-includes/images/smilies/icon_smile.gif"/> </p>
-<h1 id="8df6fbcc43d31d99e5112eb009ed8a2d_1"><span id="i-3"> </span></h1>
-<h2 id="4f53974144bca45035367d4d42b8a66c"><span id="Prepare_your_scripts">Prepare your scripts</span></h2>
-<p>Your server – along with the Python application – will listen for incoming ICMP packets. Your client will be the ping utility as described above. In order to send your sequences to the server you’ll need a small bash script which will do the rest for you:</p>
-<pre class="brush:bash;">#!/bin/sh
+<p>Of course: There are lot of other possible configurations. Perhaps it is a better idea to define only 1 action which allows you to connect to port 22 within 20 seconds, close the port again after 20 seconds and keep the established connections. Feel free to use your brain.</p>
+<h2 id="4f53974144bca45035367d4d42b8a66c">Prepare your scripts</h2>
+<p>Your server - along with the Python application - will listen for incoming ICMP packets. Your client will be the ping utility as described above. In order to send your sequences to the server you'll need a small bash script which will do the rest for you:</p>
+<div class="highlight"><pre><span class="c">#!/bin/sh</span>
 
-HOST=&lt;your host here&gt;
-keys=&lt;your keys here&gt;'
+<span class="nv">HOST</span><span class="o">=</span>&lt;your host here&gt;
+<span class="nv">keys</span><span class="o">=</span>&lt;your keys here&gt;<span class="err">'</span>
 
-for k in $keys
-do
-   ping -c 1 -p $k $HOST
-done</pre>
-<p>That’s all. Just name your script something like “start_ssh.sh” and run it every time you you’ll connect to the server. The same applies to “cllosing the port”.</p>
-<p> </p>
-<p><strong>For any comments, new features or simply feedback, please use the comment functionality or drop me a mail.</strong></p>
+<span class="k">for</span> k in <span class="nv">$keys</span>
+<span class="k">do</span>
+   ping -c <span class="m">1</span> -p <span class="nv">$k</span> <span class="nv">$HOST</span>
+<span class="k">done</span>
+</pre></div>
+<p>That's all. Just name your script something like <code>start_ssh.sh</code> and run it every time you you'll connect to the server. The same applies to <code>cllosing the port</code>.</p>
+<p>For any comments, new features or simply feedback, please use the comment functionality or drop me a mail.</p>
                 </div>
 <hr/>
 <div style="float:left;">
@@ -242,11 +214,12 @@ done</pre>
                     <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
                     <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/howto/">howto</a><sup>20</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>33</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/security/">security</a><sup>29</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/howto/">howto</a><sup>22</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>37</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/security/">security</a><sup>33</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/icmp/">icmp</a><sup>4</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/admin/">admin</a><sup>21</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/admin/">admin</a><sup>22</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/icmpknock/">icmpknock</a><sup>3</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -255,7 +228,7 @@ done</pre>
                     </div>
                     <ul id="niu2-sidebar-toc-list">
                         <li><a href="#content-heading">HowTo: Secure your server using icmpKNOCK</a></li>
-                        <li><a href='#7f313c24536ddba8cb4835ff02a5cb6d'>  </a><ul><li><a href='#cb59b87e00d11222bfd9159d0d23836f'>Getting started</a></li><li><a href='#ecb9027bcc8c0d5d9f6cb2e2f54bddbc'>Generate hex sequences</a></li></ul></li><li><a href='#8df6fbcc43d31d99e5112eb009ed8a2d'> </a><ul><li><a href='#eec2cbe3d51558ec93ea3014ecfbf4c7'>Define actions</a></li></ul></li><li><a href='#8df6fbcc43d31d99e5112eb009ed8a2d_1'> </a><ul><li><a href='#4f53974144bca45035367d4d42b8a66c'>Prepare your scripts</a></li></ul></li>
+                        <li><a href='#cb59b87e00d11222bfd9159d0d23836f'>Getting started</a></li><li><a href='#ecb9027bcc8c0d5d9f6cb2e2f54bddbc'>Generate hex sequences</a></li><li><a href='#eec2cbe3d51558ec93ea3014ecfbf4c7'>Define actions</a></li><li><a href='#4f53974144bca45035367d4d42b8a66c'>Prepare your scripts</a></li>
                         <li><a href="#content-comments">Comments</a></li>
                     </ul>
                 </div>

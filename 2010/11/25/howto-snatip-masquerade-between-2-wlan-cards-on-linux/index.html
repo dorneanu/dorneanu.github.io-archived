@@ -3,8 +3,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="keywords" content="hacking, networking, snat, linux, admin, wlan">
-        <meta name="description" content="Although this is a quite minimalistic howto you should be able to do IP masquerading between your WLAN cards in less than 2 minutes. As I posted here I’d like to share use my WLAN cards to share one cards Internet connection with the other one. The following steps ...">
+        <meta name="keywords" content="hacking, networking, linux, admin, wifi, iptables">
+        <meta name="description" content="Although this is a quite minimalistic howto you should be able to do IP masquerading between your WLAN cards in less than 2 minutes. As I posted here I'd like to share use my WLAN cards to share one cards Internet connection with the other one. The following steps ...">
         <title>HowTo: SNAT/IP Masquerade between 2 wlan cards on Linux - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
         <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
@@ -57,10 +57,13 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
+                                      (101)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
                                <li><a href="http://blog.dornea.nu/category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (18)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -114,58 +117,19 @@
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <p>Although this is a quite minimalistic howto you should be able to do IP masquerading between your WLAN cards in less than 2 minutes. As I posted <a href="http://lists.debian.org/debian-user/2010/10/msg00884.html">here</a> I’d like to share use my WLAN cards to share one cards Internet connection with the other one. The following steps don’t apply only to wifi cards. The same commands should work on Ethernet cards too. Let’s start…</p>
-<div class="toc_wrap_right toc_transparent no_bullets" id="toc_container">
-<p class="toc_title">
-    Contents
-  </p>
-<ul class="toc_list">
-<li>
-<a href="#The_Big_picture"><span class="toc_number toc_depth_1">1</span> The Big picture</a>
-</li>
-<li>
-<a href="#Configure_wlan0"><span class="toc_number toc_depth_1">2</span> Configure wlan0</a>
-</li>
-<li>
-<a href="#i"><span class="toc_number toc_depth_1">3</span>  </a>
-</li>
-<li>
-<a href="#Configure_wlan1"><span class="toc_number toc_depth_1">4</span> Configure wlan1</a>
-</li>
-<li>
-<a href="#i-2"><span class="toc_number toc_depth_1">5</span>  </a>
-</li>
-<li>
-<a href="#Configure_hostapd"><span class="toc_number toc_depth_1">6</span> Configure hostapd</a>
-</li>
-<li>
-<a href="#Do_some_tests"><span class="toc_number toc_depth_1">7</span> Do some tests</a>
-</li>
-<li>
-<a href="#i-3"><span class="toc_number toc_depth_1">8</span>  </a>
-</li>
-<li>
-<a href="#Do_the_cool_stuff"><span class="toc_number toc_depth_1">9</span> Do the cool stuff</a>
-</li>
-<li>
-<a href="#Give_it_a_try"><span class="toc_number toc_depth_1">10</span> Give it a try</a>
-</li>
-</ul>
-</div>
-<h2 id="908794c8398d8ffcbb5ddde244620bcb"><span id="The_Big_picture"><strong>The Big picture</strong></span></h2>
-<p><strong><a href="http://static.dornea.nu/img/2010/34ef840b696169b327c1123e80afe531.png"><img alt="IP Masqueradeing" class="img-responsive trigger_lightbox" height="502" src="http://static.dornea.nu/img/2010/34ef840b696169b327c1123e80afe531.png" style="width: 590px; height: 407px;" width="728"/></a></strong><!--more--></p>
-<!--break-->
+                    <p>Although this is a quite minimalistic howto you should be able to do IP masquerading between your WLAN cards in less than 2 minutes. As I posted <a href="http://lists.debian.org/debian-user/2010/10/msg00884.html">here</a> I'd like to share use my WLAN cards to share one cards Internet connection with the other one. The following steps don't apply only to wifi cards. The same commands should work on Ethernet cards too. Let's start...</p>
+<h2 id="908794c8398d8ffcbb5ddde244620bcb">The Big picture</h2>
+<p><img alt="The big picture" class="img-responsive" src="http://dl.dornea.nu/img/2010/220/snat-ip-masquerade.png"/></p>
 <p>As you see you have 2 networks:</p>
 <ul>
 <li>10.0.0.x (on wlan1)</li>
 <li>192.168.178.x (wlan0)</li>
 </ul>
-<p>wlan1 will act as a Access Point waiting for incomming connections and wlan0 will be connected to the Internet via FritzBox. Let’s get all the pieces together.</p>
-<h2 id="568208954c2f0a2b6e26c86d4eb09871"><span id="Configure_wlan0">Configure wlan0</span></h2>
+<p>wlan1 will act as a Access Point waiting for incomming connections and wlan0 will be connected to the Internet via FritzBox. Let's get all the pieces together.</p>
+<h2 id="568208954c2f0a2b6e26c86d4eb09871">Configure wlan0</h2>
 <p>Well there is not much to say about this section. Make sure you have a working Internet connection via wlan0.</p>
-<h2 id="8df6fbcc43d31d99e5112eb009ed8a2d"><span id="i"> </span></h2>
-<h2 id="311bd70f1705537c04e04304918ddbd1"><span id="Configure_wlan1">Configure wlan1</span></h2>
-<p>Now comes the more interesting part. You want to allow your clients (whoever they are) to connect to your host via <strong>wlan1</strong> and use the Internet connection on <strong>wlan0</strong>. Pretty much … simple! Let’s sum up which steps are required:</p>
+<h2 id="311bd70f1705537c04e04304918ddbd1">Configure wlan1</h2>
+<p>Now comes the more interesting part. You want to allow your clients (whoever they are) to connect to your host via <strong>wlan1</strong> and use the Internet connection on <strong>wlan0</strong>. Pretty much ... simple! Let's sum up which steps are required:</p>
 <ul>
 <li>Allow users to connect to wlan1</li>
 <li>Make sure clients get an IP address which is different <strong>wlan0′s</strong> one (just for simplicity sake)</li>
@@ -173,115 +137,127 @@
 <li>Forward packets comming from <strong>wlan1</strong> to <strong>wlan0</strong></li>
 <li>Forward packets which refer to our <em>10.0.0.x</em> network from <strong>wlan0</strong> to <strong>wlan1</strong></li>
 </ul>
-<h2 id="8df6fbcc43d31d99e5112eb009ed8a2d_1"><span id="i-2"> </span></h2>
-<h2 id="5614536b16ecfeb87c081356ffb71d71"><span id="Configure_hostapd">Configure hostapd</span></h2>
-<p>That sounds quite simple, isn’t it? Suppose <strong>wlan1</strong> is already listening for incoming connection. You can achieve that by using <strong>hostapd</strong>  and thereby acting like an Access Point on <strong>wlan1</strong>. Maybe I’ll write an additional tutorial related to this topic. But by now let’s say hostapd is running (among with <strong>dhcpd, </strong>which will assign IP addresses to the clients) and your clients are able to connect to your wifi interface and are successfully in getting an IP address.</p>
-<pre class="brush:plain;"># hostapd /etc/hostapd/hostapd.conf 
+<h2 id="5614536b16ecfeb87c081356ffb71d71">Configure hostapd</h2>
+<p>That sounds quite simple, isn't it? Suppose <strong>wlan1</strong> is already listening for incoming connection. You can achieve that by using <strong>hostapd</strong>  and thereby acting like an Access Point on <strong>wlan1</strong>. Maybe I'll write an additional tutorial related to this topic. But by now let's say hostapd is running (among with <strong>dhcpd, </strong>which will assign IP addresses to the clients) and your clients are able to connect to your wifi interface and are successfully in getting an IP address.</p>
+<div class="highlight"><pre><span class="c"># hostapd /etc/hostapd/hostapd.conf </span>
 Configuration file: /etc/hostapd/hostapd.conf
-Using interface wlan1 with hwaddr 00:11:22:33:44:55 and ssid 'HackLAN'</pre>
-<p><strong>wlan1</strong> is now acting as an AP. That’s fine for now. Now we must take care every clients will get a valid IP address. Let’s have a look at <strong>/etc/dhcpd/dhcpd.conf</strong>:</p>
-<pre class="brush:plain;">...
-subnet 10.0.0.0 netmask 255.255.255.0 {
-  range 10.0.0.10 10.0.0.100;
-  option routers 10.0.0.1;
+Using interface wlan1 with hwaddr 00:11:22:33:44:55 and ssid <span class="s1">'HackLAN'</span>
+</pre></div>
+<p><strong>wlan1</strong> is now acting as an AP. That's fine for now. Now we must take care every clients will get a valid IP address. Let's have a look at <code>/etc/dhcpd/dhcpd.conf</code>:</p>
+<div class="highlight"><pre>...
+subnet 10.0.0.0 netmask 255.255.255.0 <span class="o">{</span>
+  range 10.0.0.10 10.0.0.100<span class="p">;</span>
+  option routers 10.0.0.1<span class="p">;</span>
 
-  # These options HAVE to be changed
-  option domain-name-servers 192.168.178.1;
-  option domain-name "fritz.box";
-}
-...</pre>
-<p>By this configuration we will assign IP addresses between 10.0.0.10 – 10.0.0.100 with netmask 10.0.0.255.  You might wonder about the last 2 lines. Well these ones have to be set individually. Have a look at <strong>/etc/resolv.conf</strong> and you’ll know which domain-name-servers options you’ll be using</p>
-<pre class="brush:plain;gutter:false;"># Dynamic resolv.conf(5) file for glibc resolver(3) generated by resolvconf(8)
-#     DO NOT EDIT THIS FILE BY HAND -- YOUR CHANGES WILL BE OVERWRITTEN
+  <span class="c"># These options HAVE to be changed</span>
+  option domain-name-servers 192.168.178.1<span class="p">;</span>
+  option domain-name <span class="s2">"fritz.box"</span><span class="p">;</span>
+<span class="o">}</span>
+...
+</pre></div>
+<p>By this configuration we will assign IP addresses between 10.0.0.10 - 10.0.0.100 with netmask 10.0.0.255.  You might wonder about the last 2 lines. Well these ones have to be set individually. Have a look at <strong>/etc/resolv.conf</strong> and you'll know which domain-name-servers options you'll be using</p>
+<div class="highlight"><pre><span class="c"># Dynamic resolv.conf(5) file for glibc resolver(3) generated by resolvconf(8)</span>
+<span class="c">#     DO NOT EDIT THIS FILE BY HAND -- YOUR CHANGES WILL BE OVERWRITTEN</span>
 nameserver 192.168.178.1
-search fritz.box</pre>
-<p>Before you move on to next step we’ll have to assign <strong>wlan1</strong> an IP within our network range<span style="display: none;"> </span>, otherwise the clients won’t be able to communicate with our interface.</p>
-<pre class="brush:plain;"># ifconfig wlan1 inet 10.0.0.1 netmask 10.0.0.255</pre>
+search fritz.box
+</pre></div>
+<p>Before you move on to next step we'll have to assign <strong>wlan1</strong> an IP within our network range, otherwise the clients won't be able to communicate with our interface.</p>
+<div class="highlight"><pre><span class="c"># ifconfig wlan1 inet 10.0.0.1 netmask 10.0.0.255</span>
+</pre></div>
 <p>Now start the <strong>dhcp server</strong>:</p>
-<pre class="brush:plain;"># /etc/init.d/isc-dhcp-server start
+<div class="highlight"><pre><span class="c"># /etc/init.d/isc-dhcp-server start</span>
 Starting ISC DHCP server: dhcpd.
-# tail -n 100 /var/log/syslog
+<span class="c"># tail -n 100 /var/log/syslog</span>
 ...
-Nov 25 20:03:16 nat dhcpd: Internet Systems Consortium DHCP Server 4.1.1-P1
-Nov 25 20:03:16 nat dhcpd: Copyright 2004-2010 Internet Systems Consortium.
-Nov 25 20:03:16 nat dhcpd: All rights reserved.
-Nov 25 20:03:16 nat dhcpd: For info, please visit https://www.isc.org/software/dhcp/
-Nov 25 20:03:16 nat dhcpd: Wrote 11 leases to leases file.</pre>
-<h2 id="d12b5b21a8fdb38960252ffb0d69c476"><span id="Do_some_tests"><strong>Do some tests</strong></span></h2>
-<p>Let’s say host <em>“BlackTiny”</em> is listening for incomming connections and host “<em>Daemon”</em> would like to connect to <em>“BlackTiny”</em>. <strong>Start with the client</strong>:</p>
-<pre class="brush:plain;"># ifconfig [wifi-interface] up
-# iwconfig [wifi-interface] essid "HackLAN" 
-# dhclient [wifi-interface]
+Nov <span class="m">25</span> 20:03:16 nat dhcpd: Internet Systems Consortium DHCP Server 4.1.1-P1
+Nov <span class="m">25</span> 20:03:16 nat dhcpd: Copyright 2004-2010 Internet Systems Consortium.
+Nov <span class="m">25</span> 20:03:16 nat dhcpd: All rights reserved.
+Nov <span class="m">25</span> 20:03:16 nat dhcpd: For info, please visit https://www.isc.org/software/dhcp/
+Nov <span class="m">25</span> 20:03:16 nat dhcpd: Wrote <span class="m">11</span> leases to leases file.
+</pre></div>
+<h2 id="d12b5b21a8fdb38960252ffb0d69c476">Do some tests</h2>
+<p>Let's say host <em><code>BlackTiny</code></em> is listening for incomming connections and host <code>*Daemon</code><em> would like to connect to </em><code>BlackTiny</code>*. <strong>Start with the client</strong>:</p>
+<div class="highlight"><pre><span class="c"># ifconfig [wifi-interface] up</span>
+<span class="c"># iwconfig [wifi-interface] essid "HackLAN" </span>
+<span class="c"># dhclient [wifi-interface]</span>
 ...
-bound to 10.0.0.10 -- renewal in 251 seconds.</pre>
-<p>As you see our client <em>“Daemon”</em> got an IP: 10.0.0.10. Let’s have a look at the <strong>server/host side</strong>:</p>
-<pre class="brush:plain;"># tail -f /var/log/syslog
-Nov 25 20:09:43 nat dhcpd: DHCPACK on 10.0.0.10 to - (Daemon) via wlan1
-Nov 25 20:09:43 nat dhcpd: DHCPREQUEST for 10.0.0.10 (10.0.0.1) from - (Daemon) via wlan1
-Nov 25 20:09:43 nat dhcpd: DHCPACK on 10.0.0.10 to - (Daemon) via wlan1
-Nov 25 20:12:38 nat dhcpd: DHCPREQUEST for 10.0.0.10 from - (Daemon) via wlan1
-Nov 25 20:12:38 nat dhcpd: DHCPACK on 10.0.0.10 to - (Daemon) via wlan1
+bound to 10.0.0.10 -- renewal in <span class="m">251</span> seconds.
+</pre></div>
+<p>As you see our client <em><code>Daemon</code></em> got an IP: 10.0.0.10. Let's have a look at the <strong>server/host side</strong>:</p>
+<div class="highlight"><pre><span class="c"># tail -f /var/log/syslog</span>
+Nov <span class="m">25</span> 20:09:43 nat dhcpd: DHCPACK on 10.0.0.10 to - <span class="o">(</span>Daemon<span class="o">)</span> via wlan1
+Nov <span class="m">25</span> 20:09:43 nat dhcpd: DHCPREQUEST <span class="k">for</span> 10.0.0.10 <span class="o">(</span>10.0.0.1<span class="o">)</span> from - <span class="o">(</span>Daemon<span class="o">)</span> via wlan1
+Nov <span class="m">25</span> 20:09:43 nat dhcpd: DHCPACK on 10.0.0.10 to - <span class="o">(</span>Daemon<span class="o">)</span> via wlan1
+Nov <span class="m">25</span> 20:12:38 nat dhcpd: DHCPREQUEST <span class="k">for</span> 10.0.0.10 from - <span class="o">(</span>Daemon<span class="o">)</span> via wlan1
+Nov <span class="m">25</span> 20:12:38 nat dhcpd: DHCPACK on 10.0.0.10 to - <span class="o">(</span>Daemon<span class="o">)</span> via wlan1
 
-# ping 10.0.0.10
-PING 10.0.0.10 (10.0.0.10) 56(84) bytes of data.
-64 bytes from 10.0.0.10: icmp_req=1 ttl=64 time=3.59 ms
-64 bytes from 10.0.0.10: icmp_req=2 ttl=64 time=2.55 ms
+<span class="c"># ping 10.0.0.10</span>
+PING 10.0.0.10 <span class="o">(</span>10.0.0.10<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+<span class="m">64</span> bytes from 10.0.0.10: <span class="nv">icmp_req</span><span class="o">=</span><span class="m">1</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">64</span> <span class="nb">time</span><span class="o">=</span>3.59 ms
+<span class="m">64</span> bytes from 10.0.0.10: <span class="nv">icmp_req</span><span class="o">=</span><span class="m">2</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">64</span> <span class="nb">time</span><span class="o">=</span>2.55 ms
 ^C
 --- 10.0.0.10 ping statistics ---
-2 packets transmitted, 2 received, 0% packet loss, time 1001ms
-rtt min/avg/max/mdev = 2.557/3.076/3.596/0.522 ms</pre>
-<p>So everything seems to work. How about Internet connectivity?! <strong>Client “*Daemon</strong>*“:</p>
-<pre class="brush:plain;gutter:false;"># ping h.de
-ping: unknown host h.de</pre>
-<p>Oh … I have forgotten about that. We’ll have to allow <em>“Daemon”</em> to access the Internet through <em>“BlackTiny”</em>. Move on to the next step.</p>
-<h2 id="8df6fbcc43d31d99e5112eb009ed8a2d_1_2"><span id="i-3"> </span></h2>
-<h2 id="447f90936a23cb8142418919c4d1d823"><span id="Do_the_cool_stuff">Do the cool stuff</span></h2>
-<p>First  of all we’ll enable port forwarding on <em>“BlackTiny”</em>:</p>
-<pre class="brush:plain;gutter:false;"># sysctl -w net.ipv4.ip_forward=1
-net.ipv4.ip_forward = 1</pre>
-<p>Now we’ll do some magic <strong>iptables</strong> stuff:</p>
-<pre class="brush:plain;"># # flush all previous entries
-# iptables -F
-# iptables -t nat -F
-# iptables -L
-# iptables -L
-Chain INPUT (policy ACCEPT)
-target     prot opt source               destination
+<span class="m">2</span> packets transmitted, <span class="m">2</span> received, 0% packet loss, <span class="nb">time </span>1001ms
+rtt min/avg/max/mdev <span class="o">=</span> 2.557/3.076/3.596/0.522 ms
+</pre></div>
+<p>So everything seems to work. How about Internet connectivity?! **Client <code>*Daemon***</code>:</p>
+<div class="highlight"><pre><span class="c"># ping h.de</span>
+ping: unknown host h.de
+</pre></div>
+<p>Oh ... I have forgotten about that. We'll have to allow <em><code>Daemon</code></em> to access the Internet through <em><code>BlackTiny</code></em>. Move on to the next step.</p>
+<h2 id="447f90936a23cb8142418919c4d1d823">Do the cool stuff</h2>
+<p>First  of all we'll enable port forwarding on <em><code>BlackTiny</code></em>:</p>
+<div class="highlight"><pre><span class="c"># sysctl -w net.ipv4.ip_forward=1</span>
+net.ipv4.ip_forward <span class="o">=</span> 1
+</pre></div>
+<p>Now we'll do some magic <strong>iptables</strong> stuff:</p>
+<div class="highlight"><pre><span class="c"># # flush all previous entries</span>
+<span class="c"># iptables -F</span>
+<span class="c"># iptables -t nat -F</span>
+<span class="c"># iptables -L</span>
+<span class="c"># iptables -L</span>
+Chain INPUT <span class="o">(</span>policy ACCEPT<span class="o">)</span>
+target     prot opt <span class="nb">source               </span>destination         
 
-Chain FORWARD (policy ACCEPT)
-target     prot opt source               destination         
+Chain FORWARD <span class="o">(</span>policy ACCEPT<span class="o">)</span>
+target     prot opt <span class="nb">source               </span>destination         
 
-Chain OUTPUT (policy ACCEPT)
-target     prot opt source               destination         
-# iptables -t nat -L
-Chain PREROUTING (policy ACCEPT)
-target     prot opt source               destination         
+Chain OUTPUT <span class="o">(</span>policy ACCEPT<span class="o">)</span>
+target     prot opt <span class="nb">source               </span>destination         
+<span class="c"># iptables -t nat -L</span>
+Chain PREROUTING <span class="o">(</span>policy ACCEPT<span class="o">)</span>
+target     prot opt <span class="nb">source               </span>destination         
 
-Chain POSTROUTING (policy ACCEPT)
-target     prot opt source               destination         
+Chain POSTROUTING <span class="o">(</span>policy ACCEPT<span class="o">)</span>
+target     prot opt <span class="nb">source               </span>destination         
 
-Chain OUTPUT (policy ACCEPT)
-target     prot opt source               destination</pre>
+Chain OUTPUT <span class="o">(</span>policy ACCEPT<span class="o">)</span>
+target     prot opt <span class="nb">source               </span>destination
+</pre></div>
 <p>Now we will enable <strong>MASQUERADING</strong>  on <strong>wlan0</strong>:</p>
-<pre class="brush:plain;gutter:false;"># iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE</pre>
-<p>That means every time  a packet from <em>“Daemon”</em> is sent to other network like its own one, this certain packet will first get in its header the IP address of <strong>wlan0</strong> and be forwarded to the next station till it reaches its destination (see <em>Big Picture</em>). Any outgoing/forwarded packet will be masqueraded. So all packets will appear to come from the masquerading host (<em>“BlackTiny”</em>).  There is nothing more to say about it. That’s the all stuff behind it.</p>
+<div class="highlight"><pre><span class="c"># iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE</span>
+</pre></div>
+<p>That means every time  a packet from <em><code>Daemon</code></em> is sent to other network like its own one, this certain packet will first get in its header the IP address of <strong>wlan0</strong> and be forwarded to the next station till it reaches its destination (see <em>Big Picture</em>). Any outgoing/forwarded packet will be masqueraded. So all packets will appear to come from the masquerading host (<em><code>BlackTiny</code></em>).  There is nothing more to say about it. That's the all stuff behind it.</p>
 <p>Alternatively you could use the SNAT target within iptables:</p>
-<pre class="brush:plain;gutter:false;"># iiptables -t nat -A POSTROUTING -p tcp -o wlan0 -j SNAT --to-source [ip range]</pre>
+<div class="highlight"><pre><span class="c"># iptables -t nat -A POSTROUTING -p tcp -o wlan0 -j SNAT --to-source [ip range]</span>
+</pre></div>
 <p>Here is an explanation( found on <a href="http://www.linuxtopia.org/Linux_Firewall_iptables/x4658.html">Linuxtopia.com</a>):</p>
-<p><em>“The <b class="COMMAND">–to-source</b> option is used to specify which source the packet should use. This option, at its simplest, takes one IP address which we want to use for the <b class="COMMAND">source IP</b> address in the <b class="COMMAND">IP header</b>. [...] The –to–source IP numbers could then, for instance, be something like: 194.236.50.155-194.236.50.160. [...] We can also specify a range of ports to be used by <b class="COMMAND">SNAT</b>. All the source ports would then be confined to the ports specified. The port bit of the rule would then look like in the example above, :1024-32000. This is only valid if -p tcp or -p udp was specified somewhere in the match of the rule in question. [...]“</em></p>
-<h2 id="8a628676110c39d9f9bbbf0ad68c53ed"><span id="Give_it_a_try">Give it a try</span></h2>
-<p>Client <em>“Daemon”</em>:</p>
-<pre class="brush:bash;gutter:false;"># ping h.de
-PING h.de (212.34.170.3) 56(84) bytes of data.
-64 bytes from plesk.odn.de (212.34.170.3): icmp_req=1 ttl=50 time=39.6 ms
-64 bytes from plesk.odn.de (212.34.170.3): icmp_req=2 ttl=50 time=33.8 ms
-64 bytes from plesk.odn.de (212.34.170.3): icmp_req=3 ttl=50 time=60.8 ms
+<blockquote>
+<p>"The <b class="COMMAND">-to-source</b> option is used to specify which source the packet should use. This option, at its simplest, takes one IP address which we want to use for the <b class="COMMAND">source IP</b> address in the <b class="COMMAND">IP header</b>. [...] The -to-source IP numbers could then, for instance, be something like: 194.236.50.155-194.236.50.160. [...] We can also specify a range of ports to be used by <b class="COMMAND">SNAT</b>. All the source ports would then be confined to the ports specified. The port bit of the rule would then look like in the example above, :1024-32000. This is only valid if -p tcp or -p udp was specified somewhere in the match of the rule in question. [...]"</p>
+</blockquote>
+<h2 id="8a628676110c39d9f9bbbf0ad68c53ed">Give it a try</h2>
+<p>Client <em><code>Daemon</code></em>:</p>
+<div class="highlight"><pre><span class="c"># ping h.de</span>
+PING h.de <span class="o">(</span>212.34.170.3<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+<span class="m">64</span> bytes from plesk.odn.de <span class="o">(</span>212.34.170.3<span class="o">)</span>: <span class="nv">icmp_req</span><span class="o">=</span><span class="m">1</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">50</span> <span class="nb">time</span><span class="o">=</span>39.6 ms
+<span class="m">64</span> bytes from plesk.odn.de <span class="o">(</span>212.34.170.3<span class="o">)</span>: <span class="nv">icmp_req</span><span class="o">=</span><span class="m">2</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">50</span> <span class="nb">time</span><span class="o">=</span>33.8 ms
+<span class="m">64</span> bytes from plesk.odn.de <span class="o">(</span>212.34.170.3<span class="o">)</span>: <span class="nv">icmp_req</span><span class="o">=</span><span class="m">3</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">50</span> <span class="nb">time</span><span class="o">=</span>60.8 ms
 ^C
 --- h.de ping statistics ---
-3 packets transmitted, 3 received, 0% packet loss, time 2003ms
-rtt min/avg/max/mdev = 33.835/44.782/60.853/11.609 ms
+<span class="m">3</span> packets transmitted, <span class="m">3</span> received, 0% packet loss, <span class="nb">time </span>2003ms
+rtt min/avg/max/mdev <span class="o">=</span> 33.835/44.782/60.853/11.609 ms
 
-# tracepath h.de
+<span class="c"># tracepath h.de</span>
  1:  Daemon                                      0.225ms pmtu 1500
  1:  localhost                                             3.081ms 
  1:  localhost                                             4.630ms 
@@ -291,21 +267,21 @@ rtt min/avg/max/mdev = 33.835/44.782/60.853/11.609 ms
  4:  88.79.29.13                                          48.251ms 
  5:  88.79.28.213                                         33.242ms 
  6:  92.79.212.137                                        26.544ms 
- 7:  ffm-145-254-19-106.arcor-ip.net                      73.856ms asymm  9 
- 8:  Arcor.FRA-3-pos211.de.lambdanet.net                  34.915ms asymm 11 
- 9:  FRA-3-eth010.de.lambdanet.net                        33.810ms asymm 12 
-10:  NUE-2-eth210.de.lambdanet.net                        37.740ms asymm 13 
-11:  ODN-NUE.de.lambdanet.net                             39.732ms asymm 13 
-12:  c4506-1.nbg-1.odn.net                                37.717ms asymm 14 
+ 7:  ffm-145-254-19-106.arcor-ip.net                      73.856ms asymm  <span class="m">9</span> 
+ 8:  Arcor.FRA-3-pos211.de.lambdanet.net                  34.915ms asymm <span class="m">11</span> 
+ 9:  FRA-3-eth010.de.lambdanet.net                        33.810ms asymm <span class="m">12</span> 
+10:  NUE-2-eth210.de.lambdanet.net                        37.740ms asymm <span class="m">13</span> 
+11:  ODN-NUE.de.lambdanet.net                             39.732ms asymm <span class="m">13</span> 
+12:  c4506-1.nbg-1.odn.net                                37.717ms asymm <span class="m">14</span> 
 13:  plesk.odn.de                                         39.540ms reached
-     Resume: pmtu 576 hops 13 back 50</pre>
-<p> </p>
-<p>Have fun and keep it clean! <img alt=":)" class="wp-smiley img-responsive" src="http://dornea.nu/wp-includes/images/smilies/icon_smile.gif"/></p>
+     Resume: pmtu <span class="m">576</span> hops <span class="m">13</span> back 50
+</pre></div>
+<p>Have fun and keep it clean!</p>
                 </div>
 <hr/>
 <div style="float:left;">
-	Prev: <a href="http://blog.dornea.nu/2010/10/13/howto-build-your-own-wifi-wlan-hotspot-using-hostap" align='left'>
-	 HowTo: Build your own Wifi WLAN hotspot using hostap
+	Prev: <a href="http://blog.dornea.nu/2010/10/07/find-out-your-geolocation-via-mac-address" align='left'>
+	 Find out your geolocation via MAC address
 	</a>
 </div>
 <div style="float:right;">
@@ -341,11 +317,11 @@ rtt min/avg/max/mdev = 33.835/44.782/60.853/11.609 ms
                     <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/hacking/">hacking</a><sup>20</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>33</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/snat/">snat</a><sup>1</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/linux/">linux</a><sup>12</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/admin/">admin</a><sup>21</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wlan/">wlan</a><sup>2</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>37</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/linux/">linux</a><sup>20</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/admin/">admin</a><sup>22</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wifi/">wifi</a><sup>3</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/iptables/">iptables</a><sup>9</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -354,7 +330,7 @@ rtt min/avg/max/mdev = 33.835/44.782/60.853/11.609 ms
                     </div>
                     <ul id="niu2-sidebar-toc-list">
                         <li><a href="#content-heading">HowTo: SNAT/IP Masquerade between 2 wlan cards on Linux</a></li>
-                        <li><a href='#908794c8398d8ffcbb5ddde244620bcb'>The Big picture</a></li><li><a href='#568208954c2f0a2b6e26c86d4eb09871'>Configure wlan0</a></li><li><a href='#8df6fbcc43d31d99e5112eb009ed8a2d'> </a></li><li><a href='#311bd70f1705537c04e04304918ddbd1'>Configure wlan1</a></li><li><a href='#8df6fbcc43d31d99e5112eb009ed8a2d_1'> </a></li><li><a href='#5614536b16ecfeb87c081356ffb71d71'>Configure hostapd</a></li><li><a href='#d12b5b21a8fdb38960252ffb0d69c476'>Do some tests</a></li><li><a href='#8df6fbcc43d31d99e5112eb009ed8a2d_1_2'> </a></li><li><a href='#447f90936a23cb8142418919c4d1d823'>Do the cool stuff</a></li><li><a href='#8a628676110c39d9f9bbbf0ad68c53ed'>Give it a try</a></li>
+                        <li><a href='#908794c8398d8ffcbb5ddde244620bcb'>The Big picture</a></li><li><a href='#568208954c2f0a2b6e26c86d4eb09871'>Configure wlan0</a></li><li><a href='#311bd70f1705537c04e04304918ddbd1'>Configure wlan1</a></li><li><a href='#5614536b16ecfeb87c081356ffb71d71'>Configure hostapd</a></li><li><a href='#d12b5b21a8fdb38960252ffb0d69c476'>Do some tests</a></li><li><a href='#447f90936a23cb8142418919c4d1d823'>Do the cool stuff</a></li><li><a href='#8a628676110c39d9f9bbbf0ad68c53ed'>Give it a try</a></li>
                         <li><a href="#content-comments">Comments</a></li>
                     </ul>
                 </div>

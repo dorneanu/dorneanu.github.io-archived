@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="keywords" content="misc, wtf, gentoo, systemd, linux">
+        <meta name="keywords" content="misc, wtf, gentoo, systemd, linux, update">
         <meta name="description" content="OK, first some explanations: systemd is a modern sysvinit & RC replacement for Linux systems. It is supported in Gentoo as an alternate init system. (Source: http://wiki.gentoo.org/wiki/Systemd) ConsoleKit is a framework for defining and tracking users, login sessions, and seats. (Source: http://wiki.gentoo.org/wiki ...">
         <title>Gentoo, systemd, consolekit, udev and some failed system update - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
@@ -57,10 +57,13 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
+                                      (101)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
                                <li><a href="http://blog.dornea.nu/category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (18)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -120,16 +123,15 @@
 <li><strong>ConsoleKit</strong> is a framework for defining and tracking users, login sessions, and seats. (Source:<a href="http://wiki.gentoo.org/wiki/ConsoleKit"> http://wiki.gentoo.org/wiki/ConsoleKit)</a></li>
 <li><strong>udev</strong> is the device manager for the Linux kernel. Primarily, it manages device nodes in <tt>/dev</tt> and handles all user space actions when adding/removing devices. Also have a look at <a href="http://www.gentoo.org/proj/en/eudev" rel="nofollow">eudev</a> a gentoo fork of udev. (Source: <a href="http://wiki.gentoo.org/wiki/Udev">http://wiki.gentoo.org/wiki/Udev)</a></li>
 </ul>
-<!--more-->
-<p>At first look they don’t seem to have sth in common. These are some other facts:</p>
+<p>At first look they don't seem to have sth in common. These are some other facts:</p>
 <ul>
-<li><em>systemd</em> and <em>udev</em> don’t like each other</li>
+<li><em>systemd</em> and <em>udev</em> don't like each other</li>
 <li><em>systemd</em> conflicts with <em>consolekit</em></li>
 <li><em>consolekit</em> is not longer maintained</li>
 <li><em>systemd</em> *is* <em>udev</em> (as systemd somehow includes udev)</li>
 <li><em>polkit</em> depends on <em>consolekit</em> and they will both pull eath other</li>
 <li><em>consolekit</em> has been replaced by logind which is being provided by <em>systemd</em></li>
-<li>…and top of that <em>OpenRC</em> is somehow also involved in this whole thing.</li>
+<li>...and top of that <em>OpenRC</em> is somehow also involved in this whole thing.</li>
 </ul>
 <p>As you may have noticed: THIS IS A WHOLE BUNCH OF BULLSHIT GOING ON! I just wanted to update my Gentoo system and got stucked in some stupid conflicts between the mentioned packets. It took about one day to solve it (after reading lots of forum threads of people complaining about the same thing). Check:</p>
 <ul>
@@ -137,100 +139,104 @@
 <li><a href="http://forums.gentoo.org/viewtopic-t-917584.html">Want to get rid of *kits. What should I be careful about?</a></li>
 <li><a href="http://forums.gentoo.org/viewtopic-p-7367906.html">SOLVED gnome3 systemd udev and many other things</a></li>
 </ul>
-<p>Be sure you read them. They’ve helped me a lot to understand this whole topic. So after all this is how I was able to solve it:</p>
+<p>Be sure you read them. They've helped me a lot to understand this whole topic. So after all this is how I was able to solve it:</p>
 <ul>
-<li>
-<p>Remove all USE flags related to consolekit: <pre class="lang:sh decode:true"># euse -D consolekit policykit upower udisks</pre></p>
-</li>
-<li>
-<p>Make sure you have a “clean” /etc/make.conf. Here is mine: <pre class="lang:sh decode:true "># These settings were set by the catalyst build script that automatically</pre></p>
-</li>
+<li>Remove all USE flags related to consolekit: </li>
 </ul>
-<h1 id="02c79e3f22713568f2ea27551b459b62">built this stage.</h1>
-<h1 id="5caf7fcef17cd5f618eea32d8c440649">Please consult /usr/share/portage/config/make.conf.example for a more</h1>
-<h1 id="31e28ef39b018183ea9f556d199d1925">detailed example.</h1>
-<p>CFLAGS="-O2 -pipe"
-CXXFLAGS="${CFLAGS}"</p>
-<h1 id="19132245b196830c67a672c1ab92f816">WARNING: Changing your CHOST is not something that should be done lightly.</h1>
-<h1 id="c3fe6269cfc1a30f2b49771dc1e666d5">Please consult http://www.gentoo.org/doc/en/change-chost.xml before changing.</h1>
-<p>CHOST="x86_64-pc-linux-gnu"</p>
-<h1 id="a5a9292038304fea50eeb12acb106ada">These are the USE flags that were used in addition to what is provided by the</h1>
-<h1 id="577ebba44aa253d812b032a646703510">profile used for building.</h1>
-<p>ACCEPT_LICENSE="*"
-ACCEPT_KEYWORDS="~amd64"
-AUTOCLEAN="yes"
-VIDEO_CARDS="intel"
-USE="acpi smapi mmx sse sse2 cairo svg -kde qt4 qt3support dbus \
-     declarative jpeg png vorbis ogg pulse alsa usb sdl spice gtk gtk3 \
-     -gnome-shell -consolekit -policykit -upower -udisks"
-MAKEOPTS="-j2"
-FEATURES="-userfetch"</p>
-<h1 id="0185a99ec12513766b567bce4bb14d65">CCACHE_DIR="/var/tmp/ccache"</h1>
-<h1 id="7662382e348e0af13cd12ed3007abc07">CCACHE_SIZE="2G"</h1>
-<h1 id="2e61cb3d9170a9b066aefa41c0d264a6">source /var/lib/layman/make.conf</h1>
-<h1 id="7c236a4bfebc90627ea7586bb64bd311">Set PORTDIR for backward compatibility with various tools:</h1>
-<h1 id="4a38d1a34af08ad10f7a7ff5b234d03a">gentoo-bashcomp - bug #478444</h1>
-<h1 id="62bf2e4f1fbe0fa92f3387c5d3167860">euse - bug #474574</h1>
-<h1 id="f06da19f6e62534801723cecb8a8b139">euses and ufed - bug #478318</h1>
-<p>PORTDIR="/usr/portage"</p>
+<div class="highlight"><pre><span class="c"># euse -D consolekit policykit upower udisks</span>
+</pre></div>
 <ul>
-<li>
-<p>Make sure you have selected the right profile <pre class="lang:default decode:true "># eselect profile list
-Available profile symlink targets:
-  <a href="http://wiki.gentoo.org/wiki/Systemd">1</a>   default/linux/amd64/13.0
-  <a href="http://wiki.gentoo.org/wiki/ConsoleKit">2</a>   default/linux/amd64/13.0/selinux
-  <a href="http://wiki.gentoo.org/wiki/Udev">3</a>   default/linux/amd64/13.0/desktop *
-  <a href="http://forums.gentoo.org/viewtopic-t-920340-start-0.html" title="Force Disable ConsoleKit?">4</a>   default/linux/amd64/13.0/desktop/gnome
-  <a href="http://forums.gentoo.org/viewtopic-t-917584.html">5</a>   default/linux/amd64/13.0/desktop/kde
-  <a href="http://forums.gentoo.org/viewtopic-p-7367906.html">6</a>   default/linux/amd64/13.0/developer
-  [7]   default/linux/amd64/13.0/no-multilib
-  [8]   default/linux/amd64/13.0/x32
-  [9]   hardened/linux/amd64
-  [10]  hardened/linux/amd64/selinux
-  [11]  hardened/linux/amd64/no-multilib
-  [12]  hardened/linux/amd64/no-multilib/selinux
-  [13]  hardened/linux/amd64/x32
-  [14]  hardened/linux/uclibc/amd64</pre></p>
-</li>
-<li>
-<p>Adjust profile settings <pre class="lang:default decode:true"># cd /etc/portage/profile</pre></p>
-</li>
+<li>Make sure you have a <code>clean</code> /etc/make.conf. Here is mine:</li>
 </ul>
-<h1 id="554ec04aa3084eb5614520f29829be9e">cat use.force</h1>
-<p>-consolekit</p>
-<h1 id="835cb6787c0a721b352e30b5aa2135a3">cat use.mask</h1>
-<p>consolekit
--systemd</p>
-<ul>
-<li>
-<p>Remove udev, consolekit and polkit <pre class="lang:default decode:true"># emerge -aC udev consolekit polkit</pre></p>
-</li>
-<li>
-<p>Now you should be able to install systemd <pre class="lang:sh decode:true"># emerge -pv systemd</pre></p>
-</li>
-<li>
-<p>Now update your system</p>
-</li>
-<li>
-<p><pre class="lang:default decode:true"># emerge --keep-going --jobs 4 --update --newuse --ask --deep --with-bdeps=y @world</pre></p>
-<p> </p></li> </ul> 
-Additional steps to clean up your system:
-<p><pre class="lang:sh decode:true"># emerge -a --depclean</pre></p>
-<h1 id="d355465e504d48ed8244212d1353e604">revdep-rebuild -- -q --keep-going</h1>
-<p> </p>
-<p> </p>
-<p> </p>
+<div class="highlight"><pre><span class="c"># These settings were set by the catalyst build script that automatically</span>
+<span class="c"># built this stage.</span>
+<span class="c"># Please consult /usr/share/portage/config/make.conf.example for a more</span>
+<span class="c"># detailed example.</span>
+<span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">"-O2 -pipe"</span>
+<span class="nv">CXXFLAGS</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">CFLAGS</span><span class="si">}</span><span class="s2">"</span>
+<span class="c"># WARNING: Changing your CHOST is not something that should be done lightly.</span>
+<span class="c"># Please consult http://www.gentoo.org/doc/en/change-chost.xml before changing.</span>
+<span class="nv">CHOST</span><span class="o">=</span><span class="s2">"x86_64-pc-linux-gnu"</span>
+<span class="c"># These are the USE flags that were used in addition to what is provided by the</span>
+<span class="c"># profile used for building.</span>
+<span class="nv">ACCEPT_LICENSE</span><span class="o">=</span><span class="s2">"*"</span>
+<span class="nv">ACCEPT_KEYWORDS</span><span class="o">=</span><span class="s2">"~amd64"</span>
+<span class="nv">AUTOCLEAN</span><span class="o">=</span><span class="s2">"yes"</span>
+<span class="nv">VIDEO_CARDS</span><span class="o">=</span><span class="s2">"intel"</span>
+<span class="nv">USE</span><span class="o">=</span><span class="s2">"acpi smapi mmx sse sse2 cairo svg -kde qt4 qt3support dbus \</span>
+<span class="s2">     declarative jpeg png vorbis ogg pulse alsa usb sdl spice gtk gtk3 \</span>
+<span class="s2">     -gnome-shell -consolekit -policykit -upower -udisks"</span>
+<span class="nv">MAKEOPTS</span><span class="o">=</span><span class="s2">"-j2"</span>
+<span class="nv">FEATURES</span><span class="o">=</span><span class="s2">"-userfetch"</span>
+<span class="c">#CCACHE_DIR="/var/tmp/ccache"</span>
+<span class="c">#CCACHE_SIZE="2G"</span>
+<span class="c">#source /var/lib/layman/make.conf</span>
 
+<span class="c"># Set PORTDIR for backward compatibility with various tools:</span>
+<span class="c">#   gentoo-bashcomp - bug #478444</span>
+<span class="c">#   euse - bug #474574</span>
+<span class="c">#   euses and ufed - bug #478318</span>
+<span class="nv">PORTDIR</span><span class="o">=</span><span class="s2">"/usr/portage"</span>
+</pre></div>
+<ul>
+<li>Make sure you have selected the right profile </li>
+</ul>
+<div class="highlight"><pre><span class="c"># eselect profile list</span>
+Available profile symlink targets:
+  <span class="o">[</span>1<span class="o">]</span>   default/linux/amd64/13.0
+  <span class="o">[</span>2<span class="o">]</span>   default/linux/amd64/13.0/selinux
+  <span class="o">[</span>3<span class="o">]</span>   default/linux/amd64/13.0/desktop *
+  <span class="o">[</span>4<span class="o">]</span>   default/linux/amd64/13.0/desktop/gnome
+  <span class="o">[</span>5<span class="o">]</span>   default/linux/amd64/13.0/desktop/kde
+  <span class="o">[</span>6<span class="o">]</span>   default/linux/amd64/13.0/developer
+  <span class="o">[</span>7<span class="o">]</span>   default/linux/amd64/13.0/no-multilib
+  <span class="o">[</span>8<span class="o">]</span>   default/linux/amd64/13.0/x32
+  <span class="o">[</span>9<span class="o">]</span>   hardened/linux/amd64
+  <span class="o">[</span>10<span class="o">]</span>  hardened/linux/amd64/selinux
+  <span class="o">[</span>11<span class="o">]</span>  hardened/linux/amd64/no-multilib
+  <span class="o">[</span>12<span class="o">]</span>  hardened/linux/amd64/no-multilib/selinux
+  <span class="o">[</span>13<span class="o">]</span>  hardened/linux/amd64/x32
+  <span class="o">[</span>14<span class="o">]</span>  hardened/linux/uclibc/amd64
+</pre></div>
+<ul>
+<li>Adjust profile settings</li>
+</ul>
+<div class="highlight"><pre><span class="c"># cd /etc/portage/profile</span>
+<span class="c"># cat use.force</span>
+-consolekit
+<span class="c"># cat use.mask</span>
+consolekit
+-systemd
+</pre></div>
+<ul>
+<li>Remove udev, consolekit and polkit</li>
+</ul>
+<div class="highlight"><pre><span class="c"># emerge -aC udev consolekit polkit</span>
+</pre></div>
+<ul>
+<li>Now you should be able to install systemd</li>
+</ul>
+<div class="highlight"><pre><span class="c"># emerge -pv systemd</span>
+</pre></div>
+<ul>
+<li>Now update your system</li>
+</ul>
+<div class="highlight"><pre><span class="c"># emerge --keep-going --jobs 4 --update --newuse --ask --deep --with-bdeps=y @world</span>
+</pre></div>
+<p>Additional steps to clean up your system:</p>
+<div class="highlight"><pre><span class="c"># emerge -a --depclean</span>
+<span class="c"># revdep-rebuild -- -q --keep-going</span>
+</pre></div>
                 </div>
 <hr/>
 <div style="float:left;">
-	Prev: <a href="http://blog.dornea.nu/2013/08/09/links-of-the-week-9" align='left'>
-	 Links of the Week #9
+	Prev: <a href="http://blog.dornea.nu/2013/08/02/howto-automate-burp-using-burp-extender-api" align='left'>
+	 HowTo: Automate Burp using Burp Extender API
 	</a>
 </div>
 <div style="float:right;">
-    Next: <a href="http://blog.dornea.nu/2013/08/23/links-of-the-week-10" align='right'>
-	 Links of the Week #10
+    Next: <a href="http://blog.dornea.nu/2013/08/25/dissecting-blacktiny" align='right'>
+	 Dissecting BlackTiny
 	</a>
 </div>
 </p>
@@ -260,11 +266,12 @@ Additional steps to clean up your system:
                     <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
                     <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/misc/">misc</a><sup>29</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wtf/">wtf</a><sup>17</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/misc/">misc</a><sup>35</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wtf/">wtf</a><sup>11</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/gentoo/">gentoo</a><sup>2</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/systemd/">systemd</a><sup>1</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/linux/">linux</a><sup>12</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/linux/">linux</a><sup>20</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/update/">update</a><sup>4</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -273,7 +280,7 @@ Additional steps to clean up your system:
                     </div>
                     <ul id="niu2-sidebar-toc-list">
                         <li><a href="#content-heading">Gentoo, systemd, consolekit, udev and some failed system update</a></li>
-                        <li><a href='#02c79e3f22713568f2ea27551b459b62'>built this stage.</a></li><li><a href='#5caf7fcef17cd5f618eea32d8c440649'>Please consult /usr/share/portage/config/make.conf.example for a more</a></li><li><a href='#31e28ef39b018183ea9f556d199d1925'>detailed example.</a></li><li><a href='#19132245b196830c67a672c1ab92f816'>WARNING: Changing your CHOST is not something that should be done lightly.</a></li><li><a href='#c3fe6269cfc1a30f2b49771dc1e666d5'>Please consult http://www.gentoo.org/doc/en/change-chost.xml before changing.</a></li><li><a href='#a5a9292038304fea50eeb12acb106ada'>These are the USE flags that were used in addition to what is provided by the</a></li><li><a href='#577ebba44aa253d812b032a646703510'>profile used for building.</a></li><li><a href='#0185a99ec12513766b567bce4bb14d65'>CCACHE_DIR="/var/tmp/ccache"</a></li><li><a href='#7662382e348e0af13cd12ed3007abc07'>CCACHE_SIZE="2G"</a></li><li><a href='#2e61cb3d9170a9b066aefa41c0d264a6'>source /var/lib/layman/make.conf</a></li><li><a href='#7c236a4bfebc90627ea7586bb64bd311'>Set PORTDIR for backward compatibility with various tools:</a></li><li><a href='#4a38d1a34af08ad10f7a7ff5b234d03a'>gentoo-bashcomp - bug #478444</a></li><li><a href='#62bf2e4f1fbe0fa92f3387c5d3167860'>euse - bug #474574</a></li><li><a href='#f06da19f6e62534801723cecb8a8b139'>euses and ufed - bug #478318</a></li><li><a href='#554ec04aa3084eb5614520f29829be9e'>cat use.force</a></li><li><a href='#835cb6787c0a721b352e30b5aa2135a3'>cat use.mask</a></li><li><a href='#d355465e504d48ed8244212d1353e604'>revdep-rebuild -- -q --keep-going</a></li>
+                        
                         <li><a href="#content-comments">Comments</a></li>
                     </ul>
                 </div>

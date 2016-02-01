@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="coding, web, drupal">
-        <meta name="description" content="Add Lightbox2 functionalities to WYSIWYG editor TinyMCE – who thought this would cost me about 6 hours of work? In fact that was the easiest part: I just followed the instructions on http://drupal.org/node/252153 and everything worked well! Before being able to do that, some upgrades were necessary ...">
+        <meta name="description" content="Add Lightbox2 functionalities to WYSIWYG editor TinyMCE - who thought this would cost me about 6 hours of work? In fact that was the easiest part: I just followed the instructions on http://drupal.org/node/252153 and everything worked well! Before being able to do that, some upgrades were necessary ...">
         <title>Some Drupal peculiarities - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
         <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
@@ -57,10 +57,13 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
+                                      (101)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
                                <li><a href="http://blog.dornea.nu/category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (18)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -114,16 +117,16 @@
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <p>Add Lightbox2 functionalities to WYSIWYG editor TinyMCE – who thought this would cost me about 6 hours of work? In fact that was the easiest part: I just followed the instructions on <a href="http://drupal.org/node/252153">http://drupal.org/node/252153</a> and everything worked well! Before being able to do that, some upgrades were necessary. On <a href="http://drupal.org/project/tinymce">http://drupal.org/project/tinymce</a> I was told that the module was deprecated and replaced by the <a href="http://drupal.org/project/wysiwyg">Wysiwyg API</a>. So I had to remove the old TinyMCE module, install the new  one and add at least one editor library as described on <a href="http://drupal.org/node/371459">http://drupal.org/node/371459</a>. The installation went <strong>almost</strong> fine. I was able to create a new WYSIWYG profile and adjust settings on <em>admin/settings/wysiwyg/profile</em>. Then I was curios enought to test it using <em>node/add/articles</em>. Nothing happened… No TinyMCE… No WYS*&amp;%SHIT! </p>
-<p>So what went wrong? You won’t believe me! The main cause was a missing:</p>
-<pre class="brush: php; toolbar: false;">&lt;?php print $closure; &gt;
-</pre>
-<p>in the <strong>page.tpl.php</strong>. What the heck?! Finally the whole voodoo thing developed into a struggle and I was on the verge of a nervous breakdown. After hours of errors seeking I was able to diagnose the 2nd main cause: The whole caching system was kind of messy. I came into Drupals <a href="http://api.drupal.org/api/function/drupal_rebuild_theme_registry/6">drupal_rebuild_theme_registry()****</a> function and cleaned up the theme registry. What came next?TinyMCE’s JavaScript files were successfully loaded into the page!!! <strong>HAPPY END</strong>! <!--break--></p>
+                    <p>Add Lightbox2 functionalities to WYSIWYG editor TinyMCE - who thought this would cost me about 6 hours of work? In fact that was the easiest part: I just followed the instructions on <a href="http://drupal.org/node/252153">http://drupal.org/node/252153</a> and everything worked well! Before being able to do that, some upgrades were necessary. On <a href="http://drupal.org/project/tinymce">http://drupal.org/project/tinymce</a> I was told that the module was deprecated and replaced by the <a href="http://drupal.org/project/wysiwyg">Wysiwyg API</a>. So I had to remove the old TinyMCE module, install the new one and add at least one editor library as described on <a href="http://drupal.org/node/371459">http://drupal.org/node/371459</a>. The installation went <strong>almost</strong> fine. I was able to create a new WYSIWYG profile and adjust settings on <em>admin/settings/wysiwyg/profile</em>. Then I was curios enought to test it using <em>node/add/articles</em>. Nothing happened... No TinyMCE... No WYS*&amp;%SHIT!</p>
+<p>So what went wrong? You won't believe me! The main cause was a missing:</p>
+<div class="highlight"><pre>&lt;?php print <span class="nv">$closure</span><span class="p">;</span> &gt;
+</pre></div>
+<p>in the <strong>page.tpl.php</strong>. What the heck?! Finally the whole voodoo thing developed into a struggle and I was on the verge of a nervous breakdown. After hours of errors seeking I was able to diagnose the 2nd main cause: The whole caching system was kind of messy. I came into Drupals <a href="http://api.drupal.org/api/function/drupal_rebuild_theme_registry/6">drupal_rebuild_theme_registry()</a> function and cleaned up the theme registry. What came next? TinyMCE's JavaScript files were successfully loaded into the page!!! <strong>HAPPY END</strong>!</p>
                 </div>
 <hr/>
 <div style="float:left;">
-	Prev: <a href="http://blog.dornea.nu/2009/09/13/damn-botnets" align='left'>
-	 Damn botnets!
+	Prev: <a href="http://blog.dornea.nu/2009/07/22/cowpatty-42-for-netbsd" align='left'>
+	 CoWPAtty 4.2 for NetBSD
 	</a>
 </div>
 <div style="float:right;">
@@ -155,11 +158,11 @@
                 <div id="niu2-sidebar-meta" class="niu2-sidebar">
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>Published:</div>
                     <div class="niu2-sidebar-value">2009-09-15 00:00</div>
-                    <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
-                    <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
+                    <div class="niu2-sidebar-label"><i class="icon-book"></i>category:</div>
+                    <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/notes">notes</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/coding/">coding</a><sup>23</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/web/">web</a><sup>13</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/coding/">coding</a><sup>26</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/web/">web</a><sup>14</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/drupal/">drupal</a><sup>3</sup></div>
                 </div>
 

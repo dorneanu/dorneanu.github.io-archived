@@ -57,10 +57,13 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
+                                      (101)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
                                <li><a href="http://blog.dornea.nu/category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (18)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -114,30 +117,29 @@
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <p>Say <strong>NO</strong> to facebook and add these lines to <strong>/etc/firewall.user</strong></p>
-<pre class="brush:plain;"># This file is interpreted as shell script.
-# Put your custom $IPT rules here, they will
-# be executed with each firewall (re-)start.
-IPT=iptables
-NET_LAN=192.168.0.0/16
+                    <p>Say <strong>NO</strong> to facebook and add these lines to <code>/etc/firewall.user</code></p>
+<div class="highlight"><pre><span class="c"># This file is interpreted as shell script.</span>
+<span class="c"># Put your custom $IPT rules here, they will</span>
+<span class="c"># be executed with each firewall (re-)start.</span>
+<span class="nv">IPT</span><span class="o">=</span>iptables
+<span class="nv">NET_LAN</span><span class="o">=</span>192.168.0.0/16
 
 ...
 
-# facebook
-$IPT -I FORWARD -p tcp -m iprange --dst-range 66.220.144.0-66.220.159.255 --dport 443 -j DROP
-$IPT -I FORWARD -p tcp -m iprange --dst-range 69.63.176.0-69.63.191.255 --dport 443 -j DROP
-$IPT -I FORWARD -p tcp -m iprange --dst-range 204.15.20.0-204.15.23.255 --dport 443 -j DROP
-$IPT -I FORWARD -p tcp -m iprange --dst-range 66.220.144.0-66.220.159.255 --dport 80 -j DROP
-$IPT -I FORWARD -p tcp -m iprange --dst-range 69.63.176.0-69.63.191.255 --dport 80 -j DROP
-$IPT -I FORWARD -p tcp -m iprange --dst-range 204.15.20.0-204.15.23.255 --dport 80 -j DROP
-</pre>
-<p>Run <strong>/etc/init.d/firewall restart</strong> and you're done!</p>
-<!--break-->
+<span class="c"># facebook</span>
+<span class="nv">$IPT</span> -I FORWARD -p tcp -m iprange --dst-range 66.220.144.0-66.220.159.255 --dport <span class="m">443</span> -j DROP
+<span class="nv">$IPT</span> -I FORWARD -p tcp -m iprange --dst-range 69.63.176.0-69.63.191.255 --dport <span class="m">443</span> -j DROP
+<span class="nv">$IPT</span> -I FORWARD -p tcp -m iprange --dst-range 204.15.20.0-204.15.23.255 --dport <span class="m">443</span> -j DROP
+<span class="nv">$IPT</span> -I FORWARD -p tcp -m iprange --dst-range 66.220.144.0-66.220.159.255 --dport <span class="m">80</span> -j DROP
+<span class="nv">$IPT</span> -I FORWARD -p tcp -m iprange --dst-range 69.63.176.0-69.63.191.255 --dport <span class="m">80</span> -j DROP
+<span class="nv">$IPT</span> -I FORWARD -p tcp -m iprange --dst-range 204.15.20.0-204.15.23.255 --dport <span class="m">80</span> -j DROP
+</pre></div>
+<p>Run <code>/etc/init.d/firewall restart</code> and you're done!</p>
                 </div>
 <hr/>
 <div style="float:left;">
-	Prev: <a href="http://blog.dornea.nu/2011/03/21/openbsd-freebsd-netbsd-i-do-love-beasts" align='left'>
-	 OpenBSD, FreeBSD, NetBSD &#8211; I do love beasts!
+	Prev: <a href="http://blog.dornea.nu/2010/09/07/drupals-clean-urls-using-lighttpd-moved-from-lua-to-rewrite-once" align='left'>
+	 Drupals clean urls using Lighttpd: Moved from Lua to rewrite-once
 	</a>
 </div>
 <div style="float:right;">
@@ -169,14 +171,14 @@ $IPT -I FORWARD -p tcp -m iprange --dst-range 204.15.20.0-204.15.23.255 --dport 
                 <div id="niu2-sidebar-meta" class="niu2-sidebar">
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>Published:</div>
                     <div class="niu2-sidebar-value">2011-04-02 00:00</div>
-                    <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
-                    <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
+                    <div class="niu2-sidebar-label"><i class="icon-book"></i>category:</div>
+                    <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/notes">notes</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>33</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/security/">security</a><sup>29</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>37</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/security/">security</a><sup>33</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/facebook/">facebook</a><sup>1</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/admin/">admin</a><sup>21</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/iptables/">iptables</a><sup>5</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/admin/">admin</a><sup>22</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/iptables/">iptables</a><sup>9</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">

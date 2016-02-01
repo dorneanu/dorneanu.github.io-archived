@@ -3,9 +3,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="keywords" content="networking, icmp">
-        <meta name="description" content="1) Whats this about? If you’re familiar with port knocking, you should know the basics and how this technique basically works. If don’t have a clue what I’m talking about, feel free to have a look at the *Links* section. Most port knocking tools are listening for ...">
-        <title>icmpKNOCK &#8211; ICMP port knocking server - blog.dornea.nu</title>
+        <meta name="keywords" content="networking, icmp, tools, icmpknock">
+        <meta name="description" content="Whats this about? If you're familiar with port knocking, you should know the basics and how this technique basically works. If don't have a clue what I'm talking about, feel free to have a look at the Links section. Most port knocking tools are listening for TCP ...">
+        <title>icmpKNOCK - ICMP port knocking server - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
         <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
         <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/bootstrap.min.css" type="text/css" />
@@ -57,10 +57,13 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
+                                      (101)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
                                <li><a href="http://blog.dornea.nu/category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (18)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -110,18 +113,40 @@
 
         <div id="body-content">
             <div class="col-md-8 col-md-offset-2">
-                <h1 id="content-heading">icmpKNOCK &#8211; ICMP port knocking server</h1>
+                <h1 id="content-heading">icmpKNOCK - ICMP port knocking server</h1>
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <p>1) Whats this about? If you’re familiar with port knocking, you should know the basics and how this technique basically works. If don’t have a clue what I’m talking about, feel free to have a look at the *Links* section. Most port knocking tools are listening for TCP or UDP packets to arrive on specific ports in a specific order. icmpKNOCK is waiting for ICMP echo requests and checks their payloads. Packets that match given criteria trigger some action, e.g. open/close port(s) etc. The main advantage of this tool is the fact that this approach works with all standard ping tools, regardless of your operating system.<!--more--> 2) How to use it a) Define some unique keys (MD5, SHA1 etc.) b) Define actions (check out icmpKNOCK_actions.py) c) run icmpKNOCK.py as root!!! otherwise you won’t be able to listen for incoming ICMP requests d) Using your ping utility you can pass hex patterns to the requests: $ ping -p [hex pattern] [host]</p>
-<!--break-->
-<p>Be aware of the order in which you send the packets. Example: <code> @set_action(hex1, hex2, hex3, …) … </code> When you run ping keep in mind to first send key1, then key2, then… You got it, right? Example: $ ping -p hex1 [host] $ ping -p hex2 [host] … 3) Links http://www.portknocking.org/ http://www.faqs.org/rfcs/rfc791.html http://www.faqs.org/rfcs/rfc792.html <strong>Download <a href="http://dornea.nu/sites/default/files/coding/icmpKNOCK/icmpKNOCK.tar.gz">here!</a></strong></p>
+                    <h2 id="437fcbe2403d02bc40dd6595046c29e9">Whats this about?</h2>
+<p>If you're familiar with port knocking, you should know the basics and how this technique basically works. If don't have a clue what I'm talking about, feel free to have a look at the <em>Links</em> section. Most port knocking tools are listening for TCP or UDP packets to arrive on specific ports in a specific order. icmpKNOCK is waiting for ICMP echo requests and checks their payloads. Packets that match given criteria trigger some action, e.g. open/close port(s) etc. The main advantage of this tool is the fact that this approach works with all standard ping tools, regardless of your operating system.</p>
+<h2 id="63555203653ff0e5730ac638b4096a55">How to use it</h2>
+<p>a) Define some unique keys (MD5, SHA1 etc.):
+b) Define actions (check out icmpKNOCK_actions.py) 
+c) run icmpKNOCK.py as root!!! otherwise you won't be able to listen for incoming ICMP requests 
+d) Using your <code>ping</code> utility you can pass hex patterns to the requests: </p>
+<div class="highlight"><pre><span class="nv">$ </span>ping -p <span class="o">[</span>hex pattern<span class="o">]</span> <span class="o">[</span>host<span class="o">]</span>
+</pre></div>
+<p>Be aware of the order in which you send the packets. Example: </p>
+<div class="highlight"><pre>@set_action<span class="o">(</span>hex1, hex2, hex3, ...<span class="o">)</span>
+</pre></div>
+<p>When you run ping keep in mind to first send key1, then key2, then... You got it, right? Example: </p>
+<div class="highlight"><pre><span class="nv">$ </span>ping -p hex1 <span class="o">[</span>host<span class="o">]</span> 
+<span class="nv">$ </span>ping -p hex2 <span class="o">[</span>host<span class="o">]</span> 
+... 
+</pre></div>
+<h2 id="bd908db5ccb07777ced8023dffc802f4">Links</h2>
+<ul>
+<li>http://www.portknocking.org/ </li>
+<li>http://www.faqs.org/rfcs/rfc791.html * http://www.faqs.org/rfcs/rfc792.html </li>
+</ul>
+<p><strong>Download <a href="https://github.com/dorneanu/icmpKNOCK">here!</a></strong></p>
+<p><img alt="icmpknock" class="img-responsive" src="http://dl.dornea.nu/img/2010/200/icmpknock1.png"/></p>
+<p><img alt="icmpknock actions" class="img-responsive" src="http://dl.dornea.nu/img/2010/200/icmpknock2.png"/></p>
                 </div>
 <hr/>
 <div style="float:left;">
-	Prev: <a href="http://blog.dornea.nu/2009/07/22/cowpatty-42-for-netbsd" align='left'>
-	 CoWPAtty 4.2 for NetBSD
+	Prev: <a href="http://blog.dornea.nu/2009/07/08/ganxtaville52-luebecker-hood" align='left'>
+	 Ganxtaville52 Luebecker Hood
 	</a>
 </div>
 <div style="float:right;">
@@ -156,8 +181,10 @@
                     <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
                     <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>33</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>37</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/icmp/">icmp</a><sup>4</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/tools/">tools</a><sup>11</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/icmpknock/">icmpknock</a><sup>3</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -165,8 +192,8 @@
                         <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>Table of contents
                     </div>
                     <ul id="niu2-sidebar-toc-list">
-                        <li><a href="#content-heading">icmpKNOCK &#8211; ICMP port knocking server</a></li>
-                        
+                        <li><a href="#content-heading">icmpKNOCK - ICMP port knocking server</a></li>
+                        <li><a href='#437fcbe2403d02bc40dd6595046c29e9'>Whats this about?</a></li><li><a href='#63555203653ff0e5730ac638b4096a55'>How to use it</a></li><li><a href='#bd908db5ccb07777ced8023dffc802f4'>Links</a></li>
                         <li><a href="#content-comments">Comments</a></li>
                     </ul>
                 </div>

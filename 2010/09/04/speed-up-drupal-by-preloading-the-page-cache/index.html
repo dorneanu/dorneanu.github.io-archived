@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="web, drupal, admin">
-        <meta name="description" content="If you need some technical background, have a look here. The preload cache script I’ve been using for a couple a months: #!/bin/bash # # Preload a web site's cache # site="dornea.nu" tmp="downloads" log="log.txt" echo "Crawling $site." # Remove any prior downloaded files. rm -rf $tmp ...">
+        <meta name="description" content="If you need some technical background, have a look here. The preload cache script I've been using for a couple a months: #!/bin/bash # # Preload a web site's cache # site="dornea.nu" tmp="downloads" log="log.txt" echo "Crawling $site." # Remove any prior downloaded files. rm -rf $tmp ...">
         <title>Speed up Drupal by preloading the page cache - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
         <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
@@ -57,10 +57,13 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
+                                      (101)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
                                <li><a href="http://blog.dornea.nu/category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (18)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -114,75 +117,76 @@
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <p>If you need some technical background, have a look <a href="http://nadeausoftware.com/node/98">here</a>. The preload cache script I’ve been using for a couple a months:<!--more--></p>
-<pre class="lang:default decode:true">#!/bin/bash
-#
-# Preload a web site's cache
-#
+                    <p>If you need some technical background, have a look <a href="http://nadeausoftware.com/node/98">here</a>. The preload cache script I've been using for a couple a months:</p>
+<div class="highlight"><pre><span class="c">#!/bin/bash</span>
+<span class="c">#</span>
+<span class="c"># Preload a web site's cache</span>
+<span class="c">#</span>
 
-site="dornea.nu"
-tmp="downloads"
-log="log.txt"
+<span class="nv">site</span><span class="o">=</span><span class="s2">"dornea.nu"</span>
+<span class="nv">tmp</span><span class="o">=</span><span class="s2">"downloads"</span>
+<span class="nv">log</span><span class="o">=</span><span class="s2">"log.txt"</span>
 
-echo "Crawling $site."
+<span class="nb">echo</span> <span class="s2">"Crawling </span><span class="nv">$site</span><span class="s2">."</span>
 
-# Remove any prior downloaded files.
-rm -rf $tmp
+<span class="c"># Remove any prior downloaded files.</span>
+rm -rf <span class="nv">$tmp</span>
 
-# Clear the page cache first.
-wget --quiet --delete-after http://$site/[insert reset cache script here].php
+<span class="c"># Clear the page cache first.</span>
+wget --quiet --delete-after http://<span class="nv">$site</span>/<span class="o">[</span>insert reset cache script here<span class="o">]</span>.php
 
-# Crawl the site
-#
-# Crawl arguments:
-# --recursive Crawl the site
-# --domains=example.com Only crawl pages from the site
-# --level=inf Continue to infinite depth
-#
-# Temp file arguments:
-# --directory-prefix=downloads Save tmp files to the 'downloads' directory
-# --force-directories Create directories for downloaded pages
-# --delete-after Delete downloaded files afterwards
-#
-# Verbosity arguments:
-# --output-file=log.txt Write a log to 'log.txt'
-# --no-verbose Minimize log file output
-#
+<span class="c"># Crawl the site</span>
+<span class="c">#</span>
+<span class="c"># Crawl arguments:</span>
+<span class="c"># --recursive Crawl the site</span>
+<span class="c"># --domains=example.com Only crawl pages from the site</span>
+<span class="c"># --level=inf Continue to infinite depth</span>
+<span class="c">#</span>
+<span class="c"># Temp file arguments:</span>
+<span class="c"># --directory-prefix=downloads Save tmp files to the 'downloads' directory</span>
+<span class="c"># --force-directories Create directories for downloaded pages</span>
+<span class="c"># --delete-after Delete downloaded files afterwards</span>
+<span class="c">#</span>
+<span class="c"># Verbosity arguments:</span>
+<span class="c"># --output-file=log.txt Write a log to 'log.txt'</span>
+<span class="c"># --no-verbose Minimize log file output</span>
+<span class="c">#</span>
 
 wget
 --recursive
---level=inf
+--level<span class="o">=</span>inf
 --delete-after
---output-file=$log
---domains=$site
+--output-file<span class="o">=</span><span class="nv">$log</span>
+--domains<span class="o">=</span><span class="nv">$site</span>
 --force-directories
---directory-prefix=$tmp
+--directory-prefix<span class="o">=</span><span class="nv">$tmp</span>
 --no-verbose
 
-http://$site/
+http://<span class="nv">$site</span>/
 
-# When the crawl is done, the download files are removed.
-# Now remove the leftover directories too
-rm -rf $tmp
+<span class="c"># When the crawl is done, the download files are removed.</span>
+<span class="c"># Now remove the leftover directories too</span>
+rm -rf <span class="nv">$tmp</span>
 
-echo
-echo "Done. A log of the crawl is in '$log'."</pre>
-<!--break-->
+<span class="nb">echo</span>
+<span class="nb">echo</span> <span class="s2">"Done. A log of the crawl is in '</span><span class="nv">$log</span><span class="s2">'."</span>
+</pre></div>
 <p>The php script:</p>
-<pre class="lang:default decode:true">&lt;?php
-/**
-* Clears the page cache.
-*/
-include_once './includes/bootstrap.inc';
-drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
-cache_clear_all( '*', 'cache_page', TRUE );
-?&gt;</pre>
+<div class="highlight"><pre><span class="cp">&lt;?php</span>
+<span class="sd">/**</span>
+<span class="sd">* Clears the page cache.</span>
+<span class="sd">*/</span>
+<span class="k">include_once</span> <span class="s1">'./includes/bootstrap.inc'</span><span class="p">;</span>
+<span class="nx">drupal_bootstrap</span><span class="p">(</span><span class="nx">DRUPAL_BOOTSTRAP_FULL</span><span class="p">);</span>
+<span class="nx">cache_clear_all</span><span class="p">(</span> <span class="s1">'*'</span><span class="p">,</span> <span class="s1">'cache_page'</span><span class="p">,</span> <span class="k">TRUE</span> <span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
 <p>It really improves your sites speed! Feel free to adapt the script(s) to your needs.</p>
                 </div>
 <hr/>
 <div style="float:left;">
-	Prev: <a href="http://blog.dornea.nu/2010/09/02/funniest-ad-on-aids" align='left'>
-	 Funniest ad on aids!
+	Prev: <a href="http://blog.dornea.nu/2009/10/14/simple-mac-address-generator" align='left'>
+	 Simple MAC address generator
 	</a>
 </div>
 <div style="float:right;">
@@ -214,12 +218,12 @@ cache_clear_all( '*', 'cache_page', TRUE );
                 <div id="niu2-sidebar-meta" class="niu2-sidebar">
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>Published:</div>
                     <div class="niu2-sidebar-value">2010-09-04 00:00</div>
-                    <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
-                    <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
+                    <div class="niu2-sidebar-label"><i class="icon-book"></i>category:</div>
+                    <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/notes">notes</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/web/">web</a><sup>13</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/web/">web</a><sup>14</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/drupal/">drupal</a><sup>3</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/admin/">admin</a><sup>21</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/admin/">admin</a><sup>22</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">

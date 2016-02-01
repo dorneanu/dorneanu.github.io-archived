@@ -4,21 +4,21 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="coding, security, wargames, vortex">
-        <meta name="description" content="Solution for http://www.overthewire.org/wargames/vortex/vortex1.shtml. Here’s the code they have used: #include #include #include #include #define e(); if(((unsigned int)ptr & 0xff000000)==0xca000000) { setresuid(geteuid(), geteuid(), geteuid()); execlp("/bin/sh", "sh", "-i", NULL); } void print(unsigned char *buf, int len) { int i; printf("[ "); for ...">
+        <meta name="description" content="Solution for http://www.overthewire.org/wargames/vortex/vortex1.shtml. Here's the code they have used: #include #include #include #include #define e(); if(((unsigned int)ptr & 0xff000000)==0xca000000) { setresuid(geteuid(), geteuid(), geteuid()); execlp("/bin/sh", "sh", "-i", NULL); } void print(unsigned char *buf, int len) { int i; printf("[ "); for ...">
         <title>OverTheWire: Vortex Level1 - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
         <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
-        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="http://blog.dornea.nu/theme/font-icons/style.min.css" type="text/css" />
-        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/niu2.min.css" type="text/css" />
+        <link rel="stylesheet" href="../../../../theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="../../../../theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="../../../../theme/css/niu2.min.css" type="text/css" />
         <link rel="stylesheet" href="/css/custom.css" type="text/css" />
 		
         
-        <link rel="canonical" href="http://blog.dornea.nu/2013/05/02/overthewire-vortex-level1" />
+        <link rel="canonical" href="../../../../2013/05/02/overthewire-vortex-level1" />
         <script type="text/javascript">window.onload=function(){};</script>
         <!--[if lt IE 9]>
-            <script src="http://blog.dornea.nu/theme/js/html5shiv.js"></script>
-            <script src="http://blog.dornea.nu/theme/js/respond.min.js"></script>
+            <script src="../../../../theme/js/html5shiv.js"></script>
+            <script src="../../../../theme/js/respond.min.js"></script>
         <![endif]-->
     </head>
     <body> 
@@ -31,7 +31,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="http://blog.dornea.nu">
+                        <a class="navbar-brand" href="../../../..">
                             <i class="icon-home"></i>blog.dornea.nu
                         </a>
                     </div>
@@ -55,12 +55,12 @@
                                 <i class="icon-folder-open"></i>category<b class="caret"></b>
                            </a>
                            <ul class="dropdown-menu">
-                               <li><a href="http://blog.dornea.nu/category/blog">
+                               <li><a href="../../../../category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
-                               <li><a href="http://blog.dornea.nu/category/notes">
+                                      (153)</a></li>
+                               <li><a href="../../../../category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (9)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -93,7 +93,7 @@
             </div>
 <style>
     #banner{
-        background-image:url("http://blog.dornea.nu//images/header.jpg");
+        background-image:url("../../../..//images/header.jpg");
     }   
 </style>
 
@@ -114,44 +114,45 @@
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <p>Solution for <a href="http://www.overthewire.org/wargames/vortex/vortex1.shtml">http://www.overthewire.org/wargames/vortex/vortex1.shtml.</a> Here’s the code they have used:</p>
-<pre>#include 
-#include 
-#include 
-#include
+                    <p>Solution for <a href="http://www.overthewire.org/wargames/vortex/vortex1.shtml">http://www.overthewire.org/wargames/vortex/vortex1.shtml.</a> Here's the code they have used:</p>
+<div class="highlight"><pre><span class="cp">#include </span>
+<span class="cp">#include </span>
+<span class="cp">#include </span>
+<span class="cp">#include </span>
 
-#define e(); if(((unsigned int)ptr &amp; 0xff000000)==0xca000000) { setresuid(geteuid(), geteuid(), geteuid()); execlp("/bin/sh", "sh", "-i", NULL); }
 
-void print(unsigned char *buf, int len)
-{
-        int i;
+<span class="cp">#define e(); if(((unsigned int)ptr &amp; 0xff000000)==0xca000000) { setresuid(geteuid(), geteuid(), geteuid()); execlp("/bin/sh", "sh", "-i", NULL); }</span>
 
-        printf("[ ");
-        for(i=0; i &lt; len; i++) printf("%x ", buf[i]); 
-        printf(" ]\n");
-}
+<span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
 
-int main()
-{
-        unsigned char buf[512];
-        unsigned char *ptr = buf + (sizeof(buf)/2);
-        unsigned int x;
+        <span class="n">printf</span><span class="p">(</span><span class="s">"[ "</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">len</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">printf</span><span class="p">(</span><span class="s">"%x "</span><span class="p">,</span> <span class="n">buf</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span> 
+        <span class="n">printf</span><span class="p">(</span><span class="s">" ]</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
 
-        while((x = getchar()) != EOF) {
-                switch(x) {
-                        case '\n': print(buf, sizeof(buf)); continue; break;
-                        case '\\': ptr--; break; 
-                        default: e(); if(ptr &gt; buf + sizeof(buf)) continue; ptr++[0] = x; break;
-                }
-        }
-        printf("All done\n");
-}
-</pre>
-<p>The executable was at <strong>/vortex/</strong>vortex1:<!--more--></p>
-<pre>$ ls -l /vortex/vortex1
--r-sr-x--- 1 vortex2 vortex1 7398 2011-11-13 23:07 /vortex/vortex1
-</pre>
-<p>I hope you have noticed the SETUID-Bit which belongs to user <em>vortex2.</em> So that programm will run as <em>vortex</em>2. The password we need to find out is at <em>/etc/vortex_pass/vortex2</em>. Now let’s analyze the code…</p>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+        <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">512</span><span class="p">];</span>
+        <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="n">buf</span> <span class="o">+</span> <span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+        <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+
+        <span class="k">while</span><span class="p">((</span><span class="n">x</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">())</span> <span class="o">!=</span> <span class="n">EOF</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">switch</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="k">case</span> <span class="sc">'\n'</span><span class="o">:</span> <span class="n">print</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span> <span class="k">continue</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+                        <span class="k">case</span> <span class="sc">'\\'</span><span class="o">:</span> <span class="n">ptr</span><span class="o">--</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span> 
+                        <span class="k">default</span><span class="o">:</span> <span class="n">e</span><span class="p">();</span> <span class="k">if</span><span class="p">(</span><span class="n">ptr</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">buf</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">))</span> <span class="k">continue</span><span class="p">;</span> <span class="n">ptr</span><span class="o">++</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"All done</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+<p>The executable was at <strong>/vortex/</strong>vortex1:</p>
+<div class="highlight"><pre><span class="nv">$ </span>ls -l /vortex/vortex1
+-r-sr-x--- <span class="m">1</span> vortex2 vortex1 <span class="m">7398</span> 2011-11-13 23:07 /vortex/vortex1
+</pre></div>
+<p>I hope you have noticed the SETUID-Bit which belongs to user <em>vortex2.</em> So that programm will run as <em>vortex</em>2. The password we need to find out is at <em>/etc/vortex_pass/vortex2</em>. Now let's analyze the code...</p>
 <ul>
 <li>There is a buffer <strong>buf</strong> of size 512 * <strong>ptr</strong> points at the middle of the buffer</li>
 <li>Everytime “\” is read in, <strong>ptr</strong> is decremented. So we need to set <strong>ptr</strong> to the beginning of <strong>buf</strong>‘s address</li>
@@ -173,12 +174,12 @@ $
                 </div>
 <hr/>
 <div style="float:left;">
-	Prev: <a href="http://blog.dornea.nu/2013/05/02/overthewire-vortex-level2" align='left'>
+	Prev: <a href="../../../../2013/05/02/overthewire-vortex-level2" align='left'>
 	 OverTheWire: Vortex Level2
 	</a>
 </div>
 <div style="float:right;">
-    Next: <a href="http://blog.dornea.nu/2013/05/06/hacking-altoro-mutual" align='right'>
+    Next: <a href="../../../../2013/05/06/hacking-altoro-mutual" align='right'>
 	 Hacking Altoro Mutual
 	</a>
 </div>
@@ -190,7 +191,7 @@ $
     <script type="text/javascript">
         var disqus_shortname="dorneanu";
 				var disqus_identifier = 'overthewire-vortex-level1';
-			var disqus_url = 'http://blog.dornea.nu/2013/05/02/overthewire-vortex-level1';
+			var disqus_url = '../../../../2013/05/02/overthewire-vortex-level1';
 
 		var disqus_config = function () {
 			this.language = "en";
@@ -207,12 +208,12 @@ $
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>Published:</div>
                     <div class="niu2-sidebar-value">2013-05-02 00:00</div>
                     <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
-                    <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
+                    <div class="niu2-sidebar-value"><a href="../../../../category/blog">blog</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/coding/">coding</a><sup>23</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/security/">security</a><sup>29</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>7</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/vortex/">vortex</a><sup>3</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../../../../tag/coding/">coding</a><sup>25</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../../../../tag/security/">security</a><sup>32</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../../../../tag/wargames/">wargames</a><sup>7</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../../../../tag/vortex/">vortex</a><sup>3</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -248,7 +249,7 @@ $
                 </p>
                 <p>
                     © 2008 - 2016
-                    <a class="niu2-footer-link" href="http://blog.dornea.nu">Victor Dorneanu</a>
+                    <a class="niu2-footer-link" href="../../../..">Victor Dorneanu</a>
                 </p>
                 <p class="niu2-icons">
                     <a class="niu2-footer-icon" href="https://pgp.mit.edu/pks/lookup?op=get&search=0x18F1AD46FB05E1B7" title="my public key">
@@ -283,9 +284,9 @@ $
         <div id="niu2-pygments" data-theme="github"></div>
         <div id="niu2-lazy-load" data-loading-txt="Loading image" data-loading-icon="icon-spin icon-spinner"></div>
         <div id="niu2-toolbar-load" data-loading-icon="icon-spin icon-4x icon-spinner"></div>
-        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/niu2.min.js"></script>
-        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../../../../theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="../../../../theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="../../../../theme/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="/js/custom.js"></script>
         <script type="text/javascript">
             onContentLoaded();

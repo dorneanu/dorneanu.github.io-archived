@@ -57,10 +57,13 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
+                                      (101)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
                                <li><a href="http://blog.dornea.nu/category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (18)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -115,31 +118,43 @@
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
                     <p>If you got IP ranges in this layout: x.x.x.1-255, y.y.y.42-120 etc., you could easily use this code to generate full IP adresses without any ranges:</p>
-<pre class="lang:python decode:true ">ips = """
-x.x.x.1-23
-y.y.y.56-12
-"""
+<div class="highlight"><pre><span class="n">ips</span> <span class="o">=</span> <span class="s">"""</span>
+<span class="s">x.x.x.1-23</span>
+<span class="s">y.y.y.56-12</span>
+<span class="s">"""</span>
 
-buf = StringIO.StringIO(ips)
+<span class="n">buf</span> <span class="o">=</span> <span class="n">StringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">ips</span><span class="p">)</span>
 
-while True:
-    line = buf.readline()
-    if line == '':
-        break
-    else:
-        import re
-        m = re.search('(.*)\.(.*)\.(.*)\.(.*)', line)
-        if m:
-            ip_range = m.group(4).split('-')
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">buf</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s">''</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">re</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s">'(.*)\.(.*)\.(.*)\.(.*)'</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
+            <span class="n">ip_range</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'-'</span><span class="p">)</span>
 
-            if len(ip_range) == 2:
-                ip_addr = range(int(ip_range[0]), int(ip_range[1])+1)
-                for i in ip_addr:
-                    print "%s.%s.%s.%s" % (m.group(1), m.group(2), m.group(3), i)
-            else:
-                print "%s.%s.%s.%s" % (m.group(1), m.group(2), m.group(3), m.group(4))</pre>
-<!--nextpage-->
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ip_range</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">ip_addr</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">ip_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">ip_range</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ip_addr</span><span class="p">:</span>
+                    <span class="k">print</span> <span class="s">"</span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">i</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">"</span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
                 </div>
+<hr/>
+<div style="float:left;">
+	Prev: <a href="http://blog.dornea.nu/2012/04/01/howto-split-mp3s-by-silence-detection-using-mp3splt" align='left'>
+	 HowTo: Split MP3s by silence detection using mp3splt
+	</a>
+</div>
+<div style="float:right;">
+    Next: <a href="http://blog.dornea.nu/2014/12/02/re-root-nexus-10-4x" align='right'>
+	 Re-Root Nexus 10 4.x
+	</a>
+</div>
+</p>
 
                 <!-- Add comments -->
 <div id="content-comments">
@@ -166,8 +181,8 @@ while True:
                     <div class="niu2-sidebar-label"><i class="icon-book"></i>category:</div>
                     <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/notes">notes</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/coding/">coding</a><sup>23</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>33</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/coding/">coding</a><sup>26</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>37</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">

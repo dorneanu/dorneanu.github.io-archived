@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="howto, security, crypto, gentoo, luks, admin">
-        <meta name="description" content="Since last post many things have changed. No more NetBSD on my laptop (this has to do with several things, I’ll write about in a future post): I had to fall in love with Gentoo! I’ll try to give you some quick overview related to this posts title ...">
+        <meta name="description" content="Since last post many things have changed. No more NetBSD on my laptop (this has to do with several things, I'll write about in a future post): I had to fall in love with Gentoo! I'll try to give you some quick overview related to this posts title ...">
         <title>HowTo: Full-Encrypt data using Gentoo,Luks and initramfs - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
         <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
@@ -57,10 +57,13 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
+                                      (101)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
                                <li><a href="http://blog.dornea.nu/category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (18)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -114,16 +117,15 @@
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <p><a href="http://static.dornea.nu/img/2011/0da33a2b7f96741b4d379ce62da56e04.jpg"><img alt="Naked Data" class="img-responsive trigger_lightbox" height="510" src="http://static.dornea.nu/img/2011/0da33a2b7f96741b4d379ce62da56e04.jpg" style="height: 96px; width: 150px; margin-top: 1px; margin-bottom: 1px; padding-right: 5px;" width="800"/></a></p>
-<p>Since last post many things have changed. No more NetBSD on my laptop (this has to do with several things, I’ll write about in a future post): I had to fall in love with Gentoo! I’ll try to give you some quick overview related to this posts title: Encryption under Gentoo using Luks.</p>
-<p>There are serveral (good!) tutorials out there. Among these I’ve used:<!--more--></p>
+                    <p>Since last post many things have changed. No more NetBSD on my laptop (this has to do with several things, I'll write about in a future post): I had to fall in love with Gentoo! I'll try to give you some quick overview related to this posts title: Encryption under Gentoo using Luks.</p>
+<p>There are serveral (good!) tutorials out there. Among these I've used:</p>
 <table border="1" cellpadding="1" cellspacing="1" class="table table-hover table-striped" style="width: 100%;">
 <tr>
 <td>
 <a href="http://en.gentoo-wiki.com/wiki/DM-Crypt_with_LUKS">http://en.gentoo-wiki.com/wiki/DM-Crypt_with_LUKS</a>
 </td>
 <td>
-      There you’ll get a lot of information related to the topic. I’ve basically followed the same steps as described in the HowTo. However I didn’t get any functionable system at all. Especially the initramfs part seems to be buggy. Therefore: Follow the steps ín the article <strong>except</strong> the initramfs part!
+      There you'll get a lot of information related to the topic. I've basically followed the same steps as described in the HowTo. However I didn't get any functionable system at all. Especially the initramfs part seems to be buggy. Therefore: Follow the steps ín the article <strong>except</strong> the initramfs part!
     </td>
 </tr>
 <tr>
@@ -139,7 +141,7 @@
 <a href="http://djamc.ath.cx/2008/01/20/howto-gentoo-vollverschlusselung-mit-cryptsetup-und-initramfs-bei-der-installation/">http://djamc.ath.cx/2008/01/20/howto-gentoo-vollverschlusselung-mit-cryptsetup-und-initramfs-bei-der-installation/</a> <strong>(german)</strong>
 </td>
 <td>
-      Another nice howto I’ve found.
+      Another nice howto I've found.
     </td>
 </tr>
 <tr>
@@ -147,16 +149,14 @@
 <a href="http://en.gentoo-wiki.com/wiki/Initramfs">http://en.gentoo-wiki.com/wiki/Initramfs</a>
 </td>
 <td>
-      As already mentioned above, you’ll get into troubles if you don’t have a working initramfs. Follow this link to get detailed information how to create your own – as I did! – initramfs and how to adapt it to your needs.
+      As already mentioned above, you'll get into troubles if you don't have a working initramfs. Follow this link to get detailed information how to create your own - as I did! - initramfs and how to adapt it to your needs.
     </td>
 </tr>
 </table>
-<p>There is no need for additional explanations! Just follow the instructions in the tutorial and you’re done.</p>
-<p> </p>
-<!--break-->
-<h2 id="f0baa5389ac89af1e1bed4bb5c49c1a8"><strong>My initramfs</strong></h2>
-<p>Here is my initramfs structure I’m using:</p>
-<pre class="brush:plain;">$ tree
+<p>There is no need for additional explanations! Just follow the instructions in the tutorial and you're done.</p>
+<h2 id="f0baa5389ac89af1e1bed4bb5c49c1a8">My initramfs</h2>
+<p>Here is my initramfs structure I'm using:</p>
+<div class="highlight"><pre><span class="nv">$ </span>tree
 .
 â”œâ”€â”€ bin
 â”‚   â”œâ”€â”€ busybox
@@ -181,57 +181,59 @@
 â””â”€â”€ usr
     â””â”€â”€ bin
 
-15 directories, 7 files</pre>
+<span class="m">15</span> directories, <span class="m">7</span> files
+</pre></div>
 <p>Make sure all <strong>binaries</strong> are <strong>statically</strong> linked. And this is my <strong>init script</strong>:</p>
-<pre class="brush:plain;">$ cat init 
-#!/bin/busybox sh
+<div class="highlight"><pre><span class="nv">$ </span>cat init 
+<span class="c">#!/bin/busybox sh</span>
 
-# Some useful functions
-rescue_shell() {
-    echo "Something went wrong. Dropping you to a shell."
+<span class="c"># Some useful functions</span>
+rescue_shell<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">echo</span> <span class="s2">"Something went wrong. Dropping you to a shell."</span>
     busybox --install -s
-    exec /bin/busybox sh
-}
+    <span class="nb">exec</span> /bin/busybox sh
+<span class="o">}</span>
 
-# GPG workaround
+<span class="c"># GPG workaround</span>
 cp -a /dev/console /dev/tty
 
-# Mount the /proc and /sys filesystems.
+<span class="c"># Mount the /proc and /sys filesystems.</span>
 mount -t proc none /proc
 mount -t sysfs none /sys
 
 busybox --install -s
 mdev -s 
-echo /bin/mdev &gt; /proc/sys/kernel/hotplug
+<span class="nb">echo</span> /bin/mdev &gt; /proc/sys/kernel/hotplug
 
-# Decrypt root
-while [ ! -e /root/keys/sda1_key ] ; do
+<span class="c"># Decrypt root</span>
+<span class="k">while</span> <span class="o">[</span> ! -e /root/keys/sda1_key <span class="o">]</span> <span class="p">;</span> <span class="k">do</span>
    sleep 2
-   echo "&gt; Decrypt root ..."
+   <span class="nb">echo</span> <span class="s2">"&gt; Decrypt root ..."</span>
    gpg -o /root/keys/sda1_key -d /root/keys/sda1_key.gpg 2&gt; /dev/null
-done
+<span class="k">done</span>
 
-# Unlock partition
+<span class="c"># Unlock partition</span>
 cryptsetup -d /root/keys/sda1_key luksOpen /dev/sda1 root
 
-# Mount new root 
+<span class="c"># Mount new root </span>
 mount /dev/mapper/root /new-root
 
-# Create swap device
+<span class="c"># Create swap device</span>
 cryptsetup -c twofish -h sha256 -d /dev/urandom create swap /dev/sda6
 mkswap /dev/mapper/swap
 
-# Unmount old root
+<span class="c"># Unmount old root</span>
 umount -l /proc
 umount -l /sys
 
-# Start new system
-exec switch_root /new-root /sbin/init || rescue_shell</pre>
-<p>Don’t forget to copy your <strong>keys</strong> to <em>/root/keys/ </em>and rename them properly. Afterwards all you have to do is to create the initramfs file:</p>
-<pre class="brush:plain;">$ cd /usr/src/initramfs
-$ find . -print0 | cpio --null -ov --format=newc | gzip -9 &gt; /boot/initramfs.cpio.gz</pre>
-<p>That’s all!</p>
-<p><strong>BTW</strong>: I was kind enough to provide my initramfs: <a href="http://dl.dornea.nu/svn/misc/boot/initramfs/">http://dl.dornea.nu/svn/misc/boot/initramfs/</a></p>
+<span class="c"># Start new system</span>
+<span class="nb">exec </span>switch_root /new-root /sbin/init <span class="o">||</span> rescue_shell
+</pre></div>
+<p>Don't forget to copy your <strong>keys</strong> to <em>/root/keys/ </em>and rename them properly. Afterwards all you have to do is to create the initramfs file:</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /usr/src/initramfs
+<span class="nv">$ </span>find . -print0 <span class="p">|</span> cpio --null -ov --format<span class="o">=</span>newc <span class="p">|</span> gzip -9 &gt; /boot/initramfs.cpio.gz
+</pre></div>
+<p>That's all!</p>
                 </div>
 <hr/>
 <div style="float:left;">
@@ -271,12 +273,12 @@ $ find . -print0 | cpio --null -ov --format=newc | gzip -9 &gt; /boot/initramfs.
                     <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
                     <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/howto/">howto</a><sup>20</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/security/">security</a><sup>29</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/crypto/">crypto</a><sup>7</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/howto/">howto</a><sup>22</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/security/">security</a><sup>33</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/crypto/">crypto</a><sup>18</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/gentoo/">gentoo</a><sup>2</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/luks/">luks</a><sup>1</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/admin/">admin</a><sup>21</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/admin/">admin</a><sup>22</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">

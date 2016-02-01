@@ -3,9 +3,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="keywords" content="howto, networking, crypto, admin">
-        <meta name="description" content="Nowadays it is essential to backup your data and keep it safe in case of a data loss event. The most common way to backup (private) data is to use a remote server where you can upload your data. Certainly you want to keep it safe and private. So how ...">
-        <title>HowTo: RsynCrypto &#8211; The backup jewel - blog.dornea.nu</title>
+        <meta name="keywords" content="howto, networking, crypto, admin, backup, tools">
+        <meta name="description" content="Nowadays it is essential to backup your data and keep it safe in case of a data loss event. The most common way to backup (private) data is to use a remote server where you can upload your data. Certainly you want to keep it safe and private So how ...">
+        <title>HowTo: RsynCrypto - The backup jewel - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
         <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
         <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/bootstrap.min.css" type="text/css" />
@@ -57,10 +57,13 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
+                                      (101)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
                                <li><a href="http://blog.dornea.nu/category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (18)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -110,68 +113,49 @@
 
         <div id="body-content">
             <div class="col-md-8 col-md-offset-2">
-                <h1 id="content-heading">HowTo: RsynCrypto &#8211; The backup jewel</h1>
+                <h1 id="content-heading">HowTo: RsynCrypto - The backup jewel</h1>
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <p>Nowadays it is essential to backup your data and keep it safe in case of a data loss event. The most common way to backup (private) data is to use a remote server where you can upload your data. Certainly you want to keep it safe and <span style="text-decoration: underline;">private</span>. So how do you want to guarantee the privacy of the files stored? Upload it to the server and encrypt it afterwards?! Somehow you want to automate this backup process so you don’t have to do nothing than running the backup script. Suppose you have a huge amount of data (GB / TB) you’ll have to backup every day. Then you’ll have to upload the data completely to the server and do the encryption stuff. So your next question in mind should be: How to save bandwidth usage and keep it to a minimum?<!--more--> Apparently you’ll have to encrypt your data first and then commit the in-file changes to the server. This works similar to the CVS/SVN versioning systems. So here are the steps:</p>
-<!--break-->
+                    <p>Nowadays it is essential to backup your data and keep it safe in case of a data loss event. The most common way to backup (private) data is to use a remote server where you can upload your data. Certainly you want to keep it safe and <strong>private</strong> So how do you want to guarantee the privacy of the files stored? Upload it to the server and encrypt it afterwards?! Somehow you want to automate this backup process so you don't have to do nothing than running the backup script. Suppose you have a huge amount of data (GB / TB) you'll have to backup every day. Then you'll have to upload the data completely to the server and do the encryption stuff. So your next question in mind should be: How to save bandwidth usage and keep it to a minimum?</p>
+<p>Apparently you'll have to encrypt your data first and then commit the in-file changes to the server. This works similar to the CVS/SVN versioning systems. So here are the steps:</p>
 <ol>
 <li>Encrypt data using rsyncrypto</li>
 <li>Transfer data (changes) to server using rsync</li>
 </ol>
-<p>Quite simple, isn’t it? Let’s start by configuring and installing the required tools. (For the next steps I’ll be using NetBSD 5.0. But most Unix systems include rsync and rsyncrypto in their packaging systems.)  </p>
-<div class="toc_wrap_right toc_transparent no_bullets" id="toc_container">
-<p class="toc_title">
-    Contents
-  </p>
-<ul class="toc_list">
-<li>
-<a href="#Installing_required_tools"><span class="toc_number toc_depth_1">1</span> Installing required tools</a>
-</li>
-<li>
-<a href="#Generate_backup_keys"><span class="toc_number toc_depth_1">2</span> Generate backup keys</a>
-</li>
-<li>
-<a href="#Encrypt_data"><span class="toc_number toc_depth_1">3</span> Encrypt data</a>
-</li>
-<li>
-<a href="#Finito"><span class="toc_number toc_depth_1">4</span> Finito!</a>
-</li>
-</ul>
-</div>
-<h2 id="4a230c614b3cc01084743a04d65f23ea"><span id="Installing_required_tools">Installing required tools</span></h2>
-<pre class="brush: sql">cd /usr/pkgsrc/net/rsync
-make install clean CLEANDEPENDS=1</pre>
-<p>If you don’t find rsync in your packages list, then you’ll have to download it and from <a href="http://www.samba.org/rsync/">here</a>. I couldn’t find rsyncrypto in NetBSDs package tree so I’ve downloaded it from <a href="http://rsyncrypto.lingnu.com/index.php/Home_Page">here</a>. Be carefull when configuring the package on NetBSD:</p>
-<pre class="brush: sql">$ LDFLAGS=-L/usr/pkg/lib CPPFLAGS=-I/usr/pkg/include ./configure</pre>
+<p>Quite simple, isn't it? Let's start by configuring and installing the required tools. (For the next steps I'll be using NetBSD 5.0. But most Unix systems include rsync and rsyncrypto in their packaging systems.)  </p>
+<h2 id="4a230c614b3cc01084743a04d65f23ea">Installing required tools</h2>
+<div class="highlight"><pre><span class="nb">cd</span> /usr/pkgsrc/net/rsync
+make install clean <span class="nv">CLEANDEPENDS</span><span class="o">=</span>1
+</pre></div>
+<p>If you don't find <code>rsync</code> in your packages list, then you'll have to download it and from <a href="http://www.samba.org/rsync/">here</a>. I couldn't find <code>rsyncrypto</code> in NetBSDs package tree so I've downloaded it from <a href="http://rsyncrypto.lingnu.com/index.php/Home_Page">here</a>. Be carefull when configuring the package on NetBSD:</p>
+<div class="highlight"><pre><span class="nv">$ LDFLAGS</span><span class="o">=</span>-L/usr/pkg/lib <span class="nv">CPPFLAGS</span><span class="o">=</span>-I/usr/pkg/include ./configure
+</pre></div>
 <p>Now both tools shoud work and execute properly.</p>
-<h2 id="730eeef90d343e374892956d7bb134dd"><span id="Generate_backup_keys">Generate backup keys</span></h2>
-<p>Therefore we’ll be using OpenSSL. We’ll generate a backup key and a certificate used for encryption. Remeber: Keep these files safe and don’t lose them!</p>
-<pre class="brush: c">openssl req -nodes -newkey rsa:2046 -x509 
-    -keyout /backup/openssl/backup.key -out /backup/openssl/backup.crt</pre>
+<h2 id="730eeef90d343e374892956d7bb134dd">Generate backup keys</h2>
+<p>Therefore we'll be using OpenSSL. We'll generate a backup key and a certificate used for encryption. Remeber: Keep these files safe and don't lose them!</p>
+<div class="highlight"><pre>openssl req -nodes -newkey rsa:2046 -x509 
+    -keyout /backup/openssl/backup.key -out /backup/openssl/backup.crt
+</pre></div>
 <p>Check out the man page for parameters explication.</p>
-<h2 id="1ab93e08c6cdb49173ee80e747eabbab"><span id="Encrypt_data">Encrypt data</span></h2>
+<h2 id="1ab93e08c6cdb49173ee80e747eabbab">Encrypt data</h2>
 <p>Let us now encrypt our data.</p>
-<pre class="brush: c">rsyncrypto -r 
-         --name-encrypt=/encrypted/backup/map 
-         /encrypted/ /tmp/enc 
-         /encrypted/backup/enc.keys 
-         /encrypted/keys/openssl/backup.crt</pre>
-<p>Quite simple, isn’t it? Hehe.. Here is a quick explanation:</p>
-<pre class="brush: c">Main syntax of rsyncrypto: 
-rsyncrypto [options] src dst key master key
-In our case:
-"-r"          -- directory names are processed recursively
-"--name-encrypt=translation_file"   --  Encrypt file names
-"/encrypted"    -- Directory to be encrypted
-"/tmp/enc"       -- Where to store encrypted data temporarily
-"enc.keys"      --  Keys file or directory
-"backup.crt"    -- Master key (public key certificate or private key)</pre>
+<div class="highlight"><pre>rsyncrypto -r --name-encrypt<span class="o">=</span>/encrypted/backup/map /encrypted/ /tmp/enc /encrypted/backup/enc.keys /encrypted/keys/openssl/backup.crt
+</pre></div>
+<p>Quite simple, isn't it? Here is a quick explanation:</p>
+<div class="highlight"><pre>Main syntax of rsyncrypto: 
+rsyncrypto <span class="o">[</span>options<span class="o">]</span> src dst key master key
+In our <span class="k">case</span>:
+<span class="s2">"-r"</span>          -- directory names are processed recursively
+<span class="s2">"--name-encrypt=translation_file"</span>   --  Encrypt file names
+<span class="s2">"/encrypted"</span>    -- Directory to be encrypted
+<span class="s2">"/tmp/enc"</span>       -- Where to store encrypted data temporarily
+<span class="s2">"enc.keys"</span>      --  Keys file or directory
+<span class="s2">"backup.crt"</span>    -- Master key <span class="o">(</span>public key certificate or private key<span class="o">)</span>
+</pre></div>
 <p>Now all we have to do is to rsync the encrypted data to some remote server.</p>
-<pre class="brush: sql">rsync --progress --delete -ave /tmp/enc user@host:/dir/where/to/store/data</pre>
-<h2 id="c976beb5d601eebb7de5d15477d58d4d"><span id="Finito">Finito!</span></h2>
-<p>That’s all. Cya next time!</p>
+<div class="highlight"><pre>rsync --progress --delete -ave /tmp/enc user@host:/dir/where/to/store/data
+</pre></div>
                 </div>
 <hr/>
 <div style="float:left;">
@@ -180,8 +164,8 @@ In our case:
 	</a>
 </div>
 <div style="float:right;">
-    Next: <a href="http://blog.dornea.nu/2009/06/26/rest-in-peace-king-of-pop" align='right'>
-	 Rest in peace KING OF POP!
+    Next: <a href="http://blog.dornea.nu/2009/07/08/ganxtaville52-luebecker-hood" align='right'>
+	 Ganxtaville52 Luebecker Hood
 	</a>
 </div>
 </p>
@@ -211,10 +195,12 @@ In our case:
                     <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
                     <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/howto/">howto</a><sup>20</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>33</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/crypto/">crypto</a><sup>7</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/admin/">admin</a><sup>21</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/howto/">howto</a><sup>22</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>37</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/crypto/">crypto</a><sup>18</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/admin/">admin</a><sup>22</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/backup/">backup</a><sup>2</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/tools/">tools</a><sup>11</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -222,8 +208,8 @@ In our case:
                         <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>Table of contents
                     </div>
                     <ul id="niu2-sidebar-toc-list">
-                        <li><a href="#content-heading">HowTo: RsynCrypto &#8211; The backup jewel</a></li>
-                        <li><a href='#4a230c614b3cc01084743a04d65f23ea'>Installing required tools</a></li><li><a href='#730eeef90d343e374892956d7bb134dd'>Generate backup keys</a></li><li><a href='#1ab93e08c6cdb49173ee80e747eabbab'>Encrypt data</a></li><li><a href='#c976beb5d601eebb7de5d15477d58d4d'>Finito!</a></li>
+                        <li><a href="#content-heading">HowTo: RsynCrypto - The backup jewel</a></li>
+                        <li><a href='#4a230c614b3cc01084743a04d65f23ea'>Installing required tools</a></li><li><a href='#730eeef90d343e374892956d7bb134dd'>Generate backup keys</a></li><li><a href='#1ab93e08c6cdb49173ee80e747eabbab'>Encrypt data</a></li>
                         <li><a href="#content-comments">Comments</a></li>
                     </ul>
                 </div>

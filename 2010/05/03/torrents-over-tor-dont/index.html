@@ -3,9 +3,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="keywords" content="misc, tor">
-        <meta name="description" content="“An increasing number of people are asking us about the recent paper coming out of Inria in France around Bittorrent and privacy attacks. This post tries to explain the attacks and what they imply. There are three pieces to the attack (or three separate attacks that build on each other ...">
-        <title>Torrents over TOR?! Don&#8217;t! - blog.dornea.nu</title>
+        <meta name="keywords" content="misc, tor, security, networking">
+        <meta name="description" content=""An increasing number of people are asking us about the recent paper coming out of Inria in France around Bittorrent and privacy attacks. This post tries to explain the attacks and what they imply. There are three pieces to the attack (or three separate attacks that build on each other ...">
+        <title>Torrents over TOR?! Don't! - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
         <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
         <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/bootstrap.min.css" type="text/css" />
@@ -57,10 +57,13 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
+                                      (101)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
                                <li><a href="http://blog.dornea.nu/category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (18)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -110,16 +113,17 @@
 
         <div id="body-content">
             <div class="col-md-8 col-md-offset-2">
-                <h1 id="content-heading">Torrents over TOR?! Don&#8217;t!</h1>
+                <h1 id="content-heading">Torrents over TOR?! Don't!</h1>
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <p><em>“An increasing number of people are asking us about the recent paper coming out of Inria in France around Bittorrent and privacy attacks. This post tries to explain the attacks and what they imply. There are three pieces to the attack (or three separate attacks that build on each other, if you prefer).</em></p>
+                    <blockquote>
+<p>"An increasing number of people are asking us about the recent paper coming out of Inria in France around Bittorrent and privacy attacks. This post tries to explain the attacks and what they imply. There are three pieces to the attack (or three separate attacks that build on each other, if you prefer)."</p>
+</blockquote>
 <p><em>The first attack is on people who configure their Bittorrent application to proxy their tracker traffic through Tor. These people are hoping to keep their IP address secret from somebody looking over the list of peers at the tracker. The problem is that several popular Bittorrent clients (the authors call out uTorrent in particular, and I think Vuze does it too) just ignore their socks proxy setting in this case. Choosing to ignore the proxy setting is understandable, since modern tracker designs use the UDP protocol for communication, and<br/>
-socks proxies such as Tor only support the TCP protocol — so the developers of these applications had a choice between “make it work even when the user sets a proxy that can’t be used” and “make it mysteriously fail and frustrate the user”. The result is that the Bittorrent applications made a different security decision than some of their users expected, and now it’s biting the users.”</em></p>
+socks proxies such as Tor only support the TCP protocol — so the developers of these applications had a choice between <code>make it work even when the user sets a proxy that can't be used</code> and <code>make it mysteriously fail and frustrate the user</code>. The result is that the Bittorrent applications made a different security decision than some of their users expected, and now it's biting the users.`</em></p>
 <p>[Source: http://blog.torproject.org/blog/bittorrent-over-tor-isnt-good-idea]</p>
-<p> </p>
-<p>Read full article: <a href="http://blog.torproject.org/blog/bittorrent-over-tor-isnt-good-idea">blog.torproject.org</a><!--break--></p>
+<p>Read full article: <a href="http://blog.torproject.org/blog/bittorrent-over-tor-isnt-good-idea">blog.torproject.org</a></p>
                 </div>
 <hr/>
 <div style="float:left;">
@@ -159,8 +163,10 @@ socks proxies such as Tor only support the TCP protocol — so the developers of
                     <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
                     <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/misc/">misc</a><sup>29</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/misc/">misc</a><sup>35</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/tor/">tor</a><sup>2</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/security/">security</a><sup>33</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>37</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -168,7 +174,7 @@ socks proxies such as Tor only support the TCP protocol — so the developers of
                         <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>Table of contents
                     </div>
                     <ul id="niu2-sidebar-toc-list">
-                        <li><a href="#content-heading">Torrents over TOR?! Don&#8217;t!</a></li>
+                        <li><a href="#content-heading">Torrents over TOR?! Don't!</a></li>
                         
                         <li><a href="#content-comments">Comments</a></li>
                     </ul>

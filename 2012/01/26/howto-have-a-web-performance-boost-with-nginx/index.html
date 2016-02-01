@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="howto, nginx, admin">
-        <meta name="description" content="Contents 1 Why Nginx? 2 Get it! 3 Basic configuration 4 vHost configuration 5 Nginx as proxy server 6 Benchmarks 6.1 ab (apache suite) benchmark 6.1.1 lighttpd 6.1.2 nginx 6.2 tools.pingdom.com benchmark 7 Literature Why Nginx? Since I wanted to improve my ...">
+        <meta name="description" content="Why Nginx? Since I wanted to improve my sites load speed I thought I should look around for some lighttpd-alternatives which I have used for so many years. The really annoying thing about lighttpd is its configuration syntax. I don't think it's comprehensive nor easy to learn. Besides ...">
         <title>HowTo: Have a web performance boost with Nginx - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
         <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
@@ -57,10 +57,13 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
+                                      (101)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
                                <li><a href="http://blog.dornea.nu/category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (18)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -114,357 +117,322 @@
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <div class="toc_wrap_right toc_transparent no_bullets" id="toc_container">
-<p class="toc_title">
-    Contents
-  </p>
-<ul class="toc_list">
-<li>
-<a href="#Why_Nginx"><span class="toc_number toc_depth_1">1</span> Why Nginx?</a>
-</li>
-<li>
-<a href="#Get_it"><span class="toc_number toc_depth_1">2</span> Get it!</a>
-</li>
-<li>
-<a href="#Basic_configuration"><span class="toc_number toc_depth_1">3</span> Basic configuration</a>
-</li>
-<li>
-<a href="#vHost_configuration"><span class="toc_number toc_depth_1">4</span> vHost configuration</a>
-</li>
-<li>
-<a href="#Nginx_as_proxy_server"><span class="toc_number toc_depth_1">5</span> Nginx as proxy server</a>
-</li>
-<li>
-<a href="#Benchmarks"><span class="toc_number toc_depth_1">6</span> Benchmarks</a><ul>
-<li>
-<a href="#ab_apache_suite_benchmark"><span class="toc_number toc_depth_2">6.1</span> ab (apache suite) benchmark</a><ul>
-<li>
-<a href="#lighttpd"><span class="toc_number toc_depth_3">6.1.1</span> lighttpd</a>
-</li>
-<li>
-<a href="#nginx"><span class="toc_number toc_depth_3">6.1.2</span> nginx</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="#toolspingdomcom_benchmark"><span class="toc_number toc_depth_2">6.2</span> tools.pingdom.com benchmark</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="#Literature"><span class="toc_number toc_depth_1">7</span> Literature</a>
-</li>
-</ul>
-</div>
-<h1 id="de1fe63d6afc849c0d4bab0d15576375"><span id="Why_Nginx">Why Nginx?</span></h1>
-<p>Since I wanted to improve my sites load speed I thought I should look around for some lighttpd-alternatives which I have used for so many years. The really annoying thing about ”lighttpd” is its configuration syntax. I don’t think it’s comprehensive nor easy to learn. Besides that I wanted to have a configuration where ”memcahed” plays a major role: Serve static content (html) from memcache. Lighttpd does have some modules/tutorials how to interact with ”memcached” but I couldn’t find any working configuration. Frustration but also curiosity brought me to ”Nginx”. <!--more--></p>
-<p>According to the author Nginx ”is an HTTP and reverse proxy server, as well as a mail proxy server”. I thought I should give it a try and test its performance against Lighttpd. Meanwhile I’m using Lighttpd ”’AND”’ Nginx on my server due to some regexp issue that have to be solved very soon. In that case Nginx acts a a proxy server (see below for configuration stuff).</p>
-<h1 id="d315961f10d8f48561baf0b483b8334b"><span id="Get_it">Get it!</span></h1>
-<p>Before going further you should have the latest (stable) available Nginx version. If you use Debian make sure, you add following to your ”/etc/apt/sources.list”:</p>
-<pre class="brush:plain">deb-src http://nginx.org/packages/debian/ squeeze nginx</pre>
-<p>On my system I have currently version ”1.0.9-1” installed.</p>
-<h1 id="416206518e27ed2ec8b8e0876078af35"><span id="Basic_configuration">Basic configuration</span></h1>
-<p>The main file for this part is ”/etc/nginx/nginx.conf”. This is my ”nginx.conf”:</p>
-<pre class="brush:plain">user www-data;
-worker_processes  5;
-worker_rlimit_nofile 8192;
+                    <h2 id="de1fe63d6afc849c0d4bab0d15576375">Why Nginx?</h2>
+<p>Since I wanted to improve my sites load speed I thought I should look around for some lighttpd-alternatives which I have used for so many years. The really annoying thing about <code>lighttpd</code> is its configuration syntax. I don't think it's comprehensive nor easy to learn. Besides that I wanted to have a configuration where <code>memcahed</code> plays a major role: Serve static content (html) from memcache. Lighttpd does have some modules/tutorials how to interact with <code>memcached</code> but I couldn't find any working configuration. Frustration but also curiosity brought me to <code>Nginx</code>. </p>
+<p>According to the author Nginx <code>is an HTTP and reverse proxy server, as well as a mail proxy server</code>. I thought I should give it a try and test its performance against Lighttpd. Meanwhile I'm using Lighttpd <code>'AND</code>' Nginx on my server due to some regexp issue that have to be solved very soon. In that case Nginx acts a a proxy server (see below for configuration stuff).</p>
+<h2 id="d315961f10d8f48561baf0b483b8334b">Get it!</h2>
+<p>Before going further you should have the latest (stable) available Nginx version. If you use Debian make sure, you add following to your <code>/etc/apt/sources.list</code>:</p>
+<div class="highlight"><pre><span class="k">deb-src</span> <span class="s">http://nginx.org/packages/debian/</span> <span class="kp">squeeze</span> <span class="kp">nginx</span>
+</pre></div>
+<p>On my system I have currently version <code>1.0.9-1</code> installed.</p>
+<h2 id="416206518e27ed2ec8b8e0876078af35">Basic configuration</h2>
+<p>The main file for this part is <code>/etc/nginx/nginx.conf</code>. This is my <code>nginx.conf</code>:</p>
+<div class="highlight"><pre>user www-data<span class="p">;</span>
+worker_processes  5<span class="p">;</span>
+worker_rlimit_nofile 8192<span class="p">;</span>
 
-error_log  /var/log/nginx/error.log warn;
-pid        /var/run/nginx.pid;
+error_log  /var/log/nginx/error.log warn<span class="p">;</span>
+pid        /var/run/nginx.pid<span class="p">;</span>
 
-events {
-    worker_connections  4096;
-    use epoll;
-}
+events <span class="o">{</span>
+    worker_connections  4096<span class="p">;</span>
+    use epoll<span class="p">;</span>
+<span class="o">}</span>
 
-http {
-    include       /etc/nginx/mime.types;
-    default_type  application/octet-stream;
-    keepalive_requests    50;
-    keepalive_timeout     300 300;
+http <span class="o">{</span>
+    include       /etc/nginx/mime.types<span class="p">;</span>
+    default_type  application/octet-stream<span class="p">;</span>
+    keepalive_requests    50<span class="p">;</span>
+    keepalive_timeout     <span class="m">300</span> 300<span class="p">;</span>
 
-    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-                      '$status $body_bytes_sent "$http_referer" '
-                      '"$http_user_agent" "$http_x_forwarded_for"';
+    log_format  main  <span class="s1">'$remote_addr - $remote_user [$time_local] "$request" '</span>
+                      <span class="s1">'$status $body_bytes_sent "$http_referer" '</span>
+                      <span class="s1">'"$http_user_agent" "$http_x_forwarded_for"'</span><span class="p">;</span>
 
-    access_log  /var/log/nginx/access.log  main;
+    access_log  /var/log/nginx/access.log  main<span class="p">;</span>
 
-    sendfile        on;
-    #cp_nopush     on;
+    sendfile        on<span class="p">;</span>
+    <span class="c">#cp_nopush     on;</span>
 
-    # Compression
-    gzip on;
-    gzip_buffers 16 8k;
-    gzip_comp_level 2;
-    gzip_http_version 1.1;
-    gzip_min_length 10;
-    gzip_types text/plain text/css application/x-javascript text/xml;
-    gzip_vary on;
-    gzip_proxied any;
-    gzip_disable "MSIE [1-6].";
+    <span class="c"># Compression</span>
+    gzip on<span class="p">;</span>
+    gzip_buffers <span class="m">16</span> 8k<span class="p">;</span>
+    gzip_comp_level 2<span class="p">;</span>
+    gzip_http_version 1.1<span class="p">;</span>
+    gzip_min_length 10<span class="p">;</span>
+    gzip_types text/plain text/css application/x-javascript text/xml<span class="p">;</span>
+    gzip_vary on<span class="p">;</span>
+    gzip_proxied any<span class="p">;</span>
+    gzip_disable <span class="s2">"MSIE [1-6]."</span><span class="p">;</span>
 
-    include /etc/nginx/conf.d/*.conf;
-}</pre>
-<p>I won’t explain every line since this is not what I’m supposed to do <img alt=":)" class="wp-smiley img-responsive" src="http://dornea.nu/wp-includes/images/smilies/icon_smile.gif"/> Please have a look at the links at the end of this article for additional links.</p>
-<h1 id="7f167270d33e2ada55cd790e9aff9edb"><span id="vHost_configuration">vHost configuration</span></h1>
-<p>Well this is probably the most interesting part. You should have a configuration file per each vhost located at ”/etc/nginx/conf.d/”. In my case the configuration was adapted to Drupals system and needs. Let’s have a look:</p>
-<pre class="brush:plain">server {
-        listen 80;
-        server_name dornea.nu;
+    include /etc/nginx/conf.d/*.conf<span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>I won't explain every line since this is not what I'm supposed to do. Please have a look at the links at the end of this article for additional links.</p>
+<h2 id="7f167270d33e2ada55cd790e9aff9edb">vHost configuration</h2>
+<p>Well this is probably the most interesting part. You should have a configuration file per each vhost located at <code>/etc/nginx/conf.d/</code>. In my case the configuration was adapted to Drupals system and needs. Let's have a look:</p>
+<div class="highlight"><pre>server <span class="o">{</span>
+        listen 80<span class="p">;</span>
+        server_name dornea.nu<span class="p">;</span>
 
-        root /var/www/sites/dornea.nu/htdocs/current; ## &lt;-- Your only path reference.
+        root /var/www/sites/dornea.nu/htdocs/current<span class="p">;</span> <span class="c">## &lt;-- Your only path reference.</span>
 
-        ## Drupal Boost with nginx 
-        set $boost "";
-        set $boost_query "_";
+        <span class="c">## Drupal Boost with nginx </span>
+        <span class="nb">set</span> <span class="nv">$boost</span> <span class="s2">""</span><span class="p">;</span>
+        <span class="nb">set</span> <span class="nv">$boost_query</span> <span class="s2">"_"</span><span class="p">;</span>
 
-        if ( $request_method = GET ) { 
-                set $boost G;
-        }
+        <span class="k">if</span> <span class="o">(</span> <span class="nv">$request_method</span> <span class="o">=</span> GET <span class="o">)</span> <span class="o">{</span> 
+                <span class="nb">set</span> <span class="nv">$boost</span> G<span class="p">;</span>
+        <span class="o">}</span>
 
-        if ($http_cookie !~ "DRUPAL_UID") {
-            set $boost "${boost}D";
-        }
+        <span class="k">if</span> <span class="o">(</span><span class="nv">$http_cookie</span> !~ <span class="s2">"DRUPAL_UID"</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nb">set</span> <span class="nv">$boost</span> <span class="s2">"</span><span class="si">${</span><span class="nv">boost</span><span class="si">}</span><span class="s2">D"</span><span class="p">;</span>
+        <span class="o">}</span>
 
-        if ($query_string = "") {
-            set $boost "${boost}Q";
-        }
+        <span class="k">if</span> <span class="o">(</span><span class="nv">$query_string</span> <span class="o">=</span> <span class="s2">""</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nb">set</span> <span class="nv">$boost</span> <span class="s2">"</span><span class="si">${</span><span class="nv">boost</span><span class="si">}</span><span class="s2">Q"</span><span class="p">;</span>
+        <span class="o">}</span>
 
-        if ( -f $document_root/cache/normal/$host$request_uri$boost_query.html ) {
-            set $boost "${boost}F";
-        }
+        <span class="k">if</span> <span class="o">(</span> -f <span class="nv">$document_root</span>/cache/normal/<span class="nv">$host$request_uri$boost_query</span>.html <span class="o">)</span> <span class="o">{</span>
+            <span class="nb">set</span> <span class="nv">$boost</span> <span class="s2">"</span><span class="si">${</span><span class="nv">boost</span><span class="si">}</span><span class="s2">F"</span><span class="p">;</span>
+        <span class="o">}</span>
 
-        if ($boost = GDQF){
-            rewrite ^.*$ /cache/normal/$host/$request_uri$boost_query.html break;
-        }
+        <span class="k">if</span> <span class="o">(</span><span class="nv">$boost</span> <span class="o">=</span> GDQF<span class="o">){</span>
+            rewrite ^.*<span class="nv">$ </span>/cache/normal/<span class="nv">$host</span>/<span class="nv">$request_uri$boost_query</span>.html <span class="nb">break</span><span class="p">;</span>
+        <span class="o">}</span>
 
-        location = /favicon.ico {
-                log_not_found off;
-                access_log off;
-        }
+        <span class="nv">location</span> <span class="o">=</span> /favicon.ico <span class="o">{</span>
+                log_not_found off<span class="p">;</span>
+                access_log off<span class="p">;</span>
+        <span class="o">}</span>
 
-        location = /robots.txt {
-                allow all;
-                log_not_found off;
-                access_log off;
-        }
+        <span class="nv">location</span> <span class="o">=</span> /robots.txt <span class="o">{</span>
+                allow all<span class="p">;</span>
+                log_not_found off<span class="p">;</span>
+                access_log off<span class="p">;</span>
+        <span class="o">}</span>
 
-        # This matters if you use drush
-        location = /backup {
-                auth_basic            "Restricted";
-                auth_basic_user_file  /etc/lighttpd/lighttpd_passwords.inc;
-                #deny all;
-        }
+        <span class="c"># This matters if you use drush</span>
+        <span class="nv">location</span> <span class="o">=</span> /backup <span class="o">{</span>
+                auth_basic            <span class="s2">"Restricted"</span><span class="p">;</span>
+                auth_basic_user_file  /etc/lighttpd/lighttpd_passwords.inc<span class="p">;</span>
+                <span class="c">#deny all;</span>
+        <span class="o">}</span>
 
-        # Very rarely should these ever be accessed outside of your lan
-        location ~* .(txt|log)$ {
-                allow 192.168.0.0/16;
-                deny all;
-        }
+        <span class="c"># Very rarely should these ever be accessed outside of your lan</span>
+        location ~* .<span class="o">(</span>txt<span class="p">|</span>log<span class="o">)</span><span class="nv">$ </span><span class="o">{</span>
+                allow 192.168.0.0/16<span class="p">;</span>
+                deny all<span class="p">;</span>
+        <span class="o">}</span>
 
-        location ~ ..*/.*.php$ {
-                return 403;
-        }
+        location ~ ..*/.*.php<span class="nv">$ </span><span class="o">{</span>
+                <span class="k">return</span> 403<span class="p">;</span>
+        <span class="o">}</span>
 
-        location / {
+        location / <span class="o">{</span>
 
-                set $memcached_key "nginx:$request_uri";
-                memcached_pass 127.0.0.1:11211;
-                default_type       text/html;
+                <span class="nb">set</span> <span class="nv">$memcached_key</span> <span class="s2">"nginx:</span><span class="nv">$request_uri</span><span class="s2">"</span><span class="p">;</span>
+                memcached_pass 127.0.0.1:11211<span class="p">;</span>
+                default_type       text/html<span class="p">;</span>
 
-                error_page 404 405 502 = @fallback;
-                autoindex  on;
-        }
+                error_page <span class="m">404</span> <span class="m">405</span> <span class="nv">502</span> <span class="o">=</span> @fallback<span class="p">;</span>
+                autoindex  on<span class="p">;</span>
+        <span class="o">}</span>
 
-        location @fallback {
-                try_files $uri @rewrite;
-        } 
+        location @fallback <span class="o">{</span>
+                try_files <span class="nv">$uri</span> @rewrite<span class="p">;</span>
+        <span class="o">}</span> 
 
-        location @rewrite {
-                # Some modules enforce no slash (/) at the end of the URL
-                # Else this rewrite block wouldn't be needed (GlobalRedirect)
-                #rewrite ^/system/test/(.*)$     /index.php?q=system/test/$1;
-                #rewrite ^/system/files/(.*)$    /index.php?q=system/files/$1;
-                rewrite ^/sitemap.xml$          /index.php?q=sitemap.xml;
+        location @rewrite <span class="o">{</span>
+                <span class="c"># Some modules enforce no slash (/) at the end of the URL</span>
+                <span class="c"># Else this rewrite block wouldn't be needed (GlobalRedirect)</span>
+                <span class="c">#rewrite ^/system/test/(.*)$     /index.php?q=system/test/$1;</span>
+                <span class="c">#rewrite ^/system/files/(.*)$    /index.php?q=system/files/$1;</span>
+                rewrite ^/sitemap.xml<span class="nv">$ </span>         /index.php?q<span class="o">=</span>sitemap.xml<span class="p">;</span>
 
-                rewrite ^/(.*)$                 /index.php?q=$1;
-        }
+                rewrite ^/<span class="o">(</span>.*<span class="o">)</span><span class="nv">$ </span>                /index.php?q<span class="o">=</span><span class="nv">$1</span><span class="p">;</span>
+        <span class="o">}</span>
 
-        location ~ .php$ {
-                fastcgi_split_path_info ^(.+.php)(/.+)$;
-                #NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
-                include fastcgi_params;
-                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-                fastcgi_param  VERIFIED $ssl_client_verify;
-                fastcgi_param  DN $ssl_client_s_dn;
-                fastcgi_intercept_errors on;
-        }
+        location ~ .php<span class="nv">$ </span><span class="o">{</span>
+                fastcgi_split_path_info ^<span class="o">(</span>.+.php<span class="o">)(</span>/.+<span class="o">)</span><span class="nv">$;</span>
+                <span class="c">#NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini</span>
+                include fastcgi_params<span class="p">;</span>
+                fastcgi_param SCRIPT_FILENAME <span class="nv">$document_root$fastcgi_script_name</span><span class="p">;</span>
+                fastcgi_param  VERIFIED <span class="nv">$ssl_client_verify</span><span class="p">;</span>
+                fastcgi_param  DN <span class="nv">$ssl_client_s_dn</span><span class="p">;</span>
+                fastcgi_intercept_errors on<span class="p">;</span>
+        <span class="o">}</span>
 
-        # Fighting with ImageCache? This little gem is amazing.
-        location ~ ^/sites/.*/files/imagecache/ {
-                try_files $uri @rewrite;
-        }
-        # Catch image styles for D7 too.
-        location ~ ^/sites/.*/files/styles/ {
-                try_files $uri @rewrite;
-        }
+        <span class="c"># Fighting with ImageCache? This little gem is amazing.</span>
+        location ~ ^/sites/.*/files/imagecache/ <span class="o">{</span>
+                try_files <span class="nv">$uri</span> @rewrite<span class="p">;</span>
+        <span class="o">}</span>
+        <span class="c"># Catch image styles for D7 too.</span>
+        location ~ ^/sites/.*/files/styles/ <span class="o">{</span>
+                try_files <span class="nv">$uri</span> @rewrite<span class="p">;</span>
+        <span class="o">}</span>
 
-        location ~* .(js|css|png|jpg|jpeg|gif|ico)$ {
-                expires 24h;
-                log_not_found off;
-        }
-}</pre>
-<p>Having Drupals boost module enabled you should have static pages on your server which will be served by the memcache daemon. At the beginning of the configuration nginx checks if any static content should be served at all (ist the user logged in? etc.) If there is a html file which correlates with the URI then nginx will load the files content from memcache. If not: the PHP script will be executed. Speaking of PHP.. Lets have a look at ”/etc/nginx/”:</p>
-<pre class="brush:plain"># cat /etc/nginx/fastcgi_params 
-fastcgi_pass   unix:/tmp/fcgi.sock;
-fastcgi_param  QUERY_STRING       $query_string;
-fastcgi_param  REQUEST_METHOD     $request_method;
-fastcgi_param  CONTENT_TYPE       $content_type;
-fastcgi_param  CONTENT_LENGTH     $content_length;
-fastcgi_param  SCRIPT_NAME        $fastcgi_script_name;
-fastcgi_param  REQUEST_URI        $request_uri;
-fastcgi_param  DOCUMENT_URI       $document_uri;
-fastcgi_param  DOCUMENT_ROOT      $document_root;
-fastcgi_param  SERVER_PROTOCOL    $server_protocol;
-fastcgi_param  GATEWAY_INTERFACE  CGI/1.1;
-fastcgi_param  SERVER_SOFTWARE    nginx/$nginx_version;
-fastcgi_param  REMOTE_ADDR        $remote_addr;
-fastcgi_param  REMOTE_PORT        $remote_port;
-fastcgi_param  SERVER_ADDR        $server_addr;
-fastcgi_param  SERVER_PORT        $server_port;
-fastcgi_param  SERVER_NAME        $server_name;
+        location ~* .<span class="o">(</span>js<span class="p">|</span>css<span class="p">|</span>png<span class="p">|</span>jpg<span class="p">|</span>jpeg<span class="p">|</span>gif<span class="p">|</span>ico<span class="o">)</span><span class="nv">$ </span><span class="o">{</span>
+                expires 24h<span class="p">;</span>
+                log_not_found off<span class="p">;</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+<p>Having Drupals boost module enabled you should have static pages on your server which will be served by the memcache daemon. At the beginning of the configuration nginx checks if any static content should be served at all (ist the user logged in? etc.) If there is a html file which correlates with the URI then nginx will load the files content from memcache. If not: the PHP script will be executed. Speaking of PHP.. Lets have a look at <code>/etc/nginx/</code>:</p>
+<div class="highlight"><pre><span class="c"># cat /etc/nginx/fastcgi_params </span>
+fastcgi_pass   unix:/tmp/fcgi.sock<span class="p">;</span>
+fastcgi_param  QUERY_STRING       <span class="nv">$query_string</span><span class="p">;</span>
+fastcgi_param  REQUEST_METHOD     <span class="nv">$request_method</span><span class="p">;</span>
+fastcgi_param  CONTENT_TYPE       <span class="nv">$content_type</span><span class="p">;</span>
+fastcgi_param  CONTENT_LENGTH     <span class="nv">$content_length</span><span class="p">;</span>
+fastcgi_param  SCRIPT_NAME        <span class="nv">$fastcgi_script_name</span><span class="p">;</span>
+fastcgi_param  REQUEST_URI        <span class="nv">$request_uri</span><span class="p">;</span>
+fastcgi_param  DOCUMENT_URI       <span class="nv">$document_uri</span><span class="p">;</span>
+fastcgi_param  DOCUMENT_ROOT      <span class="nv">$document_root</span><span class="p">;</span>
+fastcgi_param  SERVER_PROTOCOL    <span class="nv">$server_protocol</span><span class="p">;</span>
+fastcgi_param  GATEWAY_INTERFACE  CGI/1.1<span class="p">;</span>
+fastcgi_param  SERVER_SOFTWARE    nginx/<span class="nv">$nginx_version</span><span class="p">;</span>
+fastcgi_param  REMOTE_ADDR        <span class="nv">$remote_addr</span><span class="p">;</span>
+fastcgi_param  REMOTE_PORT        <span class="nv">$remote_port</span><span class="p">;</span>
+fastcgi_param  SERVER_ADDR        <span class="nv">$server_addr</span><span class="p">;</span>
+fastcgi_param  SERVER_PORT        <span class="nv">$server_port</span><span class="p">;</span>
+fastcgi_param  SERVER_NAME        <span class="nv">$server_name</span><span class="p">;</span>
 
-fastcgi_index  index.php;
+fastcgi_index  index.php<span class="p">;</span>
 
-fastcgi_param  REDIRECT_STATUS    200;</pre>
-<p>I use a socket instead of child processes. The socket can be created using ”/etc/init.d/fastcgi”:</p>
-<pre class="brush:plain"># cat /etc/init.d/fastcgi 
-#!/bin/sh
+fastcgi_param  REDIRECT_STATUS    200<span class="p">;</span>
+</pre></div>
+<p>I use a socket instead of child processes. The socket can be created using <code>/etc/init.d/fastcgi</code>:</p>
+<div class="highlight"><pre><span class="c"># cat /etc/init.d/fastcgi </span>
+<span class="c">#!/bin/sh</span>
 
-### BEGIN INIT INFO
-# Provides:          fastcgi
-# Required-Start:    $local_fs $remote_fs $network $syslog
-# Required-Stop:     $local_fs $remote_fs $network $syslog
-# Default-Start:     2 3 4 5
-# Default-Stop:      0 1 6
-# Short-Description: starts the FastCGI server
-# Description:       starts spawn-fcgi using start-stop-daemon
-### END INIT INFO
+<span class="c">### BEGIN INIT INFO</span>
+<span class="c"># Provides:          fastcgi</span>
+<span class="c"># Required-Start:    $local_fs $remote_fs $network $syslog</span>
+<span class="c"># Required-Stop:     $local_fs $remote_fs $network $syslog</span>
+<span class="c"># Default-Start:     2 3 4 5</span>
+<span class="c"># Default-Stop:      0 1 6</span>
+<span class="c"># Short-Description: starts the FastCGI server</span>
+<span class="c"># Description:       starts spawn-fcgi using start-stop-daemon</span>
+<span class="c">### END INIT INFO</span>
 
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-DAEMON=/usr/local/bin/php-fastcgi
+<span class="nv">PATH</span><span class="o">=</span>/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+<span class="nv">DAEMON</span><span class="o">=</span>/usr/local/bin/php-fastcgi
 
-test -x $DAEMON || exit 0
+<span class="nb">test</span> -x <span class="nv">$DAEMON</span> <span class="o">||</span> <span class="nb">exit </span>0
 
-set -e
+<span class="nb">set</span> -e
 
-RETVAL=0
-case "$1" in
-  start)
-    $DAEMON
-    RETVAL=$?
-  ;;
-  stop)
+<span class="nv">RETVAL</span><span class="o">=</span>0
+<span class="k">case</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> in
+  start<span class="o">)</span>
+    <span class="nv">$DAEMON</span>
+    <span class="nv">RETVAL</span><span class="o">=</span><span class="nv">$?</span>
+  <span class="p">;;</span>
+  stop<span class="o">)</span>
     killall -9 php5-cgi
-    RETVAL=$?
-  ;;
-  restart)
+    <span class="nv">RETVAL</span><span class="o">=</span><span class="nv">$?</span>
+  <span class="p">;;</span>
+  restart<span class="o">)</span>
     killall -9 php5-cgi
-    $DAEMON
-    RETVAL=$?
-  ;;
-  *)
-    echo "Usage: php-fastcgi {start|stop|restart}"
-    exit 1
-  ;;
-esac
-exit $RETVAL</pre>
-<p>”php-fastcgi” is located at /usr/local/bin/:</p>
-<pre class="brush:plain"># cat /usr/local/bin/php-fastcgi 
-#!/bin/sh
-/usr/bin/spawn-fcgi -F 1 -C 10 -a 127.0.0.1 -s /tmp/fcgi.sock -u www-data -g www-data -f "/usr/bin/php5-cgi -c /etc/php5/cgi/php.ini" -P /var/run/fastcgi-php.pid</pre>
-<h1 id="20849d6369623ae5549ab46ec8cbcd43"><span id="Nginx_as_proxy_server">Nginx as proxy server</span></h1>
-<p>As already mentioned nginx can be used as a proxy server. In my case I need nginx to redirect requests on a certain subdomain to ”lighttpd” listening to a local interface. The configuration:</p>
-<pre class="brush: plain">## dl.dornea.nu
-server {
-    listen 80;
-    server_name dl.dornea.nu;
-    root /var/www/sites/dl.dornea.nu/htdocs/current;
-    rewrite_log on;
-    index index.php index.html;
+    <span class="nv">$DAEMON</span>
+    <span class="nv">RETVAL</span><span class="o">=</span><span class="nv">$?</span>
+  <span class="p">;;</span>
+  *<span class="o">)</span>
+    <span class="nb">echo</span> <span class="s2">"Usage: php-fastcgi {start|stop|restart}"</span>
+    <span class="nb">exit </span>1
+  <span class="p">;;</span>
+<span class="k">esac</span>
+<span class="nb">exit</span> <span class="nv">$RETVAL</span>
+</pre></div>
+<p><code>php-fastcgi</code> is located at /usr/local/bin/:</p>
+<div class="highlight"><pre><span class="c"># cat /usr/local/bin/php-fastcgi </span>
+<span class="c">#!/bin/sh</span>
+/usr/bin/spawn-fcgi -F <span class="m">1</span> -C <span class="m">10</span> -a 127.0.0.1 -s /tmp/fcgi.sock -u www-data -g www-data -f <span class="s2">"/usr/bin/php5-cgi -c /etc/php5/cgi/php.ini"</span> -P /var/run/fastcgi-php.pid
+</pre></div>
+<h2 id="20849d6369623ae5549ab46ec8cbcd43">Nginx as proxy server</h2>
+<p>As already mentioned nginx can be used as a proxy server. In my case I need nginx to redirect requests on a certain subdomain to <code>lighttpd</code> listening to a local interface. The configuration:</p>
+<div class="highlight"><pre><span class="c">### dl.dornea.nu</span>
+server <span class="o">{</span>
+    listen 80<span class="p">;</span>
+    server_name dl.dornea.nu<span class="p">;</span>
+    root /var/www/sites/dl.dornea.nu/htdocs/current<span class="p">;</span>
+    rewrite_log on<span class="p">;</span>
+    index index.php index.html<span class="p">;</span>
 
-    location / {
-        #index index.php index.html;
-        proxy_pass         http://127.0.0.1:8080/;
-        proxy_redirect     off;
-        proxy_set_header   Host             $host;
-        proxy_set_header   X-Real-IP        $remote_addr;
-        proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
-        proxy_connect_timeout      90;
-        proxy_send_timeout         90;
-        proxy_read_timeout         90;
+    location / <span class="o">{</span>
+        <span class="c">#index index.php index.html;</span>
+        proxy_pass         http://127.0.0.1:8080/<span class="p">;</span>
+        proxy_redirect     off<span class="p">;</span>
+        proxy_set_header   Host             <span class="nv">$host</span><span class="p">;</span>
+        proxy_set_header   X-Real-IP        <span class="nv">$remote_addr</span><span class="p">;</span>
+        proxy_set_header   X-Forwarded-For  <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+        proxy_connect_timeout      90<span class="p">;</span>
+        proxy_send_timeout         90<span class="p">;</span>
+        proxy_read_timeout         90<span class="p">;</span>
 
-        proxy_buffer_size          4k;
-        proxy_buffers              4 32k;
-        proxy_busy_buffers_size    64k;
-        proxy_temp_file_write_size 64k;
-    } 
+        proxy_buffer_size          4k<span class="p">;</span>
+        proxy_buffers              <span class="m">4</span> 32k<span class="p">;</span>
+        proxy_busy_buffers_size    64k<span class="p">;</span>
+        proxy_temp_file_write_size 64k<span class="p">;</span>
+    <span class="o">}</span> 
 
-    location ~* .(js|css|png|jpg|jpeg|gif|ico)$ {
-        expires 24h;
-        log_not_found off;
-    }
-}</pre>
-<p>All requests to ”’dl.dornea.nu/*”’ will be redirected to ”’http://127.0.0.1:8080”’. Isn’t that simple? Simple configuration, no need for magic!</p>
-<h1 id="0139c29ede5430437868e80474ff6a41"><span id="Benchmarks">Benchmarks</span></h1>
-<h2 id="bb7bec9ae5725dad1d4ecd674e695626"><span id="ab_apache_suite_benchmark">ab (apache suite) benchmark</span></h2>
-<h3 id="7872d0a8d78c4619c5081356d4c146d8"><span id="lighttpd">lighttpd</span></h3>
-<pre class="brush: plain"># ab -n 1000 -c 2 http://dornea.nu/
-This is ApacheBench, Version 2.3 &lt;$Revision: 655654 $&gt;
-Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+    location ~* .<span class="o">(</span>js<span class="p">|</span>css<span class="p">|</span>png<span class="p">|</span>jpg<span class="p">|</span>jpeg<span class="p">|</span>gif<span class="p">|</span>ico<span class="o">)</span><span class="nv">$ </span><span class="o">{</span>
+        expires 24h<span class="p">;</span>
+        log_not_found off<span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+<p>All requests to <code>'dl.dornea.nu/*</code>' will be redirected to <code>'http://127.0.0.1:8080</code>'. Isn't that simple? Simple configuration, no need for magic!</p>
+<h2 id="0139c29ede5430437868e80474ff6a41">Benchmarks</h2>
+<h3 id="bb7bec9ae5725dad1d4ecd674e695626">ab (apache suite) benchmark</h3>
+<h4 id="7872d0a8d78c4619c5081356d4c146d8">lighttpd</h4>
+<div class="highlight"><pre><span class="nv">$ </span>ab -n <span class="m">1000</span> -c <span class="m">2</span> http://dornea.nu/
+This is ApacheBench, Version 2.3 &lt;<span class="nv">$Revision</span>: <span class="m">655654</span> <span class="nv">$&gt;</span>
+Copyright <span class="m">1996</span> Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
 
-Benchmarking dornea.nu (be patient)
-Completed 100 requests
-Completed 200 requests
-Completed 300 requests
-Completed 400 requests
-Completed 500 requests
-Completed 600 requests
-Completed 700 requests
-Completed 800 requests
-Completed 900 requests
-Completed 1000 requests
-Finished 1000 requests
+Benchmarking dornea.nu <span class="o">(</span>be patient<span class="o">)</span>
+Completed <span class="m">100</span> requests
+Completed <span class="m">200</span> requests
+Completed <span class="m">300</span> requests
+Completed <span class="m">400</span> requests
+Completed <span class="m">500</span> requests
+Completed <span class="m">600</span> requests
+Completed <span class="m">700</span> requests
+Completed <span class="m">800</span> requests
+Completed <span class="m">900</span> requests
+Completed <span class="m">1000</span> requests
+Finished <span class="m">1000</span> requests
 
 Server Software:        lighttpd/1.4.28
 Server Hostname:        dornea.nu
 Server Port:            80
 
 Document Path:          /
-Document Length:        48134 bytes
+Document Length:        <span class="m">48134</span> bytes
 
 Concurrency Level:      2
-Time taken for tests:   1438.721 seconds
+Time taken <span class="k">for</span> tests:   1438.721 seconds
 Complete requests:      1000
 Failed requests:        2
-   (Connect: 0, Receive: 0, Length: 2, Exceptions: 0)
+   <span class="o">(</span>Connect: 0, Receive: 0, Length: 2, Exceptions: 0<span class="o">)</span>
 Write errors:           0
-Total transferred:      48619020 bytes
-HTML transferred:       48133998 bytes
-Requests per second:    0.70 [#/sec] (mean)
-Time per request:       2877.441 [ms] (mean)
-Time per request:       1438.721 [ms] (mean, across all concurrent requests)
-Transfer rate:          33.00 [Kbytes/sec] received
+Total transferred:      <span class="m">48619020</span> bytes
+HTML transferred:       <span class="m">48133998</span> bytes
+Requests per second:    0.70 <span class="o">[</span><span class="c">#/sec] (mean)</span>
+Time per request:       2877.441 <span class="o">[</span>ms<span class="o">]</span> <span class="o">(</span>mean<span class="o">)</span>
+Time per request:       1438.721 <span class="o">[</span>ms<span class="o">]</span> <span class="o">(</span>mean, across all concurrent requests<span class="o">)</span>
+Transfer rate:          33.00 <span class="o">[</span>Kbytes/sec<span class="o">]</span> received
 
-Connection Times (ms)
-              min  mean[+/-sd] median   max
-Connect:       36   41  18.8     39     271
-Processing:  1369 2836 1314.7   2641   15499
-Waiting:     1215 2649 1306.8   2467   15346
-Total:       1406 2877 1314.6   2680   15536
+Connection Times <span class="o">(</span>ms<span class="o">)</span>
+              min  mean<span class="o">[</span>+/-sd<span class="o">]</span> median   max
+Connect:       <span class="m">36</span>   <span class="m">41</span>  18.8     <span class="m">39</span>     271
+Processing:  <span class="m">1369</span> <span class="m">2836</span> 1314.7   <span class="m">2641</span>   15499
+Waiting:     <span class="m">1215</span> <span class="m">2649</span> 1306.8   <span class="m">2467</span>   15346
+Total:       <span class="m">1406</span> <span class="m">2877</span> 1314.6   <span class="m">2680</span>   15536
 
-Percentage of the requests served within a certain time (ms)
+Percentage of the requests served within a certain <span class="nb">time</span> <span class="o">(</span>ms<span class="o">)</span>
   50%   2680
   66%   2903
   75%   3062
@@ -473,53 +441,54 @@ Percentage of the requests served within a certain time (ms)
   95%   5057
   98%   6924
   99%   9111
- 100%  15536 (longest request)</pre>
-<h3 id="ee434023cf89d7dfb21f63d64f0f9d74"><span id="nginx">nginx</span></h3>
-<pre class="brush: plain"># ab -n 1000 -c 2 http://dornea.nu/
-This is ApacheBench, Version 2.3 &lt;$Revision: 655654 $&gt;
-Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+ 100%  <span class="m">15536</span> <span class="o">(</span>longest request<span class="o">)</span>
+</pre></div>
+<h4 id="ee434023cf89d7dfb21f63d64f0f9d74">nginx</h4>
+<div class="highlight"><pre><span class="nv">$ </span>ab -n <span class="m">1000</span> -c <span class="m">2</span> http://dornea.nu/
+This is ApacheBench, Version 2.3 &lt;<span class="nv">$Revision</span>: <span class="m">655654</span> <span class="nv">$&gt;</span>
+Copyright <span class="m">1996</span> Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
 
-Benchmarking dornea.nu (be patient)
-Completed 100 requests
-Completed 200 requests
-Completed 300 requests
-Completed 400 requests
-Completed 500 requests
-Completed 600 requests
-Completed 700 requests
-Completed 800 requests
-Completed 900 requests
-Completed 1000 requests
-Finished 1000 requests
+Benchmarking dornea.nu <span class="o">(</span>be patient<span class="o">)</span>
+Completed <span class="m">100</span> requests
+Completed <span class="m">200</span> requests
+Completed <span class="m">300</span> requests
+Completed <span class="m">400</span> requests
+Completed <span class="m">500</span> requests
+Completed <span class="m">600</span> requests
+Completed <span class="m">700</span> requests
+Completed <span class="m">800</span> requests
+Completed <span class="m">900</span> requests
+Completed <span class="m">1000</span> requests
+Finished <span class="m">1000</span> requests
 
 Server Software:        nginx/1.0.9
 Server Hostname:        dornea.nu
 Server Port:            80
 
 Document Path:          /
-Document Length:        48216 bytes
+Document Length:        <span class="m">48216</span> bytes
 
 Concurrency Level:      2
-Time taken for tests:   133.533 seconds
+Time taken <span class="k">for</span> tests:   133.533 seconds
 Complete requests:      1000
 Failed requests:        0
 Write errors:           0
-Total transferred:      48451000 bytes
-HTML transferred:       48216000 bytes
-Requests per second:    7.49 [#/sec] (mean)
-Time per request:       267.065 [ms] (mean)
-Time per request:       133.533 [ms] (mean, across all concurrent requests)
-Transfer rate:          354.34 [Kbytes/sec] received
+Total transferred:      <span class="m">48451000</span> bytes
+HTML transferred:       <span class="m">48216000</span> bytes
+Requests per second:    7.49 <span class="o">[</span><span class="c">#/sec] (mean)</span>
+Time per request:       267.065 <span class="o">[</span>ms<span class="o">]</span> <span class="o">(</span>mean<span class="o">)</span>
+Time per request:       133.533 <span class="o">[</span>ms<span class="o">]</span> <span class="o">(</span>mean, across all concurrent requests<span class="o">)</span>
+Transfer rate:          354.34 <span class="o">[</span>Kbytes/sec<span class="o">]</span> received
 
-Connection Times (ms)
-              min  mean[+/-sd] median   max
-Connect:       36   42  18.5     39     268
-Processing:   190  225  43.3    212     483
-Waiting:       36   43  17.9     40     270
-Total:        227  267  52.1    252     713
+Connection Times <span class="o">(</span>ms<span class="o">)</span>
+              min  mean<span class="o">[</span>+/-sd<span class="o">]</span> median   max
+Connect:       <span class="m">36</span>   <span class="m">42</span>  18.5     <span class="m">39</span>     268
+Processing:   <span class="m">190</span>  <span class="m">225</span>  43.3    <span class="m">212</span>     483
+Waiting:       <span class="m">36</span>   <span class="m">43</span>  17.9     <span class="m">40</span>     270
+Total:        <span class="m">227</span>  <span class="m">267</span>  52.1    <span class="m">252</span>     713
 
-Percentage of the requests served within a certain time (ms)
+Percentage of the requests served within a certain <span class="nb">time</span> <span class="o">(</span>ms<span class="o">)</span>
   50%    252
   66%    259
   75%    262
@@ -528,13 +497,14 @@ Percentage of the requests served within a certain time (ms)
   95%    371
   98%    471
   99%    481
- 100%    713 (longest request)</pre>
-<h2 id="c511823b717919b7612f5a9e4aa4ec59"><span id="toolspingdomcom_benchmark">tools.pingdom.com benchmark</span></h2>
-<p>lighttpd</p>
-<p>http://dl.dornea.nu/img/2012/270/pingdom_nl_dornea.nu_lighttpd.png</p>
-<p>nginx</p>
-<p>http://dl.dornea.nu/img/2012/270/pingdom_nl_dornea.nu_nginx.png</p>
-<h1 id="f1506b6384d089277f61a768904fcaaa"><span id="Literature">Literature</span></h1>
+ 100%    <span class="m">713</span> <span class="o">(</span>longest request<span class="o">)</span>
+</pre></div>
+<h3 id="c511823b717919b7612f5a9e4aa4ec59">tools.pingdom.com benchmark</h3>
+<h4 id="7872d0a8d78c4619c5081356d4c146d8_1">lighttpd</h4>
+<p><img alt="lighttpd" class="img-responsive" src="http://dl.dornea.nu/img/2012/270/pingdom_nl_dornea.nu_lighttpd.png"/></p>
+<h3 id="ee434023cf89d7dfb21f63d64f0f9d74_1">nginx</h3>
+<p><img alt="lighttpd" class="img-responsive" src="http://dl.dornea.nu/img/2012/270/pingdom_nl_dornea.nu_nginx.png"/></p>
+<h2 id="f1506b6384d089277f61a768904fcaaa">Literature</h2>
 <ul>
 <li>Nginx <ul>
 <li>http://nginx.org/</li>
@@ -555,8 +525,8 @@ Percentage of the requests served within a certain time (ms)
 	</a>
 </div>
 <div style="float:right;">
-    Next: <a href="http://blog.dornea.nu/2012/04/01/howto-split-mp3s-by-silence-detection-using-mp3splt" align='right'>
-	 HowTo: Split MP3s by silence detection using mp3splt
+    Next: <a href="http://blog.dornea.nu/2012/12/30/ccc-29c3" align='right'>
+	 CCC / 29C3
 	</a>
 </div>
 </p>
@@ -586,9 +556,9 @@ Percentage of the requests served within a certain time (ms)
                     <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
                     <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/howto/">howto</a><sup>20</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/nginx/">nginx</a><sup>2</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/admin/">admin</a><sup>21</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/howto/">howto</a><sup>22</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/nginx/">nginx</a><sup>4</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/admin/">admin</a><sup>22</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -597,7 +567,7 @@ Percentage of the requests served within a certain time (ms)
                     </div>
                     <ul id="niu2-sidebar-toc-list">
                         <li><a href="#content-heading">HowTo: Have a web performance boost with Nginx</a></li>
-                        <li><a href='#de1fe63d6afc849c0d4bab0d15576375'>Why Nginx?</a></li><li><a href='#d315961f10d8f48561baf0b483b8334b'>Get it!</a></li><li><a href='#416206518e27ed2ec8b8e0876078af35'>Basic configuration</a></li><li><a href='#7f167270d33e2ada55cd790e9aff9edb'>vHost configuration</a></li><li><a href='#20849d6369623ae5549ab46ec8cbcd43'>Nginx as proxy server</a></li><li><a href='#0139c29ede5430437868e80474ff6a41'>Benchmarks</a><ul><li><a href='#bb7bec9ae5725dad1d4ecd674e695626'>ab (apache suite) benchmark</a><ul><li><a href='#7872d0a8d78c4619c5081356d4c146d8'>lighttpd</a></li><li><a href='#ee434023cf89d7dfb21f63d64f0f9d74'>nginx</a></li></ul></li><li><a href='#c511823b717919b7612f5a9e4aa4ec59'>tools.pingdom.com benchmark</a></li></ul></li><li><a href='#f1506b6384d089277f61a768904fcaaa'>Literature</a></li>
+                        <li><a href='#de1fe63d6afc849c0d4bab0d15576375'>Why Nginx?</a></li><li><a href='#d315961f10d8f48561baf0b483b8334b'>Get it!</a></li><li><a href='#416206518e27ed2ec8b8e0876078af35'>Basic configuration</a></li><li><a href='#7f167270d33e2ada55cd790e9aff9edb'>vHost configuration</a></li><li><a href='#20849d6369623ae5549ab46ec8cbcd43'>Nginx as proxy server</a></li><li><a href='#0139c29ede5430437868e80474ff6a41'>Benchmarks</a><ul><li><a href='#bb7bec9ae5725dad1d4ecd674e695626'>ab (apache suite) benchmark</a><ul><li><a href='#7872d0a8d78c4619c5081356d4c146d8'>lighttpd</a></li><li><a href='#ee434023cf89d7dfb21f63d64f0f9d74'>nginx</a></li></ul></li><li><a href='#c511823b717919b7612f5a9e4aa4ec59'>tools.pingdom.com benchmark</a><ul><li><a href='#7872d0a8d78c4619c5081356d4c146d8_1'>lighttpd</a></li></ul></li><li><a href='#ee434023cf89d7dfb21f63d64f0f9d74_1'>nginx</a></li></ul></li><li><a href='#f1506b6384d089277f61a768904fcaaa'>Literature</a></li>
                         <li><a href="#content-comments">Comments</a></li>
                     </ul>
                 </div>

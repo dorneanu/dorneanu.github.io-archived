@@ -3,8 +3,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="keywords" content="hacking, howto, networking">
-        <meta name="description" content="Recently a colleague of mine at nullsecurity.net released a new scanning tool called wnmap. Basically it’s a wrapper around nmap which helps automating the scanning process by using simple configuration files. Let’s have a look at it.. Contents 1 2 Configuration 3 4 Running the tool 5 ...">
+        <meta name="keywords" content="hacking, howto, networking, tools, nmap">
+        <meta name="description" content="Recently a colleague of mine at nullsecurity.net released a new scanning tool called wnmap. Basically it's a wrapper around nmap which helps automating the scanning process by using simple configuration files. Let's have a look at it.. Configuration Make sure you you have downloaded the archive and ...">
         <title>HowTo: Automate nmap scanning - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
         <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
@@ -57,10 +57,13 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
+                                      (101)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
                                <li><a href="http://blog.dornea.nu/category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (18)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -114,135 +117,107 @@
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <p>Recently a <a href="http://nullsecurity.net/about.html">colleague</a> of mine at <a href="http://nullsecurity.net/">nullsecurity.net</a> released a new scanning tool called <a href="http://nullsecurity.net/tools/automation/wnmap-0.1.tar.gz">wnmap</a>. Basically it’s a wrapper around nmap which helps automating the scanning process by using simple configuration files. Let’s have a look at it..</p>
-<div class="toc_wrap_right toc_transparent no_bullets" id="toc_container">
-<p class="toc_title">
-    Contents
-  </p>
-<ul class="toc_list">
-<li>
-<a href="#i"><span class="toc_number toc_depth_1">1</span> </a>
-</li>
-<li>
-<a href="#Configuration"><span class="toc_number toc_depth_1">2</span> Configuration</a>
-</li>
-<li>
-<a href="#i-2"><span class="toc_number toc_depth_1">3</span> </a>
-</li>
-<li>
-<a href="#Running_the_tool"><span class="toc_number toc_depth_1">4</span> Running the tool</a>
-</li>
-<li>
-<a href="#i-3"><span class="toc_number toc_depth_1">5</span> </a>
-</li>
-<li>
-<a href="#Add_new_mode"><span class="toc_number toc_depth_1">6</span> Add new mode</a>
-</li>
-<li>
-<a href="#i-4"><span class="toc_number toc_depth_1">7</span> </a>
-</li>
-<li>
-<a href="#Combine_modes"><span class="toc_number toc_depth_1">8</span> Combine modes</a>
-</li>
-</ul>
-</div>
-<h1 id="d41d8cd98f00b204e9800998ecf8427e"><span id="i"><!--more--></span></h1>
-<h1 id="254f642527b45bc260048e30704edb39"><span id="Configuration">Configuration</span></h1>
+                    <p>Recently a <a href="http://nullsecurity.net/about.html">colleague</a> of mine at <a href="http://nullsecurity.net/">nullsecurity.net</a> released a new scanning tool called <a href="http://nullsecurity.net/tools/automation/wnmap-0.1.tar.gz">wnmap</a>. Basically it's a wrapper around nmap which helps automating the scanning process by using simple configuration files. Let's have a look at it..</p>
+<h2 id="254f642527b45bc260048e30704edb39">Configuration</h2>
 <p>Make sure you you have downloaded the archive and open <strong>src/core/wnmap.conf</strong> in order to edit:</p>
 <ul>
 <li>the wnmap path</li>
 <li>editor preferences</li>
 <li>global parameters (to use in every scan)</li>
 </ul>
-<h1 id="d41d8cd98f00b204e9800998ecf8427e_1"><span id="i-2"></span></h1>
-<h1 id="8c99bb2c4b6ceb42b6c4f31347466b40"><span id="Running_the_tool">Running the tool</span></h1>
-<p>Now the obligatory –help message:</p>
-<pre class="lang:sh decode:true">--==[ wnmap by nrz@nullsecurity.net ]==--
-Usage: wnmap [options] &lt;target specification&gt; | &lt;misc&gt;
+<h2 id="8c99bb2c4b6ceb42b6c4f31347466b40">Running the tool</h2>
+<p>Now the obligatory -help message:</p>
+<div class="highlight"><pre>-<span class="o">==[</span> wnmap by nrz@nullsecurity.net <span class="o">]==</span>--
+Usage: wnmap <span class="o">[</span>options<span class="o">]</span> &lt;target specification&gt; <span class="p">|</span> &lt;misc&gt;
 TARGET SPECIFICATION:
     Can pass hostname or IP address.
 OPTIONS:
     SCANNING - USER MODE:
-    -F: 'fast' scan - nmap args: -F
-    -K: 'ack' scan - nmap args: -PA
-    -V: 'version' scan - nmap args: -sV -version-trace
-    -O: 'os' scan - nmap args: -O --osscan-guess
-    -M: 'script_malware' scan - nmap args: -script malware
-    -H: 'http-methods' scan - nmap args: -P0 --script=http-methods.nse -p 80,443
+    -F: <span class="s1">'fast'</span> scan - nmap args: -F
+    -K: <span class="s1">'ack'</span> scan - nmap args: -PA
+    -V: <span class="s1">'version'</span> scan - nmap args: -sV -version-trace
+    -O: <span class="s1">'os'</span> scan - nmap args: -O --osscan-guess
+    -M: <span class="s1">'script_malware'</span> scan - nmap args: -script malware
+    -H: <span class="s1">'http-methods'</span> scan - nmap args: -P0 --script<span class="o">=</span>http-methods.nse -p 80,443
     SCANNING - STANDARD MODE:
     -C: chain all modes
     LOAD NEW SCAN:
-    -a {wnmap_arg;mode_name;nmap_args;need_sudo?[true,false]}: add new scan to user mode
+    -a <span class="o">{</span>wnmap_arg<span class="p">;</span>mode_name<span class="p">;</span>nmap_args<span class="p">;</span>need_sudo?<span class="o">[</span><span class="nb">true</span>,false<span class="o">]}</span>: add new scan to user mode
 MISC:
     -r: rescan host by default
     -e: edit wmodes.conf
-    -v: print version of wnmap and exit
-    -h: print this help and exit
+    -v: print version of wnmap and <span class="nb">exit</span>
+    -h: print this <span class="nb">help </span>and <span class="nb">exit</span>
 EXAMPLES:
-    wnmap -F 8.8.8.8 -r # scan again
-    wnmap -C scanme.nmap.org # give it all you got
-    wnmap -a "-I;iddle-scan;-P0 -p- -sI sweet.host.com;true"
-    wnmap -e # edit modes</pre>
+    wnmap -F 8.8.8.8 -r <span class="c"># scan again</span>
+    wnmap -C scanme.nmap.org <span class="c"># give it all you got</span>
+    wnmap -a <span class="s2">"-I;iddle-scan;-P0 -p- -sI sweet.host.com;true"</span>
+    wnmap -e <span class="c"># edit modes</span>
+</pre></div>
 <p>As you can see the tool comes along with several <strong>predefined </strong>running modes. You can easily edit them at <strong>src/core/wmodes.conf:</strong></p>
-<pre class="lang:sh decode:true" title="wnmap modes">% cat src/core/wmodes.conf
-# SAMPLE FILE !!! DEFINE YOUR OWN MAGIC !!!
-# wnmap_arg; mode_name; nmap_args; sudo?
--F;fast;-F;false
--K;ack;-PA;false
--V;version;-sV -version-trace;false
--O;os;-O --osscan-guess;true
--M;script_malware;-script malware;false</pre>
-<p>Quite handy, isn’t it? You can <strong>chain</strong> the modes using <strong>-C. </strong></p>
-<h1 id="d41d8cd98f00b204e9800998ecf8427e_1_2"><span id="i-3"></span></h1>
-<h1 id="787e9d17fdfb44cce7df782be5800b0f"><span id="Add_new_mode"><strong>Add new mode</strong></span></h1>
-<p>Let’s say I want to add a new mode, which will scan all hosts at port 80 and 443 for web services. In particular I want to the the supported HTTP methods at those ports.<br/>
+<div class="highlight"><pre>% cat src/core/wmodes.conf
+<span class="c"># SAMPLE FILE !!! DEFINE YOUR OWN MAGIC !!!</span>
+<span class="c"># wnmap_arg; mode_name; nmap_args; sudo?</span>
+-F<span class="p">;</span>fast<span class="p">;</span>-F<span class="p">;</span><span class="nb">false</span>
+-K<span class="p">;</span>ack<span class="p">;</span>-PA<span class="p">;</span><span class="nb">false</span>
+-V<span class="p">;</span>version<span class="p">;</span>-sV -version-trace<span class="p">;</span><span class="nb">false</span>
+-O<span class="p">;</span>os<span class="p">;</span>-O --osscan-guess<span class="p">;</span><span class="nb">true</span>
+-M<span class="p">;</span>script_malware<span class="p">;</span>-script malware<span class="p">;</span><span class="nb">false</span>
+</pre></div>
+<p>Quite handy, isn't it? You can <strong>chain</strong> the modes using <strong>-C. </strong></p>
+<h2 id="787e9d17fdfb44cce7df782be5800b0f">Add new mode</h2>
+<p>Let's say I want to add a new mode, which will scan all hosts at port 80 and 443 for web services. In particular I want to the the supported HTTP methods at those ports.<br/>
 You can easily use the command line to insert the new mode:</p>
-<pre class="lang:sh decode:true" title="insert new mode">% ./wnmap -a "-H;http-methods;-P0 --script=http-methods.nse -p 80,443;false"
---==[ wnmap by nrz@nullsecurity.net ]==--
-[+] New mode added!</pre>
-<p>or edit <strong>src/core/wmodes.conf </strong>directly.Â  Now let’s scan a host using the newly inserted mode:</p>
-<pre class="lang:sh decode:true" title="Scan scanme.nmap.org for web services">% ./wnmap -H scanme.nmap.org
---==[ wnmap by nrz@nullsecurity.net ]==--
-[+] Creating scanme.nmap.org/http-methods
-[+] Scanning scanme.nmap.org
-[*] cmd: /usr/bin/nmap -P0 --script=http-methods.nse -p 80,443 --reason -oX scanme.nmap.org/http-methods/scanme.nmap.org.xml -oN scanme.nmap.org/http-methods/scanme.nmap.org.nmap scanme.nmap.org
-Starting Nmap 6.25 ( http://nmap.org ) at 2013-09-11 15:32 CEST
-Nmap scan report for scanme.nmap.org (74.207.244.221)
-Host is up, received user-set (0.18s latency).
+<div class="highlight"><pre>% ./wnmap -a <span class="s2">"-H;http-methods;-P0 --script=http-methods.nse -p 80,443;false"</span>
+--<span class="o">==[</span> wnmap by nrz@nullsecurity.net <span class="o">]==</span>--
+<span class="o">[</span>+<span class="o">]</span> New mode added!
+</pre></div>
+<p>or edit <strong>src/core/wmodes.conf </strong>directly.Now let's scan a host using the newly inserted mode:</p>
+<div class="highlight"><pre>% ./wnmap -H scanme.nmap.org
+--<span class="o">==[</span> wnmap by nrz@nullsecurity.net <span class="o">]==</span>--
+<span class="o">[</span>+<span class="o">]</span> Creating scanme.nmap.org/http-methods
+<span class="o">[</span>+<span class="o">]</span> Scanning scanme.nmap.org
+<span class="o">[</span>*<span class="o">]</span> cmd: /usr/bin/nmap -P0 --script<span class="o">=</span>http-methods.nse -p 80,443 --reason -oX scanme.nmap.org/http-methods/scanme.nmap.org.xml -oN scanme.nmap.org/http-methods/scanme.nmap.org.nmap scanme.nmap.org
+Starting Nmap 6.25 <span class="o">(</span> http://nmap.org <span class="o">)</span> at 2013-09-11 15:32 CEST
+Nmap scan report <span class="k">for</span> scanme.nmap.org <span class="o">(</span>74.207.244.221<span class="o">)</span>
+Host is up, received user-set <span class="o">(</span>0.18s latency<span class="o">)</span>.
 PORT    STATE  SERVICE REASON
 80/tcp  open   http    syn-ack
-|_http-methods: GET HEAD POST OPTIONS
+<span class="p">|</span>_http-methods: GET HEAD POST OPTIONS
 443/tcp closed https   conn-refused
-Nmap done: 1 IP address (1 host up) scanned in 0.69 seconds</pre>
+Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 0.69 seconds
+</pre></div>
 <p>Now you should see a directory called <strong>scanme.nmap.org</strong> inside your working directory. The output of the scan was saved as a regular nmap file and as XML.</p>
-<pre class="lang:sh decode:true " title="Results output"># tree scanme.nmap.org
+<div class="highlight"><pre><span class="c"># tree scanme.nmap.org</span>
 scanme.nmap.org
-`-- http-methods
-    |-- scanme.nmap.org.nmap
-    `-- scanme.nmap.org.xml</pre>
-<h1 id="d41d8cd98f00b204e9800998ecf8427e_1_2_3"><span id="i-4"></span></h1>
-<h1 id="f310aa1ba095c08a3b5cec20d377dedc"><span id="Combine_modes">Combine modes</span></h1>
+<span class="sb">`</span>-- http-methods
+    <span class="p">|</span>-- scanme.nmap.org.nmap
+    <span class="sb">`</span>-- scanme.nmap.org.xml
+</pre></div>
+<h2 id="f310aa1ba095c08a3b5cec20d377dedc">Combine modes</h2>
 <p>You could now combine the modes:</p>
-<pre class="lang:sh decode:true " title="Combine modes">% ./wnmap -H -F scanme.nmap.org</pre>
-<p>And you’ll get:</p>
-<pre class="lang:sh decode:true " title="Output results modes combination "># tree scanme.nmap.org 
+<div class="highlight"><pre>% ./wnmap -H -F scanme.nmap.org
+</pre></div>
+<p>And you'll get:</p>
+<div class="highlight"><pre><span class="c"># tree scanme.nmap.org </span>
 scanme.nmap.org
-|-- fast
-|   |-- scanme.nmap.org.nmap
-|   `-- scanme.nmap.org.xml
-`-- http-methods
-    |-- scanme.nmap.org.nmap
-    `-- scanme.nmap.org.xml</pre>
+<span class="p">|</span>-- fast
+<span class="p">|</span>   <span class="p">|</span>-- scanme.nmap.org.nmap
+<span class="p">|</span>   <span class="sb">`</span>-- scanme.nmap.org.xml
+<span class="sb">`</span>-- http-methods
+    <span class="p">|</span>-- scanme.nmap.org.nmap
+    <span class="sb">`</span>-- scanme.nmap.org.xml
+</pre></div>
                 </div>
 <hr/>
 <div style="float:left;">
-	Prev: <a href="http://blog.dornea.nu/2013/09/13/links-of-the-week-11" align='left'>
-	 Links of the Week #11
+	Prev: <a href="http://blog.dornea.nu/2013/08/25/dissecting-blacktiny" align='left'>
+	 Dissecting BlackTiny
 	</a>
 </div>
 <div style="float:right;">
-    Next: <a href="http://blog.dornea.nu/2013/09/20/links-of-the-week-12" align='right'>
-	 Links of the Week #12
+    Next: <a href="http://blog.dornea.nu/2014/01/23/24h-android-sniffing-using-tcpdump-ipython-notebook-version" align='right'>
+	 24h Android sniffing using tcpdump - IPython Notebook Version
 	</a>
 </div>
 </p>
@@ -273,8 +248,10 @@ scanme.nmap.org
                     <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/hacking/">hacking</a><sup>20</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/howto/">howto</a><sup>20</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>33</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/howto/">howto</a><sup>22</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>37</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/tools/">tools</a><sup>11</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/nmap/">nmap</a><sup>2</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -283,7 +260,7 @@ scanme.nmap.org
                     </div>
                     <ul id="niu2-sidebar-toc-list">
                         <li><a href="#content-heading">HowTo: Automate nmap scanning</a></li>
-                        <li><a href='#d41d8cd98f00b204e9800998ecf8427e'></a></li><li><a href='#254f642527b45bc260048e30704edb39'>Configuration</a></li><li><a href='#d41d8cd98f00b204e9800998ecf8427e_1'></a></li><li><a href='#8c99bb2c4b6ceb42b6c4f31347466b40'>Running the tool</a></li><li><a href='#d41d8cd98f00b204e9800998ecf8427e_1_2'></a></li><li><a href='#787e9d17fdfb44cce7df782be5800b0f'>Add new mode</a></li><li><a href='#d41d8cd98f00b204e9800998ecf8427e_1_2_3'></a></li><li><a href='#f310aa1ba095c08a3b5cec20d377dedc'>Combine modes</a></li>
+                        <li><a href='#254f642527b45bc260048e30704edb39'>Configuration</a></li><li><a href='#8c99bb2c4b6ceb42b6c4f31347466b40'>Running the tool</a></li><li><a href='#787e9d17fdfb44cce7df782be5800b0f'>Add new mode</a></li><li><a href='#f310aa1ba095c08a3b5cec20d377dedc'>Combine modes</a></li>
                         <li><a href="#content-comments">Comments</a></li>
                     </ul>
                 </div>

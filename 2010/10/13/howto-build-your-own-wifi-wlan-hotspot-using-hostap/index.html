@@ -4,21 +4,21 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="howto, networking, security, wlan, linux, admin">
-        <meta name="description" content="This time I’m going to show you how to build your own wi-fi hotspot in less than 10 minutes. There is no need of sophisticated software like FreeRadius or Chilispot. Using common tools you’ll be able to set up your WLAN AP (Access Point) and allow others to ...">
+        <meta name="description" content="This time I'm going to show you how to build your own wi-fi hotspot in less than 10 minutes. There is no need of sophisticated software like FreeRadius or Chilispot. Using common tools you'll be able to set up your WLAN AP (Access Point) and allow others to ...">
         <title>HowTo: Build your own Wifi WLAN hotspot using hostap - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
         <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
-        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="http://blog.dornea.nu/theme/font-icons/style.min.css" type="text/css" />
-        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/niu2.min.css" type="text/css" />
+        <link rel="stylesheet" href="../../../../theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="../../../../theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="../../../../theme/css/niu2.min.css" type="text/css" />
         <link rel="stylesheet" href="/css/custom.css" type="text/css" />
 		
         
-        <link rel="canonical" href="http://blog.dornea.nu/2010/10/13/howto-build-your-own-wifi-wlan-hotspot-using-hostap" />
+        <link rel="canonical" href="../../../../2010/10/13/howto-build-your-own-wifi-wlan-hotspot-using-hostap" />
         <script type="text/javascript">window.onload=function(){};</script>
         <!--[if lt IE 9]>
-            <script src="http://blog.dornea.nu/theme/js/html5shiv.js"></script>
-            <script src="http://blog.dornea.nu/theme/js/respond.min.js"></script>
+            <script src="../../../../theme/js/html5shiv.js"></script>
+            <script src="../../../../theme/js/respond.min.js"></script>
         <![endif]-->
     </head>
     <body> 
@@ -31,7 +31,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="http://blog.dornea.nu">
+                        <a class="navbar-brand" href="../../../..">
                             <i class="icon-home"></i>blog.dornea.nu
                         </a>
                     </div>
@@ -55,12 +55,15 @@
                                 <i class="icon-folder-open"></i>category<b class="caret"></b>
                            </a>
                            <ul class="dropdown-menu">
-                               <li><a href="http://blog.dornea.nu/category/blog">
+                               <li><a href="../../../../category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
-                               <li><a href="http://blog.dornea.nu/category/notes">
+                                      (127)</a></li>
+                               <li><a href="../../../../category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (26)</a></li>
+                               <li><a href="../../../../category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (9)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -93,7 +96,7 @@
             </div>
 <style>
     #banner{
-        background-image:url("http://blog.dornea.nu//images/header.jpg");
+        background-image:url("../../../..//images/header.jpg");
     }   
 </style>
 
@@ -114,8 +117,8 @@
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <p>This time I’m going to show you how to build your own wi-fi hotspot in less than 10 minutes. There is no need of sophisticated software like FreeRadius or Chilispot. Using common tools you’ll be able to set up your WLAN AP (Access Point) and allow others to connect to it. Therefore we’ll be using our own DHCP server to manage the clients and their IP addresses. In this tutorial I’ll be using <a href="http://dornea.nu/about-blacktiny">BlackTiny</a> again since mobility was the main reason for writing this: There were a lot of situations where I wanted to share my Internet connectivity but I couldn’t do that due to misconfigurations and false network settings. I’d like to share my experience with you and help you easily configure your AP.</p>
-<h2 id="42360cd3c5f04ece8d33628676b3a453"><strong>Before we start …<!--more--></strong></h2>
+                    <p>This time I'm going to show you how to build your own wi-fi hotspot in less than 10 minutes. There is no need of sophisticated software like FreeRadius or Chilispot. Using common tools you'll be able to set up your WLAN AP (Access Point) and allow others to connect to it. Therefore we'll be using our own DHCP server to manage the clients and their IP addresses. In this tutorial I'll be using <strong>BlackTiny</strong> again since mobility was the main reason for writing this: There were a lot of situations where I wanted to share my Internet connectivity but I couldn't do that due to misconfigurations and false network settings. I'd like to share my experience with you and help you easily configure your AP.</p>
+<h2 id="979cde56bbe56b4c83a76054cafd243f">Before we start ...</h2>
 <p>Some technical info</p>
 <ul>
 <li><em>General</em>: Linux debian <strong>2.6.32-5-amd64</strong> #1 SMP x86_64 GNU/Linux</li>
@@ -124,7 +127,7 @@
 <li><em>hostap-utils version</em>: 0.4.7-1</li>
 <li><em>DHCP server version</em>: 4.1.1-P1-9</li>
 </ul>
-<p>Make sure …</p>
+<p>Make sure ...</p>
 <ul>
 <li>your card supports <a href="http://en.wikipedia.org/wiki/Promiscuous_mode">promiscous mode</a></li>
 <li>proper card kernel module is up and running (<strong>ath5k</strong> in my case)</li>
@@ -132,97 +135,96 @@
 <li>you have <strong>hostapd</strong> installed</li>
 <li>a <strong>DHCP</strong> server is running on your system (see below)</li>
 </ul>
-<p> </p>
-<h2 id="96ef7ae0fa0c2283c2b30b8a69af0e99"><strong>Go ‘Up in the air’ / configure hostapd</strong></h2>
-<pre class="brush:plain;"># hostapd -h
+<h2 id="a9fa05d302398f0edd45e15adf6c186b">Go "Up in the air" / configure hostapd</h2>
+<div class="highlight"><pre><span class="c"># hostapd -h</span>
 hostapd v0.6.10
-User space daemon for IEEE 802.11 AP management,
+User space daemon <span class="k">for</span> IEEE 802.11 AP management,
 IEEE 802.1X/WPA/WPA2/EAP/RADIUS Authenticator
-Copyright (c) 2002-2009, Jouni Malinen &lt;j@w1.fi&gt; and contributors
+Copyright <span class="o">(</span>c<span class="o">)</span> 2002-2009, Jouni Malinen &lt;j@w1.fi&gt; and contributors
 
-usage: hostapd [-hdBKtv] [-P &lt;PID file&gt;] &lt;configuration file(s)&gt;
+usage: hostapd <span class="o">[</span>-hdBKtv<span class="o">]</span> <span class="o">[</span>-P &lt;PID file&gt;<span class="o">]</span> &lt;configuration file<span class="o">(</span>s<span class="o">)</span>&gt;
 
 options:
    -h   show this usage
-   -d   show more debug messages (-dd for even more)
+   -d   show more debug messages <span class="o">(</span>-dd <span class="k">for</span> even more<span class="o">)</span>
    -B   run daemon in the background
    -P   PID file
    -K   include key data in debug messages
    -t   include timestamps in some debug messages
    -v   show hostapd version
-</pre>
-<p>So we’ll need a configuration. Mine was located at <strong>/etc/hostapd/hostapd.conf</strong>. You should now open it using your editor (vim still rocks! ^^) and read it. Don’t try to skim over it. You’ll end up in misconfiguring hostapd and getting crazy error messages. So these are the main important settings:</p>
-<pre class="brush:bash;"># Which interface should be used
-interface=wlan1
+</pre></div>
+<p>So we'll need a configuration. Mine was located at <code>/etc/hostapd/hostapd.conf</code>. You should now open it using your editor (vim still rocks! ^^) and read it. Don't try to skim over it. You'll end up in misconfiguring hostapd and getting crazy error messages. So these are the main important settings:</p>
+<div class="highlight"><pre><span class="c"># Which interface should be used</span>
+<span class="nv">interface</span><span class="o">=</span>wlan1
 
-# Driver interface type (hostap/wired/madwifi/prism54/test/none/nl80211/bsd);
-# default: hostap). nl80211 is used with all Linux mac80211 drivers.
-# Use driver=none if building hostapd as a standalone RADIUS server that does
-# not control any wireless/wired driver.
-driver=nl80211
+<span class="c"># Driver interface type (hostap/wired/madwifi/prism54/test/none/nl80211/bsd);</span>
+<span class="c"># default: hostap). nl80211 is used with all Linux mac80211 drivers.</span>
+<span class="c"># Use driver=none if building hostapd as a standalone RADIUS server that does</span>
+<span class="c"># not control any wireless/wired driver.</span>
+<span class="nv">driver</span><span class="o">=</span>nl80211
 
-# SSID to be used in IEEE 802.11 management frames
-ssid=TestHOSTAP
+<span class="c"># SSID to be used in IEEE 802.11 management frames</span>
+<span class="nv">ssid</span><span class="o">=</span>TestHOSTAP
 
-# Operation mode (a = IEEE 802.11a, b = IEEE 802.11b, g = IEEE 802.11g,
-# Default: IEEE 802.11b
-hw_mode=b
+<span class="c"># Operation mode (a = IEEE 802.11a, b = IEEE 802.11b, g = IEEE 802.11g,</span>
+<span class="c"># Default: IEEE 802.11b</span>
+<span class="nv">hw_mode</span><span class="o">=</span>b
 
-# Channel number (IEEE 802.11)
-# (default: 0, i.e., not set)
-# Please note that some drivers (e.g., madwifi) do not use this value from
-# hostapd and the channel will need to be configuration separately with
-# iwconfig.
-channel=11
+<span class="c"># Channel number (IEEE 802.11)</span>
+<span class="c"># (default: 0, i.e., not set)</span>
+<span class="c"># Please note that some drivers (e.g., madwifi) do not use this value from</span>
+<span class="c"># hostapd and the channel will need to be configuration separately with</span>
+<span class="c"># iwconfig.</span>
+<span class="nv">channel</span><span class="o">=</span>11
 
-# IEEE 802.11 specifies two authentication algorithms. hostapd can be
-# configured to allow both of these or only one. Open system authentication
-# should be used with IEEE 802.1X.
-# Bit fields of allowed authentication algorithms:
-# bit 0 = Open System Authentication
-# bit 1 = Shared Key Authentication (requires WEP)
-auth_algs=3
+<span class="c"># IEEE 802.11 specifies two authentication algorithms. hostapd can be</span>
+<span class="c"># configured to allow both of these or only one. Open system authentication</span>
+<span class="c"># should be used with IEEE 802.1X.</span>
+<span class="c"># Bit fields of allowed authentication algorithms:</span>
+<span class="c"># bit 0 = Open System Authentication</span>
+<span class="c"># bit 1 = Shared Key Authentication (requires WEP)</span>
+<span class="nv">auth_algs</span><span class="o">=</span>3
 
-# The own IP address of the access point (used as NAS-IP-Address)
-own_ip_addr=127.0.0.1
-</pre>
-<p>You won’t need any authentication settings since this is supposed to be a free hotspot.</p>
-<p>Now let’s try our configuration:</p>
-<pre class="brush:plain;"># hostapd -d /etc/hostapd/hostapd.conf 
+<span class="c"># The own IP address of the access point (used as NAS-IP-Address)</span>
+<span class="nv">own_ip_addr</span><span class="o">=</span>127.0.0.1
+</pre></div>
+<p>You won't need any authentication settings since this is supposed to be a free hotspot.</p>
+<p>Now let's try our configuration:</p>
+<div class="highlight"><pre><span class="c"># hostapd -d /etc/hostapd/hostapd.conf </span>
 Configuration file: /etc/hostapd/hostapd.conf
-ctrl_interface_group=0
-Opening raw packet socket for ifindex 4199392
-BSS count 1, BSSID mask ff:ff:ff:ff:ff:ff (0 bits)
-SIOCGIWRANGE: WE(compiled)=22 WE(source)=21 enc_capa=0xf
+<span class="nv">ctrl_interface_group</span><span class="o">=</span>0
+Opening raw packet socket <span class="k">for</span> ifindex 4199392
+BSS count 1, BSSID mask ff:ff:ff:ff:ff:ff <span class="o">(</span><span class="m">0</span> bits<span class="o">)</span>
+SIOCGIWRANGE: WE<span class="o">(</span>compiled<span class="o">)=</span><span class="m">22</span> WE<span class="o">(</span><span class="nb">source</span><span class="o">)=</span><span class="m">21</span> <span class="nv">enc_capa</span><span class="o">=</span>0xf
 nl80211: Added 802.11b mode based on 802.11g information
-RATE[0] rate=10 flags=0x2
-RATE[1] rate=20 flags=0x6
-RATE[2] rate=55 flags=0x4
-RATE[3] rate=110 flags=0x4
+RATE<span class="o">[</span>0<span class="o">]</span> <span class="nv">rate</span><span class="o">=</span><span class="m">10</span> <span class="nv">flags</span><span class="o">=</span>0x2
+RATE<span class="o">[</span>1<span class="o">]</span> <span class="nv">rate</span><span class="o">=</span><span class="m">20</span> <span class="nv">flags</span><span class="o">=</span>0x6
+RATE<span class="o">[</span>2<span class="o">]</span> <span class="nv">rate</span><span class="o">=</span><span class="m">55</span> <span class="nv">flags</span><span class="o">=</span>0x4
+RATE<span class="o">[</span>3<span class="o">]</span> <span class="nv">rate</span><span class="o">=</span><span class="m">110</span> <span class="nv">flags</span><span class="o">=</span>0x4
 Passive scanning not supported
-Mode: IEEE 802.11b  Channel: 11  Frequency: 2462 MHz
+Mode: IEEE 802.11b  Channel: <span class="m">11</span>  Frequency: <span class="m">2462</span> MHz
 Flushing old station entries
 Deauthenticate all stations
-Using interface wlan1 with hwaddr 00:11:22:33:44:55 and ssid 'TestHOSTAP''
-wlan1: Setup of interface done.
-MGMT (TX callback) ACK
-  MGMT (TX callback) ACK
+Using interface wlan1 with hwaddr 00:11:22:33:44:55 and ssid <span class="s1">'TestHOSTAP'</span><span class="err">'</span>
+wlan1: Setup of interface <span class="k">done</span>.
+MGMT <span class="o">(</span>TX callback<span class="o">)</span> ACK
+  MGMT <span class="o">(</span>TX callback<span class="o">)</span> ACK
 mgmt::proberesp cb
-MGMT (TX callback) ACK
+MGMT <span class="o">(</span>TX callback<span class="o">)</span> ACK
 mgmt::proberesp cb
-</pre>
-<p>It’s working! Let’s go to the next step.</p>
-<h2 id="35d9879b150c1b64d02d4e3856080136"><strong>Configure network stuff</strong></h2>
-<p>First let’s have a look at some debug messages.</p>
+</pre></div>
+<p>It's working! Let's go to the next step.</p>
+<h2 id="35d9879b150c1b64d02d4e3856080136">Configure network stuff</h2>
+<p>First let's have a look at some debug messages.</p>
                 </div>
 <hr/>
 <div style="float:left;">
-	Prev: <a href="http://blog.dornea.nu/2010/10/07/find-out-your-geolocation-via-mac-address" align='left'>
+	Prev: <a href="../../../../2010/10/07/find-out-your-geolocation-via-mac-address" align='left'>
 	 Find out your geolocation via MAC address
 	</a>
 </div>
 <div style="float:right;">
-    Next: <a href="http://blog.dornea.nu/2010/11/25/howto-snatip-masquerade-between-2-wlan-cards-on-linux" align='right'>
+    Next: <a href="../../../../2010/11/25/howto-snatip-masquerade-between-2-wlan-cards-on-linux" align='right'>
 	 HowTo: SNAT/IP Masquerade between 2 wlan cards on Linux
 	</a>
 </div>
@@ -234,7 +236,7 @@ mgmt::proberesp cb
     <script type="text/javascript">
         var disqus_shortname="dorneanu";
 				var disqus_identifier = 'howto-build-your-own-wifi-wlan-hotspot-using-hostap';
-			var disqus_url = 'http://blog.dornea.nu/2010/10/13/howto-build-your-own-wifi-wlan-hotspot-using-hostap';
+			var disqus_url = '../../../../2010/10/13/howto-build-your-own-wifi-wlan-hotspot-using-hostap';
 
 		var disqus_config = function () {
 			this.language = "en";
@@ -251,14 +253,14 @@ mgmt::proberesp cb
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>Published:</div>
                     <div class="niu2-sidebar-value">2010-10-13 00:00</div>
                     <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
-                    <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
+                    <div class="niu2-sidebar-value"><a href="../../../../category/blog">blog</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/howto/">howto</a><sup>20</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>33</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/security/">security</a><sup>29</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wlan/">wlan</a><sup>2</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/linux/">linux</a><sup>12</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/admin/">admin</a><sup>21</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../../../../tag/howto/">howto</a><sup>21</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../../../../tag/networking/">networking</a><sup>35</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../../../../tag/security/">security</a><sup>32</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../../../../tag/wlan/">wlan</a><sup>2</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../../../../tag/linux/">linux</a><sup>22</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../../../../tag/admin/">admin</a><sup>23</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -267,7 +269,7 @@ mgmt::proberesp cb
                     </div>
                     <ul id="niu2-sidebar-toc-list">
                         <li><a href="#content-heading">HowTo: Build your own Wifi WLAN hotspot using hostap</a></li>
-                        <li><a href='#42360cd3c5f04ece8d33628676b3a453'>Before we start …</a></li><li><a href='#96ef7ae0fa0c2283c2b30b8a69af0e99'>Go ‘Up in the air’ / configure hostapd</a></li><li><a href='#35d9879b150c1b64d02d4e3856080136'>Configure network stuff</a></li>
+                        <li><a href='#979cde56bbe56b4c83a76054cafd243f'>Before we start ...</a></li><li><a href='#a9fa05d302398f0edd45e15adf6c186b'>Go "Up in the air" / configure hostapd</a></li><li><a href='#35d9879b150c1b64d02d4e3856080136'>Configure network stuff</a></li>
                         <li><a href="#content-comments">Comments</a></li>
                     </ul>
                 </div>
@@ -294,7 +296,7 @@ mgmt::proberesp cb
                 </p>
                 <p>
                     © 2008 - 2016
-                    <a class="niu2-footer-link" href="http://blog.dornea.nu">Victor Dorneanu</a>
+                    <a class="niu2-footer-link" href="../../../..">Victor Dorneanu</a>
                 </p>
                 <p class="niu2-icons">
                     <a class="niu2-footer-icon" href="https://pgp.mit.edu/pks/lookup?op=get&search=0x18F1AD46FB05E1B7" title="my public key">
@@ -329,9 +331,9 @@ mgmt::proberesp cb
         <div id="niu2-pygments" data-theme="github"></div>
         <div id="niu2-lazy-load" data-loading-txt="Loading image" data-loading-icon="icon-spin icon-spinner"></div>
         <div id="niu2-toolbar-load" data-loading-icon="icon-spin icon-4x icon-spinner"></div>
-        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/niu2.min.js"></script>
-        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../../../../theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="../../../../theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="../../../../theme/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="/js/custom.js"></script>
         <script type="text/javascript">
             onContentLoaded();

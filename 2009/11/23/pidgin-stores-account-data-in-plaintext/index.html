@@ -3,8 +3,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="keywords" content="wtf">
-        <meta name="description" content="I was just looking for some configuration files in Pidgins working directory “~/.purple/” and found this: ... -rw------- 1 victor users 22939 Nov 23 19:34 accounts.xml ... Well I wouldn’t have payed to much attention at that file, if it had not contained this: $ head accounts.xml <account version ...">
+        <meta name="keywords" content="wtf, security">
+        <meta name="description" content="I was just looking for some configuration files in Pidgins working directory ~/.purple/ and found this: ... -rw------- 1 victor users 22939 Nov 23 19:34 accounts.xml ... Well I wouldn't have payed to much attention at that file, if it had not contained this: $ head accounts.xml <?xml version ...">
         <title>Pidgin stores account data in plaintext! - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
         <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
@@ -57,10 +57,13 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
+                                      (101)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
                                <li><a href="http://blog.dornea.nu/category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (18)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -114,33 +117,34 @@
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <p>I was just looking for some configuration files in Pidgins working directory “~/.purple/” and found this:</p>
-<pre class="brush: bash">...
--rw------- 1 victor users  22939 Nov 23 19:34 accounts.xml
+                    <p>I was just looking for some configuration files in Pidgins working directory <code>~/.purple/</code> and found this:</p>
+<div class="highlight"><pre>...
+-rw------- <span class="m">1</span> victor users  <span class="m">22939</span> Nov <span class="m">23</span> 19:34 accounts.xml
 ...
-</pre>
-<p>Well I wouldn’t have payed to much attention at that file, if it had not contained this:</p>
-<pre class="brush: bash">$ head accounts.xml 
-<?xml version='1.0' encoding='UTF-8' ?>
+</pre></div>
+<p>Well I wouldn't have payed to much attention at that file, if it had not contained this:</p>
+<div class="highlight"><pre><span class="nv">$ </span>head accounts.xml 
+&lt;?xml <span class="nv">version</span><span class="o">=</span><span class="s1">'1.0'</span> <span class="nv">encoding</span><span class="o">=</span><span class="s1">'UTF-8'</span> ?&gt;
 
-&lt;account version='1.0'&gt;
+&lt;account <span class="nv">version</span><span class="o">=</span><span class="s1">'1.0'</span>&gt;
         &lt;account&gt;
                 &lt;protocol&gt;prpl-msn&lt;/protocol&gt;
                 &lt;name&gt;******@hotmail.de&lt;/name&gt;
                 &lt;password&gt;**&lt;/password&gt;
-                &lt;alias&gt;v****&lt;/alias&gt;
+                &lt;<span class="nb">alias</span>&gt;v****&lt;/alias&gt;
                 &lt;statuses&gt;
 
 ...
-</pre>
-<p>Plaintext passwords? I couldn’t believe it. So I searched on Pidgins Wiki site for some entries justifing this (in)secure measurement. And indeed I found one: <a href="http://developer.pidgin.im/wiki/PlainTextPasswords">http://developer.pidgin.im/wiki/PlainTextPasswords</a>. However… Could somebody tell me what they mean by this one: </p>
-<p>“<cite title="We're 100% fine with people having false perceptions of how insecurely Pidgin handles your passwords. We are not, however, fine with sacrificing actual security for false security. ">We’re 100% fine with people having false perceptions of how insecurely<br/> Pidgin handles your passwords. We are not, however, fine with<br/> sacrificing actual security for false security.”<br/> </cite></p>
-<!--break-->
+</pre></div>
+<p>Plaintext passwords? I couldn't believe it. So I searched on Pidgins Wiki site for some entries justifing this (in)secure measurement. And indeed I found one: <a href="http://developer.pidgin.im/wiki/PlainTextPasswords">http://developer.pidgin.im/wiki/PlainTextPasswords</a>. However... Could somebody tell me what they mean by this one: </p>
+<blockquote>
+<p>"We're 100% fine with people having false perceptions of how insecurely Pidgin handles your passwords. We are not, however, fine with sacrificing actual security for false security. We're 100% fine with people having false perceptions of how insecurely. Pidgin handles your passwords. We are not, however, fine with sacrificing actual security for false security."</p>
+</blockquote>
                 </div>
 <hr/>
 <div style="float:left;">
-	Prev: <a href="http://blog.dornea.nu/2009/11/22/what-the-heck" align='left'>
-	 What the heck?
+	Prev: <a href="http://blog.dornea.nu/2009/11/14/netbsd-linux-xen-does-it-work" align='left'>
+	 NetBSD, Linux &#038; Xen - Does it work?
 	</a>
 </div>
 <div style="float:right;">
@@ -175,7 +179,8 @@
                     <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
                     <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wtf/">wtf</a><sup>17</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wtf/">wtf</a><sup>11</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/security/">security</a><sup>33</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">

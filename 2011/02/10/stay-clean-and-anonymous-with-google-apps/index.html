@@ -3,8 +3,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="keywords" content="web">
-        <meta name="description" content="I was recently reading some documentary article about the Mexican drug war near USA’s national border. Actually it was rather an interview with some guy who fights against the (corrupt) authorities and the drugs leaders by running some informative blog. Feel free to activate your investigative mind and find ...">
+        <meta name="keywords" content="web, security, google">
+        <meta name="description" content="I was recently reading some documentary article about the Mexican drug war near USA's national border. Actually it was rather an interview with some guy who fights against the (corrupt) authorities and the drugs leaders by running some informative blog. Feel free to activate your investigative mind and find ...">
         <title>Stay clean and anonymous with Google Apps - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
         <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
@@ -57,10 +57,13 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
+                                      (101)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
                                <li><a href="http://blog.dornea.nu/category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (18)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -114,11 +117,10 @@
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <p>I was recently reading some documentary article about the Mexican drug war near USA’s national border. Actually it was rather an interview with some guy who fights against the (corrupt) authorities and the drugs leaders by running some informative blog. Feel free to activate your investigative mind and find out which blog I’m talking about…</p>
-<p>So this guy was clever enough to hide its identity – what would you do in his case ? – by hiding the domains whois information. These days all you have to do is to find some serious registrar, use some CC and there you go: All your sensible information will be kept private against spammers, hax0rs, feds, …drug leaders.<!--more--></p>
-<!--break-->
-<pre class="brush:plain;">Domain Name:     xxx
-$ whois xxx
+                    <p>I was recently reading some documentary article about the Mexican drug war near USA's national border. Actually it was rather an interview with some guy who fights against the (corrupt) authorities and the drugs leaders by running some informative blog. Feel free to activate your investigative mind and find out which blog I'm talking about...</p>
+<p>So this guy was clever enough to hide its identity - what would you do in his case ? - by hiding the domains whois information. These days all you have to do is to find some serious registrar, use some CC and there you go: All your sensible information will be kept private against spammers, hax0rs, feds, ...drug leaders.</p>
+<div class="highlight"><pre>Domain Name:     xxx
+<span class="nv">$ </span>whois xxx
 ...
 Registrar:       Name.com LLC
 
@@ -141,41 +143,42 @@ CO
 80206
 US
 Phone:         +1.7202492374 
-Email Address: xxx_at_protecteddomainservices.com</pre>
-<p>Ok that’s DNS. What about (web) hosting? And here comes the interesting part. I was thinking of some .ru / .pk / .ro (…) hosters to serve the blog content. Far fetched!</p>
-<pre class="brush:plain;">$ dig xxx
+Email Address: xxx_at_protecteddomainservices.com
+</pre></div>
+<p>Ok that's DNS. What about (web) hosting? And here comes the interesting part. I was thinking of some .ru / .pk / .ro (...) hosters to serve the blog content. Far fetched!</p>
+<div class="highlight"><pre><span class="nv">$ </span>dig xxx
 
-; &lt;&lt;&gt;&gt; DiG 9.7.2-P3 &lt;&lt;&gt;&gt; xxx
-;; global options: +cmd
-;; Got answer:
-;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 35710
-;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 0
+<span class="p">;</span> &lt;&lt;&gt;&gt; DiG 9.7.2-P3 &lt;&lt;&gt;&gt; xxx
+<span class="p">;;</span> global options: +cmd
+<span class="p">;;</span> Got answer:
+<span class="p">;;</span> -&gt;&gt;HEADER<span class="s">&lt;&lt;- opco</span>de: QUERY, status: NOERROR, id: 35710
+<span class="p">;;</span> flags: qr rd ra<span class="p">;</span> QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 0
 
-;; QUESTION SECTION:
-;xxx.              IN      A
+<span class="p">;;</span> QUESTION SECTION:
+<span class="p">;</span>xxx.              IN      A
 
-;; ANSWER SECTION:
-xxx.       1782    IN      CNAME   ghs.google.com.
-ghs.google.com.         21506   IN      CNAME   ghs.l.google.com.
-ghs.l.google.com.       95      IN      A       74.125.43.121
+<span class="p">;;</span> ANSWER SECTION:
+xxx.       <span class="m">1782</span>    IN      CNAME   ghs.google.com.
+ghs.google.com.         <span class="m">21506</span>   IN      CNAME   ghs.l.google.com.
+ghs.l.google.com.       <span class="m">95</span>      IN      A       74.125.43.121
 
-;; Query time: 4 msec
-;; SERVER: xxx
-;; WHEN: Thu Feb 10 19:40:05 2011
-;; MSG SIZE  rcvd: 95</pre>
-<p>Google? Aeehhh? Ok. Let’s be sure about that and do some reverse lookup. Therefor I’ve used my favourite online dns tool DomainTools.com and voila:</p>
-<div class="form-field wide-80 normal rtecenter">
-<span>Reverse IP:</span><span class="left-pad-none bold"> <strong>1,176,001 other sites</strong></span> hosted on this server.
-</div>
-<p>0_o Now I’m really confused. Let’s hang on for a minute, take a deep breath and seek for the facts: Google seems to host this site and other 1.176.001 other sites too. How can this be? (please forgive me for my naive curiosity, but before this I had no clue about the concept behind this whole thing)</p>
-<p>A quick Google search gave me the answer I was looking for: <a href="http://www.google.com/apps/">Google Aps</a>. (I use Google to find out more about Google. Quite ironically, isn’t it?) The whole Internet is full of entries related to these Apps. Everybody seems to use these free services – besides me. I’ve never heard of Google Apps before. Did you? Never mind. Infact I knew <a href="http://www.google.com/sites/overview.html">Google Sites</a> which is – in my own oppinion – the easiest way (forget WordPress!) to create a site adapted to your needs in less than 10 minutes. So this is where the whole story ends at.</p>
-<p>Supposing you have already achived your whois protected domain, Google will help you map your Google site to your OWN url as stated <a href="http://www.google.com/support/sites/bin/answer.py?hl=en&amp;answer=99448">here</a>. You’ll need to have full access to the DNS administration of your domain and change some <a href="http://en.wikipedia.org/wiki/CNAME_record">CNAME</a> entries. Afterwards you’ll have your domain pointing to the Google site. BTW: If you like <a href="http://blogger.com">Blogger.com</a> you may want to check <a href="http://www.google.com/support/blogger/bin/answer.py?hl=en&amp;answer=55373">this</a> out. This whole hocus pocus works with MX entries too. So if you want to map your mail address me@example.com to your Google accounts mail address,  follow <a href="http://www.google.com/support/a/bin/answer.py?hl=en&amp;answer=33352">these</a> instructions.</p>
-<p>So if you ever had some criminal plans in mind or planed doing some “private” stuff, Google might be your friend.</p>
+<span class="p">;;</span> Query <span class="nb">time</span>: <span class="m">4</span> msec
+<span class="p">;;</span> SERVER: xxx
+<span class="p">;;</span> WHEN: Thu Feb <span class="m">10</span> 19:40:05 2011
+<span class="p">;;</span> MSG SIZE  rcvd: 95
+</pre></div>
+<p>Google? Aeehhh? Ok. Let's be sure about that and do some reverse lookup. Therefor I've used my favourite online dns tool DomainTools.com and voila:</p>
+<div class="highlight"><pre>Reverse IP: 1,176,001 other sites hosted on this server.
+</pre></div>
+<p>0_o Now I'm really confused. Let's hang on for a minute, take a deep breath and seek for the facts: Google seems to host this site and other 1.176.001 other sites too. How can this be? (please forgive me for my naive curiosity, but before this I had no clue about the concept behind this whole thing)</p>
+<p>A quick Google search gave me the answer I was looking for: <a href="http://www.google.com/apps/">Google Aps</a>. (I use Google to find out more about Google. Quite ironically, isn't it?) The whole Internet is full of entries related to these Apps. Everybody seems to use these free services - besides me. I've never heard of Google Apps before. Did you? Never mind. Infact I knew <a href="http://www.google.com/sites/overview.html">Google Sites</a> which is - in my own oppinion - the easiest way (forget WordPress!) to create a site adapted to your needs in less than 10 minutes. So this is where the whole story ends at.</p>
+<p>Supposing you have already achived your whois protected domain, Google will help you map your Google site to your OWN url as stated <a href="http://www.google.com/support/sites/bin/answer.py?hl=en&amp;answer=99448">here</a>. You'll need to have full access to the DNS administration of your domain and change some <a href="http://en.wikipedia.org/wiki/CNAME_record">CNAME</a> entries. Afterwards you'll have your domain pointing to the Google site. BTW: If you like <a href="http://blogger.com">Blogger.com</a> you may want to check <a href="http://www.google.com/support/blogger/bin/answer.py?hl=en&amp;answer=55373">this</a> out. This whole hocus pocus works with MX entries too. So if you want to map your mail address me@example.com to your Google accounts mail address,  follow <a href="http://www.google.com/support/a/bin/answer.py?hl=en&amp;answer=33352">these</a> instructions.</p>
+<p>So if you ever had some criminal plans in mind or planed doing some <code>private</code> stuff, Google might be your friend.</p>
                 </div>
 <hr/>
 <div style="float:left;">
 	Prev: <a href="http://blog.dornea.nu/2011/02/04/openbsd-48-first-impressions" align='left'>
-	 OpenBSD 4.8 &#8211; First impressions
+	 OpenBSD 4.8 - First impressions
 	</a>
 </div>
 <div style="float:right;">
@@ -210,7 +213,9 @@ ghs.l.google.com.       95      IN      A       74.125.43.121
                     <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
                     <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/web/">web</a><sup>13</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/web/">web</a><sup>14</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/security/">security</a><sup>33</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/google/">google</a><sup>8</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">

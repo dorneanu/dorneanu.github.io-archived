@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="coding, python">
-        <meta name="description" content="“In probability theory, the birthday problem, or birthday paradox pertains to the probability that in a set of randomly chosen people some pair of them will have the same birthday. In a group of at least 23 randomly chosen people, there is more than 50% probability that some pair of ...">
+        <meta name="description" content="In probability theory, the birthday problem, or birthday paradox pertains to the probability that in a set of randomly chosen people some pair of them will have the same birthday. In a group of at least 23 randomly chosen people, there is more than 50% probability that some pair of ...">
         <title>Birthday paradox/problem - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
         <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
@@ -57,10 +57,13 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (154)</a></li>
+                                      (101)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
                                <li><a href="http://blog.dornea.nu/category/notes">
                                       <i class="icon-book"></i>notes
-                                      (8)</a></li>
+                                      (18)</a></li>
                            </ul>
                         </li>
                         <!--  self defined dropdown list -->
@@ -114,111 +117,113 @@
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <p><img alt="image description" class="img-responsive" height="490" src="http://static.dornea.nu/img/2010/be4472de1eeb3cb6a45cc6556488dbec.png" width="800"/>“In probability theory, the birthday problem, or birthday paradox pertains to the probability that in a set of randomly chosen people some pair of them will have the same birthday. In a group of at least 23 randomly chosen people, there is more than 50% probability that some pair of them will have the same birthday. Such a result is counter-intuitive to many.</p>
-<p>For 57 or more people, the probability is more than 99%, and it reaches 100% when, ignoring leap-years, the number of people reaches 366 (by the pigeonhole principle). The mathematics behind this problem led to a well-known cryptographic attack called the birthday attack.” [Source: <a href="http://en.wikipedia.org/wiki/Birthday_problem">wikipedia</a>]<!--more--></p>
-<p>Well I tried to show that using empirical methods: I randomly generated groups of “persons” and calculated the probability that 2 people will have the same birthday. Therefor I’ve been using Python due to its simplicity and clean coding style. Here is my code:<!--break--></p>
-<pre>def birthday_paradox():
-""" We calculate the probability that 2 persons will have the same
-birthday.
-"""
-import random
-random.seed()
+                    <p>In probability theory, the birthday problem, or birthday paradox pertains to the probability that in a set of randomly chosen people some pair of them will have the same birthday. In a group of at least 23 randomly chosen people, there is more than 50% probability that some pair of them will have the same birthday. Such a result is counter-intuitive to many.</p>
+<p>For 57 or more people, the probability is more than 99%, and it reaches 100% when, ignoring leap-years, the number of people reaches 366 (by the pigeonhole principle). The mathematics behind this problem led to a well-known cryptographic attack called the birthday attack.` [Source: <a href="http://en.wikipedia.org/wiki/Birthday_problem">wikipedia</a>]</p>
+<p>Well I tried to show that using empirical methods: I randomly generated groups of <code>persons</code> and calculated the probability that 2 people will have the same birthday. Therefor I've been using Python due to its simplicity and clean coding style. Here is my code:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">birthday_paradox</span><span class="p">():</span>
+<span class="sd">""" We calculate the probability that 2 persons will have the same</span>
+<span class="sd">birthday.</span>
+<span class="sd">"""</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>
 
-# How many times should the experiment be conducted
-c = 10000
+<span class="c"># How many times should the experiment be conducted</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">10000</span>
 
-def generate_bdays(t):
-""" We generate t random birthdays between 1 and 365.
-Generated birthdays will be returned as a list.
-"""
-l = []
-for j in range(t):
-b_day = random.randint(1,365)
-l.append(b_day)
+<span class="k">def</span> <span class="nf">generate_bdays</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+<span class="sd">""" We generate t random birthdays between 1 and 365.</span>
+<span class="sd">Generated birthdays will be returned as a list.</span>
+<span class="sd">"""</span>
+<span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+<span class="n">b_day</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">365</span><span class="p">)</span>
+<span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b_day</span><span class="p">)</span>
 
-return l
+<span class="k">return</span> <span class="n">l</span>
 
-def duplication(l):
-""" Does the list contain any duplication ? """
-d = {}
+<span class="k">def</span> <span class="nf">duplication</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+<span class="sd">""" Does the list contain any duplication ? """</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
 
-# First we create a dictionary:
-# [Birthday] -&gt; [Number of occurences]
-#
-# [Birthday] is in our dictionary key and
-# [Number of occurences] the key value
-for n in l:
-d[n] = d.get(n, 0) + 1
+<span class="c"># First we create a dictionary:</span>
+<span class="c"># [Birthday] -&gt; [Number of occurences]</span>
+<span class="c">#</span>
+<span class="c"># [Birthday] is in our dictionary key and</span>
+<span class="c"># [Number of occurences] the key value</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+<span class="n">d</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 
-# Check if any key/birthday is duplicated
-for c in d.values():
-if c &gt; 1: return True
+<span class="c"># Check if any key/birthday is duplicated</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+<span class="k">if</span> <span class="n">c</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="bp">True</span>
 
-return False
+<span class="k">return</span> <span class="bp">False</span>
 
-def experiment(n,t):
-""" We create _t_ random birthdays. We do that _n_ times.
-Return value:
+<span class="k">def</span> <span class="nf">experiment</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+<span class="sd">""" We create _t_ random birthdays. We do that _n_ times.</span>
+<span class="sd">Return value:</span>
 
-Number of duplications (if any) / n
+<span class="sd">Number of duplications (if any) / n</span>
 
-"""
-duplikate = 0
-for i in range(n):
-if duplication(generate_bdays(t)):
-duplikate += 1
+<span class="sd">"""</span>
+<span class="n">duplikate</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="k">if</span> <span class="n">duplication</span><span class="p">(</span><span class="n">generate_bdays</span><span class="p">(</span><span class="n">t</span><span class="p">)):</span>
+<span class="n">duplikate</span> <span class="o">+=</span> <span class="mi">1</span>
 
-return duplikate / n
+<span class="k">return</span> <span class="n">duplikate</span> <span class="o">/</span> <span class="n">n</span>
 
-# Here we conduct our experiment
-for i in range(50):
-print("Number of persons:",i, " Probability: ",experiment(c,i))
+<span class="c"># Here we conduct our experiment</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Number of persons:"</span><span class="p">,</span><span class="n">i</span><span class="p">,</span> <span class="s">" Probability: "</span><span class="p">,</span><span class="n">experiment</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">i</span><span class="p">))</span>
 
-if __name__ == "__main__":
-birthday_paradox()</pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+<span class="n">birthday_paradox</span><span class="p">()</span>
+</pre></div>
 <p>Simple run will show:</p>
-<pre>$ python3.1 birthday_paradox.py
-Number of persons: 0 Probability: 0.0
-Number of persons: 1 Probability: 0.0
-Number of persons: 2 Probability: 0.0023
-Number of persons: 3 Probability: 0.0088
-Number of persons: 4 Probability: 0.0172
-Number of persons: 5 Probability: 0.0246
-Number of persons: 6 Probability: 0.0417
-Number of persons: 7 Probability: 0.0591
-Number of persons: 8 Probability: 0.0709
-Number of persons: 9 Probability: 0.0908
-Number of persons: 10 Probability: 0.1152
-Number of persons: 11 Probability: 0.1421
-Number of persons: 12 Probability: 0.1745
-Number of persons: 13 Probability: 0.2005
-Number of persons: 14 Probability: 0.2318
-Number of persons: 15 Probability: 0.2603
-Number of persons: 16 Probability: 0.2759
-Number of persons: 17 Probability: 0.3205
-Number of persons: 18 Probability: 0.3499
-Number of persons: 19 Probability: 0.3765
-Number of persons: 20 Probability: 0.4118
-Number of persons: 21 Probability: 0.4353
-Number of persons: 22 Probability: 0.4745
-Number of persons: 23 Probability: 0.5078
-Number of persons: 24 Probability: 0.5311
-Number of persons: 25 Probability: 0.5681
-Number of persons: 26 Probability: 0.5978
-Number of persons: 27 Probability: 0.6261
-Number of persons: 28 Probability: 0.6486
-...</pre>
+<div class="highlight"><pre><span class="nv">$ </span>python3.1 birthday_paradox.py
+Number of persons: <span class="m">0</span> Probability: 0.0
+Number of persons: <span class="m">1</span> Probability: 0.0
+Number of persons: <span class="m">2</span> Probability: 0.0023
+Number of persons: <span class="m">3</span> Probability: 0.0088
+Number of persons: <span class="m">4</span> Probability: 0.0172
+Number of persons: <span class="m">5</span> Probability: 0.0246
+Number of persons: <span class="m">6</span> Probability: 0.0417
+Number of persons: <span class="m">7</span> Probability: 0.0591
+Number of persons: <span class="m">8</span> Probability: 0.0709
+Number of persons: <span class="m">9</span> Probability: 0.0908
+Number of persons: <span class="m">10</span> Probability: 0.1152
+Number of persons: <span class="m">11</span> Probability: 0.1421
+Number of persons: <span class="m">12</span> Probability: 0.1745
+Number of persons: <span class="m">13</span> Probability: 0.2005
+Number of persons: <span class="m">14</span> Probability: 0.2318
+Number of persons: <span class="m">15</span> Probability: 0.2603
+Number of persons: <span class="m">16</span> Probability: 0.2759
+Number of persons: <span class="m">17</span> Probability: 0.3205
+Number of persons: <span class="m">18</span> Probability: 0.3499
+Number of persons: <span class="m">19</span> Probability: 0.3765
+Number of persons: <span class="m">20</span> Probability: 0.4118
+Number of persons: <span class="m">21</span> Probability: 0.4353
+Number of persons: <span class="m">22</span> Probability: 0.4745
+Number of persons: <span class="m">23</span> Probability: 0.5078
+Number of persons: <span class="m">24</span> Probability: 0.5311
+Number of persons: <span class="m">25</span> Probability: 0.5681
+Number of persons: <span class="m">26</span> Probability: 0.5978
+Number of persons: <span class="m">27</span> Probability: 0.6261
+Number of persons: <span class="m">28</span> Probability: 0.6486
+...
+</pre></div>
 <p>As we, see we need<strong> at least 23 persons</strong> in order to have a <strong>probability greather-equal 50%</strong>.</p>
                 </div>
 <hr/>
 <div style="float:left;">
 	Prev: <a href="http://blog.dornea.nu/2010/05/03/torrents-over-tor-dont" align='left'>
-	 Torrents over TOR?! Don&#8217;t!
+	 Torrents over TOR?! Don't!
 	</a>
 </div>
 <div style="float:right;">
     Next: <a href="http://blog.dornea.nu/2010/05/14/bildungsforschung-rechtschreibung-waere-besser" align='right'>
-	 Bildungsforschung? Rechtschreibung waere besser&#8230;
+	 Bildungsforschung? Rechtschreibung waere besser
 	</a>
 </div>
 </p>
@@ -248,8 +253,8 @@ Number of persons: 28 Probability: 0.6486
                     <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
                     <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/coding/">coding</a><sup>23</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/python/">python</a><sup>16</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/coding/">coding</a><sup>26</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/python/">python</a><sup>23</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
