@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/</loc>
-<lastmod>2016-02-18T11:02:50-00:00</lastmod>
+<lastmod>2016-02-18T11:21:16-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/archives.html</loc>
-<lastmod>2016-02-18T11:02:50-00:00</lastmod>
+<lastmod>2016-02-18T11:21:16-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/tags.html</loc>
-<lastmod>2016-02-18T11:02:50-00:00</lastmod>
+<lastmod>2016-02-18T11:21:16-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/categories.html</loc>
-<lastmod>2016-02-18T11:02:50-00:00</lastmod>
+<lastmod>2016-02-18T11:21:16-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -39,14 +39,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.dornea.nu/2016/02/12/chrooting-nginx-php-fpm-and-mysql-using-bitnami</loc>
-<lastmod>2016-02-12T00:00:00+01:00</lastmod>
+<loc>http://blog.dornea.nu/2016/02/18/tls-client-authentication-using-bitnami-nginx-stack</loc>
+<lastmod>2016-02-18T00:00:00+01:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.dornea.nu/2016/02/12/tls-client-authentication-using-bitnami-nginx-stack</loc>
+<loc>http://blog.dornea.nu/2016/02/12/chrooting-nginx-php-fpm-and-mysql-using-bitnami</loc>
 <lastmod>2016-02-12T00:00:00+01:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
@@ -1104,7 +1104,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/category/notes</loc>
-<lastmod>2016-02-12T00:00:00+00:53</lastmod>
+<lastmod>2016-02-18T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1286,7 +1286,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/bitnami/</loc>
-<lastmod>2016-02-12T00:00:00+00:53</lastmod>
+<lastmod>2016-02-18T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1349,7 +1349,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/ssl/</loc>
-<lastmod>2016-02-12T00:00:00+00:53</lastmod>
+<lastmod>2016-02-18T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1636,7 +1636,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/security/</loc>
-<lastmod>2016-02-12T00:00:00+00:53</lastmod>
+<lastmod>2016-02-18T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1650,7 +1650,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/tls/</loc>
-<lastmod>2016-02-12T00:00:00+00:53</lastmod>
+<lastmod>2016-02-18T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1678,7 +1678,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/openssl/</loc>
-<lastmod>2016-02-12T00:00:00+00:53</lastmod>
+<lastmod>2016-02-18T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -2091,7 +2091,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/appsec/</loc>
-<lastmod>2016-02-12T00:00:00+00:53</lastmod>
+<lastmod>2016-02-18T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -2252,7 +2252,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/nginx/</loc>
-<lastmod>2016-02-12T00:00:00+00:53</lastmod>
+<lastmod>2016-02-18T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -2322,7 +2322,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/author/victor-dorneanu.html</loc>
-<lastmod>2016-02-12T00:00:00+00:53</lastmod>
+<lastmod>2016-02-18T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

@@ -3,9 +3,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="keywords" content="note, iptables, linux, networking">
-        <meta name="description" content="Doing a simple port forwarding is actually a simple task: $ iptables -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080 This would redirect all traffic from 80 to 8080. But if you have some firewall activated, you'll have to allow both ports: $ iptables -A INPUT -p tcp --dport ...">
-        <title>No DNAT to localhost - blog.dornea.nu</title>
+        <meta name="keywords" content="nginx, openssl, tls, ssl, bitnami, security, appsec">
+        <meta name="description" content="I've felt that I have to write it down since it took almost 2 days to find the root cause of: [info] 30979#0: *2 client SSL certificate verify error: (18:self signed certificate) while reading client request headers, client: xxx, server: yyy, request: "GET / HTTP/1.1", host ...">
+        <title>TLS Client authentication using Bitnami Nginx stack - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
         <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
         <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/bootstrap.min.css" type="text/css" />
@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="/css/custom.css" type="text/css" />
 		
         
-        <link rel="canonical" href="http://blog.dornea.nu/2016/01/20/no-dnat-to-localhost" />
+        <link rel="canonical" href="http://blog.dornea.nu/2016/02/18/tls-client-authentication-using-bitnami-nginx-stack" />
         <script type="text/javascript">window.onload=function(){};</script>
         <!--[if lt IE 9]>
             <script src="http://blog.dornea.nu/theme/js/html5shiv.js"></script>
@@ -113,44 +113,81 @@
 
         <div id="body-content">
             <div class="col-md-8 col-md-offset-2">
-                <h1 id="content-heading">No DNAT to localhost</h1>
+                <h1 id="content-heading">TLS Client authentication using Bitnami Nginx stack</h1>
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <p>Doing a simple <strong>port forwarding</strong> is actually a simple task:</p>
-<div class="highlight"><pre><span class="nv">$ </span>iptables -A PREROUTING -p tcp --dport <span class="m">80</span> -j REDIRECT --to-ports 8080
+                    <p>I've felt that I <strong>have</strong> to write it down since it took almost 2 days to find the root cause of:</p>
+<div class="highlight"><pre>[info] 30979#0: *2 client SSL certificate verify error: (18:self signed certificate) while reading client request headers, client: xxx, server: yyy, request: "GET / HTTP/1.1", host: "yyy"
 </pre></div>
-<p>This would redirect all traffic from <code>80</code> to <code>8080</code>. But if you have some <strong>firewall</strong> activated, you'll have to <strong>allow</strong> both ports:</p>
-<div class="highlight"><pre><span class="nv">$ </span>iptables -A INPUT -p tcp --dport <span class="m">80</span> -j ALLOW
-<span class="nv">$ </span>iptables -A INPUT -p tcp --dport <span class="m">8080</span> -j ALLOW
+<h2 id="17b71191b669c2e6e6ff0ec468ea46f9">Use nginx stack environment</h2>
+<p><strong>Not</strong> generating the certificates inside the Bitnami environment was the root cause - at least I think it is. In your Bitnami installation folder (remember the instructions <a href="http://blog.dornea.nu/2016/02/12/chrooting-nginx-php-fpm-and-mysql-using-bitnami/">here</a>) you'll find a small script called <code>use_nginxstack</code>:</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /home/bitnami/nginxstack
+<span class="nv">$ </span>./use_nginxstack
+bash-4.3# which openssl
+/home/bitnami/nginxstack/common/bin/openssl
 </pre></div>
-<p>Otherwise the port forwarding won't work. But this is not the use case you want to achieve. In most cases you want to <strong>redirect</strong> 
-traffic from one port (let's say <code>80</code>) from an external interface to another IP address (let's say <code>10.0.0.1:8080</code>). Using <strong>DNAT</strong> this 
-actually pretty easy to implement:</p>
-<div class="highlight"><pre><span class="nv">$ </span>iptables -t nat -A PREROUTING -p tcp --dport <span class="m">80</span> -j DNAT --to-destination 10.0.0.1:8080
+<p>I still don't know <strong>why</strong> but you'll have to use the <code>openssl</code> binary inside the nginx stack.</p>
+<h2 id="46175848cc5cdebb589a7d1a8d3abac8">Generate root CA</h2>
+<p>First generate a <strong>key</strong> for the root CA and then the correponding <strong>certificate</strong>:</p>
+<div class="highlight"><pre>bash-4.3# openssl genrsa -des3 -out ca.key 4096
+bash-4.3# openssl req -new -x509 -days <span class="m">365</span> -key ca.key -out ca.crt
 </pre></div>
-<p>For a full example have a look at <a href="http://stackoverflow.com/questions/14212807/iptables-forward-request-on-different-interfaces-and-port?answertab=votes#tab-top">this stackoverflow</a>.
-However in my case I wanted to do DNAT to the <strong>loopback</strong> interface which didn't work (<a href="http://lists.netfilter.org/pipermail/netfilter/2004-August/055074.html">this answer</a> confirms this). Using <strong>REDIRECT</strong> is also a pretty bad idea since I had to allow access to both ports (which is kind of stupid). </p>
-<p>So... How to solve the problem? Using <a href="https://en.wikipedia.org/wiki/Inetdhttps://en.wikipedia.org/wiki/Inetd">inetd</a>. I've installed <a href="http://www.boutell.com/rinetd/">rinetd</a> and configured the port forwarding:</p>
-<div class="highlight"><pre><span class="nv">$ </span>apt-get install rinetd
-<span class="nv">$ </span>cat /etc/rinetd.conf
+<h2 id="7b29db9077493ff1fcfc27ca89f611f4">Generate client certificate</h2>
+<p>First generate some <em>client</em> key (without any password):</p>
+<div class="highlight"><pre>bash-4.3# openssl genrsa -out client.key 2048
+</pre></div>
+<p>Then generate the client <strong>CSR</strong>:</p>
+<div class="highlight"><pre>bash-4.3# openssl req -new -key client.key -out client.csr
+</pre></div>
+<p>Then sign the CSR using the previously generated CA:</p>
+<div class="highlight"><pre>bash-4.3# openssl x509 -req -days <span class="m">365</span> -in client.csr -CA ca.crt -CAkey ca.key -set_serial <span class="m">01</span> -out client.crt
+</pre></div>
+<h2 id="cf6329efb70587dcb5c021c3e8a2726a">Configure nginx</h2>
+<p>To make this work you'll have to configure your <code>nginx</code>. In your <code>nginx-vhosts.conf</code> make sure you have this:</p>
+<div class="highlight"><pre><span class="o">[</span>...<span class="o">]</span>
+
+server <span class="o">{</span>
+
+    listen    <span class="m">443</span> ssl<span class="p">;</span>
+    <span class="o">[</span>...<span class="o">]</span>
+
+    ssl_client_certificate <span class="s2">"/home/bitnami/nginxstack/apps/wiki.dornea.nu/certs/ca.crt"</span><span class="p">;</span>
+    ssl_verify_client on<span class="p">;</span>
+    <span class="o">[</span>...<span class="o">]</span>
+<span class="o">}</span>
+
 <span class="o">[</span>...<span class="o">]</span>
-<span class="c"># bindadress    bindport  connectaddress  connectport</span>
-&lt;external ip&gt;   <span class="m">80</span>          127.0.0.1       8080
-<span class="o">[</span>...<span class="o">]</span>
-<span class="nv">$ </span>service rinetd restart
 </pre></div>
-<p>I hope this would prevent others from spending their whole day on doing DNAT to localhost. </p>
+<p>Now restart your <code>nginx</code> and test it:</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /home/bitnami/nginxstack
+<span class="nv">$ </span>./ctlscript.sh restart nginx
+<span class="nv">$ </span>curl --insecure https://yourdomain/
+curl --insecure https://wiki.dornea.nu
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt;400 No required SSL certificate was sent&lt;/title&gt;&lt;/head&gt;
+&lt;body <span class="nv">bgcolor</span><span class="o">=</span><span class="s2">"white"</span>&gt;
+&lt;center&gt;&lt;h1&gt;400 Bad Request&lt;/h1&gt;&lt;/center&gt;
+&lt;center&gt;No required SSL certificate was sent&lt;/center&gt;
+&lt;hr&gt;&lt;center&gt;nginx&lt;/center&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+<p>So your client has to specify the <strong>client</strong> certificate. Let's move on to next section.</p>
+<h2 id="c1b5093fb42dd0a0ae02323478c1497f">Export/Import client key</h2>
+<p>Let's now <strong>export</strong> the client stuff in order to import it into your browser:</p>
+<div class="highlight"><pre>bash-4.3# openssl pkcs12 -export -clcerts -in client.crt -inkey client.key -out client.p12
+Enter Export Password:
+Verifying - Enter Export Password:
+</pre></div>
+<p>Now you should be able to import it into your browser. ALternatively you can use <code>curl</code> to test it:</p>
+<div class="highlight"><pre><span class="nv">$ </span>curl -v -s -k --key client.key --cert client.crt https://yourdomain
+</pre></div>
                 </div>
 <hr/>
 <div style="float:left;">
-	Prev: <a href="http://blog.dornea.nu/2016/01/08/video-editing-with-ffmpeg-and-kdenlive" align='left'>
-	 Video editing with ffmpeg and kdenlive
-	</a>
-</div>
-<div style="float:right;">
-    Next: <a href="http://blog.dornea.nu/2016/02/18/tls-client-authentication-using-bitnami-nginx-stack" align='right'>
-	 TLS Client authentication using Bitnami Nginx stack
+	Prev: <a href="http://blog.dornea.nu/2016/01/20/no-dnat-to-localhost" align='left'>
+	 No DNAT to localhost
 	</a>
 </div>
 </p>
@@ -160,8 +197,8 @@ However in my case I wanted to do DNAT to the <strong>loopback</strong> interfac
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         var disqus_shortname="dorneanu";
-				var disqus_identifier = 'no-dnat-to-localhost';
-			var disqus_url = 'http://blog.dornea.nu/2016/01/20/no-dnat-to-localhost';
+				var disqus_identifier = 'tls-client-authentication-using-bitnami-nginx-stack';
+			var disqus_url = 'http://blog.dornea.nu/2016/02/18/tls-client-authentication-using-bitnami-nginx-stack';
 
 		var disqus_config = function () {
 			this.language = "en";
@@ -176,14 +213,17 @@ However in my case I wanted to do DNAT to the <strong>loopback</strong> interfac
             <div class="niu2-right-container col-md-2">
                 <div id="niu2-sidebar-meta" class="niu2-sidebar">
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>Published:</div>
-                    <div class="niu2-sidebar-value">2016-01-20 00:00</div>
+                    <div class="niu2-sidebar-value">2016-02-18 00:00</div>
                     <div class="niu2-sidebar-label"><i class="icon-book"></i>category:</div>
                     <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/notes">notes</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/note/">note</a><sup>7</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/iptables/">iptables</a><sup>10</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/linux/">linux</a><sup>20</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>37</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/nginx/">nginx</a><sup>6</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/openssl/">openssl</a><sup>8</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/tls/">tls</a><sup>6</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ssl/">ssl</a><sup>6</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/bitnami/">bitnami</a><sup>2</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/security/">security</a><sup>35</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/appsec/">appsec</a><sup>23</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -191,8 +231,8 @@ However in my case I wanted to do DNAT to the <strong>loopback</strong> interfac
                         <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>Table of contents
                     </div>
                     <ul id="niu2-sidebar-toc-list">
-                        <li><a href="#content-heading">No DNAT to localhost</a></li>
-                        
+                        <li><a href="#content-heading">TLS Client authentication using Bitnami Nginx stack</a></li>
+                        <li><a href='#17b71191b669c2e6e6ff0ec468ea46f9'>Use nginx stack environment</a></li><li><a href='#46175848cc5cdebb589a7d1a8d3abac8'>Generate root CA</a></li><li><a href='#7b29db9077493ff1fcfc27ca89f611f4'>Generate client certificate</a></li><li><a href='#cf6329efb70587dcb5c021c3e8a2726a'>Configure nginx</a></li><li><a href='#c1b5093fb42dd0a0ae02323478c1497f'>Export/Import client key</a></li>
                         <li><a href="#content-comments">Comments</a></li>
                     </ul>
                 </div>
