@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/</loc>
-<lastmod>2016-02-18T11:21:16-00:00</lastmod>
+<lastmod>2016-04-16T15:53:42-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/archives.html</loc>
-<lastmod>2016-02-18T11:21:16-00:00</lastmod>
+<lastmod>2016-04-16T15:53:42-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/tags.html</loc>
-<lastmod>2016-02-18T11:21:16-00:00</lastmod>
+<lastmod>2016-04-16T15:53:42-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/categories.html</loc>
-<lastmod>2016-02-18T11:21:16-00:00</lastmod>
+<lastmod>2016-04-16T15:53:42-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -35,6 +35,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <loc>http://blog.dornea.nu/pages/books</loc>
 <lastmod>2014-06-23T00:00:00+02:00</lastmod>
 <changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.dornea.nu/2016/04/12/aws-summit-in-berlin-2016</loc>
+<lastmod>2016-04-12T00:00:00+02:00</lastmod>
+<changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -1090,7 +1097,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/category/blog</loc>
-<lastmod>2016-02-12T00:00:00+00:53</lastmod>
+<lastmod>2016-04-12T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1509,8 +1516,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.dornea.nu/tag/arm/</loc>
-<lastmod>2014-02-14T00:00:00+00:53</lastmod>
+<loc>http://blog.dornea.nu/tag/event/</loc>
+<lastmod>2016-04-12T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -2097,6 +2104,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>http://blog.dornea.nu/tag/arm/</loc>
+<lastmod>2014-02-14T00:00:00+00:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>http://blog.dornea.nu/tag/note/</loc>
 <lastmod>2016-01-20T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
@@ -2322,7 +2336,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/author/victor-dorneanu.html</loc>
-<lastmod>2016-02-18T00:00:00+00:53</lastmod>
+<lastmod>2016-04-12T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
