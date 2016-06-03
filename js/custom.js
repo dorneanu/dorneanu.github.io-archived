@@ -32,6 +32,6 @@ function PocketAPI(tag, container) {
 		});
 
 		table += '</table>';
-		$('#show-data').append(table);
+		$(container).append(table);
     });
 }
