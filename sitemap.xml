@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/</loc>
-<lastmod>2016-06-03T15:45:11-00:00</lastmod>
+<lastmod>2016-06-16T15:01:22-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/archives.html</loc>
-<lastmod>2016-06-03T15:45:11-00:00</lastmod>
+<lastmod>2016-06-16T15:01:22-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/tags.html</loc>
-<lastmod>2016-06-03T15:45:11-00:00</lastmod>
+<lastmod>2016-06-16T15:01:22-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/categories.html</loc>
-<lastmod>2016-06-03T15:45:11-00:00</lastmod>
+<lastmod>2016-06-16T15:01:22-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -91,6 +91,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <loc>http://blog.dornea.nu/pages/tags</loc>
 <lastmod>2016-05-28T00:00:00+02:00</lastmod>
 <changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.dornea.nu/2016/06/16/distribute-your-backups-using-git-annex</loc>
+<lastmod>2016-06-16T00:00:00+02:00</lastmod>
+<changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -1160,7 +1167,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/category/blog</loc>
-<lastmod>2016-05-11T00:00:00+00:53</lastmod>
+<lastmod>2016-06-16T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1439,7 +1446,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.dornea.nu/tag/ssh/</loc>
+<loc>http://blog.dornea.nu/tag/os/</loc>
 <lastmod>2014-01-17T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
@@ -1677,8 +1684,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.dornea.nu/tag/usd/</loc>
-<lastmod>2015-06-03T00:00:00+00:53</lastmod>
+<loc>http://blog.dornea.nu/tag/git/</loc>
+<lastmod>2016-06-16T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1782,8 +1789,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.dornea.nu/tag/os/</loc>
-<lastmod>2014-01-17T00:00:00+00:53</lastmod>
+<loc>http://blog.dornea.nu/tag/backup/</loc>
+<lastmod>2016-06-16T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1916,7 +1923,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/networking/</loc>
-<lastmod>2016-01-20T00:00:00+00:53</lastmod>
+<lastmod>2016-06-16T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -2008,13 +2015,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://blog.dornea.nu/tag/berlin/</loc>
 <lastmod>2016-05-11T00:00:00+00:53</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>http://blog.dornea.nu/tag/git/</loc>
-<lastmod>2014-02-07T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -2356,8 +2356,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.dornea.nu/tag/backup/</loc>
-<lastmod>2013-11-18T00:00:00+00:53</lastmod>
+<loc>http://blog.dornea.nu/tag/usd/</loc>
+<lastmod>2015-06-03T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -2405,6 +2405,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>http://blog.dornea.nu/tag/ssh/</loc>
+<lastmod>2014-01-17T00:00:00+00:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>http://blog.dornea.nu/author/victor.html</loc>
 <lastmod>2014-11-21T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
@@ -2413,7 +2420,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/author/victor-dorneanu.html</loc>
-<lastmod>2016-05-11T00:00:00+00:53</lastmod>
+<lastmod>2016-06-16T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

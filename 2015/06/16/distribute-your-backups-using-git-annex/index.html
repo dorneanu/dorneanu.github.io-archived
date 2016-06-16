@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="networking, backup, git">
+        <meta name="description" content="Motivation Backuping a whole bunch of photos and videos might be a difficult task. Taking care of the consistency of your backups is even more complicated task. Besides that you don't want to have your backups at a single place, thus mitigating the impact of a single point of ...">
+        <title>Distribute your backups using git-annex - blog.dornea.nu</title>
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
+        <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/niu2.min.css" type="text/css" />
+        <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+		
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/bootstrap.min.js"></script>
+        
+        <link rel="canonical" href="http://blog.dornea.nu/2015/06/16/distribute-your-backups-using-git-annex" />
+        <script type="text/javascript">window.onload=function(){};</script>
+        <!--[if lt IE 9]>
+            <script src="http://blog.dornea.nu/theme/js/html5shiv.js"></script>
+            <script src="http://blog.dornea.nu/theme/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body> 
+        <div id="body-header">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="http://blog.dornea.nu">
+                            <i class="icon-home"></i>blog.dornea.nu
+                        </a>
+                    </div>
+                    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                        <ul class="nav navbar-nav">
+                            <li><a href="http://dornea.nu" title="about">
+                                <i class="icon-user"></i>about</a>
+                            </li>
+                            <li><a href="/archives.html" title="archives">
+                                <i class="icon-archive"></i>archives</a>
+                            </li>
+                            <li><a href="/tags.html" title="tags">
+                                <i class="icon-tag"></i>tags</a>
+                            </li>
+                            <li><a href="/feeds/rss.xml" title="feeds">
+                                <i class="icon-rss"></i>feeds</a>
+                            </li>
+                        <!-- category dropdown list -->
+                        <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-folder-open"></i>category<b class="caret"></b>
+                           </a>
+                           <ul class="dropdown-menu">
+                               <li><a href="http://blog.dornea.nu/category/blog">
+                                      <i class="icon-pencil"></i>blog
+                                      (5)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/notes">
+                                      <i class="icon-book"></i>notes
+                                      (6)</a></li>
+                           </ul>
+                        </li>
+                        <!--  self defined dropdown list -->
+                        </ul>
+                        
+                        <!-- right nav bar -->
+                        <ul class="nav navbar-nav navbar-right">
+                        <!-- google custom search -->
+                        <li>
+                        <div id="niu2-cse-wrapper">
+                            <div id="niu2-cse-header-box" class="navbar-form navbar-nav">
+                                <form action="http://google.com/cse">
+                                    <input type="hidden" name="cx" value="008508447409818574933:pxyxuhrgnxi" />
+                                    <input type="hidden" name="ie" value="UTF-8" />
+                                    <div class="form-group">
+                                        <input id="niu2-cse-search-input" class="niu2-cse-header form-control" 
+                                            type="text" name="q" 
+                                            placeholder="Press enter to search ..."/>
+                                    </div>
+                                </form>
+                           </div>
+                           <div id="niu2-cse-ctrl-box" class="navbar-nav">
+                            <i id="niu2-cse-search-image" class="icon-search navbar-nav"></i><span id="niu2-cse-search-text">Search</span>
+                           </div>
+                       </div>
+                       </li>
+                       </ul>
+                    </nav>
+                </div>
+            </div>
+<style>
+    #banner{
+        background-image:url("http://blog.dornea.nu//images/header.jpg");
+    }   
+</style>
+
+<div id="banner">
+    <div class="container">
+        <div class="copy">
+            <h2>blog.dornea.nu</h2>
+                <p class="intro">Hack, code and drink some țuică. Personal blog of Victor Dorneanu.</p>
+        </div>
+    </div>
+</div>
+            <!-- End Banner -->
+        </div>
+
+        <div id="body-content">
+            <div class="col-md-8 col-md-offset-2">
+                <h1 id="content-heading">Distribute your backups using git-annex</h1>
+            </div>
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+                <div id="niu2-main-content">
+                    <h1 id="c076e4fd1559721e171432e66b70a487">Motivation</h1>
+<p>Backuping a whole bunch of photos and videos might be a difficult task. Taking care of the <strong>consistency</strong> of your backups is even more complicated task. Besides that you don't want to have your backups at a <strong>single place</strong>, thus mitigating the impact of a <strong>single point of data loss</strong>. </p>
+<p>I've been using <code>git-annex</code> for some years but not like a <em>pro</em> user, rather than "it just works". Meanwhile I've heard of <code>ownCloud</code> and I've liked it because one can access its data via <em>web</em>, <em>mobile client</em> or whatever. In connection with a <strong>VPN</strong> (I prefer <a href="http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids">openvpn</a>) solution you can have a <strong>secure</strong> way of remotely accessing your data from everywhere. </p>
+<p>Well this post is where the link between <code>git-annex</code> and <code>ownCloud</code> should be emphasized: Use ownCloud as your "frontend" tool for accessing the data while letting git-annex do the "backend" (aka backup) job. While this might sound like a pretty easy task, it does have some peculiarities to be taken into consideration.</p>
+<h1 id="47d9ff00142f535bb764ab3f67bfa648">Backup setup</h1>
+<div class="highlight"><pre><span class="cp">{%</span> <span class="k">blockdiag</span>
+    <span class="nv">blockdiag</span> <span class="o">{</span>
+      <span class="nv">R</span> <span class="o">[</span><span class="nv">label</span><span class="o">=</span><span class="s2">"Raspberry Pi (central repo)"</span><span class="o">,</span> <span class="nv">color</span><span class="o">=</span><span class="s2">"lightblue"</span><span class="o">,</span> <span class="nv">width</span><span class="o">=</span><span class="m">192</span><span class="o">]</span><span class="p">;</span>
+      <span class="nv">S</span> <span class="o">[</span><span class="nv">label</span><span class="o">=</span><span class="s2">"External Server (git + data)"</span><span class="o">,</span> <span class="nv">width</span><span class="o">=</span><span class="m">192</span><span class="o">]</span><span class="p">;</span>
+      <span class="nv">C</span> <span class="o">[</span><span class="nv">label</span><span class="o">=</span><span class="s2">"Cloud"</span><span class="o">]</span><span class="p">;</span>
+      <span class="nv">L</span> <span class="o">[</span><span class="nv">label</span><span class="o">=</span><span class="s2">"Laptop"</span><span class="o">]</span><span class="p">;</span>
+      <span class="nv">M</span> <span class="o">[</span><span class="nv">label</span><span class="o">=</span><span class="s2">"Mobile Clients"</span><span class="o">]</span><span class="p">;</span>
+      <span class="nv">G</span> <span class="o">[</span><span class="nv">label</span><span class="o">=</span><span class="s2">"GitHub (only git)"</span><span class="o">,</span> <span class="nv">width</span><span class="o">=</span><span class="m">192</span><span class="o">]</span><span class="p">;</span>
+
+      <span class="nv">L</span> <span class="o">-&gt;</span> <span class="nv">R</span> <span class="o">[</span><span class="nv">label</span><span class="o">=</span><span class="s2">"plain"</span><span class="o">]</span><span class="p">;</span>
+      <span class="nv">M</span> <span class="o">-&gt;</span> <span class="nv">R</span> <span class="p">;</span> 
+      <span class="nv">R</span> <span class="o">-&gt;</span> <span class="nv">S</span> <span class="o">[</span><span class="nv">label</span><span class="o">=</span><span class="s2">"enc"</span><span class="o">]</span><span class="p">;</span>
+      <span class="nv">R</span> <span class="o">-&gt;</span> <span class="nv">G</span> <span class="p">;</span> 
+      <span class="nv">S</span> <span class="o">-&gt;</span> <span class="nv">C</span> <span class="o">[</span><span class="nv">label</span><span class="o">=</span><span class="s2">"enc"</span><span class="o">]</span><span class="p">;</span>
+    <span class="o">}</span>   
+<span class="cp">%}</span><span class="x">                                                                                                                                                   </span>
+</pre></div>
+<p>There is one <strong>centralized</strong> repo on my raspberry pi where my HDD is attached to. Usually I <em>push</em> stuff to the HDD using <code>rsync</code> from my laptop or <code>ownCloud</code> using my mobile clients. Afterwards the <strong>encrypted</strong> repo <strong>and</strong> the data itself is being pushed to some <strong>external server</strong>. Data is being encrypted using my private GPG key. From the server I could then replicate the repo+data stuff to some <strong>cloud</strong> provider like <em>AWS</em>, <em>DropBox</em> or whatever. </p>
+<p>Additionally one could push the git repo to GitHub in an encrypted form - without the data itself. It will then only contain the git information (symlinks) but no data (annexed data). </p>
+<h2 id="ed81a9ba9f3286a026a8e74a46e28398">Using ownCloud with git-annex</h2>
+<div class="highlight"><pre><span class="cp">{%</span> <span class="k">blockdiag</span>
+    <span class="nv">blockdiag</span> <span class="o">{</span>
+     <span class="nv">C</span> <span class="o">[</span><span class="nv">label</span><span class="o">=</span><span class="s2">"ownCloud client"</span><span class="o">,</span> <span class="nv">width</span><span class="o">=</span><span class="m">192</span><span class="o">]</span><span class="p">;</span>
+     <span class="nv">S</span> <span class="o">[</span><span class="nv">label</span><span class="o">=</span><span class="s2">"Server"</span><span class="o">]</span><span class="p">;</span>
+     <span class="nv">Cloud</span> <span class="o">[</span><span class="nv">label</span><span class="o">=</span><span class="s2">"Cloud"</span><span class="o">]</span><span class="p">;</span>
+     <span class="nv">group</span> <span class="o">{</span>
+       <span class="nv">label</span> <span class="o">=</span> <span class="s2">"frontend"</span><span class="p">;</span>
+       <span class="nv">O</span> <span class="o">[</span><span class="nv">label</span><span class="o">=</span><span class="s2">"ownCloud"</span><span class="o">]</span><span class="p">;</span>
+     <span class="o">}</span>
+     <span class="nv">group</span> <span class="o">{</span>
+       <span class="nv">label</span> <span class="o">=</span> <span class="s2">"backend"</span><span class="p">;</span>
+       <span class="nv">G</span> <span class="o">[</span><span class="nv">label</span><span class="o">=</span><span class="s2">"git-annex"</span><span class="o">]</span><span class="p">;</span>
+     <span class="o">}</span>
+     <span class="nv">C</span> <span class="o">-&gt;</span> <span class="nv">O</span> <span class="o">[</span><span class="nv">folded</span><span class="o">]</span><span class="p">;</span>
+     <span class="nv">G</span> <span class="o">-&gt;</span> <span class="nv">S</span><span class="p">;</span>
+     <span class="nv">S</span> <span class="o">-&gt;</span> <span class="nv">Cloud</span><span class="p">;</span>
+    <span class="o">}</span> 
+<span class="cp">%}</span><span class="x"></span>
+</pre></div>
+<p><code>ownCloud</code> will act as a <strong>front-end</strong> and can be used by any ownCloud client. The data itself is then managed by <code>git-annex</code> which basically acts as a <code>back-end</code>.  One can access the data using ownCloud but you there are some restrictions:</p>
+<ul>
+<li>already annexed data can't be deleted</li>
+<li>you can add files/folders and delete them only if these weren't added to the git-annex repo yet</li>
+</ul>
+<p>That means: Newly added data (but not committed to the repo) can be deleted by the client which added the data. In this case old data can't be deleted. You'll have to work with git-annex to do that.  </p>
+<h2 id="d7f2615c71a1567cc13cf3a7f7de0aea">Encryption</h2>
+<p>One the important constraints before pushing my backups into the cloud was <strong>security</strong>. In order to be able to encrypt my stuff <strong>before</strong> pushing into the cloud, I had to</p>
+<ul>
+<li>generate a GPG key</li>
+<li>create a special remote (see below) which offers encryption</li>
+</ul>
+<h3 id="2c56ca49f1b38b5612f05368ea264991">GPG</h3>
+<p>Generating a GPG key was the easiest step. Afterwards I had to make sure that my <strong>keychain</strong> was available <code>git-annex</code> for a specific period of time. Here are my configuration files:</p>
+<div class="highlight"><pre><span class="nv">$ </span>cat ~/.gnupg/gpg.conf <span class="p">|</span> tail -n 3
+
+use-agent
+pinentry-mode loopback
+</pre></div>
+<p>and then the GPG agent configuration:</p>
+<div class="highlight"><pre><span class="nv">$ </span>cat ~/.gnupg/gpg-agent.conf
+
+pinentry-program /usr/bin/pinentry 
+default-cache-ttl 180000
+max-cache-ttl 864000
+allow-loopback-pinentry
+</pre></div>
+<h3 id="d2ea7355f284e66a6a7c9398c31ab097">Keychain</h3>
+<p>Then I've found <a href="http://www.funtoo.org/Keychain">keychain</a> which helps you manage your SSH and GPG keys in a secure manner. Adding this to your bashrc/zshrc/whatever</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">eval</span> <span class="sb">`</span>keychain --inherit any --eval --agents ssh,gpg id_rsa_backup xxx<span class="sb">`</span>
+
+* keychain 2.8.2 ~ http://www.funtoo.org
+ * Inheriting ssh-agent <span class="o">(</span>7268<span class="o">)</span>
+ * Inheriting gpg-agent <span class="o">(</span>3528<span class="o">)</span>
+ * Known ssh key: /home/cyneox/.ssh/id_rsa_backup
+
+ * Known gpg key: xxxx
+</pre></div>
+<p>will <strong>cache</strong> your GPG and SSH keys to a specific time of period. </p>
+<h1 id="86b4c8855c3292c87e08cdf663587434">git-annex reference</h1>
+<h2 id="0b606fbba130092d943e6d80336ede3e">Create git repo</h2>
+<div class="highlight"><pre><span class="nv">$ </span>git init
+</pre></div>
+<h2 id="d3aaf80f068177cb23f623b63679a9fc">Create git annex repo</h2>
+<div class="highlight"><pre><span class="nv">$ </span>git-annex init &lt;name&gt;
+</pre></div>
+<h1 id="cb51e1639a206a1d512b751337b33816">Add remotes</h1>
+<h2 id="9e327b1b587eb0eaa3c32dc62f0fa289">Create bare git repo on the server</h2>
+<div class="highlight"><pre><span class="nv">$ </span>git init --bare oc-encrypted 
+</pre></div>
+<h2 id="b4a3c04193a350cd0d8dbc5d13d4b6dc">Add special remote  (ssh+rsync)</h2>
+<div class="highlight"><pre><span class="nv">$ </span>git-annex initremote oc-encrypted <span class="nb">type</span><span class="o">=</span>gcrypt <span class="nv">gitrepo</span><span class="o">=</span>ssh://backup.ext/home/backup/oc-encrypted <span class="nv">keyid</span><span class="o">=</span>xxxx
+</pre></div>
+<h1 id="33f63cb323621dec81829d79ab0c93d4">Synchronize data</h1>
+<h2 id="8d5e5f196db3155b47c559ad14fb3d26">Sync only git repository to ssh remote</h2>
+<div class="highlight"><pre><span class="nv">$ </span>git-annex sync oc-encrypted
+</pre></div>
+<h2 id="8de1f458ce22dac9cbd859153273a790">Sync git repo + content to ssh remote</h2>
+<div class="highlight"><pre><span class="nv">$ </span>git-annex sync --content oc-encrypted
+</pre></div>
+<h1 id="231cf4c70d866b616c21baddaeed0696">Troubleshooting</h1>
+<h2 id="4bb70816ef968866a3b23681d9c78594">Find broken symlinks</h2>
+<div class="highlight"><pre><span class="nv">$ </span>find . -xtype l
+</pre></div>
+<p>or</p>
+<div class="highlight"><pre><span class="nv">$ </span>find . -type l -! -exec <span class="nb">test</span> -e <span class="o">{}</span> <span class="se">\;</span> -print
+</pre></div>
+<h1 id="5fd7d46627f07e51bc89e14675c4ef85">Garbage collection</h1>
+<h2 id="22600ffc31d53ebcb415e694062b1ab9">Delete unused (annexed) data</h2>
+<div class="highlight"><pre><span class="nv">$ </span>git-annex unused 
+unused . <span class="o">(</span>checking <span class="k">for</span> unused data...<span class="o">)</span> <span class="o">(</span>checking master...<span class="o">)</span> 
+  Some annexed data is no longer used by any files:
+    NUMBER  KEY
+    <span class="m">1</span>       SHA256E-s1048577--dd8a6196a5a42dc394ed277191024ba51149167f2afd577557e29d4495ce107b.this-is-a-test-key
+    <span class="m">2</span>       SHA256E-s11--1fd9176b4dc46b02de28fc850c160d9d0bf71ebd3cddac52b83b288d73645d89
+    <span class="m">3</span>       SHA256E-s1048575--b877cbd76972eabf53837edf24af92f3567ff9dc6cc42c420f5ebbcb911d0ad5.this-is-a-test-key
+    <span class="m">4</span>       SHA256E-s2097152--be41ea1dc3c13e45848717d213bf64d11171f221b86be4b91c56baa17193ee6e.this-is-a-test-key
+  <span class="o">(</span>To see where data was previously used, try: git log --stat -S<span class="s1">'KEY'</span><span class="o">)</span>
+
+  To remove unwanted data: git-annex dropunused NUMBER
+
+
+  Some partially transferred data exists in temporary files:
+    NUMBER  KEY
+    <span class="m">5</span>       GPGHMACSHA1--5b029d5db5dde1c7e12e347580e732c00de22f6e
+
+  To remove unwanted data: git-annex dropunused NUMBER
+
+ok
+</pre></div>
+<p>Now you can <strong>drop</strong> the unused data:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git-annex dropunused 1-4
+</pre></div>
+<h2 id="b2a1a54dd06bbf93ce5e7fd283ea1e76">Delete unused remote</h2>
+<p>First you'll have to mark the repo as <strong>dead</strong>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git-annex dead &lt;remote name&gt;
+</pre></div>
+<p>Then you'll have to <strong>forget</strong> the <strong>dead</strong> repo:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git-annex forget --force --drop-dead
+</pre></div>
+<p>And finally you can <strong>remove</strong> the remote using <code>git</code>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git remote remove &lt;repo name&gt;
+</pre></div>
+                </div>
+<hr/>
+<div style="float:left;">
+	Prev: <a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis" align='left'>
+	 Disect Android APKs like a Pro - Static code analysis
+	</a>
+</div>
+<div style="float:right;">
+    Next: <a href="http://blog.dornea.nu/2015/11/06/advanced-inter-vlan-switching-using-cisco" align='right'>
+	 Advanced inter VLAN switching using Cisco
+	</a>
+</div>
+</p>
+
+                <!-- Add comments -->
+<div id="content-comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname="dorneanu";
+				var disqus_identifier = 'distribute-your-backups-using-git-annex';
+			var disqus_url = 'http://blog.dornea.nu/2015/06/16/distribute-your-backups-using-git-annex';
+
+		var disqus_config = function () {
+			this.language = "en";
+		};
+ 
+        
+        (function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div> 
+            </div>
+            <div class="niu2-right-container col-md-2">
+                <div id="niu2-sidebar-meta" class="niu2-sidebar">
+                    <div class="niu2-sidebar-label"><i class="icon-calendar"></i>Published:</div>
+                    <div class="niu2-sidebar-value">2015-06-16 00:00</div>
+                    <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
+                    <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
+                    <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>3</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/backup/">backup</a><sup>1</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/git/">git</a><sup>1</sup></div>
+                </div>
+
+                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                    <div class="niu2-sidebar-label">
+                        <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>Table of contents
+                    </div>
+                    <ul id="niu2-sidebar-toc-list">
+                        <li><a href="#content-heading">Distribute your backups using git-annex</a></li>
+                        <li><a href='#c076e4fd1559721e171432e66b70a487'>Motivation</a></li><li><a href='#47d9ff00142f535bb764ab3f67bfa648'>Backup setup</a><ul><li><a href='#ed81a9ba9f3286a026a8e74a46e28398'>Using ownCloud with git-annex</a></li><li><a href='#d7f2615c71a1567cc13cf3a7f7de0aea'>Encryption</a><ul><li><a href='#2c56ca49f1b38b5612f05368ea264991'>GPG</a></li><li><a href='#d2ea7355f284e66a6a7c9398c31ab097'>Keychain</a></li></ul></li></ul></li><li><a href='#86b4c8855c3292c87e08cdf663587434'>git-annex reference</a><ul><li><a href='#0b606fbba130092d943e6d80336ede3e'>Create git repo</a></li><li><a href='#d3aaf80f068177cb23f623b63679a9fc'>Create git annex repo</a></li></ul></li><li><a href='#cb51e1639a206a1d512b751337b33816'>Add remotes</a><ul><li><a href='#9e327b1b587eb0eaa3c32dc62f0fa289'>Create bare git repo on the server</a></li><li><a href='#b4a3c04193a350cd0d8dbc5d13d4b6dc'>Add special remote  (ssh+rsync)</a></li></ul></li><li><a href='#33f63cb323621dec81829d79ab0c93d4'>Synchronize data</a><ul><li><a href='#8d5e5f196db3155b47c559ad14fb3d26'>Sync only git repository to ssh remote</a></li><li><a href='#8de1f458ce22dac9cbd859153273a790'>Sync git repo + content to ssh remote</a></li></ul></li><li><a href='#231cf4c70d866b616c21baddaeed0696'>Troubleshooting</a><ul><li><a href='#4bb70816ef968866a3b23681d9c78594'>Find broken symlinks</a></li></ul></li><li><a href='#5fd7d46627f07e51bc89e14675c4ef85'>Garbage collection</a><ul><li><a href='#22600ffc31d53ebcb415e694062b1ab9'>Delete unused (annexed) data</a></li><li><a href='#b2a1a54dd06bbf93ce5e7fd283ea1e76'>Delete unused remote</a></li></ul></li>
+                        <li><a href="#content-comments">Comments</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="niu2-toolbar">
+                <ul class="list-unstyled">
+                    <li><a id="niu2-toolbar-ctrlsidebar" href="#" title="Hide Sidebar"><i class="icon-3x icon-hide-sidebar"></i></a></li>
+                </ul>
+                <div id="niu2-toolbar-showsidebar" data-title="Show Sidebar"></div>
+                <div id="niu2-toolbar-github" data-repo=""></div>
+                <div id="niu2-toolbar-bitbucket" data-repo=""></div>
+            </div>
+            <div id="niu2-toc" data-style="fixed"></div>
+        </div>
+
+        <div class="niu2-footer">
+            <div id="body-footer" class="col-md-6 col-md-offset-2">
+                <hr/>
+                <p>
+                    Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
+                    <a href="https://github.com/mawenbao/niu-x2-sidebar">theme</a> built with <a href="https://github.com/twbs/bootstrap">Bootstrap3</a>
+                    by <a href="https://blog.mawenbao.com">Ma Wenbao</a>, icons by 
+                    <a href="https://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
+                </p>
+                <p>
+                    © 2008 - 2016
+                    <a class="niu2-footer-link" href="http://blog.dornea.nu">Victor Dorneanu</a>
+                </p>
+                <p class="niu2-icons">
+                    <a class="niu2-footer-icon" href="https://pgp.mit.edu/pks/lookup?op=get&search=0x18F1AD46FB05E1B7" title="my public key">
+                        <i class="icon-key icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="mailto: no-spam ÄATT dornea DOT nu" title="my email address">
+                        <i class="icon-envelope-o icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="http://github.com/dorneanu" title="my github page">
+                        <i class="icon-github-alt icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="/feeds/rss.xml" title="subscribe my blog">
+                        <i class="icon-rss icon-lg"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            var _gaq=_gaq||[];
+            _gaq.push(["_setAccount","UA-7161767-3"]);
+            _gaq.push(["_trackPageview"]);
+            (function(){
+                var b=document.createElement("script");
+                b.type="text/javascript";
+                b.async=true;
+                b.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";
+                var a=document.getElementsByTagName("script")[0];
+                a.parentNode.insertBefore(b,a)
+            })();
+        </script>
+        <div id="niu2-pygments" data-theme="github"></div>
+        <div id="niu2-lazy-load" data-loading-txt="Loading image" data-loading-icon="icon-spin icon-spinner"></div>
+        <div id="niu2-toolbar-load" data-loading-icon="icon-spin icon-4x icon-spinner"></div>
+        <script type="text/javascript" src="/js/custom.js"></script>
+        <script type="text/javascript">
+            onContentLoaded();
+        </script>
+    </body>
+</html>

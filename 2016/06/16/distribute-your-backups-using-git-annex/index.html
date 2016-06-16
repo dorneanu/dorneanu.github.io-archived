@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="networking, backup, git">
+        <meta name="description" content="Motivation Backuping a whole bunch of photos and videos might be a difficult task. Taking care of the consistency of your backups is even more complicated task. Besides that you don't want to have your backups at a single place, thus mitigating the impact of a single point of ...">
+        <title>Distribute your backups using git-annex - blog.dornea.nu</title>
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
+        <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/niu2.min.css" type="text/css" />
+        <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+		
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/bootstrap.min.js"></script>
+        
+        <link rel="canonical" href="http://blog.dornea.nu/2016/06/16/distribute-your-backups-using-git-annex" />
+        <script type="text/javascript">window.onload=function(){};</script>
+        <!--[if lt IE 9]>
+            <script src="http://blog.dornea.nu/theme/js/html5shiv.js"></script>
+            <script src="http://blog.dornea.nu/theme/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body> 
+        <div id="body-header">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="http://blog.dornea.nu">
+                            <i class="icon-home"></i>blog.dornea.nu
+                        </a>
+                    </div>
+                    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                        <ul class="nav navbar-nav">
+                            <li><a href="http://dornea.nu" title="about">
+                                <i class="icon-user"></i>about</a>
+                            </li>
+                            <li><a href="/archives.html" title="archives">
+                                <i class="icon-archive"></i>archives</a>
+                            </li>
+                            <li><a href="/tags.html" title="tags">
+                                <i class="icon-tag"></i>tags</a>
+                            </li>
+                            <li><a href="/feeds/rss.xml" title="feeds">
+                                <i class="icon-rss"></i>feeds</a>
+                            </li>
+                        <!-- category dropdown list -->
+                        <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-folder-open"></i>category<b class="caret"></b>
+                           </a>
+                           <ul class="dropdown-menu">
+                               <li><a href="http://blog.dornea.nu/category/blog">
+                                      <i class="icon-pencil"></i>blog
+                                      (107)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/notes">
+                                      <i class="icon-book"></i>notes
+                                      (19)</a></li>
+                           </ul>
+                        </li>
+                        <!--  self defined dropdown list -->
+                        </ul>
+                        
+                        <!-- right nav bar -->
+                        <ul class="nav navbar-nav navbar-right">
+                        <!-- google custom search -->
+                        <li>
+                        <div id="niu2-cse-wrapper">
+                            <div id="niu2-cse-header-box" class="navbar-form navbar-nav">
+                                <form action="http://google.com/cse">
+                                    <input type="hidden" name="cx" value="008508447409818574933:pxyxuhrgnxi" />
+                                    <input type="hidden" name="ie" value="UTF-8" />
+                                    <div class="form-group">
+                                        <input id="niu2-cse-search-input" class="niu2-cse-header form-control" 
+                                            type="text" name="q" 
+                                            placeholder="Press enter to search ..."/>
+                                    </div>
+                                </form>
+                           </div>
+                           <div id="niu2-cse-ctrl-box" class="navbar-nav">
+                            <i id="niu2-cse-search-image" class="icon-search navbar-nav"></i><span id="niu2-cse-search-text">Search</span>
+                           </div>
+                       </div>
+                       </li>
+                       </ul>
+                    </nav>
+                </div>
+            </div>
+<style>
+    #banner{
+        background-image:url("http://blog.dornea.nu//images/header.jpg");
+    }   
+</style>
+
+<div id="banner">
+    <div class="container">
+        <div class="copy">
+            <h2>blog.dornea.nu</h2>
+                <p class="intro">Hack, code and drink some țuică. Personal blog of Victor Dorneanu.</p>
+        </div>
+    </div>
+</div>
+            <!-- End Banner -->
+        </div>
+
+        <div id="body-content">
+            <div class="col-md-8 col-md-offset-2">
+                <h1 id="content-heading">Distribute your backups using git-annex</h1>
+            </div>
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+                <div id="niu2-main-content">
+                    <h1 id="c076e4fd1559721e171432e66b70a487">Motivation</h1>
+<p>Backuping a whole bunch of photos and videos might be a difficult task. Taking care of the <strong>consistency</strong> of your backups is even more complicated task. Besides that you don't want to have your backups at a <strong>single place</strong>, thus mitigating the impact of a <strong>single point of data loss</strong>. </p>
+<p>I've been using <code>git-annex</code> for some years but not like a <em>pro</em> user, rather than "it just works". Meanwhile I've heard of <code>ownCloud</code> and I've liked it because one can access its data via <em>web</em>, <em>mobile client</em> or whatever. In connection with a <strong>VPN</strong> (I prefer <a href="http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids">openvpn</a>) solution you can have a <strong>secure</strong> way of remotely accessing your data from everywhere. </p>
+<p>Well this post is where the link between <code>git-annex</code> and <code>ownCloud</code> should be emphasized: Use ownCloud as your "frontend" tool for accessing the data while letting git-annex do the "backend" (aka backup) job. While this might sound like a pretty easy task, it does have some peculiarities to be taken into consideration.</p>
+<h1 id="47d9ff00142f535bb764ab3f67bfa648">Backup setup</h1>
+<p><div class="blockdiag" style="align: center;"><img class="img-responsive" src="data:image/png;base64,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"/></div> </p>
+<p>There is one <strong>centralized</strong> repo on my raspberry pi where my HDD is attached to. Usually I <em>push</em> stuff to the HDD using <code>rsync</code> from my laptop or <code>ownCloud</code> using my mobile clients. Afterwards the <strong>encrypted</strong> repo <strong>and</strong> the data itself is being pushed to some <strong>external server</strong>. Data is being encrypted using my private GPG key. From the server I could then replicate the repo+data stuff to some <strong>cloud</strong> provider like <em>AWS</em>, <em>DropBox</em> or whatever. </p>
+<p>Additionally one could push the git repo to GitHub in an encrypted form - without the data itself. It will then only contain the git information (symlinks) but no data (annexed data). </p>
+<h2 id="ed81a9ba9f3286a026a8e74a46e28398">Using ownCloud with git-annex</h2>
+<p><div class="blockdiag" style="align: center;"><img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAsAAAAEYCAYAAABSqkAwAAAxI0lEQVR4nO3dPYwkW3re+ec950RkZmX17b73znDuzCUFaSBxDYLGmitLpsC1BC5AZy1qIYvOCgTWkL2GAILr0KRorQwBImitQJMW5WkNgcZyd0aARjP38n72R31lRJzzrhERVVnVVV1Z1dldXRH/H5DdWZVZkdFdJzKefOONE+buJgAAAGAmwkOvAAAAAPA+EYABAAAwKwRgAAAAzAoBGAAAALNCAAYAAMCsEIABAAAwKwRgAAAAzAoBGAAAALNCAAYAAMCsEIABAAAwKwRgAAAAzAoBGAAAALNCAAYAAMCsEIABAAAwKwRgAAAAzAoBGAAAALNCAAYAAMCsEIABAAAwKwRgAAAAzAoBGAAAALNCAAYAAMCsEIABAAAwKwRgAAAAzAoBGAAAALNCAAYAAMCsEIABAAAwKwRgAAAAzAoBGAAAALNCAAYAAMCsEIABAAAwKwRgAAAAzAoBGAAAALNCAAYAAMCsEIABAAAwKwRgAAAAzAoBGAAAALNCAAYAAMCsEIABAAAwKwRgAAAAzEp66BV4aGZWHnodgIfk7nwQBgDMyuwDsCS5+0OvAvAgzEzubpJ8/BoAgKmj8gPMXCnFhiqwDWEYAIBJowIMzFzOOZlZCSG4mY2HQ5xqMABgqqgAAzO32WwWXddVOedYSglDFZj0CwCYrFlXgDncC0gnJyeHdV03VVU1VVU1khRCKJK0VREGAGAyZhuAOfEN6L18+fKT1Wp1vFqtjiXJzDZm5mbm7s6JcQCAyZltAJaoAAOS9Pz58x90XZekvvIbY+zMrFiPT4oAgMmZcwA2qsCA9P333/9QklJKXVVVm5RSE2PM7l6sL/+yoQAAJmXOAVjiRB9Az58//7Sqqs1yuTw5ODg4KqXErRPhCL8AgMmZ9SwQVIAB6fj4+Onp6em6aZpF13XVGIDZPgAAUzXLALy1Y6cCjNkbwu+y67o0TIVm21OhEYQBAFMzywAssVMHRl3X1cM8wKmUErV1RTi2EwDAFM02AAPo5ZzT1kUwmB0FADB5BGBg5kopQVJw9yAxPSAAYPoIwADoiwcAzAoBGAAAALMy93mAcQdXL4n7tidIbS/vPsu6bX3Gx99mPfexDAAA8GEhAONa14XLMQRefey+3P2tlnXb+hBaAQDAdQjAE3O1qrpdwTSz10Ln1edsL+MuAfWmZd72Gvf9d+363KvPv+3/56Z1pBIMAMB00AM8IdcFuJsC23XPuS6Ubld+9/G61z3/NncNzzet85vW87r/h+1l7PL/AAAAHgcqwDMxhrp9tS88lH2E0Mf+fwAAAN4OAXgG3qbX9kM79L+P9bnvz35o/xcAAOB+aIGYkDcdwt/++rYAd9NyzOy1vtg3tQ7c1Ev7ph7bfazPLut59Tl3fW0AAPB4UQGemNt6fq/2td70c9ct503h77bXvcuydn3+fcLobcvZ1+sAAIAPFxVgAAAAzAoBGAAAALNCAAYAAMCsEIABAAAwKwRgAAAAzAoBGAAAALNCAAYAAMCsEIABAAAwKwRgAAAAzAoBGAAAALNCAAYAAMCsEIABAAAwKwRgAAAAzAoBGIDMbLzrD7keAAC8DwRgYOZCCEVSMbMiSWZGCAYATFp66BX4EGxVv4DZiTF2McYcQihmRgAGAEzebAPwGHpPTk7WJycn6xcvXnz69ddf//iLL774+7/61a/+wVdfffXr33///Y+Ojo6ebTabVdd1i5zz+f+XOxlhH/78z//8N3/3d3/3bx96PaZs+wNejLFLKW0Wi8Xp4eHh848//vjvUkpNSqmNMXYhhCzJxxDMh0MAwBTNMgCb2Rhg3cw8hOAxxpxS6uq6PlutVscHBwdHTdMsJamqqk3XdVUpJRF89+/JkyffPfQ6zIGZKYTQpZTaxWJxul6vXxwcHBytVqvjuq7PUkpjJXgMwIRgAMAkzTIAj8bDvSGEnFJq67rerFar4/V6/WKz2Swlqa7rs6Zpll3XVe4e3F3uTu/0Hn3yySdfPvQ6TJ2Zje0NZRjrZwcHB0cfffTRt+v1+sUQgjcppTaEkM3MCb4AgKmadQDWRQU4p5Sa5XJ5cnh4+LJt24UkLRaLs9PT03XXdXXOOZVSCL7vwE9+8pP/8tDrMBchhDK0QTTjh71nz559e3h4+HK5XJ6klJoxAIsZIQAAEzXnAOzWK0PrQ7NarY67rktS3/ZweHj4Yqz+5pyjpEALxP59/vnnP3vodZiDoaJbhnafdmz3OTw8fHl4ePh8qAI3KaVurBiLEAwAmKA5B2Bt9/9WVdWsVqtjSUopdcvl8qRpmkXXdWms/tL68G58/vnnP3/odZgLMytbVeCuruvNcrk8Wa1Wx6vV6riqquZKHzAAAJMz2wA8ngg3hOBSVVUj9YeIq6raHBwcHI2V31JK3Kr80hi5Z5999tkvHnodZuL8pLYQQh4rwSmlpq7rpqqqpqqqZpgOjRPgAACTNdsALF1M+D9cCEBmthn7I0spcbiZJHN3c3fSwDvw7Nmzbx56HeZiOLnNJXkIwUMIeeiBP58LeAzAVIABAFM16wA88KEiNu70S4wxj4GX4PvurdfrVw+9DnMzBtytWxnbHjgBDgAwdbMPwNsn+gw7f3P3or7qK9Hy8M7Vdd089DrM1DjVmW9fAY7KLwBg6mYfgEd97vXzEKytChgzP7xbw9XH8B5d09tLzy8AYDYIwFu2dv6Xwi+h4N2i4vgwGNcAgLkiAN+CkPDu8X8MAADeJ+a1BQAAwKwQgAEAADArBGAAAADMCgEYAAAAs0IABgAAwKwQgAEAADArBGAAAADMCgEYAAAAs0IABgAAwKwQgAEAADArBGAAAADMSnroFXg/XHLZQ68FbuDO7+ZDZHKx2QAAJmjiAditz74yySXJ5MPfF895mFXDOfccH3od5u1SyHWZ9X+7mcmHj47GhgIAmIzpBmB3G4KvyYvJPUhuLreh4jjs9dmv7yJWB0fj/dyeHO5z2SFWzb6W+y7Xc7rOA7DLzK3fdFxmxS243PpPkkYIBgBMwzQDsJ8H3SAvwb1EeU7yHOUlupchGA8BGW+UDn7whSR1J9/8WJK8PXnyLl5nH8vtTr758bi+72o9p8d8aHdws+BuIctilsXOzLMsFDcr5iIEAwAmYYIBeKj8ugd5jl66WqWrvTS1clt76ao+COd4Uf3tC1x4XfXJb/7n8f4YLNvv/va3x+9v37/t66v3r77W9vKvvvYuy9l+viT52Xc/eJt/++Rdam0wyWJ2i9lCahWrxkLdeEiNhdRIUW5W+g2FEAwAeNzMp3YCUl/9DSo5emkXnpul59O12tO159MD5c3Cc5vkXVIpQSrMhHGLxW/8k/8gSZtf/NXvXPf98bGbvt7l/tXl3+Vn33R/n/8P0xWKQiiy1FmsOsXFxuLqRNXq2OLq2GJ9ZqHaKMRsskIVGADw2E2sAuz9CW9ezL1Ela72fLpW8+qpNy+fefPqI2+P1spnSy9tpdLFiwDstAPforz8+U+v+/7p3/zZH5SXP//p6d/82R+sfuv3/+Tqc3e5f9PytwPyXZd50/pCY/V3+CIUhZQtVK3H5ZlVh8eqn7w0/yh5LZmF4hY7cytusT8xjtkhAACP2LQCsA+zPfTtD8lLU6s9XXvz8lk5+/aHfvbtp9o8f+rt0VplUyu3SV7C/pLvtCtj/uJn1wbK676//b3t+2NAvnr/uq8l6eSv/9Uf37bMXe7Pw32O5phkoShWnYdFY9XhsS+evbDSLIIks9R5qDYWUiMPWeZFbiaahgAAj9i0WiDO2x+65Hmz8uboadl892t+8tVn5eSLn+jkyx/56befqn1x6N3JUqWp5CX0U6PtoxViegF4/U//3T+7+r3jv/y9v7j6/eO//L2/uO5nxu+P37vuZ69b/nWvvf2zV++/aV1v+zdOx1235VBkQwAOdWvp4EzV0yNbffqtDj77u3Dw41/Zwa99GRaffGX14QuLi1OF1NEGAQB47KYXgL0E965Sd7Yum5cf+9nXn5WjX/66H/3i7/nRLz/30y9/oM33T9Udr1Q2lZcuDVXjPawAoWAXh//TX/8PNz129O//8X98n+syLXfclq2fDdBC6hQWrdL6VIuPX9jqs2/s8PNf2uFv/Ndw+Pl/s+UPvwyLj75XWh6bpdYsEIABAI/atFogejYEYZPn6LlNymdLb4/Wal8cavP9U99890zdq5W6s4W8S334JQC/L0f/5z/6fw7/5//3v7vu+zr7+pOHWKdpuOuHWZPM5JY6peVGebMwSUqrM2+fri2fLT23yTxH92LmbjKafwEAj98UA7B0fgGMHOVd6k9429TenSzVHa/UvVqpebVWPqtU2iT5nvqACcBvpX25fuhVeNzuEYBlRaHq+u1AUlxsvDtZWtnUXtrKvEvDlIFbF48BAOBxm2oAvjghrpSg0kXlNqk0lcqmUne2UD6rlM+WKm107etEOALwrl796UdfP/lfXv5w+2vPp4uHXKfH7+4B2BSKPPfvA121ULWpVJqq31662E8V6MP2BADANEwwAI/tDGMYGOb69f7mpRvmAG5TH37bdPEz24vxe5wURwC+N28nOBbft1sCsFm58g25LFiRZDH1R0u6ZMO2cr7tnC97X61CAAA8rImHju1AMJ7odv53OK/8+vYMEPcJvtsvsgfnJxhtBeoJnnT06t+sv3vyz48/efVv1t899Lq8V5dOPB3u7+Vk1FuWcf6hbgzCLlkorhJMHq5sH7svFwCAR2baAdiv3ikXO/lLN+lS8L1X9ffyK+7qyb/YPLnna03Gk39+POsT31796eF3MrdhTmq7fxje4efMysVYt/LatnBpSkC/9BcAAFMx7QA82nUHfm3wvVMYvldU8L1MwYbHyMykkLLc5crR5EE2tuzcNQjf9Pyt1odxjL/WDnHd4u726gAAPBbzCMC3uhpy36oNYncTbGvA3ZWwOjWVaP2sJbGfdWG47ac1Yms8bwdfD5e/BgBgHgjAo/Pq73sMvxbze3ktfNBKXB+bd9HUVVba2rytvIzl3H2F4NEQet3DTlVgAAAmiAB8a7/vO2qBsJBlgQow1NjhSbS2imqyKXpwk8lNxV0qV07SfJMdWiBe+xEPMhGEAQCzQgB+o3dUDTZzKRQqwJCkUz88raxtK9vUKYSiIgUrwcZeYLtPP/A2Wh0AANhGAL7E9zUd2i3MXVbMEgEYetUdbJaxzcsQs0yqQgmuHM1zdHXRZP72U5Fth2ACMQBg3gjAD8FCMYvZqQBD0ouz2rvaWlVSCLkJapOpad1ibRazVOLubRAAAOA2BOBd7TY38O09vWYu769B684sEJCen4YoVSWZ5yqlnCx1UcndzU0Kw2WId5gf+MrjnOQGAMC1qCo9BDOXhSKLBBToxYnS8cbsrIvqVOViqbjFThZLP074oAQAwD4RgN+7i8scO32YkHTcKJ22FtoSPJdYimJxhdKPj2suiw0AAN4KAfgBuMslc6ZBgySdNR6brNAVKbt5cSt+Pj7M+/ECAAD2hR7ge7u2J3iHoOKSyfytz+rHVHRZMWeFXMyKK8hM7maS5HKTyfoe9Fv70AnKAADsgArw+0Y/J67ILssuFZdcur7ey7gBAGBvCMAPxtyMIjCkUtwkM+9ne5C7dDE+CL4AAOwbARj4ALiPOZcPRQAAvGv0AO9LP0/w7dU6d5c8yP0tL2+L6fDxZsOcv6G/7zaMk4vbNub5BQDgXgjAeFBX20AuKqFvv7y3XRYAAJgmAjDem+vC7hhS99UP7e57WxYAAJgmAjBudbWqOn493r8aOq8+Z3sZdwmoNy3zttcAAAB4E06Ce2fGeVtvu33YrguZN7UWXPec60LpduV3H6973fMfGbu4+Xh7dGMFAIDHggrwO3PTCUpWLt8erzF0Unl9a35xG6c+uzpOrEiKD7uaAABMA1Ul3MvbVFrNjNAMAAAeDAEYb3RdD+91j98WiG9aztUwPH590/Ova624qeWCkA0AAK5DCwRudVvP7/bjN92/aTlvCs63ve5dlgUAADAiAO+LWdnpsrVmZetGYoO2zoEbLoasfiyZ+flYkRVK2gAA7ActEAAAAJgVAjAAAABmhQAMAACAWaEH+N6um8N3l57e6cwDjL3Zngd4uOmaeYBv6wF2eoQBANgBFWAAAADMCgEYAAAAs0IABgAAwKzQA7wr26Vf907zALtM9ABjNMz7K23NEV3O5wLebR5geoABANgBFWAAAADMCgH4ku0qLzM0YEoY2wAAjAjAb0RQwBQwjgEA2EYPsFmR+xs+CNwlPDAPMO5lmPvXvW/jNb9mDuAd5gG+Rw/wTr3tAABMCxXg0XkQIBDg/Ts/v813+Az1dq9UhhdknAMAZosKsKQ+FGxXgbfDwZuqw2/DzZ0rd0EKoa/+Wn81uCEL9+PD9nJ1t5vCLiEYADBP8wjAu0aIsSrmN4XhWxdwe/nOdTGt1bDs22e3wpTFYB5DH4StHwyvtz+4fIexePtAukvll2EJAJioaQdgu3onlL6N8urNdREuPNz/8PCO8wBLbsOcr9/829/+T6f+5OhVd3j2zenCv3wZ6y+/L6uvXnYHz4/ywfFZXmzaUnVZMZeLYO7v/FA59mX7A04MVlJUXlShXS/j5tlhPElBOUYrMRQP5qWfEliSSWbmrvMPTbe+1I5rtD0jxOWbmaRQLh7bfakAADwW0w7AlwLpuHM//7uYQnFZkIXSh2DpPBy88cS4XV7vxucU6y9y4Op7IDyYFIOUgryO6pZ16A4WsW07bSR5ipa77MFdgeD7eJmZzFRStDIE4OZgEdtlHbo6qktBHoMsmGTD+ND4Ycn3EIBf+2DXbw+mMF5oQ5e2k4vnMegAAJMywQB8Xs0adtqh9JXf/mYhdW6pU6g6eU5WJFcJFwH4fDH3qALvVAF2WZWlmM1SMQslyDwGeRWtrOqg9ULNppNJ5lUKXduV2GUPLpm7y52TFx8bMxUzk/UfaEqVQj5YhPbJKmzWi9CsauUqltIHYHNTKGapSDHLqqz+R28Zk3ftFx7Cb6iyQtXJUmchdeO2cr7t9M/1i20LAIDHbYIBeGDqd9ghFIWUFatOoW4VFq3ScqPS9v92i8nkrwfg+73ojgE4ZoWqtVC1wVKJFnNSyKs6dusS1RZzmedl7e1pU1Lf/iArnDT36AXrP+ykqLyqQ3dQW/v0wLr10ttV7UohKIaYg6dioWpNi6QSJEtZt/7+7x6AJSsKVae47LeLsGgV6rbfXlJWCH3l2faygQAA8EGYagDu51W1mPuqVtV6WDSWDs48rU+VNwtJUlct5F3qp556TwFYkkLMbqm1sGgUlptoi7ZW3S1Dag+VikJsq0rxrFVsOg9d9pBdkowWiEes7wX2Ek1K0UqdrCwr5fVC+bDOZVkr1KlWVG7leWNFwUty865SyfH2V7hHADaTLHVKy43Sk1Ol9amlgzOFRWOhamWpk8U8jG0GHwBgEqYYgF1mbhbcLWaLVedxeWbV4bFXT4+0OF2aJMXFRtWm8tIlyfc0/+qOAbivAncW6jaExUa22CQtmmVVN6qSp0X05UrWdLJc+ltxmTvHnx87M3kweez7fb1O8mWSL1O2ZeoshVRHpRy8zlY2rZemkud0e/VXunMAHnp9LaSuPzKyPtXi4xeqnh5ZdXisuDyzWHWymM2CywjBAIBpmF4ANpO5uVvIFlLrcbGx6vDYF89eWD5bSpLS6sy7k6VKU5mX0Iffsoe+2l0DsGQWsyvmEFIrq9taqTGvciyxVNnKyoNyMeXiGsLvxQ/jkep/iWZSH4JNMbiSFdXRQwo5VNbGoK4O3lQqXRWUozzH3WLnXSvAw6woFopC3Vo6OFP19MhWn36rxbMXfQhebCykVhayyfz2i9EBAPDhm14A3m5/iFVjcXWi+slLK83CJVlcnnn7dG1lUyu3SX7NCXD3doez5fsqdXGFHC1mU39LHkoq8uLmxc28nzdYw8lvpI9HzkxuZpK7zGTB3IO5pSALVkJQjmPoNZWo/gPajr/3+/SIDwE4Vp3CorHq8FiLZy9s+em3Vj95aXF1olg1tEEAAKZkWgHY5HIzmZWhxaDxanVs/lEKkjzUG6+evLB8tvTSVipdvKj8+nvetVt/SNlVZMGjggdZKW4lSjov+u6rOwMflPMZxySZvJ991zz0J2QWkxcz0xB+38HJj3b+h6T+RFELVauhXcjqJy+t/ui5qtWxhbqRxe58LmJOiAMAPHLTCsAymdzdgpt59pAai6tjryWz1CmtTiw/XXhuk3mXVErYT+vDvY1XPOjPbTMrwYfvS331VxIXJJgQv3ynnxlt6xLI7mG8FPLwyec9/NZDUQhFljqLVae42FhcnahaHVtcHSukxixkWRgu18xABAA8bhMLwBou7GY+zPnbSJJZKB6qjeXVkZeuMh/6Ks/TiD9wTcuGYq+P98eE0X//vARM8Hj8xuD72mUKXf3hi/HLd//L7qvAFx+yLGZZzBZSq1g1FupGITUWUtPPC2w04QAAJsF8inPLupv3FbQgL8G9xP5M+hzlJboXG0Lvuzm8/PbOq2xMezZdFyH4fVV6b1wTH+bN9n62h5CHMNwNld8is2Jj2w4AAI/cNAOwNITgIeB66cOwzoPx1iWt2J9j7s7fAvopBPurvnnfS99fgNCGxx5yLQEA2JfpBmBJY2vDEIQl6Zq+SvbpmLtLbwHjVGeu4frLl1slAAB4/CYegEd+vhsHsCPjhDcAwDRN7yS4azF1EwAAAHoPOQUYAAAA8N4RgAEAADArBGAAAADMCgEYAAAAs0IABgAAwKwQgAEAADArBGAAAADMCgEYAAAAszKTC2FwJTjgzrgSHABgoiYegN367CtTfyE4kw9/XzznYVYN+GBcCrkus/5vNzP58NHR2FAAAJMx3QDsbkPwNXkxuQfJzeUmd9P5Xp/9+q5idXAkSbk9OXzbZbztct71MuflPAC7zNz6TcdlVtyCy63/JGmEYADANEwzAPt50A3yEtxLlOckz1FeonsZgvEQkHEn3p48ue/Pdiff/Dgd/OCLt13Ou17mvJgP7Q5uFtwtZFnMstiZeZaF4mbFXIRgAMAkTDAAD5Vf9yDP0UtXq3S1l6ZWbmsvXdUH4Rwvqr99gQu7GcNm+93f/vb4veqT3/zP4/1dvi9JfvbdD8bHx8euPn/78avPvfr8cZlv+++bjUutDSZZzG4xW0itYtVYqBsPqbGQGinKzUq/oRCCAQCPm7lPrALaV3+DSo5e2oXnZun5dK32dO359EB5s/DcJnmXVEqQCjNh7GjxG//kP0jS5hd/9Tv7uD/a/OKvfmefy3+3/wtTFIpCKLLUWaw6xcXG4upE1erY4urYYn1modooxGyyQhUYAPDYTawC7P0Jb17MvUSVrvZ8ulbz6qk3L5958+ojb4/WymdLL22l0sWLAOy0A++ovPz5T7fvn/7Nn/3B6rd+/0+2g+11z7n6fUk6/Zs/+4Or33vTcu5yH29g53+oD8ApW6haj8szqw6PVT95af5R8loyC8UtduZW3GJ/YhyzQwAAHrFpBWAfZnvo2x+Sl6ZWe7r25uWzcvbtD/3s20+1ef7U26O1yqZWbpO8hP0l33lUxvzFz366ff/gH//v/1KSTv76X/3xeP9Nz9le1uq3fv9Prn5v++ury7nL/fm5z9EckywUxarzsGisOjz2xbMXVppFkGSWOg/VxkJq5CHLvMjNRNMQAOARm1YLxHn7Q5c8b1beHD0tm+9+zU+++qycfPETnXz5Iz/99lO1Lw69O1mqNJW8hH5qtH20Qkw7AK//6b/7Z9tfH//l7/3Fdd/ffnz7savPv+7x617juue/6bXHx+bnrttyKLIhAIe6tXRwpurpka0+/VYHn/1dOPjxr+zg174Mi0++svrwhcXFqULqaIMAADx20wvAXoJ7V6k7W5fNy4/97OvPytEvf92PfvH3/OiXn/vplz/Q5vun6o5XKpvKS5eGqvEeVoBQgId0x23Z+tkALaROYdEqrU+1+PiFrT77xg4//6Ud/sZ/DYef/zdb/vDLsPjoe6XlsVlqzQIBGADwqE2rBaJnQxA2eY6e26R8tvT2aK32xaE23z/1zXfP1L1aqTtbyLvUh18CMB67u36YNclMbqlTWm6UNwuTpLQ68/bp2vLZ0nObzHN0L2buJqP5FwDw+E0xAEvnF8DIUd6l/oS3Te3dyVLd8Urdq5WaV2vls0qlTZLvqQ+YAIyHdI8ALCsKVddvB5LiYuPdydLKpvbSVuZdGqYM3Lp4DAAAj9tUA/DFCXGlBJUuKrdJpalUNpW6s4XyWaV8tlRpo2tfJ8IRgPGQ7h6ATaHIc/8+0FULVZtKpan67aWL/VSBPmxPAABMwwQD8NjOMIaBYa5f729eumEO4Db14bdNFz+zvRi/x0lxBGA8pFsCsFm58g25LFiRZDH1R0u6ZMO2cr7tnC97X61CAAA8rAkG4G3bgWA80e3873Be+fXtGSDuE3y3X2QPzk8w2grUnHQ0HZdOPB3u7+Vk1FuWcf6hbgzCLlkorhJMHq5sH7svFwCAR2baAdiv3ikXO/lLN+lS8L1X9ffyK+7qyb/YPLnna2EiXv3p4Xcyt2FOart/GN7h58zKxVi38tq2cGlKQL/01xTZa1VxzI3f//3+0WP8Y87jf9oBeLTrDvzagXCnwXGvqOB7mYINj5GZSSFlucuVo8mDbGzZuWsQvun5Wzu5cYzvsuObybBk+5svM9MwFaiPX88N43++5j7+5xGAb3U15L6nT0S0NUBSCatTU4nWz1oS+1kXhtt+WiO2xvN28PVw+WtgfkopNnB3l/G+jBmZ8/gnAI/Oq7/vMfxazO/ltfBBK3F9bN5FU1dZaWvztvIylnP3FYJHQ+h1DztVgYGJyzknMyshBN/a+fvcqmGYpzmPfwLwrf0v76gFwkKWhdl80sLNGjs8idZWUU02RQ9uMrmpuEvlykmab7JDC8RrP+JBJoIwZmuz2SxSSl2MMYcQSgihDDt/3p8xeXMe/wTgN3pH1WAzl0KhAgxJOvXD08ratrJNnUIoKlKwEmzsBbb79ANvo9XhOpO6DDzu7eTk5LCu66aqqqaqqkaSQghF0qQPBzP+Ic13/EsE4Ct8X9Oh3cLcZcUsEYChV93BZhnbvAwxy6QqlODK0TxHVxdN5m8/Fdl2CCYQc+IPRi9fvvxktVodr1arY0kys42Z+VZP5EOv4t4x/jGa4/gfEYAfgoViFrNTAYakF2e1d7W1qqQQchPUJlPTusXaLGapxN3bILArKmCQpOfPn/+g67ok9ZWvGGNnZuOZQZNNiox/SPMd/xIBeHe7zZV3+2Axc3l/DVr3aQ8u7Ob5aYhSVZJ5rlLKyVIXldzd3KQwXIZ4h/mBrzzOSW5vYlTBIEnff//9DyUppdRVVbVJKTUxxuzuxfry1xQHCuMfkmY7/iURgB+GmctCkUUCCvTiRKkK1i5i1CpVuVgqrtjJYunHifl034IeFBUw6Pnz559WVbVZLpcnBwcHR6WUOFRHJ73zF+MfmvX4F4dV37uLyxz7zPsw0TtulE5bC20JnkssRbG4QunHxzWXxcZeUAGDJB0fHz89PT1dN02z6LquGgPA1MfH1P992M1cx79EAH4Q7nLJnGnQIElnjccmK3RFym5e3Iqfjw9zp/67V1tv7FTAoGHnv+y6LuWcYynFtipgkwuKjH9sm9v430YLxL1d2xO8w0hxyWT+1mf1Yyq6rJizQi5mxRVkJvdxIkY3mazvQb+1D32671R7NuU3ddxN13V113VVzjmVUqL6T53nO/8pngXP+MdojuN/RAX4fZv4WZW4u+yy7FJxyaXr672MG+CdyDmPla/g7syOgFmZ8/gnAD8Ym8WlBnG7UtwkM/fxkJN0MT4IvsC7VEoJkoIPM/3MKQAAcx7/BGDgA3BxSHI27z3AB4O+WMzZXMc/PcD70n96ur1a5+6SB7m/5eVtMR0+3myY8zf0992GcXJx28Y8v7cys+K7zeENTA7jH7gZARh3NrZubJ9Icd33gA+BDR8UCAKYo7mO/6sthm+7b9peHvu5aSAA487Y+PEYjUFg6Hl79Pa9g8e0TW38b7tuWxi3h32dazP1GRHmiACMa21XdG/a6K97g9m1Enz10/R1r/em+zct57ZlAyGEIklt29YPvS73dXVMX7cNXvf4TdvzddvJXZbDtvV4TGH8b9tlX3XTz1z3c7dtC5gOAvA7c9PhpqEHWDvN6/og7hI67/K8655rZjKze9+/bjnbjz2G8Pu//fH/9d/f80fjftbgTNIrSV9J+v8k/cf9LPYDV1VV89Dr8LZu2lHftE3sumO/y3Ieezj4wz/8w//1odfhIUxh/F+1y/v8m/Y/uzwf00EAfmduOkHJyuXbdN30ZnR1J/q2dq1ofaj+9b/8H//vn3wcTn78tLQ/Wjf2tHq1WtnLdV1ePbHuaK1ytjTvKpV8OfC+fhKcv/nx7a+t9I9bkVWdxdVG1UfHWv7wOzv8jS/to3/4X+zpP/xZ+OinPw/rn/zClp98Y9XBKwtVYxbzY5mX2N5womDbtvVjDQFXA+y4Ex+9advaft5Nwfguy/nQt6/b/NEf/dH/8fnnn//s888///lnn332i2fPnn2zXq9f1XXdhBCy2eOdsnKq4x/YBwIw9u624LnvT9TXvc7VQ8KPfSeN/RkmfLfhqkeP0nVHO7bta7yz3UzPFMb/TR5L0QMfhg/yEDwe1k2HR69Wbd90SPUuh6L2sZ7b67JrOwbmxd3PJ3ufguu2v9u2iav3r/vZ+y4HH7apjf/RTfuem/ZXNz3/pn762/rs8XhRAca13nQizG0/s+uy3/T9Xe7ftKw3PR/zM+Wd/q6P3Wfbvc9y8OGZ4vi/6q5jdZd90K7LwuNFAN6Xvp9yl7Jn2bp9kFvVTRUivCs23oaLIasfS2Z+Plb6nl3KDnc0h50/cBPGP3AzAjBeQ+AFAABTxqdDAAAAzAoBGAAAALNCC8S9XTe/4i49vfOZBxg784ubDTeV18fKbT3ATo8wAAA7oAIMAACAWSEAAwAAYFYIwAAAAJgVeoB39YZrqm896S7zALtM9ABjNMz7K23NEV3O5wLebR5geoABANgBFWAAAADMCgH4ku0qLzM0YEoY2wAAjAjAb0RQwBQwjgEA2EYPsFnRG6+XfpfwwDzAuJdh7l/3vo3X/Jo5gHeYB/gePcA79bYDADAtVIBH50GAQID37/z8Nt/hM9TbvVIZXpBxDgy2zi991xsg8MGZ6/inAiypDwXbVeDtcPCm6vDbcHPnyl2QQuirv9a/+QzvRf34sL1c3e2msEsIBkIIRVKx4UOh2S5H8oBpmPP4n0cA3jVCjFUxvykM37qA2weO62JaK50PuN1fApMTg3kMfRC2fjC83v7g8h3G4u0D6S6V35kMS7a/eYsxdjHGHEIoZjarACAx/uduzuN/2gHYrt4JpW+jvHpzXYQLD/c/PLzjPMCS2zDn6zf/9rf/06k/OXrVHZ59c7rwL1/G+svvy+qrl93B86N8cHyWF5u2VF1WzOUimPs7P1SOfdnewcRgJUXlRRXa9TJunh3GkxSUY7QSQ/FgXvopgSVZ/2ncdf6h6daX2nGNtmeEuHwzkxTKxWO7L/UxGX8nJycn65OTk/WLFy8+/frrr3/8xRdf/P1f/epX/+Crr7769e+///5HR0dHzzabzarrukXO+fz9ku3v8bi0/cXYpZQ2i8Xi9PDw8PnHH3/8dymlJqXUxhi7EELW+P6s6YZDxv98MP5vNu0AfCmQjjv387+LKRSXBVkoF60v11WB7/N6Nz6nDIPL1fdAeDApBikFeR3VLevQHSxi23baSPIULXfZg7sCbzyPV//pWiVFK0MAbg4WsV3WoaujuhTkMciCSTaMD41vRr6HAPzaB7t+ezCF8UIburSdXDxvUoPOzMYduJuZhxA8xphTSl1d12er1er44ODgqGmapSRVVbXpuq4qpSS2v8fLzBRC6FJK7WKxOF2v1y8ODg6OVqvVcV3XZymlsRLm5+/Rml4IYPzPE+P/dRMMwOfVrGFLDaWv/PY3C6lzS51C1clzsiK5Snit9/teV2nbqQLssipLMZulYhZKkHkM8ipaWdVB64WaTSeTzKsUurYrscseXDJ3lzsnLz42ZuoPL/UfaEqVQj5YhPbJKmzWi9CsauUqltIHYHNTKGapSDHLqqz+R28Zk3ftFx7Cb6iyQtXJUmchdeO2cr7t9M/1i21rGsbDfSGEnFJq67rerFar4/V6/WKz2Swlqa7rs6Zpll3XVe4e+u3vXZ0XgHfFzMbDu2X4XZ8dHBwcffTRR9+u1+sXQwjYpJTaEEI2M5/yjl9i/M8J4/96EwzAA1O/ww6hKKSsWHUKdauwaJWWG5W2/7dbTCZ/PQDf70V3DMAxK1SthaoNlkq0mJNCXtWxW5eotpjLPC9rb0+bkvr2B1nhpLlHL1j/YSdF5VUduoPa2qcH1q2X3q5qVwpBMcQcPBULVWtaJJUgWcq69fd/9wAsWVGoOsVlv12ERatQt/32krJC6CvPNsmzg30rADTL5fLk8PDwZdu2C0laLBZnp6en667r6pxzKqWw43/kQghlOAzcjGHv2bNn3x4eHr5cLpcnKaVmDACa/hnxjP+ZYfxfNtUA3M+rajH3Va2q9bBoLB2ceVqfKm8WkqSuWsi71E899Z4CsCSFmN1Sa2HRKCw30RZtrbpbhtQeKhWF2FaV4lmr2HQeuuwh9wcjaIF4xPpP1F6iSSlaqZOVZaW8Xigf1rksa4U61YrKrTxvrCh4SW7eVSo53v4K9wjAZpKlTmm5UXpyqrQ+tXRwprBoLFStLHWymIexPaXB59Yrw6HfZrVaHXddl6T+sO/h4eGLsfqVc44SLUiP2VDRKsPh/nY83H94ePjy8PDw+VAFa1JK3Vgx07TG/DbG/8ww/l83xQDsMnOz4G4xW6w6j8szqw6PvXp6pMXp0iQpLjaqNpWXLkm+p/lXdwzAfRW4s1C3ISw2ssUmadEsq7pRlTwtoi9XsqaT5dLfisvcJ3T8eabM5MHkse/39TrJl0m+TNmWqbMUUh2VcvA6W9m0XppKntPt1V/pzgF46PW1kLr+yMj6VIuPX6h6emTV4bHi8sxi1cliNguuiVUFtvsfq6pqVqvVsSSllLrlcnnSNM2i67o0Vr849Pv4mVnZqoJ1dV1vlsvlyWq1Ol6tVsdVVTVX+iAni/E/P4z/y6YXgM1kbu4WsoXUelxsrDo89sWzF5bPlpKktDrz7mSp0lTmJfThdx+Hd3YNwJJZzK6YQ0itrG5rpca8yrHEUmUrKw/KxZSLawi/Fz+MR6r/JZpJfQg2xeBKVlRHDynkUFkbg7o6eFOpdFVQjvIcd4udd60AD7OiWCgKdWvp4EzV0yNbffqtFs9e9CF4sbGQWlnIJvPbL0b3OIwnAg0hoFRV1Uj9IcKqqjYHBwdHY+WrlBKdDXAKzk/qCSHksRKWUmrqum6qqmqqqmqG6aAmfQIQ43+WGP9XTC8Ab7c/xKqxuDpR/eSllWbhkiwuz7x9urayqZXbJL/mBLh7u8Mnpr5KXVwhR4vZ1N+Sh5KKvLh5cTPv5w3WcPLbtEfjDJipP7nAXWayYO7B3FKQBSshKMcx9JpKVP8Bbcff+316xIcAHKtOYdFYdXisxbMXtvz0W6ufvLS4OlGsmim2QYxv8sNE8DKzzdgfV0qJw60/o9a5cM0UDCf3uCQPIXgIIQ89sOdzoY4BYOoVMMb//DD+L5tWADa53ExmZWgxaLxaHZt/lIIkD/XGqycvLJ8tvbSVShcvKr/+nnft1h9SdhVZ8KjgQVaKW4mSzou+++rOwAflfMYxSSbvZ981D/0JmcXkxcw0hN93sOOx8z8k9SeKWqhaDe1CVj95afVHz1Wtji3UjSx253MRT+uEOB8qIuObfokx5nGHz45/msYd/NatjId953IC0IDxP0OM/960ArBMJne34GaePaTG4urYa8ksdUqrE8tPF57bZN4llRL20/pwb+MVD/ojTGYl+PB9qa/+SjoPKrwNPX5++U4/M9rWJZDdw3gp5OGTz3v4rYeiEIosdRarTnGxsbg6UbU6trg6VkiNWciyMFyueToDcftEj+HN39y96HyjnNA/FleNUz359hWw5lD5GjH+Z43xP71Pd96fLOYlyHP00tUqXe2lqZXb2ktX9T2VOV6kEX/gmpYNxV4f74+/k/775yXgif2qZmkMvq9dptDVH74Yv3z3v+y+CnzxIctilsVsIbWKVWOhbhRSYyH1LRAWitnQYjRBN/U5cub79FzT2ziLnsc3YfzPB+O/N8EALMndvK+gBXkJ7iX2Z9LnKC/RvdgQet/N4eW3d15l481nui7ebB660mI+zJvt/WwPIQ9huBsqv0Vmxca2nRlh+5uuue3s74PxP12M/6kGYGkIwUPA9dKHYZ0H461LWrGBY+7O3wL6KQT7q75530vfX4DQhsceci0BANiX6QZgSWNrwxCEJemavkr26Zi7y0c8dd4X2F9/+XKrBAAAj9/EA/DIz3fjAHZk0zrhDQCA0cRmgbjJ5KZuAgAAwD1xaUMAAADMCgEYAAAAs0IABgAAwKwQgAEAADArBGAAAADMCgEYAAAAs0IABgAAwKwQgAEAADArBGAAAADMCgEYAAAAs0IABgAAwKwQgAEAADArBGAAAADMCgEYAAAAs0IABgAAwKwQgAEAADArBGAAAADMCgEYAAAAs0IABgAAwKwQgAEAADArBGAAAADMCgEYAAAAs0IABgAAwKz8/34Zy0ZEiJZiAAAAAElFTkSuQmCC"/></div></p>
+<p><code>ownCloud</code> will act as a <strong>front-end</strong> and can be used by any ownCloud client. The data itself is then managed by <code>git-annex</code> which basically acts as a <code>back-end</code>.  One can access the data using ownCloud but you there are some restrictions:</p>
+<ul>
+<li>already annexed data can't be deleted</li>
+<li>you can add files/folders and delete them only if these weren't added to the git-annex repo yet</li>
+</ul>
+<p>That means: Newly added data (but not committed to the repo) can be deleted by the client which added the data. In this case old data can't be deleted. You'll have to work with git-annex to do that.  </p>
+<h2 id="d7f2615c71a1567cc13cf3a7f7de0aea">Encryption</h2>
+<p>One the important constraints before pushing my backups into the cloud was <strong>security</strong>. In order to be able to encrypt my stuff <strong>before</strong> pushing into the cloud, I had to</p>
+<ul>
+<li>generate a GPG key</li>
+<li>create a special remote (see below) which offers encryption</li>
+</ul>
+<h3 id="2c56ca49f1b38b5612f05368ea264991">GPG</h3>
+<p>Generating a GPG key was the easiest step. Afterwards I had to make sure that my <strong>keychain</strong> was available <code>git-annex</code> for a specific period of time. Here are my configuration files:</p>
+<div class="highlight"><pre><span class="nv">$ </span>cat ~/.gnupg/gpg.conf <span class="p">|</span> tail -n 3
+
+use-agent
+pinentry-mode loopback
+</pre></div>
+<p>and then the GPG agent configuration:</p>
+<div class="highlight"><pre><span class="nv">$ </span>cat ~/.gnupg/gpg-agent.conf
+
+pinentry-program /usr/bin/pinentry 
+default-cache-ttl 180000
+max-cache-ttl 864000
+allow-loopback-pinentry
+</pre></div>
+<h3 id="d2ea7355f284e66a6a7c9398c31ab097">Keychain</h3>
+<p>Then I've found <a href="http://www.funtoo.org/Keychain">keychain</a> which helps you manage your SSH and GPG keys in a secure manner. Adding this to your bashrc/zshrc/whatever</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">eval</span> <span class="sb">`</span>keychain --inherit any --eval --agents ssh,gpg id_rsa_backup xxx<span class="sb">`</span>
+
+* keychain 2.8.2 ~ http://www.funtoo.org
+ * Inheriting ssh-agent <span class="o">(</span>7268<span class="o">)</span>
+ * Inheriting gpg-agent <span class="o">(</span>3528<span class="o">)</span>
+ * Known ssh key: /home/cyneox/.ssh/id_rsa_backup
+
+ * Known gpg key: xxxx
+</pre></div>
+<p>will <strong>cache</strong> your GPG and SSH keys to a specific time of period. </p>
+<h1 id="86b4c8855c3292c87e08cdf663587434">git-annex reference</h1>
+<h2 id="0b606fbba130092d943e6d80336ede3e">Create git repo</h2>
+<div class="highlight"><pre><span class="nv">$ </span>git init
+</pre></div>
+<h2 id="d3aaf80f068177cb23f623b63679a9fc">Create git annex repo</h2>
+<div class="highlight"><pre><span class="nv">$ </span>git-annex init &lt;name&gt;
+</pre></div>
+<h1 id="cb51e1639a206a1d512b751337b33816">Add remotes</h1>
+<h2 id="9e327b1b587eb0eaa3c32dc62f0fa289">Create bare git repo on the server</h2>
+<div class="highlight"><pre><span class="nv">$ </span>git init --bare oc-encrypted 
+</pre></div>
+<h2 id="b4a3c04193a350cd0d8dbc5d13d4b6dc">Add special remote  (ssh+rsync)</h2>
+<div class="highlight"><pre><span class="nv">$ </span>git-annex initremote oc-encrypted <span class="nb">type</span><span class="o">=</span>gcrypt <span class="nv">gitrepo</span><span class="o">=</span>ssh://backup.ext/home/backup/oc-encrypted <span class="nv">keyid</span><span class="o">=</span>xxxx
+</pre></div>
+<h1 id="33f63cb323621dec81829d79ab0c93d4">Synchronize data</h1>
+<h2 id="8d5e5f196db3155b47c559ad14fb3d26">Sync only git repository to ssh remote</h2>
+<div class="highlight"><pre><span class="nv">$ </span>git-annex sync oc-encrypted
+</pre></div>
+<h2 id="8de1f458ce22dac9cbd859153273a790">Sync git repo + content to ssh remote</h2>
+<div class="highlight"><pre><span class="nv">$ </span>git-annex sync --content oc-encrypted
+</pre></div>
+<h1 id="231cf4c70d866b616c21baddaeed0696">Troubleshooting</h1>
+<h2 id="4bb70816ef968866a3b23681d9c78594">Find broken symlinks</h2>
+<div class="highlight"><pre><span class="nv">$ </span>find . -xtype l
+</pre></div>
+<p>or</p>
+<div class="highlight"><pre><span class="nv">$ </span>find . -type l -! -exec <span class="nb">test</span> -e <span class="o">{}</span> <span class="se">\;</span> -print
+</pre></div>
+<h1 id="5fd7d46627f07e51bc89e14675c4ef85">Garbage collection</h1>
+<h2 id="22600ffc31d53ebcb415e694062b1ab9">Delete unused (annexed) data</h2>
+<div class="highlight"><pre><span class="nv">$ </span>git-annex unused 
+unused . <span class="o">(</span>checking <span class="k">for</span> unused data...<span class="o">)</span> <span class="o">(</span>checking master...<span class="o">)</span> 
+  Some annexed data is no longer used by any files:
+    NUMBER  KEY
+    <span class="m">1</span>       SHA256E-s1048577--dd8a6196a5a42dc394ed277191024ba51149167f2afd577557e29d4495ce107b.this-is-a-test-key
+    <span class="m">2</span>       SHA256E-s11--1fd9176b4dc46b02de28fc850c160d9d0bf71ebd3cddac52b83b288d73645d89
+    <span class="m">3</span>       SHA256E-s1048575--b877cbd76972eabf53837edf24af92f3567ff9dc6cc42c420f5ebbcb911d0ad5.this-is-a-test-key
+    <span class="m">4</span>       SHA256E-s2097152--be41ea1dc3c13e45848717d213bf64d11171f221b86be4b91c56baa17193ee6e.this-is-a-test-key
+  <span class="o">(</span>To see where data was previously used, try: git log --stat -S<span class="s1">'KEY'</span><span class="o">)</span>
+
+  To remove unwanted data: git-annex dropunused NUMBER
+
+
+  Some partially transferred data exists in temporary files:
+    NUMBER  KEY
+    <span class="m">5</span>       GPGHMACSHA1--5b029d5db5dde1c7e12e347580e732c00de22f6e
+
+  To remove unwanted data: git-annex dropunused NUMBER
+
+ok
+</pre></div>
+<p>Now you can <strong>drop</strong> the unused data:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git-annex dropunused 1-4
+</pre></div>
+<h2 id="b2a1a54dd06bbf93ce5e7fd283ea1e76">Delete unused remote</h2>
+<p>First you'll have to mark the repo as <strong>dead</strong>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git-annex dead &lt;remote name&gt;
+</pre></div>
+<p>Then you'll have to <strong>forget</strong> the <strong>dead</strong> repo:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git-annex forget --force --drop-dead
+</pre></div>
+<p>And finally you can <strong>remove</strong> the remote using <code>git</code>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git remote remove &lt;repo name&gt;
+</pre></div>
+                </div>
+<hr/>
+<div style="float:left;">
+	Prev: <a href="http://blog.dornea.nu/2016/05/11/the-digital-future-in-berlin" align='left'>
+	 The Digital Future in Berlin
+	</a>
+</div>
+</p>
+
+                <!-- Add comments -->
+<div id="content-comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname="dorneanu";
+				var disqus_identifier = 'distribute-your-backups-using-git-annex';
+			var disqus_url = 'http://blog.dornea.nu/2016/06/16/distribute-your-backups-using-git-annex';
+
+		var disqus_config = function () {
+			this.language = "en";
+		};
+ 
+        
+        (function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div> 
+            </div>
+            <div class="niu2-right-container col-md-2">
+                <div id="niu2-sidebar-meta" class="niu2-sidebar">
+                    <div class="niu2-sidebar-label"><i class="icon-calendar"></i>Published:</div>
+                    <div class="niu2-sidebar-value">2016-06-16 00:00</div>
+                    <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
+                    <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
+                    <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>38</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/backup/">backup</a><sup>3</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/git/">git</a><sup>3</sup></div>
+                </div>
+
+                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                    <div class="niu2-sidebar-label">
+                        <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>Table of contents
+                    </div>
+                    <ul id="niu2-sidebar-toc-list">
+                        <li><a href="#content-heading">Distribute your backups using git-annex</a></li>
+                        <li><a href='#c076e4fd1559721e171432e66b70a487'>Motivation</a></li><li><a href='#47d9ff00142f535bb764ab3f67bfa648'>Backup setup</a><ul><li><a href='#ed81a9ba9f3286a026a8e74a46e28398'>Using ownCloud with git-annex</a></li><li><a href='#d7f2615c71a1567cc13cf3a7f7de0aea'>Encryption</a><ul><li><a href='#2c56ca49f1b38b5612f05368ea264991'>GPG</a></li><li><a href='#d2ea7355f284e66a6a7c9398c31ab097'>Keychain</a></li></ul></li></ul></li><li><a href='#86b4c8855c3292c87e08cdf663587434'>git-annex reference</a><ul><li><a href='#0b606fbba130092d943e6d80336ede3e'>Create git repo</a></li><li><a href='#d3aaf80f068177cb23f623b63679a9fc'>Create git annex repo</a></li></ul></li><li><a href='#cb51e1639a206a1d512b751337b33816'>Add remotes</a><ul><li><a href='#9e327b1b587eb0eaa3c32dc62f0fa289'>Create bare git repo on the server</a></li><li><a href='#b4a3c04193a350cd0d8dbc5d13d4b6dc'>Add special remote  (ssh+rsync)</a></li></ul></li><li><a href='#33f63cb323621dec81829d79ab0c93d4'>Synchronize data</a><ul><li><a href='#8d5e5f196db3155b47c559ad14fb3d26'>Sync only git repository to ssh remote</a></li><li><a href='#8de1f458ce22dac9cbd859153273a790'>Sync git repo + content to ssh remote</a></li></ul></li><li><a href='#231cf4c70d866b616c21baddaeed0696'>Troubleshooting</a><ul><li><a href='#4bb70816ef968866a3b23681d9c78594'>Find broken symlinks</a></li></ul></li><li><a href='#5fd7d46627f07e51bc89e14675c4ef85'>Garbage collection</a><ul><li><a href='#22600ffc31d53ebcb415e694062b1ab9'>Delete unused (annexed) data</a></li><li><a href='#b2a1a54dd06bbf93ce5e7fd283ea1e76'>Delete unused remote</a></li></ul></li>
+                        <li><a href="#content-comments">Comments</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="niu2-toolbar">
+                <ul class="list-unstyled">
+                    <li><a id="niu2-toolbar-ctrlsidebar" href="#" title="Hide Sidebar"><i class="icon-3x icon-hide-sidebar"></i></a></li>
+                </ul>
+                <div id="niu2-toolbar-showsidebar" data-title="Show Sidebar"></div>
+                <div id="niu2-toolbar-github" data-repo=""></div>
+                <div id="niu2-toolbar-bitbucket" data-repo=""></div>
+            </div>
+            <div id="niu2-toc" data-style="fixed"></div>
+        </div>
+
+        <div class="niu2-footer">
+            <div id="body-footer" class="col-md-6 col-md-offset-2">
+                <hr/>
+                <p>
+                    Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
+                    <a href="https://github.com/mawenbao/niu-x2-sidebar">theme</a> built with <a href="https://github.com/twbs/bootstrap">Bootstrap3</a>
+                    by <a href="https://blog.mawenbao.com">Ma Wenbao</a>, icons by 
+                    <a href="https://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
+                </p>
+                <p>
+                    © 2008 - 2016
+                    <a class="niu2-footer-link" href="http://blog.dornea.nu">Victor Dorneanu</a>
+                </p>
+                <p class="niu2-icons">
+                    <a class="niu2-footer-icon" href="https://pgp.mit.edu/pks/lookup?op=get&search=0x18F1AD46FB05E1B7" title="my public key">
+                        <i class="icon-key icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="mailto: no-spam ÄATT dornea DOT nu" title="my email address">
+                        <i class="icon-envelope-o icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="http://github.com/dorneanu" title="my github page">
+                        <i class="icon-github-alt icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="/feeds/rss.xml" title="subscribe my blog">
+                        <i class="icon-rss icon-lg"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            var _gaq=_gaq||[];
+            _gaq.push(["_setAccount","UA-7161767-3"]);
+            _gaq.push(["_trackPageview"]);
+            (function(){
+                var b=document.createElement("script");
+                b.type="text/javascript";
+                b.async=true;
+                b.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";
+                var a=document.getElementsByTagName("script")[0];
+                a.parentNode.insertBefore(b,a)
+            })();
+        </script>
+        <div id="niu2-pygments" data-theme="github"></div>
+        <div id="niu2-lazy-load" data-loading-txt="Loading image" data-loading-icon="icon-spin icon-spinner"></div>
+        <div id="niu2-toolbar-load" data-loading-icon="icon-spin icon-4x icon-spinner"></div>
+        <script type="text/javascript" src="/js/custom.js"></script>
+        <script type="text/javascript">
+            onContentLoaded();
+        </script>
+    </body>
+</html>
