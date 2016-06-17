@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="networking, backup, git">
-        <meta name="description" content="Motivation Backuping a whole bunch of photos and videos might be a difficult task. Taking care of the consistency of your backups is even more complicated task. Besides that you don't want to have your backups at a single place, thus mitigating the impact of a single point of ...">
+        <meta name="description" content="Backuping a whole bunch of photos and videos might be a difficult task. Taking care of the consistency of your backups is even more complicated task. Besides that you don't want to have your backups at a single place, thus mitigating the impact of a single point of data ...">
         <title>Distribute your backups using git-annex - blog.dornea.nu</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
         <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
@@ -120,8 +120,7 @@
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <h1 id="c076e4fd1559721e171432e66b70a487">Motivation</h1>
-<p>Backuping a whole bunch of photos and videos might be a difficult task. Taking care of the <strong>consistency</strong> of your backups is even more complicated task. Besides that you don't want to have your backups at a <strong>single place</strong>, thus mitigating the impact of a <strong>single point of data loss</strong>. </p>
+                    <p>Backuping a whole bunch of photos and videos might be a difficult task. Taking care of the <strong>consistency</strong> of your backups is even more complicated task. Besides that you don't want to have your backups at a <strong>single place</strong>, thus mitigating the impact of a <strong>single point of data loss</strong>. </p>
 <p>I've been using <code>git-annex</code> for some years but not like a <em>pro</em> user, rather than "it just works". Meanwhile I've heard of <code>ownCloud</code> and I've liked it because one can access its data via <em>web</em>, <em>mobile client</em> or whatever. In connection with a <strong>VPN</strong> (I prefer <a href="http://blog.dornea.nu/2015/11/17/openvpn-for-paranoids">openvpn</a>) solution you can have a <strong>secure</strong> way of remotely accessing your data from everywhere. </p>
 <p>Well this post is where the link between <code>git-annex</code> and <code>ownCloud</code> should be emphasized: Use ownCloud as your "frontend" tool for accessing the data while letting git-annex do the "backend" (aka backup) job. While this might sound like a pretty easy task, it does have some peculiarities to be taken into consideration.</p>
 <h1 id="47d9ff00142f535bb764ab3f67bfa648">Backup setup</h1>
@@ -189,6 +188,32 @@ allow-loopback-pinentry
 </pre></div>
 <h2 id="8de1f458ce22dac9cbd859153273a790">Sync git repo + content to ssh remote</h2>
 <div class="highlight"><pre><span class="nv">$ </span>git-annex sync --content oc-encrypted
+</pre></div>
+<p>If you have a look at the repo <code>oc-encrypted</code> on the external server, you'll see only encrypted stuff:</p>
+<div class="highlight"><pre>% tree <span class="p">|</span> head -n <span class="m">20</span> 
+.
+<span class="p">|</span>-- HEAD
+<span class="p">|</span>-- annex
+<span class="p">|</span>   <span class="p">|</span>-- keys.lck
+<span class="p">|</span>   <span class="p">|</span>-- objects
+<span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>-- 000
+<span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>-- 32a
+<span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>   <span class="sb">`</span>-- GPGHMACSHA1--0222fb5a96702da2e0e0d763f3893d0a97897d32
+<span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>       <span class="sb">`</span>-- GPGHMACSHA1--0222fb5a96702da2e0e0d763f3893d0a97897d32
+<span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>-- d88
+<span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>   <span class="sb">`</span>-- GPGHMACSHA1--55d8e2ea7626a3958b0182192e7cf34c8be09fd5
+<span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>       <span class="sb">`</span>-- GPGHMACSHA1--55d8e2ea7626a3958b0182192e7cf34c8be09fd5
+<span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>   <span class="sb">`</span>-- db9
+<span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>       <span class="sb">`</span>-- GPGHMACSHA1--2b2a121170d00fdb06a04d8df80b6135c4c51d7e
+<span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>           <span class="sb">`</span>-- GPGHMACSHA1--2b2a121170d00fdb06a04d8df80b6135c4c51d7e
+<span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>-- 001
+<span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>-- 380
+<span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>   <span class="sb">`</span>-- GPGHMACSHA1--6dbdddddde415496c429c9788428fffb358e55fa
+<span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>       <span class="sb">`</span>-- GPGHMACSHA1--6dbdddddde415496c429c9788428fffb358e55fa
+<span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>-- 590
+
+% file annex/objects/000/32a/GPGHMACSHA1--0222fb5a96702da2e0e0d763f3893d0a97897d32/GPGHMACSHA1--0222fb5a96702da2e0e0d763f3893d0a97897d32 
+annex/objects/000/32a/GPGHMACSHA1--0222fb5a96702da2e0e0d763f3893d0a97897d32/GPGHMACSHA1--0222fb5a96702da2e0e0d763f3893d0a97897d32: GPG symmetrically encrypted data <span class="o">(</span>AES cipher<span class="o">)</span>
 </pre></div>
 <h1 id="231cf4c70d866b616c21baddaeed0696">Troubleshooting</h1>
 <h2 id="4bb70816ef968866a3b23681d9c78594">Find broken symlinks</h2>
@@ -278,7 +303,7 @@ ok
                     </div>
                     <ul id="niu2-sidebar-toc-list">
                         <li><a href="#content-heading">Distribute your backups using git-annex</a></li>
-                        <li><a href='#c076e4fd1559721e171432e66b70a487'>Motivation</a></li><li><a href='#47d9ff00142f535bb764ab3f67bfa648'>Backup setup</a><ul><li><a href='#ed81a9ba9f3286a026a8e74a46e28398'>Using ownCloud with git-annex</a></li><li><a href='#d7f2615c71a1567cc13cf3a7f7de0aea'>Encryption</a><ul><li><a href='#2c56ca49f1b38b5612f05368ea264991'>GPG</a></li><li><a href='#d2ea7355f284e66a6a7c9398c31ab097'>Keychain</a></li></ul></li></ul></li><li><a href='#86b4c8855c3292c87e08cdf663587434'>git-annex reference</a><ul><li><a href='#0b606fbba130092d943e6d80336ede3e'>Create git repo</a></li><li><a href='#d3aaf80f068177cb23f623b63679a9fc'>Create git annex repo</a></li></ul></li><li><a href='#cb51e1639a206a1d512b751337b33816'>Add remotes</a><ul><li><a href='#9e327b1b587eb0eaa3c32dc62f0fa289'>Create bare git repo on the server</a></li><li><a href='#b4a3c04193a350cd0d8dbc5d13d4b6dc'>Add special remote  (ssh+rsync)</a></li></ul></li><li><a href='#33f63cb323621dec81829d79ab0c93d4'>Synchronize data</a><ul><li><a href='#8d5e5f196db3155b47c559ad14fb3d26'>Sync only git repository to ssh remote</a></li><li><a href='#8de1f458ce22dac9cbd859153273a790'>Sync git repo + content to ssh remote</a></li></ul></li><li><a href='#231cf4c70d866b616c21baddaeed0696'>Troubleshooting</a><ul><li><a href='#4bb70816ef968866a3b23681d9c78594'>Find broken symlinks</a></li></ul></li><li><a href='#5fd7d46627f07e51bc89e14675c4ef85'>Garbage collection</a><ul><li><a href='#22600ffc31d53ebcb415e694062b1ab9'>Delete unused (annexed) data</a></li><li><a href='#b2a1a54dd06bbf93ce5e7fd283ea1e76'>Delete unused remote</a></li></ul></li>
+                        <li><a href='#47d9ff00142f535bb764ab3f67bfa648'>Backup setup</a><ul><li><a href='#ed81a9ba9f3286a026a8e74a46e28398'>Using ownCloud with git-annex</a></li><li><a href='#d7f2615c71a1567cc13cf3a7f7de0aea'>Encryption</a><ul><li><a href='#2c56ca49f1b38b5612f05368ea264991'>GPG</a></li><li><a href='#d2ea7355f284e66a6a7c9398c31ab097'>Keychain</a></li></ul></li></ul></li><li><a href='#86b4c8855c3292c87e08cdf663587434'>git-annex reference</a><ul><li><a href='#0b606fbba130092d943e6d80336ede3e'>Create git repo</a></li><li><a href='#d3aaf80f068177cb23f623b63679a9fc'>Create git annex repo</a></li></ul></li><li><a href='#cb51e1639a206a1d512b751337b33816'>Add remotes</a><ul><li><a href='#9e327b1b587eb0eaa3c32dc62f0fa289'>Create bare git repo on the server</a></li><li><a href='#b4a3c04193a350cd0d8dbc5d13d4b6dc'>Add special remote  (ssh+rsync)</a></li></ul></li><li><a href='#33f63cb323621dec81829d79ab0c93d4'>Synchronize data</a><ul><li><a href='#8d5e5f196db3155b47c559ad14fb3d26'>Sync only git repository to ssh remote</a></li><li><a href='#8de1f458ce22dac9cbd859153273a790'>Sync git repo + content to ssh remote</a></li></ul></li><li><a href='#231cf4c70d866b616c21baddaeed0696'>Troubleshooting</a><ul><li><a href='#4bb70816ef968866a3b23681d9c78594'>Find broken symlinks</a></li></ul></li><li><a href='#5fd7d46627f07e51bc89e14675c4ef85'>Garbage collection</a><ul><li><a href='#22600ffc31d53ebcb415e694062b1ab9'>Delete unused (annexed) data</a></li><li><a href='#b2a1a54dd06bbf93ce5e7fd283ea1e76'>Delete unused remote</a></li></ul></li>
                         <li><a href="#content-comments">Comments</a></li>
                     </ul>
                 </div>
