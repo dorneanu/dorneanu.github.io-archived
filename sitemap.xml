@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/</loc>
-<lastmod>2016-08-26T12:19:37-00:00</lastmod>
+<lastmod>2016-09-20T14:50:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/archives.html</loc>
-<lastmod>2016-08-26T12:19:37-00:00</lastmod>
+<lastmod>2016-09-20T14:50:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/tags.html</loc>
-<lastmod>2016-08-26T12:19:37-00:00</lastmod>
+<lastmod>2016-09-20T14:50:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.dornea.nu/categories.html</loc>
-<lastmod>2016-08-26T12:19:37-00:00</lastmod>
+<lastmod>2016-09-20T14:50:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -91,6 +91,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <loc>http://blog.dornea.nu/pages/tags</loc>
 <lastmod>2016-05-28T00:00:00+02:00</lastmod>
 <changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.dornea.nu/2016/09/19/ringzer0-ctf-jail-escaping-c</loc>
+<lastmod>2016-09-19T00:00:00+02:00</lastmod>
+<changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -1195,7 +1202,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/category/blog</loc>
-<lastmod>2016-06-20T00:00:00+00:53</lastmod>
+<lastmod>2016-09-19T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1447,7 +1454,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/ringzer0/</loc>
-<lastmod>2016-06-20T00:00:00+00:53</lastmod>
+<lastmod>2016-09-19T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1783,7 +1790,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/c/</loc>
-<lastmod>2016-08-23T00:00:00+00:53</lastmod>
+<lastmod>2016-09-19T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1951,7 +1958,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/wargames/</loc>
-<lastmod>2016-08-23T00:00:00+00:53</lastmod>
+<lastmod>2016-09-19T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -2224,7 +2231,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/tag/ctf/</loc>
-<lastmod>2016-08-23T00:00:00+00:53</lastmod>
+<lastmod>2016-09-19T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -2462,7 +2469,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.dornea.nu/author/victor-dorneanu.html</loc>
-<lastmod>2016-08-26T00:00:00+00:53</lastmod>
+<lastmod>2016-09-19T00:00:00+00:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

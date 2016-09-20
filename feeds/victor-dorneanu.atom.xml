@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>blog.dornea.nu</title><link href="http://blog.dornea.nu/" rel="alternate"></link><link href="http://blog.dornea.nu/feeds/victor-dorneanu.atom.xml" rel="self"></link><id>http://blog.dornea.nu/</id><updated>2016-08-26T00:00:00+02:00</updated><entry><title>Automatic file uploads</title><link href="http://blog.dornea.nu/2016/08/26/automatic-file-uploads" rel="alternate"></link><updated>2016-08-26T00:00:00+02:00</updated><author><name>Victor Dorneanu</name></author><id>tag:blog.dornea.nu,2016-08-26:2016/08/26/automatic-file-uploads</id><summary type="html">&lt;p&gt;Uploading files in web applications iw nowadays a common feature. Being able to &lt;strong&gt;automate&lt;/strong&gt; this steps using &lt;code&gt;Burp&lt;/code&gt;, &lt;code&gt;Curl&lt;/code&gt;, &lt;code&gt;Python&lt;/code&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>blog.dornea.nu</title><link href="http://blog.dornea.nu/" rel="alternate"></link><link href="http://blog.dornea.nu/feeds/victor-dorneanu.atom.xml" rel="self"></link><id>http://blog.dornea.nu/</id><updated>2016-09-19T00:00:00+02:00</updated><entry><title>ringzer0 CTF - Jail Escaping C</title><link href="http://blog.dornea.nu/2016/09/19/ringzer0-ctf-jail-escaping-c" rel="alternate"></link><updated>2016-09-19T00:00:00+02:00</updated><author><name>Victor Dorneanu</name></author><id>tag:blog.dornea.nu,2016-09-19:2016/09/19/ringzer0-ctf-jail-escaping-c</id><summary type="html">&lt;p&gt;Here are my solutions for the &lt;a href="https://ringzer0team.com"&gt;ringzer0&lt;/a&gt; &lt;strong&gt;Jail Escaping C&lt;/strong&gt; challenges:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Level 1: https://ringzer0team.com/challenges/228&lt;/li&gt;
+&lt;li&gt;Level 2: https://ringzer0team.com/challenges/229&lt;/li&gt;
+&lt;li&gt;Level 3: https://ringzer0team.com/challenges/230&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id="5afaf1679ad0887adebaddb40e0bd3f7"&gt;Level 1&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;level1@ringzer0team.com&lt;span class="s1"&gt;'s password: &lt;/span&gt;
+&lt;span class="s1"&gt;Last login: Sun Apr 24 05:48:42 2016 from&lt;/span&gt;
+
+&lt;span class="s1"&gt;RingZer0 ...&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><category term="ringzer0"></category><category term="ctf"></category><category term="wargames"></category><category term="c"></category></entry><entry><title>Automatic file uploads</title><link href="http://blog.dornea.nu/2016/08/26/automatic-file-uploads" rel="alternate"></link><updated>2016-08-26T00:00:00+02:00</updated><author><name>Victor Dorneanu</name></author><id>tag:blog.dornea.nu,2016-08-26:2016/08/26/automatic-file-uploads</id><summary type="html">&lt;p&gt;Uploading files in web applications iw nowadays a common feature. Being able to &lt;strong&gt;automate&lt;/strong&gt; this steps using &lt;code&gt;Burp&lt;/code&gt;, &lt;code&gt;Curl&lt;/code&gt;, &lt;code&gt;Python&lt;/code&gt;
 &amp;amp; Co. doesn't seem to be an easy task. Basically the automation involves following steps:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;for a given directory of files, repeat the request for each file&lt;/li&gt;

