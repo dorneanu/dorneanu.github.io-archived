@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="events, hacking, sploitfun, dfir, android, arm">
+        <meta name="description" content="This year I've attended the hack.lu conference in Luxembourg. Being actually for the first time there, I've had absolutely no expectations. In fact it was a really lovelly and warm athmosphere during the whole conference and I've met a lot of interesting persons. A nice @hack_lu ...">
+        <title>hack.lu conference 2016 - blog.dornea.nu</title>
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
+        <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/niu2.min.css" type="text/css" />
+        <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+		
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/bootstrap.min.js"></script>
+        
+        <link rel="canonical" href="http://blog.dornea.nu/2016/10/21/hacklu-conference-2016" />
+        <script type="text/javascript">window.onload=function(){};</script>
+        <!--[if lt IE 9]>
+            <script src="http://blog.dornea.nu/theme/js/html5shiv.js"></script>
+            <script src="http://blog.dornea.nu/theme/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body> 
+        <div id="body-header">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="http://blog.dornea.nu">
+                            <i class="icon-home"></i>blog.dornea.nu
+                        </a>
+                    </div>
+                    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                        <ul class="nav navbar-nav">
+                            <li><a href="http://dornea.nu" title="about">
+                                <i class="icon-user"></i>about</a>
+                            </li>
+                            <li><a href="/archives.html" title="archives">
+                                <i class="icon-archive"></i>archives</a>
+                            </li>
+                            <li><a href="/tags.html" title="tags">
+                                <i class="icon-tag"></i>tags</a>
+                            </li>
+                            <li><a href="/feeds/rss.xml" title="feeds">
+                                <i class="icon-rss"></i>feeds</a>
+                            </li>
+                        <!-- category dropdown list -->
+                        <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-folder-open"></i>category<b class="caret"></b>
+                           </a>
+                           <ul class="dropdown-menu">
+                               <li><a href="http://blog.dornea.nu/category/blog">
+                                      <i class="icon-pencil"></i>blog
+                                      (111)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/notes">
+                                      <i class="icon-book"></i>notes
+                                      (21)</a></li>
+                           </ul>
+                        </li>
+                        <!--  self defined dropdown list -->
+                        </ul>
+                        
+                        <!-- right nav bar -->
+                        <ul class="nav navbar-nav navbar-right">
+                        <!-- google custom search -->
+                        <li>
+                        <div id="niu2-cse-wrapper">
+                            <div id="niu2-cse-header-box" class="navbar-form navbar-nav">
+                                <form action="http://google.com/cse">
+                                    <input type="hidden" name="cx" value="008508447409818574933:pxyxuhrgnxi" />
+                                    <input type="hidden" name="ie" value="UTF-8" />
+                                    <div class="form-group">
+                                        <input id="niu2-cse-search-input" class="niu2-cse-header form-control" 
+                                            type="text" name="q" 
+                                            placeholder="Press enter to search ..."/>
+                                    </div>
+                                </form>
+                           </div>
+                           <div id="niu2-cse-ctrl-box" class="navbar-nav">
+                            <i id="niu2-cse-search-image" class="icon-search navbar-nav"></i><span id="niu2-cse-search-text">Search</span>
+                           </div>
+                       </div>
+                       </li>
+                       </ul>
+                    </nav>
+                </div>
+            </div>
+<style>
+    #banner{
+        background-image:url("http://blog.dornea.nu//images/header.jpg");
+    }   
+</style>
+
+<div id="banner">
+    <div class="container">
+        <div class="copy">
+            <h2>blog.dornea.nu</h2>
+                <p class="intro">Hack, code and drink some țuică. Personal blog of Victor Dorneanu.</p>
+        </div>
+    </div>
+</div>
+            <!-- End Banner -->
+        </div>
+
+        <div id="body-content">
+            <div class="col-md-8 col-md-offset-2">
+                <h1 id="content-heading">hack.lu conference 2016</h1>
+            </div>
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+                <div id="niu2-main-content">
+                    <p>This year I've attended the <a href="https://2016.hack.lu">hack.lu</a> conference in Luxembourg. Being actually for the 
+first time there, I've had absolutely no expectations. In fact it was a really lovelly and warm athmosphere during the whole
+conference and I've met a lot of interesting persons.</p>
+<p><img alt="" class="img-responsive" src="https://pbs.twimg.com/media/CvDP9L6WYAASFMS.jpg"/></p>
+<blockquote class="twitter-tweet" data-lang="en"><p dir="ltr" lang="en">A nice <a href="https://twitter.com/hack_lu">@hack_lu</a> logo made with the <a href="https://twitter.com/Level2Lu">@Level2Lu</a> 3d printer during <a href="https://twitter.com/hashtag/hacklu?src=hash">#hacklu</a>. <a href="https://t.co/jFB1wlw5uS">pic.twitter.com/jFB1wlw5uS</a></p>— hack_lu (@hack_lu) <a href="https://twitter.com/hack_lu/status/788360243659104256">October 18, 2016</a></blockquote>
+<h2 id="522082bbe794026117389f3a80a4adb4">Talks</h2>
+<p>I think there were some realy good talks. Unfortunately I've seen only 1 because most of the time I was at the workshops practicing
+my <strong>reverse engineering</strong> skills. If you want to know more about the talks, read here:</p>
+<ul>
+<li><a href="https://blog.rootshell.be/2016/10/18/hack-lu-2016-wrap-day-1/">Wrap-Up Day #1</a></li>
+<li><a href="https://blog.rootshell.be/2016/10/20/hack-lu-2016-wrap-day-2/">Wrap-Up Day #2</a></li>
+<li><a href="https://blog.rootshell.be/2016/10/20/hack-lu-2016-wrap-day-3/">Wrap-Up Day #3</a></li>
+</ul>
+<p>If you're looking for the talks, have a look at <a href="https://www.youtube.com/channel/UCI6B0zYvK-7FdM0Vgh3v3Tg">this channel</a>.</p>
+<h2 id="d7ec78ebbbf090fc809c58ce7f57f739">Workshops</h2>
+<p>Below the workshops I have attented:</p>
+<h3 id="694c7eb46b4b0ef4cc6f9d62d08f8713">Advanced Exploitation: ROP</h3>
+<p><img alt="" class="img-responsive" src="https://pbs.twimg.com/media/Cu_WmrpWgAA-5Dd.jpg"/></p>
+<blockquote class="twitter-tweet" data-lang="en"><p dir="ltr" lang="en">Ready for tomorrow’s workshop on ROP exploitation at <a href="https://twitter.com/hack_lu">@hack_lu</a> <a href="https://twitter.com/KudelskiSec">@KudelskiSec</a> <a href="https://t.co/M5F2F2V44N">pic.twitter.com/M5F2F2V44N</a></p>— Julien Bachmann (@milkmix_) <a href="https://twitter.com/milkmix_/status/788084491483017216">October 17, 2016</a></blockquote>
+<p>The <a href="http://2016.hack.lu/talks/#advanced-exploitation-rop-and-protections-bypass-under-linux">Advanced Exploitation: ROP and protections bypass under Linux</a> 
+course by <a href="https://twitter.com/milkmix_">Julien Bachmann</a> was my first one and very <strong>good</strong>. It's not that I haven't heard
+of <strong>ROP</strong> (Return Oriented Programming) before, it was rather a lack of time which prevented me going deep-dive into this 
+specific topic. After refreshing knowledge how programms get executed and how function calls are working, basic 
+exploitation techniques like <strong>stack based overflows</strong> were introduced to the audience. <strong>Debugging</strong> frameworks like
+<a href="https://github.com/hugsy/gef">GEF</a> and <a href="https://github.com/longld/peda">PEDA</a> were shortly explained and used 
+to examine the stack and registers during the exploitation. </p>
+<p>Thereafter the basic ideas behind <strong>ROP</strong> were presented: Instead of bringing sth <strong>into</strong> the process, ROP will use 
+pieces of code fragments <strong>inside</strong> the process to conduct the attack. That means: In a classical <em>stack based
+overlow</em> attack one will try to overlow some buffer, control the return address of a function and put some code (shellcode) 
+on the stack that might get executed. Binary exploitation <strong>countermeasures</strong> like <strong>ASRL</strong> or <strong>NX</strong> have introduced 
+new methods how to protect against such attacks. However, new exploitation techniques have been found to circumvent
+those. Starting with <strong>ret2libc</strong> ROP <strong>gadgets</strong> were basically the further development. The main idea behing <strong>ret2libc</strong> 
+was to call <strong>libc</strong> functions directly instead of using <strong>syscalls</strong>. In this case the calling convention (how to push the parameters 
+for the function into the stack) had to be taken into account. Finding some good examples on the net should be not that hard.</p>
+<p>In the world of ROP specific code fragments have to be used in a certain order to build a <strong>ROP chain</strong>. That means that by pushing 
+some data (mostly addresses) into the stack and having a buffer overflow we can control the program execution depending on the data 
+being pushed into the stack.</p>
+<blockquote>
+<p>Make sure to have a look at <a href="https://speakerdeck.com/milkmix/advanced-exploitation-on-linux-rop-and-infoleaks">https://speakerdeck.com/milkmix/advanced-exploitation-on-linux-rop-and-infoleaks</a>
+for more detailed explanations. </p>
+</blockquote>
+<p>Finding ROP gadgets is actually also an easy task. There are several tools which will help you finding those:</p>
+<ul>
+<li><a href="https://github.com/packz/ropeme">ropeme</a></li>
+<li><a href="https://github.com/sashs/Ropper">ropper</a></li>
+<li><a href="https://github.com/JonathanSalwan/ROPgadget">ropgadget</a></li>
+<li><a href="https://github.com/0vercl0k/rp">rp++</a></li>
+</ul>
+<p>Some of the useful gadgets would be:</p>
+<ul>
+<li>redirect execution to address pointed by some register</li>
+<li>stack pivot (change the original stack to sth different; that might be the heap)</li>
+<li>set register values</li>
+<li>read at a memory address</li>
+<li>"write-what-where"</li>
+<li>syscall (<code>int 0x80</code> for x86)</li>
+</ul>
+<p>Julien also provided live examples for ROP exploitation. Make sure you do have a look at <a href="https://github.com/0xmilkmix/training">https://github.com/0xmilkmix/training</a>.
+All in one this was an <strong>excellent</strong> introduction to <strong>ROP</strong> which during the 4h course provided enough information to be "armed" for your next target. 
+Probably I would have spent more than 2 weeks to accumulate the same amount of information. A big thanks to <a href="https://twitter.com/milkmix_">Julien</a> 
+his training and explanations. </p>
+<h3 id="b50d68529816567b8a295cc1b39685ce">The Fantastic 4 forensic domains: net, disk, mem, mal</h3>
+<p>This <a href="http://2016.hack.lu/talks/#the-fantastic-4--forensic-domains-net-disk-mem-mal">workshop</a> aimed at showing the audience some techniques 
+and tools when it comes to <strong>DFIR</strong>. Having some data provided by the <a href="https://ccdcoe.org">NATO Cooperative Cyber Defence Centre of Excellence</a>
+<a href="https://twitter.com/ddurvaux">David</a> and <a href="https://twitter.com/cvandeplas">Christophe</a> started looking at different aspects:</p>
+<ul>
+<li>network traffic</li>
+<li>disk data</li>
+<li>memory data</li>
+<li>malware activities</li>
+</ul>
+<p>Rather than covering each aspect individually, a more interdisciplinary approach was prefered. By analysing the input sources and correlating
+the results with some others would bring you more benefits than focusing only on a single task. Among some tips how to deal with the data source, some tools 
+mentioned as well:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Forensic_Toolkit">AccessData FTK Imager</a><ul>
+<li>saves an image of a hard disk in one file or in segments </li>
+</ul>
+</li>
+<li><a href="https://github.com/log2timeline/plaso/wiki">log2timeline</a><ul>
+<li>check out the <a href="https://digital-forensics.sans.org/summit-archives/DFIR_Summit/Plaso-Reinventing-the-Super-Timeline-Kristinn-Gudjonsson.pdf">presentation</a></li>
+<li>helps creating <em>super timelines</em> (correlation, context, confidence, sorted based on time)</li>
+</ul>
+</li>
+<li><a href="http://www.rekall-forensic.com">rekall</a><ul>
+<li>I know everybody knows about <a href="https://github.com/volatilityfoundation/volatility">volatility</a></li>
+<li>but <code>rekall</code> should be <strong>faster</strong></li>
+</ul>
+</li>
+</ul>
+<p>One thing that caught my attention was the fact that when doing <strong>string analysis</strong>, you can use old good <code>strings</code> also for unicode strings:</p>
+<div class="highlight"><pre><span class="nv">$ </span>strings -eL &lt;file&gt;
+</pre></div>
+<p>From the manpage:</p>
+<div class="highlight"><pre>--encoding=encoding
+       Select the character encoding of the strings that are to be found.  Possible values for encoding are: s = single-7-bit-byte characters (ASCII, ISO 8859, etc., default), S = single-8-bit-byte characters, b = 16-bit
+       bigendian, l = 16-bit littleendian, B = 32-bit bigendian, L = 32-bit littleendian.  Useful for finding wide character strings. (l and b apply to, for example, Unicode UTF-16/UCS-2 encodings).
+</pre></div>
+<p>Nice. Also make sure you'll have a look at the <a href="https://docs.google.com/presentation/d/1j1y97LUw9AHapfcFICVOZ3hGxaT6jYSwk_gm4iQjEnA/edit">presentation</a> and the <a href="http://vandeplas.com/hacklu/">provided data sources</a>. Happy DFIR! </p>
+<h3 id="08665f454fe6692b1d1febb6c341b1d5">Android malware reverse engineering</h3>
+<p><img alt="" class="img-responsive" src="https://pbs.twimg.com/media/Cuu7qRlXgAATwsZ.jpg"/></p>
+<blockquote class="twitter-tweet" data-lang="en"><p dir="ltr" lang="en">Ready for the <a href="https://twitter.com/hashtag/Android?src=hash">#Android</a> <a href="https://twitter.com/hashtag/RE?src=hash">#RE</a> <a href="https://twitter.com/hashtag/workshop?src=hash">#workshop</a> at <a href="https://twitter.com/hashtag/hacklu?src=hash">#hacklu</a> ;) cc: <a href="https://twitter.com/Fortinet">@Fortinet</a> <a href="https://t.co/gIClXygRUz">pic.twitter.com/gIClXygRUz</a></p>— Axelle Ap. (@cryptax) <a href="https://twitter.com/cryptax/status/786928903235497984">October 14, 2016</a></blockquote>
+<p><a href="https://twitter.com/cryptax">Axelle Apvrille</a> had a workshop on <a href="http://2016.hack.lu/talks/#android-malware-reverse-engineering">Android Malware Reverse Engineering</a>. While the first part covered the 
+"basics" (static code analysis and dynamic analysis) not that interesting to me (due to previous work: <a href="http://blog.dornea.nu/2014/07/07/disect-android-apks-like-a-pro-static-code-analysis/">here</a>, <a href="http://blog.dornea.nu/2014/08/05/android-dynamic-code-analysis-mastering-droidbox/">here</a> and also <a href="http://blog.dornea.nu/2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms/">here</a>) the second part dealed with <strong>obfuscation</strong> and <strong>packed</strong> samples. </p>
+<p>Installing the workshop VM (ca. 5 GB) was also quite easy:</p>
+<div class="highlight"><pre><span class="nv">$ </span>docker pull cryptax/android-re
+<span class="nv">$ </span>docker run -d --name androidre -p 5022:22 -p 5900:5900 cryptax/android-re
+</pre></div>
+<p>Like mentioned before the 2nd part of the workshop was rather the fun part. By structuring the whole workshop in several labs, the students were able to dissect the APKs locally and play with 
+the provided tools. In lab 6 e.g. we had to analyze an <strong>infected version of Pokemon Go</strong> by using <a href="https://github.com/androguard/androguard">AndroGuard</a>. Students were then asked to
+deobfuscate some code fragments (sth that I did when analyzing <a href="http://blog.dornea.nu/tag/fakebanker/">FakeBanker</a>). Then several <strong>unpacking</strong> techniques were shown:</p>
+<ul>
+<li>unpacking <a href="http://strazzere.com/papers/AAP-QPSI.pdf">Pangxie</a></li>
+<li>unpacking via memory dump (files were packed by <strong>LIAPP</strong>)</li>
+</ul>
+<p>One tool I'd like to mention when it comes to decompiling is <a href="https://www.pnfsoftware.com/jeb2/">JEB</a>. It really helps you analyze your target 
+using a nice GUI <strong>and</strong> it is <strong>extensible</strong>: Using Java or Python you can write your own scripts to automate the reverse engineering process.</p>
+<p>If you don't know which <strong>packer</strong> has been used <a href="https://github.com/rednaga/APKiD">APKI</a> might be helpful. BTW: The <a href="http://rednaga.io">rednaga</a> team also haves an <a href="https://github.com/rednaga/training">Android training</a>.
+Make sure you'll have a look at their materials. They're really good. </p>
+<p>All in one this was a very good workshop. Using the mentioned techniques you should be able to reverse <strong>DEX</strong> files easily. In case of <a href="https://developer.android.com/ndk/samples/sample_hellojni.html">JNIs</a>
+you'll have to go back to binary analysis since a malware could hide its all components inside a shared object (ELF). Besides that there is also <a href="https://source.android.com/devices/tech/dalvik/">ART</a>
+which basically converts the bytecode into machine code (sampled inside an <a href="http://stackoverflow.com/questions/28435860/what-does-oat-mean">OAT</a> file). Regarding ART: This <a href="https://www.youtube.com/watch?v=tSQxuxmzXCc&amp;list=PLH15HpR5qRsVol8qseSSVe4XrtHcZO47E&amp;index=21">video</a> will give you a nice introduction.   </p>
+<h3 id="5e7d1e6d6105a6a699b92cc54576644f">ARM Shellcode Basics</h3>
+<p>I think this one was my favourite one. <a href="https://twitter.com/therealsaumil">Saumil Shah</a> introduced to the basics of the ARM architecture before 
+he got into the <a href="http://2016.hack.lu/talks/#arm-shellcode-basics">ARM Shellcode Basics</a>. Again I've learnt a lot about ARM in just few hours. </p>
+<p><img alt="" class="img-responsive" src="https://pbs.twimg.com/media/CvMo1okXYAEZkqW.jpg"/></p>
+<blockquote class="twitter-tweet" data-lang="en"><p dir="ltr" lang="en">Introduction to ARM Shellcoding by <a href="https://twitter.com/therealsaumil">@therealsaumil</a> Great! <a href="https://twitter.com/hashtag/hacklu?src=hash">#hacklu</a> <a href="https://t.co/DOjLL5TbAp">pic.twitter.com/DOjLL5TbAp</a></p>— Victor Dorneanu (@victordorneanu) <a href="https://twitter.com/victordorneanu/status/789019299855863808">October 20, 2016</a></blockquote>
+<p>During the workshop we were able to write and run ARM assembly on a Raspberry Pi Saumil provided. This way we were able to test and run 
+the shellcodes on real ARM hardware without any emulators. </p>
+<p><img alt="" class="img-responsive" src="https://pbs.twimg.com/media/CvMq7eoVUAApWFe.jpg"/></p>
+<blockquote class="twitter-tweet" data-lang="en"><p dir="ltr" lang="en">ARM Shellcode Workshop <a href="https://twitter.com/hashtag/hacklu?src=hash">#hacklu</a> - my mini Raspberry Pi NOC, with battery backup <a href="https://t.co/FoOrH2p5ze">pic.twitter.com/FoOrH2p5ze</a></p>— Saumil Shah (@therealsaumil) <a href="https://twitter.com/therealsaumil/status/789021572958789632">October 20, 2016</a></blockquote>
+<p>After the workshop the difference between <strong>ARM mode</strong> and <strong>Thumb mode</strong> seems to be much more clear. Also the fact that most of 
+the ARM shellcodes are in thumb mode was discussed extensively.  </p>
+<p>Writing ARM shellcodes doesn't differ that much from the x86 way. Being equipped with good knowlegde how syscalls work on ARM
+and which parameters you need to use insde the registers (in ARM you don't push the arguments on the stack) you should be able to 
+write your very first shellcode. In fact it is much easier to write ASM assembly due to the small instruction set (you do have a lot of
+variations but the set is much smaller than the x68 one). Just one example:</p>
+<div class="highlight"><pre>* ARM execve shellcode
+ * --------------------
+ * by Saumil Shah, ARM Exploit Lab
+ * @therealsaumil
+ *
+ * execve("/bin/sh", 0, 0)
+ *
+ * as exec_arm.s -o exec_arm.o
+ * ld exec_arm.o -o exec_arm
+ */
+
+.section .text
+.global _start
+_start:
+    add     r0, pc, #12
+    mov     r1, #0
+    mov     r2, #0
+
+    mov     r7, #11          /* syscall 11, execve */
+    svc     #0
+
+.ascii "/bin/sh\0"
+</pre></div>
+<p>Switching between the modes is also very simple:</p>
+<div class="highlight"><pre><span class="cm">/* ARM/THUMB execve shellcode</span>
+<span class="cm"> * --------------------------</span>
+<span class="cm"> * by Saumil Shah, ARM Exploit Lab</span>
+<span class="cm"> * @therealsaumil</span>
+<span class="cm"> *</span>
+<span class="cm"> * execve("/bin/sh", 0, 0)</span>
+<span class="cm"> *</span>
+<span class="cm"> * as exec_thumb.s -o exec_thumb.o</span>
+<span class="cm"> * ld exec_thumb.o -o exec_thumb</span>
+<span class="cm"> */</span><span class="w"></span>
+
+<span class="o">.</span>section<span class="w"> </span><span class="o">.</span>text<span class="w"></span>
+<span class="o">.</span>global<span class="w"> </span>_start<span class="w"></span>
+<span class="nl">_start</span><span class="o">:</span><span class="w"></span>
+<span class="w">    </span><span class="o">.</span>code<span class="w"> </span><span class="m">32</span><span class="w"></span>
+<span class="w">    </span>add<span class="w">     </span>r3<span class="o">,</span><span class="w"> </span>pc<span class="o">,</span><span class="w"> </span><span class="err">#</span><span class="m">1</span><span class="w"></span>
+<span class="w">    </span>bx<span class="w">      </span>r3<span class="w"></span>
+
+<span class="w">    </span><span class="o">.</span>code<span class="w"> </span><span class="m">16</span><span class="w"></span>
+<span class="w">    </span>add<span class="w">     </span>r0<span class="o">,</span><span class="w"> </span>pc<span class="o">,</span><span class="w"> </span><span class="err">#</span><span class="m">8</span><span class="w"></span>
+<span class="w">    </span>mov<span class="w">     </span>r1<span class="o">,</span><span class="w"> </span><span class="err">#</span><span class="m">0</span><span class="w"></span>
+<span class="w">    </span>mov<span class="w">     </span>r2<span class="o">,</span><span class="w"> </span><span class="err">#</span><span class="m">0</span><span class="w"></span>
+<span class="w">    </span>mov<span class="w">     </span>r7<span class="o">,</span><span class="w"> </span><span class="err">#</span><span class="m">11</span><span class="w">          </span><span class="cm">/* syscall 11, execve */</span><span class="w"></span>
+<span class="w">    </span>svc<span class="w">     </span><span class="err">#</span><span class="m">0</span><span class="w"></span>
+<span class="w">    </span>mov<span class="w">     </span>r5<span class="o">,</span><span class="w"> </span>r5<span class="w">           </span><span class="cm">/* NOP */</span><span class="w"></span>
+
+<span class="o">.</span>ascii<span class="w"> </span><span class="s">"/bin/sh\0"</span><span class="w"></span>
+</pre></div>
+<p>However, <strong>de-NULLyfing</strong> the shellcode requires a good knowledge of the instruction set and how ARM works. A more complicated shellcode
+(reverse shell) was also shown and aimed at understanding how one would write more complex shellcode. As a next step (was not part of the
+workshop) one could dive deeper and write ROP gadgets for ARM. Now being more clear about how ROP works (see the workshop from Julien) 
+this should be a very good exercise. ALl in one this was also a very good workshop and Saumil is really competent hacker and speaker. 
+Next year he will be presenting some advanced <a href="https://recon.cx/2017/brussels/training/trainingexploitlab.html">ARM based exploitation techniques</a>
+at the <a href="https://recon.cx/2017/brussels/">recon 2017 in Brussels</a>. </p>
+<h2 id="6f8b794f3246b0c1e1780bb4d4d5dc53">Conclusion</h2>
+<p>I think it was a really successful conference with really cool people and a nice location. I've really enjoyed
+the conversations I've had, especially during the refreshment breaks. Even though I haven't manage it to see 
+that many talks (actually only 1 - don't blame me for this), I think my learning curve after the workshops I've 
+attended was pretty straightforward. </p>
+<p>I would like to thank all the <strong>Key Super Secret Company</strong> guys for letting me join their dinner. If you guys
+are reading this here, I hope to see you soon in Berlin :) And a big thanks goes to my <strong>Holy Romanian Water</strong> 
+connection: I had so much fun with you (we somehow managed it to get back to the hotel :D)! 
+To the <strong>Canadian fraction</strong>: Enjoy your trip and keep an eye for the <strong>big things</strong> (Sergei, ya know what I mean :P)
+And last but not least a warm hug for my <strong>Romanian fellows</strong> for sharing their skills in dissecting... bronies!
+And yes (how could I forget this?): Thank you <a href="https://2016.hack.lu">hack.lu</a> for organizing the whole stuff! 
+I hope to see you next year again. </p>
+<h2 id="105e3a46457f8510bdbbace0d0e679a8">Some random images</h2>
+<p>Some random images took during the days:</p>
+<p><img alt="" class="img-responsive" src="http://dl.dornea.nu/img/2016/hack.lu/IMG_20161017_163538_1.jpg"/></p>
+<p><img alt="" class="img-responsive" src="http://dl.dornea.nu/img/2016/hack.lu/IMG_20161019_183422.jpg"/></p>
+<p><img alt="" class="img-responsive" src="http://dl.dornea.nu/img/2016/hack.lu/IMG_20161020_161742.jpg"/></p>
+<p><img alt="" class="img-responsive" src="http://dl.dornea.nu/img/2016/hack.lu/IMG_20161020_170506_1.jpg"/></p>
+<p><img alt="" class="img-responsive" src="http://dl.dornea.nu/img/2016/hack.lu/IMG_20161020_173631_1.jpg"/></p>
+                </div>
+<hr/>
+<div style="float:left;">
+	Prev: <a href="http://blog.dornea.nu/2016/09/19/ringzer0-ctf-jail-escaping-c" align='left'>
+	 ringzer0 CTF - Jail Escaping C
+	</a>
+</div>
+</p>
+
+                <!-- Add comments -->
+<div id="content-comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname="dorneanu";
+				var disqus_identifier = 'hacklu-conference-2016';
+			var disqus_url = 'http://blog.dornea.nu/2016/10/21/hacklu-conference-2016';
+
+		var disqus_config = function () {
+			this.language = "en";
+		};
+ 
+        
+        (function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div> 
+            </div>
+            <div class="niu2-right-container col-md-2">
+                <div id="niu2-sidebar-meta" class="niu2-sidebar">
+                    <div class="niu2-sidebar-label"><i class="icon-calendar"></i>Published:</div>
+                    <div class="niu2-sidebar-value">2016-10-21 00:00</div>
+                    <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
+                    <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
+                    <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/events/">events</a><sup>6</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/hacking/">hacking</a><sup>21</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/sploitfun/">sploitfun</a><sup>11</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/dfir/">dfir</a><sup>3</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/android/">android</a><sup>26</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/arm/">arm</a><sup>4</sup></div>
+                </div>
+
+                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                    <div class="niu2-sidebar-label">
+                        <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>Table of contents
+                    </div>
+                    <ul id="niu2-sidebar-toc-list">
+                        <li><a href="#content-heading">hack.lu conference 2016</a></li>
+                        <li><a href='#522082bbe794026117389f3a80a4adb4'>Talks</a></li><li><a href='#d7ec78ebbbf090fc809c58ce7f57f739'>Workshops</a><ul><li><a href='#694c7eb46b4b0ef4cc6f9d62d08f8713'>Advanced Exploitation: ROP</a></li><li><a href='#b50d68529816567b8a295cc1b39685ce'>The Fantastic 4 forensic domains: net, disk, mem, mal</a></li><li><a href='#08665f454fe6692b1d1febb6c341b1d5'>Android malware reverse engineering</a></li><li><a href='#5e7d1e6d6105a6a699b92cc54576644f'>ARM Shellcode Basics</a></li></ul></li><li><a href='#6f8b794f3246b0c1e1780bb4d4d5dc53'>Conclusion</a></li><li><a href='#105e3a46457f8510bdbbace0d0e679a8'>Some random images</a></li>
+                        <li><a href="#content-comments">Comments</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="niu2-toolbar">
+                <ul class="list-unstyled">
+                    <li><a id="niu2-toolbar-ctrlsidebar" href="#" title="Hide Sidebar"><i class="icon-3x icon-hide-sidebar"></i></a></li>
+                </ul>
+                <div id="niu2-toolbar-showsidebar" data-title="Show Sidebar"></div>
+                <div id="niu2-toolbar-github" data-repo=""></div>
+                <div id="niu2-toolbar-bitbucket" data-repo=""></div>
+            </div>
+            <div id="niu2-toc" data-style="fixed"></div>
+        </div>
+
+        <div class="niu2-footer">
+            <div id="body-footer" class="col-md-6 col-md-offset-2">
+                <hr/>
+                <p>
+                    Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
+                    <a href="https://github.com/mawenbao/niu-x2-sidebar">theme</a> built with <a href="https://github.com/twbs/bootstrap">Bootstrap3</a>
+                    by <a href="https://blog.mawenbao.com">Ma Wenbao</a>, icons by 
+                    <a href="https://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
+                </p>
+                <p>
+                    © 2008 - 2016
+                    <a class="niu2-footer-link" href="http://blog.dornea.nu">Victor Dorneanu</a>
+                </p>
+                <p class="niu2-icons">
+                    <a class="niu2-footer-icon" href="https://pgp.mit.edu/pks/lookup?op=get&search=0x18F1AD46FB05E1B7" title="my public key">
+                        <i class="icon-key icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="mailto: no-spam ÄATT dornea DOT nu" title="my email address">
+                        <i class="icon-envelope-o icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="http://github.com/dorneanu" title="my github page">
+                        <i class="icon-github-alt icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="/feeds/rss.xml" title="subscribe my blog">
+                        <i class="icon-rss icon-lg"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            var _gaq=_gaq||[];
+            _gaq.push(["_setAccount","UA-7161767-3"]);
+            _gaq.push(["_trackPageview"]);
+            (function(){
+                var b=document.createElement("script");
+                b.type="text/javascript";
+                b.async=true;
+                b.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";
+                var a=document.getElementsByTagName("script")[0];
+                a.parentNode.insertBefore(b,a)
+            })();
+        </script>
+        <div id="niu2-pygments" data-theme="github"></div>
+        <div id="niu2-lazy-load" data-loading-txt="Loading image" data-loading-icon="icon-spin icon-spinner"></div>
+        <div id="niu2-toolbar-load" data-loading-icon="icon-spin icon-4x icon-spinner"></div>
+        <script type="text/javascript" src="/js/custom.js"></script>
+        <script type="text/javascript">
+            onContentLoaded();
+        </script>
+    </body>
+</html>
