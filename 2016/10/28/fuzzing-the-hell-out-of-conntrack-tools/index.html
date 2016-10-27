@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="hacking, fuzz, networking, python, afl, linux, appsec">
+        <meta name="description" content="Fuzzing is nowadays the attack technique used by a lot of pentesters and security researchers. Whether you're looking for vulnerabilities in media files (pictures, videos, audio stuff) or just binary files, fuzzing is the right approach if you don't want to do some static code analysis or debug ...">
+        <title>Fuzzing the hell out of conntrack tools - blog.dornea.nu</title>
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
+        <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/niu2.min.css" type="text/css" />
+        <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+		
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/bootstrap.min.js"></script>
+        
+        <link rel="canonical" href="http://blog.dornea.nu/2016/10/28/fuzzing-the-hell-out-of-conntrack-tools" />
+        <script type="text/javascript">window.onload=function(){};</script>
+        <!--[if lt IE 9]>
+            <script src="http://blog.dornea.nu/theme/js/html5shiv.js"></script>
+            <script src="http://blog.dornea.nu/theme/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body> 
+        <div id="body-header">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="http://blog.dornea.nu">
+                            <i class="icon-home"></i>blog.dornea.nu
+                        </a>
+                    </div>
+                    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                        <ul class="nav navbar-nav">
+                            <li><a href="http://dornea.nu" title="about">
+                                <i class="icon-user"></i>about</a>
+                            </li>
+                            <li><a href="/archives.html" title="archives">
+                                <i class="icon-archive"></i>archives</a>
+                            </li>
+                            <li><a href="/tags.html" title="tags">
+                                <i class="icon-tag"></i>tags</a>
+                            </li>
+                            <li><a href="/feeds/rss.xml" title="feeds">
+                                <i class="icon-rss"></i>feeds</a>
+                            </li>
+                        <!-- category dropdown list -->
+                        <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-folder-open"></i>category<b class="caret"></b>
+                           </a>
+                           <ul class="dropdown-menu">
+                               <li><a href="http://blog.dornea.nu/category/blog">
+                                      <i class="icon-pencil"></i>blog
+                                      (112)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/notes">
+                                      <i class="icon-book"></i>notes
+                                      (21)</a></li>
+                           </ul>
+                        </li>
+                        <!--  self defined dropdown list -->
+                        </ul>
+                        
+                        <!-- right nav bar -->
+                        <ul class="nav navbar-nav navbar-right">
+                        <!-- google custom search -->
+                        <li>
+                        <div id="niu2-cse-wrapper">
+                            <div id="niu2-cse-header-box" class="navbar-form navbar-nav">
+                                <form action="http://google.com/cse">
+                                    <input type="hidden" name="cx" value="008508447409818574933:pxyxuhrgnxi" />
+                                    <input type="hidden" name="ie" value="UTF-8" />
+                                    <div class="form-group">
+                                        <input id="niu2-cse-search-input" class="niu2-cse-header form-control" 
+                                            type="text" name="q" 
+                                            placeholder="Press enter to search ..."/>
+                                    </div>
+                                </form>
+                           </div>
+                           <div id="niu2-cse-ctrl-box" class="navbar-nav">
+                            <i id="niu2-cse-search-image" class="icon-search navbar-nav"></i><span id="niu2-cse-search-text">Search</span>
+                           </div>
+                       </div>
+                       </li>
+                       </ul>
+                    </nav>
+                </div>
+            </div>
+<style>
+    #banner{
+        background-image:url("http://blog.dornea.nu//images/header.jpg");
+    }   
+</style>
+
+<div id="banner">
+    <div class="container">
+        <div class="copy">
+            <h2>blog.dornea.nu</h2>
+                <p class="intro">Hack, code and drink some țuică. Personal blog of Victor Dorneanu.</p>
+        </div>
+    </div>
+</div>
+            <!-- End Banner -->
+        </div>
+
+        <div id="body-content">
+            <div class="col-md-8 col-md-offset-2">
+                <h1 id="content-heading">Fuzzing the hell out of conntrack tools</h1>
+            </div>
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+                <div id="niu2-main-content">
+                    <p>Fuzzing is nowadays <strong>the</strong> attack technique used by a lot of pentesters and security researchers. Whether you're 
+looking for vulnerabilities in media files (pictures, videos, audio stuff) or just binary files,
+fuzzing is the right approach if you don't want to do some static code analysis or debug the 
+hell out of your targets. </p>
+<p>When it comes to fuzzing there are a few tools to mention that have established during the last 
+years. One of them is definitely <a href="http://lcamtuf.coredump.cx/afl/">AFL</a>. AFL has a very powerful
+<a href="https://lcamtuf.blogspot.de/2014/08/binary-fuzzing-strategies-what-works.html">fuzzing engine</a>
+and a lot of <a href="http://lcamtuf.coredump.cx/afl/#bugs">vulnerabilities</a> have been identified by AFL.
+However, AFL's simpleness of using files as parameters to your target binary, is also one big 
+disadvantage. While in most cases you should be fine by reading your input from files, when dealing
+with <strong>sockets</strong>, the <strong>code</strong> has to be <strong>modified</strong> in order to read input from files instead of sockets.
+This step can be very <strong>complex</strong> and involves good C/C++ skills.</p>
+<p>After reading <a href="https://blog.skullsecurity.org/2015/how-i-nearly-almost-saved-the-internet-starring-afl-fuzz-and-dnsmasq">"How I nearly almost saved the Internet"</a> 
+I thought it should be an easy task to adapt the code of my target in order
+to run it by AFL. This step was indeed very <strong>time-consuming</strong> and was done after endless debug sessions.
+Below I'll try to give some overview which steps might be essential in fuzzing your target in an
+effective way. Modifying the source code for your needs definitely requires a deep understanding 
+of the programms workflow. I hope this post will provide some useful tips how to speed up 
+the fuzzing process - whatever your target will be. </p>
+<h2 id="c076e4fd1559721e171432e66b70a487">Motivation</h2>
+<p>Why would one want to <strong>fuzz</strong> <a href="http://conntrack-tools.netfilter.org">conntrack-tools</a> anyway? Before we continue: <strong>No 0day here!</strong> 
+As sad as it sounds, I wasn't able to find any crashes using <code>AFL</code>. But that is no guarantee
+for safe, secure code so there might be some vulnerabilities ready to be found. </p>
+<p>As you probably know <strong>software security</strong> doest not only apply to web stuff but also to 
+software that runs critical network infrastructure. Since the IT sec community seems to
+have a <strong>huge</strong> focus on web applications (it's still the main entry point, right?), a few
+people (in relation to the first group mentioned) do have a look at network/system level 
+stuff. In my case I wanted to audit and fuzz software that deals with <a href="http://www.iptables.info/en/connection-state.html#COMPLEXPROTOCOLS">connection tracking</a> management. In my particular case I've used <a href="http://conntrack-tools.netfilter.org/conntrackd.html">conntrackd</a>
+to manage and synchronize the connection tracking information between 2 hosts. </p>
+<h2 id="ad2376beebecdcf7846ba973fa1a005b">Setup</h2>
+<p>On 2 virtual machines I've downloaded the <code>conntrack-tools</code> (also includes <code>conntrackd</code>), 
+compiled the code and ran the daemons:</p>
+<p><div class="blockdiag" style="align: center;"><img class="img-responsive" src="data:image/png;base64,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"/></div></p>
+<p>So <code>nat01</code> and <code>nat02</code> were supposed to exchange information about their connection tracking table. 
+In a nutshell <code>conntrackd</code>:</p>
+<ul>
+<li><strong>synchronizes</strong> connection tracking states among several replica firewalls</li>
+<li>has <strong>channels</strong> (UDP, TCP)</li>
+<li>has <strong>sync</strong> modes (notrack, ftfw)</li>
+</ul>
+<p>Let's have a look at some <strong>configuration</strong> file:</p>
+<div class="highlight"><pre>Sync {
+        Mode FTFW{
+        }
+    UDP Default {
+        IPv4_address 192.168.122.242
+        IPv4_Destination_Address 192.168.122.252 
+        Port 3780
+        Interface ens3 
+        SndSocketBuffer 1249280
+        RcvSocketBuffer 1249280
+        Checksum on
+    }
+}
+</pre></div>
+<p>This configuration says:</p>
+<ul>
+<li><strong>FTFW</strong> sync mode is used</li>
+<li><strong>own</strong> IP address is <code>192.168.122.242</code></li>
+<li><strong>destination</strong> IP address for sync is <code>192.168.122.252</code></li>
+<li>use <strong>port</strong> <code>3780</code> for sync</li>
+</ul>
+<p>Basically this how synchronization works. Of course some details have been ommitted for the sake of 
+simplicity. For the detailed configuration please refer to the <a href="http://conntrack-tools.netfilter.org/manual.html">documentation</a>. 
+In the end the daemons are started by specifying the config file:</p>
+<div class="highlight"><pre><span class="nv">$ </span>./src/conntrackd -C &lt;config file&gt;
+...
+</pre></div>
+<blockquote>
+<p>If you experience some crazy error messages, make sure you have following kernel modules loaded: <code>af_netlink</code></p>
+</blockquote>
+<h2 id="98efdd5a8722137a3ebb434d7fa2f325">Network traffic</h2>
+<p>If you then <strong>sniff</strong> for packets you'll see some magic packets:</p>
+<div class="highlight"><pre><span class="nv">$ </span>tshark -nr nat-traffic.pcap -E <span class="nv">separator</span><span class="o">=</span><span class="s2">","</span> -T fields -e udp.srcport -e udp.dstport -e udp.length -e data  <span class="p">|</span> head -n 5
+53085,3780,76,110000445815c162000c00000a17680236ef368f000800050000019e00050002060000000008000391f201bb000500040400000000080006000000780008000c7e64b2c3
+53085,3780,76,110000445815c163000c00000a17680236ef368f000800050000019e00050002060000000008000391f201bb0005000406000000000800060000001e0008000c7e64b2c3
+53085,3780,76,100000445815c164000c00000a216801d83ad4a30008000500000198000500020600000000080003c29a0050000500040100000000080006000000780008000ceb64b2c3
+53085,3780,76,110000445815c1aa000c00000a171f0cca0c1b21000800050000019a00050002060000000008000386e600350005000402000000000800060000003c0008000c7e64b2c3
+53085,3780,76,110000445815c1ab000c00000a171f0cca0c1b21000800050000019e00050002060000000008000386e60035000500040300000000080006000038400008000c7e64b2c3
+</pre></div>
+<p>As you have noticed the <code>UDP</code> payloads above are very similar to each other. However, <strong>bigger</strong> payloads were also transmitted:</p>
+<div class="highlight"><pre>57252,3780,1444,1100004457e14ced000c00000a21680236ef249d000800050000019e000500020600000000080003d9ac01bb000500040300000000080006000038400008000ceb64b
+2c31100004457e14cee000c00000a17680236ef22ae000800050000019e000500020600000000080003c0a201bb000500040300000000080006000038400008000c7e64b2c31100004457
+e14cef000c00000a176801c3b265ac000800050000019e000500020600000000080003bc700050000500040300000000080006000038400008000c7e64b2c31100004457e14cf0000c000
+00a176802b0206cff000800050000019e000500020600000000080003c16401bb000500040300000000080006000038400008000c7e64b2c31100004457e14cf1000c00000a21680136ef208d000800050000019e0005000206000000000800039dc201bb000500040300000000080006000038400008000ceb64b2c31100004457e14cf2000c00000a17680236ef249d000800050000019e000500020600000000080003d12c01bb000500040300000000080006000038400008000c7e64b2c31100004457e14cf3000c00000a21680236ef208d000800050000019e000500020600000000080003be7c01bb000500040300000000080006000038400008000ceb64b2c31100004457e14cf4000c00000a21680236ef37cb000800050000019e000500020600000000080003d4d201bb000500040300000000080006000038400008000ceb64b2c31100004457e14cf5000c00000a21680236ef208d000800050000019e000500020600000000080003de9001bb000500040300000000080006000038400008000ceb64b2c31100004457e14cf6000c00000a21680136ef208d000800050000019e000500020600000000080003bdae01bb000500040300000000080006000038400008000ceb64b2c31100004457e14cf7000c00000a17680336ef22af000800050000019e000500020600000000080003a37a01bb000500040300000000080006000038400008000c7e64b2c31100004457e14cf8000c00000a21680136ef208d000800050000019e0005000206000000000800039c8601bb000500040300000000080006000038400008000ceb64b2c31100004457e14cf9000c00000a21680134314113000800050000019e00050002060000000008000382f401bb000500040300000000080006000038400008000ceb64b2c31100004c57e14cfa000c00000a21680236ef3698000800050000019e000500020600000000080003d27c01bb000500040300000000080006000038400008000ceb64b2c30006000eeb0600001100004457e14cfb000c00000a17680336ef249d000800050000019e000500020600000000080003de7601bb000500040300000000080006000038400008000c7e64b2c31100004457e14cfc000c00000a21680136ef208d000800050000019e0005000206000000000800039ce001bb000500040300000000080006000038400008000ceb64b2c31100004457e14cfd000c00000a176803c01efd70000800050000019e000500020600000000080003b51001bb0005000403000000000800
+</pre></div>
+<h2 id="739e6d2a73723ec7b1919fa5a51f9b07">Analysis</h2>
+<p>Now what valuable information can we extract from the payloads? Using <a href="http://www.secdev.org/projects/scapy/">scapy</a> I've did
+some basic traffic analysis:</p>
+<div class="highlight"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="n">p</span><span class="o">.</span><span class="n">payload</span><span class="o">.</span><span class="n">payload</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c">###[ UDP ]###</span>
+  <span class="n">sport</span>     <span class="o">=</span> <span class="mi">53085</span>
+  <span class="n">dport</span>     <span class="o">=</span> <span class="n">nnp</span>
+  <span class="nb">len</span>       <span class="o">=</span> <span class="mi">76</span>
+  <span class="n">chksum</span>    <span class="o">=</span> <span class="mh">0x1aa6</span>
+<span class="c">###[ Raw ]###</span>
+     <span class="n">load</span>      <span class="o">=</span> <span class="s">'</span><span class="se">\x11\x00\x00</span><span class="s">DX</span><span class="se">\x15\xc1</span><span class="s">c</span><span class="se">\x00\x0c\x00\x00\n\x17</span><span class="s">h</span><span class="se">\x02</span><span class="s">6</span><span class="se">\xef</span><span class="s">6</span><span class="se">\x8f\x00\x08\x00\x05\x00\x00\x01\x9e\x00\x05\x00\x02\x06\x00\x00\x00\x00\x08\x00\x03\x91\xf2\x01\xbb\x00\x05\x00\x04\x06\x00\x00\x00\x00\x08\x00\x06\x00\x00\x00\x1e\x00\x08\x00\x0c</span><span class="s">~d</span><span class="se">\xb2\xc3</span><span class="s">'</span>
+</pre></div>
+<p>Apparently this is no ASCII data (who would have expected that anyway? :) Using <code>gdb</code> I wanted to know what's inside the data 
+and did some <strong>dynamic analysis</strong>. This way I was able to learn more about the data being passed over the wire and how 
+the source code is structured.   </p>
+<p>But first I had to make the code debuggable:</p>
+<div class="highlight"><pre><span class="nv">$ CCFLAGS</span><span class="o">=</span><span class="s2">"-g3 -gdwarf2"</span> ./configure
+<span class="o">[</span>...<span class="o">]</span>
+</pre></div>
+<p>Afterwards you should be able to <strong>run</strong> it:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo ./src/conntrackd -C conntrackd.conf
+</pre></div>
+<p>Sniffing the traffic you should see sth like this:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo tshark -i ens3 -Y udp -E <span class="nv">separator</span><span class="o">=</span><span class="s2">","</span> -T fields -e ip.src -e udp.srcport -e udp.dstport -e udp.length -e data
+192.168.122.242,192.168.122.242,48786,3780,16,1a10000858109293
+192.168.122.242,192.168.122.242,48786,3780,16,1a10000858109294
+192.168.122.242,192.168.122.242,48786,3780,16,1a10000858109295
+192.168.122.242,192.168.122.242,48786,3780,16,1a10000858109296
+192.168.122.242,192.168.122.242,48786,3780,16,1a10000858109297
+192.168.122.242,192.168.122.242,48786,3780,16,1a10000858109298
+192.168.122.242,192.168.122.242,48786,3780,16,1a10000858109299
+192.168.122.242,192.168.122.242,48786,3780,16,1a1000085810929a
+^C8 packets captured
+</pre></div>
+<p>The daemon will try to send out some "keep-alive" messages to its counterpart. Now we send those packets
+<strong>manually</strong> and debug the interesting part in the code. For packet generation I'll use <code>scapy</code> again (running as
+<strong>root</strong> since you'll need to create <strong>RAW sockets</strong>):</p>
+<div class="highlight"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">scapy.all</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">WARNING</span><span class="p">:</span> <span class="n">No</span> <span class="n">route</span> <span class="n">found</span> <span class="k">for</span> <span class="n">IPv6</span> <span class="n">destination</span> <span class="p">::</span> <span class="p">(</span><span class="n">no</span> <span class="n">default</span> <span class="n">route</span><span class="err">?</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">binascii</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">p</span><span class="o">=</span><span class="n">Ether</span><span class="p">()</span><span class="o">/</span><span class="n">IP</span><span class="p">(</span><span class="n">dst</span><span class="o">=</span><span class="s">"192.168.122.242"</span><span class="p">)</span><span class="o">/</span><span class="n">UDP</span><span class="p">(</span><span class="n">dport</span><span class="o">=</span><span class="mi">3780</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">payload</span> <span class="o">=</span> <span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="s">"1a10000858109293"</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">p</span><span class="o">/</span><span class="n">Raw</span><span class="p">(</span><span class="n">load</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">Ether</span>  <span class="nb">type</span><span class="o">=</span><span class="n">IPv4</span> <span class="o">|&lt;</span><span class="n">IP</span>  <span class="n">frag</span><span class="o">=</span><span class="mi">0</span> <span class="n">proto</span><span class="o">=</span><span class="n">udp</span> <span class="n">dst</span><span class="o">=</span><span class="mf">192.168</span><span class="o">.</span><span class="mf">122.242</span> <span class="o">|&lt;</span><span class="n">UDP</span>  <span class="n">dport</span><span class="o">=</span><span class="n">nnp</span> <span class="o">|&lt;</span><span class="n">Raw</span>  <span class="n">load</span><span class="o">=</span><span class="s">'</span><span class="se">\x1a\x10\x00\x08</span><span class="s">X</span><span class="se">\x10\x92\x93</span><span class="s">'</span> <span class="o">|&gt;&gt;&gt;&gt;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="n">sendp</span><span class="p">(</span><span class="n">p</span><span class="o">/</span><span class="n">Raw</span><span class="p">(</span><span class="n">load</span><span class="o">=</span><span class="n">payload</span><span class="p">))</span>
+<span class="o">.</span>
+<span class="n">Sent</span> <span class="mi">1</span> <span class="n">packets</span><span class="o">.</span>
+</pre></div>
+<h3 id="51e229527022b23ef548bfc016bfb0ac">Data flow</h3>
+<p>After heavy debugging sessions I was able to understand the data flow inside the code. Below I'll try to explain how <code>conntrackd</code> basically
+works:</p>
+<ol>
+<li>The <strong>configuration</strong> file gets parsed and several options are set</li>
+<li>In <code>src/sync-mode.c</code> you have <a href="http://git.netfilter.org/conntrack-tools/tree/src/sync-mode.c#n362">init_sync</a> where a lot of vodoo happens but the most important part is:</li>
+</ol>
+<div class="highlight"><pre>    <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">STATE_SYNC</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">channel_num</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">channel_get_fd</span><span class="p">(</span><span class="n">STATE_SYNC</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">channel</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="n">fcntl</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">F_SETFL</span><span class="p">,</span> <span class="n">O_NONBLOCK</span><span class="p">);</span>
+
+        <span class="k">switch</span><span class="p">(</span><span class="n">channel_type</span><span class="p">(</span><span class="n">STATE_SYNC</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">channel</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="nl">CHANNEL_T_STREAM</span><span class="p">:</span>
+            <span class="n">register_fd</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">channel_accept_cb</span><span class="p">,</span>
+                    <span class="n">STATE_SYNC</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">channel</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                    <span class="n">STATE</span><span class="p">(</span><span class="n">fds</span><span class="p">));</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nl">CHANNEL_T_DATAGRAM</span><span class="p">:</span>
+            <span class="n">register_fd</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">channel_handler</span><span class="p">,</span>
+                    <span class="n">STATE_SYNC</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">channel</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                    <span class="n">STATE</span><span class="p">(</span><span class="n">fds</span><span class="p">));</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+<p>Depending on the <strong>sync</strong> mode, then for every <strong>channel</strong> a channel <strong>handler</strong> is being registered. This 
+will be called every time an "event" occurs, that means a packet arrives:</p>
+<ul>
+<li>for TCP packets (<code>CHANNEL_T_STREAM</code>) <code>channel_accept_cb</code> will be called</li>
+<li>for UDP datagrams (<code>CHANNEL_T_DATAGRAM</code>) <code>channel_handler</code> will be called</li>
+</ul>
+<p>Since I chose to test for <strong>UDP</strong> packets, let's have a look at <a href="http://git.netfilter.org/conntrack-tools/tree/src/sync-mode.c#n253">channel_handler</a>:</p>
+<div class="highlight"><pre><span class="k">static</span> <span class="kt">void</span> <span class="nf">channel_handler</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">struct</span> <span class="n">channel</span> <span class="o">*</span><span class="n">c</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">k</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">CONFIG</span><span class="p">(</span><span class="n">event_iterations_limit</span><span class="p">);</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">channel_handler_routine</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+<p>This will then call <a href="http://git.netfilter.org/conntrack-tools/tree/src/sync-mode.c#n178">channel_handler_routine</a>:</p>
+<div class="highlight"><pre><span class="k">static</span> <span class="kt">int</span> <span class="nf">channel_handler_routine</span><span class="p">(</span><span class="k">struct</span> <span class="n">channel</span> <span class="o">*</span><span class="n">m</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">ssize_t</span> <span class="n">numbytes</span><span class="p">;</span>
+    <span class="kt">ssize_t</span> <span class="n">remain</span><span class="p">,</span> <span class="n">pending</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">-</span> <span class="n">__net</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="n">__net</span><span class="p">;</span>
+
+    <span class="n">numbytes</span> <span class="o">=</span> <span class="n">channel_recv</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">cur</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">__net</span><span class="p">)</span> <span class="o">-</span> <span class="n">pending</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">numbytes</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+    <span class="n">remain</span> <span class="o">=</span> <span class="n">numbytes</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">pending</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">remain</span> <span class="o">+=</span> <span class="n">pending</span><span class="p">;</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">__net</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">remain</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">struct</span> <span class="n">nethdr</span> <span class="o">*</span><span class="n">net</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">nethdr</span> <span class="o">*</span><span class="p">)</span> <span class="n">ptr</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">len</span><span class="p">;</span>
+
+        <span class="c1">// HERE THE PACKET ITSELF IS ANALYZED</span>
+        <span class="p">[...]</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+<p>Obvisouly <a href="http://git.netfilter.org/conntrack-tools/tree/src/channel.c#n279">channel_recv</a> is called:</p>
+<div class="highlight"><pre><span class="kt">int</span> <span class="nf">channel_recv</span><span class="p">(</span><span class="k">struct</span> <span class="n">channel</span> <span class="o">*</span><span class="n">c</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">c</span><span class="o">-&gt;</span><span class="n">ops</span><span class="o">-&gt;</span><span class="n">recv</span><span class="p">(</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+<p>Depending on which channel (variable <code>c</code>) is currently active <code>channel_recv</code> will then call the channel's
+<code>recv</code> function. The channel for UDP is stored in a structure called <a href="http://git.netfilter.org/conntrack-tools/tree/src/channel_udp.c#n128">channel_udp</a>:</p>
+<div class="highlight"><pre><span class="k">struct</span> <span class="n">channel_ops</span> <span class="n">channel_udp</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">.</span><span class="n">headersiz</span>  <span class="o">=</span> <span class="mi">28</span><span class="p">,</span> <span class="cm">/* IP header (20 bytes) + UDP header 8 (bytes) */</span>
+    <span class="p">.</span><span class="n">open</span>       <span class="o">=</span> <span class="n">channel_udp_open</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">close</span>      <span class="o">=</span> <span class="n">channel_udp_close</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">send</span>       <span class="o">=</span> <span class="n">channel_udp_send</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">recv</span>       <span class="o">=</span> <span class="n">channel_udp_recv</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">get_fd</span>     <span class="o">=</span> <span class="n">channel_udp_get_fd</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">isset</span>      <span class="o">=</span> <span class="n">channel_udp_isset</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">accept_isset</span>   <span class="o">=</span> <span class="n">channel_udp_accept_isset</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">stats</span>      <span class="o">=</span> <span class="n">channel_udp_stats</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">stats_extended</span> <span class="o">=</span> <span class="n">channel_udp_stats_extended</span><span class="p">,</span>
+<span class="p">};</span>
+</pre></div>
+<p>As you can notice <code>channel_udp.recv</code> is a function pointer to <a href="http://git.netfilter.org/conntrack-tools/tree/src/channel_udp.c#n49">channel_udp_recv</a>:</p>
+<div class="highlight"><pre><span class="k">static</span> <span class="kt">int</span>
+<span class="nf">channel_udp_recv</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">channel</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">struct</span> <span class="n">udp_channel</span> <span class="o">*</span><span class="n">m</span> <span class="o">=</span> <span class="n">channel</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">udp_recv</span><span class="p">(</span><span class="n">m</span><span class="o">-&gt;</span><span class="n">server</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+<p>So now we're getting closer to the function that is actually responsible for reading data from the wire. In <a href="http://git.netfilter.org/conntrack-tools/tree/src/udp.c#n193">udp_recv</a> all the magic happens:</p>
+<div class="highlight"><pre><span class="kt">ssize_t</span> <span class="nf">udp_recv</span><span class="p">(</span><span class="k">struct</span> <span class="n">udp_sock</span> <span class="o">*</span><span class="n">m</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">ssize_t</span> <span class="n">ret</span><span class="p">;</span>
+    <span class="kt">socklen_t</span> <span class="n">sin_size</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr_in</span><span class="p">);</span>
+
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">recvfrom</span><span class="p">(</span><span class="n">m</span><span class="o">-&gt;</span><span class="n">fd</span><span class="p">,</span>
+               <span class="n">data</span><span class="p">,</span> 
+               <span class="n">size</span><span class="p">,</span>
+               <span class="mi">0</span><span class="p">,</span>
+               <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">m</span><span class="o">-&gt;</span><span class="n">addr</span><span class="p">,</span>
+               <span class="o">&amp;</span><span class="n">sin_size</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">errno</span> <span class="o">!=</span> <span class="n">EAGAIN</span><span class="p">)</span>
+            <span class="n">m</span><span class="o">-&gt;</span><span class="n">stats</span><span class="p">.</span><span class="n">error</span><span class="o">++</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">m</span><span class="o">-&gt;</span><span class="n">stats</span><span class="p">.</span><span class="n">bytes</span> <span class="o">+=</span> <span class="n">ret</span><span class="p">;</span>
+    <span class="n">m</span><span class="o">-&gt;</span><span class="n">stats</span><span class="p">.</span><span class="n">messages</span><span class="o">++</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+<p>Nothing special about: Just call <code>recvfrom</code>, read the data into <code>data</code> and update some statistics. </p>
+<h3 id="cd39479ba3bfdc5f35f48e9a70e8f4a8">The plan</h3>
+<p>If we want to do some fuzzing we'll have to modify <code>udp_recv</code> to read from some file instead of sockets. Re-writing 
+the function was actually a quite easy task:</p>
+<div class="highlight"><pre><span class="cp">#ifdef FUZZ</span>
+<span class="kt">ssize_t</span> <span class="nf">my_udp_recv</span><span class="p">(</span><span class="k">struct</span> <span class="n">udp_sock</span> <span class="o">*</span><span class="n">m</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">ssize_t</span> <span class="n">ret</span><span class="p">;</span>
+    <span class="kt">long</span> <span class="n">f_size</span><span class="p">;</span>
+    <span class="kt">FILE</span> <span class="o">*</span><span class="n">f</span><span class="p">;</span>
+    <span class="kt">socklen_t</span> <span class="n">sin_size</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr_in</span><span class="p">);</span>
+
+    <span class="c1">// Read file</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">f</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">(</span><span class="n">fuzz_file</span><span class="p">),</span> <span class="s">"rb"</span><span class="p">)))</span> <span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"[FUZZ] Couldn't open file</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Get file length</span>
+    <span class="n">fseek</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0L</span><span class="p">,</span> <span class="n">SEEK_END</span><span class="p">);</span>
+    <span class="n">f_size</span> <span class="o">=</span> <span class="n">ftell</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
+    <span class="n">rewind</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
+
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">fread</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">f</span><span class="p">);</span>
+    <span class="n">fclose</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">errno</span> <span class="o">!=</span> <span class="n">EAGAIN</span><span class="p">)</span>
+            <span class="n">m</span><span class="o">-&gt;</span><span class="n">stats</span><span class="p">.</span><span class="n">error</span><span class="o">++</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">m</span><span class="o">-&gt;</span><span class="n">stats</span><span class="p">.</span><span class="n">bytes</span> <span class="o">+=</span> <span class="n">f_size</span><span class="p">;</span>
+    <span class="n">m</span><span class="o">-&gt;</span><span class="n">stats</span><span class="p">.</span><span class="n">messages</span><span class="o">++</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">f_size</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
+</pre></div>
+<p>Easy, right? Now <code>my_udp_recv</code> will read the file specified by <code>filename</code> and store the contents inside <code>data</code>. However,
+this simple modification implied several changes across the whole base. </p>
+<blockquote>
+<p>You can see the whole changes <a href="https://github.com/dorneanu/conntrack-fuzzing/search?utf8=✓&amp;q=udp_recv">here</a>. </p>
+</blockquote>
+<p>Afterwards I was able to compile the code with this new feature:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git clone https://github.com/dorneanu/conntrack-fuzzing
+<span class="nv">$ </span><span class="nb">cd </span>conntrack-fuzzing
+<span class="nv">$ CFLAGS</span><span class="o">=</span>-DFUZZ <span class="nv">LDFLAGS</span><span class="o">=</span>-ldl ./configure
+<span class="o">[</span>...<span class="o">]</span>
+<span class="nv">$ </span>./src/conntrackd --help 
+Connection tracking userspace daemon v1.4.4
+Usage: ./src/conntrackd <span class="o">[</span>commands<span class="o">]</span> <span class="o">[</span>options<span class="o">]</span>
+
+Daemon mode commands:
+  -X <span class="o">[</span>fuzz-file<span class="o">]</span>, specify fuzz file
+  -d <span class="o">[</span>options<span class="o">]</span>          Run in daemon mode
+
+<span class="o">[</span>...<span class="o">]</span>
+</pre></div>
+<p>Now you can specify a file (<code>-X</code>) which will be used as parameter for <code>my_udp_recv</code>. The "daemon" will now just read 
+the contents of the file, analyze the input and then simply exit.</p>
+<h2 id="ebf0d3f5e018717a3a2b11f5c11a9e34">Generating input values</h2>
+<p>Now that I was able to specify files as data input, I had to generate some input examples for the screening process of <code>AFL</code>.
+By sniffing enought traffic between 2 productive hosts running <code>conntrackd</code> I got a <strong>lots</strong> of payloads I could then use
+for <code>AFL</code>. All I had to do was to store those values as binary files:</p>
+<div class="highlight"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">payload</span> <span class="o">=</span> <span class="s">"1000003c5815c1c9000c00000a171f0cc3b265fa000800050000019800050002110000000008000305be0035000800060000001e0008000c7e64b2c3"</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">binascii</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"/tmp/input1"</span><span class="p">,</span> <span class="s">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="o">...</span><span class="p">:</span>     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">payload</span><span class="p">))</span>
+   <span class="o">...</span><span class="p">:</span>     <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+   <span class="o">...</span><span class="p">:</span> 
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="err">!</span><span class="n">hexdump</span> <span class="o">-</span><span class="n">C</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">input1</span>
+<span class="mo">00000000</span>  <span class="mi">10</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mi">3</span><span class="n">c</span> <span class="mi">58</span> <span class="mi">15</span> <span class="n">c1</span> <span class="n">c9</span>  <span class="mo">00</span> <span class="mi">0</span><span class="n">c</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mi">0</span><span class="n">a</span> <span class="mi">17</span> <span class="mi">1</span><span class="n">f</span> <span class="mi">0</span><span class="n">c</span>  <span class="o">|...&lt;</span><span class="n">X</span><span class="o">...........|</span>
+<span class="mo">00000010</span>  <span class="n">c3</span> <span class="n">b2</span> <span class="mi">65</span> <span class="n">fa</span> <span class="mo">00</span> <span class="mi">08</span> <span class="mo">00</span> <span class="mo">05</span>  <span class="mo">00</span> <span class="mo">00</span> <span class="mo">01</span> <span class="mi">98</span> <span class="mo">00</span> <span class="mo">05</span> <span class="mo">00</span> <span class="mo">02</span>  <span class="o">|..</span><span class="n">e</span><span class="o">.............|</span>
+<span class="mo">00000020</span>  <span class="mi">11</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mi">08</span> <span class="mo">00</span> <span class="mo">03</span>  <span class="mo">05</span> <span class="n">be</span> <span class="mo">00</span> <span class="mi">35</span> <span class="mo">00</span> <span class="mi">08</span> <span class="mo">00</span> <span class="mo">06</span>  <span class="o">|...........</span><span class="mf">5.</span><span class="o">...|</span>
+<span class="mo">00000030</span>  <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mi">1</span><span class="n">e</span> <span class="mo">00</span> <span class="mi">08</span> <span class="mo">00</span> <span class="mi">0</span><span class="n">c</span>  <span class="mi">7</span><span class="n">e</span> <span class="mi">64</span> <span class="n">b2</span> <span class="n">c3</span>              <span class="o">|........~</span><span class="n">d</span><span class="o">..|</span>
+<span class="mo">0000003</span><span class="n">c</span>
+</pre></div>
+<p>For my test cases I've chosen ca. 4-5 different payloads and stored them as binary files. Now I was ready to run <code>AFL</code>.  </p>
+<h2 id="a0dcc3a486e8acdbbe2c2901c622b5b5">Prepare for AFL</h2>
+<p>Inside the project I've then created the directory structure for <code>AFL</code>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>mkdir -p fuzzing/<span class="o">{</span>ftfw,notrack<span class="o">}</span>/input
+</pre></div>
+<p>For every sync mode (ftwfw and notrack) I've then copied the input values into <code>input</code>. As a next step I had to compile the source using
+<code>afl-gcc</code>:</p>
+<div class="highlight"><pre><span class="nv">$ CC</span><span class="o">=</span>afl-gcc <span class="nv">AFL_USE_ASAN</span><span class="o">=</span><span class="m">1</span> <span class="nv">CFLAGS</span><span class="o">=</span>-DFUZZ <span class="nv">LDFLAGS</span><span class="o">=</span>-ldl ./configure
+<span class="o">[</span>...<span class="o">]</span>
+<span class="nv">$ </span>make -j 4
+<span class="o">[</span>...<span class="o">]</span>
+</pre></div>
+<h2 id="e6a9b14941a605eada4e4edbd493fa7a">Running AFL</h2>
+<p><code>AFL</code> itself had to be ran as <code>root</code> since <code>conntrackd</code> requires privileged permissions:</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">echo </span>core &gt;/proc/sys/kernel/core_pattern
+<span class="nv">$ </span>afl-fuzz -i fuzzing/ftfw/input/ -o fuzzing/ftfw/output ./src/conntrackd -C conntrackd.conf -X @@
+<span class="o">[</span>+<span class="o">]</span> You have <span class="m">2</span> CPU cores and <span class="m">1</span> runnable tasks <span class="o">(</span>utilization: 50%<span class="o">)</span>.
+<span class="o">[</span>+<span class="o">]</span> Try parallel <span class="nb">jobs</span> - see /usr/local/share/doc/afl/parallel_fuzzing.txt.
+<span class="o">[</span>*<span class="o">]</span> Checking core_pattern...
+<span class="o">[</span>*<span class="o">]</span> Setting up output directories...
+<span class="o">[</span>*<span class="o">]</span> Scanning <span class="s1">'fuzzing/ftfw/input/'</span>...
+<span class="o">[</span>+<span class="o">]</span> No auto-generated dictionary tokens to reuse.
+<span class="o">[</span>*<span class="o">]</span> Creating hard links <span class="k">for</span> all input files...
+<span class="o">[</span>*<span class="o">]</span> Validating target binary...
+<span class="o">[</span>*<span class="o">]</span> Attempting dry run with <span class="s1">'id:000000,orig:r1'</span>...
+<span class="o">[</span>*<span class="o">]</span> Spinning up the fork server...
+<span class="o">[</span>+<span class="o">]</span> All right - fork server is up.
+    <span class="nv">len</span> <span class="o">=</span> 136, map <span class="nv">size</span> <span class="o">=</span> 597, <span class="nb">exec </span><span class="nv">speed</span> <span class="o">=</span> <span class="m">3185</span> us
+<span class="o">[</span>*<span class="o">]</span> Attempting dry run with <span class="s1">'id:000001,orig:r2'</span>...
+    <span class="nv">len</span> <span class="o">=</span> 204, map <span class="nv">size</span> <span class="o">=</span> 622, <span class="nb">exec </span><span class="nv">speed</span> <span class="o">=</span> <span class="m">2569</span> us
+<span class="o">[</span>*<span class="o">]</span> Attempting dry run with <span class="s1">'id:000002,orig:r3'</span>...
+    <span class="nv">len</span> <span class="o">=</span> 68, map <span class="nv">size</span> <span class="o">=</span> 619, <span class="nb">exec </span><span class="nv">speed</span> <span class="o">=</span> <span class="m">2545</span> us
+<span class="o">[</span>*<span class="o">]</span> Attempting dry run with <span class="s1">'id:000003,orig:r4'</span>...
+    <span class="nv">len</span> <span class="o">=</span> 476, map <span class="nv">size</span> <span class="o">=</span> 597, <span class="nb">exec </span><span class="nv">speed</span> <span class="o">=</span> <span class="m">2867</span> us
+<span class="o">[</span>!<span class="o">]</span> WARNING: No new instrumentation output, <span class="nb">test </span><span class="k">case</span> may be useless.
+<span class="o">[</span>+<span class="o">]</span> All <span class="nb">test </span>cases processed.
+
+<span class="o">[</span>!<span class="o">]</span> WARNING: Some <span class="nb">test </span>cases look useless. Consider using a smaller set.
+<span class="o">[</span>+<span class="o">]</span> Here are some useful stats:
+
+    Test <span class="k">case</span> count : <span class="m">2</span> favored, <span class="m">0</span> variable, <span class="m">4</span> total
+       Bitmap range : <span class="m">597</span> to <span class="m">622</span> bits <span class="o">(</span>average: 608.75 bits<span class="o">)</span>
+        Exec timing : <span class="m">2545</span> to <span class="m">3185</span> us <span class="o">(</span>average: <span class="m">2792</span> us<span class="o">)</span>
+
+<span class="o">[</span>*<span class="o">]</span> No -t option specified, so I<span class="err">'</span>ll use <span class="nb">exec </span>timeout of <span class="m">20</span> ms.
+<span class="o">[</span>+<span class="o">]</span> All <span class="nb">set </span>and ready to roll!
+
+<span class="o">[</span>...<span class="o">]</span>
+</pre></div>
+<p>You can also monitor the current input using:</p>
+<div class="highlight"><pre><span class="nv">$ </span>watch -n1 <span class="s1">'cat fuzzing/ftfw/output/.cur_input | hexdump -C'</span>
+</pre></div>
+<h2 id="fd69c5cf902969e6fb71d043085ddee6">Results</h2>
+<p>While the <strong>preparation</strong> steps were indeed time-consuming I think I have definitely improved my <code>gdb</code> 
+skills looking at the code and trying to understand how things work. Additionally I was able to trace 
+the data flow within the code - from the sockets till to the functions where data got analyzed. The 
+<strong>fuzzing process</strong> itself was quite straight-forward and mainly managed by <code>AFL</code> itself. Unfortunately 
+(depends on the perspective you're looking from) I wasn't able to find any crashes inside <code>conntrack-tools</code> 
+which is actually good. By crashing the daemon some network connectivity would have been heavily 
+affected. But again: The fact that I wasn't able to find any issues, is no guarantee for secure software.
+Maybe other will have a look at the code and do some <strong>static code analysis</strong>. </p>
+<p>For me personally this was a hell of fun and I'm already looking forward to my next fuzzing project. Stay tuned
+and feel free to drop your comments for additional questions/suggestions regarding the steps explained here. </p>
+                </div>
+<hr/>
+<div style="float:left;">
+	Prev: <a href="http://blog.dornea.nu/2016/10/21/hacklu-conference-2016" align='left'>
+	 hack.lu conference 2016
+	</a>
+</div>
+</p>
+
+                <!-- Add comments -->
+<div id="content-comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname="dorneanu";
+				var disqus_identifier = 'fuzzing-the-hell-out-of-conntrack-tools';
+			var disqus_url = 'http://blog.dornea.nu/2016/10/28/fuzzing-the-hell-out-of-conntrack-tools';
+
+		var disqus_config = function () {
+			this.language = "en";
+		};
+ 
+        
+        (function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div> 
+            </div>
+            <div class="niu2-right-container col-md-2">
+                <div id="niu2-sidebar-meta" class="niu2-sidebar">
+                    <div class="niu2-sidebar-label"><i class="icon-calendar"></i>Published:</div>
+                    <div class="niu2-sidebar-value">2016-10-28 00:00</div>
+                    <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
+                    <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
+                    <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/hacking/">hacking</a><sup>22</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/fuzz/">fuzz</a><sup>1</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>39</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/python/">python</a><sup>25</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/afl/">afl</a><sup>1</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/linux/">linux</a><sup>21</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/appsec/">appsec</a><sup>25</sup></div>
+                </div>
+
+                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                    <div class="niu2-sidebar-label">
+                        <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>Table of contents
+                    </div>
+                    <ul id="niu2-sidebar-toc-list">
+                        <li><a href="#content-heading">Fuzzing the hell out of conntrack tools</a></li>
+                        <li><a href='#c076e4fd1559721e171432e66b70a487'>Motivation</a></li><li><a href='#ad2376beebecdcf7846ba973fa1a005b'>Setup</a></li><li><a href='#98efdd5a8722137a3ebb434d7fa2f325'>Network traffic</a></li><li><a href='#739e6d2a73723ec7b1919fa5a51f9b07'>Analysis</a><ul><li><a href='#51e229527022b23ef548bfc016bfb0ac'>Data flow</a></li><li><a href='#cd39479ba3bfdc5f35f48e9a70e8f4a8'>The plan</a></li></ul></li><li><a href='#ebf0d3f5e018717a3a2b11f5c11a9e34'>Generating input values</a></li><li><a href='#a0dcc3a486e8acdbbe2c2901c622b5b5'>Prepare for AFL</a></li><li><a href='#e6a9b14941a605eada4e4edbd493fa7a'>Running AFL</a></li><li><a href='#fd69c5cf902969e6fb71d043085ddee6'>Results</a></li>
+                        <li><a href="#content-comments">Comments</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="niu2-toolbar">
+                <ul class="list-unstyled">
+                    <li><a id="niu2-toolbar-ctrlsidebar" href="#" title="Hide Sidebar"><i class="icon-3x icon-hide-sidebar"></i></a></li>
+                </ul>
+                <div id="niu2-toolbar-showsidebar" data-title="Show Sidebar"></div>
+                <div id="niu2-toolbar-github" data-repo=""></div>
+                <div id="niu2-toolbar-bitbucket" data-repo=""></div>
+            </div>
+            <div id="niu2-toc" data-style="fixed"></div>
+        </div>
+
+        <div class="niu2-footer">
+            <div id="body-footer" class="col-md-6 col-md-offset-2">
+                <hr/>
+                <p>
+                    Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
+                    <a href="https://github.com/mawenbao/niu-x2-sidebar">theme</a> built with <a href="https://github.com/twbs/bootstrap">Bootstrap3</a>
+                    by <a href="https://blog.mawenbao.com">Ma Wenbao</a>, icons by 
+                    <a href="https://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
+                </p>
+                <p>
+                    © 2008 - 2016
+                    <a class="niu2-footer-link" href="http://blog.dornea.nu">Victor Dorneanu</a>
+                </p>
+                <p class="niu2-icons">
+                    <a class="niu2-footer-icon" href="https://pgp.mit.edu/pks/lookup?op=get&search=0x18F1AD46FB05E1B7" title="my public key">
+                        <i class="icon-key icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="mailto: no-spam ÄATT dornea DOT nu" title="my email address">
+                        <i class="icon-envelope-o icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="http://github.com/dorneanu" title="my github page">
+                        <i class="icon-github-alt icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="/feeds/rss.xml" title="subscribe my blog">
+                        <i class="icon-rss icon-lg"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            var _gaq=_gaq||[];
+            _gaq.push(["_setAccount","UA-7161767-3"]);
+            _gaq.push(["_trackPageview"]);
+            (function(){
+                var b=document.createElement("script");
+                b.type="text/javascript";
+                b.async=true;
+                b.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";
+                var a=document.getElementsByTagName("script")[0];
+                a.parentNode.insertBefore(b,a)
+            })();
+        </script>
+        <div id="niu2-pygments" data-theme="github"></div>
+        <div id="niu2-lazy-load" data-loading-txt="Loading image" data-loading-icon="icon-spin icon-spinner"></div>
+        <div id="niu2-toolbar-load" data-loading-icon="icon-spin icon-4x icon-spinner"></div>
+        <script type="text/javascript" src="/js/custom.js"></script>
+        <script type="text/javascript">
+            onContentLoaded();
+        </script>
+    </body>
+</html>
