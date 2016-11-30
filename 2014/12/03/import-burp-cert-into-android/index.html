@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -122,7 +122,7 @@
                 <div id="niu2-main-content">
                     <p>As already mentioned in previous posts, in order to install Burps CA certificate, just go to the IP address Burp is listening on, followed by <em>/cert</em>, e.g. <code>http://127.0.0.1:8080/cert</code>. There you can download the cert and push it to your Android device. Usually you'll get a <em>binary</em> certificate in <em>DER</em> format: <em>cacert.crt</em>. </p>
 <p>Android won't recognize this file as a cert. You'll have to <strong>rename</strong> it to: <em>cacert.der</em> and push it to your device:</p>
-<div class="highlight"><pre># mv cacert.crt cacert.der
+<div class="highlight"><pre><span></span># mv cacert.crt cacert.der
 # adb push cacert.der /mnt/sdcard
 </pre></div>
 <p>Afterwards you should be able to import your cert into your Android device.</p>

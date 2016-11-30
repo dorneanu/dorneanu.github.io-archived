@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -121,15 +121,15 @@
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
                     <p>I wrote this since I always forget the 2 essential steps in order to regain <strong>root</strong> on a Nexus 10 device which has been updated over-the-air. Basically you'll have to flash a new <strong>recovery</strong> image:</p>
-<div class="highlight"><pre># ~/android-sdk/platform-tools/fastboot flash recovery recovery-clockwork-touch-6.0.4.3-manta.img
+<div class="highlight"><pre><span></span># ~/android-sdk/platform-tools/fastboot flash recovery recovery-clockwork-touch-6.0.4.3-manta.img
 ...
 </pre></div>
 <p>Before booting into <em>recovery</em> make sure you'll push the latest <code>SuperSU</code> zip package to your device:</p>
-<div class="highlight"><pre># adb push UPDATE-SuperSU-v1.51.zip /mnt/sdcard
+<div class="highlight"><pre><span></span># adb push UPDATE-SuperSU-v1.51.zip /mnt/sdcard
 ...
 </pre></div>
 <p>Boot into <em>recovery</em>:</p>
-<div class="highlight"><pre># adb reboot recovery
+<div class="highlight"><pre><span></span># adb reboot recovery
 ...
 </pre></div>
 <p>In CWRM install the previously pushed zip file and you're done.</p>

@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -121,15 +121,15 @@
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
                     <p>Say <strong>NO</strong> to facebook and add these lines to <code>/etc/firewall.user</code></p>
-<div class="highlight"><pre><span class="c"># This file is interpreted as shell script.</span>
-<span class="c"># Put your custom $IPT rules here, they will</span>
-<span class="c"># be executed with each firewall (re-)start.</span>
+<div class="highlight"><pre><span></span><span class="c1"># This file is interpreted as shell script.</span>
+<span class="c1"># Put your custom $IPT rules here, they will</span>
+<span class="c1"># be executed with each firewall (re-)start.</span>
 <span class="nv">IPT</span><span class="o">=</span>iptables
 <span class="nv">NET_LAN</span><span class="o">=</span>192.168.0.0/16
 
 ...
 
-<span class="c"># facebook</span>
+<span class="c1"># facebook</span>
 <span class="nv">$IPT</span> -I FORWARD -p tcp -m iprange --dst-range 66.220.144.0-66.220.159.255 --dport <span class="m">443</span> -j DROP
 <span class="nv">$IPT</span> -I FORWARD -p tcp -m iprange --dst-range 69.63.176.0-69.63.191.255 --dport <span class="m">443</span> -j DROP
 <span class="nv">$IPT</span> -I FORWARD -p tcp -m iprange --dst-range 204.15.20.0-204.15.23.255 --dport <span class="m">443</span> -j DROP

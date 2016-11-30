@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -121,10 +121,10 @@
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
                     <p>If you need some technical background, have a look <a href="http://nadeausoftware.com/node/98">here</a>. The preload cache script I've been using for a couple a months:</p>
-<div class="highlight"><pre><span class="c">#!/bin/bash</span>
-<span class="c">#</span>
-<span class="c"># Preload a web site's cache</span>
-<span class="c">#</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#</span>
+<span class="c1"># Preload a web site's cache</span>
+<span class="c1">#</span>
 
 <span class="nv">site</span><span class="o">=</span><span class="s2">"dornea.nu"</span>
 <span class="nv">tmp</span><span class="o">=</span><span class="s2">"downloads"</span>
@@ -132,28 +132,28 @@
 
 <span class="nb">echo</span> <span class="s2">"Crawling </span><span class="nv">$site</span><span class="s2">."</span>
 
-<span class="c"># Remove any prior downloaded files.</span>
+<span class="c1"># Remove any prior downloaded files.</span>
 rm -rf <span class="nv">$tmp</span>
 
-<span class="c"># Clear the page cache first.</span>
+<span class="c1"># Clear the page cache first.</span>
 wget --quiet --delete-after http://<span class="nv">$site</span>/<span class="o">[</span>insert reset cache script here<span class="o">]</span>.php
 
-<span class="c"># Crawl the site</span>
-<span class="c">#</span>
-<span class="c"># Crawl arguments:</span>
-<span class="c"># --recursive Crawl the site</span>
-<span class="c"># --domains=example.com Only crawl pages from the site</span>
-<span class="c"># --level=inf Continue to infinite depth</span>
-<span class="c">#</span>
-<span class="c"># Temp file arguments:</span>
-<span class="c"># --directory-prefix=downloads Save tmp files to the 'downloads' directory</span>
-<span class="c"># --force-directories Create directories for downloaded pages</span>
-<span class="c"># --delete-after Delete downloaded files afterwards</span>
-<span class="c">#</span>
-<span class="c"># Verbosity arguments:</span>
-<span class="c"># --output-file=log.txt Write a log to 'log.txt'</span>
-<span class="c"># --no-verbose Minimize log file output</span>
-<span class="c">#</span>
+<span class="c1"># Crawl the site</span>
+<span class="c1">#</span>
+<span class="c1"># Crawl arguments:</span>
+<span class="c1"># --recursive Crawl the site</span>
+<span class="c1"># --domains=example.com Only crawl pages from the site</span>
+<span class="c1"># --level=inf Continue to infinite depth</span>
+<span class="c1">#</span>
+<span class="c1"># Temp file arguments:</span>
+<span class="c1"># --directory-prefix=downloads Save tmp files to the 'downloads' directory</span>
+<span class="c1"># --force-directories Create directories for downloaded pages</span>
+<span class="c1"># --delete-after Delete downloaded files afterwards</span>
+<span class="c1">#</span>
+<span class="c1"># Verbosity arguments:</span>
+<span class="c1"># --output-file=log.txt Write a log to 'log.txt'</span>
+<span class="c1"># --no-verbose Minimize log file output</span>
+<span class="c1">#</span>
 
 wget
 --recursive
@@ -167,15 +167,15 @@ wget
 
 http://<span class="nv">$site</span>/
 
-<span class="c"># When the crawl is done, the download files are removed.</span>
-<span class="c"># Now remove the leftover directories too</span>
+<span class="c1"># When the crawl is done, the download files are removed.</span>
+<span class="c1"># Now remove the leftover directories too</span>
 rm -rf <span class="nv">$tmp</span>
 
 <span class="nb">echo</span>
 <span class="nb">echo</span> <span class="s2">"Done. A log of the crawl is in '</span><span class="nv">$log</span><span class="s2">'."</span>
 </pre></div>
 <p>The php script:</p>
-<div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 <span class="sd">/**</span>
 <span class="sd">* Clears the page cache.</span>
 <span class="sd">*/</span>

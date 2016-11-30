@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -126,19 +126,17 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In times of NSA, surveillance and data privacy, protecting your data has become an essential part of your every day life. A good understanding of basic principles is half the battle. In this post I just wanted to have look at SSL/TLS from a developer point of view but also from an users one. On the one hand I wanted to use <code>openssl</code> as a CLI utility to <em>inspect</em> and <em>validate</em> <a href="http://en.wikipedia.org/wiki/X.509">X.509 certificates</a>. On the other hand I wanted to have code I could use in my own projects. I've found <a href="https://github.com/pyca/pyopenssl">pyOpenSSL</a> to be a quite useful library to use on a regular daily basis. Regardless the programming language you'll find pretty generic ways of <em>validating</em> the certificates and <em>pinning</em> the presented data. For the sake of simplicity I've chosen to analyze <a href="https://www.google.com">Googles</a> SSL certificate. But first let's start with <strong>certificate pinning</strong>. </p>
+<p>In times of NSA, surveillance and data privacy, protecting your data has become an essential part of your every day life. A good understanding of basic principles is half the battle. In this post I just wanted to have look at SSL/TLS from a developer point of view but also from an users one. On the one hand I wanted to use <code>openssl</code> as a CLI utility to <em>inspect</em> and <em>validate</em> <a href="http://en.wikipedia.org/wiki/X.509">X.509 certificates</a>. On the other hand I wanted to have code I could use in my own projects. I've found <a href="https://github.com/pyca/pyopenssl">pyOpenSSL</a> to be a quite useful library to use on a regular daily basis. Regardless the programming language you'll find pretty generic ways of <em>validating</em> the certificates and <em>pinning</em> the presented data. For the sake of simplicity I've chosen to analyze <a href="https://www.google.com">Googles</a> SSL certificate. But first let's start with <strong>certificate pinning</strong>.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [1]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Init ipython notebook stuff</span>
-<span class="c"># Import crypto modules</span>
+<div class="prompt input_prompt">In [1]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="c1"># Init ipython notebook stuff</span>
+<span class="c1"># Import crypto modules</span>
 <span class="kn">import</span> <span class="nn">ssl</span>
 <span class="kn">import</span> <span class="nn">OpenSSL</span>
 <span class="kn">import</span> <span class="nn">socket</span>
@@ -147,18 +145,18 @@ In [1]:
 <span class="kn">from</span> <span class="nn">Crypto.Util</span> <span class="kn">import</span> <span class="n">asn1</span>
 <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
-<span class="c"># Import ipython specific modules</span>
+<span class="c1"># Import ipython specific modules</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.height'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.max_rows'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.max_columns'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.width'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.height'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.max_rows'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.max_columns'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.width'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 
-<span class="o">%</span><span class="k">install_ext</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">dorneanu</span><span class="o">/</span><span class="n">ipython</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">extensions</span><span class="o">/</span><span class="n">diagmagic</span><span class="o">.</span><span class="n">py</span>
-<span class="o">%</span><span class="k">load_ext</span> <span class="n">diagmagic</span>
+<span class="o">%</span><span class="k">install_ext</span> https://raw.githubusercontent.com/dorneanu/ipython/master/extensions/diagmagic.py
+<span class="o">%</span><span class="k">load_ext</span> diagmagic
 
-<span class="o">%</span><span class="k">install_ext</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">cjdrake</span><span class="o">/</span><span class="n">ipython</span><span class="o">-</span><span class="n">magic</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">gvmagic</span><span class="o">.</span><span class="n">py</span>
-<span class="o">%</span><span class="k">load_ext</span> <span class="n">gvmagic</span>
+<span class="o">%</span><span class="k">install_ext</span> https://raw.github.com/cjdrake/ipython-magic/master/gvmagic.py
+<span class="o">%</span><span class="k">load_ext</span> gvmagic
 </pre></div>
 </div>
 </div>
@@ -166,7 +164,7 @@ In [1]:
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">height has been deprecated.
 
 Installed diagmagic.py. To use it, type:
@@ -184,30 +182,27 @@ Installed gvmagic.py. To use it, type:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="6d07b621f405abec582cca17872ff8bb">What is it?</h2>
-<p>Having to implement <em>certificate pinning</em> most developers have a poor knowledge about it and the impact it <em>could</em> have on an end-user if not done properly. I think MITM attacks are nowadays widely understood (generally speaking) and developers seem to accept the importance of security measurements against this specific type of attacks. Certificate pinning referrs to the <strong>authenticity</strong> of data and the process of comparing some <em>presented</em> to <em>expected</em> data. Take a look at the <a href="https://www.owasp.org/index.php/Certificate_and_Public_Key_Pinning">OWASP site</a> for a more detailed introduction. But first let's have a look how client communicates to a server using a secure (SSL/TLS) channel:</p>
+<h2 id="aecf981176c1700646d09f448cb429e3">What is it?<a class="anchor-link" href="#What-is-it?">¶</a></h2><p>Having to implement <em>certificate pinning</em> most developers have a poor knowledge about it and the impact it <em>could</em> have on an end-user if not done properly. I think MITM attacks are nowadays widely understood (generally speaking) and developers seem to accept the importance of security measurements against this specific type of attacks. Certificate pinning referrs to the <strong>authenticity</strong> of data and the process of comparing some <em>presented</em> to <em>expected</em> data. Take a look at the <a href="https://www.owasp.org/index.php/Certificate_and_Public_Key_Pinning">OWASP site</a> for a more detailed introduction. But first let's have a look how client communicates to a server using a secure (SSL/TLS) channel:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [27]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">seqdiag</span>
-<span class="o">//</span> <span class="o">&lt;</span><span class="err">!</span><span class="o">--</span> <span class="n">collapse</span><span class="o">=</span><span class="bp">True</span> <span class="o">--&gt;</span>
-<span class="p">{</span>
-  <span class="n">Client</span> <span class="o">-&gt;</span> <span class="n">Server</span> <span class="p">[</span><span class="n">label</span><span class="o">=</span><span class="s">"Connect to port 443 ... "</span><span class="p">];</span>
-  <span class="n">Server</span> <span class="o">-&gt;</span> <span class="n">Client</span> <span class="p">[</span><span class="n">label</span><span class="o">=</span><span class="s">"Send X.509 certificate"</span><span class="p">];</span>
+<div class="prompt input_prompt">In [27]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">seqdiag</span> 
+// &lt;!-- collapse=True --&gt;
+{
+  Client -&gt; Server [label="Connect to port 443 ... "];
+  Server -&gt; Client [label="Send X.509 certificate"];
 
-  <span class="o">//</span> <span class="n">Separator</span>
-  <span class="o">===</span> <span class="n">Secure</span> <span class="n">Connection</span> <span class="o">===</span>
+  // Separator
+  === Secure Connection ===
 
-  <span class="n">Client</span> <span class="o">-&gt;</span> <span class="n">Server</span> <span class="p">[</span><span class="n">label</span><span class="o">=</span><span class="s">"GET /index.html"</span><span class="p">];</span>
-  <span class="n">Server</span> <span class="o">-&gt;</span> <span class="n">Client</span> <span class="p">[</span><span class="n">label</span><span class="o">=</span><span class="s">"200 OK Success"</span><span class="p">];</span>
-<span class="p">}</span>
+  Client -&gt; Server [label="GET /index.html"];
+  Server -&gt; Client [label="200 OK Success"];
+}
 </pre></div>
 </div>
 </div>
@@ -479,9 +474,8 @@ JEmSJPXQ/we545MPH1w7RAAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Before establishing the secure connection the client must <strong>validate</strong> the <em>presented</em> certificate. </p>
-<blockquote>
-<p>Regarding the validation: Here I won't go into much details because this is a quite complicated story from a technical point of view. </p>
+<p>Before establishing the secure connection the client must <strong>validate</strong> the <em>presented</em> certificate.</p>
+<blockquote><p>Regarding the validation: Here I won't go into much details because this is a quite complicated story from a technical point of view.</p>
 </blockquote>
 <p>After the successfull validation the <strong>authenticity</strong> of the server is guaranteed - at least that's what the client is assuming. Now let's have a look what happens during a <strong>MITM attack</strong>:</p>
 </div>
@@ -489,29 +483,27 @@ JEmSJPXQ/we545MPH1w7RAAAAABJRU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [29]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">seqdiag</span>
-<span class="o">//</span> <span class="o">&lt;</span><span class="err">!</span><span class="o">--</span> <span class="n">collapse</span><span class="o">=</span><span class="bp">True</span> <span class="o">--&gt;</span>
-<span class="p">{</span>
-  <span class="n">Client</span> <span class="o">-&gt;</span> <span class="n">Eve</span> <span class="p">[</span><span class="n">label</span><span class="o">=</span><span class="s">"Connect to port 443 ... "</span><span class="p">];</span>
-  <span class="n">Eve</span> <span class="o">-&gt;</span> <span class="n">Server</span> <span class="p">[</span><span class="n">label</span><span class="o">=</span><span class="s">"Connect to port 443 ..."</span><span class="p">];</span>
+<div class="prompt input_prompt">In [29]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">seqdiag</span> 
+// &lt;!-- collapse=True --&gt;
+{
+  Client -&gt; Eve [label="Connect to port 443 ... "];
+  Eve -&gt; Server [label="Connect to port 443 ..."];
 
-  <span class="n">Server</span> <span class="o">-&gt;</span> <span class="n">Eve</span> <span class="p">[</span><span class="n">label</span><span class="o">=</span><span class="s">"Send Servers certificate"</span><span class="p">];</span>
-  <span class="n">Eve</span> <span class="o">-&gt;</span> <span class="n">Client</span> <span class="p">[</span><span class="n">label</span><span class="o">=</span><span class="s">"Send Eves certificate"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">red</span><span class="p">];</span>
+  Server -&gt; Eve [label="Send Servers certificate"];
+  Eve -&gt; Client [label="Send Eves certificate", color=red];
 
-  <span class="o">//</span> <span class="n">Separator</span>
-  <span class="o">===</span> <span class="s">"Secure"</span> <span class="n">Connection</span> <span class="o">===</span>
+  // Separator
+  === "Secure" Connection ===
 
-  <span class="n">Client</span> <span class="o">-&gt;</span> <span class="n">Eve</span> <span class="p">[</span><span class="n">label</span><span class="o">=</span><span class="s">"GET /index.html"</span><span class="p">];</span>
-  <span class="n">Eve</span> <span class="o">-&gt;</span> <span class="n">Server</span> <span class="p">[</span><span class="n">label</span><span class="o">=</span><span class="s">"GET /index.html"</span><span class="p">];</span>
+  Client -&gt; Eve [label="GET /index.html"];
+  Eve -&gt; Server [label="GET /index.html"];
   
-  <span class="n">Server</span> <span class="o">-&gt;</span> <span class="n">Eve</span> <span class="p">[</span><span class="n">label</span><span class="o">=</span><span class="s">"200 OK Success"</span><span class="p">];</span>
-  <span class="n">Eve</span> <span class="o">-&gt;</span> <span class="n">Client</span> <span class="p">[</span><span class="n">label</span><span class="o">=</span><span class="s">"200 OK Success"</span><span class="p">];</span>
-<span class="p">}</span>
+  Server -&gt; Eve [label="200 OK Success"];
+  Eve -&gt; Client [label="200 OK Success"];
+}
 </pre></div>
 </div>
 </div>
@@ -958,8 +950,7 @@ kiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkqRs/D9CnNxJDgYe9AAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="297e71b175322512595e2c6beb72778c">Inside the certificate</h2>
-<p>A <a href="http://en.wikipedia.org/wiki/X.509">X.509 certificate</a> usually consists of three main components:</p>
+<h2 id="ee07f188d5803e5756ab1e271dc04ec6">Inside the certificate<a class="anchor-link" href="#Inside-the-certificate">¶</a></h2><p>A <a href="http://en.wikipedia.org/wiki/X.509">X.509 certificate</a> usually consists of three main components:</p>
 <ol>
 <li>the <em>certificate</em> itself</li>
 <li>certificate signature <em>algorithm</em></li>
@@ -988,32 +979,32 @@ kiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkqRs/D9CnNxJDgYe9AAAAABJRU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [4]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Create new SSL context with several security tunings</span>
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create new SSL context with several security tunings</span>
 <span class="n">ssl_context</span> <span class="o">=</span> <span class="n">ssl</span><span class="o">.</span><span class="n">SSLContext</span><span class="p">(</span><span class="n">ssl</span><span class="o">.</span><span class="n">PROTOCOL_TLSv1</span><span class="p">)</span>
 
-<span class="c"># Allow NO SSLv2</span>
+<span class="c1"># Allow NO SSLv2</span>
 <span class="n">ssl_context</span><span class="o">.</span><span class="n">options</span> <span class="o">|=</span> <span class="n">ssl</span><span class="o">.</span><span class="n">OP_NO_SSLv2</span>
 
-<span class="c"># Prevent CRIME attacks (OpenSSL 1.0+)</span>
-<span class="n">ssl_context</span><span class="o">.</span><span class="n">options</span> <span class="o">|=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">ssl</span><span class="o">.</span><span class="n">_ssl</span><span class="p">,</span> <span class="s">"OP_NO_COMPRESSION"</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="c1"># Prevent CRIME attacks (OpenSSL 1.0+)</span>
+<span class="n">ssl_context</span><span class="o">.</span><span class="n">options</span> <span class="o">|=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">ssl</span><span class="o">.</span><span class="n">_ssl</span><span class="p">,</span> <span class="s2">"OP_NO_COMPRESSION"</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-<span class="c"># Allow only good ciphers</span>
-<span class="n">ssl_context</span><span class="o">.</span><span class="n">set_ciphers</span><span class="p">(</span><span class="s">'HIGH:!aNULL:!RC4:!DSS'</span><span class="p">)</span>
+<span class="c1"># Allow only good ciphers</span>
+<span class="n">ssl_context</span><span class="o">.</span><span class="n">set_ciphers</span><span class="p">(</span><span class="s1">'HIGH:!aNULL:!RC4:!DSS'</span><span class="p">)</span>
 
-<span class="c"># Validate the server certificate</span>
+<span class="c1"># Validate the server certificate</span>
 <span class="n">ssl_context</span><span class="o">.</span><span class="n">verify_mode</span> <span class="o">=</span> <span class="n">ssl</span><span class="o">.</span><span class="n">CERT_REQUIRED</span>
 
-<span class="c"># Check host name</span>
-<span class="n">ssl_context</span><span class="o">.</span><span class="n">check_hostname</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c1"># Check host name</span>
+<span class="n">ssl_context</span><span class="o">.</span><span class="n">check_hostname</span> <span class="o">=</span> <span class="kc">True</span>
 
-<span class="c"># Load CA bundle</span>
-<span class="c"># HINT: This path may differ on your system</span>
-<span class="n">ssl_context</span><span class="o">.</span><span class="n">load_verify_locations</span><span class="p">(</span><span class="s">"/etc/ssl/certs/ca-certificates.crt"</span><span class="p">)</span>
+<span class="c1"># Load CA bundle</span>
+<span class="c1"># HINT: This path may differ on your system</span>
+<span class="n">ssl_context</span><span class="o">.</span><span class="n">load_verify_locations</span><span class="p">(</span><span class="s2">"/etc/ssl/certs/ca-certificates.crt"</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -1028,20 +1019,20 @@ In [4]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [5]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Define target information</span>
-<span class="n">target_host</span> <span class="o">=</span> <span class="s">"www.google.com"</span>
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Define target information</span>
+<span class="n">target_host</span> <span class="o">=</span> <span class="s2">"www.google.com"</span>
 <span class="n">target_port</span> <span class="o">=</span> <span class="mi">443</span>
 
-<span class="c"># Create SSL socket</span>
+<span class="c1"># Create SSL socket</span>
 <span class="n">ssl_socket</span> <span class="o">=</span> <span class="n">ssl_context</span><span class="o">.</span><span class="n">wrap_socket</span><span class="p">(</span>\
                 <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">),</span>\
                 <span class="n">server_hostname</span><span class="o">=</span><span class="n">target_host</span><span class="p">)</span>
 <span class="n">ssl_socket</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">target_host</span><span class="p">,</span> <span class="n">target_port</span><span class="p">))</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -1065,16 +1056,16 @@ In [5]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [6]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Fetch human readable certificate</span>
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Fetch human readable certificate</span>
 <span class="n">cert_string</span> <span class="o">=</span> <span class="n">ssl_socket</span><span class="o">.</span><span class="n">getpeercert</span><span class="p">()</span>
 
-<span class="c"># Fetch certificate in PEM format</span>
+<span class="c1"># Fetch certificate in PEM format</span>
 <span class="n">cert</span> <span class="o">=</span> <span class="n">ssl</span><span class="o">.</span><span class="n">get_server_certificate</span><span class="p">((</span><span class="n">target_host</span><span class="p">,</span> <span class="n">target_port</span><span class="p">))</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -1083,8 +1074,7 @@ In [6]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<blockquote>
-<p>You don't know nothing about <strong>ASN.1</strong>, <strong>DER</strong> or <strong>PEM</strong>? No problem! Just have a look at this <a href="https://tls.mbed.org/kb/cryptography/asn1-key-structures-in-der-and-pem">great article</a>. But to summarize it:
+<blockquote><p>You don't know nothing about <strong>ASN.1</strong>, <strong>DER</strong> or <strong>PEM</strong>? No problem! Just have a look at this <a href="https://tls.mbed.org/kb/cryptography/asn1-key-structures-in-der-and-pem">great article</a>. But to summarize it:
 <em>DER</em> is binary format, its structure is called <em>ASN.1</em>. <em>PEM</em> format is Base64 encoded representation of <em>DER</em>.</p>
 </blockquote>
 </div>
@@ -1101,18 +1091,18 @@ In [6]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [7]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="k">print</span><span class="p">(</span><span class="n">cert</span><span class="p">)</span>
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cert</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">-----BEGIN CERTIFICATE-----
 MIIEdjCCA16gAwIBAgIIX7v8fExu/5IwDQYJKoZIhvcNAQEFBQAwSTELMAkGA1UE
 BhMCVVMxEzARBgNVBAoTCkdvb2dsZSBJbmMxJTAjBgNVBAMTHEdvb2dsZSBJbnRl
@@ -1157,34 +1147,34 @@ aUYdqnU+Mgkfro7CDpEjOucBzZbsSevm9vPQMhExdju6pKf+nC0bz+7T
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [8]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">pprint</span><span class="p">(</span><span class="n">cert_string</span><span class="p">)</span>
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="n">cert_string</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
-<pre class="ipynb">{&amp;apos;OCSP&amp;apos;: (&amp;apos;http://clients1.google.com/ocsp&amp;apos;,),
- &amp;apos;caIssuers&amp;apos;: (&amp;apos;http://pki.google.com/GIAG2.crt&amp;apos;,),
- &amp;apos;crlDistributionPoints&amp;apos;: (&amp;apos;http://pki.google.com/GIAG2.crl&amp;apos;,),
- &amp;apos;issuer&amp;apos;: (((&amp;apos;countryName&amp;apos;, &amp;apos;US&amp;apos;),),
-            ((&amp;apos;organizationName&amp;apos;, &amp;apos;Google Inc&amp;apos;),),
-            ((&amp;apos;commonName&amp;apos;, &amp;apos;Google Internet Authority G2&amp;apos;),)),
- &amp;apos;notAfter&amp;apos;: &amp;apos;Aug  4 00:00:00 2015 GMT&amp;apos;,
- &amp;apos;notBefore&amp;apos;: &amp;apos;May  6 10:29:25 2015 GMT&amp;apos;,
- &amp;apos;serialNumber&amp;apos;: &amp;apos;5FBBFC7C4C6EFF92&amp;apos;,
- &amp;apos;subject&amp;apos;: (((&amp;apos;countryName&amp;apos;, &amp;apos;US&amp;apos;),),
-             ((&amp;apos;stateOrProvinceName&amp;apos;, &amp;apos;California&amp;apos;),),
-             ((&amp;apos;localityName&amp;apos;, &amp;apos;Mountain View&amp;apos;),),
-             ((&amp;apos;organizationName&amp;apos;, &amp;apos;Google Inc&amp;apos;),),
-             ((&amp;apos;commonName&amp;apos;, &amp;apos;www.google.com&amp;apos;),)),
- &amp;apos;subjectAltName&amp;apos;: ((&amp;apos;DNS&amp;apos;, &amp;apos;www.google.com&amp;apos;),),
- &amp;apos;version&amp;apos;: 3}
+<div class="output_subarea output_stream output_stdout output_text">
+<pre class="ipynb">{'OCSP': ('http://clients1.google.com/ocsp',),
+ 'caIssuers': ('http://pki.google.com/GIAG2.crt',),
+ 'crlDistributionPoints': ('http://pki.google.com/GIAG2.crl',),
+ 'issuer': ((('countryName', 'US'),),
+            (('organizationName', 'Google Inc'),),
+            (('commonName', 'Google Internet Authority G2'),)),
+ 'notAfter': 'Aug  4 00:00:00 2015 GMT',
+ 'notBefore': 'May  6 10:29:25 2015 GMT',
+ 'serialNumber': '5FBBFC7C4C6EFF92',
+ 'subject': ((('countryName', 'US'),),
+             (('stateOrProvinceName', 'California'),),
+             (('localityName', 'Mountain View'),),
+             (('organizationName', 'Google Inc'),),
+             (('commonName', 'www.google.com'),)),
+ 'subjectAltName': (('DNS', 'www.google.com'),),
+ 'version': 3}
 </pre>
 </div>
 </div>
@@ -1196,8 +1186,7 @@ In [8]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<blockquote>
-<p>Have a look at <a href="http://www.zytrax.com/tech/survival/ssl.html">this site</a> for great explanations regarding the properties. </p>
+<blockquote><p>Have a look at <a href="http://www.zytrax.com/tech/survival/ssl.html">this site</a> for great explanations regarding the properties.</p>
 </blockquote>
 <p>From an attackers perspective generating certificates that contain the same data is easy peasy. So while doing the certificate pinning you shouldn't rely on these values. Furthermore rely on data that can not be manipulated or data that has been generated randomly. Of course there is still a risk with "pseudo-random" data in case of insecure <a href="http://en.wikipedia.org/wiki/Pseudorandom_number_generator">PRNGs</a>. Or don't you remember this <a href="http://article.gmane.org/gmane.linux.debian.security.announce/1614">one</a> anymore? :)</p>
 </div>
@@ -1223,39 +1212,39 @@ In [8]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [9]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">from</span> <span class="nn">Crypto.PublicKey</span> <span class="kn">import</span> <span class="n">RSA</span>
-<span class="kn">from</span> <span class="nn">base64</span> <span class="kn">import</span> <span class="n">b64decode</span>
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">Crypto.PublicKey</span> <span class="k">import</span> <span class="n">RSA</span>
+<span class="kn">from</span> <span class="nn">base64</span> <span class="k">import</span> <span class="n">b64decode</span>
 
-<span class="c"># Convert PEM format to x509 Object</span>
+<span class="c1"># Convert PEM format to x509 Object</span>
 <span class="n">x509</span> <span class="o">=</span> <span class="n">OpenSSL</span><span class="o">.</span><span class="n">crypto</span><span class="o">.</span><span class="n">load_certificate</span><span class="p">(</span><span class="n">OpenSSL</span><span class="o">.</span><span class="n">crypto</span><span class="o">.</span><span class="n">FILETYPE_PEM</span><span class="p">,</span> <span class="n">cert</span><span class="p">)</span>
 
-<span class="c"># Convert x509 object to ASN1</span>
+<span class="c1"># Convert x509 object to ASN1</span>
 <span class="n">x509_asn1</span> <span class="o">=</span> <span class="n">OpenSSL</span><span class="o">.</span><span class="n">crypto</span><span class="o">.</span><span class="n">dump_certificate</span><span class="p">(</span><span class="n">OpenSSL</span><span class="o">.</span><span class="n">crypto</span><span class="o">.</span><span class="n">FILETYPE_ASN1</span><span class="p">,</span> <span class="n">x509</span><span class="p">)</span>
 
-<span class="c"># Convert x509 object to PEM</span>
+<span class="c1"># Convert x509 object to PEM</span>
 <span class="n">x509_pem</span> <span class="o">=</span> <span class="n">OpenSSL</span><span class="o">.</span><span class="n">crypto</span><span class="o">.</span><span class="n">dump_certificate</span><span class="p">(</span><span class="n">OpenSSL</span><span class="o">.</span><span class="n">crypto</span><span class="o">.</span><span class="n">FILETYPE_PEM</span><span class="p">,</span> <span class="n">x509</span><span class="p">)</span>
 
-<span class="c"># Decode the certificate</span>
+<span class="c1"># Decode the certificate</span>
 <span class="n">der</span> <span class="o">=</span> <span class="n">asn1</span><span class="o">.</span><span class="n">DerSequence</span><span class="p">()</span>
 <span class="n">der</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">x509_asn1</span><span class="p">)</span>
 
-<span class="c"># Store the components</span>
-<span class="n">der_cert</span> <span class="o">=</span> <span class="n">der</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>     <span class="c"># certificate</span>
-<span class="n">der_algo</span> <span class="o">=</span> <span class="n">der</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>     <span class="c"># signing algorithm</span>
-<span class="n">der_sign</span> <span class="o">=</span> <span class="n">der</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>     <span class="c"># certificate signature</span>
+<span class="c1"># Store the components</span>
+<span class="n">der_cert</span> <span class="o">=</span> <span class="n">der</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>     <span class="c1"># certificate</span>
+<span class="n">der_algo</span> <span class="o">=</span> <span class="n">der</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>     <span class="c1"># signing algorithm</span>
+<span class="n">der_sign</span> <span class="o">=</span> <span class="n">der</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>     <span class="c1"># certificate signature</span>
 
 <span class="n">der_sign_in</span><span class="o">=</span><span class="n">asn1</span><span class="o">.</span><span class="n">DerObject</span><span class="p">()</span>
 <span class="n">der_sign_in</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">der_sign</span><span class="p">)</span>
 <span class="n">der_sign_payload</span> <span class="o">=</span> <span class="n">der_sign_in</span><span class="o">.</span><span class="n">payload</span>
 <span class="n">cert_sign</span> <span class="o">=</span> <span class="n">der_sign_payload</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
 
-<span class="c"># Extract the signing certificate algorithm</span>
+<span class="c1"># Extract the signing certificate algorithm</span>
 <span class="n">sign_algo</span> <span class="o">=</span> <span class="n">x509</span><span class="o">.</span><span class="n">get_signature_algorithm</span><span class="p">()</span> 
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -1279,34 +1268,34 @@ In [9]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [10]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Write x509 (PEM format) to file</span>
-<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'/tmp/pyopenssl/www.google.com.cert.pem'</span><span class="p">,</span><span class="s">'w'</span><span class="p">)</span>
-<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">x509_pem</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Write x509 (PEM format) to file</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'/tmp/pyopenssl/www.google.com.cert.pem'</span><span class="p">,</span><span class="s1">'w'</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">x509_pem</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">))</span>
 <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [11]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="c"># Show certificate fingerprint using openssl</span>
-<span class="n">openssl</span> <span class="n">x509</span> <span class="o">-</span><span class="n">fingerprint</span> <span class="o">-</span><span class="n">inform</span> <span class="n">PEM</span> <span class="o">-</span><span class="ow">in</span>  <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pyopenssl</span><span class="o">/</span><span class="n">www</span><span class="o">.</span><span class="n">google</span><span class="o">.</span><span class="n">com</span><span class="o">.</span><span class="n">cert</span><span class="o">.</span><span class="n">pem</span> <span class="o">-</span><span class="n">sha256</span>  <span class="o">|</span> <span class="n">grep</span> <span class="n">Fingerprint</span>
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+<span class="c1"># Show certificate fingerprint using openssl</span>
+openssl x509 -fingerprint -inform PEM -in  /tmp/pyopenssl/www.google.com.cert.pem -sha256  <span class="p">|</span> grep Fingerprint
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">SHA256 Fingerprint=16:3D:A3:9A:7C:8F:4E:C4:79:59:5E:30:A8:82:2C:A7:58:CD:0A:6B:87:EF:7B:43:10:5A:97:C3:93:90:98:D8
 </pre>
 </div>
@@ -1348,38 +1337,38 @@ In [11]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [12]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">from</span> <span class="nn">Crypto.PublicKey</span> <span class="kn">import</span> <span class="n">RSA</span>
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">Crypto.PublicKey</span> <span class="k">import</span> <span class="n">RSA</span>
 
-<span class="c"># Extract the public key</span>
+<span class="c1"># Extract the public key</span>
 <span class="n">pub_key</span> <span class="o">=</span> <span class="n">x509</span><span class="o">.</span><span class="n">get_pubkey</span><span class="p">()</span>
 
-<span class="c"># Print the public key in TEXT formatboru</span>
+<span class="c1"># Print the public key in TEXT formatboru</span>
 <span class="n">pub_key_text</span> <span class="o">=</span> <span class="n">OpenSSL</span><span class="o">.</span><span class="n">crypto</span><span class="o">.</span><span class="n">dump_privatekey</span><span class="p">(</span><span class="n">OpenSSL</span><span class="o">.</span><span class="n">crypto</span><span class="o">.</span><span class="n">FILETYPE_TEXT</span><span class="p">,</span> <span class="n">pub_key</span><span class="p">)</span>
 
-<span class="c"># Convert to ASN1</span>
+<span class="c1"># Convert to ASN1</span>
 <span class="n">pub_key_asn1</span> <span class="o">=</span> <span class="n">OpenSSL</span><span class="o">.</span><span class="n">crypto</span><span class="o">.</span><span class="n">dump_privatekey</span><span class="p">(</span><span class="n">OpenSSL</span><span class="o">.</span><span class="n">crypto</span><span class="o">.</span><span class="n">FILETYPE_ASN1</span><span class="p">,</span> <span class="n">pub_key</span><span class="p">)</span>
 
-<span class="c"># Convert key to DER format</span>
+<span class="c1"># Convert key to DER format</span>
 <span class="n">pub_der</span> <span class="o">=</span> <span class="n">asn1</span><span class="o">.</span><span class="n">DerSequence</span><span class="p">()</span>
 <span class="n">pub_der</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">pub_key_asn1</span><span class="p">)</span>
 
-<span class="c"># Construct RSA key</span>
-<span class="c"># In Python 3 you no longer use "long" -&gt; Use "int" instead</span>
+<span class="c1"># Construct RSA key</span>
+<span class="c1"># In Python 3 you no longer use "long" -&gt; Use "int" instead</span>
 <span class="n">b</span> <span class="o">=</span> <span class="n">RSA</span><span class="o">.</span><span class="n">construct</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">pub_der</span><span class="o">.</span><span class="n">_seq</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">pub_der</span><span class="o">.</span><span class="n">_seq</span><span class="p">[</span><span class="mi">2</span><span class="p">])))</span>
 
-<span class="c"># Print public key information</span>
-<span class="k">print</span><span class="p">(</span><span class="n">pub_key_text</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+<span class="c1"># Print public key information</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pub_key_text</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">))</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">Public-Key: (2048 bit)
 Modulus:
     00:db:41:80:aa:b8:c5:e3:68:d1:55:99:a8:24:36:
@@ -1419,20 +1408,20 @@ Exponent: 65537 (0x10001)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [13]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">openssl</span> <span class="n">x509</span> <span class="o">-</span><span class="n">inform</span> <span class="n">PEM</span> <span class="o">-</span><span class="ow">in</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pyopenssl</span><span class="o">/</span><span class="n">www</span><span class="o">.</span><span class="n">google</span><span class="o">.</span><span class="n">com</span><span class="o">.</span><span class="n">cert</span><span class="o">.</span><span class="n">pem</span> <span class="o">-</span><span class="n">pubkey</span> <span class="o">-</span><span class="n">noout</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pyopenssl</span><span class="o">/</span><span class="n">pubkey</span><span class="o">.</span><span class="n">pem</span>
-<span class="n">openssl</span> <span class="n">rsa</span> <span class="o">-</span><span class="n">inform</span> <span class="n">PEM</span> <span class="o">-</span><span class="n">pubin</span> <span class="o">-</span><span class="ow">in</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pyopenssl</span><span class="o">/</span><span class="n">pubkey</span><span class="o">.</span><span class="n">pem</span> <span class="o">-</span><span class="n">modulus</span> <span class="mi">2</span><span class="o">&gt;</span><span class="mi">1</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">Modulus</span>
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+openssl x509 -inform PEM -in /tmp/pyopenssl/www.google.com.cert.pem -pubkey -noout &gt; /tmp/pyopenssl/pubkey.pem
+openssl rsa -inform PEM -pubin -in /tmp/pyopenssl/pubkey.pem -modulus 2&gt;1 <span class="p">|</span> grep Modulus
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">Modulus=DB4180AAB8C5E368D15599A8243644E856C4E53693F5EC7CE9B3B9C9553F9C35CBBF6D5E26444106F284595352844473F36B781DE0F9B322767170CCE2F74C14A19210872302742B4B0DCD9C4AC849DD369933DBA78EB3338134F95610E7A136FBDABF16CAA758BD8E30A7672F75F91A2E9522AD855890AC30F1B31E9A35C73330581E201D0D32D8EAC05E9CCD3EB7BCDF2D14E5B7E253644C7F6CAFDAEE51241CD16F0A7D885BE318B7EEBAF31558C364E70615C8265A3466B3F95696B8DEA211A3291DE2F515524DEC707C92ED78670C453F0FB2235BA042588078FC6AE008C7B34534913D85EE7D4D9A401F62C0096DA3BC831C95BBD66DC14D4C436B1067
 </pre>
 </div>
@@ -1442,20 +1431,20 @@ In [13]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [14]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="c"># Dump the public key</span>
-<span class="n">openssl</span> <span class="n">asn1parse</span> <span class="o">-</span><span class="n">dump</span> <span class="o">-</span><span class="ow">in</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pyopenssl</span><span class="o">/</span><span class="n">pubkey</span><span class="o">.</span><span class="n">pem</span>
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+<span class="c1"># Dump the public key</span>
+openssl asn1parse -dump -in /tmp/pyopenssl/pubkey.pem
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">    0:d=0  hl=4 l= 290 cons: SEQUENCE          
     4:d=1  hl=2 l=  13 cons: SEQUENCE          
     6:d=2  hl=2 l=   9 prim: OBJECT            :rsaEncryption
@@ -1495,19 +1484,19 @@ In [14]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [15]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">sha256sum</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pyopenssl</span><span class="o">/</span><span class="n">pubkey</span><span class="o">.</span><span class="n">pem</span>
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+sha256sum /tmp/pyopenssl/pubkey.pem
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">618a8d05fce8d0f8f790e0a2fbaaf739ff7049e7da087520e81a31d0af81513a  /tmp/pyopenssl/pubkey.pem
 </pre>
 </div>
@@ -1535,19 +1524,19 @@ In [15]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [16]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">openssl</span> <span class="n">s_client</span> <span class="o">-</span><span class="n">showcerts</span> <span class="o">-</span><span class="n">connect</span> <span class="n">www</span><span class="o">.</span><span class="n">google</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="mi">443</span>  <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">e</span> <span class="s">"s:"</span> <span class="o">-</span><span class="n">e</span> <span class="s">"i:"</span>
+<div class="prompt input_prompt">In [16]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+openssl s_client -showcerts -connect www.google.com:443  <span class="p">|</span> grep -e <span class="s2">"s:"</span> -e <span class="s2">"i:"</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb"> 0 s:/C=US/ST=California/L=Mountain View/O=Google Inc/CN=www.google.com
    i:/C=US/O=Google Inc/CN=Google Internet Authority G2
  1 s:/C=US/O=Google Inc/CN=Google Internet Authority G2
@@ -1558,7 +1547,7 @@ In [16]:
 </div>
 </div>
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stderr">
+<div class="output_subarea output_stream output_stderr output_text">
 <pre class="ipynb">depth=2 C = US, O = GeoTrust Inc., CN = GeoTrust Global CA
 verify error:num=20:unable to get local issuer certificate
 DONE
@@ -1570,41 +1559,39 @@ DONE
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [2]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">dot</span>
-<span class="o">//</span> <span class="o">&lt;</span><span class="err">!</span><span class="o">--</span> <span class="n">collapse</span><span class="o">=</span><span class="bp">True</span> <span class="o">--&gt;</span>
-<span class="n">digraph</span> <span class="n">trie</span> <span class="p">{</span>
-    <span class="n">rankdir</span><span class="o">=</span><span class="s">"TR"</span><span class="p">;</span>
-    <span class="n">graph</span> <span class="p">[</span><span class="n">label</span><span class="o">=</span><span class="s">"</span><span class="se">\n\n</span><span class="s">Chain of trust for www.google.com"</span><span class="p">];</span>
-    <span class="n">node</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"Mrecord"</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">6</span><span class="p">];</span>
-    <span class="n">equifax</span> <span class="p">[</span><span class="n">label</span><span class="o">=</span><span class="s">"{Subject:  GeoTrust Global CA \l | Issuer: Equifax Secure Certificate Authority \l }"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">"grey"</span><span class="p">];</span>
-    <span class="n">geotrust</span> <span class="p">[</span><span class="n">label</span><span class="o">=</span><span class="s">"{Subject:  Google Internet Authority G2 \l | Issuer: GeoTrust Global CA \l }"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">"grey"</span><span class="p">];</span>
-    <span class="n">g2</span> <span class="p">[</span><span class="n">label</span><span class="o">=</span><span class="s">"{Subject: google.com \l | Issuer: Google Internet Authority G2 \l }"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">"grey"</span><span class="p">];</span>
-    <span class="n">google_site</span> <span class="p">[</span><span class="n">label</span><span class="o">=</span><span class="s">"www.google.com \l"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">"red"</span><span class="p">];</span>
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">dot</span>
+// &lt;!-- collapse=True --&gt;
+digraph trie {
+    rankdir="TR";
+    graph [label="\n\nChain of trust for www.google.com"];
+    node [shape = "Mrecord", width=6];
+    equifax [label="{Subject:  GeoTrust Global CA \l | Issuer: Equifax Secure Certificate Authority \l }", color="grey"];
+    geotrust [label="{Subject:  Google Internet Authority G2 \l | Issuer: GeoTrust Global CA \l }", color="grey"];
+    g2 [label="{Subject: google.com \l | Issuer: Google Internet Authority G2 \l }", color="grey"];
+    google_site [label="www.google.com \l", color="red"];
     
-    <span class="n">root</span> <span class="p">[</span><span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s">"none"</span><span class="p">];</span>
-    <span class="n">leaf</span> <span class="p">[</span><span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s">"none"</span><span class="p">];</span>
+    root [width=2, shape="none"];
+    leaf [width=2, shape="none"];
     
-    <span class="n">equifax</span> <span class="o">-&gt;</span> <span class="n">geotrust</span><span class="p">;</span>
-    <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">equifax</span> <span class="p">[</span><span class="n">arrowsize</span><span class="o">=.</span><span class="mi">5</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mf">2.</span><span class="p">];</span>
-    <span class="n">geotrust</span> <span class="o">-&gt;</span> <span class="n">g2</span><span class="p">;</span>
-    <span class="n">g2</span> <span class="o">-&gt;</span> <span class="n">google_site</span><span class="p">;</span>
-    <span class="n">leaf</span> <span class="o">-&gt;</span> <span class="n">google_site</span> <span class="p">[</span><span class="n">arrowsize</span><span class="o">=.</span><span class="mi">5</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mf">2.</span><span class="p">];</span>
+    equifax -&gt; geotrust;
+    root -&gt; equifax [arrowsize=.5, weight=2.];
+    geotrust -&gt; g2;
+    g2 -&gt; google_site;
+    leaf -&gt; google_site [arrowsize=.5, weight=2.];
     
-    <span class="mi">0</span> <span class="p">[</span><span class="n">shape</span><span class="o">=</span><span class="s">"none"</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">];</span>
-    <span class="mi">1</span> <span class="p">[</span><span class="n">shape</span><span class="o">=</span><span class="s">"none"</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">];</span>
-    <span class="mi">2</span> <span class="p">[</span><span class="n">shape</span><span class="o">=</span><span class="s">"none"</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">];</span>
+    0 [shape="none", width=1];
+    1 [shape="none", width=1];
+    2 [shape="none", width=1];
     
-    <span class="p">{</span><span class="n">rank</span> <span class="o">=</span> <span class="n">same</span><span class="p">;</span> <span class="n">root</span><span class="p">;</span> <span class="n">equifax</span><span class="p">}</span>
-    <span class="p">{</span><span class="n">rank</span> <span class="o">=</span> <span class="n">same</span><span class="p">;</span> <span class="n">g2</span><span class="p">,</span> <span class="mi">0</span><span class="p">}</span>
-    <span class="p">{</span><span class="n">rank</span> <span class="o">=</span> <span class="n">same</span><span class="p">;</span> <span class="n">geotrust</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span>
-    <span class="p">{</span><span class="n">rank</span> <span class="o">=</span> <span class="n">same</span><span class="p">;</span> <span class="n">leaf</span><span class="p">;</span> <span class="n">google_site</span><span class="p">}</span>
+    {rank = same; root; equifax}
+    {rank = same; g2, 0}
+    {rank = same; geotrust, 1}
+    {rank = same; leaf; google_site}
     
-<span class="p">}</span>
+}
 </pre></div>
 </div>
 </div>
@@ -1710,25 +1697,27 @@ In [2]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>First of all you'll notice that there has been some problem regarding the validation:</p>
 <pre><code>verify error:num=20:unable to get local issuer certificate
-</code></pre><p>This has to do with the fact that <code>openssl</code> doesn't provide a list of trusted certs by default. You'll have to specify it manually:</p>
+
+</code></pre>
+<p>This has to do with the fact that <code>openssl</code> doesn't provide a list of trusted certs by default. You'll have to specify it manually:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [18]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">openssl</span> <span class="n">s_client</span> <span class="o">-</span><span class="n">showcerts</span> <span class="o">-</span><span class="n">connect</span> <span class="n">www</span><span class="o">.</span><span class="n">google</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="mi">443</span> <span class="o">-</span><span class="n">CApath</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ssl</span><span class="o">/</span><span class="n">certs</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span> <span class="o">|</span> <span class="n">grep</span> <span class="s">"Verify"</span>
+<div class="prompt input_prompt">In [18]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash 
+openssl s_client -showcerts -connect www.google.com:443 -CApath /etc/ssl/certs 2&gt; /dev/null <span class="p">|</span> grep <span class="s2">"Verify"</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">    Verify return code: 0 (ok)
 </pre>
 </div>
@@ -1747,19 +1736,19 @@ In [18]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [19]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">openssl</span> <span class="n">verify</span> <span class="o">-</span><span class="n">CApath</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ssl</span><span class="o">/</span><span class="n">certs</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pyopenssl</span><span class="o">/</span><span class="n">www</span><span class="o">.</span><span class="n">google</span><span class="o">.</span><span class="n">com</span><span class="o">.</span><span class="n">pem</span> <span class="o">|</span> <span class="n">grep</span> <span class="s">"error"</span>
+<div class="prompt input_prompt">In [19]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash 
+openssl verify -CApath /etc/ssl/certs /tmp/pyopenssl/www.google.com.pem <span class="p">|</span> grep <span class="s2">"error"</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">error 20 at 0 depth lookup:unable to get local issuer certificate
 </pre>
 </div>
@@ -1778,19 +1767,19 @@ In [19]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [20]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">openssl</span> <span class="n">verify</span> <span class="o">-</span><span class="n">CAfile</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ssl</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">ca</span><span class="o">-</span><span class="n">certificates</span><span class="o">.</span><span class="n">crt</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pyopenssl</span><span class="o">/</span><span class="n">www</span><span class="o">.</span><span class="n">google</span><span class="o">.</span><span class="n">com</span><span class="o">.</span><span class="n">pem</span> <span class="o">|</span> <span class="n">grep</span> <span class="s">"error"</span>
+<div class="prompt input_prompt">In [20]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+openssl verify -CAfile /etc/ssl/certs/ca-certificates.crt /tmp/pyopenssl/www.google.com.pem <span class="p">|</span> grep <span class="s2">"error"</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">error 20 at 0 depth lookup:unable to get local issuer certificate
 </pre>
 </div>
@@ -1809,20 +1798,20 @@ In [20]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [21]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">openssl</span> <span class="n">verify</span> <span class="o">-</span><span class="n">CAfile</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ssl</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">ca</span><span class="o">-</span><span class="n">certificates</span><span class="o">.</span><span class="n">crt</span> \
-       <span class="o">-</span><span class="n">untrusted</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pyopenssl</span><span class="o">/</span><span class="n">www</span><span class="o">.</span><span class="n">google</span><span class="o">.</span><span class="n">com</span><span class="o">.</span><span class="n">pem</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pyopenssl</span><span class="o">/</span><span class="n">www</span><span class="o">.</span><span class="n">google</span><span class="o">.</span><span class="n">com</span><span class="o">.</span><span class="n">pem</span> <span class="o">|</span> <span class="n">grep</span> <span class="s">"error"</span>
+<div class="prompt input_prompt">In [21]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+openssl verify -CAfile /etc/ssl/certs/ca-certificates.crt <span class="se">\</span>
+       -untrusted /tmp/pyopenssl/www.google.com.pem /tmp/pyopenssl/www.google.com.pem <span class="p">|</span> grep <span class="s2">"error"</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">error 20 at 0 depth lookup:unable to get local issuer certificate
 </pre>
 </div>
@@ -1835,8 +1824,7 @@ In [21]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<blockquote>
-<p>If you have any ideas how to solve this, just drop me a line!</p>
+<blockquote><p>If you have any ideas how to solve this, just drop me a line!</p>
 </blockquote>
 </div>
 </div>
@@ -1938,7 +1926,7 @@ In [21]:
                     </div>
                     <ul id="niu2-sidebar-toc-list">
                         <li><a href="#content-heading">Validating and pinning X.509 certificates</a></li>
-                        <li><a href='#6d07b621f405abec582cca17872ff8bb'>What is it?</a></li><li><a href='#297e71b175322512595e2c6beb72778c'>Inside the certificate</a><ul><li><a href='#a54237ff28b269dcfbc09717c8ab62c1'>Connection settings¶</a></li><li><a href='#8ec66ba8eaf0e99b05a99885ddb90da0'>Make connection¶</a></li><li><a href='#0e7818eae6d2cf9711fed86f846ce554'>Fetch the certificate¶</a><ul><li><a href='#0a43ce513d6dfba3f3363e584c036791'>PEM format¶</a></li><li><a href='#949e76819544dd5261b7fbb6746be5ba'>TEXT format¶</a></li></ul></li></ul></li><li><a href='#edb6be217da69094167d4c5f83a48a56'>Certificate pinning¶</a><ul><li><a href='#9041f342bf6ef5c36e062b9bf83b3c03'>Pin the certificate¶</a></li><li><a href='#e4d97fb09fcb2e7fbc720ab492d0a75b'>Pin the public key¶</a></li></ul></li><li><a href='#2fe7927bb0f69c27bca4ad2761afbcac'>Validate certificate¶</a></li><li><a href='#6988aab4de844bedbe7984c3e74c1cc2'>Conclusion¶</a><ul><li><a href='#5cd6478416b226b632eb44888361e8d8'>References¶</a></li></ul></li>
+                        <li><a href='#aecf981176c1700646d09f448cb429e3'>What is it?¶</a></li><li><a href='#ee07f188d5803e5756ab1e271dc04ec6'>Inside the certificate¶</a><ul><li><a href='#a54237ff28b269dcfbc09717c8ab62c1'>Connection settings¶</a></li><li><a href='#8ec66ba8eaf0e99b05a99885ddb90da0'>Make connection¶</a></li><li><a href='#0e7818eae6d2cf9711fed86f846ce554'>Fetch the certificate¶</a><ul><li><a href='#0a43ce513d6dfba3f3363e584c036791'>PEM format¶</a></li><li><a href='#949e76819544dd5261b7fbb6746be5ba'>TEXT format¶</a></li></ul></li></ul></li><li><a href='#edb6be217da69094167d4c5f83a48a56'>Certificate pinning¶</a><ul><li><a href='#9041f342bf6ef5c36e062b9bf83b3c03'>Pin the certificate¶</a></li><li><a href='#e4d97fb09fcb2e7fbc720ab492d0a75b'>Pin the public key¶</a></li></ul></li><li><a href='#2fe7927bb0f69c27bca4ad2761afbcac'>Validate certificate¶</a></li><li><a href='#6988aab4de844bedbe7984c3e74c1cc2'>Conclusion¶</a><ul><li><a href='#5cd6478416b226b632eb44888361e8d8'>References¶</a></li></ul></li>
                         <li><a href="#content-comments">Comments</a></li>
                     </ul>
                 </div>

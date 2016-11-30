@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -123,57 +123,57 @@
                     <p>Any time you do some <strong>security researches</strong> you should better spoof/hide your identity. The best way to do that is to spoof/manipulate the MAC address of your interface. I normally do that when doing WiFi stuff: WEP cracking and such stuff. I usually assign some random MAC address to my interfaces to fully hide my identity.</p>
 <p>A MAC address consists of six groups of hexadecimal digits. Each group is separated by hyphens or colons. Each group consists of 256 possible permutations, e.g. A1, 1F, C3 etc. Since we have 6 groups, you’ll get 256^6 = 2^48 = 281,474,976,710,656 possible MAC addresses.</p>
 <p>I wrote a simple sh (not bash) script which generates MAC addresses using shuffle (you may want to use another randomizing command available on your system). If no arguments are given the script will print out the generated MAC. You can call the script with an additional parameter which should be an existant network interface. In that case the script (you'll need r00t rights) will assign that MAC to the interface. </p>
-<div class="highlight"><pre><span class="c">#!/bin/sh</span>
-<span class="c">#    MACgen - simple MAC address generator</span>
-<span class="c">#    Copyright (C) 2009 by Victor Dorneanu</span>
-<span class="c">#</span>
-<span class="c">#    This program is free software: you can redistribute it and/or modify</span>
-<span class="c">#    it under the terms of the GNU General Public License as published by</span>
-<span class="c">#    the Free Software Foundation, either version 3 of the License, or</span>
-<span class="c">#    (at your option) any later version.</span>
-<span class="c">#</span>
-<span class="c">#    This program is distributed in the hope that it will be useful,</span>
-<span class="c">#    but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="c">#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="c">#    GNU General Public License for more details.</span>
-<span class="c">#</span>
-<span class="c">#    You should have received a copy of the GNU General Public License</span>
-<span class="c">#    along with this program.  If not, see .</span>
-<span class="c">#</span>
-<span class="c">#    Mail: victor[__at__]dornea.nu</span>
-<span class="c">#    Site: http://dornea.nu</span>
-<span class="c">#    ----------------------</span>
-<span class="c"># </span>
-<span class="c">#    USAGE: MACgen.sh [interface]</span>
-<span class="c">#           If "interface" exists, then the newly generated MAC address will</span>
-<span class="c">#           be assigned to the given interface. Otherwise the script will just</span>
-<span class="c">#           print out the MAC address.</span>
-<span class="c">#</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+<span class="c1">#    MACgen - simple MAC address generator</span>
+<span class="c1">#    Copyright (C) 2009 by Victor Dorneanu</span>
+<span class="c1">#</span>
+<span class="c1">#    This program is free software: you can redistribute it and/or modify</span>
+<span class="c1">#    it under the terms of the GNU General Public License as published by</span>
+<span class="c1">#    the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1">#    (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1">#    This program is distributed in the hope that it will be useful,</span>
+<span class="c1">#    but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1">#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1">#    GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1">#    You should have received a copy of the GNU General Public License</span>
+<span class="c1">#    along with this program.  If not, see .</span>
+<span class="c1">#</span>
+<span class="c1">#    Mail: victor[__at__]dornea.nu</span>
+<span class="c1">#    Site: http://dornea.nu</span>
+<span class="c1">#    ----------------------</span>
+<span class="c1"># </span>
+<span class="c1">#    USAGE: MACgen.sh [interface]</span>
+<span class="c1">#           If "interface" exists, then the newly generated MAC address will</span>
+<span class="c1">#           be assigned to the given interface. Otherwise the script will just</span>
+<span class="c1">#           print out the MAC address.</span>
+<span class="c1">#</span>
 
-<span class="c"># Define here randomizing shell command</span>
+<span class="c1"># Define here randomizing shell command</span>
 <span class="nv">SHUFFLE</span><span class="o">=</span><span class="sb">`</span>which shuffle<span class="sb">`</span>
 <span class="nv">SHUFFLE_OPTS</span><span class="o">=</span><span class="s1">'-p 1'</span>
 
-<span class="c"># List of available characters</span>
+<span class="c1"># List of available characters</span>
 <span class="nv">list</span><span class="o">=</span><span class="s2">"0 1 2 3 4 5 6 7 8 9 A B C D E F"</span>
 
-<span class="c"># How many characters does a MAC address consist of?</span>
+<span class="c1"># How many characters does a MAC address consist of?</span>
 <span class="nv">mac_size</span><span class="o">=</span>12
 
-<span class="c"># Our random MAC address</span>
+<span class="c1"># Our random MAC address</span>
 <span class="nv">generated_mac</span><span class="o">=</span><span class="s2">""</span>
 
 generate_mac<span class="o">()</span>
 <span class="o">{</span>
-   <span class="c"># Some internal variable (used for the dots ":")</span>
+   <span class="c1"># Some internal variable (used for the dots ":")</span>
    <span class="nv">c</span><span class="o">=</span>2
 
-   <span class="c"># Permutate list of available characters</span>
-   <span class="k">while</span> <span class="nb">true </span>
-<span class="nb">   </span><span class="k">do</span>
-      <span class="c"># Loop break condition</span>
-      <span class="k">if</span> <span class="o">[</span> <span class="nv">$mac_size</span> <span class="o">=</span> <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="nb">break </span>
-<span class="nb">      </span><span class="k">fi</span>
+   <span class="c1"># Permutate list of available characters</span>
+   <span class="k">while</span> <span class="nb">true</span> 
+   <span class="k">do</span>
+      <span class="c1"># Loop break condition</span>
+      <span class="k">if</span> <span class="o">[</span> <span class="nv">$mac_size</span> <span class="o">=</span> <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="nb">break</span> 
+      <span class="k">fi</span>
 
       <span class="k">if</span> <span class="o">[</span> <span class="nv">$c</span> <span class="o">=</span> <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
          <span class="nv">generated_mac</span><span class="o">=</span><span class="nv">$generated_mac</span>:<span class="sb">`</span><span class="nv">$SHUFFLE</span> <span class="nv">$SHUFFLE_OPTS</span> <span class="nv">$list</span><span class="sb">`</span>
@@ -187,12 +187,12 @@ generate_mac<span class="o">()</span>
    <span class="k">done</span>
 <span class="o">}</span>
 
-<span class="c"># Check if interface argument was supplied</span>
+<span class="c1"># Check if interface argument was supplied</span>
 <span class="k">if</span> <span class="o">[</span> -z <span class="nv">$1</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
    generate_mac
    <span class="nb">echo</span> <span class="nv">$generated_mac</span>
 
-<span class="c"># Assign MAC to interface</span>
+<span class="c1"># Assign MAC to interface</span>
 <span class="k">else</span>
     generate_mac
    <span class="sb">`</span>which ifconfig<span class="sb">`</span> <span class="nv">$1</span> link <span class="nv">$generated_mac</span> active
@@ -200,17 +200,17 @@ generate_mac<span class="o">()</span>
 <span class="k">fi</span>
 </pre></div>
 <p>Feel free to change the script and adapt it to your needs. Some examples:</p>
-<div class="highlight"><pre>root@BlackTiny:~<span class="o">]</span><span class="nv">$ </span>MACgen.sh 
+<div class="highlight"><pre><span></span>root@BlackTiny:~<span class="o">]</span>$ MACgen.sh 
 60:17:E8:1C:FF:7C
-<span class="o">[</span>root@BlackTiny:~<span class="o">]</span><span class="nv">$ </span>MACgen.sh
+<span class="o">[</span>root@BlackTiny:~<span class="o">]</span>$ MACgen.sh
 AE:7C:B6:CE:8B:7A
-<span class="o">[</span>root@BlackTiny:~<span class="o">]</span><span class="nv">$ </span>MACgen.sh
+<span class="o">[</span>root@BlackTiny:~<span class="o">]</span>$ MACgen.sh
 FB:D9:AB:D8:01:61
-<span class="o">[</span>root@BlackTiny:~<span class="o">]</span><span class="nv">$ </span>MACgen.sh
+<span class="o">[</span>root@BlackTiny:~<span class="o">]</span>$ MACgen.sh
 D8:F8:67:EF:BF:06
-<span class="o">[</span>root@BlackTiny:~<span class="o">]</span><span class="nv">$ </span>MACgen.sh ath0
+<span class="o">[</span>root@BlackTiny:~<span class="o">]</span>$ MACgen.sh ath0
 New MAC address <span class="k">for</span> ath0: BD:50:D4:CB:FA:F2
-<span class="o">[</span>root@BlackTiny:~<span class="o">]</span><span class="nv">$ </span>ifconfig ath0
+<span class="o">[</span>root@BlackTiny:~<span class="o">]</span>$ ifconfig ath0
 ath0: <span class="nv">flags</span><span class="o">=</span><span class="m">8802</span> mtu 1500
         ssid <span class="s2">""</span>
         powersave off

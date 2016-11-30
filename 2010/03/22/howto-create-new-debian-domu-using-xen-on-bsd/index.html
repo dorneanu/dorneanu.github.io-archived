@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -123,7 +123,7 @@
                     <p>In this tutorial you'll get detailed information how to setup a fully functionable Debian Lenny system using virtualization software <a href="http://xen.org/">Xen</a>. This entry was written due to high frustration caused by unreliable/outdated articles on the Internet and uncompleted tutorials. This here should be an attempt to describe the installation process completely and provide additional information which might help you solve common problems. The domU system we'd like to setup (in our case Debian) provides a neat <a href="http://en.wikipedia.org/wiki/NetBoot">netboot</a> installer which supports Xen. I don't know - I don't really have the time to look it up - if any other Linux distributions have such installer (nor if they support Xen at all) , so this howto might also apply - or not - to any other distribution. The same applies to the dom0 system: On your system shown shell commands might differ (different syntax)  as well as described methods (e.g. mount pseudo devices etc.). I used NetBSD 5.0_STABLE (amd64) on my system, so there should be no major differences to other BSD systems. If you use Linux as your host system, then you should seek forward since this paper is aimed to focus on *BSD papers. There are enough (good) tutorials out there you can rely on.</p>
 <h2 id="ee68e5b99222bbc29a480fcb0d1d6ee2">Prerequisites</h2>
 <p>At this point you should have a running Xen instance and have booted your dom0 (NetBSD with kernel XEN3_DOM0). You should have sth like this:</p>
-<div class="highlight"><pre><span class="nv">$ </span>uname -a
+<div class="highlight"><pre><span></span>$ uname -a
 NetBSD BlackTiny 5.0_STABLE NetBSD 5.0_STABLE <span class="o">(</span>XEN3_DOM0<span class="o">)</span>
 </pre></div>
 <p>Some technical details:</p>
@@ -136,12 +136,12 @@ NetBSD BlackTiny 5.0_STABLE NetBSD 5.0_STABLE <span class="o">(</span>XEN3_DOM0<
 </ul>
 <h2 id="825f9b50242f51833f9627933dac7b72">Step 1: Network configuration</h2>
 <p>Now you'll have to create a network bridge:</p>
-<div class="highlight"><pre><span class="nv">$ </span>ifconfig bridge0 create
-<span class="nv">$ </span>ifconfig bridge0
+<div class="highlight"><pre><span></span>$ ifconfig bridge0 create
+$ ifconfig bridge0
 bridge0: <span class="nv">flags</span><span class="o">=</span><span class="m">0</span> mtu 1500
 </pre></div>
 <p>Make sure you use an Intenet connection based on Ethernet (IEEE 802.3) since the Debian installer provides no WiFi modules (?). There have been several problems when using WiFi due to some data encapsulation issues. So be sure you have an active Internet connection based on Ethernet. Now you should add your Ethernet interface (wm0 on my system) to the network bridge we've created:</p>
-<div class="highlight"><pre><span class="nv">$ </span>brconfig -a
+<div class="highlight"><pre><span></span>$ brconfig -a
 bridge0: <span class="nv">flags</span><span class="o">=</span>0
         Configuration:
                 priority <span class="m">32768</span> hellotime <span class="m">2</span> fwddelay <span class="m">15</span> maxage 20
@@ -149,8 +149,8 @@ bridge0: <span class="nv">flags</span><span class="o">=</span>0
         Interfaces:
         Address cache <span class="o">(</span>max cache: 100, timeout: 1200<span class="o">)</span>:
 
-<span class="nv">$ </span>brconfig bridge0 add wm0 stp wm0 up
-<span class="nv">$ </span>brconfig bridge0
+$ brconfig bridge0 add wm0 stp wm0 up
+$ brconfig bridge0
 bridge0: <span class="nv">flags</span><span class="o">=</span><span class="m">41</span> UP,RUNNING
         Configuration:
                 priority <span class="m">32768</span> hellotime <span class="m">2</span> fwddelay <span class="m">15</span> maxage 20
@@ -161,12 +161,12 @@ bridge0: <span class="nv">flags</span><span class="o">=</span><span class="m">41
         Address cache <span class="o">(</span>max cache: 100, timeout: 1200<span class="o">)</span>:
 </pre></div>
 <p>This whole configuration stuff will be gone after reboot in case you don't save it to some file. If you want your system to automaticallly create the bridge, then you'll have to create <code>/etc/ifconfig.bridge0</code> and add these lines to it:</p>
-<div class="highlight"><pre>create!brconfig <span class="nv">$int</span> add <span class="o">[</span>your LAN interface<span class="o">]</span>up
+<div class="highlight"><pre><span></span>create!brconfig <span class="nv">$int</span> add <span class="o">[</span>your LAN interface<span class="o">]</span>up
 </pre></div>
 <p>Be sure to replace <code>[your LAN interface]</code> with the interface identifier on your system (in my case it would be wm0).</p>
 <h2 id="ec5c191f2a1f0c267ac9131b18037452">Create disk container</h2>
 <p>After setting up the network stuff, you should now create a container (about 2GB) where Debian will be later on installed.</p>
-<div class="highlight"><pre><span class="nv">$ </span>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>Debian-Lenny.img <span class="nv">bs</span><span class="o">=</span>1m <span class="nv">count</span><span class="o">=</span>2048
+<div class="highlight"><pre><span></span>$ dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>Debian-Lenny.img <span class="nv">bs</span><span class="o">=</span>1m <span class="nv">count</span><span class="o">=</span>2048
 </pre></div>
 <h2 id="0b7b53484efe23f204a26d9a05cb9efc">Step 3: Get Debian kernel and ramdisk file</h2>
 <p>In order to have a fully functionable Debian installation <strong>DON'T</strong> use <a href="http://people.debian.org/%7Ejoeyh/d-i/images/daily/">these</a> files. You'll run into several problems which will keep you busy searching the Internet for the solutions. Instead you should use the i386-current Xen netboot installer from this<a href="ftp://ftp.debian.org/debian/dists/lenny/main/installer-i386/current/images/netboot/xen/"> link</a>. You should at least download:</p>
@@ -177,49 +177,49 @@ bridge0: <span class="nv">flags</span><span class="o">=</span><span class="m">41
 <p>to your local directory.</p>
 <h2 id="614dcc5ca59201e50cf18351ba7cce39">Step 4: Xen domU configuration</h2>
 <p>Now let us configure then Xen domU at least with these options (see xm-debian.cfg):</p>
-<div class="highlight"><pre><span class="c"># Initial memory allocation (in megabytes) for the new domain.</span>
+<div class="highlight"><pre><span></span><span class="c1"># Initial memory allocation (in megabytes) for the new domain.</span>
 <span class="nv">memory</span> <span class="o">=</span> 128
 
-<span class="c"># A name for your domain. All domains must have different names.</span>
+<span class="c1"># A name for your domain. All domains must have different names.</span>
 <span class="nv">name</span> <span class="o">=</span> <span class="s2">"debianinstall"</span>
 
-<span class="c"># Define network interfaces</span>
+<span class="c1"># Define network interfaces</span>
 <span class="nv">vif</span> <span class="o">=</span> <span class="o">[</span><span class="s1">'bridge=bridge0'</span><span class="o">]</span>
 ...
 </pre></div>
 <h2 id="9bd8e6cbf3003f74d1b8aed541f5dae0">Step 5: Start Xen services</h2>
 <p>First be sure you have following entries in your <code>/etc/rc.conf</code>:</p>
-<div class="highlight"><pre><span class="nv">xend</span><span class="o">=</span>YES
+<div class="highlight"><pre><span></span><span class="nv">xend</span><span class="o">=</span>YES
 <span class="nv">xendomains</span><span class="o">=</span>YES
 <span class="nv">xenbackendd</span><span class="o">=</span>YES
 </pre></div>
 <p>Additionally you can add:</p>
-<div class="highlight"><pre><span class="nv">xendomains</span><span class="o">=</span><span class="s2">"domain.foo domain.bar"</span>
+<div class="highlight"><pre><span></span><span class="nv">xendomains</span><span class="o">=</span><span class="s2">"domain.foo domain.bar"</span>
 </pre></div>
 <p>where <code>domain.foo</code> and <code>domain.bar</code> are your Xen configs for these domains,<br/>
 i.e $LOCALBASE/etc/xen/domain.foo.In my case $LOCALBASE is defined as /usr/pkg.This will bring Xen to automatically start your DomUs. (thanks Marcin M. Jessa for this hint)</p>
 <p>Then you should be able to start Xen services:</p>
-<div class="highlight"><pre><span class="nv">$ </span>/usr/pkg/share/examples/rc.d/xend start
-<span class="nv">$ </span>/usr/pkg/share/examples/rc.d/xenbackendd start
-<span class="nv">$ </span>/usr/pkg/share/examples/rc.d/xendomains start
+<div class="highlight"><pre><span></span>$ /usr/pkg/share/examples/rc.d/xend start
+$ /usr/pkg/share/examples/rc.d/xenbackendd start
+$ /usr/pkg/share/examples/rc.d/xendomains start
 </pre></div>
 <h2 id="b1a4723cafea2baa0823270d9e10a9cb">Step 6: Install Debian</h2>
 <p>Now you should be able to start the Debian installation process.</p>
-<div class="highlight"><pre><span class="nv">$ </span>ls -l
+<div class="highlight"><pre><span></span>$ ls -l
 -rw-r--r--  <span class="m">1</span> root  wheel  <span class="m">13796958</span> Mar  <span class="m">3</span> 18:13 initrd.gz
 -rw-r--r--  <span class="m">1</span> root  wheel   <span class="m">1548496</span> Mar  <span class="m">3</span> 18:13 vmlinuz
 -rw-r--r--  <span class="m">1</span> root  wheel      <span class="m">7733</span> Mar <span class="m">21</span> 18:46 xm-debian.cfg
 
-<span class="nv">$ $ </span>sha1 vmlinuz 
+$ $ sha1 vmlinuz 
 SHA1 <span class="o">(</span>vmlinuz<span class="o">)</span> <span class="o">=</span> becfb0b127c083b1444f896011564b1822423152
-<span class="nv">$ </span>sha1 initrd.gz 
+$ sha1 initrd.gz 
 SHA1 <span class="o">(</span>initrd.gz<span class="o">)</span> <span class="o">=</span> 11bc2711f08ed8a0863169c506ab88d69cf9f3cf
 </pre></div>
 <p>You should now launch your Xen domU:</p>
-<div class="highlight"><pre><span class="nv">$ </span>xm create xm-debian.cfg <span class="nv">install</span><span class="o">=</span><span class="nb">true </span>install-kernel<span class="o">=</span>./vmlinuz install-ramdisk<span class="o">=</span>./initrd.gz
+<div class="highlight"><pre><span></span>$ xm create xm-debian.cfg <span class="nv">install</span><span class="o">=</span><span class="nb">true</span> install-kernel<span class="o">=</span>./vmlinuz install-ramdisk<span class="o">=</span>./initrd.gz
 </pre></div>
 <p>Since we use no framebuffer you should now switch to your console (by pressing CTRL+ALT + Fx, where X = 1 .. 8), login as root, cd to the previously listed directory and type:</p>
-<div class="highlight"><pre><span class="nv">$ </span>xm console debianinstall
+<div class="highlight"><pre><span></span>$ xm console debianinstall
 </pre></div>
 <p>You should now have an attached console to Debian's installer.</p>
 <p><img alt="debian installer" class="img-responsive" src="http://dl.dornea.nu/img/2010/147/11ae9eb.jpg"/></p>
@@ -235,10 +235,10 @@ SHA1 <span class="o">(</span>initrd.gz<span class="o">)</span> <span class="o">=
 <p>You should now go through the installation process without experiencing any troubles. At the end of the installation you won't have to install grub nor any boot loader, so simply ignore the error messages and select <code>Continue</code>. Even if you should go back to the main installation menu, select <code>Continue without any boot loader</code> and everything will be alright.</p>
 <h2 id="fb52f5892476d6a6ce108537d15e6baa">Step 7: Start your fresh new Debian system</h2>
 <p>First you'll have to extract <code>vmlinuz</code> and <code>initrd.gz</code> from your local disk container. NetBSD provides vnconfig(8) to configure pseudo disk devices.</p>
-<div class="highlight"><pre><span class="nv">$ </span>vnconfig vnd0 Debian-Lenny.img
-<span class="nv">$ </span>disklabel /dev/vnd0
-<span class="c"># /dev/vnd0d:</span>
-<span class="nb">type</span>: vnd
+<div class="highlight"><pre><span></span>$ vnconfig vnd0 Debian-Lenny.img
+$ disklabel /dev/vnd0
+<span class="c1"># /dev/vnd0d:</span>
+type: vnd
 disk: vnd
 label: fictitious
 flags:
@@ -252,25 +252,25 @@ rpm: 3600
 interleave: 1
 trackskew: 0
 cylinderskew: 0
-headswitch: <span class="m">0</span> <span class="c"># microseconds</span>
-track-to-track seek: <span class="m">0</span> <span class="c"># microseconds</span>
+headswitch: <span class="m">0</span> <span class="c1"># microseconds</span>
+track-to-track seek: <span class="m">0</span> <span class="c1"># microseconds</span>
 drivedata: 0
 
 <span class="m">9</span> partitions:
-<span class="c"># size offset fstype [fsize bsize cpg/sgs]</span>
-d: <span class="m">2097152</span> <span class="m">0</span> unused <span class="m">0</span> <span class="m">0</span> <span class="c"># (Cyl. 0 - 1023)</span>
-e: <span class="m">1863477</span> <span class="m">63</span> Linux Ext2 <span class="m">0</span> <span class="m">0</span> <span class="c"># (Cyl. 0*- 909*)</span>
-i: <span class="m">224847</span> <span class="m">1863603</span> swap <span class="c"># (Cyl. 909*- 1019*)</span>
+<span class="c1"># size offset fstype [fsize bsize cpg/sgs]</span>
+d: <span class="m">2097152</span> <span class="m">0</span> unused <span class="m">0</span> <span class="m">0</span> <span class="c1"># (Cyl. 0 - 1023)</span>
+e: <span class="m">1863477</span> <span class="m">63</span> Linux Ext2 <span class="m">0</span> <span class="m">0</span> <span class="c1"># (Cyl. 0*- 909*)</span>
+i: <span class="m">224847</span> <span class="m">1863603</span> swap <span class="c1"># (Cyl. 909*- 1019*)</span>
 disklabel: boot block size 0
 disklabel: super block size 0
 </pre></div>
 <p>As expected we have a swap partition and a ext2 (!!!) file system. We'll try now to mount it in order to extract the previously mentioned files:</p>
-<div class="highlight"><pre><span class="nv">$ </span>mount -t ext2fs /dev/vnd0e /mnt
-<span class="nv">$ </span>file /mnt/vmlinuz /mnt/vmlinuz: symbolic link to <span class="sb">`</span>boot/vmlinuz-2.6.26-2-686-bigmem<span class="s1">'</span>
+<div class="highlight"><pre><span></span>$ mount -t ext2fs /dev/vnd0e /mnt
+$ file /mnt/vmlinuz /mnt/vmlinuz: symbolic link to <span class="sb">`</span>boot/vmlinuz-2.6.26-2-686-bigmem<span class="s1">'</span>
 <span class="s1">$ file /mnt/initrd.img /mnt/initrd.img: symbolic link to `boot/initrd.img-2.6.26-2-686-bigmem'</span>
 </pre></div>
 <p>Now all you'll have to do is to copy these files to your local partition and use them in your domU configuration. On my laptop I've created /home/xen:</p>
-<div class="highlight"><pre><span class="nv">$ </span>ls -lR total 16
+<div class="highlight"><pre><span></span>$ ls -lR total 16
 drwxr-xr-x <span class="m">2</span> root wheel <span class="m">512</span> Mar <span class="m">22</span> 17:04 conf
 drwxr-xr-x <span class="m">2</span> root wheel <span class="m">512</span> Mar <span class="m">6</span> 22:07 container
 drwxr-xr-x <span class="m">2</span> root wheel <span class="m">512</span> Mar <span class="m">6</span> 22:08 kernel
@@ -293,29 +293,29 @@ total 12192
 -rw-r--r-- <span class="m">1</span> root wheel <span class="m">6214259</span> Mar <span class="m">5</span> 18:03 Debian-Lenny-initrd.img-2.6.26-2-686-bigmem
 </pre></div>
 <p>Debian-Lenny.conf in <em>conf </em>contains:</p>
-<div class="highlight"><pre><span class="c"># Kernel image file. This kernel will be loaded in the new domain.</span>
+<div class="highlight"><pre><span></span><span class="c1"># Kernel image file. This kernel will be loaded in the new domain.</span>
 <span class="nv">kernel</span> <span class="o">=</span> <span class="s2">"/home/xen/kernel/Debian-Lenny-vmlinuz-2.6.26-2-686-bigmem"</span>
 <span class="nv">ramdisk</span> <span class="o">=</span> <span class="s2">"/home/xen/ramdisk/Debian-Lenny-initrd.img-2.6.26-2-686-bigmem"</span>
 
-<span class="c"># Memory allocation (in megabytes) for the new domain.</span>
+<span class="c1"># Memory allocation (in megabytes) for the new domain.</span>
 <span class="nv">memory</span> <span class="o">=</span> 156
 
-<span class="c"># A handy name for your new domain. This will appear in 'xm list',</span>
-<span class="c"># and you can use this as parameters for xm in place of the domain</span>
-<span class="c"># number. All domains must have different names.</span>
+<span class="c1"># A handy name for your new domain. This will appear in 'xm list',</span>
+<span class="c1"># and you can use this as parameters for xm in place of the domain</span>
+<span class="c1"># number. All domains must have different names.</span>
 
 <span class="nv">name</span> <span class="o">=</span> <span class="s2">"Debian-Lenny"</span>
 <span class="nv">vif</span> <span class="o">=</span> <span class="o">[</span> <span class="s1">'mac=00:16:3e:2e:32:5f, bridge=bridge0'</span> <span class="o">]</span>
 
 <span class="nv">disk</span> <span class="o">=</span> <span class="o">[</span> <span class="s1">'file:/home/xen/container/Debian-Lenny.img,xvda,w'</span><span class="o">]</span>
 
-<span class="c"># Set root device.</span>
+<span class="c1"># Set root device.</span>
 <span class="nv">root</span> <span class="o">=</span> <span class="s2">"/dev/xvda"</span>
 </pre></div>
 <p>Now for the final step, launch your Debian domU using:</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>conf
-<span class="nv">$ </span><span class="nb">pwd</span>/home/xen/conf
-<span class="nv">$ </span>xen create -c Debian-Lenny.conf
+<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> conf
+$ pwd/home/xen/conf
+$ xen create -c Debian-Lenny.conf
 </pre></div>
 <p>Thats it! I hope you enjoyed this HowTo and if you have any questions/unsolved issues, just drop me a mail and I'll try to help.</p>
                 </div>

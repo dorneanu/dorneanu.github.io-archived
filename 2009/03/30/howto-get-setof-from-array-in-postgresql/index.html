@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -121,7 +121,7 @@
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
                     <p>The use of so called "procedural languages" in PostgreSQL allows the user to write user-defined functions in other languages than SQL or C. Since every query is sent to the server, the database server has to know how to interpret and handle function statements. As the PostgreSQL documentation describes, the function handler itself is a C language function compiled into a shared object and loaded on demand. All you have to do is to install the <em>language</em> into your database. Besides that you'll have to install the pre-compiled shared objects on your system. On my system (Debian 5.0) I had to install the <code>postgresql-plperl</code> package. Afterwars I connected to the database and typed:</p>
-<div class="highlight"><pre><span class="k">CREATE</span> <span class="k">FUNCTION</span> <span class="n">plpgsql_call_handler</span> <span class="p">()</span>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">FUNCTION</span> <span class="n">plpgsql_call_handler</span> <span class="p">()</span>
    <span class="k">RETURNS</span> <span class="n">OPAQUE</span>
    <span class="k">AS</span> <span class="s1">'/usr/lib/postgresql/8.3/lib/plpgsql.so'</span>
 <span class="k">LANGUAGE</span> <span class="s1">'C'</span><span class="p">;</span>
@@ -129,22 +129,22 @@
 <p>Of course you'll have to look up for the right file path in order to work. Finally I was able to use the language <code>plpgsql</code> in my functions. If you need help installing languages just check out the PostgreSQL <a href="http://www.postgresql.org/docs/8.3/static/plpgsql.html">documentation</a> (it helped me too).</p>
 <h2 id="bdc50b329fe8dddb376057be59471cf6">Polymorphic types</h2>
 <p>When speaking of polymorphism in PostgreSQL, we actually refer to the polymorphic functions. So what’s the difference between a polymorphic type and a polymorphic function? They're related to each other. In fact every function declared to use polymorphic types is called as a polymorphic function. These types (pseudo-types) are <code>anyelement</code> and <code>anyarray</code>. So when arguments of these types are passed to a function, it can handle with different data types. Imagine a function called <code>equal</code> that compares two arguments and returns a boolean:</p>
-<div class="highlight"><pre><span class="k">CREATE</span> <span class="k">or</span> <span class="k">REPLACE</span> <span class="k">FUNCTION</span> <span class="n">equal</span> <span class="p">(</span><span class="n">anyelement</span><span class="p">,</span><span class="n">anyelement</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">or</span> <span class="k">REPLACE</span> <span class="k">FUNCTION</span> <span class="n">equal</span> <span class="p">(</span><span class="n">anyelement</span><span class="p">,</span><span class="n">anyelement</span><span class="p">)</span>
   <span class="k">RETURNS</span> <span class="nb">boolean</span> <span class="k">AS</span>
   <span class="err">$$</span>
       <span class="p">...</span>
-      <span class="n">IF</span> <span class="err">$</span><span class="mi">1</span> <span class="o">==</span> <span class="err">$</span><span class="mi">2</span> <span class="k">THEN</span>
+      <span class="k">IF</span> <span class="err">$</span><span class="mi">1</span> <span class="o">==</span> <span class="err">$</span><span class="mi">2</span> <span class="k">THEN</span>
           <span class="k">return</span> <span class="k">TRUE</span><span class="p">;</span>
       <span class="k">ELSE</span>
           <span class="k">return</span> <span class="k">FALSE</span><span class="p">;</span>
-      <span class="k">END</span> <span class="n">IF</span><span class="p">;</span>
+      <span class="k">END</span> <span class="k">IF</span><span class="p">;</span>
   <span class="err">$$</span>
 <span class="k">LANGUAGE</span> <span class="s1">'sql'</span><span class="p">;</span>
 </pre></div>
 <p><code>equal</code> will take 2 input values of the SAME data type. Otherwise how could you e.g. compare a string to an integer? Read <a href="http://www.postgresql.org/docs/current/static/extend-type-system.html">more</a>.</p>
 <h2 id="cb59b87e00d11222bfd9159d0d23836f">Getting started</h2>
 <p>I'll use following employees table:</p>
-<div class="highlight"><pre><span class="k">create</span> <span class="k">table</span> <span class="n">t_employee</span>
+<div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">table</span> <span class="n">t_employee</span>
 <span class="p">(</span>
         <span class="n">ID</span> <span class="nb">integer</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
         <span class="n">name</span> <span class="nb">text</span><span class="p">,</span>
@@ -156,7 +156,7 @@
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span><span class="k">OIDS</span><span class="o">=</span><span class="k">FALSE</span><span class="p">);</span>
 </pre></div>
 <p>Then we insert some new data into the table:</p>
-<div class="highlight"><pre><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">t_employee</span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">salary</span><span class="p">,</span><span class="n">start_date</span><span class="p">,</span><span class="n">city</span><span class="p">)</span> 
+<div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">t_employee</span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">salary</span><span class="p">,</span><span class="n">start_date</span><span class="p">,</span><span class="n">city</span><span class="p">)</span> 
    <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s1">'Peter'</span><span class="p">,</span><span class="s1">'2100'</span><span class="p">,</span><span class="s1">'2003-06-19'</span><span class="p">,</span><span class="s1">'Stuttgart'</span><span class="p">);</span>
 <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">t_employee</span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">salary</span><span class="p">,</span><span class="n">start_date</span><span class="p">,</span><span class="n">city</span><span class="p">)</span> 
    <span class="k">VALUES</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s1">'Peter'</span><span class="p">,</span><span class="s1">'2100'</span><span class="p">,</span><span class="s1">'2003-06-19'</span><span class="p">,</span><span class="s1">'Stuttgart'</span><span class="p">);</span>
@@ -168,7 +168,7 @@
    <span class="k">VALUES</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="s1">'Gerd'</span><span class="p">,</span><span class="s1">'900'</span><span class="p">,</span><span class="s1">'2004-06-24'</span><span class="p">,</span><span class="s1">'Hannover'</span><span class="p">);</span>
 </pre></div>
 <p><code>t_employee</code> will now contain:</p>
-<div class="highlight"><pre><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">t_employee</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">t_employee</span><span class="p">;</span>
 
  <span class="n">id</span> <span class="o">|</span>  <span class="n">name</span>  <span class="o">|</span> <span class="n">salary</span> <span class="o">|</span> <span class="n">start_date</span> <span class="o">|</span>   <span class="n">city</span>    
 <span class="c1">----+--------+--------+------------+-----------</span>
@@ -182,7 +182,7 @@
 <p>In the next step we'll try to write a function which returns a SETOF containing our data.</p>
 <h2 id="838d9fcc4e8b6b1584ea05d417f6948a">SETOF vs. Array</h2>
 <p>Now we need a function which returns our data as a SETOF. In my function I can declare <code>l_row</code> of type <code>t_employee</code>(see below). In this variable data is structured as in the table <code>t_employee</code>. So far, no big deal. Just let us have a look at the function:</p>
-<div class="highlight"><pre><span class="k">CREATE</span> <span class="k">or</span> <span class="k">REPLACE</span> <span class="k">FUNCTION</span> <span class="n">get_employee</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">or</span> <span class="k">REPLACE</span> <span class="k">FUNCTION</span> <span class="n">get_employee</span><span class="p">()</span>
    <span class="k">RETURNS</span> <span class="k">SETOF</span> <span class="n">t_employees</span> <span class="k">AS</span>
 <span class="err">$</span><span class="n">BODY$</span>
 
@@ -203,7 +203,7 @@
    <span class="k">LANGUAGE</span> <span class="s1">'plpgsql'</span><span class="p">;</span>
 </pre></div>
 <p>Okay. But as you might have noticed, the purpose of this howto ist to show you how to get a SETOF from an array. Therefor we need some array. We'll modify <code>get_employees</code> in this way:</p>
-<div class="highlight"><pre><span class="k">CREATE</span> <span class="k">or</span> <span class="k">REPLACE</span> <span class="k">FUNCTION</span> <span class="n">get_employee</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">or</span> <span class="k">REPLACE</span> <span class="k">FUNCTION</span> <span class="n">get_employee</span><span class="p">()</span>
    <span class="k">RETURNS</span> <span class="k">SETOF</span> <span class="n">t_employee</span> <span class="k">AS</span>
 <span class="err">$</span><span class="n">BODY$</span>
 
@@ -226,7 +226,7 @@
    <span class="k">LANGUAGE</span> <span class="s1">'plpgsql'</span><span class="p">;</span>
 </pre></div>
 <p>IN the next step we'll have to extract SETOF data from the array. Since you can't do that with built-in Postgres functions, we'll need some auxiliary function:</p>
-<div class="highlight"><pre><span class="cm">/*</span>
+<div class="highlight"><pre><span></span><span class="cm">/*</span>
 <span class="cm">   Polymorphic function 'unnest': ANYARRAY -&amp;gt; SETOF</span>
 <span class="cm">   Return SETOF from ANYARRAY</span>
 <span class="cm">*/</span>
@@ -240,7 +240,7 @@
 <span class="err">$$</span><span class="p">;</span>
 </pre></div>
 <p>I hope you have noticed the <code>anyarray</code> which is given as a parameter to the function. So you can use <code>unnest</code> for every type of array. That's the great point when using polymorphic functions: You have some kind of generic function and you can use it for all arrays. Well having this function implemented, we can now modify <code>get_employees</code>:</p>
-<div class="highlight"><pre><span class="k">CREATE</span> <span class="k">or</span> <span class="k">REPLACE</span> <span class="k">FUNCTION</span> <span class="n">get_employee</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">or</span> <span class="k">REPLACE</span> <span class="k">FUNCTION</span> <span class="n">get_employee</span><span class="p">()</span>
    <span class="k">RETURNS</span> <span class="k">SETOF</span> <span class="n">t_employee</span> <span class="k">AS</span>
 <span class="err">$</span><span class="n">BODY$</span>
 

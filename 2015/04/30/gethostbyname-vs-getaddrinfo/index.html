@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -124,26 +124,26 @@
 at some basic network stuff like: <strong>socket()</strong>, <strong>connect()</strong> etc. In order to resolve domain names, one was used to 
 use <strong>gethostbyname()</strong>. I've used this function in all my previous C projects but this one seems to be out-dated as 
 the main page states:</p>
-<div class="highlight"><pre><span class="nx">The</span> <span class="nx">gethostbyname</span><span class="o">*</span><span class="p">(),</span> <span class="nx">gethostbyaddr</span><span class="o">*</span><span class="p">(),</span> <span class="nx">herror</span><span class="p">(),</span> <span class="nx">and</span> <span class="nx">hstrerror</span><span class="p">()</span> <span class="nx">functions</span> <span class="nx">are</span> <span class="nx">obsolete</span><span class="p">.</span>  
-<span class="nx">Applications</span> <span class="nx">should</span> <span class="nx">use</span> <span class="nx">getaddrinfo</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="nx">getnameinfo</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="nx">and</span> <span class="nx">gai_strerror</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="nx">instead</span><span class="p">.</span>
+<div class="highlight"><pre><span></span>The gethostbyname*(), gethostbyaddr*(), herror(), and hstrerror() functions are obsolete.  
+Applications should use getaddrinfo(3), getnameinfo(3), and gai_strerror(3) instead.
 </pre></div>
 <p>The really bad thing about <strong>gethostbyname</strong> is the fact that it doesn't support IPv6. Besides that you would then load
 the results into a <em>struct sockaddr_in</em>  and use it for your futher calls. A better option is <strong>getaddrinfo()</strong> which 
 supports IPv4 and IPv6 as well, does the DNS lookup and fills your structures. Perfect! </p>
 <p>So what do you need? First you'll need some variables:</p>
-<div class="highlight"><pre><span class="kt">int</span> <span class="n">status</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">status</span><span class="p">;</span>
 <span class="kt">char</span> <span class="n">ip_addr</span><span class="p">[</span><span class="n">INET6_ADDRSTRLEN</span><span class="p">];</span>
 <span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="o">*</span><span class="n">remote</span><span class="p">;</span>
 <span class="k">struct</span> <span class="n">addrinfo</span> <span class="n">hints</span><span class="p">,</span> <span class="o">*</span><span class="n">res</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
 </pre></div>
 <p>And then the call:</p>
-<div class="highlight"><pre><span class="k">if</span> <span class="p">((</span><span class="n">status</span><span class="o">=</span><span class="n">getaddrinfo</span><span class="p">(</span><span class="n">server_hostname</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">res</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">((</span><span class="n">status</span><span class="o">=</span><span class="n">getaddrinfo</span><span class="p">(</span><span class="n">server_hostname</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">res</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">log_err</span><span class="p">(</span><span class="s">"getaddrinfo failed: %s"</span><span class="p">,</span> <span class="n">gai_strerror</span><span class="p">(</span><span class="n">status</span><span class="p">));</span>
     <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 <p><code>res</code> is a linked list which has to be looped to fetch the results:</p>
-<div class="highlight"><pre><span class="k">while</span> <span class="p">(</span><span class="n">p</span> <span class="o">=</span> <span class="n">res</span><span class="p">;</span> <span class="n">p</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">ai_next</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="k">while</span> <span class="p">(</span><span class="n">p</span> <span class="o">=</span> <span class="n">res</span><span class="p">;</span> <span class="n">p</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">ai_next</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">void</span> <span class="o">*</span><span class="n">addr</span><span class="p">;</span>
     <span class="n">remote</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="o">*</span><span class="p">)</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">ai_addr</span><span class="p">;</span>
     <span class="n">addr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">remote</span><span class="o">-&gt;</span><span class="n">sin_addr</span><span class="p">);</span>
@@ -155,7 +155,7 @@ supports IPv4 and IPv6 as well, does the DNS lookup and fills your structures. P
 <span class="p">}</span>
 </pre></div>
 <p>Now you could create your socket, connect to the host, read data and so on:</p>
-<div class="highlight"><pre><span class="k">if</span> <span class="p">((</span><span class="n">socketfd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">res</span><span class="o">-&gt;</span><span class="n">ai_family</span><span class="p">,</span> <span class="n">res</span><span class="o">-&gt;</span><span class="n">ai_socktype</span><span class="p">,</span> <span class="n">res</span><span class="o">-&gt;</span><span class="n">ai_protocol</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">((</span><span class="n">socketfd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">res</span><span class="o">-&gt;</span><span class="n">ai_family</span><span class="p">,</span> <span class="n">res</span><span class="o">-&gt;</span><span class="n">ai_socktype</span><span class="p">,</span> <span class="n">res</span><span class="o">-&gt;</span><span class="n">ai_protocol</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">log_err</span><span class="p">(</span><span class="s">"Failed creating socket!"</span><span class="p">);</span>
     <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span>

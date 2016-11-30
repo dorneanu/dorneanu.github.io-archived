@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -127,7 +127,7 @@
 <strong>declare</strong> functions and use <strong>header</strong> files. After initial difficulties I was able to run my code and compile it using <code>-Wall</code> without any warnings. Perfect. </p>
 <p>The project itself is about implementing SSL/TLS in C since I've never done that before. The executable
 will take an <em>UR</em>L and optionally a <em>proxy</em> as arguments:</p>
-<div class="highlight"><pre><span class="nv">$ </span>./main -u http://blog.dornea.nu/ -p http://username:password@localhost:8080
+<div class="highlight"><pre><span></span>$ ./main -u http://blog.dornea.nu/ -p http://username:password@localhost:8080
 </pre></div>
 <p>The very first problem I've encountered was <strong>parsing</strong>. While in Python you usually have pretty good
 string operations you can apply on your string, in C you have to take of everything. In my case
@@ -140,7 +140,7 @@ I had to parse the proxy argument for its specific parts:</p>
 <li>port</li>
 </ul>
 <p>And if that wasn't enought, I also have to take care about <strong>error handling</strong> in case the proxy URL is malformed.  Speaking of <em>error handling</em>: It was indeed tempted to think of some <code>try .. catch</code> construct. Naaah! I remember ... The typical construct you should use:</p>
-<div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="n">not</span> <span class="n">sth</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">not</span> <span class="n">sth</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// this is very bad</span>
     <span class="k">return</span> <span class="o">&lt;</span><span class="n">whatever</span><span class="o">&gt;</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -148,7 +148,7 @@ I had to parse the proxy argument for its specific parts:</p>
 <span class="p">}</span>
 </pre></div>
 <p>Ok. What about <strong>logging</strong>? I remember having implemented some <strong>macros</strong> in the past and finally found this:</p>
-<div class="highlight"><pre><span class="cp">#define log_err(M, ...) fprintf(stderr, "ERROR: \t(%s:%d: errno: %s) " M "\n",\     </span>
+<div class="highlight"><pre><span></span><span class="cp">#define log_err(M, ...) fprintf(stderr, "ERROR: \t(%s:%d: errno: %s) " M "\n",\     </span>
                        <span class="n">__FILE__</span><span class="p">,</span> <span class="n">__LINE__</span><span class="p">,</span> <span class="n">clean_errno</span><span class="p">(),</span> <span class="err">##</span><span class="n">__VA_ARGS__</span><span class="p">)</span>
 
 <span class="cp">#define log_warn(M, ...) fprintf(stderr, "WARN: \t(%s:%d: errno: %s) " M "\n",\</span>
@@ -160,7 +160,7 @@ I had to parse the proxy argument for its specific parts:</p>
 mindset change. Almost everything is a pointer to some data structure, to some memory region etc. 
 Using pointers the right way has always been a challenge. Let's first have a look at some struct
 I'm using to collect information and store global accessible data:</p>
-<div class="highlight"><pre><span class="k">typedef</span> <span class="k">struct</span> <span class="n">globalargs</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="k">struct</span> <span class="n">globalargs</span> <span class="p">{</span>
     <span class="kt">char</span> <span class="o">*</span><span class="n">prog</span><span class="p">;</span>
     <span class="kt">char</span> <span class="o">*</span><span class="n">url</span><span class="p">;</span>
     <span class="kt">char</span> <span class="o">*</span><span class="n">proxy_uri</span><span class="p">;</span>
@@ -179,8 +179,8 @@ I'm using to collect information and store global accessible data:</p>
 <p>So we've got pointers everywhere. I use this struct to collect the CLI arguments using <code>getopt</code>. Besides that
 I'm using <code>globalargs</code> to store information which should be available in all "modules" (I don't have any yet but
 just for the explanation ...). But let me explain this using some example:</p>
-<div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;stdlib.h&gt;</span>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
 
 <span class="k">typedef</span> <span class="k">struct</span> <span class="n">myStruct</span> <span class="p">{</span>
     <span class="kt">char</span> <span class="o">*</span><span class="n">username</span><span class="p">;</span>
@@ -221,7 +221,7 @@ just for the explanation ...). But let me explain this using some example:</p>
 <span class="p">}</span>
 </pre></div>
 <p>When compiled and executed this produces following output:</p>
-<div class="highlight"><pre><span class="nv">$ </span>gcc -Wall -o n n.c <span class="o">&amp;&amp;</span> ./n
+<div class="highlight"><pre><span></span>$ gcc -Wall -o n n.c <span class="o">&amp;&amp;</span> ./n
 Username: username0
 Username: username0
 Username: username2
@@ -233,7 +233,7 @@ I should definitely improve my pointer arithmetics :)</p>
 <p>For almost every data structure memory has to be allocated. While this in OOP (object oriented programming) is usually done 
 by just creating a new instance of a new object, in C everything has to be done "manually". In our example allocating memory 
 for <code>myStruct</code> should be easy and straight forward:</p>
-<div class="highlight"><pre><span class="p">...</span>
+<div class="highlight"><pre><span></span><span class="p">...</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">ms</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">myStruct</span><span class="p">))))</span> <span class="p">{</span>
         <span class="n">printf</span><span class="p">(</span><span class="s">"Failed allocating memory!"</span><span class="p">);</span>
         <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>

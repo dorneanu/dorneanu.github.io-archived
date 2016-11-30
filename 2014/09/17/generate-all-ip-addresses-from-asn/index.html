@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -121,17 +121,17 @@
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
                     <p>Sometimes you need to know if a certain IP (or several ones) are within an IP range or belong to a certain <a href="http://en.wikipedia.org/wiki/Autonomous_System_%28Internet%29">ASN</a>. Let's give it a try and generate all possible IP addresses for <a href="http://telekom.de">telekom.de</a>. </p>
-<div class="highlight"><pre><span class="nv">$ </span>dig telekom.de 
+<div class="highlight"><pre><span></span>$ dig telekom.de 
 ...
 telekom.de.     <span class="m">86346</span>   IN  A   46.29.100.76
 ...
 </pre></div>
 <p>Now let's find out the ASN:</p>
-<div class="highlight"><pre><span class="nv">$ </span>whois 46.29.100.76 <span class="p">|</span> grep origin            
+<div class="highlight"><pre><span></span>$ whois 46.29.100.76 <span class="p">|</span> grep origin            
 origin:         AS34086
 </pre></div>
 <p>Now ask <a href="http://ripe.net">RIPE</a> for the IP ranges:</p>
-<div class="highlight"><pre><span class="nv">$ </span>whois -h whois.ripe.net -T route AS34086 -i origin <span class="p">|</span> egrep <span class="s2">"route: "</span> <span class="p">|</span> awk <span class="s1">'{print $NF}'</span>   
+<div class="highlight"><pre><span></span>$ whois -h whois.ripe.net -T route AS34086 -i origin <span class="p">|</span> egrep <span class="s2">"route: "</span> <span class="p">|</span> awk <span class="s1">'{print $NF}'</span>   
 145.225.1.0/24
 151.136.0.0/16
 185.9.216.0/22
@@ -148,8 +148,8 @@ origin:         AS34086
 <blockquote>
 <p>I know there is <a href="www.cpan.org/authors/id/R/RA/RAYNERLUC/cidr2range-0.9.pl">cidr2range</a> but that didn't work for certain blocks like <strong>145.225.1.0/24</strong>.</p>
 </blockquote>
-<div class="highlight"><pre><span class="nv">$ </span>cat cidr2list.py 
-<span class="c">#!/usr/bin/env python2</span>
+<div class="highlight"><pre><span></span>$ cat cidr2list.py 
+<span class="c1">#!/usr/bin/env python2</span>
 
 import sys
 from netaddr import IPNetwork
@@ -162,9 +162,9 @@ from netaddr import IPNetwork
             print <span class="s1">'%s'</span> % ip
 </pre></div>
 <p>Now let's generate the lists:</p>
-<div class="highlight"><pre><span class="nv">$ </span>whois -h whois.ripe.net -T route AS34086 -i origin <span class="p">|</span> egrep <span class="s2">"route: "</span> <span class="p">|</span> awk <span class="s1">'{print $NF}'</span>  &gt;&gt; /tmp/ip-ranges.txt
-<span class="nv">$ </span>cat /tmp/ip-ranges.txt <span class="p">|</span> xargs -n1 ./cidr2list.py &gt; /tmp/ip-lists.txt
-<span class="nv">$ </span> head -n <span class="m">10</span> /tmp/ip-lists.txt 
+<div class="highlight"><pre><span></span>$ whois -h whois.ripe.net -T route AS34086 -i origin <span class="p">|</span> egrep <span class="s2">"route: "</span> <span class="p">|</span> awk <span class="s1">'{print $NF}'</span>  &gt;&gt; /tmp/ip-ranges.txt
+$ cat /tmp/ip-ranges.txt <span class="p">|</span> xargs -n1 ./cidr2list.py &gt; /tmp/ip-lists.txt
+$  head -n <span class="m">10</span> /tmp/ip-lists.txt 
 145.225.1.0
 145.225.1.1
 145.225.1.2
@@ -175,7 +175,7 @@ from netaddr import IPNetwork
 145.225.1.7
 145.225.1.8
 145.225.1.9
-<span class="nv">$ </span>wc -l /tmp/ip-lists.txt 
+$ wc -l /tmp/ip-lists.txt 
 <span class="m">81920</span> /tmp/ip-lists.txt
 </pre></div>
 <p>Voila! :) </p>

@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -141,20 +141,18 @@
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [45]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">blockdiag</span>
-<span class="n">diagram</span> <span class="n">admin</span> <span class="p">{</span>
-    <span class="n">SW1</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.layer_2_remote_switch"</span><span class="p">];</span>
-    <span class="n">SW2</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.layer_2_remote_switch"</span><span class="p">];</span>
-    <span class="n">SW3</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.layer_2_remote_switch"</span><span class="p">];</span>
+<div class="prompt input_prompt">In [45]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="o">%%</span><span class="k">blockdiag</span>
+diagram admin {
+    SW1 [shape = "cisco.layer_2_remote_switch"];
+    SW2 [shape = "cisco.layer_2_remote_switch"];
+    SW3 [shape = "cisco.layer_2_remote_switch"];
 
-    <span class="n">SW1</span> <span class="o">&lt;-&gt;</span> <span class="n">SW2</span><span class="p">;</span>
-    <span class="n">SW2</span> <span class="o">&lt;-&gt;</span> <span class="n">SW3</span><span class="p">;</span>
-<span class="p">}</span>
+    SW1 &lt;-&gt; SW2;
+    SW2 &lt;-&gt; SW3;
+}
 </pre></div>
 </div>
 </div>
@@ -326,73 +324,72 @@ RU5ErkJggg==
 <li>Setup proper console logging</li>
 <li>...</li>
 </ol>
-<h3 id="d3a684ba26dc075fa5016464088813da">Basic switch configuration</h3>
-<ul>
+<h3 id="43d81d4e69bf139c537574c8e5837a62">Basic switch configuration<a class="anchor-link" href="#Basic-switch-configuration">¶</a></h3><ul>
 <li>House keeping:</li>
 </ul>
-<pre><code class="language-.bash"><span class="keyword">Switch</span>&gt;enable
-<span class="keyword">Switch</span><span class="comment">#conf t</span>
+<pre><code>.bash
+Switch&gt;enable
+Switch#conf t
 Enter configuration commands, one per line.  End with CNTL/Z.
-<span class="keyword">Switch</span>(config)<span class="comment">#hostname SW1</span>
-SW1(config)<span class="comment">#no ip domain-lookup</span>
-SW1(config)<span class="comment">#service password-encryption </span>
-SW1(config)<span class="comment">#enable secret admin!</span>
-SW1(config)<span class="comment">#exit</span>
-</code></pre>
+Switch(config)#hostname SW1
+SW1(config)#no ip domain-lookup
+SW1(config)#service password-encryption 
+SW1(config)#enable secret admin!
+SW1(config)#exit</code></pre>
 <ul>
 <li>Console settings:</li>
 </ul>
-<pre><code class="language-.bash">SW1(config)<span class="preprocessor">#<span class="keyword">line</span> console 0</span>
-SW1(config-line)<span class="preprocessor">#exec-timeout 0 0</span>
-SW1(config-line)<span class="preprocessor">#logging synchronous </span>
-SW1(config)<span class="preprocessor">#exit</span>
-</code></pre>
+<pre><code>.bash
+SW1(config)#line console 0
+SW1(config-line)#exec-timeout 0 0
+SW1(config-line)#logging synchronous 
+SW1(config)#exit</code></pre>
 <ul>
 <li>Virtual terminal settings:</li>
 </ul>
-<pre><code class="language-.bash">SW1(config)<span class="preprocessor">#line vty 0 15</span>
-SW1(config-line)#exec-timeout <span class="number">0</span> <span class="number">0</span>
-SW1(config)#exit
-</code></pre>
+<pre><code>.bash
+SW1(config)#line vty 0 15
+SW1(config-line)#exec-timeout 0 0
+SW1(config)#exit</code></pre>
 <ul>
 <li>SSH settings:</li>
 </ul>
-<pre><code class="language-.bash">SW1(config)<span class="comment">#ip domain-name sw1.local</span>
-SW1(config)<span class="comment">#crypto key generate rsa</span>
-The <span class="property">name</span> <span class="keyword">for</span> <span class="keyword">the</span> keys will be: SW1.sw1.<span class="keyword">local</span>
-Choose <span class="keyword">the</span> size <span class="keyword">of</span> <span class="keyword">the</span> key modulus <span class="keyword">in</span> <span class="keyword">the</span> range <span class="keyword">of</span> <span class="number">360</span> <span class="keyword">to</span> <span class="number">2048</span> <span class="keyword">for</span> your
-  General Purpose Keys. Choosing a key modulus <span class="keyword">greater than</span> <span class="number">512</span> may take
+<pre><code>.bash
+SW1(config)#ip domain-name sw1.local
+SW1(config)#crypto key generate rsa
+The name for the keys will be: SW1.sw1.local
+Choose the size of the key modulus in the range of 360 to 2048 for your
+  General Purpose Keys. Choosing a key modulus greater than 512 may take
   a few minutes.
 
-How many bits <span class="keyword">in</span> <span class="keyword">the</span> modulus [<span class="number">512</span>]: <span class="number">2048</span>
-% Generating <span class="number">2048</span> bit RSA keys, keys will be non-exportable...[OK]
-SW1(config)<span class="comment">#ip ssh version 2</span>
-</code></pre>
+How many bits in the modulus [512]: 2048
+% Generating 2048 bit RSA keys, keys will be non-exportable...[OK]
+SW1(config)#ip ssh version 2</code></pre>
 <ul>
 <li>Allow SSH for terminals:</li>
 </ul>
-<pre><code class="language-.bash">SW1(config)<span class="preprocessor">#<span class="keyword">line</span> vty 0 15</span>
-SW1(config-line)<span class="preprocessor">#login local</span>
-SW1(config-line)<span class="preprocessor">#transport input ssh</span>
-SW1(config-line)<span class="preprocessor">#exit</span>
-</code></pre>
+<pre><code>.bash
+SW1(config)#line vty 0 15
+SW1(config-line)#login local
+SW1(config-line)#transport input ssh
+SW1(config-line)#exit</code></pre>
 <ul>
 <li>Add local users:</li>
 </ul>
-<pre><code class="language-.bash">SW1(config)<span class="preprocessor">#username admin password admin!</span>
-</code></pre>
+<pre><code>.bash
+SW1(config)#username admin password admin!</code></pre>
 <ul>
 <li>Check SSH:</li>
 </ul>
-<pre><code class="language-.bash">SW1#<span class="operator"><span class="keyword">show</span> ssh
-%<span class="keyword">No</span> SSHv2 server connections running.
-%<span class="keyword">No</span> SSHv1 server connections running.
-</span></code></pre>
+<pre><code>.bash
+SW1#show ssh
+%No SSHv2 server connections running.
+%No SSHv1 server connections running.</code></pre>
 <p>And now store the configuration by replacing the <strong>startup-config</strong> by the <strong>running-config</strong>:</p>
-<pre><code class="language-.bash">SW1<span class="comment">#copy running-config startup-config </span>
-Destination filename<span class="sqbracket"> [startup-config]? 
-Building configuration...
-</span></code></pre>
+<pre><code>.bash
+SW1#copy running-config startup-config 
+Destination filename [startup-config]? 
+Building configuration...</code></pre>
 <p>Now we will apply the same configuration (with slightly different modifications) to <code>SW2</code> and <code>SW3</code>.</p>
 </div>
 </div>
@@ -402,55 +399,52 @@ Building configuration...
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2be699659df3451ee9edbd78cb507a23">Configure ports</h3>
-<p>Let's have a look at the next step and how our small network should look like:</p>
+<h3 id="e7f4ab2fde2512ea433b1c109242c48e">Configure ports<a class="anchor-link" href="#Configure-ports">¶</a></h3><p>Let's have a look at the next step and how our small network should look like:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [53]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">blockdiag</span>
-<span class="n">diagram</span> <span class="n">admin</span> <span class="p">{</span>
-    <span class="n">SW1</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.layer_2_remote_switch"</span><span class="p">];</span>
-    <span class="n">SW2</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.layer_2_remote_switch"</span><span class="p">];</span>
-    <span class="n">SW3</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.layer_2_remote_switch"</span><span class="p">];</span>
+<div class="prompt input_prompt">In [53]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="o">%%</span><span class="k">blockdiag</span>
+diagram admin {
+    SW1 [shape = "cisco.layer_2_remote_switch"];
+    SW2 [shape = "cisco.layer_2_remote_switch"];
+    SW3 [shape = "cisco.layer_2_remote_switch"];
 
-    <span class="n">PC1</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
-    <span class="n">PC2</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
-    <span class="n">PC3</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
-    <span class="n">PC4</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
-    <span class="n">PC5</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
-    <span class="n">PC6</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
+    PC1 [shape = "cisco.pc"];
+    PC2 [shape = "cisco.pc"];
+    PC3 [shape = "cisco.pc"];
+    PC4 [shape = "cisco.pc"];
+    PC5 [shape = "cisco.pc"];
+    PC6 [shape = "cisco.pc"];
 
-    <span class="n">SW1</span> <span class="o">&lt;-&gt;</span> <span class="n">SW2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"F0/1   -   F0/1"</span><span class="p">];</span>
-    <span class="n">SW2</span> <span class="o">&lt;-&gt;</span> <span class="n">SW3</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"F0/2   -   F0/1"</span><span class="p">];</span>
+    SW1 &lt;-&gt; SW2 [label = "F0/1   -   F0/1"];
+    SW2 &lt;-&gt; SW3 [label = "F0/2   -   F0/1"];
     
-    <span class="n">group</span> <span class="p">{</span>
-        <span class="n">orientation</span> <span class="o">=</span> <span class="n">portrait</span><span class="p">;</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s">"#FFF"</span><span class="p">;</span>
-        <span class="n">SW1</span> <span class="o">&lt;-&gt;</span> <span class="n">PC1</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"F0/2 - F0"</span><span class="p">];</span>
-        <span class="n">SW1</span> <span class="o">&lt;-&gt;</span> <span class="n">PC2</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"F0/3 - F0"</span><span class="p">];</span>
-    <span class="p">}</span>
+    group {
+        orientation = portrait;
+        color = "#FFF";
+        SW1 &lt;-&gt; PC1 [label = "F0/2 - F0"];
+        SW1 &lt;-&gt; PC2 [label = "F0/3 - F0"];
+    }
     
-    <span class="n">group</span> <span class="p">{</span>
-        <span class="n">orientation</span> <span class="o">=</span> <span class="n">portrait</span><span class="p">;</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s">"#FFF"</span><span class="p">;</span>
-        <span class="n">SW2</span> <span class="o">&lt;-&gt;</span> <span class="n">PC3</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"F0/3 - F0"</span><span class="p">];</span>
-        <span class="n">SW2</span> <span class="o">&lt;-&gt;</span> <span class="n">PC4</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"F0/4 - F0"</span><span class="p">];</span>
-    <span class="p">}</span>
+    group {
+        orientation = portrait;
+        color = "#FFF";
+        SW2 &lt;-&gt; PC3 [label = "F0/3 - F0"];
+        SW2 &lt;-&gt; PC4 [label = "F0/4 - F0"];
+    }
     
-    <span class="n">group</span> <span class="p">{</span>
-        <span class="n">orientation</span> <span class="o">=</span> <span class="n">portrait</span><span class="p">;</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s">"#FFF"</span><span class="p">;</span>
-        <span class="n">SW3</span> <span class="o">&lt;-&gt;</span> <span class="n">PC5</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"F0/3 - F0"</span><span class="p">];</span>
-        <span class="n">SW3</span> <span class="o">&lt;-&gt;</span> <span class="n">PC6</span> <span class="p">[</span><span class="n">label</span> <span class="o">=</span> <span class="s">"F0/4 - F0"</span><span class="p">];</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    group {
+        orientation = portrait;
+        color = "#FFF";
+        SW3 &lt;-&gt; PC5 [label = "F0/3 - F0"];
+        SW3 &lt;-&gt; PC6 [label = "F0/4 - F0"];
+    }
+}
 </pre></div>
 </div>
 </div>
@@ -838,7 +832,8 @@ AAAAAElFTkSuQmCC
 <td>PC2</td>
 <td>F0/3</td>
 <td></td>
-<td></td><br> </br></tr>
+<td></td>
+</tr>
 <tr>
 <td>PC3</td>
 <td></td>
@@ -864,85 +859,83 @@ AAAAAElFTkSuQmCC
 <td>F0/4</td>
 </tr>
 </table>
-<h3 id="5e89ea2b8f38ea944502610b0493c10a">Configure links between switches</h3>
-<p>Now I'll configure the ports on between <code>SW1</code> and <code>SW2</code>:</p>
+<h3 id="3685d65aeecfd83cd5d8e82dcdd99084">Configure links between switches<a class="anchor-link" href="#Configure-links-between-switches">¶</a></h3><p>Now I'll configure the ports on between <code>SW1</code> and <code>SW2</code>:</p>
 <ul>
 <li>Set duplex and link speed:</li>
 </ul>
-<pre><code class="language-.bash">SW1<span class="comment">#conf t</span>
-SW1(config)<span class="comment">#int f0/1</span>
-SW1(config-<span class="keyword">if</span>)<span class="comment">#dupl</span>
-SW1(config-<span class="keyword">if</span>)<span class="comment">#duplex full</span>
-SW1(config-<span class="keyword">if</span>)<span class="comment">#speed 100</span>
-SW1(config-<span class="keyword">if</span>)<span class="comment">#description SW2 connects here</span>
-</code></pre>
+<pre><code>.bash
+SW1#conf t
+SW1(config)#int f0/1
+SW1(config-if)#dupl
+SW1(config-if)#duplex full
+SW1(config-if)#speed 100
+SW1(config-if)#description SW2 connects here</code></pre>
 <ul>
 <li>Activate <strong>trunk</strong> mode:</li>
 </ul>
-<pre><code class="language-.bash">SW1(config-<span class="keyword">if</span>)<span class="comment">#switchport mode trunk</span>
-SW1(config-<span class="keyword">if</span>)<span class="comment">#switchport trunk encapsulation dot1q</span>
-SW1(config-<span class="keyword">if</span>)<span class="comment">#no shhutdown</span>
-SW1(config-<span class="keyword">if</span>)<span class="comment">#end</span>
-</code></pre>
+<pre><code>.bash
+SW1(config-if)#switchport mode trunk
+SW1(config-if)#switchport trunk encapsulation dot1q
+SW1(config-if)#no shhutdown
+SW1(config-if)#end</code></pre>
 <ul>
 <li>Check switchport configuration:</li>
 </ul>
-<pre><code class="language-.bash">SW1<span class="comment">#sh int f0/1 switchport</span>
-Name: Fa0/<span class="number">1</span>
+<pre><code>.bash
+SW1#sh int f0/1 switchport
+Name: Fa0/1
 Switchport: Enabled
 Administrative Mode: trunk
 Operational Mode: down
 Administrative Trunking Encapsulation: dot1q
 Operational Trunking Encapsulation: dot1q
 Negotiation of Trunking: On
-Access Mode VLAN: <span class="number">1</span> (default)
-Trunking Native Mode VLAN: <span class="number">1</span> (default)
+Access Mode VLAN: 1 (default)
+Trunking Native Mode VLAN: 1 (default)
 Voice VLAN: none
-<span class="keyword">...</span>
-</code></pre>
+...</code></pre>
 <ul>
 <li>Check interface configuration:</li>
 </ul>
-<pre><code class="language-.bash">SW1<span class="comment">#sh int f0/1 </span>
-FastEthernet0/<span class="number">1</span> <span class="keyword">is</span> down, line protocol <span class="keyword">is</span> down (disabled)
-  Hardware <span class="keyword">is</span> Lance, address <span class="keyword">is</span> <span class="number">0090.211</span>e<span class="number">.2e01</span> (bia <span class="number">0090.211</span>e<span class="number">.2e01</span>)
+<pre><code>.bash
+SW1#sh int f0/1 
+FastEthernet0/1 is down, line protocol is down (disabled)
+  Hardware is Lance, address is 0090.211e.2e01 (bia 0090.211e.2e01)
   Description: Sw2 connects here
- BW <span class="number">100000</span> Kbit, DLY <span class="number">1000</span> usec,
-     reliability <span class="number">255</span><span class="regexp">/255, txload 1/255, rxload 1/</span><span class="number">255</span>
-  Encapsulation ARPA, loopback <span class="keyword">not</span> set
-  Keepalive set (<span class="number">10</span> sec)
-  Full-duplex, <span class="number">100</span>Mb/s
-  input flow-control <span class="keyword">is</span> <span class="literal">off</span>, output flow-control <span class="keyword">is</span> <span class="literal">off</span>
-...
-</code></pre>
+ BW 100000 Kbit, DLY 1000 usec,
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Full-duplex, 100Mb/s
+  input flow-control is off, output flow-control is off
+...</code></pre>
 <p>You should have noticed that the interfaces is currently <strong>down</strong>. This happens due to <strong>encapsulation</strong> misconfiguration between the two switches. After having <code>SW2</code> configured as well you should have:</p>
-<pre><code class="language-.bash">SW2<span class="comment">#sh int f0/1 switchport </span>
-Name: Fa0/<span class="number">1</span>
+<pre><code>.bash
+SW2#sh int f0/1 switchport 
+Name: Fa0/1
 Switchport: Enabled
 Administrative Mode: trunk
 Operational Mode: trunk
 Administrative Trunking Encapsulation: dot1q
 Operational Trunking Encapsulation: dot1q
 Negotiation of Trunking: On
-Access Mode VLAN: <span class="number">1</span> (default)
-Trunking Native Mode VLAN: <span class="number">1</span> (default)
+Access Mode VLAN: 1 (default)
+Trunking Native Mode VLAN: 1 (default)
 Voice VLAN: none
-<span class="keyword">...</span>
+...
 
-SW2<span class="comment">#sh int f0/1</span>
-FastEthernet0/<span class="number">1</span> is up, line protocol is up (connected)
+SW2#sh int f0/1
+FastEthernet0/1 is up, line protocol is up (connected)
   Hardware is Lance, address is 00d0.58ac.4d01 (bia 00d0.58ac.4d01)
   Description: SW1 connects here
- BW <span class="number">100000</span> Kbit, DLY <span class="number">1000</span> usec,
-     reliability <span class="number">255</span>/<span class="number">255</span>, txload <span class="number">1</span>/<span class="number">255</span>, rxload <span class="number">1</span>/<span class="number">255</span>
+ BW 100000 Kbit, DLY 1000 usec,
+     reliability 255/255, txload 1/255, rxload 1/255
   Encapsulation ARPA, loopback not set
-  Keepalive set (<span class="number">10</span> sec)
+  Keepalive set (10 sec)
   Full-duplex, 100Mb/s
-<span class="keyword">...</span>
-</code></pre>
+...</code></pre>
 <p>Now we should have a working <strong>trunk</strong> between <code>SW1</code> and <code>SW2</code>. The link between <code>Sw2</code> and <code>Sw3</code> should be then configured as well.</p>
-<h3 id="1727e4f72891fa2d06c22b40eb455294">Add VLANs</h3>
-<p>Now I'll create 2 VLANs:</p>
+<h3 id="20ef485c3e004e92396c7fcfa28cb3c5">Add VLANs<a class="anchor-link" href="#Add-VLANs">¶</a></h3><p>Now I'll create 2 VLANs:</p>
 <ul>
 <li>VLAN <strong>Students</strong><ul>
 <li>ID: 10</li>
@@ -1001,51 +994,49 @@ FastEthernet0/<span class="number">1</span> is up, line protocol is up (connecte
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [54]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">blockdiag</span>
-<span class="n">diagram</span> <span class="n">admin</span> <span class="p">{</span>
-    <span class="n">SW1</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.layer_2_remote_switch"</span><span class="p">];</span>
-    <span class="n">SW2</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.layer_2_remote_switch"</span><span class="p">];</span>
-    <span class="n">SW3</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.layer_2_remote_switch"</span><span class="p">];</span>
+<div class="prompt input_prompt">In [54]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="o">%%</span><span class="k">blockdiag</span>
+diagram admin {
+    SW1 [shape = "cisco.layer_2_remote_switch"];
+    SW2 [shape = "cisco.layer_2_remote_switch"];
+    SW3 [shape = "cisco.layer_2_remote_switch"];
 
-    <span class="n">PC1</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
-    <span class="n">PC2</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
-    <span class="n">PC3</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
-    <span class="n">PC4</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
-    <span class="n">PC5</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
-    <span class="n">PC6</span> <span class="p">[</span><span class="n">shape</span> <span class="o">=</span> <span class="s">"cisco.pc"</span><span class="p">];</span>
+    PC1 [shape = "cisco.pc"];
+    PC2 [shape = "cisco.pc"];
+    PC3 [shape = "cisco.pc"];
+    PC4 [shape = "cisco.pc"];
+    PC5 [shape = "cisco.pc"];
+    PC6 [shape = "cisco.pc"];
 
-    <span class="n">SW1</span> <span class="o">&lt;-&gt;</span> <span class="n">SW2</span><span class="p">;</span>
-    <span class="n">SW2</span> <span class="o">&lt;-&gt;</span> <span class="n">SW3</span><span class="p">;</span>
+    SW1 &lt;-&gt; SW2;
+    SW2 &lt;-&gt; SW3;
     
-    <span class="n">group</span> <span class="p">{</span>
-        <span class="n">orientation</span> <span class="o">=</span> <span class="n">portrait</span><span class="p">;</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="s">"VLAN 10"</span><span class="p">;</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s">"#FFF000"</span><span class="p">;</span>
-        <span class="n">SW1</span> <span class="o">&lt;-&gt;</span> <span class="n">PC1</span><span class="p">;</span>
-        <span class="n">SW1</span> <span class="o">&lt;-&gt;</span> <span class="n">PC2</span><span class="p">;</span>
-    <span class="p">}</span>
+    group {
+        orientation = portrait;
+        label = "VLAN 10";
+        color = "#FFF000";
+        SW1 &lt;-&gt; PC1;
+        SW1 &lt;-&gt; PC2;
+    }
     
-    <span class="n">group</span> <span class="p">{</span>
-        <span class="n">orientation</span> <span class="o">=</span> <span class="n">portrait</span><span class="p">;</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="s">"VLAN 20"</span><span class="p">;</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s">"#FFFEEE"</span><span class="p">;</span>
-        <span class="n">SW2</span> <span class="o">&lt;-&gt;</span> <span class="n">PC3</span><span class="p">;</span>
-        <span class="n">SW2</span> <span class="o">&lt;-&gt;</span> <span class="n">PC4</span><span class="p">;</span>
-    <span class="p">}</span>
+    group {
+        orientation = portrait;
+        label = "VLAN 20";
+        color = "#FFFEEE";
+        SW2 &lt;-&gt; PC3;
+        SW2 &lt;-&gt; PC4;
+    }
     
-    <span class="n">group</span> <span class="p">{</span>
-        <span class="n">orientation</span> <span class="o">=</span> <span class="n">portrait</span><span class="p">;</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="s">"VLAN 10 + VLAN 20"</span><span class="p">;</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s">"#FFFDDD"</span><span class="p">;</span>
-        <span class="n">SW3</span> <span class="o">&lt;-&gt;</span> <span class="n">PC5</span><span class="p">;</span>
-        <span class="n">SW3</span> <span class="o">&lt;-&gt;</span> <span class="n">PC6</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    group {
+        orientation = portrait;
+        label = "VLAN 10 + VLAN 20";
+        color = "#FFFDDD";
+        SW3 &lt;-&gt; PC5;
+        SW3 &lt;-&gt; PC6;
+    }
+}
 </pre></div>
 </div>
 </div>
@@ -1609,89 +1600,85 @@ iIiIjLP/DwnHj9AhfM5rAAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Keep in mind that the switches don't really belong to any VLANs at all.</strong></p>
-<h3 id="66f686c99eb197d8193486019f165d41">Add VLAN Students</h3>
-<p>Adding the VLAN configuration has to be done on every switch. I could have used <code>VTP</code> (VLAN Trunking Protocol) but for the sake of exercise I'll do it manually, beginning with <code>SW1</code>:</p>
-<pre><code class="language-.bash">SW1(config)<span class="comment">#vlan 10</span>
-SW1(config-vlan)<span class="comment">#name Students</span>
-SW1(config-vlan)<span class="comment">#exit</span>
-SW1(config)<span class="comment">#int range f0/2 - 3</span>
-SW1(config-<span class="keyword">if</span>-range)<span class="comment">#switchport mode access </span>
-SW1(config-<span class="keyword">if</span>-range)<span class="comment">#switchport access vlan 10</span>
-SW1(config-<span class="keyword">if</span>-range)<span class="comment">#no shutdown</span>
-</code></pre>
+<h3 id="89a12d07693498abc018e42de7492cf1">Add VLAN Students<a class="anchor-link" href="#Add-VLAN-Students">¶</a></h3><p>Adding the VLAN configuration has to be done on every switch. I could have used <code>VTP</code> (VLAN Trunking Protocol) but for the sake of exercise I'll do it manually, beginning with <code>SW1</code>:</p>
+<pre><code>.bash
+SW1(config)#vlan 10
+SW1(config-vlan)#name Students
+SW1(config-vlan)#exit
+SW1(config)#int range f0/2 - 3
+SW1(config-if-range)#switchport mode access 
+SW1(config-if-range)#switchport access vlan 10
+SW1(config-if-range)#no shutdown</code></pre>
 <p>Now do the same with <code>SW3</code> (ports are of course different):</p>
-<pre><code class="language-.bash">SW3(config)<span class="comment">#int f0/3</span>
-SW3(config-<span class="keyword">if</span>)<span class="comment">#switchport mode access </span>
-SW3(config-<span class="keyword">if</span>)<span class="comment">#switchport access vlan 10</span>
-SW3(config-<span class="keyword">if</span>)<span class="comment">#no shutdown</span>
-</code></pre>
+<pre><code>.bash
+SW3(config)#int f0/3
+SW3(config-if)#switchport mode access 
+SW3(config-if)#switchport access vlan 10
+SW3(config-if)#no shutdown</code></pre>
 <p>Add the VLAN config to <code>SW2</code> as well:</p>
-<pre><code class="language-.bash">SW2(config)<span class="preprocessor">#vlan 10</span>
-SW2(config-vlan)<span class="preprocessor">#name Students</span>
-SW2(config-vlan)<span class="preprocessor">#exit</span>
-</code></pre>
-<h3 id="64e895d93c2dc46fe8d45dbc3e62f324">Add VLAN Teachers</h3>
-<p>The configuration is pretty straight-forward:</p>
-<pre><code class="language-.bash">SW2(config)<span class="comment">#vlan 20</span>
-SW2(config-vlan)<span class="comment">#name Teachers</span>
-SW2(config-vlan)<span class="comment">#exit</span>
-SW2(config)<span class="comment">#int range f0/3 - 4</span>
-SW2(config-<span class="keyword">if</span>-range)<span class="comment">#switchport mode access </span>
-SW2(config-<span class="keyword">if</span>-range)<span class="comment">#switchport access vlan 10</span>
-SW2(config-<span class="keyword">if</span>-range)<span class="comment">#no shutdown</span>
-</code></pre>
+<pre><code>.bash
+SW2(config)#vlan 10
+SW2(config-vlan)#name Students
+SW2(config-vlan)#exit</code></pre>
+<h3 id="bc7fcb5a6d3cac989bd9a7a09ba5f6c7">Add VLAN Teachers<a class="anchor-link" href="#Add-VLAN-Teachers">¶</a></h3><p>The configuration is pretty straight-forward:</p>
+<pre><code>.bash
+SW2(config)#vlan 20
+SW2(config-vlan)#name Teachers
+SW2(config-vlan)#exit
+SW2(config)#int range f0/3 - 4
+SW2(config-if-range)#switchport mode access 
+SW2(config-if-range)#switchport access vlan 10
+SW2(config-if-range)#no shutdown</code></pre>
 <p>Now on <code>SW3</code>:</p>
-<pre><code class="language-.bash">SW3(config-vlan)<span class="comment">#name Teachers</span>
-SW3(config-vlan)<span class="comment">#exit</span>
-SW3(config)<span class="comment">#int f0/2</span>
-SW3(config-<span class="keyword">if</span>)<span class="comment">#switchport mode access </span>
-SW3(config-<span class="keyword">if</span>)<span class="comment">#switchport access vlan 20</span>
-SW3(config-<span class="keyword">if</span>)<span class="comment">#no shutdown</span>
-</code></pre>
+<pre><code>.bash
+SW3(config-vlan)#name Teachers
+SW3(config-vlan)#exit
+SW3(config)#int f0/2
+SW3(config-if)#switchport mode access 
+SW3(config-if)#switchport access vlan 20
+SW3(config-if)#no shutdown</code></pre>
 <p>Don't forget to add the VLAN config to <code>SW1</code> as well:</p>
-<pre><code class="language-.bash">SW1(config)<span class="preprocessor">#vlan 20</span>
-SW1(config-vlan)<span class="preprocessor">#name Teachers</span>
-SW1(config-vlan)<span class="preprocessor">#exit</span>
-</code></pre>
-<h3 id="4ac66c95dbcd46e1932ebee463abb66d">Restrict VLANs on trunk ports</h3>
-<p>If you have a look at the configured trunk ports, you'll get sth like this:</p>
-<pre><code class="language-.bash">SW1<span class="comment">#sh int trunk</span>
+<pre><code>.bash
+SW1(config)#vlan 20
+SW1(config-vlan)#name Teachers
+SW1(config-vlan)#exit</code></pre>
+<h3 id="6b3e91d13572c1b73f0ed5b4675d82ca">Restrict VLANs on trunk ports<a class="anchor-link" href="#Restrict-VLANs-on-trunk-ports">¶</a></h3><p>If you have a look at the configured trunk ports, you'll get sth like this:</p>
+<pre><code>.bash
+SW1#sh int trunk
 Port        Mode         Encapsulation  Status        Native vlan
-Fa0/<span class="number">1</span>       <span class="function_start"><span class="keyword">on</span> </span>          <span class="number">802.1</span>q         trunking      <span class="number">1</span>
+Fa0/1       on           802.1q         trunking      1
 
-Port        Vlans allowed <span class="function_start"><span class="keyword">on</span> <span class="title">trunk</span></span>
-Fa0/<span class="number">1</span>       <span class="number">1</span>-<span class="number">1005</span>
+Port        Vlans allowed on trunk
+Fa0/1       1-1005
 
-Port        Vlans allowed <span class="keyword">and</span> active <span class="keyword">in</span> management domain
-Fa0/<span class="number">1</span>       <span class="number">1</span>,<span class="number">10</span>,<span class="number">20</span>
+Port        Vlans allowed and active in management domain
+Fa0/1       1,10,20
 
-Port        Vlans <span class="keyword">in</span> spanning tree forwarding state <span class="keyword">and</span> <span class="keyword">not</span> pruned
-Fa0/<span class="number">1</span>       <span class="number">1</span>,<span class="number">10</span>,<span class="number">20</span>
-</code></pre>
+Port        Vlans in spanning tree forwarding state and not pruned
+Fa0/1       1,10,20</code></pre>
 <p>You'll notice that the <strong>allowed VLANs</strong> on the trunk ports range from <code>1-1005</code>. Actually (and due to security reasons) we want to restrict the VLANs which should be forwarded by the switches:</p>
-<pre><code class="language-.bash">SW1(config)<span class="comment">#int f0/1</span>
-SW1(config-<span class="keyword">if</span>)<span class="comment">#switchport trunk allowed vlan 10,20</span>
-</code></pre>
+<pre><code>.bash
+SW1(config)#int f0/1
+SW1(config-if)#switchport trunk allowed vlan 10,20</code></pre>
 <p>We only want to allow frames with a VLAN tag id = {10, 20}. <strong>Every</strong> trunk port must be configured that way. Finally you can verify that by:</p>
-<pre><code class="language-.bash">SW2<span class="comment">#sh int trunk</span>
+<pre><code>.bash
+SW2#sh int trunk
 Port        Mode         Encapsulation  Status        Native vlan
-Fa0/<span class="number">1</span>       <span class="function_start"><span class="keyword">on</span> </span>          <span class="number">802.1</span>q         trunking      <span class="number">1</span>
-Fa0/<span class="number">2</span>       <span class="function_start"><span class="keyword">on</span> </span>          <span class="number">802.1</span>q         trunking      <span class="number">1</span>
+Fa0/1       on           802.1q         trunking      1
+Fa0/2       on           802.1q         trunking      1
 
-Port        Vlans allowed <span class="function_start"><span class="keyword">on</span> <span class="title">trunk</span></span>
-Fa0/<span class="number">1</span>       <span class="number">10</span>,<span class="number">20</span>
-Fa0/<span class="number">2</span>       <span class="number">10</span>,<span class="number">20</span>
+Port        Vlans allowed on trunk
+Fa0/1       10,20
+Fa0/2       10,20
 
-Port        Vlans allowed <span class="keyword">and</span> active <span class="keyword">in</span> management domain
-Fa0/<span class="number">1</span>       <span class="number">10</span>,<span class="number">20</span>
-Fa0/<span class="number">2</span>       <span class="number">10</span>,<span class="number">20</span>
+Port        Vlans allowed and active in management domain
+Fa0/1       10,20
+Fa0/2       10,20
 
-Port        Vlans <span class="keyword">in</span> spanning tree forwarding state <span class="keyword">and</span> <span class="keyword">not</span> pruned
-Fa0/<span class="number">1</span>       <span class="number">10</span>,<span class="number">20</span>
-Fa0/<span class="number">2</span>       <span class="number">10</span>,<span class="number">20</span>
-</code></pre>
-<h3 id="a0ca235f38b952761c698472f11e77d8">Configure Switch Virtual Interfaces</h3>
-<p>Traditionally switches operate on <em>Layer 2</em>. By using <strong>SVI</strong>s (Switch Virtual Interface) the switches uses a virtual <em>Layer 3</em> interface to route traffic to other <em>Layer 3</em> interface without any physical router. VLANs divide networks into smaller segments which keep traffic inside the VLAN. And because each VLAN has its own domain, a mechanism is needed to pass data to other VLANs.</p>
+Port        Vlans in spanning tree forwarding state and not pruned
+Fa0/1       10,20
+Fa0/2       10,20</code></pre>
+<h3 id="3be0668f304eaadd3ce90b4425bc305d">Configure Switch Virtual Interfaces<a class="anchor-link" href="#Configure-Switch-Virtual-Interfaces">¶</a></h3><p>Traditionally switches operate on <em>Layer 2</em>. By using <strong>SVI</strong>s (Switch Virtual Interface) the switches uses a virtual <em>Layer 3</em> interface to route traffic to other <em>Layer 3</em> interface without any physical router. VLANs divide networks into smaller segments which keep traffic inside the VLAN. And because each VLAN has its own domain, a mechanism is needed to pass data to other VLANs.</p>
 <p>In our case we'll have to add each switch to some VLAN and assign some SVI a valid routable IP address.</p>
 <table border="0" cellpadding="0" cellspacing="0" class="table table-hover table-striped" width="100%">
 <tr>
@@ -1718,68 +1705,68 @@ Fa0/<span class="number">2</span>       <span class="number">10</span>,<span cla
 <ul>
 <li>Configure <code>SW1</code>:</li>
 </ul>
-<pre><code class="language-.bash">SW1(config)<span class="comment">#vlan 30</span>
-SW1(config-vlan)<span class="comment">#name Management</span>
-SW1(config-vlan)<span class="comment">#exit</span>
-SW1(config)<span class="comment">#int vlan 30</span>
-SW1(config-<span class="keyword">if</span>)<span class="comment">#</span>
-%LINK-<span class="number">5</span>-CHANGED: Interface Vlan30, changed state to up
+<pre><code>.bash
+SW1(config)#vlan 30
+SW1(config-vlan)#name Management
+SW1(config-vlan)#exit
+SW1(config)#int vlan 30
+SW1(config-if)#
+%LINK-5-CHANGED: Interface Vlan30, changed state to up
 
-SW1(config-<span class="keyword">if</span>)<span class="comment">#ip address 30.30.30.1 255.255.255.0</span>
-SW1<span class="comment">#sh ip int brief</span>
-<span class="keyword">...</span>
-Vlan30                 <span class="number">30.30</span><span class="number">.30</span><span class="number">.1</span>      YES manual up                    down
-</code></pre>
+SW1(config-if)#ip address 30.30.30.1 255.255.255.0
+SW1#sh ip int brief
+...
+Vlan30                 30.30.30.1      YES manual up                    down</code></pre>
 <ul>
 <li>Configure <code>SW2</code>:</li>
 </ul>
-<pre><code class="language-.bash">SW2(config)<span class="comment">#vlan 30</span>
-SW2(config-vlan)<span class="comment">#name Management</span>
-SW2(config-vlan)<span class="comment">#exit</span>
-SW2(config)<span class="comment">#int vlan 30</span>
-SW2(config-<span class="keyword">if</span>)<span class="comment">#</span>
-%LINK-<span class="number">5</span>-CHANGED: Interface Vlan30, changed state to up
+<pre><code>.bash
+SW2(config)#vlan 30
+SW2(config-vlan)#name Management
+SW2(config-vlan)#exit
+SW2(config)#int vlan 30
+SW2(config-if)#
+%LINK-5-CHANGED: Interface Vlan30, changed state to up
 
-SW2(config-<span class="keyword">if</span>)<span class="comment">#ip add</span>
-SW2(config-<span class="keyword">if</span>)<span class="comment">#ip address 30.30.30.2 255.255.255.0</span>
-SW2<span class="comment">#sh ip int brief</span>
-<span class="keyword">...</span>
-Vlan30                 <span class="number">30.30</span><span class="number">.30</span><span class="number">.2</span>      YES manual up                    down
-</code></pre>
+SW2(config-if)#ip add
+SW2(config-if)#ip address 30.30.30.2 255.255.255.0
+SW2#sh ip int brief
+...
+Vlan30                 30.30.30.2      YES manual up                    down</code></pre>
 <ul>
 <li>Configure <code>Sw3</code>:</li>
 </ul>
-<pre><code class="language-.bash">SW3(config)<span class="comment">#vlan 30</span>
-SW3(config-vlan)<span class="comment">#name Management</span>
-SW3(config-vlan)<span class="comment">#exit</span>
-SW3(config)<span class="comment">#int vlan 30</span>
-SW3(config-<span class="keyword">if</span>)<span class="comment">#</span>
-%LINK-<span class="number">5</span>-CHANGED: Interface Vlan30, changed state to up
+<pre><code>.bash
+SW3(config)#vlan 30
+SW3(config-vlan)#name Management
+SW3(config-vlan)#exit
+SW3(config)#int vlan 30
+SW3(config-if)#
+%LINK-5-CHANGED: Interface Vlan30, changed state to up
 
-SW3(config-<span class="keyword">if</span>)<span class="comment">#ip address 30.30.30.3 255.255.255.0</span>
-SW3<span class="comment">#sh ip int brief</span>
-<span class="keyword">...</span>
-Vlan30                 <span class="number">30.30</span><span class="number">.30</span><span class="number">.3</span>      YES manual up                    down
-</code></pre>
+SW3(config-if)#ip address 30.30.30.3 255.255.255.0
+SW3#sh ip int brief
+...
+Vlan30                 30.30.30.3      YES manual up                    down</code></pre>
 <p>As you can see the interfaces are all in <strong>up/down</strong> state which is generally a <strong>Layer 2</strong> problem. If you remember correctly we have configured the <em>trunk</em> ports previously. We also allowed only <em>specific</em> VLANs to pass through these trunks. In this case we'll have to allow VLAN <strong>Management</strong> as well. Just an example for <code>SW2</code>:</p>
-<pre><code class="language-.bash">SW2(config)#<span class="typename">int</span> <span class="keyword">range</span> f0<span class="number">/1</span> -<span class="number"> 2</span>
-SW2(config-<span class="keyword">if</span>-<span class="keyword">range</span>)#switchport trunk allowed vlan<span class="number"> 10</span><span class="number">,20</span><span class="number">,30</span>
-</code></pre>
+<pre><code>.bash
+SW2(config)#int range f0/1 - 2
+SW2(config-if-range)#switchport trunk allowed vlan 10,20,30</code></pre>
 <p>Now the port should be resetted:</p>
-<pre><code class="language-.bash">
-SW2(config)<span class="preprocessor">#int vlan 30</span>
-SW2(config-<span class="keyword">if</span>)<span class="preprocessor">#no shutdown </span>
-SW2(config-<span class="keyword">if</span>)<span class="preprocessor">#</span>
-%LINEPROTO-<span class="number">5</span>-UPDOWN: Line <span class="class"><span class="keyword">protocol</span> <span class="id">on</span> <span class="id">Interface</span> <span class="id">Vlan30</span>, <span class="id">changed</span> <span class="id">state</span> <span class="id">to</span> <span class="id">up</span></span>
+<pre><code>.bash
 
-SW2(config-<span class="keyword">if</span>)<span class="preprocessor">#^Z</span>
-</code></pre>
+SW2(config)#int vlan 30
+SW2(config-if)#no shutdown 
+SW2(config-if)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan30, changed state to up
+
+SW2(config-if)#^Z</code></pre>
 <p>And then check again the port state:</p>
-<pre><code class="language-.bash">SW2<span class="comment">#sh ip int brief</span>
-<span class="keyword">...</span>
-Vlan30                 <span class="number">30.30</span><span class="number">.30</span><span class="number">.2</span>      YES manual up                    up
-</code></pre>
-<p>The configuration steps for <code>SW1</code> and <code>SW3</code> are here intentionally ommitted. </p>
+<pre><code>.bash
+SW2#sh ip int brief
+...
+Vlan30                 30.30.30.2      YES manual up                    up</code></pre>
+<p>The configuration steps for <code>SW1</code> and <code>SW3</code> are here intentionally ommitted.</p>
 </div>
 </div>
 </div>
@@ -1788,84 +1775,81 @@ Vlan30                 <span class="number">30.30</span><span class="number">.30
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="9bd9d0ebc081bd74f5bef4e136bb1aed">Connectivity</h2>
-<h3 id="b9c58242dd440acf0c4c6270d5ebcd3a">Ping between PCs</h3>
-<p>Now let's check the connectivity between the posts:</p>
+<h2 id="a4626c8810838b580624975bf4a8d7da">Connectivity<a class="anchor-link" href="#Connectivity">¶</a></h2><h3 id="0ce6e5682c9256c16640495700251a3f">Ping between PCs<a class="anchor-link" href="#Ping-between-PCs">¶</a></h3><p>Now let's check the connectivity between the posts:</p>
 <ul>
 <li><code>PC1</code> -&gt; <code>PC2</code>:</li>
 </ul>
-<pre><code class="language-.bash">PC&gt;ping <span class="number">10.10</span><span class="number">.10</span><span class="number">.102</span>
+<pre><code>.bash
+PC&gt;ping 10.10.10.102
 
-Pinging <span class="number">10.10</span><span class="number">.10</span><span class="number">.102</span> <span class="keyword">with</span> <span class="number">32</span> bytes <span class="keyword">of</span> data:
+Pinging 10.10.10.102 with 32 bytes of data:
 
-Reply <span class="keyword">from</span> <span class="number">10.10</span><span class="number">.10</span><span class="number">.102</span>: bytes=<span class="number">32</span> <span class="property">time</span>=<span class="number">1</span>ms TTL=<span class="number">128</span>
-Reply <span class="keyword">from</span> <span class="number">10.10</span><span class="number">.10</span><span class="number">.102</span>: bytes=<span class="number">32</span> <span class="property">time</span>=<span class="number">0</span>ms TTL=<span class="number">128</span>
-Reply <span class="keyword">from</span> <span class="number">10.10</span><span class="number">.10</span><span class="number">.102</span>: bytes=<span class="number">32</span> <span class="property">time</span>=<span class="number">0</span>ms TTL=<span class="number">128</span>
-Reply <span class="keyword">from</span> <span class="number">10.10</span><span class="number">.10</span><span class="number">.102</span>: bytes=<span class="number">32</span> <span class="property">time</span>=<span class="number">0</span>ms TTL=<span class="number">128</span>
+Reply from 10.10.10.102: bytes=32 time=1ms TTL=128
+Reply from 10.10.10.102: bytes=32 time=0ms TTL=128
+Reply from 10.10.10.102: bytes=32 time=0ms TTL=128
+Reply from 10.10.10.102: bytes=32 time=0ms TTL=128
 
-Ping statistics <span class="keyword">for</span> <span class="number">10.10</span><span class="number">.10</span><span class="number">.102</span>:
-    Packets: Sent = <span class="number">4</span>, Received = <span class="number">4</span>, Lost = <span class="number">0</span> (<span class="number">0</span>% loss),
-Approximate <span class="command">round</span> trip <span class="keyword">times</span> <span class="keyword">in</span> milli-seconds:
-    Minimum = <span class="number">0</span>ms, Maximum = <span class="number">1</span>ms, Average = <span class="number">0</span>ms
-</code></pre>
+Ping statistics for 10.10.10.102:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms</code></pre>
 <ul>
 <li><code>PC1</code> -&gt; <code>PC5</code>:</li>
 </ul>
-<pre><code class="language-.bash">PC&gt;ping <span class="number">10.10</span><span class="number">.10</span><span class="number">.105</span>
+<pre><code>.bash
+PC&gt;ping 10.10.10.105
 
-Pinging <span class="number">10.10</span><span class="number">.10</span><span class="number">.105</span> <span class="keyword">with</span> <span class="number">32</span> bytes <span class="keyword">of</span> data:
+Pinging 10.10.10.105 with 32 bytes of data:
 
-Reply <span class="keyword">from</span> <span class="number">10.10</span><span class="number">.10</span><span class="number">.105</span>: bytes=<span class="number">32</span> <span class="property">time</span>=<span class="number">1</span>ms TTL=<span class="number">128</span>
-Reply <span class="keyword">from</span> <span class="number">10.10</span><span class="number">.10</span><span class="number">.105</span>: bytes=<span class="number">32</span> <span class="property">time</span>=<span class="number">0</span>ms TTL=<span class="number">128</span>
-Reply <span class="keyword">from</span> <span class="number">10.10</span><span class="number">.10</span><span class="number">.105</span>: bytes=<span class="number">32</span> <span class="property">time</span>=<span class="number">0</span>ms TTL=<span class="number">128</span>
-Reply <span class="keyword">from</span> <span class="number">10.10</span><span class="number">.10</span><span class="number">.105</span>: bytes=<span class="number">32</span> <span class="property">time</span>=<span class="number">0</span>ms TTL=<span class="number">128</span>
+Reply from 10.10.10.105: bytes=32 time=1ms TTL=128
+Reply from 10.10.10.105: bytes=32 time=0ms TTL=128
+Reply from 10.10.10.105: bytes=32 time=0ms TTL=128
+Reply from 10.10.10.105: bytes=32 time=0ms TTL=128
 
-Ping statistics <span class="keyword">for</span> <span class="number">10.10</span><span class="number">.10</span><span class="number">.105</span>:
-    Packets: Sent = <span class="number">4</span>, Received = <span class="number">4</span>, Lost = <span class="number">0</span> (<span class="number">0</span>% loss),
-Approximate <span class="command">round</span> trip <span class="keyword">times</span> <span class="keyword">in</span> milli-seconds:
-    Minimum = <span class="number">0</span>ms, Maximum = <span class="number">1</span>ms, Average = <span class="number">0</span>ms
-</code></pre>
+Ping statistics for 10.10.10.105:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms</code></pre>
 <ul>
 <li><code>PC4</code> -&gt; <code>PC6</code>:</li>
 </ul>
-<pre><code class="language-.bash">PC&gt;ping <span class="number">20.20</span><span class="number">.20</span><span class="number">.106</span>
+<pre><code>.bash
+PC&gt;ping 20.20.20.106
 
-Pinging <span class="number">20.20</span><span class="number">.20</span><span class="number">.106</span> <span class="keyword">with</span> <span class="number">32</span> bytes <span class="keyword">of</span> data:
+Pinging 20.20.20.106 with 32 bytes of data:
 
-Reply <span class="keyword">from</span> <span class="number">20.20</span><span class="number">.20</span><span class="number">.106</span>: bytes=<span class="number">32</span> <span class="property">time</span>=<span class="number">0</span>ms TTL=<span class="number">128</span>
-Reply <span class="keyword">from</span> <span class="number">20.20</span><span class="number">.20</span><span class="number">.106</span>: bytes=<span class="number">32</span> <span class="property">time</span>=<span class="number">0</span>ms TTL=<span class="number">128</span>
-Reply <span class="keyword">from</span> <span class="number">20.20</span><span class="number">.20</span><span class="number">.106</span>: bytes=<span class="number">32</span> <span class="property">time</span>=<span class="number">0</span>ms TTL=<span class="number">128</span>
-Reply <span class="keyword">from</span> <span class="number">20.20</span><span class="number">.20</span><span class="number">.106</span>: bytes=<span class="number">32</span> <span class="property">time</span>=<span class="number">0</span>ms TTL=<span class="number">128</span>
+Reply from 20.20.20.106: bytes=32 time=0ms TTL=128
+Reply from 20.20.20.106: bytes=32 time=0ms TTL=128
+Reply from 20.20.20.106: bytes=32 time=0ms TTL=128
+Reply from 20.20.20.106: bytes=32 time=0ms TTL=128
 
-Ping statistics <span class="keyword">for</span> <span class="number">20.20</span><span class="number">.20</span><span class="number">.106</span>:
-    Packets: Sent = <span class="number">4</span>, Received = <span class="number">4</span>, Lost = <span class="number">0</span> (<span class="number">0</span>% loss),
-Approximate <span class="command">round</span> trip <span class="keyword">times</span> <span class="keyword">in</span> milli-seconds:
-    Minimum = <span class="number">0</span>ms, Maximum = <span class="number">0</span>ms, Average = <span class="number">0</span>ms
-</code></pre>
-<h3 id="db762d1184b2bb19e3a453867915b2a3">Ping between Switches</h3>
-<ul>
+Ping statistics for 20.20.20.106:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms</code></pre>
+<h3 id="55202139360a3cc544fe31114ec85aa0">Ping between Switches<a class="anchor-link" href="#Ping-between-Switches">¶</a></h3><ul>
 <li><code>SW3</code> -&gt; <code>SW1</code></li>
 </ul>
-<pre><code class="language-.bash">SW3<span class="comment">#ping 30.30.30.1</span>
+<pre><code>.bash
+SW3#ping 30.30.30.1
 
-Type escape sequence <span class="keyword">to</span> abort.
-Sending <span class="number">5</span>, <span class="number">100</span>-byte ICMP Echos <span class="keyword">to</span> <span class="number">30.30</span><span class="number">.30</span><span class="number">.1</span>, <span class="keyword">timeout</span> <span class="keyword">is</span> <span class="number">2</span> seconds:
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 30.30.30.1, timeout is 2 seconds:
 ..!!!
-Success rate <span class="keyword">is</span> <span class="number">60</span> percent (<span class="number">3</span>/<span class="number">5</span>), <span class="command">round</span>-trip min/avg/max = <span class="number">0</span>/<span class="number">0</span>/<span class="number">0</span> ms
-</code></pre>
+Success rate is 60 percent (3/5), round-trip min/avg/max = 0/0/0 ms</code></pre>
 <p>The first 2 ICMP Echo Requests were not successful because <code>SW3</code> and <code>SW2</code> didn't have yet the MAC address of <code>SW1</code>. The 2nd ping command will therefore have 100% connectivity rate since the MAC address table has been updated:</p>
-<pre><code class="language-.bash">SW3<span class="comment">#ping 30.30.30.1</span>
+<pre><code>.bash
+SW3#ping 30.30.30.1
 
-Type escape sequence <span class="keyword">to</span> abort.
-Sending <span class="number">5</span>, <span class="number">100</span>-byte ICMP Echos <span class="keyword">to</span> <span class="number">30.30</span><span class="number">.30</span><span class="number">.1</span>, <span class="keyword">timeout</span> <span class="keyword">is</span> <span class="number">2</span> seconds:
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 30.30.30.1, timeout is 2 seconds:
 !!!!!
-Success rate <span class="keyword">is</span> <span class="number">100</span> percent (<span class="number">5</span>/<span class="number">5</span>), <span class="command">round</span>-trip min/avg/max = <span class="number">0</span>/<span class="number">1</span>/<span class="number">6</span> ms
-</code></pre>
-<h3 id="765553e6c7ac8592c389acb9878a050a">SSH</h3>
-<ul>
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/1/6 ms</code></pre>
+<h3 id="aa06709a0f86692ff672a0184e28476c">SSH<a class="anchor-link" href="#SSH">¶</a></h3><ul>
 <li><code>SW1</code> -&gt; <code>SW2</code>:</li>
 </ul>
-<pre><code class="language-.bash">SW1<span class="comment">#ssh -l admin -v 2 30.30.30.2</span>
+<pre><code>.bash
+SW1#ssh -l admin -v 2 30.30.30.2
 Open
 Password: 
 
@@ -1873,32 +1857,30 @@ Password:
 
 SW2&gt;enable
 Password: 
-SW2<span class="comment">#exit</span>
+SW2#exit
 
-[Connection <span class="keyword">to</span> <span class="number">30.30</span><span class="number">.30</span><span class="number">.2</span> closed <span class="keyword">by</span> foreign host]
-SW1<span class="comment">#</span>
-</code></pre>
-<h3 id="0b9aa4324b61192201bddcf739d34224">MAC address tables</h3>
-<p>Now that we have pinged the hosts, the switches should now have all MAC addresses in their tables:</p>
+[Connection to 30.30.30.2 closed by foreign host]
+SW1#</code></pre>
+<h3 id="c376859c84771eb57f607ed28cab0025">MAC address tables<a class="anchor-link" href="#MAC-address-tables">¶</a></h3><p>Now that we have pinged the hosts, the switches should now have all MAC addresses in their tables:</p>
 <ul>
 <li><code>SW2</code>:</li>
 </ul>
-<pre><code class="language-.bash"><span class="comment">SW2#show</span> <span class="comment">mac</span> <span class="comment">address</span>-<span class="comment">table</span> 
-          <span class="comment">Mac</span> <span class="comment">Address</span> <span class="comment">Table</span>
-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>
+<pre><code>.bash
+SW2#show mac address-table 
+          Mac Address Table
+-------------------------------------------
 
-<span class="comment">Vlan</span>    <span class="comment">Mac</span> <span class="comment">Address</span>       <span class="comment">Type</span>        <span class="comment">Ports</span>
-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>    <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>       <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>    <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
 
-   <span class="comment">1</span>    <span class="comment">0030</span>.<span class="comment">a341</span>.<span class="comment">e901</span>    <span class="comment">DYNAMIC</span>     <span class="comment">Fa0/2</span>
-   <span class="comment">1</span>    <span class="comment">0090</span>.<span class="comment">211e</span>.<span class="comment">2e01</span>    <span class="comment">DYNAMIC</span>     <span class="comment">Fa0/1</span>
-  <span class="comment">10</span>    <span class="comment">0001</span>.<span class="comment">437b</span>.<span class="comment">a40c</span>    <span class="comment">DYNAMIC</span>     <span class="comment">Fa0/2</span>
-  <span class="comment">10</span>    <span class="comment">0030</span>.<span class="comment">a341</span>.<span class="comment">e901</span>    <span class="comment">DYNAMIC</span>     <span class="comment">Fa0/2</span>
-  <span class="comment">10</span>    <span class="comment">0030</span>.<span class="comment">f28c</span>.<span class="comment">c65a</span>    <span class="comment">DYNAMIC</span>     <span class="comment">Fa0/1</span>
-  <span class="comment">20</span>    <span class="comment">0030</span>.<span class="comment">a319</span>.<span class="comment">da0b</span>    <span class="comment">DYNAMIC</span>     <span class="comment">Fa0/4</span>
-  <span class="comment">20</span>    <span class="comment">0030</span>.<span class="comment">a341</span>.<span class="comment">e901</span>    <span class="comment">DYNAMIC</span>     <span class="comment">Fa0/2</span>
-  <span class="comment">20</span>    <span class="comment">0060</span>.<span class="comment">7079</span>.<span class="comment">8692</span>    <span class="comment">DYNAMIC</span>     <span class="comment">Fa0/2
-</span></code></pre>
+   1    0030.a341.e901    DYNAMIC     Fa0/2
+   1    0090.211e.2e01    DYNAMIC     Fa0/1
+  10    0001.437b.a40c    DYNAMIC     Fa0/2
+  10    0030.a341.e901    DYNAMIC     Fa0/2
+  10    0030.f28c.c65a    DYNAMIC     Fa0/1
+  20    0030.a319.da0b    DYNAMIC     Fa0/4
+  20    0030.a341.e901    DYNAMIC     Fa0/2
+  20    0060.7079.8692    DYNAMIC     Fa0/2</code></pre>
 </div>
 </div>
 </div>
@@ -1907,49 +1889,47 @@ SW1<span class="comment">#</span>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="2fae32629d4ef4fc6341f1751b405e45">Security</h2>
-<h3 id="c964378a1b7af535f1912ca284d3bdf5">Port security</h3>
-<p>Now suppose <code>SW1</code> should implement <strong>port security</strong> and therefore allow only <strong>pre-defined</strong> devices to connect to the switch. This will prevent devices which MAC addresses is not included in the whitelist from sending frames through <code>SW1</code>. The next commands will configure port security for ports <strong>F0/2</strong> (PC1) and <strong>F0/3</strong> (PC2):</p>
-<pre><code class="language-.bash">SW1<span class="comment">#conf t</span>
-Enter configuration commands, one per line.  End <span class="keyword">with</span> CNTL/Z.
-SW1(config)<span class="comment">#int f0/2</span>
-SW1(config-<span class="keyword">if</span>)<span class="comment">#switchport port-security </span>
-SW1(config-<span class="keyword">if</span>)<span class="comment">#switchport port-security mac-address 0030.f28c.c65a</span>
-SW1(config-<span class="keyword">if</span>)<span class="comment">#exit</span>
-SW1(config)<span class="comment">#int f0/3</span>
-SW1(config-<span class="keyword">if</span>)<span class="comment">#switchport port-security </span>
-SW1(config-<span class="keyword">if</span>)<span class="comment">#switchport port-security mac-address 0060.2fd2.a80a</span>
-SW1(config-<span class="keyword">if</span>)<span class="comment">#exit</span>
-</code></pre>
+<h2 id="c9d3ea87bd8fe338e29ad28e85f7a1c5">Security<a class="anchor-link" href="#Security">¶</a></h2><h3 id="f9722453a5f16b50b3d6c0ca1af2861a">Port security<a class="anchor-link" href="#Port-security">¶</a></h3><p>Now suppose <code>SW1</code> should implement <strong>port security</strong> and therefore allow only <strong>pre-defined</strong> devices to connect to the switch. This will prevent devices which MAC addresses is not included in the whitelist from sending frames through <code>SW1</code>. The next commands will configure port security for ports <strong>F0/2</strong> (PC1) and <strong>F0/3</strong> (PC2):</p>
+<pre><code>.bash
+SW1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+SW1(config)#int f0/2
+SW1(config-if)#switchport port-security 
+SW1(config-if)#switchport port-security mac-address 0030.f28c.c65a
+SW1(config-if)#exit
+SW1(config)#int f0/3
+SW1(config-if)#switchport port-security 
+SW1(config-if)#switchport port-security mac-address 0060.2fd2.a80a
+SW1(config-if)#exit</code></pre>
 <p>Check the configuration:</p>
-<pre><code class="language-.bash">SW1#sh <span class="keyword">port</span>-security int f0/<span class="number">2</span>
-<span class="keyword">Port</span> Security              : Enabled
-<span class="keyword">Port</span> Status                : Secure-up
+<pre><code>.bash
+SW1#sh port-security int f0/2
+Port Security              : Enabled
+Port Status                : Secure-up
 Violation Mode             : Shutdown
-Aging <span class="typename">Time</span>                 : <span class="number">0</span> mins
-Aging <span class="keyword">Type</span>                 : Absolute
+Aging Time                 : 0 mins
+Aging Type                 : Absolute
 SecureStatic Address Aging : Disabled
-Maximum MAC Addresses      : <span class="number">1</span>
-Total MAC Addresses        : <span class="number">1</span>
-Configured MAC Addresses   : <span class="number">1</span>
-Sticky MAC Addresses       : <span class="number">0</span>
-Last Source Address:Vlan   : <span class="number">0030.</span>F28C.C65A:<span class="number">10</span>
-Security Violation Count   : <span class="number">0</span>
+Maximum MAC Addresses      : 1
+Total MAC Addresses        : 1
+Configured MAC Addresses   : 1
+Sticky MAC Addresses       : 0
+Last Source Address:Vlan   : 0030.F28C.C65A:10
+Security Violation Count   : 0
 
-SW1#sh <span class="keyword">port</span>-security int f0/<span class="number">3</span>
-<span class="keyword">Port</span> Security              : Enabled
-<span class="keyword">Port</span> Status                : Secure-up
+SW1#sh port-security int f0/3
+Port Security              : Enabled
+Port Status                : Secure-up
 Violation Mode             : Shutdown
-Aging <span class="typename">Time</span>                 : <span class="number">0</span> mins
-Aging <span class="keyword">Type</span>                 : Absolute
+Aging Time                 : 0 mins
+Aging Type                 : Absolute
 SecureStatic Address Aging : Disabled
-Maximum MAC Addresses      : <span class="number">1</span>
-Total MAC Addresses        : <span class="number">1</span>
-Configured MAC Addresses   : <span class="number">0</span>
-Sticky MAC Addresses       : <span class="number">0</span>
-Last Source Address:Vlan   : <span class="number">0060.2</span>FD2.A80A:<span class="number">10</span>
-Security Violation Count   : <span class="number">0</span>
-</code></pre>
+Maximum MAC Addresses      : 1
+Total MAC Addresses        : 1
+Configured MAC Addresses   : 0
+Sticky MAC Addresses       : 0
+Last Source Address:Vlan   : 0060.2FD2.A80A:10
+Security Violation Count   : 0</code></pre>
 </div>
 </div>
 </div></p>
@@ -2008,7 +1988,7 @@ Security Violation Count   : <span class="number">0</span>
                     </div>
                     <ul id="niu2-sidebar-toc-list">
                         <li><a href="#content-heading">Basic Layer 2 Switching using Cisco Packet Tracer</a></li>
-                        <li><a href='#61c41ee6a8a0b8c34e4026a354bd1428'>Configure the Switches¶</a><ul><li><a href='#d3a684ba26dc075fa5016464088813da'>Basic switch configuration</a></li><li><a href='#2be699659df3451ee9edbd78cb507a23'>Configure ports</a></li><li><a href='#5e89ea2b8f38ea944502610b0493c10a'>Configure links between switches</a></li><li><a href='#1727e4f72891fa2d06c22b40eb455294'>Add VLANs</a></li><li><a href='#66f686c99eb197d8193486019f165d41'>Add VLAN Students</a></li><li><a href='#64e895d93c2dc46fe8d45dbc3e62f324'>Add VLAN Teachers</a></li><li><a href='#4ac66c95dbcd46e1932ebee463abb66d'>Restrict VLANs on trunk ports</a></li><li><a href='#a0ca235f38b952761c698472f11e77d8'>Configure Switch Virtual Interfaces</a></li></ul></li><li><a href='#9bd9d0ebc081bd74f5bef4e136bb1aed'>Connectivity</a><ul><li><a href='#b9c58242dd440acf0c4c6270d5ebcd3a'>Ping between PCs</a></li><li><a href='#db762d1184b2bb19e3a453867915b2a3'>Ping between Switches</a></li><li><a href='#765553e6c7ac8592c389acb9878a050a'>SSH</a></li><li><a href='#0b9aa4324b61192201bddcf739d34224'>MAC address tables</a></li></ul></li><li><a href='#2fae32629d4ef4fc6341f1751b405e45'>Security</a><ul><li><a href='#c964378a1b7af535f1912ca284d3bdf5'>Port security</a></li></ul></li>
+                        <li><a href='#61c41ee6a8a0b8c34e4026a354bd1428'>Configure the Switches¶</a><ul><li><a href='#43d81d4e69bf139c537574c8e5837a62'>Basic switch configuration¶</a></li><li><a href='#e7f4ab2fde2512ea433b1c109242c48e'>Configure ports¶</a></li><li><a href='#3685d65aeecfd83cd5d8e82dcdd99084'>Configure links between switches¶</a></li><li><a href='#20ef485c3e004e92396c7fcfa28cb3c5'>Add VLANs¶</a></li><li><a href='#89a12d07693498abc018e42de7492cf1'>Add VLAN Students¶</a></li><li><a href='#bc7fcb5a6d3cac989bd9a7a09ba5f6c7'>Add VLAN Teachers¶</a></li><li><a href='#6b3e91d13572c1b73f0ed5b4675d82ca'>Restrict VLANs on trunk ports¶</a></li><li><a href='#3be0668f304eaadd3ce90b4425bc305d'>Configure Switch Virtual Interfaces¶</a></li></ul></li><li><a href='#a4626c8810838b580624975bf4a8d7da'>Connectivity¶</a><ul><li><a href='#0ce6e5682c9256c16640495700251a3f'>Ping between PCs¶</a></li><li><a href='#55202139360a3cc544fe31114ec85aa0'>Ping between Switches¶</a></li><li><a href='#aa06709a0f86692ff672a0184e28476c'>SSH¶</a></li><li><a href='#c376859c84771eb57f607ed28cab0025'>MAC address tables¶</a></li></ul></li><li><a href='#c9d3ea87bd8fe338e29ad28e85f7a1c5'>Security¶</a><ul><li><a href='#f9722453a5f16b50b3d6c0ca1af2861a'>Port security¶</a></li></ul></li>
                         <li><a href="#content-comments">Comments</a></li>
                     </ul>
                 </div>

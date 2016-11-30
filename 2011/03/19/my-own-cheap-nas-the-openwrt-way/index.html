@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -131,7 +131,7 @@ processor               : 0
 cpu model               : MIPS 24Kc V7.4</pre></li>
 </ul>
 <h2 id="2bd2440a8b5fed6660918b5f10f685bb">Filesystems</h2>
-<div class="highlight"><pre>root@OpenWrt:~# df -Ph
+<div class="highlight"><pre><span></span>root@OpenWrt:~# df -Ph
 Filesystem                Size      Used Available Capacity Mounted on
 /dev/root                 2.1M      2.1M         <span class="m">0</span> 100% /rom
 tmpfs                    14.4M    232.0K     14.2M   2% /tmp
@@ -143,26 +143,26 @@ mini_fo:/overlay          2.1M      2.1M         <span class="m">0</span> 100% /
 <p><img alt="TP Link" class="img-responsive" src="http://dl.dornea.nu/img/2011/236/tp-link-TL-WR1043ND_1.jpg"/></p>
 <h2 id="c5381dc540506dbb210e2d300554e4cd">Firewall</h2>
 <p>These are my firewall [3] rules:</p>
-<div class="highlight"><pre>root@OpenWrt:~# cat /etc/firewall.user 
-<span class="c"># This file is interpreted as shell script.</span>
-<span class="c"># Put your custom iptables rules here, they will</span>
-<span class="c"># be executed with each firewall (re-)start.</span>
+<div class="highlight"><pre><span></span>root@OpenWrt:~# cat /etc/firewall.user 
+<span class="c1"># This file is interpreted as shell script.</span>
+<span class="c1"># Put your custom iptables rules here, they will</span>
+<span class="c1"># be executed with each firewall (re-)start.</span>
 <span class="nv">IPT</span><span class="o">=</span>iptables
 <span class="nv">NET_LAN</span><span class="o">=</span>192.168.0.0/16
 
-<span class="c"># ssh from outside</span>
+<span class="c1"># ssh from outside</span>
 <span class="nv">$IPT</span> -I input -j ACCEPT -i eth0.2 -s xxx -p tcp --dport 22
 <span class="nv">$IPT</span> -I input -j ACCEPT -i eth0.2 -s xxx -p udp --dport 22
 
-<span class="c"># portmap</span>
+<span class="c1"># portmap</span>
 <span class="nv">$IPT</span> -I INPUT -j ACCEPT -i eth0.2 -s <span class="nv">$NET_LAN</span> -p tcp --dport 111
 <span class="nv">$IPT</span> -I INPUT -j ACCEPT -i eth0.2 -s <span class="nv">$NET_LAN</span> -p udp --dport 111
 
-<span class="c"># nfsd</span>
+<span class="c1"># nfsd</span>
 <span class="nv">$IPT</span> -I INPUT -j ACCEPT -i eth0.1 -s <span class="nv">$NET_LAN</span> -p tcp --dport 32777:32780
 <span class="nv">$IPT</span> -I INPUT -j ACCEPT -i eth0.1 -s <span class="nv">$NET_LAN</span> -p udp --dport 32777:32780
 
-<span class="c"># minidlna</span>
+<span class="c1"># minidlna</span>
 <span class="nv">$IPT</span> -I INPUT -j ACCEPT -i eth0.2 -s <span class="nv">$NET_LAN</span> -p tcp --dport 8200
 <span class="nv">$IPT</span> -I INPUT -j ACCEPT -i eth0.2 -s <span class="nv">$NET_LAN</span> -p udp --dport 8200
 </pre></div>

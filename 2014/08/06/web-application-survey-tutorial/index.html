@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -142,12 +142,10 @@
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [2]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">pylab</span> <span class="n">inline</span>
+<div class="prompt input_prompt">In [2]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="o">%</span><span class="k">pylab</span> inline
 <span class="kn">import</span> <span class="nn">binascii</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -170,16 +168,16 @@ In [2]:
 <span class="kn">from</span> <span class="nn">urlparse</span> <span class="kn">import</span> <span class="n">urlparse</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display_pretty</span><span class="p">,</span> <span class="n">display_html</span><span class="p">,</span> <span class="n">display_jpeg</span><span class="p">,</span> <span class="n">display_png</span><span class="p">,</span> <span class="n">display_json</span><span class="p">,</span> <span class="n">display_latex</span><span class="p">,</span> <span class="n">display_svg</span>
 
-<span class="c"># Ipython settings</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.height'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.max_rows'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.max_columns'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.max_colwidth'</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.width'</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.column_space'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="c1"># Ipython settings</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.height'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.max_rows'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.max_columns'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.max_colwidth'</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.width'</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.column_space'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 
-<span class="c"># Change working directory</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s">"/root/work/appsurvey"</span><span class="p">)</span>
+<span class="c1"># Change working directory</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">"/root/work/appsurvey"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -187,7 +185,7 @@ In [2]:
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">Populating the interactive namespace from numpy and matplotlib
 height has been deprecated.
 
@@ -208,32 +206,31 @@ height has been deprecated.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [3]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Fetch list of random URLs (found using Google)</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s">'http://files.ianonavy.com/urls.txt'</span><span class="p">)</span>
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Fetch list of random URLs (found using Google)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s1">'http://files.ianonavy.com/urls.txt'</span><span class="p">)</span>
 <span class="n">targets_row</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
-<span class="c"># Create DataFrame</span>
-<span class="n">targets</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">targets_row</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"Target"</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="s">"First 20 entries in the targets list"</span><span class="p">)</span>
+<span class="c1"># Create DataFrame</span>
+<span class="n">targets</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">targets_row</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"Target"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"First 20 entries in the targets list"</span><span class="p">)</span>
 <span class="n">targets</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">First 20 entries in the targets list
 </pre>
 </div>
 </div>
-<div class="output_area"><div class="prompt output_prompt">
-    Out[3]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -349,35 +346,33 @@ In [3]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [4]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Join root domain + suffix</span>
-<span class="n">extract_root_domain</span> <span class="o">=</span>  <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s">'.'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tldextract</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+<div class="prompt input_prompt">In [4]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="c1"># Join root domain + suffix</span>
+<span class="n">extract_root_domain</span> <span class="o">=</span>  <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">'.'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tldextract</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
 
-<span class="n">target_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'scheme'</span><span class="p">,</span> <span class="s">'userinfo'</span><span class="p">,</span> <span class="s">'host'</span><span class="p">,</span> <span class="s">'port'</span><span class="p">,</span> <span class="s">'path'</span><span class="p">,</span> <span class="s">'query'</span><span class="p">,</span> <span class="s">'fragment'</span><span class="p">,</span> <span class="s">'decoded'</span><span class="p">]</span>
-<span class="n">target_component</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">URL</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">[</span><span class="s">'Target'</span><span class="p">]]</span>
+<span class="n">target_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'scheme'</span><span class="p">,</span> <span class="s1">'userinfo'</span><span class="p">,</span> <span class="s1">'host'</span><span class="p">,</span> <span class="s1">'port'</span><span class="p">,</span> <span class="s1">'path'</span><span class="p">,</span> <span class="s1">'query'</span><span class="p">,</span> <span class="s1">'fragment'</span><span class="p">,</span> <span class="s1">'decoded'</span><span class="p">]</span>
+<span class="n">target_component</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">URL</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">[</span><span class="s1">'Target'</span><span class="p">]]</span>
 
 <span class="n">df_targets</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">target_component</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">target_columns</span><span class="p">)</span>
-<span class="n">empty_hosts</span> <span class="o">=</span> <span class="n">df_targets</span><span class="p">[</span><span class="n">df_targets</span><span class="p">[</span><span class="s">'host'</span><span class="p">]</span> <span class="o">==</span> <span class="s">''</span><span class="p">]</span>
+<span class="n">empty_hosts</span> <span class="o">=</span> <span class="n">df_targets</span><span class="p">[</span><span class="n">df_targets</span><span class="p">[</span><span class="s1">'host'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">''</span><span class="p">]</span>
 
-<span class="c"># Copy path information to host</span>
+<span class="c1"># Copy path information to host</span>
 <span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">row</span> <span class="ow">in</span> <span class="n">empty_hosts</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">df_targets</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">index</span><span class="p">:</span><span class="n">index</span><span class="p">][</span><span class="s">'host'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_targets</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">index</span><span class="p">:</span><span class="n">index</span><span class="p">][</span><span class="s">'path'</span><span class="p">]</span>
-    <span class="n">df_targets</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">index</span><span class="p">:</span><span class="n">index</span><span class="p">][</span><span class="s">'path'</span><span class="p">]</span> <span class="o">=</span> <span class="s">''</span>
+    <span class="n">df_targets</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">index</span><span class="p">:</span><span class="n">index</span><span class="p">][</span><span class="s1">'host'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_targets</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">index</span><span class="p">:</span><span class="n">index</span><span class="p">][</span><span class="s1">'path'</span><span class="p">]</span>
+    <span class="n">df_targets</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">index</span><span class="p">:</span><span class="n">index</span><span class="p">][</span><span class="s1">'path'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">''</span>
     
-<span class="c"># Extract root tld</span>
-<span class="n">df_targets</span><span class="p">[</span><span class="s">'root_domain'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_targets</span><span class="p">[</span><span class="s">'host'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">extract_root_domain</span><span class="p">)</span>
+<span class="c1"># Extract root tld</span>
+<span class="n">df_targets</span><span class="p">[</span><span class="s1">'root_domain'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_targets</span><span class="p">[</span><span class="s1">'host'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">extract_root_domain</span><span class="p">)</span>
 
-<span class="c"># Drop unnecessary columns</span>
-<span class="n">df_targets</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s">'query'</span><span class="p">,</span> <span class="s">'fragment'</span><span class="p">,</span> <span class="s">'decoded'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="c1"># Drop unnecessary columns</span>
+<span class="n">df_targets</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'query'</span><span class="p">,</span> <span class="s1">'fragment'</span><span class="p">,</span> <span class="s1">'decoded'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-<span class="c"># Write df to file (for later use)</span>
-<span class="n">df_targets</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s">"targets_df.csv"</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">)</span>
+<span class="c1"># Write df to file (for later use)</span>
+<span class="n">df_targets</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"targets_df.csv"</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s">"First 20 Entries"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"First 20 Entries"</span><span class="p">)</span>
 <span class="n">df_targets</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -386,14 +381,13 @@ In [4]:
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">First 20 Entries
 </pre>
 </div>
 </div>
-<div class="output_area"><div class="prompt output_prompt">
-    Out[4]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[4]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -616,74 +610,71 @@ In [4]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [7]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="k">if</span> <span class="p">[</span> <span class="err">!</span> <span class="o">-</span><span class="n">d</span> <span class="s">"WHOIS"</span> <span class="p">];</span> <span class="n">then</span>
-    <span class="n">mkdir</span> <span class="n">WHOIS</span>
-<span class="n">fi</span>
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+<span class="k">if</span> <span class="o">[</span> ! -d <span class="s2">"WHOIS"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    mkdir WHOIS
+<span class="k">fi</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [8]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Get unique values</span>
-<span class="n">uniq_roots</span> <span class="o">=</span> <span class="n">df_targets</span><span class="p">[</span><span class="s">'root_domain'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
-<span class="n">uniq_subdomains</span> <span class="o">=</span> <span class="n">df_targets</span><span class="p">[</span><span class="s">'host'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get unique values</span>
+<span class="n">uniq_roots</span> <span class="o">=</span> <span class="n">df_targets</span><span class="p">[</span><span class="s1">'root_domain'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">uniq_subdomains</span> <span class="o">=</span> <span class="n">df_targets</span><span class="p">[</span><span class="s1">'host'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [9]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">date_handler</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s">'isoformat'</span><span class="p">)</span> <span class="k">else</span> <span class="n">obj</span>
+<div class="prompt input_prompt">In [9]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="k">def</span> <span class="nf">date_handler</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s1">'isoformat'</span><span class="p">)</span> <span class="k">else</span> <span class="n">obj</span>
 
 <span class="n">target_whois</span> <span class="o">=</span> <span class="p">{}</span>
 
 <span class="k">def</span> <span class="nf">fetch_whois</span><span class="p">(</span><span class="n">domains</span><span class="p">):</span>
     <span class="sd">""" Fetch WHOIS information for specified domains (list) """</span>
     <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">domains</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">"Get WHOIS for</span><span class="se">\t</span><span class="s"> </span><span class="si">%s</span><span class="s"> ..."</span> <span class="o">%</span> <span class="n">d</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">"Get WHOIS for</span><span class="se">\t</span><span class="s2"> </span><span class="si">%s</span><span class="s2"> ..."</span> <span class="o">%</span> <span class="n">d</span><span class="p">)</span>
 
-        <span class="c"># Check if file already exists</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s">"WHOIS/</span><span class="si">%s</span><span class="s">.json"</span> <span class="o">%</span> <span class="n">d</span><span class="p">):</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">"File exists already. Aborting."</span><span class="p">)</span>
+        <span class="c1"># Check if file already exists</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s2">"WHOIS/</span><span class="si">%s</span><span class="s2">.json"</span> <span class="o">%</span> <span class="n">d</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">"File exists already. Aborting."</span><span class="p">)</span>
             <span class="k">continue</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="c"># Get whois information</span>
+            <span class="c1"># Get whois information</span>
             <span class="n">whois_data</span> <span class="o">=</span> <span class="n">pythonwhois</span><span class="o">.</span><span class="n">get_whois</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
 
-            <span class="c"># Convert to JSON$</span>
+            <span class="c1"># Convert to JSON$</span>
             <span class="n">json_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">whois_data</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">date_handler</span><span class="p">)</span>
 
-            <span class="c"># Write contents to file</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'WHOIS/</span><span class="si">%s</span><span class="s">.json'</span> <span class="o">%</span> <span class="n">d</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+            <span class="c1"># Write contents to file</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'WHOIS/</span><span class="si">%s</span><span class="s1">.json'</span> <span class="o">%</span> <span class="n">d</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
               <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">json_data</span><span class="p">,</span> <span class="n">outfile</span><span class="p">)</span>
 
-            <span class="c"># Sleep for 20s    </span>
+            <span class="c1"># Sleep for 20s    </span>
             <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">"[ERROR] Couldn't retrieve WHOIS for</span><span class="se">\t</span><span class="s"> </span><span class="si">%s</span><span class="s">"</span> <span class="o">%</span> <span class="n">d</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">"[ERROR] Couldn't retrieve WHOIS for</span><span class="se">\t</span><span class="s2"> </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">d</span><span class="p">)</span>
             
-<span class="c"># I'll only fetch the root domains and only the first 20. Feel free to uncomment this</span>
-<span class="c"># and adapt it to your needs.</span>
-<span class="c">#fetch_whois(uniq_subdomains)</span>
+<span class="c1"># I'll only fetch the root domains and only the first 20. Feel free to uncomment this</span>
+<span class="c1"># and adapt it to your needs.</span>
+<span class="c1">#fetch_whois(uniq_subdomains)</span>
 <span class="n">fetch_whois</span><span class="p">(</span><span class="n">uniq_roots</span><span class="p">[:</span><span class="mi">20</span><span class="p">])</span>
-    
 </pre></div>
 </div>
 </div>
@@ -691,7 +682,7 @@ In [9]:
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">Get WHOIS for	 altpress.org ...
 Get WHOIS for	 nzfortress.co.nz ...
 Get WHOIS for	 evillasforsale.com ...
@@ -729,49 +720,47 @@ Get WHOIS for	 voicesofsafety.com ...
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [10]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="k">if</span> <span class="p">[</span> <span class="err">!</span> <span class="o">-</span><span class="n">d</span> <span class="s">"DNS"</span> <span class="p">];</span> <span class="n">then</span>
-    <span class="n">mkdir</span> <span class="n">DNS</span>
-<span class="n">fi</span>
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+<span class="k">if</span> <span class="o">[</span> ! -d <span class="s2">"DNS"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    mkdir DNS
+<span class="k">fi</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [11]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">fetch_dns</span><span class="p">(</span><span class="n">domains</span><span class="p">):</span>
+<div class="prompt input_prompt">In [11]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="k">def</span> <span class="nf">fetch_dns</span><span class="p">(</span><span class="n">domains</span><span class="p">):</span>
     <span class="sd">""" Fetch all DNS records for specified domains (list) """</span>
     <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">domains</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">"Dig DNS records for</span><span class="se">\t</span><span class="s"> </span><span class="si">%s</span><span class="s"> ..."</span> <span class="o">%</span> <span class="n">d</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">"Dig DNS records for</span><span class="se">\t</span><span class="s2"> </span><span class="si">%s</span><span class="s2"> ..."</span> <span class="o">%</span> <span class="n">d</span><span class="p">)</span>
 
-        <span class="c"># Check if file already exists</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s">"DNS/</span><span class="si">%s</span><span class="s">.txt"</span> <span class="o">%</span> <span class="n">d</span><span class="p">):</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">"File exists already. Aborting."</span><span class="p">)</span>
+        <span class="c1"># Check if file already exists</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s2">"DNS/</span><span class="si">%s</span><span class="s2">.txt"</span> <span class="o">%</span> <span class="n">d</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">"File exists already. Aborting."</span><span class="p">)</span>
             <span class="k">continue</span>
             
-        <span class="c"># Get DNS info</span>
-        <span class="n">dig_data</span> <span class="o">=</span> <span class="err">!</span><span class="n">dig</span> <span class="o">+</span><span class="n">nocmd</span> <span class="err">$</span><span class="n">d</span> <span class="nb">any</span> <span class="o">+</span><span class="n">multiline</span> <span class="o">+</span><span class="n">noall</span> <span class="o">+</span><span class="n">answer</span>
-        <span class="n">dig_output</span> <span class="o">=</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dig_data</span><span class="p">)</span>
+        <span class="c1"># Get DNS info</span>
+        <span class="n">dig_data</span> <span class="o">=</span> <span class="o">!</span>dig +nocmd <span class="nv">$d</span> any +multiline +noall +answer
+        <span class="n">dig_output</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dig_data</span><span class="p">)</span>
         
-        <span class="c"># Write contents to file</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'DNS/</span><span class="si">%s</span><span class="s">.txt'</span> <span class="o">%</span> <span class="n">d</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+        <span class="c1"># Write contents to file</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'DNS/</span><span class="si">%s</span><span class="s1">.txt'</span> <span class="o">%</span> <span class="n">d</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
             <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dig_output</span><span class="p">)</span>
             <span class="n">outfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
         
-<span class="c"># I'll only fetch the root domains and only the first 20. Feel free to uncomment this</span>
-<span class="c"># and adapt it to your needs.</span>
-<span class="c">#fetch_dns(uniq_subdomains)</span>
+<span class="c1"># I'll only fetch the root domains and only the first 20. Feel free to uncomment this</span>
+<span class="c1"># and adapt it to your needs.</span>
+<span class="c1">#fetch_dns(uniq_subdomains)</span>
 <span class="n">fetch_dns</span><span class="p">(</span><span class="n">uniq_roots</span><span class="p">[:</span><span class="mi">20</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -780,7 +769,7 @@ In [11]:
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">Dig DNS records for	 altpress.org ...
 Dig DNS records for	 nzfortress.co.nz ...
 Dig DNS records for	 evillasforsale.com ...
@@ -827,55 +816,53 @@ Dig DNS records for	 voicesofsafety.com ...
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [12]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<div class="prompt input_prompt">In [12]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
-<span class="c"># Global DF frames</span>
+<span class="c1"># Global DF frames</span>
 <span class="n">frames</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">def</span> <span class="nf">read_whois</span><span class="p">(</span><span class="n">domains</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">domains</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">"Reading WHOIS for</span><span class="se">\t</span><span class="s"> </span><span class="si">%s</span><span class="s">"</span> <span class="o">%</span> <span class="n">d</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">"Reading WHOIS for</span><span class="se">\t</span><span class="s2"> </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">d</span><span class="p">)</span>
         
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'WHOIS/</span><span class="si">%s</span><span class="s">.json'</span> <span class="o">%</span> <span class="n">d</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">inputfile</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'WHOIS/</span><span class="si">%s</span><span class="s1">.json'</span> <span class="o">%</span> <span class="n">d</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">inputfile</span><span class="p">:</span>
                 <span class="n">whois</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">inputfile</span><span class="p">))</span>
 
-                <span class="c"># Delete raw record</span>
-                <span class="n">whois</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">'raw'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+                <span class="c1"># Delete raw record</span>
+                <span class="n">whois</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">'raw'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
 
                 <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
                 
-                <span class="c"># Iterate contacts -&gt; tech</span>
-                <span class="k">if</span> <span class="n">whois</span><span class="p">[</span><span class="s">'contacts'</span><span class="p">][</span><span class="s">'tech'</span><span class="p">]:</span>
-                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">whois</span><span class="p">[</span><span class="s">'contacts'</span><span class="p">][</span><span class="s">'tech'</span><span class="p">]:</span>
-                        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">d</span><span class="p">,</span> <span class="s">'contacts'</span><span class="p">,</span> <span class="s">'tech'</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">whois</span><span class="p">[</span><span class="s">'contacts'</span><span class="p">][</span><span class="s">'tech'</span><span class="p">][</span><span class="n">i</span><span class="p">]])</span>
+                <span class="c1"># Iterate contacts -&gt; tech</span>
+                <span class="k">if</span> <span class="n">whois</span><span class="p">[</span><span class="s1">'contacts'</span><span class="p">][</span><span class="s1">'tech'</span><span class="p">]:</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">whois</span><span class="p">[</span><span class="s1">'contacts'</span><span class="p">][</span><span class="s1">'tech'</span><span class="p">]:</span>
+                        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">d</span><span class="p">,</span> <span class="s1">'contacts'</span><span class="p">,</span> <span class="s1">'tech'</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">whois</span><span class="p">[</span><span class="s1">'contacts'</span><span class="p">][</span><span class="s1">'tech'</span><span class="p">][</span><span class="n">i</span><span class="p">]])</span>
 
-                <span class="c"># Iterate contacts -&gt; admin</span>
-                <span class="k">if</span> <span class="n">whois</span><span class="p">[</span><span class="s">'contacts'</span><span class="p">][</span><span class="s">'admin'</span><span class="p">]:</span>
-                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">whois</span><span class="p">[</span><span class="s">'contacts'</span><span class="p">][</span><span class="s">'admin'</span><span class="p">]:</span>
-                        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">d</span><span class="p">,</span> <span class="s">'contacts'</span><span class="p">,</span> <span class="s">'admin'</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">whois</span><span class="p">[</span><span class="s">'contacts'</span><span class="p">][</span><span class="s">'admin'</span><span class="p">][</span><span class="n">i</span><span class="p">]])</span>
+                <span class="c1"># Iterate contacts -&gt; admin</span>
+                <span class="k">if</span> <span class="n">whois</span><span class="p">[</span><span class="s1">'contacts'</span><span class="p">][</span><span class="s1">'admin'</span><span class="p">]:</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">whois</span><span class="p">[</span><span class="s1">'contacts'</span><span class="p">][</span><span class="s1">'admin'</span><span class="p">]:</span>
+                        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">d</span><span class="p">,</span> <span class="s1">'contacts'</span><span class="p">,</span> <span class="s1">'admin'</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">whois</span><span class="p">[</span><span class="s1">'contacts'</span><span class="p">][</span><span class="s1">'admin'</span><span class="p">][</span><span class="n">i</span><span class="p">]])</span>
 
-                <span class="c"># Nameservers</span>
-                <span class="k">if</span> <span class="s">"nameservers"</span> <span class="ow">in</span> <span class="n">whois</span><span class="p">:</span>
-                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">whois</span><span class="p">[</span><span class="s">'nameservers'</span><span class="p">]:</span>
-                        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">d</span><span class="p">,</span> <span class="s">'nameservers'</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
+                <span class="c1"># Nameservers</span>
+                <span class="k">if</span> <span class="s2">"nameservers"</span> <span class="ow">in</span> <span class="n">whois</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">whois</span><span class="p">[</span><span class="s1">'nameservers'</span><span class="p">]:</span>
+                        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">d</span><span class="p">,</span> <span class="s1">'nameservers'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
 
-                <span class="c"># Create DF only if data is not empty</span>
+                <span class="c1"># Create DF only if data is not empty</span>
                 <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
-                    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'domain'</span><span class="p">,</span> <span class="s">'element'</span><span class="p">,</span> <span class="s">'type'</span><span class="p">,</span> <span class="s">'field'</span><span class="p">,</span> <span class="s">'value'</span><span class="p">])</span>
+                    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'domain'</span><span class="p">,</span> <span class="s1">'element'</span><span class="p">,</span> <span class="s1">'type'</span><span class="p">,</span> <span class="s1">'field'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">])</span>
                     <span class="n">frames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 
-                <span class="c"># Close file</span>
+                <span class="c1"># Close file</span>
                 <span class="n">inputfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">"[ERROR] Couldn't read WHOIS for</span><span class="se">\t</span><span class="s"> </span><span class="si">%s</span><span class="s">"</span> <span class="o">%</span> <span class="n">d</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">"[ERROR] Couldn't read WHOIS for</span><span class="se">\t</span><span class="s2"> </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">d</span><span class="p">)</span>
 
-<span class="c">#read_whois(uniq_subdomains)</span>
+<span class="c1">#read_whois(uniq_subdomains)</span>
 <span class="n">read_whois</span><span class="p">(</span><span class="n">uniq_roots</span><span class="p">[:</span><span class="mi">20</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -884,7 +871,7 @@ In [12]:
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">Reading WHOIS for	 altpress.org
 Reading WHOIS for	 nzfortress.co.nz
 Reading WHOIS for	 evillasforsale.com
@@ -913,30 +900,29 @@ Reading WHOIS for	 voicesofsafety.com
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [13]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_whois</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span>
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_whois</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [14]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_whois</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">'domain'</span><span class="p">,</span> <span class="s">'element'</span><span class="p">,</span> <span class="s">'type'</span><span class="p">,</span> <span class="s">'field'</span><span class="p">])</span>
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_whois</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">'domain'</span><span class="p">,</span> <span class="s1">'element'</span><span class="p">,</span> <span class="s1">'type'</span><span class="p">,</span> <span class="s1">'field'</span><span class="p">])</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[14]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[14]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -2563,54 +2549,52 @@ In [14]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Do the same with the DNS files... </p>
+<p>Do the same with the DNS files...</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [15]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<div class="prompt input_prompt">In [15]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">traceback</span>
 
-<span class="c"># Global DF frames</span>
+<span class="c1"># Global DF frames</span>
 <span class="n">frames</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">def</span> <span class="nf">read_dns</span><span class="p">(</span><span class="n">domains</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">domains</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">"Reading WHOIS for</span><span class="se">\t</span><span class="s"> </span><span class="si">%s</span><span class="s">"</span> <span class="o">%</span> <span class="n">d</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">"Reading WHOIS for</span><span class="se">\t</span><span class="s2"> </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">d</span><span class="p">)</span>
         <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'DNS/</span><span class="si">%s</span><span class="s">.txt'</span> <span class="o">%</span> <span class="n">d</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">inputfile</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'DNS/</span><span class="si">%s</span><span class="s1">.txt'</span> <span class="o">%</span> <span class="n">d</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">inputfile</span><span class="p">:</span>
                 <span class="n">dns</span> <span class="o">=</span> <span class="n">inputfile</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
                 
                 <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">dns</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
                     <span class="n">records</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
                     
-                    <span class="c"># Check only for NS, MX, A, CNAME, TXT</span>
-                    <span class="n">a</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">"^(NS|MX|A|CNAME|TXT)$"</span><span class="p">)</span>
+                    <span class="c1"># Check only for NS, MX, A, CNAME, TXT</span>
+                    <span class="n">a</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">"^(NS|MX|A|CNAME|TXT)$"</span><span class="p">)</span>
                     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">records</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">:</span>
                         <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">records</span><span class="p">[</span><span class="mi">3</span><span class="p">]):</span>
                             <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">d</span><span class="p">,</span> <span class="n">records</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">records</span><span class="p">[</span><span class="mi">4</span><span class="p">]])</span>
                 
-                <span class="c"># Create DF only if data is not empty</span>
+                <span class="c1"># Create DF only if data is not empty</span>
                 <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
-                    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'domain'</span><span class="p">,</span> <span class="s">'dns_record'</span><span class="p">,</span> <span class="s">'value'</span><span class="p">])</span>
+                    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'domain'</span><span class="p">,</span> <span class="s1">'dns_record'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">])</span>
                     <span class="n">frames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>      
                     
-                <span class="c"># Close file</span>
+                <span class="c1"># Close file</span>
                 <span class="n">inputfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
                 
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">"[ERROR] Couldn't read WHOIS for</span><span class="se">\t</span><span class="s"> </span><span class="si">%s</span><span class="s">"</span> <span class="o">%</span> <span class="n">d</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">"[ERROR] Couldn't read WHOIS for</span><span class="se">\t</span><span class="s2"> </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">d</span><span class="p">)</span>
             <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
 
-<span class="c">#read_dns(uniq_subdomains)            </span>
+<span class="c1">#read_dns(uniq_subdomains)            </span>
 <span class="n">read_dns</span><span class="p">(</span><span class="n">uniq_roots</span><span class="p">[:</span><span class="mi">20</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -2619,7 +2603,7 @@ In [15]:
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">Reading WHOIS for	 altpress.org
 Reading WHOIS for	 nzfortress.co.nz
 Reading WHOIS for	 evillasforsale.com
@@ -2648,30 +2632,29 @@ Reading WHOIS for	 voicesofsafety.com
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [16]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_dns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span>
+<div class="prompt input_prompt">In [16]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_dns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [17]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_dns</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">'domain'</span><span class="p">,</span> <span class="s">'dns_record'</span><span class="p">])</span>
+<div class="prompt input_prompt">In [17]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_dns</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">'domain'</span><span class="p">,</span> <span class="s1">'dns_record'</span><span class="p">])</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[17]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[17]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -3057,67 +3040,65 @@ In [17]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For every single target I'll connect to it per HTTP(s) using <code>urllib2</code> and store the HTTP headers. </p>
+<p>For every single target I'll connect to it per HTTP(s) using <code>urllib2</code> and store the HTTP headers.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [19]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">urllib2</span>
+<div class="prompt input_prompt">In [19]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="kn">import</span> <span class="nn">urllib2</span>
 <span class="kn">import</span> <span class="nn">httplib</span>
 
 
-<span class="n">c_targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">[</span><span class="s">'Target'</span><span class="p">][:</span><span class="mi">20</span><span class="p">]]</span>
+<span class="n">c_targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">[</span><span class="s1">'Target'</span><span class="p">][:</span><span class="mi">20</span><span class="p">]]</span>
 <span class="n">frames</span> <span class="o">=</span> <span class="p">[]</span>
 
-<span class="c"># Collect here all URLs failed to connect to</span>
+<span class="c1"># Collect here all URLs failed to connect to</span>
 <span class="n">error_urls</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">def</span> <span class="nf">send_request</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
     <span class="sd">""" Sends a single request to the target """</span>            
     
-    <span class="c"># Set own headers</span>
-    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'User-Agent'</span> <span class="p">:</span> <span class="s">'Mozilla 5.10'</span><span class="p">}</span>
+    <span class="c1"># Set own headers</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'User-Agent'</span> <span class="p">:</span> <span class="s1">'Mozilla 5.10'</span><span class="p">}</span>
 
-    <span class="c"># Create request</span>
+    <span class="c1"># Create request</span>
     <span class="n">request</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
     
-    <span class="c"># Default response</span>
+    <span class="c1"># Default response</span>
     <span class="n">response</span> <span class="o">=</span> <span class="bp">None</span>
         
     <span class="k">try</span><span class="p">:</span>
-        <span class="c"># Send request</span>
+        <span class="c1"># Send request</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
         
-        <span class="c"># Add headers</span>
+        <span class="c1"># Add headers</span>
         <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">info</span><span class="p">():</span>
             <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">target</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">info</span><span class="p">()[</span><span class="n">h</span><span class="p">]])</span>
         
     <span class="k">except</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">HTTPError</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">'[ERROR] HTTPError = '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">code</span><span class="p">))</span>
-        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">target</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="s">''</span><span class="p">])</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">'[ERROR] HTTPError = '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">code</span><span class="p">))</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">target</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="s1">''</span><span class="p">])</span>
             
     <span class="k">except</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">URLError</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">'[ERROR] URLError = '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
-        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">target</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">reason</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="s">''</span><span class="p">])</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">'[ERROR] URLError = '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">target</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">reason</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="s1">''</span><span class="p">])</span>
             
     <span class="k">except</span> <span class="ne">ValueError</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
-        <span class="c"># Most probably the target didn't have any schema</span>
-        <span class="c"># So send the request again with HTTP</span>
+        <span class="c1"># Most probably the target didn't have any schema</span>
+        <span class="c1"># So send the request again with HTTP</span>
         <span class="n">error_urls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">'[ERROR] ValueError = '</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">'[ERROR] ValueError = '</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
             
     <span class="k">except</span> <span class="n">httplib</span><span class="o">.</span><span class="n">HTTPException</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">'[ERROR] HTTPException'</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">'[ERROR] HTTPException'</span><span class="p">)</span>
             
     <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
         <span class="kn">import</span> <span class="nn">traceback</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">'[ERROR] Exception: '</span> <span class="o">+</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">())</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">'[ERROR] Exception: '</span> <span class="o">+</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">())</span>
         
     <span class="k">finally</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">response</span>
@@ -3129,22 +3110,22 @@ In [19]:
     <span class="sd">""" Iterate through targets and send requests """</span>
     <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">"Connecting to</span><span class="se">\t</span><span class="s"> </span><span class="si">%s</span><span class="s">"</span> <span class="o">%</span> <span class="n">t</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">"Connecting to</span><span class="se">\t</span><span class="s2"> </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">t</span><span class="p">)</span>
         
         <span class="n">response</span> <span class="o">=</span> <span class="n">send_request</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
         
-    <span class="c"># Create DF only if data is not empty</span>
+    <span class="c1"># Create DF only if data is not empty</span>
     <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'url'</span><span class="p">,</span> <span class="s">'response'</span><span class="p">,</span> <span class="s">'header'</span><span class="p">,</span> <span class="s">'value'</span><span class="p">])</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'url'</span><span class="p">,</span> <span class="s1">'response'</span><span class="p">,</span> <span class="s1">'header'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">])</span>
         <span class="n">frames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>    
         
 
-<span class="c"># Open connection to targets and collect information</span>
+<span class="c1"># Open connection to targets and collect information</span>
 <span class="n">open_connection</span><span class="p">(</span><span class="n">c_targets</span><span class="p">)</span>
 
-<span class="c"># If there are any urls not having been tested, then</span>
-<span class="c"># prepend http:// to &lt;target&gt; and run again</span>
-<span class="n">new_targets</span> <span class="o">=</span>  <span class="p">[</span><span class="s">"http://"</span><span class="o">+</span><span class="n">u</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">error_urls</span><span class="p">]</span>
+<span class="c1"># If there are any urls not having been tested, then</span>
+<span class="c1"># prepend http:// to &lt;target&gt; and run again</span>
+<span class="n">new_targets</span> <span class="o">=</span>  <span class="p">[</span><span class="s2">"http://"</span><span class="o">+</span><span class="n">u</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">error_urls</span><span class="p">]</span>
 <span class="n">open_connection</span><span class="p">(</span><span class="n">new_targets</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -3153,7 +3134,7 @@ In [19]:
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">Connecting to	 http://www.altpress.org/
 Connecting to	 http://www.nzfortress.co.nz
 Connecting to	 http://www.evillasforsale.com
@@ -3169,7 +3150,7 @@ Connecting to	 http://www.xenith.net
   File "/usr/lib/python2.7/urllib2.py", line 401, in open
     response = self._open(req, data)
   File "/usr/lib/python2.7/urllib2.py", line 419, in _open
-    &amp;apos;_open&amp;apos;, req)
+    '_open', req)
   File "/usr/lib/python2.7/urllib2.py", line 379, in _call_chain
     result = func(*args)
   File "/usr/lib/python2.7/urllib2.py", line 1211, in http_open
@@ -3208,30 +3189,29 @@ Connecting to	 http://www.voicesofsafety.com
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [20]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_connection</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span>
+<div class="prompt input_prompt">In [20]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_connection</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [21]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_connection</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">'url'</span><span class="p">,</span> <span class="s">'response'</span><span class="p">,</span> <span class="s">'header'</span><span class="p">])</span>
+<div class="prompt input_prompt">In [21]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_connection</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">'url'</span><span class="p">,</span> <span class="s1">'response'</span><span class="p">,</span> <span class="s1">'header'</span><span class="p">])</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[21]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[21]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -4023,16 +4003,16 @@ In [21]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [25]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">ExcelWriter</span>
-<span class="n">writer</span> <span class="o">=</span> <span class="n">ExcelWriter</span><span class="p">(</span><span class="s">'Excel/output.xls'</span><span class="p">)</span>
-<span class="n">df_whois</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="s">"Sheet - WHOIS"</span><span class="p">)</span>
-<span class="n">df_dns</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="s">"Sheet - DNS"</span><span class="p">)</span>
-<span class="c">#df_connection.to_excel(writer, "Sheet - Connections")</span>
+<div class="prompt input_prompt">In [25]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pandas</span> <span class="k">import</span> <span class="n">ExcelWriter</span>
+<span class="n">writer</span> <span class="o">=</span> <span class="n">ExcelWriter</span><span class="p">(</span><span class="s1">'Excel/output.xls'</span><span class="p">)</span>
+<span class="n">df_whois</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="s2">"Sheet - WHOIS"</span><span class="p">)</span>
+<span class="n">df_dns</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="s2">"Sheet - DNS"</span><span class="p">)</span>
+<span class="c1">#df_connection.to_excel(writer, "Sheet - Connections")</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -4047,12 +4027,12 @@ In [25]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [26]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_connection</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s">"Excel/connection.csv"</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="prompt input_prompt">In [26]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_connection</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"Excel/connection.csv"</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div></p>

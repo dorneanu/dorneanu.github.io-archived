@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -125,39 +125,39 @@
 <p><img alt="" class="img-responsive" src="http://dl.dornea.nu/img/2011/230/04022011268.jpg"/></p>
 <p><img alt="" class="img-responsive" src="http://dl.dornea.nu/img/2011/230/04022011269.jpg"/></p>
 <p>Then my first ipf configuration:</p>
-<div class="highlight"><pre><span class="c"># Set network interfaces</span>
-<span class="nv">ext_if</span><span class="o">=</span>sk0 <span class="c">#internet</span>
-<span class="nv">int_if</span><span class="o">=</span>sk1  <span class="c">#LAN</span>
-<span class="c"># Allowed  icmp type</span>
+<div class="highlight"><pre><span></span><span class="c1"># Set network interfaces</span>
+<span class="nv">ext_if</span><span class="o">=</span>sk0 <span class="c1">#internet</span>
+<span class="nv">int_if</span><span class="o">=</span>sk1  <span class="c1">#LAN</span>
+<span class="c1"># Allowed  icmp type</span>
 <span class="nv">icmp_types</span><span class="o">=</span>echoreq
 
-<span class="c"># Skip all loopback traffic</span>
-<span class="nb">set </span>skip on lo
+<span class="c1"># Skip all loopback traffic</span>
+<span class="nb">set</span> skip on lo
 
-<span class="c"># Scrub all traffic</span>
+<span class="c1"># Scrub all traffic</span>
 scrub in
 
-<span class="c"># Perform NAT on external interface</span>
+<span class="c1"># Perform NAT on external interface</span>
 nat on <span class="nv">$ext_if</span> from <span class="nv">$int_if</span>:network -&gt; <span class="o">(</span><span class="nv">$ext_if</span>:0<span class="o">)</span>
 
-<span class="c"># Define default behavior: block IN, pass OUT</span>
+<span class="c1"># Define default behavior: block IN, pass OUT</span>
 block in
 pass out keep state
 
-<span class="c"># Allow inbound traffic on internal interface</span>
+<span class="c1"># Allow inbound traffic on internal interface</span>
 pass quick on <span class="nv">$int_if</span>
 
-<span class="c"># No spoofing</span>
+<span class="c1"># No spoofing</span>
 antispoof quick <span class="k">for</span> <span class="o">{</span> lo <span class="nv">$int_if</span> <span class="o">}</span>
 </pre></div>
 <p>Quite easy, isn't it?</p>
 <p><strong>[Update: 2011-02-17]</strong></p>
 <p>As stated <a href="http://www.openbsd.org/faq/upgrade47.html">here</a> there have been some changes made to the pf syntax in 4.8.</p>
-<div class="highlight"><pre><span class="c"># Perform NAT on external interface</span>
+<div class="highlight"><pre><span></span><span class="c1"># Perform NAT on external interface</span>
 nat on <span class="nv">$ext_if</span> from <span class="nv">$int_if</span>:network -&gt; <span class="o">(</span><span class="nv">$ext_if</span>:0<span class="o">)</span>
 </pre></div>
 <p>should be changed to</p>
-<div class="highlight"><pre>..
+<div class="highlight"><pre><span></span>..
 match out on <span class="nv">$ext_if</span> from <span class="nv">$int_if</span> nat-to <span class="o">(</span><span class="nv">$ext_if</span><span class="o">)</span>
 ...
 </pre></div>

@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -165,7 +165,7 @@
 </div>
 <h2 id="a3b79d28dc874c042040b27dc471b95d">Sniff environment</h2>
 <p>I've used my <strong>Samsung Note 1 (GT N7000)</strong> as sniffing device. At the moment I use a customized ROM (slimbean) with root access. In order to be to use sniffing tools on my phone I had to work in a chrooted environment like <a href="http://sven-ola.dyndns.org/repo/debian-kit-en.html">Debian on Android Kit</a>. This way I was given access to phones data interfaces and I was ready to go.</p>
-<div class="highlight"><pre>u0_a99@android:/ <span class="nv">$ </span>deb
+<div class="highlight"><pre><span></span>u0_a99@android:/ $ deb
 e2fsck 1.41.11 <span class="o">(</span>14-Mar-2010<span class="o">)</span>
 /storage/sdcard1/debian-kit/debian.img: recovering journal
 /storage/sdcard1/debian-kit/debian.img: clean, 55210/170752 files, 426942/512000 blocks
@@ -179,18 +179,18 @@ collisions:0 txqueuelen:1000
 RX bytes:34233580 <span class="o">(</span>32.6 MiB<span class="o">)</span> TX bytes:5906191 <span class="o">(</span>5.6 MiB<span class="o">)</span>
 </pre></div>
 <p>Initially I wanted to use tshark for the sniffing part but it didn't work quite well. So I came back to old school tcpdump. Since my data interface was going done all the time I had to make sure that tcpdump was restarted as soon as the data interface was online again. I used the following script:</p>
-<div class="highlight"><pre>root@debian-on-android:~# cat monitor.sh
-<span class="c">#!/bin/bash</span>
+<div class="highlight"><pre><span></span>root@debian-on-android:~# cat monitor.sh
+<span class="c1">#!/bin/bash</span>
 
 <span class="nv">DATE</span><span class="o">=</span><span class="sb">`</span>date +<span class="s2">"%Y-%m-%d-%s"</span><span class="sb">`</span>
 
-<span class="k">while</span> <span class="nb">true</span><span class="p">;</span>
+<span class="k">while</span> true<span class="p">;</span>
 <span class="k">do</span>
 tcpdump -i rmnet0 -np -w output-<span class="sb">`</span>date +<span class="s2">"%Y-%m-%d-%s"</span><span class="sb">`</span>.pcap<span class="p">;</span> sleep 10
 <span class="k">done</span>
 </pre></div>
 <p>I've fired up my script and after 24 hours I had these outputs:</p>
-<div class="highlight"><pre>root@debian-on-android:~# ls -l output-2014-01-1*
+<div class="highlight"><pre><span></span>root@debian-on-android:~# ls -l output-2014-01-1*
 -rw-r--r--. <span class="m">1</span> root root <span class="m">24907</span> Jan <span class="m">18</span> 12:53 output-2014-01-18-1390049466.pcap
 -rw-r--r--. <span class="m">1</span> root root <span class="m">2881</span> Jan <span class="m">18</span> 12:55 output-2014-01-18-1390049736.pcap
 -rw-r--r--. <span class="m">1</span> root root <span class="m">14963016</span> Jan <span class="m">18</span> 14:02 output-2014-01-18-1390049777.pcap
@@ -200,7 +200,7 @@ root@debian-on-android:~#
 </pre></div>
 <h2 id="fe1cabbfe29afe44f91c3d9cce98a0fa">Extract information from pcap files</h2>
 <p>I did this analysis using <a href="ttp://ipython.org/notebook.html">IPython Notebook</a>. This tool is everything worth mentioning. I was fascinated by the simplicity and the Pythonic way to handle/manipulate data. You should defnitely also have look at <a href="http://pandas.pydata.org/">Pandas</a>. Ok, back to sniffing and First I had to merge the pcap files to one piece:</p>
-<div class="highlight"><pre><span class="nv">$ </span>mergecap -F libpcap -a output-* -w merged.pcap
+<div class="highlight"><pre><span></span>$ mergecap -F libpcap -a output-* -w merged.pcap
 </pre></div>
 <p>Next step was to extract valuable information from the merged pcap file. I thought following information would be from interest:</p>
 <ul>
@@ -208,14 +208,14 @@ root@debian-on-android:~#
 <li>Connections several hosts: Which ports? Which protocols? etc.</li>
 <li>HTTP traffic</li>
 </ul>
-<div class="highlight"><pre><span class="nv">PCAP_FILE</span> <span class="o">=</span> <span class="s2">"/home/victor/work/Projects/24h-Android-Monitoring/pcap/merged.pcap"</span>
+<div class="highlight"><pre><span></span><span class="nv">PCAP_FILE</span> <span class="o">=</span> <span class="s2">"/home/victor/work/Projects/24h-Android-Monitoring/pcap/merged.pcap"</span>
 
-<span class="c"># Tshark generated files</span>
+<span class="c1"># Tshark generated files</span>
 <span class="nv">DNS_QUERIES</span>  <span class="o">=</span> <span class="s2">"/home/victor/work/Projects/24h-Android-Monitoring/pcap/dns_queries.csv"</span>
 <span class="nv">CONNECTIONS</span>  <span class="o">=</span> <span class="s2">"/home/victor/work/Projects/24h-Android-Monitoring/pcap/connections.csv"</span>
 <span class="nv">HTTP_TRAFFIC</span> <span class="o">=</span> <span class="s2">"/home/victor/work/Projects/24h-Android-Monitoring/pcap/http_traffic.csv"</span>
 
-<span class="c"># Use tshark to generate some files</span>
+<span class="c1"># Use tshark to generate some files</span>
 <span class="nv">dns_queries</span> <span class="o">=</span> !tshark -r <span class="nv">$PCAP_FILE</span>  -R <span class="s2">"dns.flags.response == 1"</span>  -E <span class="nv">occurrence</span><span class="o">=</span>f -E <span class="nv">header</span><span class="o">=</span>y <span class="se">\</span>
               -T fields  -e frame.number -e frame.time -e dns.qry.name -e dns.resp.addr &gt; <span class="nv">$DNS_QUERIES</span>
 
@@ -228,52 +228,52 @@ root@debian-on-android:~#
 </pre></div>
 <h1 id="76f773e7ba482fe672b285ad07bfc319">Import data into SQLite3 DB</h1>
 <p>Now that we have all necessary data, all we have to do is to import it into some RDMS so we can analyze it.</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">sqlite3</span> <span class="kn">as</span> <span class="nn">sql</span>
-<span class="n">con</span> <span class="o">=</span> <span class="n">sql</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">":memory:"</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span> <span class="kn">as</span> <span class="nn">sql</span>
+<span class="n">con</span> <span class="o">=</span> <span class="n">sql</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">":memory:"</span><span class="p">)</span>
 <span class="n">cur</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 </pre></div>
 <p>In the next step the CSV data would be read into some Pandas DataFrames and then exported to our newly created DB. </p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">binascii</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">binascii</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">pandas.io.sql</span> <span class="kn">as</span> <span class="nn">pdsql</span>
 
-<span class="c"># Pandas settings</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.height'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.max_rows'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.max_columns'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.width'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.max_colwidth'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="c1"># Pandas settings</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.height'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.max_rows'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.max_columns'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.width'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.max_colwidth'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 
-<span class="c"># Useful functions</span>
+<span class="c1"># Useful functions</span>
 <span class="k">def</span> <span class="nf">hex2str</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="s">'nan'</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="s1">'nan'</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">None</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">)</span>
 
-<span class="c"># Import DNS queries</span>
+<span class="c1"># Import DNS queries</span>
 <span class="n">dns_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">DNS_QUERIES</span><span class="p">)</span>
-<span class="n">dns_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'frame_number'</span><span class="p">,</span> <span class="s">'frame_time'</span><span class="p">,</span> <span class="s">'dns_query'</span><span class="p">,</span> <span class="s">'dns_response'</span><span class="p">]</span>
+<span class="n">dns_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'frame_number'</span><span class="p">,</span> <span class="s1">'frame_time'</span><span class="p">,</span> <span class="s1">'dns_query'</span><span class="p">,</span> <span class="s1">'dns_response'</span><span class="p">]</span>
 
-<span class="c"># Import connections</span>
+<span class="c1"># Import connections</span>
 <span class="n">con_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">CONNECTIONS</span><span class="p">)</span>
-<span class="n">con_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'frame_number'</span><span class="p">,</span> <span class="s">'frame_time'</span><span class="p">,</span> <span class="s">'src'</span><span class="p">,</span> <span class="s">'dst'</span><span class="p">,</span> <span class="s">'dstport'</span><span class="p">,</span> <span class="s">'frame_protocols'</span><span class="p">]</span>
+<span class="n">con_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'frame_number'</span><span class="p">,</span> <span class="s1">'frame_time'</span><span class="p">,</span> <span class="s1">'src'</span><span class="p">,</span> <span class="s1">'dst'</span><span class="p">,</span> <span class="s1">'dstport'</span><span class="p">,</span> <span class="s1">'frame_protocols'</span><span class="p">]</span>
 
-<span class="c"># Import http traffic</span>
+<span class="c1"># Import http traffic</span>
 <span class="n">http_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">HTTP_TRAFFIC</span><span class="p">)</span>
-<span class="n">http_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'frame_number'</span><span class="p">,</span> <span class="s">'frame_time'</span><span class="p">,</span> <span class="s">'ip_dst'</span><span class="p">,</span><span class="s">'request_method'</span><span class="p">,</span> <span class="s">'request_uri'</span><span class="p">,</span> <span class="s">'user_agent'</span><span class="p">,</span><span class="s">'response_code'</span><span class="p">,</span> <span class="s">'response_phrase'</span><span class="p">,</span><span class="s">'content_length'</span><span class="p">,</span> <span class="s">'data'</span><span class="p">,</span> <span class="s">'text'</span><span class="p">]</span>
+<span class="n">http_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'frame_number'</span><span class="p">,</span> <span class="s1">'frame_time'</span><span class="p">,</span> <span class="s1">'ip_dst'</span><span class="p">,</span><span class="s1">'request_method'</span><span class="p">,</span> <span class="s1">'request_uri'</span><span class="p">,</span> <span class="s1">'user_agent'</span><span class="p">,</span><span class="s1">'response_code'</span><span class="p">,</span> <span class="s1">'response_phrase'</span><span class="p">,</span><span class="s1">'content_length'</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'text'</span><span class="p">]</span>
 
-<span class="c"># Convert data (hex) to ascii</span>
+<span class="c1"># Convert data (hex) to ascii</span>
 <span class="n">convert_data</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">hex2str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">http_df</span><span class="p">[</span><span class="s">'data'</span><span class="p">]</span> <span class="o">=</span> <span class="n">http_df</span><span class="p">[</span><span class="s">'data'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">convert_data</span><span class="p">)</span>
+<span class="n">http_df</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]</span> <span class="o">=</span> <span class="n">http_df</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">convert_data</span><span class="p">)</span>
 
 
-<span class="c"># Write to SQLite</span>
-<span class="n">pdsql</span><span class="o">.</span><span class="n">write_frame</span><span class="p">(</span><span class="n">dns_df</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">"dns"</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">con</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s">"delete"</span><span class="p">)</span>
-<span class="n">pdsql</span><span class="o">.</span><span class="n">write_frame</span><span class="p">(</span><span class="n">con_df</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">"connection"</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">con</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s">"delete"</span><span class="p">)</span>
-<span class="n">pdsql</span><span class="o">.</span><span class="n">write_frame</span><span class="p">(</span><span class="n">http_df</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">"http"</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">con</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s">"delete"</span><span class="p">)</span>
+<span class="c1"># Write to SQLite</span>
+<span class="n">pdsql</span><span class="o">.</span><span class="n">write_frame</span><span class="p">(</span><span class="n">dns_df</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"dns"</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">con</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s2">"delete"</span><span class="p">)</span>
+<span class="n">pdsql</span><span class="o">.</span><span class="n">write_frame</span><span class="p">(</span><span class="n">con_df</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"connection"</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">con</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s2">"delete"</span><span class="p">)</span>
+<span class="n">pdsql</span><span class="o">.</span><span class="n">write_frame</span><span class="p">(</span><span class="n">http_df</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"http"</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">con</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s2">"delete"</span><span class="p">)</span>
 </pre></div>
 <p>Now we're ready to do the analysis.</p>
 <h2 id="fd69c5cf902969e6fb71d043085ddee6">Results</h2>
@@ -325,7 +325,7 @@ root@debian-on-android:~#
 </table>
 </div>
 <h3 id="bc84b9da81c4adef9b2c0a40f6871a52">Top 100 DNS queries</h3>
-<div class="highlight"><pre><span class="n">p1</span> <span class="o">=</span> <span class="n">pdsql</span><span class="p">.</span><span class="n">read_frame</span><span class="p">(</span><span class="ss">"""</span>
+<div class="highlight"><pre><span></span><span class="n">p1</span> <span class="o">=</span> <span class="n">pdsql</span><span class="p">.</span><span class="n">read_frame</span><span class="p">(</span><span class="ss">"""</span>
 <span class="ss">    SELECT COUNT(dns_response) AS '# DNS Responses', dns_query AS 'DNS to lookup'</span>
 <span class="ss">    FROM dns GROUP BY dns_query</span>
 <span class="ss">    ORDER by 1 DESC</span>
@@ -1448,15 +1448,15 @@ root@debian-on-android:~#
 </div>
 <h3 id="30362ea3ccbcb28d1af569bc24bf9c8f">Top 100 connections</h3>
 <p><strong>EDIT [2014-01-27]:</strong> There are some errors regarding the following SQL query. These numbers haven't been updated yet. I have done some filtering for the domain <code>googleapis.com</code>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>dig googleapis.com
+<div class="highlight"><pre><span></span>$ dig googleapis.com
 ....
-<span class="nv">$ </span>tshark -r merged.pcap -Y <span class="s2">"ip.dst==173.194.113.147/24"</span> -E <span class="nv">header</span><span class="o">=</span>y &gt;&gt; googleapis.csv
-<span class="nv">$ </span>wc -l googleapis.csv
+$ tshark -r merged.pcap -Y <span class="s2">"ip.dst==173.194.113.147/24"</span> -E <span class="nv">header</span><span class="o">=</span>y &gt;&gt; googleapis.csv
+$ wc -l googleapis.csv
 <span class="m">3017</span> googleapis.csv
 </pre></div>
 <p>So there were only 3016 packets for the domain <code>googleapis.com</code> and <strong>not</strong> 5 Mil. </p>
 <p><strong>EDIT [2014-02-02]:</strong> The SQL query has been updated. There was some mistake during the JOIN between the 'dns' and 'connection' tables. Below is the new query:</p>
-<div class="highlight"><pre><span class="n">p_testing</span> <span class="o">=</span> <span class="n">pdsql</span><span class="p">.</span><span class="n">read_frame</span><span class="p">(</span><span class="ss">"""</span>
+<div class="highlight"><pre><span></span><span class="n">p_testing</span> <span class="o">=</span> <span class="n">pdsql</span><span class="p">.</span><span class="n">read_frame</span><span class="p">(</span><span class="ss">"""</span>
 <span class="ss">    SELECT COUNT(*), (SELECT dns_query FROM dns WHERE dns_response=c.dst LIMIT 1) as DNS, c.dstport, c.frame_protocols FROM connection AS c</span>
 <span class="ss">    WHERE c.dst NOT LIKE "</span><span class="mi">10</span><span class="p">.</span><span class="o">%</span><span class="ss">"</span>
 <span class="ss">    GROUP by 2</span>
@@ -1465,7 +1465,7 @@ root@debian-on-android:~#
 <span class="n">p_testing</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 <p><strong>Old</strong> query:</p>
-<div class="highlight"><pre><span class="n">p2</span> <span class="o">=</span> <span class="n">pdsql</span><span class="p">.</span><span class="n">read_frame</span><span class="p">(</span><span class="ss">"""</span>
+<div class="highlight"><pre><span></span><span class="n">p2</span> <span class="o">=</span> <span class="n">pdsql</span><span class="p">.</span><span class="n">read_frame</span><span class="p">(</span><span class="ss">"""</span>
 <span class="ss">    SELECT COUNT(c.dst), d.dns_query, c.dstport, c.frame_protocols FROM connection AS c</span>
 <span class="ss">    JOIN dns AS d ON c.dst=d.dns_response</span>
 <span class="ss">    WHERE c.frame_protocols LIKE "</span><span class="n">sll</span><span class="p">:</span><span class="n">ip</span><span class="p">:</span><span class="n">tcp</span><span class="p">:</span><span class="o">%</span><span class="ss">"</span>
@@ -3195,7 +3195,7 @@ root@debian-on-android:~#
 </table>
 </div>
 <h3 id="ff7001c777fa3cfed4320d31ae3b8edb">Used protocols</h3>
-<div class="highlight"><pre><span class="n">p_proto</span> <span class="o">=</span> <span class="n">pdsql</span><span class="p">.</span><span class="n">read_frame</span><span class="p">(</span><span class="ss">"""</span>
+<div class="highlight"><pre><span></span><span class="n">p_proto</span> <span class="o">=</span> <span class="n">pdsql</span><span class="p">.</span><span class="n">read_frame</span><span class="p">(</span><span class="ss">"""</span>
 <span class="ss">    SELECT COUNT(frame_protocols), frame_protocols</span>
 <span class="ss">    FROM connection</span>
 <span class="ss">    GROUP by frame_protocols</span>
@@ -3955,7 +3955,7 @@ root@debian-on-android:~#
 </table>
 </div>
 <h3 id="c4abe59fd813754615917db024eb7f2c">Used destinations</h3>
-<div class="highlight"><pre><span class="n">p_ports</span> <span class="o">=</span> <span class="n">pdsql</span><span class="p">.</span><span class="n">read_frame</span><span class="p">(</span><span class="ss">"""</span>
+<div class="highlight"><pre><span></span><span class="n">p_ports</span> <span class="o">=</span> <span class="n">pdsql</span><span class="p">.</span><span class="n">read_frame</span><span class="p">(</span><span class="ss">"""</span>
 <span class="ss">    SELECT COUNT(c.dstport), c.dstport</span>
 <span class="ss">    FROM connection AS c</span>
 <span class="ss">    JOIN dns AS d ON c.dst = d.dns_response</span>
@@ -4089,7 +4089,7 @@ root@debian-on-android:~#
 </div>
 <h3 id="0830acabf67902de6041752fae26f014">HTTP Connections</h3>
 <h4 id="bbcf55e9dbeab00eccf03285f6398115">HTTP Methods</h4>
-<div class="highlight"><pre><span class="n">p_http_methods</span> <span class="o">=</span> <span class="n">pdsql</span><span class="p">.</span><span class="n">read_frame</span><span class="p">(</span><span class="ss">"""</span>
+<div class="highlight"><pre><span></span><span class="n">p_http_methods</span> <span class="o">=</span> <span class="n">pdsql</span><span class="p">.</span><span class="n">read_frame</span><span class="p">(</span><span class="ss">"""</span>
 <span class="ss">    SELECT COUNT(request_method), request_method</span>
 <span class="ss">    FROM http</span>
 <span class="ss">    GROUP by request_method</span>
@@ -4134,7 +4134,7 @@ root@debian-on-android:~#
 </table>
 </div>
 <h4 id="db8a03985d1ba9a158297a6ac64da8a0">User agents</h4>
-<div class="highlight"><pre><span class="n">p_user_agents</span> <span class="o">=</span> <span class="n">pdsql</span><span class="p">.</span><span class="n">read_frame</span><span class="p">(</span><span class="ss">"""</span>
+<div class="highlight"><pre><span></span><span class="n">p_user_agents</span> <span class="o">=</span> <span class="n">pdsql</span><span class="p">.</span><span class="n">read_frame</span><span class="p">(</span><span class="ss">"""</span>
 <span class="ss">    SELECT COUNT(user_agent), user_agent</span>
 <span class="ss">    FROM http</span>
 <span class="ss">    GROUP by user_agent</span>
@@ -4387,7 +4387,7 @@ root@debian-on-android:~#
 </table>
 </div>
 <h4 id="05257d5309347cf1f56f7ba7d8b70521">GET Requests</h4>
-<div class="highlight"><pre><span class="n">p3</span> <span class="o">=</span> <span class="n">pdsql</span><span class="p">.</span><span class="n">read_frame</span><span class="p">(</span><span class="ss">"""</span>
+<div class="highlight"><pre><span></span><span class="n">p3</span> <span class="o">=</span> <span class="n">pdsql</span><span class="p">.</span><span class="n">read_frame</span><span class="p">(</span><span class="ss">"""</span>
 <span class="ss">    SELECT h.frame_number, h.ip_dst, d.dns_query, h.request_method, h.request_uri, h.user_agent FROM http AS  h</span>
 <span class="ss">    JOIN dns AS d ON h.ip_dst = d.dns_response</span>
 <span class="ss">    WHERE lower(h.request_method) == 'get' AND</span>
@@ -6771,7 +6771,7 @@ root@debian-on-android:~#
 </table>
 </div>
 <h4 id="c70b7d365d8f7f7dfbd6e46e2c325384">POST requests</h4>
-<div class="highlight"><pre><span class="n">p3</span> <span class="o">=</span> <span class="n">pdsql</span><span class="p">.</span><span class="n">read_frame</span><span class="p">(</span><span class="ss">"""</span>
+<div class="highlight"><pre><span></span><span class="n">p3</span> <span class="o">=</span> <span class="n">pdsql</span><span class="p">.</span><span class="n">read_frame</span><span class="p">(</span><span class="ss">"""</span>
 <span class="ss">    SELECT h.frame_number, d.dns_query, h.request_uri, h.data, h.text FROM http AS  h</span>
 <span class="ss">    JOIN dns AS d ON h.ip_dst = d.dns_response</span>
 <span class="ss">    WHERE lower(h.request_method) == 'post'</span>

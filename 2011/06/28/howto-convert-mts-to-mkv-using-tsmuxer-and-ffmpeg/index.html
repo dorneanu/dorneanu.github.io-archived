@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -127,7 +127,7 @@
 <p>I've used <strong>tsMuxeR</strong> from SmartLabs to demux the files. Here's what I did:</p>
 <p><img alt="tsmuxer" class="img-responsive" src="http://dl.dornea.nu/img/2011/253/tsmuxer.png"/></p>
 <p>Now you should have following files on your disk:</p>
-<div class="highlight"><pre><span class="c"># ls -ltr 00001.*</span>
+<div class="highlight"><pre><span></span><span class="c1"># ls -ltr 00001.*</span>
 -rwxr-xr-x <span class="m">1</span> root root <span class="m">1259520</span> Jun <span class="m">27</span> 21:31 00001.MTS
 -rw-r----- <span class="m">1</span> root root    <span class="m">8906</span> Jun <span class="m">28</span> 10:09 00001.track_4608.sup
 -rw-r----- <span class="m">1</span> root root   <span class="m">25344</span> Jun <span class="m">28</span> 10:09 00001.track_4352.ac3
@@ -135,16 +135,16 @@
 </pre></div>
 <h2 id="efa784a8e910b1ca142d95e680813457">Put things together</h2>
 <p>Now using <strong>ffmpeg</strong> let's create some MKV from previously demuxed files. Make sure you have ffmpeg with libx264 built-in support ("-enable-libx264" when configuring). For Gentoo users this are my USE flags:</p>
-<div class="highlight"><pre><span class="c"># eix -e ffmpeg</span>
+<div class="highlight"><pre><span></span><span class="c1"># eix -e ffmpeg</span>
 <span class="o">[</span>I<span class="o">]</span> media-video/ffmpeg
 ...
      Installed versions:  0.7_rc1<span class="o">(</span>09:28:59 PM 06/27/2011<span class="o">)(</span>3dnow 3dnowext X alsa avx bzip2 encode hardcoded-tables mmx mmxext ssse3 truetype v4l v4l2 x264 xvid zlib -aac -altivec -amr -bindist -celt -cpudetection -custom-cflags -debug -dirac -doc -faac -frei0r -gsm -ieee1394 -jack -jpeg2k -mp3 -network -oss -pic -qt-faststart -rtmp -schroedinger -sdl -speex -static-libs -test -theora -threads -vaapi -vdpau -video_cards_nvidia -vorbis -vpx<span class="o">)</span>
 </pre></div>
 <p>Now all you have to do is to type:</p>
-<div class="highlight"><pre><span class="nv">$ </span>ffmpeg -i 00001.*.264 -i 00001.*.ac3 -vcodec libx264 -acodec ac3 -b 2000k output.mkv
+<div class="highlight"><pre><span></span>$ ffmpeg -i 00001.*.264 -i 00001.*.ac3 -vcodec libx264 -acodec ac3 -b 2000k output.mkv
 </pre></div>
 <p>You should get some crazy output like:</p>
-<div class="highlight"><pre>ffmpeg version 0.7-rc1, Copyright <span class="o">(</span>c<span class="o">)</span> 2000-2011 the FFmpeg developers
+<div class="highlight"><pre><span></span>ffmpeg version 0.7-rc1, Copyright <span class="o">(</span>c<span class="o">)</span> 2000-2011 the FFmpeg developers
   built on Jun <span class="m">27</span> <span class="m">2011</span> 21:28:51 with gcc 4.4.4
   configuration: --prefix<span class="o">=</span>/usr --libdir<span class="o">=</span>/usr/lib64 --shlibdir<span class="o">=</span>/usr/lib64 --mandir<span class="o">=</span>/usr/share/man --enable-shared --cc<span class="o">=</span>x86_64-pc-linux-gnu-gcc --disable-static --enable-gpl --enable-postproc --enable-avfilter --disable-stripping --disable-debug --disable-doc --disable-network --disable-vaapi --disable-ffplay --disable-vdpau --enable-libx264 --enable-libxvid --disable-indev<span class="o">=</span>oss --disable-indev<span class="o">=</span>jack --enable-x11grab --disable-outdev<span class="o">=</span>oss --enable-libfreetype --disable-altivec --enable-hardcoded-tables
   libavutil    50. 40. <span class="m">1</span> / 50. 40. 1
@@ -157,30 +157,30 @@
 <span class="o">[</span>h264 @ 0x24266a0<span class="o">]</span> Estimating duration from bitrate, this may be inaccurate
 
 Seems stream <span class="m">0</span> codec frame rate differs from container frame rate: 100.00 <span class="o">(</span>100/1<span class="o">)</span> -&gt; 50.00 <span class="o">(</span>100/2<span class="o">)</span>
-Input <span class="c">#0, h264, from &amp;#39;00001.track_4113.264&amp;#39;:</span>
+Input <span class="c1">#0, h264, from &amp;#39;00001.track_4113.264&amp;#39;:</span>
   Duration: N/A, bitrate: N/A
-    Stream <span class="c">#0.0: Video: h264 (High), yuv420p, 1280x720 [PAR 1:1 DAR 16:9], 25 fps, 50 tbr, 1200k tbn, 100 tbc</span>
+    Stream <span class="c1">#0.0: Video: h264 (High), yuv420p, 1280x720 [PAR 1:1 DAR 16:9], 25 fps, 50 tbr, 1200k tbn, 100 tbc</span>
 <span class="o">[</span>ac3 @ 0x2427960<span class="o">]</span> Estimating duration from bitrate, this may be inaccurate
-Input <span class="c">#1, ac3, from &amp;#39;00001.track_4352.ac3&amp;#39;:</span>
+Input <span class="c1">#1, ac3, from &amp;#39;00001.track_4352.ac3&amp;#39;:</span>
   Duration: 00:00:01.05, start: 0.000000, bitrate: <span class="m">192</span> kb/s
-    Stream <span class="c">#1.0: Audio: ac3, 48000 Hz, stereo, s16, 192 kb/s</span>
-File <span class="p">&amp;</span><span class="c">#39;output.mkv&amp;#39; already exists. Overwrite ? [y/N] y</span>
+    Stream <span class="c1">#1.0: Audio: ac3, 48000 Hz, stereo, s16, 192 kb/s</span>
+File <span class="p">&amp;</span><span class="c1">#39;output.mkv&amp;#39; already exists. Overwrite ? [y/N] y</span>
 <span class="o">[</span>buffer @ 0x242d7d0<span class="o">]</span> w:1280 h:720 pixfmt:yuv420p
 <span class="o">[</span>libx264 @ 0x245aa20<span class="o">]</span> Default settings detected, using medium profile
 <span class="o">[</span>libx264 @ 0x245aa20<span class="o">]</span> using <span class="nv">SAR</span><span class="o">=</span>1/1
 <span class="o">[</span>libx264 @ 0x245aa20<span class="o">]</span> using cpu capabilities: MMX2 SSE2Fast SSSE3 FastShuffle SSE4.1 Cache64
 <span class="o">[</span>libx264 @ 0x245aa20<span class="o">]</span> profile High, level 3.2
 <span class="o">[</span>libx264 @ 0x245aa20<span class="o">]</span> <span class="m">264</span> - core <span class="m">107</span> - H.264/MPEG-4 AVC codec - Copyleft 2003-2010 - http://www.videolan.org/x264.html - options: <span class="nv">cabac</span><span class="o">=</span><span class="m">1</span> <span class="nv">ref</span><span class="o">=</span><span class="m">3</span> <span class="nv">deblock</span><span class="o">=</span>1:0:0 <span class="nv">analyse</span><span class="o">=</span>0x3:0x113 <span class="nv">me</span><span class="o">=</span>hex <span class="nv">subme</span><span class="o">=</span><span class="m">7</span> <span class="nv">psy</span><span class="o">=</span><span class="m">1</span> <span class="nv">psy_rd</span><span class="o">=</span>1.00:0.00 <span class="nv">mixed_ref</span><span class="o">=</span><span class="m">1</span> <span class="nv">me_range</span><span class="o">=</span><span class="m">16</span> <span class="nv">chroma_me</span><span class="o">=</span><span class="m">1</span> <span class="nv">trellis</span><span class="o">=</span><span class="m">1</span> <span class="nv">8x8dct</span><span class="o">=</span><span class="m">1</span> <span class="nv">cqm</span><span class="o">=</span><span class="m">0</span> <span class="nv">deadzone</span><span class="o">=</span>21,11 <span class="nv">fast_pskip</span><span class="o">=</span><span class="m">1</span> <span class="nv">chroma_qp_offset</span><span class="o">=</span>-2 <span class="nv">threads</span><span class="o">=</span><span class="m">1</span> <span class="nv">sliced_threads</span><span class="o">=</span><span class="m">0</span> <span class="nv">nr</span><span class="o">=</span><span class="m">0</span> <span class="nv">decimate</span><span class="o">=</span><span class="m">1</span> <span class="nv">interlaced</span><span class="o">=</span><span class="m">0</span> <span class="nv">constrained_intra</span><span class="o">=</span><span class="m">0</span> <span class="nv">bframes</span><span class="o">=</span><span class="m">3</span> <span class="nv">b_pyramid</span><span class="o">=</span><span class="m">2</span> <span class="nv">b_adapt</span><span class="o">=</span><span class="m">1</span> <span class="nv">b_bias</span><span class="o">=</span><span class="m">0</span> <span class="nv">direct</span><span class="o">=</span><span class="m">1</span> <span class="nv">weightb</span><span class="o">=</span><span class="m">1</span> <span class="nv">open_gop</span><span class="o">=</span><span class="m">0</span> <span class="nv">weightp</span><span class="o">=</span><span class="m">2</span> <span class="nv">keyint</span><span class="o">=</span><span class="m">250</span> <span class="nv">keyint_min</span><span class="o">=</span><span class="m">25</span> <span class="nv">scenecut</span><span class="o">=</span><span class="m">40</span> <span class="nv">intra_refresh</span><span class="o">=</span><span class="m">0</span> <span class="nv">rc_lookahead</span><span class="o">=</span><span class="m">40</span> <span class="nv">rc</span><span class="o">=</span>abr <span class="nv">mbtree</span><span class="o">=</span><span class="m">1</span> <span class="nv">bitrate</span><span class="o">=</span><span class="m">2000</span> <span class="nv">ratetol</span><span class="o">=</span>1.0 <span class="nv">qcomp</span><span class="o">=</span>0.60 <span class="nv">qpmin</span><span class="o">=</span><span class="m">10</span> <span class="nv">qpmax</span><span class="o">=</span><span class="m">51</span> <span class="nv">qpstep</span><span class="o">=</span><span class="m">4</span> <span class="nv">ip_ratio</span><span class="o">=</span>1.40 <span class="nv">aq</span><span class="o">=</span>1:1.00
-Output <span class="c">#0, matroska, to &amp;#39;output.mkv&amp;#39;:</span>
+Output <span class="c1">#0, matroska, to &amp;#39;output.mkv&amp;#39;:</span>
   Metadata:
     encoder         : Lavf52.108.0
-    Stream <span class="c">#0.0: Video: libx264, yuv420p, 1280x720 [PAR 1:1 DAR 16:9], q=2-31, 2000 kb/s, 1k tbn, 50 tbc</span>
-    Stream <span class="c">#0.1: Audio: ac3, 48000 Hz, stereo, s16, 64 kb/s</span>
+    Stream <span class="c1">#0.0: Video: libx264, yuv420p, 1280x720 [PAR 1:1 DAR 16:9], q=2-31, 2000 kb/s, 1k tbn, 50 tbc</span>
+    Stream <span class="c1">#0.1: Audio: ac3, 48000 Hz, stereo, s16, 64 kb/s</span>
 Stream mapping:
-  Stream <span class="c">#0.0 -&gt; #0.0</span>
-  Stream <span class="c">#1.0 -&gt; #0.1</span>
+  Stream <span class="c1">#0.0 -&gt; #0.0</span>
+  Stream <span class="c1">#1.0 -&gt; #0.1</span>
 Press <span class="o">[</span>q<span class="o">]</span> to stop encoding
-^Came<span class="o">=</span>   <span class="m">22</span> <span class="nv">fps</span><span class="o">=</span>  <span class="m">0</span> <span class="nv">q</span><span class="o">=</span>0.0 <span class="nv">size</span><span class="o">=</span>       1kB <span class="nb">time</span><span class="o">=</span>10000000000.00 <span class="nv">bitrate</span><span class="o">=</span>   0.0kbits/s    
+^Came<span class="o">=</span>   <span class="m">22</span> <span class="nv">fps</span><span class="o">=</span>  <span class="m">0</span> <span class="nv">q</span><span class="o">=</span>0.0 <span class="nv">size</span><span class="o">=</span>       1kB <span class="nv">time</span><span class="o">=</span>10000000000.00 <span class="nv">bitrate</span><span class="o">=</span>   0.0kbits/s    
 </pre></div>
                 </div>
 <hr/>

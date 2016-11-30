@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -132,12 +132,12 @@
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In []:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -152,16 +152,14 @@ In []:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [236]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">display</span>
+<div class="prompt input_prompt">In [236]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">display</span>
 <span class="kn">from</span> <span class="nn">IPython.core.magic</span> <span class="kn">import</span> <span class="n">register_cell_magic</span><span class="p">,</span> <span class="n">Magics</span><span class="p">,</span> <span class="n">magics_class</span><span class="p">,</span> <span class="n">cell_magic</span>
 <span class="kn">import</span> <span class="nn">jinja2</span>
 
-<span class="c"># Create jinja cell magic (http://nbviewer.ipython.org/urls/gist.github.com/bj0/5343292/raw/23a0845ee874827e3635edb0bf5701710a537bfc/jinja2.ipynb)</span>
+<span class="c1"># Create jinja cell magic (http://nbviewer.ipython.org/urls/gist.github.com/bj0/5343292/raw/23a0845ee874827e3635edb0bf5701710a537bfc/jinja2.ipynb)</span>
 <span class="nd">@magics_class</span>
 <span class="k">class</span> <span class="nc">JinjaMagics</span><span class="p">(</span><span class="n">Magics</span><span class="p">):</span>
     <span class="sd">'''Magics class containing the jinja2 magic and state'''</span>
@@ -169,11 +167,11 @@ In [236]:
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shell</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">JinjaMagics</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">shell</span><span class="p">)</span>
         
-        <span class="c"># create a jinja2 environment to use for rendering</span>
-        <span class="c"># this can be modified for desired effects (ie: using different variable syntax)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="n">jinja2</span><span class="o">.</span><span class="n">Environment</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">jinja2</span><span class="o">.</span><span class="n">FileSystemLoader</span><span class="p">(</span><span class="s">'.'</span><span class="p">))</span>
+        <span class="c1"># create a jinja2 environment to use for rendering</span>
+        <span class="c1"># this can be modified for desired effects (ie: using different variable syntax)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="n">jinja2</span><span class="o">.</span><span class="n">Environment</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">jinja2</span><span class="o">.</span><span class="n">FileSystemLoader</span><span class="p">(</span><span class="s1">'.'</span><span class="p">))</span>
         
-        <span class="c"># possible output types</span>
+        <span class="c1"># possible output types</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">display_functions</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">html</span><span class="o">=</span><span class="n">display</span><span class="o">.</span><span class="n">HTML</span><span class="p">,</span> 
                                       <span class="n">latex</span><span class="o">=</span><span class="n">display</span><span class="o">.</span><span class="n">Latex</span><span class="p">,</span>
                                       <span class="n">json</span><span class="o">=</span><span class="n">display</span><span class="o">.</span><span class="n">JSON</span><span class="p">,</span>
@@ -193,7 +191,7 @@ In [236]:
         
         <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
         <span class="n">rend</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="nb">dict</span><span class="p">((</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">user_ns</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> 
-                                        <span class="k">if</span> <span class="ow">not</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">'_'</span><span class="p">)</span> <span class="ow">and</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">user_ns_hidden</span><span class="p">))</span>
+                                        <span class="k">if</span> <span class="ow">not</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'_'</span><span class="p">)</span> <span class="ow">and</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">user_ns_hidden</span><span class="p">))</span>
         
         <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">rend</span><span class="p">)</span>
         
@@ -216,41 +214,39 @@ In [236]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [259]:
-</div>
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">uuid</span>
+<div class="prompt input_prompt">In [259]:</div>
+<div class="collapseheader inner_cell"><span style="font-weight: bold;">Expand Code</span>
+<div class="input_area" style="display:none">
+<div class="highlight-ipynb"><pre class="ipynb"><span></span><span class="kn">import</span> <span class="nn">uuid</span>
 
 <span class="k">def</span> <span class="nf">DataTable</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
     <span class="sd">""" Prints a pandas.DataFrame as JQuery DataTables """</span>
     <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
-    <span class="c"># Generate random container name</span>
+    <span class="c1"># Generate random container name</span>
     <span class="n">id_container</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid1</span><span class="p">()</span>
-    <span class="n">output</span> <span class="o">=</span> <span class="s">"""</span>
-<span class="s">        &lt;div id="datatable-container-</span><span class="si">%s</span><span class="s">"&gt;</span>
-<span class="s">            &lt;link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css"&gt;</span>
-<span class="s">            &lt;link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css"&gt;</span>
-<span class="s">            &lt;script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"&gt;&lt;/script&gt;</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">        &lt;div id="datatable-container-</span><span class="si">%s</span><span class="s2">"&gt;</span>
+<span class="s2">            &lt;link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css"&gt;</span>
+<span class="s2">            &lt;link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css"&gt;</span>
+<span class="s2">            &lt;script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"&gt;&lt;/script&gt;</span>
 
-<span class="s">            &lt;script type="text/javascript"&gt;</span>
-<span class="s">                var url = window.location.href;</span>
-<span class="s">                </span>
-<span class="s">                if(url.indexOf("localhost:9999") != -1){</span>
-<span class="s">                    $('#datatable-container-</span><span class="si">%s</span><span class="s"> table.datatable').dataTable();</span>
-<span class="s">                } else {</span>
-<span class="s">                    $.getScript("http://code.jquery.com/jquery-1.11.1.min.js");</span>
-<span class="s">                    $(document).ready(function() {</span>
-<span class="s">                        $('#datatable-container-</span><span class="si">%s</span><span class="s"> table.datatable').dataTable();</span>
-<span class="s">                    });</span>
-<span class="s">                }</span>
-<span class="s">                </span>
-<span class="s">            &lt;/script&gt;</span>
-<span class="s">            &lt;!-- Insert table below --&gt;</span>
-<span class="s">            </span><span class="si">%s</span><span class="s"></span>
-<span class="s">        &lt;/div&gt;</span>
-<span class="s">    """</span> <span class="o">%</span> <span class="p">(</span><span class="n">id_container</span><span class="p">,</span> <span class="n">id_container</span><span class="p">,</span> <span class="n">id_container</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="s">"datatable dataframe"</span><span class="p">))</span>
+<span class="s2">            &lt;script type="text/javascript"&gt;</span>
+<span class="s2">                var url = window.location.href;</span>
+<span class="s2">                </span>
+<span class="s2">                if(url.indexOf("localhost:9999") != -1){</span>
+<span class="s2">                    $('#datatable-container-</span><span class="si">%s</span><span class="s2"> table.datatable').dataTable();</span>
+<span class="s2">                } else {</span>
+<span class="s2">                    $.getScript("http://code.jquery.com/jquery-1.11.1.min.js");</span>
+<span class="s2">                    $(document).ready(function() {</span>
+<span class="s2">                        $('#datatable-container-</span><span class="si">%s</span><span class="s2"> table.datatable').dataTable();</span>
+<span class="s2">                    });</span>
+<span class="s2">                }</span>
+<span class="s2">                </span>
+<span class="s2">            &lt;/script&gt;</span>
+<span class="s2">            &lt;!-- Insert table below --&gt;</span>
+<span class="s2">            </span><span class="si">%s</span><span class="s2"></span>
+<span class="s2">        &lt;/div&gt;</span>
+<span class="s2">    """</span> <span class="o">%</span> <span class="p">(</span><span class="n">id_container</span><span class="p">,</span> <span class="n">id_container</span><span class="p">,</span> <span class="n">id_container</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="s2">"datatable dataframe"</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">HTML</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -259,12 +255,12 @@ In [259]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [250]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb">
+<div class="prompt input_prompt">In [250]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -273,37 +269,37 @@ In [250]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I know the code is not perfect, but at least it works for me. Now let's create some random DataFrame: </p>
+<p>I know the code is not perfect, but at least it works for me. Now let's create some random DataFrame:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [247]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<div class="prompt input_prompt">In [247]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">urllib2</span>
-<span class="kn">from</span> <span class="nn">yurl</span> <span class="kn">import</span> <span class="n">URL</span>
+<span class="kn">from</span> <span class="nn">yurl</span> <span class="k">import</span> <span class="n">URL</span>
 
 
-<span class="c"># Fetch list of random URLs (found using Google)</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s">'http://files.ianonavy.com/urls.txt'</span><span class="p">)</span>
+<span class="c1"># Fetch list of random URLs (found using Google)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s1">'http://files.ianonavy.com/urls.txt'</span><span class="p">)</span>
 <span class="n">targets_row</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
-<span class="c"># Create DataFrame</span>
-<span class="n">targets</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">targets_row</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"Target"</span><span class="p">])</span>
+<span class="c1"># Create DataFrame</span>
+<span class="n">targets</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">targets_row</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"Target"</span><span class="p">])</span>
 
-<span class="c"># Join root domain + suffix</span>
-<span class="n">extract_root_domain</span> <span class="o">=</span>  <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s">'.'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tldextract</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+<span class="c1"># Join root domain + suffix</span>
+<span class="n">extract_root_domain</span> <span class="o">=</span>  <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">'.'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tldextract</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
 
-<span class="n">target_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'scheme'</span><span class="p">,</span> <span class="s">'userinfo'</span><span class="p">,</span> <span class="s">'host'</span><span class="p">,</span> <span class="s">'port'</span><span class="p">,</span> <span class="s">'path'</span><span class="p">,</span> <span class="s">'query'</span><span class="p">,</span> <span class="s">'fragment'</span><span class="p">,</span> <span class="s">'decoded'</span><span class="p">]</span>
-<span class="n">target_component</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">URL</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">[</span><span class="s">'Target'</span><span class="p">]]</span>
+<span class="n">target_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'scheme'</span><span class="p">,</span> <span class="s1">'userinfo'</span><span class="p">,</span> <span class="s1">'host'</span><span class="p">,</span> <span class="s1">'port'</span><span class="p">,</span> <span class="s1">'path'</span><span class="p">,</span> <span class="s1">'query'</span><span class="p">,</span> <span class="s1">'fragment'</span><span class="p">,</span> <span class="s1">'decoded'</span><span class="p">]</span>
+<span class="n">target_component</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">URL</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">[</span><span class="s1">'Target'</span><span class="p">]]</span>
 
-<span class="c"># Create data frame</span>
+<span class="c1"># Create data frame</span>
 <span class="n">df_targets</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">target_component</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">target_columns</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -318,19 +314,18 @@ In [247]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [239]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df_targets</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span>
+<div class="prompt input_prompt">In [239]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_targets</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[239]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[239]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -586,19 +581,18 @@ In [239]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [260]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">DataTable</span><span class="p">(</span><span class="n">df_targets</span><span class="p">[:</span><span class="mi">20</span><span class="p">])</span>
+<div class="prompt input_prompt">In [260]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">DataTable</span><span class="p">(</span><span class="n">df_targets</span><span class="p">[:</span><span class="mi">20</span><span class="p">])</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[260]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[260]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div id="datatable-container-aab341ae-2f8d-11e4-95d5-52540086692e">
 <link href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
 <link href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css" rel="stylesheet" type="text/css">
@@ -850,33 +844,32 @@ In [260]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [242]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">html_output</span> <span class="o">=</span> <span class="n">DataTable</span><span class="p">(</span><span class="n">df_targets</span><span class="p">[:</span><span class="mi">20</span><span class="p">])</span>
+<div class="prompt input_prompt">In [242]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">html_output</span> <span class="o">=</span> <span class="n">DataTable</span><span class="p">(</span><span class="n">df_targets</span><span class="p">[:</span><span class="mi">20</span><span class="p">])</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [211]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">jinja</span> <span class="n">html</span>
-<span class="o">&lt;</span><span class="n">div</span> <span class="nb">id</span><span class="o">=</span><span class="s">"table-container"</span><span class="o">&gt;</span>
-    <span class="p">{{</span> <span class="n">html_output</span> <span class="p">}}</span>
-<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<div class="prompt input_prompt">In [211]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">jinja</span> html
+&lt;div id="table-container"&gt;
+    {{ html_output }}
+&lt;/div&gt;
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[211]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[211]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div id="table-container">
 <ipython.core.display.html 0x7f042eaa02d0="" at="" object="">
 </ipython.core.display.html></div>
@@ -887,19 +880,18 @@ In [211]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [243]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">html_output</span>
+<div class="prompt input_prompt">In [243]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">html_output</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[243]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[243]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div id="datatable-container-3b6a2692-2f8c-11e4-95d5-52540086692e">
 <link href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
 <link href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css" rel="stylesheet" type="text/css">

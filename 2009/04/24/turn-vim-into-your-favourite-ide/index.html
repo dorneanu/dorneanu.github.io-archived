@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -122,16 +122,16 @@
                 <div id="niu2-main-content">
                     <p>Before you start reading this I'd recommand you to ask your best friend Google™ for the most common (platform independent) <a href="http://en.wikipedia.org/wiki/Integrated_development_environment" title="Wiki IDE">IDE</a>s (Integrated Development Environment). If you want some top 10 of most featured/used/known/whatever IDEs go to <a href="http://en.wikipedia.org/wiki/Comparison_of_integrated_development_environments" title="Comparison of IDEs">Wikipedia</a> and satisfy your needs. So don't get me wrong: This article is NOT supposed to give you some comparison nor to influence your oppinion. I'll just satisfy MY needs and give you some kind of reviews in using <a href="http://en.wikipedia.org/wiki/Vim_(text_editor)" rel="external" title="Read more about VIM">VIM</a> for complex projects and daily coding tasks.</p>
 <p>So why using VIM at all? Isn't that some ancient Unix editor used by the most geeks out there? Well like other many other things in this world, VIM seems to be some kind of ageless editor. I really tried to get some sincere answer why I'm still addicted to VIM. When dealing with software development most coders will mention <a href="http://www.eclipse.org/" title="More about Eclipse">Eclipse</a> or <a href="http://www.netbeans.org/" title="More about Netbeans">Netbeans</a>. The competition between them is quite intense because those products have the most active communities of user. Of the primary players out there (including <a href="http://www.jetbrains.com/idea/" title="More about IntelliJ IDEA">InteliJ IDEA</a> of Oracle) only Eclipse and Netbeans are free and open source. I've been using Netbeans for a long time. My oppionion: A really good (open source) IDE. I really disliked Eclipse in cause of its extremly bloated look. But the main reason for using Netbeans instead of Eclipse was my 12.1" Laptop.If I had some larger display maybe I'll be using Eclipse too. It has a big potential and some really cool features. Ok, I think I wrote enough about the so called big "primary players*. Let us take a look at VIM, the lighty IDE with cool features. Since VIMs <a href="http://www.vim.org/htmldoc/term.html#mouse-using" title="VIM Mouse support">mouse</a> support things became a lot easier. You can use contoll VIM by your mouse! It works under xterm and other several terminals. All you'll have to to is to set following option:</p>
-<div class="highlight"><pre>:set <span class="nv">mouse</span><span class="o">=</span>a
+<div class="highlight"><pre><span></span>:set <span class="nv">mouse</span><span class="o">=</span>a
 </pre></div>
 <p>First of all let me show you what VIM is capable of. Left to this text you have some screenshot I made on my Debian/Linux. I splitted the main window into several windows and loaded source codes into them. Before doing that I activated the mouse support (see above) in order to simplify the file loading process. On the left most side of the screen you see some files listes in the current working directory. Once I've clicked on some item in the the current working window, it splitted horizontally (default behaviour) and loaded the selected file. In order to spn lit vertically you'll have to use the <code>vsp</code> command. Fur further info just take a look at the documentation. There are a lot of information shown in each splitted window like e.g. the lines number, file name, current cursor position etc. Here you have my VIM configuration file <code>~/.vimrc</code>:</p>
-<div class="highlight"><pre><span class="nb">set </span><span class="nv">t_Co</span><span class="o">=</span>256
+<div class="highlight"><pre><span></span><span class="nb">set</span> <span class="nv">t_Co</span><span class="o">=</span>256
 syntax on
 colorscheme leo
-<span class="nb">set </span><span class="nv">tabstop</span><span class="o">=</span>3
-<span class="nb">set </span><span class="nv">shiftwidth</span><span class="o">=</span>3
-<span class="nb">set </span>expandtab
-<span class="nb">set </span>number
+<span class="nb">set</span> <span class="nv">tabstop</span><span class="o">=</span>3
+<span class="nb">set</span> <span class="nv">shiftwidth</span><span class="o">=</span>3
+<span class="nb">set</span> expandtab
+<span class="nb">set</span> number
 </pre></div>
 <p>If you really like my colorscheme just download it at <a href="http://www.vim.org/scripts/script.php?script_id=2156" title="colorscheme leo">http://www.vim.org/scripts/script.php?script_id=2156</a>. Put it into <code>~/.vim/colors/</code> and then activate it using <code>:colorscheme leo</code>. It really has cool colors and preserves your tired eyes and boosts your motivation why programming. The mentioned file manager is called <strong>NERDTree</strong> and can be downloaded <a href="http://www.vim.org/scripts/script.php?script_id=1658">here</a>. Once you have activated the mouse support and created several windows splits you can now select the splits by mouse or resize them. In order to do that just simply select the splits border (the blue line in the left screenshot) and move it vertically to your desired position. I hope you'll have fun playing with VIM (take your time like I did) and discover its (unknown?) IDE capabilities. You'll soon be fascinated by the vast posibilities this editor offers you. Feel free to <a href="http://www.google.com/search?hl=en&amp;q=vim+IDE">Google</a> for some other blog posts. I'm glad I'm not the only one geek out there addicted to VIM. </p>
                 </div>

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="ringzer0, ctf, wargames, asm, x86, sploitfun">
+        <meta name="description" content="First let's collect some information about the binary itself: $ readelf IntelligenSoftware -h ELF Header: Magic: 7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 Class: ELF64 Data: 2's complement, little endian Version: 1 (current) OS/ABI: UNIX - System V ABI Version ...">
+        <title>ringzer0 CTF - Binaries - Heap Allocator - blog.dornea.nu</title>
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
+        <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/niu2.min.css" type="text/css" />
+        <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+		
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/bootstrap.min.js"></script>
+        
+        <link rel="canonical" href="http://blog.dornea.nu/2016/11/30/ringzer0-ctf-binaries-heap-allocator" />
+        <script type="text/javascript">window.onload=function(){};</script>
+        <!--[if lt IE 9]>
+            <script src="http://blog.dornea.nu/theme/js/html5shiv.js"></script>
+            <script src="http://blog.dornea.nu/theme/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body> 
+        <div id="body-header">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="http://blog.dornea.nu">
+                            <i class="icon-home"></i>blog.dornea.nu
+                        </a>
+                    </div>
+                    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                        <ul class="nav navbar-nav">
+                            <li><a href="http://dornea.nu" title="about">
+                                <i class="icon-user"></i>about</a>
+                            </li>
+                            <li><a href="/archives.html" title="archives">
+                                <i class="icon-archive"></i>archives</a>
+                            </li>
+                            <li><a href="/tags.html" title="tags">
+                                <i class="icon-tag"></i>tags</a>
+                            </li>
+                            <li><a href="/feeds/rss.xml" title="feeds">
+                                <i class="icon-rss"></i>feeds</a>
+                            </li>
+                        <!-- category dropdown list -->
+                        <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-folder-open"></i>category<b class="caret"></b>
+                           </a>
+                           <ul class="dropdown-menu">
+                               <li><a href="http://blog.dornea.nu/category/blog">
+                                      <i class="icon-pencil"></i>blog
+                                      (116)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/notes">
+                                      <i class="icon-book"></i>notes
+                                      (21)</a></li>
+                           </ul>
+                        </li>
+                        <!--  self defined dropdown list -->
+                        </ul>
+                        
+                        <!-- right nav bar -->
+                        <ul class="nav navbar-nav navbar-right">
+                        <!-- google custom search -->
+                        <li>
+                        <div id="niu2-cse-wrapper">
+                            <div id="niu2-cse-header-box" class="navbar-form navbar-nav">
+                                <form action="http://google.com/cse">
+                                    <input type="hidden" name="cx" value="008508447409818574933:pxyxuhrgnxi" />
+                                    <input type="hidden" name="ie" value="UTF-8" />
+                                    <div class="form-group">
+                                        <input id="niu2-cse-search-input" class="niu2-cse-header form-control" 
+                                            type="text" name="q" 
+                                            placeholder="Press enter to search ..."/>
+                                    </div>
+                                </form>
+                           </div>
+                           <div id="niu2-cse-ctrl-box" class="navbar-nav">
+                            <i id="niu2-cse-search-image" class="icon-search navbar-nav"></i><span id="niu2-cse-search-text">Search</span>
+                           </div>
+                       </div>
+                       </li>
+                       </ul>
+                    </nav>
+                </div>
+            </div>
+<style>
+    #banner{
+        background-image:url("http://blog.dornea.nu//images/header.jpg");
+    }   
+</style>
+
+<div id="banner">
+    <div class="container">
+        <div class="copy">
+            <h2>blog.dornea.nu</h2>
+                <p class="intro">Hack, code and drink some țuică. Personal blog of Victor Dorneanu.</p>
+        </div>
+    </div>
+</div>
+            <!-- End Banner -->
+        </div>
+
+        <div id="body-content">
+            <div class="col-md-8 col-md-offset-2">
+                <h1 id="content-heading">ringzer0 CTF - Binaries - Heap Allocator</h1>
+            </div>
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+                <div id="niu2-main-content">
+                    <p>First let's collect some information about the binary itself:</p>
+<div class="highlight"><pre><span></span>$ readelf IntelligenSoftware -h
+ELF Header:
+  Magic:   7f <span class="m">45</span> 4c <span class="m">46</span> <span class="m">02</span> <span class="m">01</span> <span class="m">01</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> 00
+  Class:                             ELF64
+  Data:                              2<span class="err">'</span>s complement, little endian
+  Version:                           <span class="m">1</span> <span class="o">(</span>current<span class="o">)</span>
+  OS/ABI:                            UNIX - System V
+  ABI Version:                       0
+  Type:                              EXEC <span class="o">(</span>Executable file<span class="o">)</span>
+  Machine:                           Advanced Micro Devices X86-64
+  Version:                           0x1
+  Entry point address:               0x400688
+  Start of program headers:          <span class="m">64</span> <span class="o">(</span>bytes into file<span class="o">)</span>
+  Start of section headers:          <span class="m">4608</span> <span class="o">(</span>bytes into file<span class="o">)</span>
+  Flags:                             0x0
+  Size of this header:               <span class="m">64</span> <span class="o">(</span>bytes<span class="o">)</span>
+  Size of program headers:           <span class="m">56</span> <span class="o">(</span>bytes<span class="o">)</span>
+  Number of program headers:         9
+  Size of section headers:           <span class="m">64</span> <span class="o">(</span>bytes<span class="o">)</span>
+  Number of section headers:         30
+  Section header string table index: 27
+</pre></div>
+<p>Let's see some code:</p>
+<div class="highlight"><pre><span></span>$ objdump -d IntelligentSoftware -j .text 
+...
+<span class="m">0000000000400660</span> &lt;main&gt;:
+  400660:       <span class="m">48</span> <span class="m">83</span> ec <span class="m">08</span>             sub    <span class="nv">$0</span>x8,%rsp
+  400664:       ba a0 <span class="m">10</span> <span class="m">60</span> <span class="m">00</span>          mov    <span class="nv">$0</span>x6010a0,%edx
+  400669:       be <span class="m">87</span> <span class="m">08</span> <span class="m">40</span> <span class="m">00</span>          mov    <span class="nv">$0</span>x400887,%esi
+  40066e:       bf <span class="m">01</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>          mov    <span class="nv">$0</span>x1,%edi
+  400673:       <span class="m">31</span> c0                   xor    %eax,%eax
+  400675:       e8 <span class="m">26</span> ff ff ff          callq  4005a0 &lt;__printf_chk@plt&gt;
+  40067a:       <span class="m">31</span> c0                   xor    %eax,%eax
+  40067c:       e8 ff <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>          callq  <span class="m">400780</span> &lt;get_flag&gt;
+  400681:       <span class="m">31</span> c0                   xor    %eax,%eax
+  400683:       <span class="m">48</span> <span class="m">83</span> c4 <span class="m">08</span>             add    <span class="nv">$0</span>x8,%rsp
+  400687:       c3                      retq
+</pre></div>
+<p>Nothing interesting here. But there is a <code>call</code> to <code>get_flag</code>:</p>
+<div class="highlight"><pre><span></span>0000000000400780 &lt;get_flag&gt;:
+  400780:       53                      push   %rbx
+  400781:       bf 00 04 00 00          mov    $0x400,%edi
+  400786:       e8 05 fe ff ff          callq  400590 &lt;malloc@plt&gt;
+  40078b:       be 54 08 40 00          mov    $0x400854,%esi
+  400790:       48 89 c3                mov    %rax,%rbx
+  400793:       48 89 c2                mov    %rax,%rdx
+  400651:       eb d0                   jmp    400623 &lt;__libc_csu_ctor+0x73&gt;
+  400653:       66 a5                   movsw  %ds:(%rsi),%es:(%rdi)
+  400655:       83 e8 02                sub    $0x2,%eax
+  400658:       eb cf                   jmp    400629 &lt;__libc_csu_ctor+0x79&gt;
+  40065a:       e8 01 ff ff ff          callq  400560 &lt;__stack_chk_fail@plt&gt;
+  40065f:       90                      nop
+</pre></div>
+<p>And there is some <code>jmp</code> to a <strong>libc constructor</strong> (`__libc_csu_ctor').</p>
+<h3 id="0b8ad7d11c118f318e1ca0a195107681">Libc constructors / destructors</h3>
+<p>If you don't have a clue what <strong>libc</strong> constructors/destructors are, make sure
+you have a look at:</p>
+<ul>
+<li><a href="http://dbp-consulting.com/tutorials/debugging/linuxProgramStartup.html">Linux x86 Program Start Up</a></li>
+<li><a href="http://bottomupcs.sourceforge.net/csbu/x3564.htm">Starting a process</a></li>
+<li><a href="http://eli.thegreenplace.net/2012/08/13/how-statically-linked-programs-run-on-linux">How statically linked programs run on Linux</a> </li>
+<li><a href="http://nairobi-embedded.org/070_elf_c_runtime.html">C Run-time for ELF Executables</a></li>
+</ul>
+<h3 id="5158a74ac720be85643dd47b40dc4ffe">Dynamic analysis</h3>
+<p>Again using <code>radare</code> I'll disassemble <code>get_flag</code>:</p>
+<div class="highlight"><pre><span></span>[0x00400688]&gt; pdf @ sym.get_flag
+/ (fcn) sym.get_flag 73
+|   sym.get_flag ();
+|       |   ; CALL XREF from 0x0040067c (sym.main)
+|       |   0x00400780      53             push rbx
+|       |   0x00400781      bf00040000     mov edi, 0x400
+|       |   0x00400786      e805feffff     call sym.imp.malloc        ;  void *malloc(size_t size);
+|       |   0x0040078b      be54084000     mov esi, str.Allocating_1024_bytes__p..._n ; "Allocating 1024 bytes %p...." @ 0x400854
+|       |   0x00400790      4889c3         mov rbx, rax
+|       |   0x00400793      4889c2         mov rdx, rax
+|       |   0x00400796      bf01000000     mov edi, 1
+|       |   0x0040079b      31c0           xor eax, eax
+|       |   0x0040079d      e8fefdffff     call sym.imp.__printf_chk
+|       |   0x004007a2      4889df         mov rdi, rbx
+|       |   0x004007a5      e896fdffff     call sym.imp.free          ; void free(void *ptr);
+|       |   0x004007aa      4889da         mov rdx, rbx
+|       |   0x004007ad      bf01000000     mov edi, 1
+|       |   0x004007b2      be71084000     mov esi, str.Freeing_buffer__p..._n ; "Freeing buffer %p...." @ 0x400871
+|       |   0x004007b7      31c0           xor eax, eax
+|       |   0x004007b9      e8e2fdffff     call sym.imp.__printf_chk
+|       |   0x004007be      5b             pop rbx
+|       |   0x004007bf      bf90084000     mov edi, str.Heap_is_working_perfectly__No_Flag_then ; "Heap is working perfectly! No Flag then" @ 0x400890
+\       `=&lt; 0x004007c4      e987fdffff     jmp sym.imp.puts
+</pre></div>
+<p>Nothing suspicious about it: <code>malloc</code> is being called and then <code>free</code>. Now let's have a look at the constructors, which are usually
+called before <code>main</code>:</p>
+<div class="highlight"><pre><span></span>[0x00400688]&gt; pdf @ entry0
+            ;-- _start:
+/ (fcn) entry0 41
+|   entry0 ();
+|           ; UNKNOWN XREF from 0x00400018 (unk)
+|           0x00400688      31ed           xor ebp, ebp
+|           0x0040068a      4989d1         mov r9, rdx
+|           0x0040068d      5e             pop rsi
+|           0x0040068e      4889e2         mov rdx, rsp
+|           0x00400691      4883e4f0       and rsp, 0xfffffffffffffff0
+|           0x00400695      50             push rax
+|           0x00400696      54             push rsp
+|           0x00400697      49c7c0400840.  mov r8, sym.__libc_csu_fini ; sym.__libc_csu_fini
+|           0x0040069e      48c7c1d00740.  mov rcx, sym.__libc_csu_init ; "AWA..AVI..AUI..ATL.% . " @ 0x4007d0
+|           0x004006a5      48c7c7600640.  mov rdi, sym.main           ; "H......`" @ 0x400660
+\           0x004006ac      e8bffeffff     call sym.imp.__libc_start_main; int __libc_start_main(func main, int argc, char **ubp_av, func init, func fini, func rtld_fini, void *stack_end);
+</pre></div>
+<p>Ahh, there we go. From the links mentioned before we know that <code>__libc_start_main</code> has following syntax:</p>
+<div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">__libc_start_main</span><span class="p">(</span> 
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">main</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="o">*</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="o">*</span><span class="p">),</span> 
+    <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> 
+    <span class="kt">char</span> <span class="o">*</span> <span class="o">*</span> <span class="n">ubp_av</span><span class="p">,</span> 
+    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">init</span><span class="p">)</span> <span class="p">(</span><span class="kt">void</span><span class="p">),</span> 
+    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">fini</span><span class="p">)</span> <span class="p">(</span><span class="kt">void</span><span class="p">),</span> 
+    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">rtld_fini</span><span class="p">)</span> <span class="p">(</span><span class="kt">void</span><span class="p">),</span> 
+    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span> <span class="n">stack_end</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+<p>So before calling <code>main</code> its arguments are copied to the corresponding registers. Since we're dealing with <code>x86-64</code>
+the <strong>ABI</strong> requires that registers are used instead of the stack. On Linux we have the <a href="https://en.wikipedia.org/wiki/X86_calling_conventions#System_V_AMD64_ABI">System V AMD64 ABI</a> calling convention which uses following registers for the parameters:</p>
+<ul>
+<li>RDI</li>
+<li>RSI</li>
+<li>RDX</li>
+<li>RCX</li>
+<li>R8</li>
+<li>R9 </li>
+</ul>
+<p>Additional arguments can be passed on the stack. In our case we have:</p>
+<p><div class="graphviz" style="text-align: center;"><img class="img-responsive" src="data:image/png;base64,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U0REREQyMEwRERERycAwRURERCQDwxQRERGRDAxTRERERDIwTBERERHJwDBFREREJAPDFBEREZEMDFNEREREMjBMEREREclgpO8CiEgzGzZswOHDh/VdBhERVcAzU0REREQy8MwU0Wti3rx5GDNmjL7LIKI3jEKh0HcJ9R7PTBERERHJwDBFREREJAPDFBEREZEMDFNEREREMjBMEREREcnAMEVEREQkA8MUERERkQwMU0REREQyMEwRERERycAwRURERCQDwxQRERGRDAxTRERERDIwTBERERHJwDBFREREJAPDFBEREZEMDFNEREREMjBMEREREcnAMEVEREQkA8MUERERkQwMU0REREQyMEwRERERycAwRURERCQDwxQRERGRDAxTRERERDIwTBERERHJwDBFREREJAPDFBEREZEMDFNEREREMjBMEREREcnAMEVEREQkA8MUERERkQwMU0REREQyMEwRERERycAwRURERCQDwxQRERGRDAxTRERERDIwTBERERHJwDBFRNSAPHv2DBkZGRo/JiL5GKaIiBoQPz8/tGrVCklJSRo9JiL5GKaIiBqQli1bwsHBAba2tho9JiL5jPRdABER6c6BAwe0ekxE8vHMFBEREZEMDFNEREREMjBMEREREcnAMEVEREQkA8MUERERkQwMU0REREQyMEwRERERycAwRURERCQDwxQRERGRDAxTRERERDIwTBERERHJwDBFREREJAPDFBEREZEMDFNEREREMjBMEREREcnAMEVEREQkA8MUERERkQwMU0REREQyMEwRERERycAwRURERCQDwxQRERGRDAxTRERERDIwTBERERHJwDBFREREJAPDFBEREZEMDFNEREREMjBMEREREcnAMEVEREQkA8MUERERkQxG+i6AiDSTkJAAhUKh7zKIiKgChRBC6LsIIqoeQxQR6VN0dDTGjBmj7zLqq0M8M0X0muCLGRHpA/+YqxnXTBERERHJwDBFREREJAPDFBEREZEMDFNEREREMjBMEdFrraCgACdOnEBqaqq+S5HtwYMHOHz4sNb7qZuDpKQkRERE4NmzZ7os8ZWkp6cjJiZG32UQ1RqGKSLS2v79++Hp6Qlzc3N0794dQggIIbBixQq4u7ujUaNG+PDDD1+5vzZ+/vln+Pv7Iy4uTkfPTn+WL1+O4OBg3Lx5U6v91M3B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MjBMEREREcnAMEVEREQkA8MUERERkQz8NB9RO3H27FlIkqTvNoiIqAHeAZ2oHXBxcUF+fr6+2yCiTqhr1644fvw4AgMD9d3K6+ogz0wRtQN5eXn6boGIiJrBNVNEREREMjBMEREREcnAMEVEREQkA8MUERERkQwMU0REREQyMEwRERERycAwRURERCQDwxQRERGRDAxTRERERDIwTBERERHJwDBFREREJAPDFBEREZEMDFNEREREMjBMEREREcnAMEVEREQkA8MUERERkQwMU0REREQyMEwRERERycAwRURERCQDwxQRERGRDAxTRERERDIwTBERERHJwDBFREREJAPDFBEREZEMDFNEREREMjBMEREREcnAMEVEREQkA8MUERERkQwMU0REREQyMEwRERERycAwRURERCQDwxQRERGRDAxTRERERDIwTBERERHJwDBFREREJAPDFBEREZEMDFNEREREMjBMEREREcnAMEVEREQkA8MUERERkQwMU0REREQyMEwRERERycAwRURERCQDwxQRERGRDAxTRERERDIwTBERERHJwDBFREREJAPDFBEREZEMDFNEREREMjBMEREREcnAMEVEREQkA8MUERERkQwMU0REREQyMEwRERERycAwRURERCQDwxQRERGRDAxTRERERDIwTBERERHJwDBFREREJAPDFBEREZEMDFNEREREMjBMEREREcnAMEVEREQkA8MUERERkQwMU0REREQyMEwRERERycAwRURERCQDwxQRERGRDAxTRERERDIwTBERERHJwDBFREREJMP/AGs06ljE8heqAAAAAElFTkSuQmCC"/></div></p>
+<p>As stated <a href="http://dbp-consulting.com/tutorials/debugging/linuxProgramStartup.html">here</a> <code>__libc_start_main</code> does
+the following:</p>
+<ul>
+<li>Takes care of some security problems with setuid setgid programs</li>
+<li>Starts up threading</li>
+<li>Registers the fini (our program), and rtld_fini (run-time loader) arguments to get run by at_exit to run the program's and the loader's cleanup routines</li>
+<li>Calls the init argument</li>
+<li>Calls the main with the argc and argv arguments passed to it and with the global __environ argument as detailed above.</li>
+<li>Calls exit with the return value of main</li>
+</ul>
+<p>The <code>init</code> argument is set to <code>__libc_csu_init</code>. In the <strong>glibc</strong> source tree you will find <code>csu/elf-init.c</code> which contains <code>__libc_csu_init</code>:</p>
+<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">__libc_csu_init</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">envp</span><span class="p">)</span> <span class="p">{</span>
+     <span class="n">_init</span> <span class="p">();</span> 
+
+    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">size</span> <span class="o">=</span> <span class="n">__init_array_end</span> <span class="o">-</span> <span class="n">__init_array_start</span><span class="p">;</span> 
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> 
+        <span class="p">(</span><span class="o">*</span><span class="n">__init_array_start</span> <span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="n">envp</span><span class="p">);</span> 
+<span class="p">}</span>
+</pre></div>
+<p>Let's have a look at the disassembly:</p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="mh">0x00400688</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">pdf</span> <span class="p">@</span> <span class="n">sym</span><span class="p">.</span><span class="n">__libc_csu_init</span>
+<span class="o">/</span> <span class="p">(</span><span class="n">fcn</span><span class="p">)</span> <span class="n">sym</span><span class="p">.</span><span class="n">__libc_csu_init</span> <span class="mi">101</span>
+<span class="o">|</span>   <span class="n">sym</span><span class="p">.</span><span class="n">__libc_csu_init</span> <span class="p">();</span>
+<span class="o">|</span>           <span class="p">;</span> <span class="n">DATA</span> <span class="n">XREF</span> <span class="n">from</span> <span class="mh">0x0040069e</span> <span class="p">(</span><span class="n">entry0</span><span class="p">)</span>
+<span class="o">|</span>           <span class="p">;</span> <span class="n">DATA</span> <span class="n">XREF</span> <span class="n">from</span> <span class="mh">0x004005c4</span> <span class="p">(</span><span class="n">sym</span><span class="p">.</span><span class="n">__libc_csu_ctor</span><span class="p">)</span>
+<span class="o">|</span>           <span class="p">;</span> <span class="n">DATA</span> <span class="n">XREF</span> <span class="n">from</span> <span class="mh">0x004005c9</span> <span class="p">(</span><span class="n">sym</span><span class="p">.</span><span class="n">__libc_csu_ctor</span><span class="p">)</span>
+<span class="o">|</span>           <span class="mh">0x004007d0</span>      <span class="mi">4157</span>           <span class="n">push</span> <span class="n">r15</span>
+<span class="o">|</span>           <span class="mh">0x004007d2</span>      <span class="mf">4189ff</span>         <span class="n">mov</span> <span class="n">r15d</span><span class="p">,</span> <span class="n">edi</span>
+<span class="o">|</span>           <span class="p">;</span> <span class="n">DATA</span> <span class="n">XREF</span> <span class="n">from</span> <span class="mh">0x004005d2</span> <span class="p">(</span><span class="n">sym</span><span class="p">.</span><span class="n">__libc_csu_ctor</span><span class="p">)</span>
+<span class="o">|</span>           <span class="mh">0x004007d5</span>      <span class="mi">4156</span>           <span class="n">push</span> <span class="n">r14</span>
+<span class="o">|</span>           <span class="mh">0x004007d7</span>      <span class="mf">4989f</span><span class="mi">6</span>         <span class="n">mov</span> <span class="n">r14</span><span class="p">,</span> <span class="n">rsi</span>
+<span class="o">|</span>           <span class="mh">0x004007da</span>      <span class="mi">4155</span>           <span class="n">push</span> <span class="n">r13</span>
+<span class="o">|</span>           <span class="mh">0x004007dc</span>      <span class="mi">4989</span><span class="n">d5</span>         <span class="n">mov</span> <span class="n">r13</span><span class="p">,</span> <span class="n">rdx</span>
+<span class="o">|</span>           <span class="mh">0x004007df</span>      <span class="mi">4154</span>           <span class="n">push</span> <span class="n">r12</span>
+<span class="o">|</span>           <span class="mh">0x004007e1</span>      <span class="mi">4</span><span class="n">c8d25200620</span><span class="p">.</span>  <span class="n">lea</span> <span class="n">r12</span><span class="p">,</span> <span class="n">qword</span> <span class="n">obj</span><span class="p">.</span><span class="n">__frame_dummy_init_array_entry</span> <span class="p">;</span> <span class="mh">0x600e08</span> <span class="p">;</span> <span class="n">loc</span><span class="p">.</span><span class="n">__init_array_start</span> <span class="p">;</span> <span class="s">"P.@"</span> <span class="p">@</span> <span class="mh">0x600e08</span>
+<span class="o">|</span>           <span class="mh">0x004007e8</span>      <span class="mi">55</span>             <span class="n">push</span> <span class="n">rbp</span>
+<span class="o">|</span>           <span class="mh">0x004007e9</span>      <span class="mi">488</span><span class="n">d2d280620</span><span class="p">.</span>  <span class="n">lea</span> <span class="n">rbp</span><span class="p">,</span> <span class="n">qword</span> <span class="n">obj</span><span class="p">.</span><span class="n">__do_global_dtors_aux_fini_array_entry</span> <span class="p">;</span> <span class="mh">0x600e18</span> <span class="p">;</span> <span class="n">loc</span><span class="p">.</span><span class="n">__init_array_end</span> <span class="p">;</span> <span class="s">"0.@"</span> <span class="p">@</span> <span class="mh">0x600e18</span>
+<span class="o">|</span>           <span class="mh">0x004007f0</span>      <span class="mi">53</span>             <span class="n">push</span> <span class="n">rbx</span>
+<span class="o">|</span>           <span class="mh">0x004007f1</span>      <span class="mi">4</span><span class="n">c29e5</span>         <span class="n">sub</span> <span class="n">rbp</span><span class="p">,</span> <span class="n">r12</span>
+<span class="o">|</span>           <span class="mh">0x004007f4</span>      <span class="mi">31</span><span class="n">db</span>           <span class="n">xor</span> <span class="n">ebx</span><span class="p">,</span> <span class="n">ebx</span>
+<span class="o">|</span>           <span class="mh">0x004007f6</span>      <span class="mi">48</span><span class="n">c1fd03</span>       <span class="n">sar</span> <span class="n">rbp</span><span class="p">,</span> <span class="mi">3</span>
+<span class="o">|</span>           <span class="mh">0x004007fa</span>      <span class="mi">4883</span><span class="n">ec08</span>       <span class="n">sub</span> <span class="n">rsp</span><span class="p">,</span> <span class="mi">8</span>
+<span class="o">|</span>           <span class="mh">0x004007fe</span>      <span class="n">e805fdffff</span>     <span class="n">call</span> <span class="n">sym</span><span class="p">.</span><span class="n">_init</span>
+<span class="o">|</span>           <span class="mh">0x00400803</span>      <span class="mi">4885</span><span class="n">ed</span>         <span class="n">test</span> <span class="n">rbp</span><span class="p">,</span> <span class="n">rbp</span>
+<span class="o">|</span>       <span class="p">,</span><span class="o">=&lt;</span> <span class="mh">0x00400806</span>      <span class="mi">741</span><span class="n">e</span>           <span class="n">je</span> <span class="mh">0x400826</span>
+<span class="o">|</span>       <span class="o">|</span>   <span class="mh">0x00400808</span>      <span class="mf">0f1f84000000.</span>  <span class="n">nop</span> <span class="n">dword</span> <span class="p">[</span><span class="n">rax</span> <span class="o">+</span> <span class="n">rax</span><span class="p">]</span>
+<span class="o">|</span>      <span class="p">.</span><span class="o">--&gt;</span> <span class="mh">0x00400810</span>      <span class="mi">4</span><span class="n">c89ea</span>         <span class="n">mov</span> <span class="n">rdx</span><span class="p">,</span> <span class="n">r13</span>
+<span class="o">|</span>      <span class="o">||</span>   <span class="mh">0x00400813</span>      <span class="mi">4</span><span class="n">c89f6</span>         <span class="n">mov</span> <span class="n">rsi</span><span class="p">,</span> <span class="n">r14</span>
+<span class="o">|</span>      <span class="o">||</span>   <span class="mh">0x00400816</span>      <span class="mf">4489ff</span>         <span class="n">mov</span> <span class="n">edi</span><span class="p">,</span> <span class="n">r15d</span>
+<span class="o">|</span>      <span class="o">||</span>   <span class="mh">0x00400819</span>      <span class="mf">41ff</span><span class="mi">14</span><span class="n">dc</span>       <span class="n">call</span> <span class="n">qword</span> <span class="p">[</span><span class="n">r12</span> <span class="o">+</span> <span class="n">rbx</span><span class="o">*</span><span class="mi">8</span><span class="p">]</span>
+<span class="o">|</span>      <span class="o">||</span>   <span class="mh">0x0040081d</span>      <span class="mi">4883</span><span class="n">c301</span>       <span class="n">add</span> <span class="n">rbx</span><span class="p">,</span> <span class="mi">1</span>
+<span class="o">|</span>      <span class="o">||</span>   <span class="mh">0x00400821</span>      <span class="mi">4839</span><span class="n">eb</span>         <span class="n">cmp</span> <span class="n">rbx</span><span class="p">,</span> <span class="n">rbp</span>
+<span class="o">|</span>      <span class="err">`</span><span class="o">==&lt;</span> <span class="mh">0x00400824</span>      <span class="mi">75</span><span class="n">ea</span>           <span class="n">jne</span> <span class="mh">0x400810</span>
+<span class="o">|</span>       <span class="err">`</span><span class="o">-&gt;</span> <span class="mh">0x00400826</span>      <span class="mi">4883</span><span class="n">c408</span>       <span class="n">add</span> <span class="n">rsp</span><span class="p">,</span> <span class="mi">8</span>
+<span class="o">|</span>           <span class="mh">0x0040082a</span>      <span class="mi">5</span><span class="n">b</span>             <span class="n">pop</span> <span class="n">rbx</span>
+<span class="o">|</span>           <span class="mh">0x0040082b</span>      <span class="mi">5</span><span class="n">d</span>             <span class="n">pop</span> <span class="n">rbp</span>
+<span class="o">|</span>           <span class="mh">0x0040082c</span>      <span class="mi">415</span><span class="n">c</span>           <span class="n">pop</span> <span class="n">r12</span>
+<span class="o">|</span>           <span class="mh">0x0040082e</span>      <span class="mi">415</span><span class="n">d</span>           <span class="n">pop</span> <span class="n">r13</span>
+<span class="o">|</span>           <span class="mh">0x00400830</span>      <span class="mi">415</span><span class="n">e</span>           <span class="n">pop</span> <span class="n">r14</span>
+<span class="o">|</span>           <span class="mh">0x00400832</span>      <span class="mf">415f</span>           <span class="n">pop</span> <span class="n">r15</span>
+<span class="err">\</span>           <span class="mh">0x00400834</span>      <span class="n">c3</span>             <span class="n">ret</span>
+</pre></div>
+<p>You can definitely see the call to <code>_init()</code>. The loop inside looks very interesting:</p>
+<div class="highlight"><pre><span></span><span class="o">|</span>       <span class="o">|</span>   <span class="nt">0x08048592</span>      <span class="nt">8db600000000</span>   <span class="nt">lea</span> <span class="nt">esi</span><span class="o">,</span> <span class="cp">[</span><span class="nx">esi</span><span class="cp">]</span>
+<span class="o">|</span>      <span class="nc">.--</span><span class="o">&gt;</span> <span class="nt">0x08048598</span>      <span class="nt">8b442438</span>       <span class="nt">mov</span> <span class="nt">eax</span><span class="o">,</span> <span class="nt">dword</span> <span class="cp">[</span><span class="nx">esp</span> <span class="o">+</span> <span class="nx">arg_38h</span><span class="cp">]</span> <span class="o">;</span> <span class="cp">[</span><span class="mh">0x38</span><span class="p">:</span><span class="mi">4</span><span class="cp">]</span><span class="o">=</span><span class="nt">52</span> <span class="o">;</span> <span class="s1">'8'</span>
+<span class="o">|</span>      <span class="o">||</span>   <span class="nt">0x0804859c</span>      <span class="nt">892c24</span>         <span class="nt">mov</span> <span class="nt">dword</span> <span class="cp">[</span><span class="nx">esp</span><span class="cp">]</span><span class="o">,</span> <span class="nt">ebp</span>
+<span class="o">|</span>      <span class="o">||</span>   <span class="nt">0x0804859f</span>      <span class="nt">89442408</span>       <span class="nt">mov</span> <span class="nt">dword</span> <span class="cp">[</span><span class="nx">esp</span> <span class="o">+</span> <span class="nx">local_8h</span><span class="cp">]</span><span class="o">,</span> <span class="nt">eax</span>
+<span class="o">|</span>      <span class="o">||</span>   <span class="nt">0x080485a3</span>      <span class="nt">8b442434</span>       <span class="nt">mov</span> <span class="nt">eax</span><span class="o">,</span> <span class="nt">dword</span> <span class="cp">[</span><span class="nx">esp</span> <span class="o">+</span> <span class="nx">arg_34h</span><span class="cp">]</span> <span class="o">;</span> <span class="cp">[</span><span class="mh">0x34</span><span class="p">:</span><span class="mi">4</span><span class="cp">]</span><span class="o">=</span><span class="nt">6</span> <span class="o">;</span> <span class="s1">'4'</span>
+<span class="o">|</span>      <span class="o">||</span>   <span class="nt">0x080485a7</span>      <span class="nt">89442404</span>       <span class="nt">mov</span> <span class="nt">dword</span> <span class="cp">[</span><span class="nx">esp</span> <span class="o">+</span> <span class="nx">local_4h</span><span class="cp">]</span><span class="o">,</span> <span class="nt">eax</span>
+<span class="o">|</span>      <span class="o">||</span>   <span class="nt">0x080485ab</span>      <span class="nt">ff94b308ffff</span><span class="o">.</span>  <span class="nt">call</span> <span class="nt">dword</span> <span class="cp">[</span><span class="nx">ebx</span> <span class="o">+</span> <span class="nx">esi</span><span class="o">*</span><span class="mi">4</span> <span class="o">-</span> <span class="mh">0xf8</span><span class="cp">]</span>
+<span class="o">|</span>      <span class="o">||</span>   <span class="nt">0x080485b2</span>      <span class="nt">83c601</span>         <span class="nt">add</span> <span class="nt">esi</span><span class="o">,</span> <span class="nt">1</span>
+<span class="o">|</span>      <span class="o">||</span>   <span class="nt">0x080485b5</span>      <span class="nt">39fe</span>           <span class="nt">cmp</span> <span class="nt">esi</span><span class="o">,</span> <span class="nt">edi</span>
+<span class="o">|</span>      <span class="err">`</span><span class="o">==&lt;</span> <span class="nt">0x080485b7</span>      <span class="nt">75df</span>           <span class="nt">jne</span> <span class="nt">0x8048598</span>
+</pre></div>
+<p>Let's have a look what's happening inside this loop:</p>
+<div class="highlight"><pre><span></span>gef&gt; b *0x0000000000400803
+gef&gt; r
+gef&gt; 
+0x0000000000400819    &lt;__libc_csu_init+73&gt;     call   QWORD PTR <span class="o">[</span>r12+rbx*8<span class="o">]</span>   &lt;- <span class="nv">$pc</span>
+
+gef&gt; x/x <span class="nv">$r12</span>
+0x600e08:       0x00400750
+gef&gt; x/x <span class="nv">$rbx</span>
+0x0:    Cannot access memory at address 0x0
+</pre></div>
+<p>As you can see the address at <code>$r12 + rbx*8</code> will be called. Since <code>$rbx</code> is null the programm
+execution will jump to the address <code>0x00400750</code>. But where does this address come from?</p>
+<h3 id="559a25fdb98a7d1fd1c3771ac568d5e9">Constructors</h3>
+<p>As you have seen previously an <code>init_array</code> is used to call some functions. In C you'd usually 
+implement some constructors using <code>__attribute__</code>:</p>
+<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">init</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">envp</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="n">printf</span><span class="p">(</span><span class="s">"INIT!"</span><span class="p">);</span> 
+<span class="p">}</span>
+<span class="n">__attribute__</span><span class="p">((</span><span class="n">section</span><span class="p">(</span><span class="s">".init_array"</span><span class="p">)))</span> <span class="n">typeof</span><span class="p">(</span><span class="n">init</span><span class="p">)</span> <span class="o">*</span><span class="n">__init</span> <span class="o">=</span> <span class="n">init</span><span class="p">;</span>
+</pre></div>
+<p>This whole information is stored inside the ELF binary at a section called <code>init_array</code>. Let's
+see what it contains:</p>
+<div class="highlight"><pre><span></span>$ objdump -d -j .init_array IntelligentSoftware
+
+IntelligentSoftware:     file format elf64-x86-64
+
+
+Disassembly of section .init_array:
+
+0000000000600e08 &lt;__frame_dummy_init_array_entry&gt;:
+  600e08:       <span class="m">50</span> <span class="m">07</span> <span class="m">40</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> b0 <span class="m">05</span> <span class="m">40</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>     P.@.......@.....
+</pre></div>
+<p>Did you recognize the address <code>0x600e08</code> and the value <code>0x00400750</code>? Let's go back to <code>radare</code>:</p>
+<div class="highlight"><pre><span></span>[0x00400688]&gt; pxr @ obj.__frame_dummy_init_array_entry
+0x00600e08  0x0000000000400750   P.@..... (.text) sym.frame_dummy sym.frame_dummy R X 'cmp qword [rip + 0x2006c8], 0'
+0x00600e10  0x00000000004005b0   ..@..... (.text) sym.__libc_csu_ctor sym.__libc_csu_ctor R X 'sub rsp, 0x48'
+0x00600e18  0x0000000000400730   0.@..... (.text) sym.__do_global_dtors_aux sym.__do_global_dtors_aux R X 'cmp byte [rip + 0x200998], 0'
+0x00600e20  0x0000000000000000   ........ section_end.GNU_STACK
+...
+</pre></div>
+<p>Let's have a look at the <strong>2nd</strong>  constructor/entry:</p>
+<div class="highlight"><pre><span></span><span class="o">/</span> <span class="o">(</span><span class="nt">fcn</span><span class="o">)</span> <span class="nt">sym</span><span class="nc">.__libc_csu_ctor</span> <span class="nt">216</span>
+<span class="o">|</span>   <span class="nt">sym</span><span class="nc">.__libc_csu_ctor</span> <span class="o">();</span>
+<span class="o">|</span>           <span class="o">;</span> <span class="nt">var</span> <span class="nt">int</span> <span class="nt">local_8h</span> <span class="o">@</span> <span class="nt">rsp</span><span class="o">+</span><span class="nt">0x8</span>
+<span class="o">|</span>           <span class="o">;</span> <span class="nt">var</span> <span class="nt">int</span> <span class="nt">local_10h</span> <span class="o">@</span> <span class="nt">rsp</span><span class="o">+</span><span class="nt">0x10</span>
+<span class="o">|</span>           <span class="o">;</span> <span class="nt">var</span> <span class="nt">int</span> <span class="nt">local_11h</span> <span class="o">@</span> <span class="nt">rsp</span><span class="o">+</span><span class="nt">0x11</span>
+<span class="o">|</span>           <span class="o">;</span> <span class="nt">var</span> <span class="nt">int</span> <span class="nt">local_12h</span> <span class="o">@</span> <span class="nt">rsp</span><span class="o">+</span><span class="nt">0x12</span>
+<span class="o">|</span>           <span class="o">;</span> <span class="nt">var</span> <span class="nt">int</span> <span class="nt">local_14h</span> <span class="o">@</span> <span class="nt">rsp</span><span class="o">+</span><span class="nt">0x14</span>
+<span class="o">|</span>           <span class="o">;</span> <span class="nt">var</span> <span class="nt">int</span> <span class="nt">local_18h</span> <span class="o">@</span> <span class="nt">rsp</span><span class="o">+</span><span class="nt">0x18</span>
+<span class="o">|</span>           <span class="o">;</span> <span class="nt">var</span> <span class="nt">int</span> <span class="nt">local_38h</span> <span class="o">@</span> <span class="nt">rsp</span><span class="o">+</span><span class="nt">0x38</span>
+<span class="o">|</span>           <span class="o">;</span> <span class="nt">UNKNOWN</span> <span class="nt">XREF</span> <span class="nt">from</span> <span class="nt">0x00400e10</span> <span class="o">(</span><span class="nt">unk</span><span class="o">)</span>
+<span class="o">|</span>           <span class="o">;</span> <span class="nt">CALL</span> <span class="nt">XREF</span> <span class="nt">from</span> <span class="nt">0x004005b0</span> <span class="o">(</span><span class="nt">sym</span><span class="nc">.__libc_csu_ctor</span><span class="o">)</span>
+<span class="o">|</span>           <span class="nt">0x004005b0</span>      <span class="nt">4883ec48</span>       <span class="nt">sub</span> <span class="nt">rsp</span><span class="o">,</span> <span class="nt">0x48</span>               <span class="o">;</span> <span class="s1">'H'</span> <span class="o">;</span> <span class="cp">[</span><span class="mi">13</span><span class="cp">]</span> <span class="nt">va</span><span class="o">=</span><span class="nt">0x004005b0</span> <span class="nt">pa</span><span class="o">=</span><span class="nt">0x000005b0</span> <span class="nt">sz</span><span class="o">=</span><span class="nt">658</span> <span class="nt">vsz</span><span class="o">=</span><span class="nt">658</span> <span class="nt">rwx</span><span class="o">=</span><span class="nt">--r-x</span> <span class="nc">.text</span>
+<span class="o">|</span>           <span class="nt">0x004005b4</span>      <span class="nt">64488b042528</span><span class="o">.</span>  <span class="nt">mov</span> <span class="nt">rax</span><span class="o">,</span> <span class="nt">qword</span> <span class="nt">fs</span><span class="o">:</span><span class="cp">[</span><span class="mh">0x28</span><span class="cp">]</span>    <span class="o">;</span> <span class="cp">[</span><span class="mh">0x28</span><span class="p">:</span><span class="mi">8</span><span class="cp">]</span><span class="o">=</span><span class="nt">0x1200</span> <span class="o">;</span> <span class="s1">'('</span>
+<span class="o">|</span>           <span class="nt">0x004005bd</span>      <span class="nt">4889442438</span>     <span class="nt">mov</span> <span class="nt">qword</span> <span class="cp">[</span><span class="nx">rsp</span> <span class="o">+</span> <span class="nx">local_38h</span><span class="cp">]</span><span class="o">,</span> <span class="nt">rax</span>
+<span class="o">|</span>           <span class="nt">0x004005c2</span>      <span class="nt">31c0</span>           <span class="nt">xor</span> <span class="nt">eax</span><span class="o">,</span> <span class="nt">eax</span>
+<span class="o">|</span>           <span class="nt">0x004005c4</span>      <span class="nt">b8d0074000</span>     <span class="nt">mov</span> <span class="nt">eax</span><span class="o">,</span> <span class="nt">sym</span><span class="nc">.__libc_csu_init</span> <span class="o">;</span> <span class="s2">"AWA..AVI..AUI..ATL.% . "</span> <span class="o">@</span> <span class="nt">0x4007d0</span>
+<span class="o">|</span>           <span class="nt">0x004005c9</span>      <span class="nt">48c7442408d0</span><span class="o">.</span>  <span class="nt">mov</span> <span class="nt">qword</span> <span class="cp">[</span><span class="nx">rsp</span> <span class="o">+</span> <span class="nx">local_8h</span><span class="cp">]</span><span class="o">,</span> <span class="nt">sym</span><span class="nc">.__libc_csu_init</span> <span class="o">;</span> <span class="cp">[</span><span class="mh">0x4007d0</span><span class="p">:</span><span class="mi">8</span><span class="cp">]</span><span class="o">=</span><span class="nt">0x495641ff89415741</span> <span class="nt">LEA</span> <span class="nt">sym</span><span class="nc">.__libc_csu_init</span> <span class="o">;</span> <span class="s2">"AWA..AVI..AUI..ATL.% . "</span> <span class="o">@</span> <span class="nt">0x4007d0</span>
+<span class="o">|</span>           <span class="nt">0x004005d2</span>      <span class="nt">678b4005</span>       <span class="nt">mov</span> <span class="nt">eax</span><span class="o">,</span> <span class="nt">dword</span> <span class="cp">[</span><span class="nx">eax</span> <span class="o">+</span> <span class="mi">5</span><span class="cp">]</span>    <span class="o">;</span> <span class="cp">[</span><span class="mh">0x5</span><span class="p">:</span><span class="mi">4</span><span class="cp">]</span><span class="o">=</span><span class="nt">257</span>
+<span class="o">|</span>           <span class="nt">0x004005d6</span>      <span class="nt">3ccc</span>           <span class="nt">cmp</span> <span class="nt">al</span><span class="o">,</span> <span class="nt">0xcc</span>
+<span class="o">|</span>       <span class="o">,=&lt;</span> <span class="nt">0x004005d8</span>      <span class="nt">7415</span>           <span class="nt">je</span> <span class="nt">0x4005ef</span>
+<span class="o">|</span>       <span class="o">|</span>   <span class="o">;</span> <span class="nt">JMP</span> <span class="nt">XREF</span> <span class="nt">from</span> <span class="nt">0x0040064c</span> <span class="o">(</span><span class="nt">sym</span><span class="nc">.__libc_csu_ctor</span><span class="o">)</span>
+<span class="o">|</span>       <span class="o">|</span>   <span class="nt">0x004005da</span>      <span class="nt">488b442438</span>     <span class="nt">mov</span> <span class="nt">rax</span><span class="o">,</span> <span class="nt">qword</span> <span class="cp">[</span><span class="nx">rsp</span> <span class="o">+</span> <span class="nx">local_38h</span><span class="cp">]</span> <span class="o">;</span> <span class="cp">[</span><span class="mh">0x38</span><span class="p">:</span><span class="mi">8</span><span class="cp">]</span><span class="o">=</span><span class="nt">0x1b001e00400009</span> <span class="o">;</span> <span class="s1">'8'</span>
+<span class="o">|</span>       <span class="o">|</span>   <span class="nt">0x004005df</span>      <span class="nt">644833042528</span><span class="o">.</span>  <span class="nt">xor</span> <span class="nt">rax</span><span class="o">,</span> <span class="nt">qword</span> <span class="nt">fs</span><span class="o">:</span><span class="cp">[</span><span class="mh">0x28</span><span class="cp">]</span>
+<span class="o">|</span>      <span class="o">,==&lt;</span> <span class="nt">0x004005e8</span>      <span class="nt">7570</span>           <span class="nt">jne</span> <span class="nt">0x40065a</span>
+<span class="o">|</span>      <span class="o">||</span>   <span class="nt">0x004005ea</span>      <span class="nt">4883c448</span>       <span class="nt">add</span> <span class="nt">rsp</span><span class="o">,</span> <span class="nt">0x48</span>               <span class="o">;</span> <span class="s1">'H'</span>
+<span class="o">|</span>      <span class="o">||</span>   <span class="nt">0x004005ee</span>      <span class="nt">c3</span>             <span class="nt">ret</span>
+<span class="o">|</span>      <span class="o">|</span><span class="err">`</span><span class="nt">-</span><span class="o">&gt;</span> <span class="nt">0x004005ef</span>      <span class="nt">488b3d8a0a20</span><span class="o">.</span>  <span class="nt">mov</span> <span class="nt">rdi</span><span class="o">,</span> <span class="nt">qword</span> <span class="cp">[</span><span class="nx">obj.__libc_ptr</span><span class="cp">]</span> <span class="o">;</span> <span class="cp">[</span><span class="mh">0x601080</span><span class="p">:</span><span class="mi">8</span><span class="cp">]</span><span class="o">=</span><span class="nt">0x6010a0</span> <span class="nt">obj</span><span class="nc">.banner</span> <span class="nt">LEA</span> <span class="nt">obj</span><span class="nc">.__libc_ptr</span> <span class="o">;</span> <span class="nt">obj</span><span class="nc">.__libc_ptr</span>
+<span class="o">|</span>      <span class="o">|</span>    <span class="nt">0x004005f6</span>      <span class="nt">c644241046</span>     <span class="nt">mov</span> <span class="nt">byte</span> <span class="cp">[</span><span class="nx">rsp</span> <span class="o">+</span> <span class="nx">local_10h</span><span class="cp">]</span><span class="o">,</span> <span class="nt">0x46</span> <span class="o">;</span> <span class="s1">'F'</span> <span class="o">;</span> <span class="cp">[</span><span class="mh">0x46</span><span class="p">:</span><span class="mi">1</span><span class="cp">]</span><span class="o">=</span><span class="nt">0</span> <span class="o">;</span> <span class="s1">'F'</span>
+<span class="o">|</span>      <span class="o">|</span>    <span class="nt">0x004005fb</span>      <span class="nt">488d742410</span>     <span class="nt">lea</span> <span class="nt">rsi</span><span class="o">,</span> <span class="nt">qword</span> <span class="cp">[</span><span class="nx">rsp</span> <span class="o">+</span> <span class="nx">local_10h</span><span class="cp">]</span> <span class="o">;</span> <span class="nt">0x10</span>
+<span class="o">|</span>      <span class="o">|</span>    <span class="nt">0x00400600</span>      <span class="nt">c64424114c</span>     <span class="nt">mov</span> <span class="nt">byte</span> <span class="cp">[</span><span class="nx">rsp</span> <span class="o">+</span> <span class="nx">local_11h</span><span class="cp">]</span><span class="o">,</span> <span class="nt">0x4c</span> <span class="o">;</span> <span class="s1">'L'</span> <span class="o">;</span> <span class="cp">[</span><span class="mh">0x4c</span><span class="p">:</span><span class="mi">1</span><span class="cp">]</span><span class="o">=</span><span class="nt">0</span> <span class="o">;</span> <span class="s1">'L'</span>
+<span class="o">|</span>      <span class="o">|</span>    <span class="nt">0x00400605</span>      <span class="nt">66c744241833</span><span class="o">.</span>  <span class="nt">mov</span> <span class="nt">word</span> <span class="cp">[</span><span class="nx">rsp</span> <span class="o">+</span> <span class="nx">local_18h</span><span class="cp">]</span><span class="o">,</span> <span class="nt">0x3933</span> <span class="o">;</span> <span class="cp">[</span><span class="mh">0x3933</span><span class="p">:</span><span class="mi">2</span><span class="cp">]</span><span class="o">=</span><span class="nt">0xffff</span>
+<span class="o">|</span>      <span class="o">|</span>    <span class="nt">0x0040060c</span>      <span class="nt">b828000000</span>     <span class="nt">mov</span> <span class="nt">eax</span><span class="o">,</span> <span class="nt">0x28</span>               <span class="o">;</span> <span class="s1">'('</span>
+<span class="o">|</span>      <span class="o">|</span>    <span class="nt">0x00400611</span>      <span class="nt">66c744241241</span><span class="o">.</span>  <span class="nt">mov</span> <span class="nt">word</span> <span class="cp">[</span><span class="nx">rsp</span> <span class="o">+</span> <span class="nx">local_12h</span><span class="cp">]</span><span class="o">,</span> <span class="nt">0x4741</span> <span class="o">;</span> <span class="cp">[</span><span class="mh">0x4741</span><span class="p">:</span><span class="mi">2</span><span class="cp">]</span><span class="o">=</span><span class="nt">0xffff</span>
+<span class="o">|</span>      <span class="o">|</span>    <span class="nt">0x00400618</span>      <span class="nt">c64424142d</span>     <span class="nt">mov</span> <span class="nt">byte</span> <span class="cp">[</span><span class="nx">rsp</span> <span class="o">+</span> <span class="nx">local_14h</span><span class="cp">]</span><span class="o">,</span> <span class="nt">0x2d</span> <span class="o">;</span> <span class="s1">'-'</span> <span class="o">;</span> <span class="cp">[</span><span class="mh">0x2d</span><span class="p">:</span><span class="mi">1</span><span class="cp">]</span><span class="o">=</span><span class="nt">0</span> <span class="o">;</span> <span class="s1">'-'</span>
+<span class="o">|</span>      <span class="o">|</span>    <span class="nt">0x0040061d</span>      <span class="nt">40f6c701</span>       <span class="nt">test</span> <span class="nt">dil</span><span class="o">,</span> <span class="nt">1</span>
+<span class="o">|</span>      <span class="o">|,=&lt;</span> <span class="nt">0x00400621</span>      <span class="nt">752b</span>           <span class="nt">jne</span> <span class="nt">0x40064e</span>
+<span class="o">|</span>      <span class="o">||</span>   <span class="o">;</span> <span class="nt">JMP</span> <span class="nt">XREF</span> <span class="nt">from</span> <span class="nt">0x00400651</span> <span class="o">(</span><span class="nt">sym</span><span class="nc">.__libc_csu_ctor</span><span class="o">)</span>
+<span class="o">|</span>      <span class="o">||</span>   <span class="nt">0x00400623</span>      <span class="nt">40f6c702</span>       <span class="nt">test</span> <span class="nt">dil</span><span class="o">,</span> <span class="nt">2</span>
+<span class="o">|</span>     <span class="o">,===&lt;</span> <span class="nt">0x00400627</span>      <span class="nt">752a</span>           <span class="nt">jne</span> <span class="nt">0x400653</span>
+<span class="o">|</span>     <span class="o">|||</span>   <span class="o">;</span> <span class="nt">JMP</span> <span class="nt">XREF</span> <span class="nt">from</span> <span class="nt">0x00400658</span> <span class="o">(</span><span class="nt">sym</span><span class="nc">.__libc_csu_ctor</span><span class="o">)</span>
+<span class="o">|</span>     <span class="o">|||</span>   <span class="nt">0x00400629</span>      <span class="nt">89c1</span>           <span class="nt">mov</span> <span class="nt">ecx</span><span class="o">,</span> <span class="nt">eax</span>
+<span class="o">|</span>     <span class="o">|||</span>   <span class="nt">0x0040062b</span>      <span class="nt">31d2</span>           <span class="nt">xor</span> <span class="nt">edx</span><span class="o">,</span> <span class="nt">edx</span>
+<span class="o">|</span>     <span class="o">|||</span>   <span class="nt">0x0040062d</span>      <span class="nt">c1e902</span>         <span class="nt">shr</span> <span class="nt">ecx</span><span class="o">,</span> <span class="nt">2</span>
+<span class="o">|</span>     <span class="o">|||</span>   <span class="nt">0x00400630</span>      <span class="nt">a802</span>           <span class="nt">test</span> <span class="nt">al</span><span class="o">,</span> <span class="nt">2</span>
+</pre></div>
+<p>Do you see how the string <code>FLAG-</code> is being concatenated? Let's <code>seek</code> to that address and let <code>radare</code> give us some 
+graphics:</p>
+<div class="highlight"><pre><span></span>[0x00400688]&gt; s 0x00000000004005b
+[0x004005b0]&gt; VV
+
+                                                         =---------------------------------=
+                                                         | [0x4005b0]                      |
+                                                         | 0x004005c4 sym.__libc_csu_init  |
+                                                         | 0x004005c9 sym.__libc_csu_init  |
+                                                         =---------------------------------=
+                                                               t f
+                                                             .-' '-----------------.
+                                                             |                     |
+                                                             |                     |
+                                                       =--------------------=      |
+                                                       |  0x4005ef          |      |
+                                                       =--------------------=      |
+                                                             t f                   |
+                                                       .-----' '-------------.     |
+                                                       |                     |     |
+                                                       |                     |     |
+                                                 =--------------------=      |     |
+                                                 |  0x40064e          |      |     |
+                                                 =--------------------=      |     |
+                                                     v                       |     |
+                                                     '-----.   .-------------'     |
+                                                           |   |                   |
+                                                           |   |                   |
+                                                       =--------------------=      |
+                                                       |  0x400623          |      |
+                                                       =--------------------=      |
+                                                             t f                   |
+                                                       .-----' '-------------.     |
+                                                       |                     |     |
+                                                       |                     |     |
+                                                 =--------------------=      |     |
+                                                 |  0x400653          |      |     |
+                                                 =--------------------=      |     |
+                                                     v                       |     |
+                                                     '-----.   .-------------'     |
+                                                           |   |                   |
+                                                           |   |                   |
+                                                       =--------------------=      |
+                                                       |  0x400629          |      |
+                                                       =--------------------=      |
+                                                               f t                 |
+                                                         .-----' '-----------.     |
+                                                         |                   |     |
+                                                         |                   |     |
+                                                 =--------------------=      |     |
+                                                 |  0x400636          |      |     |
+                                                 =--------------------=      |     |
+                                                     v                       |     |
+                                                     '-----.     .-----------'     |
+                                                           |     |                 |
+                                                           |     |                 |
+                                                       =--------------------=      |
+                                                       |  0x400641          |      |
+                                                       =--------------------=      |
+                                                               f t                 |
+                                                         .-----' '-----------.     |
+                                                         |                   |     |
+                                                         |                   |     |
+                                                 =--------------------=      |     |
+                                                 |  0x400645          |      |     |
+                                                 =--------------------=      |     |
+                                                     v                       |     |
+                                                     '------------.   .-.----'-----'
+                                                                  |   | |
+                                                                  |   | |
+                                                              =--------------------=
+                                                              |  0x4005da          |
+                                                              =--------------------=
+                                                                    t f
+                                      .-----------------------------' '-------------------.
+                                      |                                                   |
+                                      |                                                   |
+                                =------------------------------------------=      =--------------------=
+                                |  0x40065a                                |      |  0x4005ea          |
+                                | 0x0040065a call sym.imp.__stack_chk_fail |      =--------------------=
+                                | 0x00400675 call sym.imp.__printf_chk     |
+                                | 0x0040067c call sym.get_flag             |
+                                =------------------------------------------=
+</pre></div>
+<p>As you can see there is one execution path which will directly lead to <code>0x4005da</code> and then either 
+to <code>0x4005ea</code> or <code>sym.imp.__stack_chk_fail</code> if sth was wrong with the stack (this function 
+wil be called if the stack canaries were modified). Now let's have a look what happens inside
+the first block:</p>
+<div class="highlight"><pre><span></span>                =----------------------------------------------------------------------------=
+                | [0x4005b0]                                                                 |
+                |   ;-- section_end..plt:                                                    |
+                |   ;-- section..text:                                                       |
+                | (fcn) sym.__libc_csu_ctor 216                                              |
+                |   sym.__libc_csu_ctor ();                                                  |
+                | ; var int local_8h @ rsp+0x8                                               |
+                | ; var int local_10h @ rsp+0x10                                             |
+                | ; var int local_11h @ rsp+0x11                                             |
+                | ; var int local_12h @ rsp+0x12                                             |
+                | ; var int local_14h @ rsp+0x14                                             |
+                | ; var int local_18h @ rsp+0x18                                             |
+                | ; var int local_38h @ rsp+0x38                                             |
+                | 0x004005b0 4883ec48       sub rsp, 0x48                                    |
+                | 0x004005b4 64488b042528.  mov rax, qword fs:[0x28]                         |
+                | 0x004005bd 4889442438     mov qword [rsp + local_38h], rax                 |
+                | 0x004005c2 31c0           xor eax, eax                                     |
+                | 0x004005c4 b8d0074000     mov eax, sym.__libc_csu_init                     |
+                | 0x004005c9 48c7442408d0.  mov qword [rsp + local_8h], sym.__libc_csu_init  |
+                | 0x004005d2 678b4005       mov eax, dword [eax + 5]                         |
+                | 0x004005d6 3ccc           cmp al, 0xcc                                     |
+                | 0x004005d8 7415           je 0x4005ef ;[a]                                 |
+                =----------------------------------------------------------------------------=
+                      t f
+          .-----------' '-------------------------------------------------.
+          |                                                               |
+          |                                                               |
+    =---------------------------------------------------------------=     |
+    |  0x4005ef                                                     |     |
+    | 0x004005ef 488b3d8a0a20.  mov rdi, qword [obj.__libc_ptr]     |     |
+    | 0x004005f6 c644241046     mov byte [rsp + local_10h], 0x46    |     |
+    | 0x004005fb 488d742410     lea rsi, qword [rsp + local_10h]    |     |
+    | 0x00400600 c64424114c     mov byte [rsp + local_11h], 0x4c    |     |
+    | 0x00400605 66c744241833.  mov word [rsp + local_18h], 0x3933  |     |
+    | 0x0040060c b828000000     mov eax, 0x28                       |     |
+    | 0x00400611 66c744241241.  mov word [rsp + local_12h], 0x4741  |     |
+    | 0x00400618 c64424142d     mov byte [rsp + local_14h], 0x2d    |     |
+    | 0x0040061d 40f6c701       test dil, 1                         |     |
+    | 0x00400621 752b           jne 0x40064e ;[b]                   |     |
+    =---------------------------------------------------------------=     |
+</pre></div>
+<p>Apparently the programm will jump to <code>0x4005ef</code> only if <code>$al = 0xcc</code>:</p>
+<div class="highlight"><pre><span></span>|           0x004005d6      3ccc           cmp al, 0xcc
+|       ,=&lt; 0x004005d8      7415           je 0x4005ef
+</pre></div>
+<p>Let's debug the binary and see what happens:</p>
+<div class="highlight"><pre><span></span>gef&gt;  b *0x004005d6
+Breakpoint <span class="m">1</span> at 0x4005d6
+gef&gt;  r
+gef&gt;  <span class="nb">set</span> <span class="nv">$al</span><span class="o">=</span>0xcc
+gef&gt;  c
+Continuing.
+FLAG-Allocating <span class="m">1024</span> bytes 0x602420...
+Freeing buffer 0x602420...
+Heap is working perfectly! No Flag <span class="k">then</span>
+<span class="o">[</span>Inferior <span class="m">1</span> <span class="o">(</span>process 1745<span class="o">)</span> exited normally<span class="o">]</span>
+</pre></div>
+<p>Well <code>FLAG-Allocating</code> looks like a flag! ;) </p>
+                </div>
+<hr/>
+<div style="float:left;">
+	Prev: <a href="http://blog.dornea.nu/2016/11/29/ringzer0-ctf-binaries-time-to-learn-x86-asm-and-gdb" align='left'>
+	 ringzer0 CTF - Binaries - Time to learn x86 ASM and gdb
+	</a>
+</div>
+</p>
+
+                <!-- Add comments -->
+<div id="content-comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname="dorneanu";
+				var disqus_identifier = 'ringzer0-ctf-binaries-heap-allocator';
+			var disqus_url = 'http://blog.dornea.nu/2016/11/30/ringzer0-ctf-binaries-heap-allocator';
+
+		var disqus_config = function () {
+			this.language = "en";
+		};
+ 
+        
+        (function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div> 
+            </div>
+            <div class="niu2-right-container col-md-2">
+                <div id="niu2-sidebar-meta" class="niu2-sidebar">
+                    <div class="niu2-sidebar-label"><i class="icon-calendar"></i>Published:</div>
+                    <div class="niu2-sidebar-value">2016-11-30 00:00</div>
+                    <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
+                    <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
+                    <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ringzer0/">ringzer0</a><sup>7</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ctf/">ctf</a><sup>10</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>15</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/asm/">asm</a><sup>4</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/x86/">x86</a><sup>5</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/sploitfun/">sploitfun</a><sup>13</sup></div>
+                </div>
+
+                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                    <div class="niu2-sidebar-label">
+                        <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>Table of contents
+                    </div>
+                    <ul id="niu2-sidebar-toc-list">
+                        <li><a href="#content-heading">ringzer0 CTF - Binaries - Heap Allocator</a></li>
+                        <li><a href='#0b8ad7d11c118f318e1ca0a195107681'>Libc constructors / destructors</a></li><li><a href='#5158a74ac720be85643dd47b40dc4ffe'>Dynamic analysis</a></li><li><a href='#559a25fdb98a7d1fd1c3771ac568d5e9'>Constructors</a></li>
+                        <li><a href="#content-comments">Comments</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="niu2-toolbar">
+                <ul class="list-unstyled">
+                    <li><a id="niu2-toolbar-ctrlsidebar" href="#" title="Hide Sidebar"><i class="icon-3x icon-hide-sidebar"></i></a></li>
+                </ul>
+                <div id="niu2-toolbar-showsidebar" data-title="Show Sidebar"></div>
+                <div id="niu2-toolbar-github" data-repo=""></div>
+                <div id="niu2-toolbar-bitbucket" data-repo=""></div>
+            </div>
+            <div id="niu2-toc" data-style="fixed"></div>
+        </div>
+
+        <div class="niu2-footer">
+            <div id="body-footer" class="col-md-6 col-md-offset-2">
+                <hr/>
+                <p>
+                    Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
+                    <a href="https://github.com/mawenbao/niu-x2-sidebar">theme</a> built with <a href="https://github.com/twbs/bootstrap">Bootstrap3</a>
+                    by <a href="https://blog.mawenbao.com">Ma Wenbao</a>, icons by 
+                    <a href="https://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
+                </p>
+                <p>
+                    © 2008 - 2016
+                    <a class="niu2-footer-link" href="http://blog.dornea.nu">Victor Dorneanu</a>
+                </p>
+                <p class="niu2-icons">
+                    <a class="niu2-footer-icon" href="https://pgp.mit.edu/pks/lookup?op=get&search=0x18F1AD46FB05E1B7" title="my public key">
+                        <i class="icon-key icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="mailto: no-spam ÄATT dornea DOT nu" title="my email address">
+                        <i class="icon-envelope-o icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="http://github.com/dorneanu" title="my github page">
+                        <i class="icon-github-alt icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="/feeds/rss.xml" title="subscribe my blog">
+                        <i class="icon-rss icon-lg"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            var _gaq=_gaq||[];
+            _gaq.push(["_setAccount","UA-7161767-3"]);
+            _gaq.push(["_trackPageview"]);
+            (function(){
+                var b=document.createElement("script");
+                b.type="text/javascript";
+                b.async=true;
+                b.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";
+                var a=document.getElementsByTagName("script")[0];
+                a.parentNode.insertBefore(b,a)
+            })();
+        </script>
+        <div id="niu2-pygments" data-theme="github"></div>
+        <div id="niu2-lazy-load" data-loading-txt="Loading image" data-loading-icon="icon-spin icon-spinner"></div>
+        <div id="niu2-toolbar-load" data-loading-icon="icon-spin icon-4x icon-spinner"></div>
+        <script type="text/javascript" src="/js/custom.js"></script>
+        <script type="text/javascript">
+            onContentLoaded();
+        </script>
+    </body>
+</html>

@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -123,7 +123,7 @@
                     <p>This time I'd like to give you a short usage description of <a href="http://github.com/dorneanu/icmpKNOCK">icmpKNOCK</a> that was recently released. The main reason I wrote it was lack of security measurements on my boxes. I didn't want any sophisticated IDS tools nor complicated monitoring services. I wanted to implement something which will run on (almost) any platform without any external toolsb. Since the ping utility is available on most modern systems using ICMP packets to communicate with the server was the most reasonable approach. There are plenty of other <strong>port knocking</strong> tools but these are mostly binaries. These have to be first compiled on the running system which is bad. So the second thought was to use a programming language powerful enough to fulfill my needs and be portable. It had to be Python. </p>
 <h2 id="cb59b87e00d11222bfd9159d0d23836f">Getting started</h2>
 <p>First you'll have to get the latest version of icmpKNOCK. Please check the SVN download <a href="http://github.com/dorneanu/icmpKNOCK">link</a> for the newest packages. Then make sure to upload the package to your server and copy it to a secret place where nobody - besides you - has read permissions on the actions file. Why is that important? Because the actions file contains your <code>secret</code> hex sequences used to trigger certain actions. So you don't want anybody to know these ones. In that case potential attackers might manipulate the behaviour of your system without noticing it.</p>
-<div class="highlight"><pre>~/icmpknock/v0.2.r9# ls -l
+<div class="highlight"><pre><span></span>~/icmpknock/v0.2.r9# ls -l
 total 32
 -rw-r--r-- <span class="m">1</span> root root   <span class="m">35</span> Sep  <span class="m">9</span> 13:45 AUTHORS
 -rw-r--r-- <span class="m">1</span> root root  <span class="m">340</span> Sep  <span class="m">9</span> 14:19 CHANGELOG
@@ -135,7 +135,7 @@ drwxr-xr-x <span class="m">2</span> root root <span class="m">4096</span> Sep <s
 </pre></div>
 <h2 id="ecb9027bcc8c0d5d9f6cb2e2f54bddbc">Generate hex sequences</h2>
 <p>Now you'll have to generate your keys. You could use MD4, MD5, SHA-1 etc hashes. This is what I did:</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="k">for</span> i in <span class="sb">`</span>seq <span class="m">1</span> 10<span class="sb">`</span><span class="p">;</span> 
+<div class="highlight"><pre><span></span>$ <span class="k">for</span> i in <span class="sb">`</span>seq <span class="m">1</span> 10<span class="sb">`</span><span class="p">;</span> 
 <span class="k">do</span> pwgen <span class="m">20</span> <span class="m">1</span> <span class="p">|</span> md5<span class="p">;</span> 
 <span class="k">done</span>        
 bf6e1e0c0ce8fedb43146e50d1b281f9                                                
@@ -153,12 +153,12 @@ b124d903a6c510fbba2b1ccb23a11f2d
 <h2 id="eec2cbe3d51558ec93ea3014ecfbf4c7">Define actions</h2>
 <p>This is the most interesting part. In this HowTo I'll give you an example how to block/open SSH port 22 using icmpKNOCK. Therefor I'll be using iptables which should be available within every Linux distribution. So let's start...</p>
 <p>For this tutorial the SSH port should be always closed. Let's define the action describing that:</p>
-<div class="highlight"><pre><span class="o">[</span>stop_ssh<span class="o">]</span>
+<div class="highlight"><pre><span></span><span class="o">[</span>stop_ssh<span class="o">]</span>
 <span class="nv">keys</span> <span class="o">=</span> &lt;your secret keys here&gt;
 <span class="nv">payload</span> <span class="o">=</span> iptables -A INPUT -p tcp --dport <span class="m">22</span> -j REJECT --reject-with tcp-reset
 </pre></div>
 <p>Everytime the server receives the secret hex sequences it will close port 22 to block any external connections. What about opening it?</p>
-<div class="highlight"><pre><span class="o">[</span>start_ssh<span class="o">]</span>
+<div class="highlight"><pre><span></span><span class="o">[</span>start_ssh<span class="o">]</span>
 <span class="nv">keys</span> <span class="o">=</span> &lt;your secret keys here&gt;
 <span class="nv">payload</span> <span class="o">=</span> iptables -D INPUT -p tcp --dport <span class="m">22</span> -j REJECT --reject-with tcp-reset
 </pre></div>
@@ -166,7 +166,7 @@ b124d903a6c510fbba2b1ccb23a11f2d
 <p>Of course: There are lot of other possible configurations. Perhaps it is a better idea to define only 1 action which allows you to connect to port 22 within 20 seconds, close the port again after 20 seconds and keep the established connections. Feel free to use your brain.</p>
 <h2 id="4f53974144bca45035367d4d42b8a66c">Prepare your scripts</h2>
 <p>Your server - along with the Python application - will listen for incoming ICMP packets. Your client will be the ping utility as described above. In order to send your sequences to the server you'll need a small bash script which will do the rest for you:</p>
-<div class="highlight"><pre><span class="c">#!/bin/sh</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
 
 <span class="nv">HOST</span><span class="o">=</span>&lt;your host here&gt;
 <span class="nv">keys</span><span class="o">=</span>&lt;your keys here&gt;<span class="err">'</span>

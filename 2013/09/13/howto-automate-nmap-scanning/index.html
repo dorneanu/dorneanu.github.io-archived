@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -130,7 +130,7 @@
 </ul>
 <h2 id="8c99bb2c4b6ceb42b6c4f31347466b40">Running the tool</h2>
 <p>Now the obligatory -help message:</p>
-<div class="highlight"><pre>-<span class="o">==[</span> wnmap by nrz@nullsecurity.net <span class="o">]==</span>--
+<div class="highlight"><pre><span></span>-<span class="o">==[</span> wnmap by nrz@nullsecurity.net <span class="o">]==</span>--
 Usage: wnmap <span class="o">[</span>options<span class="o">]</span> &lt;target specification&gt; <span class="p">|</span> &lt;misc&gt;
 TARGET SPECIFICATION:
     Can pass hostname or IP address.
@@ -145,22 +145,22 @@ OPTIONS:
     SCANNING - STANDARD MODE:
     -C: chain all modes
     LOAD NEW SCAN:
-    -a <span class="o">{</span>wnmap_arg<span class="p">;</span>mode_name<span class="p">;</span>nmap_args<span class="p">;</span>need_sudo?<span class="o">[</span><span class="nb">true</span>,false<span class="o">]}</span>: add new scan to user mode
+    -a <span class="o">{</span>wnmap_arg<span class="p">;</span>mode_name<span class="p">;</span>nmap_args<span class="p">;</span>need_sudo?<span class="o">[</span>true,false<span class="o">]}</span>: add new scan to user mode
 MISC:
     -r: rescan host by default
     -e: edit wmodes.conf
     -v: print version of wnmap and <span class="nb">exit</span>
-    -h: print this <span class="nb">help </span>and <span class="nb">exit</span>
+    -h: print this <span class="nb">help</span> and <span class="nb">exit</span>
 EXAMPLES:
-    wnmap -F 8.8.8.8 -r <span class="c"># scan again</span>
-    wnmap -C scanme.nmap.org <span class="c"># give it all you got</span>
+    wnmap -F 8.8.8.8 -r <span class="c1"># scan again</span>
+    wnmap -C scanme.nmap.org <span class="c1"># give it all you got</span>
     wnmap -a <span class="s2">"-I;iddle-scan;-P0 -p- -sI sweet.host.com;true"</span>
-    wnmap -e <span class="c"># edit modes</span>
+    wnmap -e <span class="c1"># edit modes</span>
 </pre></div>
 <p>As you can see the tool comes along with several <strong>predefined </strong>running modes. You can easily edit them at <strong>src/core/wmodes.conf:</strong></p>
-<div class="highlight"><pre>% cat src/core/wmodes.conf
-<span class="c"># SAMPLE FILE !!! DEFINE YOUR OWN MAGIC !!!</span>
-<span class="c"># wnmap_arg; mode_name; nmap_args; sudo?</span>
+<div class="highlight"><pre><span></span>% cat src/core/wmodes.conf
+<span class="c1"># SAMPLE FILE !!! DEFINE YOUR OWN MAGIC !!!</span>
+<span class="c1"># wnmap_arg; mode_name; nmap_args; sudo?</span>
 -F<span class="p">;</span>fast<span class="p">;</span>-F<span class="p">;</span><span class="nb">false</span>
 -K<span class="p">;</span>ack<span class="p">;</span>-PA<span class="p">;</span><span class="nb">false</span>
 -V<span class="p">;</span>version<span class="p">;</span>-sV -version-trace<span class="p">;</span><span class="nb">false</span>
@@ -171,12 +171,12 @@ EXAMPLES:
 <h2 id="787e9d17fdfb44cce7df782be5800b0f">Add new mode</h2>
 <p>Let's say I want to add a new mode, which will scan all hosts at port 80 and 443 for web services. In particular I want to the the supported HTTP methods at those ports.<br/>
 You can easily use the command line to insert the new mode:</p>
-<div class="highlight"><pre>% ./wnmap -a <span class="s2">"-H;http-methods;-P0 --script=http-methods.nse -p 80,443;false"</span>
+<div class="highlight"><pre><span></span>% ./wnmap -a <span class="s2">"-H;http-methods;-P0 --script=http-methods.nse -p 80,443;false"</span>
 --<span class="o">==[</span> wnmap by nrz@nullsecurity.net <span class="o">]==</span>--
 <span class="o">[</span>+<span class="o">]</span> New mode added!
 </pre></div>
 <p>or edit <strong>src/core/wmodes.conf </strong>directly.Now let's scan a host using the newly inserted mode:</p>
-<div class="highlight"><pre>% ./wnmap -H scanme.nmap.org
+<div class="highlight"><pre><span></span>% ./wnmap -H scanme.nmap.org
 --<span class="o">==[</span> wnmap by nrz@nullsecurity.net <span class="o">]==</span>--
 <span class="o">[</span>+<span class="o">]</span> Creating scanme.nmap.org/http-methods
 <span class="o">[</span>+<span class="o">]</span> Scanning scanme.nmap.org
@@ -191,7 +191,7 @@ PORT    STATE  SERVICE REASON
 Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 0.69 seconds
 </pre></div>
 <p>Now you should see a directory called <strong>scanme.nmap.org</strong> inside your working directory. The output of the scan was saved as a regular nmap file and as XML.</p>
-<div class="highlight"><pre><span class="c"># tree scanme.nmap.org</span>
+<div class="highlight"><pre><span></span><span class="c1"># tree scanme.nmap.org</span>
 scanme.nmap.org
 <span class="sb">`</span>-- http-methods
     <span class="p">|</span>-- scanme.nmap.org.nmap
@@ -199,10 +199,10 @@ scanme.nmap.org
 </pre></div>
 <h2 id="f310aa1ba095c08a3b5cec20d377dedc">Combine modes</h2>
 <p>You could now combine the modes:</p>
-<div class="highlight"><pre>% ./wnmap -H -F scanme.nmap.org
+<div class="highlight"><pre><span></span>% ./wnmap -H -F scanme.nmap.org
 </pre></div>
 <p>And you'll get:</p>
-<div class="highlight"><pre><span class="c"># tree scanme.nmap.org </span>
+<div class="highlight"><pre><span></span><span class="c1"># tree scanme.nmap.org </span>
 scanme.nmap.org
 <span class="p">|</span>-- fast
 <span class="p">|</span>   <span class="p">|</span>-- scanme.nmap.org.nmap

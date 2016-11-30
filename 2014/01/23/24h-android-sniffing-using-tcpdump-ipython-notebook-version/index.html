@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -153,7 +153,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I've used my Samsung Note 1 (GT N7000) as sniffing device. At the moment I use a customized ROM (slimbean) with root access. In order to be to use sniffing tools on my phone I had to work in a chrooted environment like "Debian on Android". This way I was given access to phones data interfaces and I was ready to go. </p>
+<p>I've used my Samsung Note 1 (GT N7000) as sniffing device. At the moment I use a customized ROM (slimbean) with root access. In order to be to use sniffing tools on my phone I had to work in a chrooted environment like "Debian on Android". This way I was given access to phones data interfaces and I was ready to go.</p>
 <pre><code>u0_a99@android:/ $ deb
 e2fsck 1.41.11 (14-Mar-2010)
 /storage/sdcard1/debian-kit/debian.img: recovering journal
@@ -166,7 +166,11 @@ rmnet0    Link encap:Point-to-Point Protocol
       TX packets:30841 errors:0 dropped:0 overruns:0 carrier:0
       collisions:0 txqueuelen:1000 
       RX bytes:34233580 (32.6 MiB)  TX bytes:5906191 (5.6 MiB)
-</code></pre><p>Initially I wanted to use tshark for the sniffing part but it didn't work quite well. So I came back to old school tcpdump.
+
+
+
+</code></pre>
+<p>Initially I wanted to use tshark for the sniffing part but it didn't work quite well. So I came back to old school tcpdump.
 Since my data interface was going done all the time I had to make sure that tcpdump was restarted as soon as the data interface was online again. I used the following script:</p>
 <pre><code>root@debian-on-android:~# cat monitor.sh 
 #!/bin/bash
@@ -177,15 +181,16 @@ while true;
 do 
     tcpdump -i rmnet0 -np -w output-`date +"%Y-%m-%d-%s"`.pcap; sleep 10 
 done
-</code></pre><p>I've fired up my script and after 24 hours I had these outputs:</p>
+
+</code></pre>
+<p>I've fired up my script and after 24 hours I had these outputs:</p>
 <pre><code>root@debian-on-android:~# ls -l output-2014-01-1*
 -rw-r--r--. 1 root root    24907 Jan 18 12:53 output-2014-01-18-1390049466.pcap
 -rw-r--r--. 1 root root     2881 Jan 18 12:55 output-2014-01-18-1390049736.pcap
 -rw-r--r--. 1 root root 14963016 Jan 18 14:02 output-2014-01-18-1390049777.pcap
 -rw-r--r--. 1 root root 54695690 Jan 19 14:03 output-2014-01-18-1390053867.pcap
 -rw-r--r--. 1 root root 12492822 Jan 19 16:27 output-2014-01-19-1390140216.pcap
-root@debian-on-android:~# 
-</code></pre>
+root@debian-on-android:~# </code></pre>
 </div>
 </div>
 </div>
@@ -197,10 +202,7 @@ root@debian-on-android:~#
 <h1 id="296eae81c829ecea9b7bdb80031deefd">Merge pcap files<a class="anchor-link" href="#Merge-pcap-files">¶</a></h1>
 </div>
 </div>
-</div>
-
-                $ mergecap -F libpcap -a output-* -w merged.pcap
-                
+</div>$ mergecap -F libpcap -a output-* -w merged.pcap
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -212,28 +214,28 @@ root@debian-on-android:~#
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [2]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">PCAP_FILE</span> <span class="o">=</span> <span class="s">"/home/victor/work/Projects/24h-Android-Monitoring/pcap/merged.pcap"</span>
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">PCAP_FILE</span> <span class="o">=</span> <span class="s2">"/home/victor/work/Projects/24h-Android-Monitoring/pcap/merged.pcap"</span>
 
-<span class="c"># Tshark generated files</span>
-<span class="n">DNS_QUERIES</span>  <span class="o">=</span> <span class="s">"/home/victor/work/Projects/24h-Android-Monitoring/pcap/dns_queries.csv"</span>
-<span class="n">CONNECTIONS</span>  <span class="o">=</span> <span class="s">"/home/victor/work/Projects/24h-Android-Monitoring/pcap/connections.csv"</span>
-<span class="n">HTTP_TRAFFIC</span> <span class="o">=</span> <span class="s">"/home/victor/work/Projects/24h-Android-Monitoring/pcap/http_traffic.csv"</span>
+<span class="c1"># Tshark generated files</span>
+<span class="n">DNS_QUERIES</span>  <span class="o">=</span> <span class="s2">"/home/victor/work/Projects/24h-Android-Monitoring/pcap/dns_queries.csv"</span>
+<span class="n">CONNECTIONS</span>  <span class="o">=</span> <span class="s2">"/home/victor/work/Projects/24h-Android-Monitoring/pcap/connections.csv"</span>
+<span class="n">HTTP_TRAFFIC</span> <span class="o">=</span> <span class="s2">"/home/victor/work/Projects/24h-Android-Monitoring/pcap/http_traffic.csv"</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In []:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -248,123 +250,122 @@ In []:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [25]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">dns_queries</span> <span class="o">=</span> <span class="err">!</span><span class="n">tshark</span> <span class="o">-</span><span class="n">r</span> <span class="err">$</span><span class="n">PCAP_FILE</span>  <span class="o">-</span><span class="n">R</span> <span class="s">"dns.flags.response == 1"</span>  <span class="o">-</span><span class="n">E</span> <span class="n">occurrence</span><span class="o">=</span><span class="n">f</span> <span class="o">-</span><span class="n">E</span> <span class="n">header</span><span class="o">=</span><span class="n">y</span> \
+<div class="prompt input_prompt">In [25]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dns_queries</span> <span class="o">=</span> <span class="o">!</span>tshark -r <span class="nv">$PCAP_FILE</span>  -R <span class="s2">"dns.flags.response == 1"</span>  -E <span class="nv">occurrence</span><span class="o">=</span>f -E <span class="nv">header</span><span class="o">=</span>y <span class="err">\</span>
               <span class="o">-</span><span class="n">T</span> <span class="n">fields</span>  <span class="o">-</span><span class="n">e</span> <span class="n">frame</span><span class="o">.</span><span class="n">number</span> <span class="o">-</span><span class="n">e</span> <span class="n">frame</span><span class="o">.</span><span class="n">time</span> <span class="o">-</span><span class="n">e</span> <span class="n">dns</span><span class="o">.</span><span class="n">qry</span><span class="o">.</span><span class="n">name</span> <span class="o">-</span><span class="n">e</span> <span class="n">dns</span><span class="o">.</span><span class="n">resp</span><span class="o">.</span><span class="n">addr</span> <span class="o">&gt;</span> <span class="err">$</span><span class="n">DNS_QUERIES</span>
     
-<span class="n">connections</span> <span class="o">=</span> <span class="err">!</span><span class="n">tshark</span> <span class="o">-</span><span class="n">r</span> <span class="err">$</span><span class="n">PCAP_FILE</span> <span class="o">-</span><span class="n">E</span> <span class="n">header</span><span class="o">=</span><span class="n">y</span> <span class="o">-</span><span class="n">E</span> <span class="n">separator</span><span class="o">=</span>\<span class="p">;</span> <span class="o">-</span><span class="n">T</span> <span class="n">fields</span> <span class="o">-</span><span class="n">e</span> <span class="n">frame</span><span class="o">.</span><span class="n">number</span> \
+<span class="n">connections</span> <span class="o">=</span> <span class="o">!</span>tshark -r <span class="nv">$PCAP_FILE</span> -E <span class="nv">header</span><span class="o">=</span>y -E <span class="nv">separator</span><span class="o">=</span><span class="se">\;</span> -T fields -e frame.number <span class="err">\</span>
               <span class="o">-</span><span class="n">e</span> <span class="n">frame</span><span class="o">.</span><span class="n">time</span> <span class="o">-</span><span class="n">e</span> <span class="n">ip</span><span class="o">.</span><span class="n">src</span> <span class="o">-</span><span class="n">e</span> <span class="n">ip</span><span class="o">.</span><span class="n">dst</span> <span class="o">-</span><span class="n">e</span> <span class="n">tcp</span><span class="o">.</span><span class="n">dstport</span> <span class="o">-</span><span class="n">e</span> <span class="n">frame</span><span class="o">.</span><span class="n">protocols</span> <span class="o">&gt;</span> <span class="err">$</span><span class="n">CONNECTIONS</span>
 
-<span class="n">http_traffic</span> <span class="o">=</span> <span class="err">!</span><span class="n">tshark</span> <span class="o">-</span><span class="n">r</span> <span class="err">$</span><span class="n">PCAP_FILE</span> <span class="o">-</span><span class="n">Y</span> <span class="s">"http.request"</span> <span class="o">-</span><span class="n">E</span> <span class="n">header</span><span class="o">=</span><span class="n">y</span> <span class="o">-</span><span class="n">T</span> <span class="n">fields</span> \
+<span class="n">http_traffic</span> <span class="o">=</span> <span class="o">!</span>tshark -r <span class="nv">$PCAP_FILE</span> -Y <span class="s2">"http.request"</span> -E <span class="nv">header</span><span class="o">=</span>y -T fields <span class="err">\</span>
               <span class="o">-</span><span class="n">e</span> <span class="n">frame</span><span class="o">.</span><span class="n">number</span> <span class="o">-</span><span class="n">e</span> <span class="n">frame</span><span class="o">.</span><span class="n">time</span> <span class="o">-</span><span class="n">e</span> <span class="n">ip</span><span class="o">.</span><span class="n">dst</span> <span class="o">-</span><span class="n">e</span> <span class="n">http</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">-</span><span class="n">e</span> <span class="n">http</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">uri</span> <span class="o">-</span><span class="n">e</span> <span class="n">http</span><span class="o">.</span><span class="n">user_agent</span> \
               <span class="o">-</span><span class="n">e</span> <span class="n">http</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">code</span>  <span class="o">-</span><span class="n">e</span> <span class="n">http</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">phrase</span> <span class="o">-</span><span class="n">e</span> <span class="n">http</span><span class="o">.</span><span class="n">content_length</span> <span class="o">-</span><span class="n">e</span> <span class="n">data</span> <span class="o">-</span><span class="n">e</span> <span class="n">text</span> <span class="o">&gt;</span> <span class="err">$</span><span class="n">HTTP_TRAFFIC</span>
 </pre></div>
 </div>
 </div>
 </div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In []:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
 </div>
 </div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [26]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">sqlite3</span> <span class="kn">as</span> <span class="nn">sql</span>
-<span class="n">con</span> <span class="o">=</span> <span class="n">sql</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">":memory:"</span><span class="p">)</span>
+<div class="prompt input_prompt">In [26]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span> <span class="k">as</span> <span class="nn">sql</span>
+<span class="n">con</span> <span class="o">=</span> <span class="n">sql</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">":memory:"</span><span class="p">)</span>
 <span class="n">cur</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In []:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
 </div>
 </div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [27]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">binascii</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">pandas.io.sql</span> <span class="kn">as</span> <span class="nn">pdsql</span> 
+<div class="prompt input_prompt">In [27]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">binascii</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas.io.sql</span> <span class="k">as</span> <span class="nn">pdsql</span> 
 
-<span class="c"># Pandas settings</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.height'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.max_rows'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.max_columns'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.width'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.max_colwidth'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="c1"># Pandas settings</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.height'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.max_rows'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.max_columns'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.width'</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.max_colwidth'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 
-<span class="c"># Useful functions</span>
+<span class="c1"># Useful functions</span>
 <span class="k">def</span> <span class="nf">hex2str</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="s">'nan'</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="s1">'nan'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">)</span>
     
-<span class="c"># Import DNS queries</span>
+<span class="c1"># Import DNS queries</span>
 <span class="n">dns_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">DNS_QUERIES</span><span class="p">)</span>
-<span class="n">dns_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'frame_number'</span><span class="p">,</span> <span class="s">'frame_time'</span><span class="p">,</span> <span class="s">'dns_query'</span><span class="p">,</span> <span class="s">'dns_response'</span><span class="p">]</span>
+<span class="n">dns_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'frame_number'</span><span class="p">,</span> <span class="s1">'frame_time'</span><span class="p">,</span> <span class="s1">'dns_query'</span><span class="p">,</span> <span class="s1">'dns_response'</span><span class="p">]</span>
 
-<span class="c"># Import connections</span>
-<span class="n">con_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">CONNECTIONS</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">";"</span><span class="p">)</span>
-<span class="n">con_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'frame_number'</span><span class="p">,</span> <span class="s">'frame_time'</span><span class="p">,</span> <span class="s">'src'</span><span class="p">,</span> <span class="s">'dst'</span><span class="p">,</span> <span class="s">'dstport'</span><span class="p">,</span> <span class="s">'frame_protocols'</span><span class="p">]</span>
+<span class="c1"># Import connections</span>
+<span class="n">con_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">CONNECTIONS</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">";"</span><span class="p">)</span>
+<span class="n">con_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'frame_number'</span><span class="p">,</span> <span class="s1">'frame_time'</span><span class="p">,</span> <span class="s1">'src'</span><span class="p">,</span> <span class="s1">'dst'</span><span class="p">,</span> <span class="s1">'dstport'</span><span class="p">,</span> <span class="s1">'frame_protocols'</span><span class="p">]</span>
 
-<span class="c"># Import http traffic</span>
+<span class="c1"># Import http traffic</span>
 <span class="n">http_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">HTTP_TRAFFIC</span><span class="p">)</span>
-<span class="n">http_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'frame_number'</span><span class="p">,</span> <span class="s">'frame_time'</span><span class="p">,</span> <span class="s">'ip_dst'</span><span class="p">,</span><span class="s">'request_method'</span><span class="p">,</span> <span class="s">'request_uri'</span><span class="p">,</span> <span class="s">'user_agent'</span><span class="p">,</span><span class="s">'response_code'</span><span class="p">,</span> <span class="s">'response_phrase'</span><span class="p">,</span><span class="s">'content_length'</span><span class="p">,</span> <span class="s">'data'</span><span class="p">,</span> <span class="s">'text'</span><span class="p">]</span>
+<span class="n">http_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'frame_number'</span><span class="p">,</span> <span class="s1">'frame_time'</span><span class="p">,</span> <span class="s1">'ip_dst'</span><span class="p">,</span><span class="s1">'request_method'</span><span class="p">,</span> <span class="s1">'request_uri'</span><span class="p">,</span> <span class="s1">'user_agent'</span><span class="p">,</span><span class="s1">'response_code'</span><span class="p">,</span> <span class="s1">'response_phrase'</span><span class="p">,</span><span class="s1">'content_length'</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'text'</span><span class="p">]</span>
 
-<span class="c"># Convert data (hex) to ascii</span>
+<span class="c1"># Convert data (hex) to ascii</span>
 <span class="n">convert_data</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">hex2str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">http_df</span><span class="p">[</span><span class="s">'data'</span><span class="p">]</span> <span class="o">=</span> <span class="n">http_df</span><span class="p">[</span><span class="s">'data'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">convert_data</span><span class="p">)</span>
+<span class="n">http_df</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]</span> <span class="o">=</span> <span class="n">http_df</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">convert_data</span><span class="p">)</span>
 
 
-<span class="c"># Write to SQLite</span>
-<span class="n">pdsql</span><span class="o">.</span><span class="n">write_frame</span><span class="p">(</span><span class="n">dns_df</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">"dns"</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">con</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s">"delete"</span><span class="p">)</span>
-<span class="n">pdsql</span><span class="o">.</span><span class="n">write_frame</span><span class="p">(</span><span class="n">con_df</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">"connection"</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">con</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s">"delete"</span><span class="p">)</span>
-<span class="n">pdsql</span><span class="o">.</span><span class="n">write_frame</span><span class="p">(</span><span class="n">http_df</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">"http"</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">con</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s">"delete"</span><span class="p">)</span>
+<span class="c1"># Write to SQLite</span>
+<span class="n">pdsql</span><span class="o">.</span><span class="n">write_frame</span><span class="p">(</span><span class="n">dns_df</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"dns"</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">con</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s2">"delete"</span><span class="p">)</span>
+<span class="n">pdsql</span><span class="o">.</span><span class="n">write_frame</span><span class="p">(</span><span class="n">con_df</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"connection"</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">con</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s2">"delete"</span><span class="p">)</span>
+<span class="n">pdsql</span><span class="o">.</span><span class="n">write_frame</span><span class="p">(</span><span class="n">http_df</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"http"</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">con</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s2">"delete"</span><span class="p">)</span>
 
 <span class="n">dns_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 
-<span class="c">#p2 = pdsql.read_frame("""SELECT COUNT(dns_response), dns_query FROM dns""", cnx)</span>
-<span class="c">#p2</span>
+<span class="c1">#p2 = pdsql.read_frame("""SELECT COUNT(dns_response), dns_query FROM dns""", cnx)</span>
+<span class="c1">#p2</span>
 
-<span class="c"># Count unique values</span>
-<span class="c">#unique_dns = dns_df.groupby('DNS Query')['DNS Response'].nunique().reset_index()</span>
-<span class="c">#unique_dns.columns = ['DNS', '# DNS Queries']</span>
-<span class="c">#unique_dns.sort(['# DNS Queries'], ascending=False).head(10)</span>
+<span class="c1"># Count unique values</span>
+<span class="c1">#unique_dns = dns_df.groupby('DNS Query')['DNS Response'].nunique().reset_index()</span>
+<span class="c1">#unique_dns.columns = ['DNS', '# DNS Queries']</span>
+<span class="c1">#unique_dns.sort(['# DNS Queries'], ascending=False).head(10)</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[27]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[27]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -422,23 +423,23 @@ In [27]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In []:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
+</div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In []:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -453,25 +454,24 @@ In []:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [191]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">p1</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">"""</span>
-<span class="s">    SELECT COUNT(dns_response) AS '# DNS Responses', dns_query AS 'DNS to lookup' </span>
-<span class="s">    FROM dns GROUP BY dns_query </span>
-<span class="s">    ORDER by 1 DESC</span>
-<span class="s">"""</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
-<span class="c">#print(p1.head(100).to_string())</span>
+<div class="prompt input_prompt">In [191]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p1</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s2">"""</span>
+<span class="s2">    SELECT COUNT(dns_response) AS '# DNS Responses', dns_query AS 'DNS to lookup' </span>
+<span class="s2">    FROM dns GROUP BY dns_query </span>
+<span class="s2">    ORDER by 1 DESC</span>
+<span class="s2">"""</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
+<span class="c1">#print(p1.head(100).to_string())</span>
 <span class="n">p1</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[191]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[191]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -992,33 +992,32 @@ In [191]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [40]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">p_testing</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">""" </span>
-<span class="s">    SELECT COUNT(c.dst),c.dst, c.dstport, c.frame_protocols FROM connection AS c </span>
-<span class="s">    JOIN dns AS d ON c.dst=d.dns_response</span>
-<span class="s">    WHERE c.dst == "173.194.70.95" AND c.dst NOT LIKE "10.%"</span>
-<span class="s">    ORDER by 1 DESC</span>
-<span class="s">"""</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
-<span class="c">#p_testing.head(100)</span>
+<div class="prompt input_prompt">In [40]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p_testing</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s2">""" </span>
+<span class="s2">    SELECT COUNT(c.dst),c.dst, c.dstport, c.frame_protocols FROM connection AS c </span>
+<span class="s2">    JOIN dns AS d ON c.dst=d.dns_response</span>
+<span class="s2">    WHERE c.dst == "173.194.70.95" AND c.dst NOT LIKE "10.%"</span>
+<span class="s2">    ORDER by 1 DESC</span>
+<span class="s2">"""</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
+<span class="c1">#p_testing.head(100)</span>
 
-<span class="n">p_testing</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">"""</span>
-<span class="s">    SELECT COUNT(*), (SELECT dns_query FROM dns WHERE dns_response=c.dst LIMIT 1) as DNS, c.dstport, c.frame_protocols FROM connection AS c</span>
-<span class="s">    WHERE c.dst NOT LIKE "10.%"</span>
-<span class="s">    GROUP by 2</span>
-<span class="s">    ORDER by 1 DESC</span>
-<span class="s">"""</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
+<span class="n">p_testing</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s2">"""</span>
+<span class="s2">    SELECT COUNT(*), (SELECT dns_query FROM dns WHERE dns_response=c.dst LIMIT 1) as DNS, c.dstport, c.frame_protocols FROM connection AS c</span>
+<span class="s2">    WHERE c.dst NOT LIKE "10.%"</span>
+<span class="s2">    GROUP by 2</span>
+<span class="s2">    ORDER by 1 DESC</span>
+<span class="s2">"""</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
 <span class="n">p_testing</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[40]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[40]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -1741,12 +1740,12 @@ In [40]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In []:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -1761,26 +1760,25 @@ In []:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [193]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">p2</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">""" </span>
-<span class="s">    SELECT COUNT(c.dst), d.dns_query, c.dstport, c.frame_protocols FROM connection AS c </span>
-<span class="s">    JOIN dns AS d ON c.dst=d.dns_response</span>
-<span class="s">    WHERE c.frame_protocols LIKE "sll:ip:tcp:%"</span>
-<span class="s">    GROUP by c.dst</span>
-<span class="s">    ORDER by 1 DESC</span>
-<span class="s">"""</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
+<div class="prompt input_prompt">In [193]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p2</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s2">""" </span>
+<span class="s2">    SELECT COUNT(c.dst), d.dns_query, c.dstport, c.frame_protocols FROM connection AS c </span>
+<span class="s2">    JOIN dns AS d ON c.dst=d.dns_response</span>
+<span class="s2">    WHERE c.frame_protocols LIKE "sll:ip:tcp:%"</span>
+<span class="s2">    GROUP by c.dst</span>
+<span class="s2">    ORDER by 1 DESC</span>
+<span class="s2">"""</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
 <span class="n">p2</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[193]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[193]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -2503,38 +2501,37 @@ In [193]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In []:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
+</div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [171]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">p_testing</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">""" </span>
-<span class="s">    SELECT  frame_number, frame_protocols</span>
-<span class="s">    FROM connection</span>
-<span class="s">    WHERE frame_protocols LIKE 'sll:ip:tcp</span><span class="si">%x</span><span class="s">ml%'</span>
-<span class="s">    GROUP by frame_protocols</span>
-<span class="s">    ORDER by 1 DESC</span>
-<span class="s">"""</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
-<span class="c">#print(p1.head(100).to_string())</span>
+<div class="prompt input_prompt">In [171]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p_testing</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s2">""" </span>
+<span class="s2">    SELECT  frame_number, frame_protocols</span>
+<span class="s2">    FROM connection</span>
+<span class="s2">    WHERE frame_protocols LIKE 'sll:ip:tcp</span><span class="si">%x</span><span class="s2">ml%'</span>
+<span class="s2">    GROUP by frame_protocols</span>
+<span class="s2">    ORDER by 1 DESC</span>
+<span class="s2">"""</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
+<span class="c1">#print(p1.head(100).to_string())</span>
 <span class="n">p_testing</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[171]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[171]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -2575,12 +2572,12 @@ In [171]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In []:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -2595,25 +2592,24 @@ In []:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [189]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">p_proto</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">""" </span>
-<span class="s">    SELECT COUNT(frame_protocols), frame_protocols</span>
-<span class="s">    FROM connection</span>
-<span class="s">    GROUP by frame_protocols</span>
-<span class="s">    ORDER BY 1 DESC</span>
-<span class="s">"""</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
+<div class="prompt input_prompt">In [189]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p_proto</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s2">""" </span>
+<span class="s2">    SELECT COUNT(frame_protocols), frame_protocols</span>
+<span class="s2">    FROM connection</span>
+<span class="s2">    GROUP by frame_protocols</span>
+<span class="s2">    ORDER BY 1 DESC</span>
+<span class="s2">"""</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
 <span class="n">p_proto</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[189]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[189]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -2969,12 +2965,12 @@ In [189]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In []:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -2989,27 +2985,26 @@ In []:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [186]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">p_ports</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">""" </span>
-<span class="s">    SELECT COUNT(c.dstport), c.dstport</span>
-<span class="s">    FROM connection AS c</span>
-<span class="s">    JOIN dns AS d ON c.dst = d.dns_response</span>
-<span class="s">    GROUP by c.dstport</span>
-<span class="s">    ORDER by 1 DESC</span>
-<span class="s">"""</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
-<span class="c">#print(p1.head(100).to_string())</span>
+<div class="prompt input_prompt">In [186]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p_ports</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s2">""" </span>
+<span class="s2">    SELECT COUNT(c.dstport), c.dstport</span>
+<span class="s2">    FROM connection AS c</span>
+<span class="s2">    JOIN dns AS d ON c.dst = d.dns_response</span>
+<span class="s2">    GROUP by c.dstport</span>
+<span class="s2">    ORDER by 1 DESC</span>
+<span class="s2">"""</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
+<span class="c1">#print(p1.head(100).to_string())</span>
 <span class="n">p_ports</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[186]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[186]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -3080,12 +3075,12 @@ In [186]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In []:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -3109,26 +3104,25 @@ In []:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [132]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">p_http_methods</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">""" </span>
-<span class="s">    SELECT COUNT(request_method), request_method</span>
-<span class="s">    FROM http</span>
-<span class="s">    GROUP by request_method</span>
-<span class="s">    ORDER by 1 DESC</span>
-<span class="s">"""</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
-<span class="c">#print(p1.head(100).to_string())</span>
+<div class="prompt input_prompt">In [132]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p_http_methods</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s2">""" </span>
+<span class="s2">    SELECT COUNT(request_method), request_method</span>
+<span class="s2">    FROM http</span>
+<span class="s2">    GROUP by request_method</span>
+<span class="s2">    ORDER by 1 DESC</span>
+<span class="s2">"""</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
+<span class="c1">#print(p1.head(100).to_string())</span>
 <span class="n">p_http_methods</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[132]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[132]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -3168,26 +3162,25 @@ In [132]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [147]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">p_user_agents</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">""" </span>
-<span class="s">    SELECT COUNT(user_agent), user_agent</span>
-<span class="s">    FROM http</span>
-<span class="s">    GROUP by user_agent</span>
-<span class="s">    ORDER by 1 DESC</span>
-<span class="s">"""</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
-<span class="c">#print(p1.head(100).to_string())</span>
+<div class="prompt input_prompt">In [147]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p_user_agents</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s2">""" </span>
+<span class="s2">    SELECT COUNT(user_agent), user_agent</span>
+<span class="s2">    FROM http</span>
+<span class="s2">    GROUP by user_agent</span>
+<span class="s2">    ORDER by 1 DESC</span>
+<span class="s2">"""</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
+<span class="c1">#print(p1.head(100).to_string())</span>
 <span class="n">p_user_agents</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[147]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[147]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -3313,12 +3306,12 @@ In [147]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In []:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -3333,43 +3326,42 @@ In []:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [190]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">p3</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">""" </span>
-<span class="s">    SELECT h.frame_number, h.ip_dst, d.dns_query, h.request_method, h.request_uri, h.user_agent FROM http AS  h</span>
-<span class="s">    JOIN dns AS d ON h.ip_dst = d.dns_response</span>
-<span class="s">    WHERE lower(h.request_method) == 'get' AND</span>
-<span class="s">        -- Filter all rubish</span>
-<span class="s">        (h.request_uri NOT LIKE '%.gif'  AND </span>
-<span class="s">         h.request_uri NOT LIKE '%.jpg'  AND</span>
-<span class="s">         h.request_uri NOT LIKE '%.jpeg' AND</span>
-<span class="s">         h.request_uri NOT LIKE '%.png'  AND</span>
-<span class="s">         h.request_uri NOT LIKE '%.gif'  AND</span>
-<span class="s">         h.request_uri NOT LIKE '%.css'  AND </span>
-<span class="s">         h.request_uri NOT LIKE '%.html' AND</span>
-<span class="s">         h.request_uri NOT LIKE '%.js') </span>
-<span class="s">    AND</span>
-<span class="s">        (d.dns_query NOT LIKE '%amazon%'   AND</span>
-<span class="s">         d.dns_query NOT LIKE '</span><span class="si">%f</span><span class="s">ahrinfo%' AND</span>
-<span class="s">         d.dns_query NOT LIKE '</span><span class="si">%f</span><span class="s">az.net%'  AND</span>
-<span class="s">         d.dns_query NOT LIKE '</span><span class="si">%he</span><span class="s">ute.de%' AND</span>
-<span class="s">         d.dns_query NOT LIKE '%twitter%'  AND</span>
-<span class="s">         d.dns_query NOT LIKE '</span><span class="si">%s</span><span class="s">ueddeutsche%')</span>
-<span class="s">    </span>
-<span class="s">    GROUP by h.request_uri</span>
-<span class="s">    ORDER by d.dns_query</span>
-<span class="s">"""</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
+<div class="prompt input_prompt">In [190]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p3</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s2">""" </span>
+<span class="s2">    SELECT h.frame_number, h.ip_dst, d.dns_query, h.request_method, h.request_uri, h.user_agent FROM http AS  h</span>
+<span class="s2">    JOIN dns AS d ON h.ip_dst = d.dns_response</span>
+<span class="s2">    WHERE lower(h.request_method) == 'get' AND</span>
+<span class="s2">        -- Filter all rubish</span>
+<span class="s2">        (h.request_uri NOT LIKE '%.gif'  AND </span>
+<span class="s2">         h.request_uri NOT LIKE '%.jpg'  AND</span>
+<span class="s2">         h.request_uri NOT LIKE '%.jpeg' AND</span>
+<span class="s2">         h.request_uri NOT LIKE '%.png'  AND</span>
+<span class="s2">         h.request_uri NOT LIKE '%.gif'  AND</span>
+<span class="s2">         h.request_uri NOT LIKE '%.css'  AND </span>
+<span class="s2">         h.request_uri NOT LIKE '%.html' AND</span>
+<span class="s2">         h.request_uri NOT LIKE '%.js') </span>
+<span class="s2">    AND</span>
+<span class="s2">        (d.dns_query NOT LIKE '%amazon%'   AND</span>
+<span class="s2">         d.dns_query NOT LIKE '</span><span class="si">%f</span><span class="s2">ahrinfo%' AND</span>
+<span class="s2">         d.dns_query NOT LIKE '</span><span class="si">%f</span><span class="s2">az.net%'  AND</span>
+<span class="s2">         d.dns_query NOT LIKE '</span><span class="si">%he</span><span class="s2">ute.de%' AND</span>
+<span class="s2">         d.dns_query NOT LIKE '%twitter%'  AND</span>
+<span class="s2">         d.dns_query NOT LIKE '</span><span class="si">%s</span><span class="s2">ueddeutsche%')</span>
+<span class="s2">    </span>
+<span class="s2">    GROUP by h.request_uri</span>
+<span class="s2">    ORDER by d.dns_query</span>
+<span class="s2">"""</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
 <span class="n">p3</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[190]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[190]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -5311,23 +5303,23 @@ In [190]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [130]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb">
+<div class="prompt input_prompt">In [130]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
+</div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In []:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -5342,25 +5334,24 @@ In []:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [149]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">p3</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s">""" </span>
-<span class="s">    SELECT h.frame_number, d.dns_query, h.request_uri, h.data, h.text FROM http AS  h</span>
-<span class="s">    JOIN dns AS d ON h.ip_dst = d.dns_response</span>
-<span class="s">    WHERE lower(h.request_method) == 'post'</span>
-<span class="s">    ORDER by h.ip_dst    </span>
-<span class="s">"""</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
+<div class="prompt input_prompt">In [149]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p3</span> <span class="o">=</span> <span class="n">pdsql</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="s2">""" </span>
+<span class="s2">    SELECT h.frame_number, d.dns_query, h.request_uri, h.data, h.text FROM http AS  h</span>
+<span class="s2">    JOIN dns AS d ON h.ip_dst = d.dns_response</span>
+<span class="s2">    WHERE lower(h.request_method) == 'post'</span>
+<span class="s2">    ORDER by h.ip_dst    </span>
+<span class="s2">"""</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
 <span class="n">p3</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[149]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[149]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -6920,12 +6911,12 @@ In [149]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In []:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
+</div>
 </div>
 </div>
 </div></p>

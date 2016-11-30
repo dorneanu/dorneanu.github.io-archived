@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -125,12 +125,12 @@
 <p>According to the author Nginx <code>is an HTTP and reverse proxy server, as well as a mail proxy server</code>. I thought I should give it a try and test its performance against Lighttpd. Meanwhile I'm using Lighttpd <code>'AND</code>' Nginx on my server due to some regexp issue that have to be solved very soon. In that case Nginx acts a a proxy server (see below for configuration stuff).</p>
 <h2 id="d315961f10d8f48561baf0b483b8334b">Get it!</h2>
 <p>Before going further you should have the latest (stable) available Nginx version. If you use Debian make sure, you add following to your <code>/etc/apt/sources.list</code>:</p>
-<div class="highlight"><pre><span class="k">deb-src</span> <span class="s">http://nginx.org/packages/debian/</span> <span class="kp">squeeze</span> <span class="kp">nginx</span>
+<div class="highlight"><pre><span></span><span class="k">deb-src</span> <span class="s">http://nginx.org/packages/debian/</span> <span class="kp">squeeze</span> <span class="kp">nginx</span>
 </pre></div>
 <p>On my system I have currently version <code>1.0.9-1</code> installed.</p>
 <h2 id="416206518e27ed2ec8b8e0876078af35">Basic configuration</h2>
 <p>The main file for this part is <code>/etc/nginx/nginx.conf</code>. This is my <code>nginx.conf</code>:</p>
-<div class="highlight"><pre>user www-data<span class="p">;</span>
+<div class="highlight"><pre><span></span>user www-data<span class="p">;</span>
 worker_processes  5<span class="p">;</span>
 worker_rlimit_nofile 8192<span class="p">;</span>
 
@@ -155,9 +155,9 @@ http <span class="o">{</span>
     access_log  /var/log/nginx/access.log  main<span class="p">;</span>
 
     sendfile        on<span class="p">;</span>
-    <span class="c">#cp_nopush     on;</span>
+    <span class="c1">#cp_nopush     on;</span>
 
-    <span class="c"># Compression</span>
+    <span class="c1"># Compression</span>
     gzip on<span class="p">;</span>
     gzip_buffers <span class="m">16</span> 8k<span class="p">;</span>
     gzip_comp_level 2<span class="p">;</span>
@@ -174,13 +174,13 @@ http <span class="o">{</span>
 <p>I won't explain every line since this is not what I'm supposed to do. Please have a look at the links at the end of this article for additional links.</p>
 <h2 id="7f167270d33e2ada55cd790e9aff9edb">vHost configuration</h2>
 <p>Well this is probably the most interesting part. You should have a configuration file per each vhost located at <code>/etc/nginx/conf.d/</code>. In my case the configuration was adapted to Drupals system and needs. Let's have a look:</p>
-<div class="highlight"><pre>server <span class="o">{</span>
+<div class="highlight"><pre><span></span>server <span class="o">{</span>
         listen 80<span class="p">;</span>
         server_name dornea.nu<span class="p">;</span>
 
-        root /var/www/sites/dornea.nu/htdocs/current<span class="p">;</span> <span class="c">## &lt;-- Your only path reference.</span>
+        root /var/www/sites/dornea.nu/htdocs/current<span class="p">;</span> <span class="c1">## &lt;-- Your only path reference.</span>
 
-        <span class="c">## Drupal Boost with nginx </span>
+        <span class="c1">## Drupal Boost with nginx </span>
         <span class="nb">set</span> <span class="nv">$boost</span> <span class="s2">""</span><span class="p">;</span>
         <span class="nb">set</span> <span class="nv">$boost_query</span> <span class="s2">"_"</span><span class="p">;</span>
 
@@ -201,7 +201,7 @@ http <span class="o">{</span>
         <span class="o">}</span>
 
         <span class="k">if</span> <span class="o">(</span><span class="nv">$boost</span> <span class="o">=</span> GDQF<span class="o">){</span>
-            rewrite ^.*<span class="nv">$ </span>/cache/normal/<span class="nv">$host</span>/<span class="nv">$request_uri$boost_query</span>.html <span class="nb">break</span><span class="p">;</span>
+            rewrite ^.*$ /cache/normal/<span class="nv">$host</span>/<span class="nv">$request_uri$boost_query</span>.html break<span class="p">;</span>
         <span class="o">}</span>
 
         <span class="nv">location</span> <span class="o">=</span> /favicon.ico <span class="o">{</span>
@@ -215,20 +215,20 @@ http <span class="o">{</span>
                 access_log off<span class="p">;</span>
         <span class="o">}</span>
 
-        <span class="c"># This matters if you use drush</span>
+        <span class="c1"># This matters if you use drush</span>
         <span class="nv">location</span> <span class="o">=</span> /backup <span class="o">{</span>
                 auth_basic            <span class="s2">"Restricted"</span><span class="p">;</span>
                 auth_basic_user_file  /etc/lighttpd/lighttpd_passwords.inc<span class="p">;</span>
-                <span class="c">#deny all;</span>
+                <span class="c1">#deny all;</span>
         <span class="o">}</span>
 
-        <span class="c"># Very rarely should these ever be accessed outside of your lan</span>
-        location ~* .<span class="o">(</span>txt<span class="p">|</span>log<span class="o">)</span><span class="nv">$ </span><span class="o">{</span>
+        <span class="c1"># Very rarely should these ever be accessed outside of your lan</span>
+        location ~* .<span class="o">(</span>txt<span class="p">|</span>log<span class="o">)</span>$ <span class="o">{</span>
                 allow 192.168.0.0/16<span class="p">;</span>
                 deny all<span class="p">;</span>
         <span class="o">}</span>
 
-        location ~ ..*/.*.php<span class="nv">$ </span><span class="o">{</span>
+        location ~ ..*/.*.php$ <span class="o">{</span>
                 <span class="k">return</span> 403<span class="p">;</span>
         <span class="o">}</span>
 
@@ -247,18 +247,18 @@ http <span class="o">{</span>
         <span class="o">}</span> 
 
         location @rewrite <span class="o">{</span>
-                <span class="c"># Some modules enforce no slash (/) at the end of the URL</span>
-                <span class="c"># Else this rewrite block wouldn't be needed (GlobalRedirect)</span>
-                <span class="c">#rewrite ^/system/test/(.*)$     /index.php?q=system/test/$1;</span>
-                <span class="c">#rewrite ^/system/files/(.*)$    /index.php?q=system/files/$1;</span>
-                rewrite ^/sitemap.xml<span class="nv">$ </span>         /index.php?q<span class="o">=</span>sitemap.xml<span class="p">;</span>
+                <span class="c1"># Some modules enforce no slash (/) at the end of the URL</span>
+                <span class="c1"># Else this rewrite block wouldn't be needed (GlobalRedirect)</span>
+                <span class="c1">#rewrite ^/system/test/(.*)$     /index.php?q=system/test/$1;</span>
+                <span class="c1">#rewrite ^/system/files/(.*)$    /index.php?q=system/files/$1;</span>
+                rewrite ^/sitemap.xml$          /index.php?q<span class="o">=</span>sitemap.xml<span class="p">;</span>
 
-                rewrite ^/<span class="o">(</span>.*<span class="o">)</span><span class="nv">$ </span>                /index.php?q<span class="o">=</span><span class="nv">$1</span><span class="p">;</span>
+                rewrite ^/<span class="o">(</span>.*<span class="o">)</span>$                 /index.php?q<span class="o">=</span><span class="nv">$1</span><span class="p">;</span>
         <span class="o">}</span>
 
-        location ~ .php<span class="nv">$ </span><span class="o">{</span>
-                fastcgi_split_path_info ^<span class="o">(</span>.+.php<span class="o">)(</span>/.+<span class="o">)</span><span class="nv">$;</span>
-                <span class="c">#NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini</span>
+        location ~ .php$ <span class="o">{</span>
+                fastcgi_split_path_info ^<span class="o">(</span>.+.php<span class="o">)(</span>/.+<span class="o">)</span>$<span class="p">;</span>
+                <span class="c1">#NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini</span>
                 include fastcgi_params<span class="p">;</span>
                 fastcgi_param SCRIPT_FILENAME <span class="nv">$document_root$fastcgi_script_name</span><span class="p">;</span>
                 fastcgi_param  VERIFIED <span class="nv">$ssl_client_verify</span><span class="p">;</span>
@@ -266,23 +266,23 @@ http <span class="o">{</span>
                 fastcgi_intercept_errors on<span class="p">;</span>
         <span class="o">}</span>
 
-        <span class="c"># Fighting with ImageCache? This little gem is amazing.</span>
+        <span class="c1"># Fighting with ImageCache? This little gem is amazing.</span>
         location ~ ^/sites/.*/files/imagecache/ <span class="o">{</span>
                 try_files <span class="nv">$uri</span> @rewrite<span class="p">;</span>
         <span class="o">}</span>
-        <span class="c"># Catch image styles for D7 too.</span>
+        <span class="c1"># Catch image styles for D7 too.</span>
         location ~ ^/sites/.*/files/styles/ <span class="o">{</span>
                 try_files <span class="nv">$uri</span> @rewrite<span class="p">;</span>
         <span class="o">}</span>
 
-        location ~* .<span class="o">(</span>js<span class="p">|</span>css<span class="p">|</span>png<span class="p">|</span>jpg<span class="p">|</span>jpeg<span class="p">|</span>gif<span class="p">|</span>ico<span class="o">)</span><span class="nv">$ </span><span class="o">{</span>
+        location ~* .<span class="o">(</span>js<span class="p">|</span>css<span class="p">|</span>png<span class="p">|</span>jpg<span class="p">|</span>jpeg<span class="p">|</span>gif<span class="p">|</span>ico<span class="o">)</span>$ <span class="o">{</span>
                 expires 24h<span class="p">;</span>
                 log_not_found off<span class="p">;</span>
         <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
 <p>Having Drupals boost module enabled you should have static pages on your server which will be served by the memcache daemon. At the beginning of the configuration nginx checks if any static content should be served at all (ist the user logged in? etc.) If there is a html file which correlates with the URI then nginx will load the files content from memcache. If not: the PHP script will be executed. Speaking of PHP.. Lets have a look at <code>/etc/nginx/</code>:</p>
-<div class="highlight"><pre><span class="c"># cat /etc/nginx/fastcgi_params </span>
+<div class="highlight"><pre><span></span><span class="c1"># cat /etc/nginx/fastcgi_params </span>
 fastcgi_pass   unix:/tmp/fcgi.sock<span class="p">;</span>
 fastcgi_param  QUERY_STRING       <span class="nv">$query_string</span><span class="p">;</span>
 fastcgi_param  REQUEST_METHOD     <span class="nv">$request_method</span><span class="p">;</span>
@@ -306,23 +306,23 @@ fastcgi_index  index.php<span class="p">;</span>
 fastcgi_param  REDIRECT_STATUS    200<span class="p">;</span>
 </pre></div>
 <p>I use a socket instead of child processes. The socket can be created using <code>/etc/init.d/fastcgi</code>:</p>
-<div class="highlight"><pre><span class="c"># cat /etc/init.d/fastcgi </span>
-<span class="c">#!/bin/sh</span>
+<div class="highlight"><pre><span></span><span class="c1"># cat /etc/init.d/fastcgi </span>
+<span class="c1">#!/bin/sh</span>
 
-<span class="c">### BEGIN INIT INFO</span>
-<span class="c"># Provides:          fastcgi</span>
-<span class="c"># Required-Start:    $local_fs $remote_fs $network $syslog</span>
-<span class="c"># Required-Stop:     $local_fs $remote_fs $network $syslog</span>
-<span class="c"># Default-Start:     2 3 4 5</span>
-<span class="c"># Default-Stop:      0 1 6</span>
-<span class="c"># Short-Description: starts the FastCGI server</span>
-<span class="c"># Description:       starts spawn-fcgi using start-stop-daemon</span>
-<span class="c">### END INIT INFO</span>
+<span class="c1">### BEGIN INIT INFO</span>
+<span class="c1"># Provides:          fastcgi</span>
+<span class="c1"># Required-Start:    $local_fs $remote_fs $network $syslog</span>
+<span class="c1"># Required-Stop:     $local_fs $remote_fs $network $syslog</span>
+<span class="c1"># Default-Start:     2 3 4 5</span>
+<span class="c1"># Default-Stop:      0 1 6</span>
+<span class="c1"># Short-Description: starts the FastCGI server</span>
+<span class="c1"># Description:       starts spawn-fcgi using start-stop-daemon</span>
+<span class="c1">### END INIT INFO</span>
 
 <span class="nv">PATH</span><span class="o">=</span>/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 <span class="nv">DAEMON</span><span class="o">=</span>/usr/local/bin/php-fastcgi
 
-<span class="nb">test</span> -x <span class="nv">$DAEMON</span> <span class="o">||</span> <span class="nb">exit </span>0
+<span class="nb">test</span> -x <span class="nv">$DAEMON</span> <span class="o">||</span> <span class="nb">exit</span> 0
 
 <span class="nb">set</span> -e
 
@@ -343,19 +343,19 @@ fastcgi_param  REDIRECT_STATUS    200<span class="p">;</span>
   <span class="p">;;</span>
   *<span class="o">)</span>
     <span class="nb">echo</span> <span class="s2">"Usage: php-fastcgi {start|stop|restart}"</span>
-    <span class="nb">exit </span>1
+    <span class="nb">exit</span> 1
   <span class="p">;;</span>
 <span class="k">esac</span>
 <span class="nb">exit</span> <span class="nv">$RETVAL</span>
 </pre></div>
 <p><code>php-fastcgi</code> is located at /usr/local/bin/:</p>
-<div class="highlight"><pre><span class="c"># cat /usr/local/bin/php-fastcgi </span>
-<span class="c">#!/bin/sh</span>
+<div class="highlight"><pre><span></span><span class="c1"># cat /usr/local/bin/php-fastcgi </span>
+<span class="c1">#!/bin/sh</span>
 /usr/bin/spawn-fcgi -F <span class="m">1</span> -C <span class="m">10</span> -a 127.0.0.1 -s /tmp/fcgi.sock -u www-data -g www-data -f <span class="s2">"/usr/bin/php5-cgi -c /etc/php5/cgi/php.ini"</span> -P /var/run/fastcgi-php.pid
 </pre></div>
 <h2 id="20849d6369623ae5549ab46ec8cbcd43">Nginx as proxy server</h2>
 <p>As already mentioned nginx can be used as a proxy server. In my case I need nginx to redirect requests on a certain subdomain to <code>lighttpd</code> listening to a local interface. The configuration:</p>
-<div class="highlight"><pre><span class="c">### dl.dornea.nu</span>
+<div class="highlight"><pre><span></span><span class="c1">### dl.dornea.nu</span>
 server <span class="o">{</span>
     listen 80<span class="p">;</span>
     server_name dl.dornea.nu<span class="p">;</span>
@@ -364,7 +364,7 @@ server <span class="o">{</span>
     index index.php index.html<span class="p">;</span>
 
     location / <span class="o">{</span>
-        <span class="c">#index index.php index.html;</span>
+        <span class="c1">#index index.php index.html;</span>
         proxy_pass         http://127.0.0.1:8080/<span class="p">;</span>
         proxy_redirect     off<span class="p">;</span>
         proxy_set_header   Host             <span class="nv">$host</span><span class="p">;</span>
@@ -380,7 +380,7 @@ server <span class="o">{</span>
         proxy_temp_file_write_size 64k<span class="p">;</span>
     <span class="o">}</span> 
 
-    location ~* .<span class="o">(</span>js<span class="p">|</span>css<span class="p">|</span>png<span class="p">|</span>jpg<span class="p">|</span>jpeg<span class="p">|</span>gif<span class="p">|</span>ico<span class="o">)</span><span class="nv">$ </span><span class="o">{</span>
+    location ~* .<span class="o">(</span>js<span class="p">|</span>css<span class="p">|</span>png<span class="p">|</span>jpg<span class="p">|</span>jpeg<span class="p">|</span>gif<span class="p">|</span>ico<span class="o">)</span>$ <span class="o">{</span>
         expires 24h<span class="p">;</span>
         log_not_found off<span class="p">;</span>
     <span class="o">}</span>
@@ -390,8 +390,8 @@ server <span class="o">{</span>
 <h2 id="0139c29ede5430437868e80474ff6a41">Benchmarks</h2>
 <h3 id="bb7bec9ae5725dad1d4ecd674e695626">ab (apache suite) benchmark</h3>
 <h4 id="7872d0a8d78c4619c5081356d4c146d8">lighttpd</h4>
-<div class="highlight"><pre><span class="nv">$ </span>ab -n <span class="m">1000</span> -c <span class="m">2</span> http://dornea.nu/
-This is ApacheBench, Version 2.3 &lt;<span class="nv">$Revision</span>: <span class="m">655654</span> <span class="nv">$&gt;</span>
+<div class="highlight"><pre><span></span>$ ab -n <span class="m">1000</span> -c <span class="m">2</span> http://dornea.nu/
+This is ApacheBench, Version 2.3 &lt;<span class="nv">$Revision</span>: <span class="m">655654</span> $&gt;
 Copyright <span class="m">1996</span> Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
 
@@ -423,7 +423,7 @@ Failed requests:        2
 Write errors:           0
 Total transferred:      <span class="m">48619020</span> bytes
 HTML transferred:       <span class="m">48133998</span> bytes
-Requests per second:    0.70 <span class="o">[</span><span class="c">#/sec] (mean)</span>
+Requests per second:    0.70 <span class="o">[</span><span class="c1">#/sec] (mean)</span>
 Time per request:       2877.441 <span class="o">[</span>ms<span class="o">]</span> <span class="o">(</span>mean<span class="o">)</span>
 Time per request:       1438.721 <span class="o">[</span>ms<span class="o">]</span> <span class="o">(</span>mean, across all concurrent requests<span class="o">)</span>
 Transfer rate:          33.00 <span class="o">[</span>Kbytes/sec<span class="o">]</span> received
@@ -447,8 +447,8 @@ Percentage of the requests served within a certain <span class="nb">time</span> 
  100%  <span class="m">15536</span> <span class="o">(</span>longest request<span class="o">)</span>
 </pre></div>
 <h4 id="ee434023cf89d7dfb21f63d64f0f9d74">nginx</h4>
-<div class="highlight"><pre><span class="nv">$ </span>ab -n <span class="m">1000</span> -c <span class="m">2</span> http://dornea.nu/
-This is ApacheBench, Version 2.3 &lt;<span class="nv">$Revision</span>: <span class="m">655654</span> <span class="nv">$&gt;</span>
+<div class="highlight"><pre><span></span>$ ab -n <span class="m">1000</span> -c <span class="m">2</span> http://dornea.nu/
+This is ApacheBench, Version 2.3 &lt;<span class="nv">$Revision</span>: <span class="m">655654</span> $&gt;
 Copyright <span class="m">1996</span> Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
 
@@ -479,7 +479,7 @@ Failed requests:        0
 Write errors:           0
 Total transferred:      <span class="m">48451000</span> bytes
 HTML transferred:       <span class="m">48216000</span> bytes
-Requests per second:    7.49 <span class="o">[</span><span class="c">#/sec] (mean)</span>
+Requests per second:    7.49 <span class="o">[</span><span class="c1">#/sec] (mean)</span>
 Time per request:       267.065 <span class="o">[</span>ms<span class="o">]</span> <span class="o">(</span>mean<span class="o">)</span>
 Time per request:       133.533 <span class="o">[</span>ms<span class="o">]</span> <span class="o">(</span>mean, across all concurrent requests<span class="o">)</span>
 Transfer rate:          354.34 <span class="o">[</span>Kbytes/sec<span class="o">]</span> received

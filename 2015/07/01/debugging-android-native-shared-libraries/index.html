@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -150,19 +150,19 @@
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [28]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">tree</span> <span class="o">-</span><span class="n">L</span> <span class="mi">1</span>
+<div class="prompt input_prompt">In [28]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+tree -L 1
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">.
 ├── AndroidManifest.xml
 ├── assets
@@ -190,18 +190,18 @@ In [28]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [29]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">ls</span> <span class="o">-</span><span class="n">lR</span> <span class="n">src</span><span class="o">/</span><span class="n">com</span><span class="o">/</span><span class="n">example</span><span class="o">/</span><span class="n">jni_debug_demo</span>
+<div class="prompt input_prompt">In [29]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">ls</span> -lR src/com/example/jni_debug_demo
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">src/com/example/jni_debug_demo:
 total 8
 -rw-r--r-- 1 victor users 1183 Jun 30 16:44 MainActivity.java
@@ -232,19 +232,19 @@ total 8
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [30]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">victor</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">android</span><span class="o">-</span><span class="n">sdk</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">android</span> <span class="n">update</span> <span class="n">project</span> <span class="o">--</span><span class="n">target</span> <span class="n">android</span><span class="o">-</span><span class="mi">19</span> <span class="o">-</span><span class="n">p</span> <span class="o">.</span>
+<div class="prompt input_prompt">In [30]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+/home/victor/work/android-sdk/tools/android update project --target android-19 -p .
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">Updated and renamed default.properties to project.properties
 Updated local.properties
 Added file ./proguard-project.txt
@@ -265,19 +265,19 @@ Added file ./proguard-project.txt
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [31]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">ant</span> <span class="n">clean</span> <span class="n">release</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">BUILD</span>
+<div class="prompt input_prompt">In [31]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+ant clean release <span class="p">|</span> grep BUILD
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">BUILD SUCCESSFUL
 </pre>
 </div>
@@ -323,20 +323,20 @@ In [31]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [37]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">javah</span> <span class="o">-</span><span class="n">jni</span> <span class="o">-</span><span class="n">classpath</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">android</span><span class="o">-</span><span class="n">sdk</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">android</span><span class="o">-</span><span class="mi">19</span><span class="o">/</span><span class="n">android</span><span class="o">.</span><span class="n">jar</span><span class="p">:</span><span class="o">./</span><span class="nb">bin</span><span class="o">/</span><span class="n">classes</span> <span class="o">-</span><span class="n">o</span> <span class="n">square</span><span class="o">.</span><span class="n">h</span> <span class="n">com</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">jni_debug_demo</span><span class="o">.</span><span class="n">SquaredWrapper</span>
-<span class="n">cat</span> <span class="n">square</span><span class="o">.</span><span class="n">h</span>
+<div class="prompt input_prompt">In [37]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+javah -jni -classpath ~/work/android-sdk/platforms/android-19/android.jar:./bin/classes -o square.h com.example.jni_debug_demo.SquaredWrapper
+cat square.h
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">/* DO NOT EDIT THIS FILE - it is machine generated */
 #include &lt;jni.h&gt;
 /* Header for class com_example_jni_debug_demo_SquaredWrapper */
@@ -375,14 +375,14 @@ JNIEXPORT jint JNICALL Java_com_example_jni_1debug_1demo_SquaredWrapper_squared
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [38]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">mkdir</span> <span class="n">jni</span>
-<span class="n">mv</span> <span class="n">square</span><span class="o">.</span><span class="n">h</span> <span class="n">jni</span><span class="o">/</span>
+<div class="prompt input_prompt">In [38]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+mkdir jni
+mv square.h jni/
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -406,18 +406,18 @@ In [38]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [39]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">cat</span> <span class="n">jni</span><span class="o">/</span><span class="n">square</span><span class="o">.</span><span class="n">c</span>
+<div class="prompt input_prompt">In [39]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">cat</span> jni/square.c
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">#include "square.h"
  
 JNIEXPORT jint JNICALL Java_com_example_jni_1debug_1demo_SquaredWrapper_squared (JNIEnv * je, jclass jc, jint base)
@@ -435,7 +435,7 @@ JNIEXPORT jint JNICALL Java_com_example_jni_1debug_1demo_SquaredWrapper_squared 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>So nothing special about it. Due to the introductory aspect of this post I'll try to keep things simple. You can of course go further and implement more complex functions. </p>
+<p>So nothing special about it. Due to the introductory aspect of this post I'll try to keep things simple. You can of course go further and implement more complex functions.</p>
 </div>
 </div>
 </div>
@@ -453,24 +453,24 @@ JNIEXPORT jint JNICALL Java_com_example_jni_1debug_1demo_SquaredWrapper_squared 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Create a <strong>Makefile</strong> for all the Android build tools. </p>
+<p>Create a <strong>Makefile</strong> for all the Android build tools.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [40]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">cat</span> <span class="n">jni</span><span class="o">/</span><span class="n">Android</span><span class="o">.</span><span class="n">mk</span>
+<div class="prompt input_prompt">In [40]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">cat</span> jni/Android.mk
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">LOCAL_PATH := $(call my-dir)
  
 include $(CLEAR_VARS)
@@ -498,20 +498,20 @@ include $(BUILD_SHARED_LIBRARY)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [41]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">NDK_DEBUG</span><span class="o">=</span><span class="mi">1</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">victor</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">android</span><span class="o">-</span><span class="n">ndk</span><span class="o">-</span><span class="n">r10e</span><span class="o">/</span><span class="n">ndk</span><span class="o">-</span><span class="n">build</span> 
-<span class="n">readelf</span> <span class="o">-</span><span class="n">h</span> <span class="n">libs</span><span class="o">/</span><span class="n">armeabi</span><span class="o">/</span><span class="n">libsquared</span><span class="o">.</span><span class="n">so</span>
+<div class="prompt input_prompt">In [41]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+<span class="nv">NDK_DEBUG</span><span class="o">=</span><span class="m">1</span> /home/victor/work/android-ndk-r10e/ndk-build 
+readelf -h libs/armeabi/libsquared.so
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">Android NDK: WARNING: APP_PLATFORM android-19 is larger than android:minSdkVersion 16 in ./AndroidManifest.xml    
 [armeabi] Gdbserver      : [arm-linux-androideabi-4.8] libs/armeabi/gdbserver
 [armeabi] Gdbsetup       : libs/armeabi/gdb.setup
@@ -521,7 +521,7 @@ In [41]:
 ELF Header:
   Magic:   7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00 
   Class:                             ELF32
-  Data:                              2&amp;apos;s complement, little endian
+  Data:                              2's complement, little endian
   Version:                           1 (current)
   OS/ABI:                            UNIX - System V
   ABI Version:                       0
@@ -559,39 +559,39 @@ ELF Header:
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In <code>MainActivity</code> some static routines of the class <code>SquaredWrapper</code> are being called:</p>
-<pre><code class="language-.java"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="id">MainActivity</span> <span class="id">extends</span> <span class="id">Activity</span> {</span>
-    <span class="keyword">private</span> EditText etInput;
-    <span class="keyword">private</span> TextView txtTo2;
-    <span class="keyword">private</span> TextView txtTo4;
+<pre><code>.java
+public class MainActivity extends Activity {
+    private EditText etInput;
+    private TextView txtTo2;
+    private TextView txtTo4;
 
     @Override
-    <span class="keyword">protected</span> <span class="keyword">void</span> onCreate(Bundle savedInstanceState) {
-        <span class="keyword">super</span><span class="variable">.onCreate</span>(savedInstanceState);
-        setContentView(R<span class="variable">.layout</span><span class="variable">.activity_main</span>);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        <span class="comment">// Define Input EditText, TextViews</span>
-        etInput = (EditText) findViewById(R<span class="variable">.id</span><span class="variable">.etInput</span>);
-        txtTo2 =  (TextView) findViewById(R<span class="variable">.id</span><span class="variable">.resTo2</span>);
-        txtTo4 =  (TextView) findViewById(R<span class="variable">.id</span><span class="variable">.resTo4</span>);
+        // Define Input EditText, TextViews
+        etInput = (EditText) findViewById(R.id.etInput);
+        txtTo2 =  (TextView) findViewById(R.id.resTo2);
+        txtTo4 =  (TextView) findViewById(R.id.resTo4);
 
-        <span class="keyword">int</span> b = <span class="number">3</span>;
-        <span class="keyword">int</span> a = SquaredWrapper<span class="variable">.to4</span>(b);
-        Log<span class="variable">.i</span>(<span class="string">"JNIDemo"</span>, String<span class="variable">.format</span>(<span class="string">"%d-&gt;%d"</span>, b,a));
+        int b = 3;
+        int a = SquaredWrapper.to4(b);
+        Log.i("JNIDemo", String.format("%d-&gt;%d", b,a));
     }
 
-    <span class="keyword">public</span> <span class="keyword">void</span> cbCalculate(View view) {
-        <span class="keyword">int</span> in = <span class="number">0</span>;
-        <span class="keyword">try</span>{
-            in = Integer<span class="variable">.valueOf</span>( etInput<span class="variable">.getText</span>()<span class="variable">.toString</span>() );
-        } <span class="keyword">catch</span>(NumberFormatException e) { 
-            <span class="keyword">return</span> ; 
+    public void cbCalculate(View view) {
+        int in = 0;
+        try{
+            in = Integer.valueOf( etInput.getText().toString() );
+        } catch(NumberFormatException e) { 
+            return ; 
         }
 
-        txtTo2<span class="variable">.setText</span>(String<span class="variable">.format</span>(<span class="string">"%d"</span>, SquaredWrapper<span class="variable">.squared</span>(in)));
-        txtTo4<span class="variable">.setText</span>(String<span class="variable">.format</span>(<span class="string">"%d"</span>, SquaredWrapper<span class="variable">.to4</span>(in)));
+        txtTo2.setText(String.format("%d", SquaredWrapper.squared(in)));
+        txtTo4.setText(String.format("%d", SquaredWrapper.to4(in)));
     }
-}
-</code></pre>
+}</code></pre>
 </div>
 </div>
 </div>
@@ -606,19 +606,19 @@ ELF Header:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [42]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">ant</span> <span class="n">clean</span> <span class="n">release</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">e</span> <span class="s">"^BUILD"</span>
+<div class="prompt input_prompt">In [42]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+ant clean release <span class="p">|</span> grep -e <span class="s2">"^BUILD"</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">BUILD SUCCESSFUL
 </pre>
 </div>
@@ -646,19 +646,19 @@ In [42]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [43]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">ant</span> <span class="n">clean</span> <span class="n">debug</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">e</span> <span class="s">"^BUILD"</span>
+<div class="prompt input_prompt">In [43]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+ant clean debug <span class="p">|</span> grep -e <span class="s2">"^BUILD"</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">BUILD SUCCESSFUL
 </pre>
 </div>
@@ -677,19 +677,19 @@ In [43]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [44]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">victor</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">android</span><span class="o">-</span><span class="n">sdk</span><span class="o">/</span><span class="n">platform</span><span class="o">-</span><span class="n">tools</span><span class="o">/</span><span class="n">adb</span> <span class="n">devices</span>
+<div class="prompt input_prompt">In [44]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+/home/victor/work/android-sdk/platform-tools/adb devices
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">List of devices attached 
 0123456789ABCDEF	device
 
@@ -701,19 +701,19 @@ In [44]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [47]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">adb</span> <span class="n">install</span> <span class="o">./</span><span class="nb">bin</span><span class="o">/</span><span class="n">MainActivity</span><span class="o">-</span><span class="n">debug</span><span class="o">.</span><span class="n">apk</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span>
+<div class="prompt input_prompt">In [47]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+adb install ./bin/MainActivity-debug.apk 2&gt; /dev/null
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">WARNING: linker: libvc1dec_sa.ca7.so has text relocations. This is wasting memory and is a security risk. Please fix.
 WARNING: linker: libvc1dec_sa.ca7.so has text relocations. This is wasting memory and is a security risk. Please fix.
 	pkg: /data/local/tmp/MainActivity-debug.apk
@@ -726,19 +726,19 @@ Success
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [91]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">adb</span> <span class="n">shell</span> <span class="n">am</span> <span class="n">start</span> <span class="o">-</span><span class="n">n</span> <span class="n">com</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">jni_debug_demo</span><span class="o">/</span><span class="n">com</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">jni_debug_demo</span><span class="o">.</span><span class="n">MainActivity</span>
+<div class="prompt input_prompt">In [91]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash 
+adb shell am start -n com.example.jni_debug_demo/com.example.jni_debug_demo.MainActivity
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">WARNING: linker: libvc1dec_sa.ca7.so has text relocations. This is wasting memory and is a security risk. Please fix.
 WARNING: linker: libvc1dec_sa.ca7.so has text relocations. This is wasting memory and is a security risk. Please fix.
 Starting: Intent { cmp=com.example.jni_debug_demo/.MainActivity }
@@ -755,14 +755,14 @@ Starting: Intent { cmp=com.example.jni_debug_demo/.MainActivity }
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><img alt="JNI Debug Demo Application" class="img-responsive" src="http://dl.dornea.nu/img/2015/android-solib/a74f0e9adca736086c2834fb63c793ad.png"/></p>
 <p>Greping for the <strong>logcat messages</strong> shows:</p>
-<pre><code class="language-.shell"><span class="comment">$</span> <span class="comment">adb</span> <span class="comment">logcat</span> <span class="literal">-</span><span class="comment">s</span> <span class="comment">JNIDemo</span>
-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">beginning</span> <span class="comment">of</span> <span class="comment">/dev/log/system</span>
-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">beginning</span> <span class="comment">of</span> <span class="comment">/dev/log/main</span>
-<span class="comment">I/JNIDemo</span> <span class="comment">(</span> <span class="comment">5524):</span> <span class="comment">3</span>-&gt;<span class="comment">81</span>
-<span class="comment">I/JNIDemo</span> <span class="comment">(</span> <span class="comment">5524):</span> <span class="comment">3</span>-&gt;<span class="comment">81</span>
-<span class="comment">I/JNIDemo</span> <span class="comment">(</span> <span class="comment">5524):</span> <span class="comment">3</span>-&gt;<span class="comment">81</span>
-<span class="comment">^C
-</span></code></pre>
+<pre><code>.shell
+$ adb logcat -s JNIDemo
+--------- beginning of /dev/log/system
+--------- beginning of /dev/log/main
+I/JNIDemo ( 5524): 3-&gt;81
+I/JNIDemo ( 5524): 3-&gt;81
+I/JNIDemo ( 5524): 3-&gt;81
+^C</code></pre>
 </div>
 </div>
 </div>
@@ -780,7 +780,7 @@ Starting: Intent { cmp=com.example.jni_debug_demo/.MainActivity }
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For the next steps a <strong>rooted</strong> device is <em>required</em>. Besides that you should install the <em>Android NDK</em> if you haven't done this yet. </p>
+<p>For the next steps a <strong>rooted</strong> device is <em>required</em>. Besides that you should install the <em>Android NDK</em> if you haven't done this yet.</p>
 </div>
 </div>
 </div>
@@ -804,19 +804,19 @@ Starting: Intent { cmp=com.example.jni_debug_demo/.MainActivity }
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [103]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">adb</span> <span class="n">shell</span> <span class="n">mount</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">e</span> <span class="s">"system"</span>
+<div class="prompt input_prompt">In [103]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+adb shell mount <span class="p">|</span> grep -e <span class="s2">"system"</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">/emmc@android /system ext4 ro,seclabel,noatime,noauto_da_alloc,commit=1,data=ordered 0 0
 </pre>
 </div>
@@ -826,31 +826,31 @@ In [103]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [49]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">adb</span> <span class="n">shell</span> <span class="s">"su -c 'mount -o rw,remount /system'"</span>
+<div class="prompt input_prompt">In [49]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+adb shell <span class="s2">"su -c 'mount -o rw,remount /system'"</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [50]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">adb</span> <span class="n">shell</span> <span class="n">mount</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">e</span> <span class="s">"system"</span>
+<div class="prompt input_prompt">In [50]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+adb shell mount <span class="p">|</span> grep -e <span class="s2">"system"</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">/emmc@android /system ext4 rw,seclabel,relatime,noauto_da_alloc,commit=1,data=ordered 0 0
 </pre>
 </div>
@@ -878,19 +878,19 @@ In [50]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [100]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">find</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">victor</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">android</span><span class="o">-</span><span class="n">ndk</span><span class="o">-</span><span class="n">r10e</span><span class="o">/</span> <span class="o">-</span><span class="nb">type</span> <span class="n">f</span> <span class="o">-</span><span class="n">name</span> <span class="s">"gdbserver"</span>
+<div class="prompt input_prompt">In [100]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+find /home/victor/work/android-ndk-r10e/ -type f -name <span class="s2">"gdbserver"</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">/home/victor/work/android-ndk-r10e/prebuilt/android-mips/gdbserver/gdbserver
 /home/victor/work/android-ndk-r10e/prebuilt/android-x86_64/gdbserver/gdbserver
 /home/victor/work/android-ndk-r10e/prebuilt/android-arm64/gdbserver/gdbserver
@@ -905,19 +905,19 @@ In [100]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [107]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">adb</span> <span class="n">shell</span> <span class="n">cat</span> <span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">cpuinfo</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">e</span> <span class="s">"Processor"</span>
+<div class="prompt input_prompt">In [107]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+adb shell cat /proc/cpuinfo <span class="p">|</span> grep -e <span class="s2">"Processor"</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">Processor	: ARMv7 Processor rev 3 (v7l)
 </pre>
 </div>
@@ -927,14 +927,14 @@ In [107]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [52]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">adb</span> <span class="n">push</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">victor</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">android</span><span class="o">-</span><span class="n">ndk</span><span class="o">-</span><span class="n">r10e</span><span class="o">/</span><span class="n">prebuilt</span><span class="o">/</span><span class="n">android</span><span class="o">-</span><span class="n">arm</span><span class="o">/</span><span class="n">gdbserver</span><span class="o">/</span><span class="n">gdbserver</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">sdcard</span><span class="o">/</span><span class="n">tmp</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span>
-<span class="n">adb</span> <span class="n">shell</span> <span class="s">"su -c 'cp /mnt/sdcard/tmp/gdbserver /system/bin/'"</span>
+<div class="prompt input_prompt">In [52]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+adb push /home/victor/work/android-ndk-r10e/prebuilt/android-arm/gdbserver/gdbserver /mnt/sdcard/tmp 2&gt; /dev/null
+adb shell <span class="s2">"su -c 'cp /mnt/sdcard/tmp/gdbserver /system/bin/'"</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -958,15 +958,15 @@ In [52]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [12]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">mkdir</span> <span class="n">system_lib</span>
-<span class="n">cd</span> <span class="n">system_lib</span>
-<span class="n">adb</span> <span class="n">pull</span> <span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">lib</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span>
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+mkdir system_lib
+<span class="nb">cd</span> system_lib
+adb pull /system/lib 2&gt; /dev/null
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -981,19 +981,19 @@ In [12]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [4]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">adb</span> <span class="n">shell</span> <span class="n">am</span> <span class="n">start</span> <span class="o">-</span><span class="n">n</span> <span class="n">com</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">jni_debug_demo</span><span class="o">/</span><span class="n">com</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">jni_debug_demo</span><span class="o">.</span><span class="n">MainActivity</span>
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+adb shell am start -n com.example.jni_debug_demo/com.example.jni_debug_demo.MainActivity
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">WARNING: linker: libvc1dec_sa.ca7.so has text relocations. This is wasting memory and is a security risk. Please fix.
 WARNING: linker: libvc1dec_sa.ca7.so has text relocations. This is wasting memory and is a security risk. Please fix.
 Starting: Intent { cmp=com.example.jni_debug_demo/.MainActivity }
@@ -1005,19 +1005,19 @@ Starting: Intent { cmp=com.example.jni_debug_demo/.MainActivity }
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [5]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">adb</span> <span class="n">shell</span> <span class="n">ps</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">jni_debug_demo</span>
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+adb shell ps <span class="p">|</span> grep jni_debug_demo
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">u0_a159   28054 135   554400 14484 ffffffff 00000000 S com.example.jni_debug_demo
 </pre>
 </div>
@@ -1030,7 +1030,7 @@ In [5]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now that the app is running we're ready to start the debugger and attach it to the process ID <em>28054</em>. </p>
+<p>Now that the app is running we're ready to start the debugger and attach it to the process ID <em>28054</em>.</p>
 </div>
 </div>
 </div>
@@ -1048,25 +1048,25 @@ In [5]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In project's root directory you'll run <code>ndk-gdb</code> which is part of the <em>Android NDK</em> package. </p>
+<p>In project's root directory you'll run <code>ndk-gdb</code> which is part of the <em>Android NDK</em> package.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [10]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">ndk</span><span class="o">-</span><span class="n">gdb</span> <span class="o">--</span><span class="n">verbose</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span>
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+ndk-gdb --verbose &gt; /dev/null
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stderr">
+<div class="output_subarea output_stream output_stderr output_text">
 <pre class="ipynb">warning: Could not load shared library symbols for 108 libraries, e.g. libstdc++.so.
 Use the "info sharedlibrary" command to see the complete listing.
 Do you need "set solib-search-path" or "set sysroot"?
@@ -1086,31 +1086,30 @@ Do you need "set solib-search-path" or "set sysroot"?
 <li>check if application is running</li>
 <li>setup network redirection (port forwarding)</li>
 </ul>
-<pre><code>adb_cmd forward tcp:5039 localfilesystem:/data/data/com.example.jni_debug_demo/debug-socket
-</code></pre><ul>
+<pre><code>adb_cmd forward tcp:5039 localfilesystem:/data/data/com.example.jni_debug_demo/debug-socket</code></pre>
+<ul>
 <li>pull several utilities (app_process, linker) from the device/emulator</li>
 <li>start <code>gdb</code></li>
 <li>attach to the process</li>
 </ul>
-<p>One could of course do all these steps <strong>manually</strong>. </p>
+<p>One could of course do all these steps <strong>manually</strong>.</p>
 <p>1) Do port <em>forwarding</em>:</p>
-<pre><code>$ adb forward tcp:1337 tcp:1337
-</code></pre><p>1) Attach <code>gdbserver</code> to the process (on the device)</p>
+<pre><code>$ adb forward tcp:1337 tcp:1337</code></pre>
+<p>1) Attach <code>gdbserver</code> to the process (on the device)</p>
 <pre><code>root@Android:/ # ps | grep jni
 u0_a159   28054 135   561056 14100 ffffffff 400a499c S com.example.jni_debug_demo
 root@Android:/ # gdbserver :1337 --attach 28054                                
 Attached; pid = 28054
-Listening on port 1337
-</code></pre><p>2) Connect gdb <code>client</code> to the server:</p>
+Listening on port 1337</code></pre>
+<p>2) Connect gdb <code>client</code> to the server:</p>
 <pre><code>$ /home/victor/work/android-ndk-r10e/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/bin/arm-linux-androideabi-gdb
 ...
 &gt; target remote :1337
-...
-</code></pre><p>But I still recommend using <code>ndk-gdb</code>. </p>
-<h3 id="eaae69963118347f34db7ec3d2c2d0d9">Read debugging information</h3>
-<p>And now let's go back to the previously mentioned <code>warning</code> message:</p>
-<pre><code>warning: Could not load shared library symbols for 108 libraries, e.g. libstdc++.so.
-</code></pre><p><code>gdb</code> is telling us that it can't find any <strong>debugging symbols</strong> for the loaded (ARM) libraries. In that case we'll have to specify the <strong>path</strong> where it can find that information:</p>
+...</code></pre>
+<p>But I still recommend using <code>ndk-gdb</code>.</p>
+<h3 id="e1349582eb1fec3b3c6b7d78d7e4ae5b">Read debugging information<a class="anchor-link" href="#Read-debugging-information">¶</a></h3><p>And now let's go back to the previously mentioned <code>warning</code> message:</p>
+<pre><code>warning: Could not load shared library symbols for 108 libraries, e.g. libstdc++.so.</code></pre>
+<p><code>gdb</code> is telling us that it can't find any <strong>debugging symbols</strong> for the loaded (ARM) libraries. In that case we'll have to specify the <strong>path</strong> where it can find that information:</p>
 <ul>
 <li><code>system_lib</code>: contains all ARM libraries from the device (/system/lib)</li>
 <li><code>obj/local/armeabi</code>: contains debugging information about <code>libsquared.so</code> (our target)</li>
@@ -1127,8 +1126,8 @@ Loaded symbols for system_lib/libm.so
 Reading symbols from system_lib/liblog.so...(no debugging symbols found)...done.
 Loaded symbols for system_lib/liblog.so
 Reading symbols from system_lib/libcutils.so...(no debugging symbols found)...done.
-...
-</code></pre><p>You can now <strong>verify</strong> the debugging information via <code>info sharedlibrary</code>:</p>
+...</code></pre>
+<p>You can now <strong>verify</strong> the debugging information via <code>info sharedlibrary</code>:</p>
 <pre><code>gef&gt; info sharedlibrary
 From        To          Syms Read   Shared Object Library
 0x40053a80  0x400619e8  Yes (*)     /home/victor/workspace/jni_debug_demo/obj/local/armeabi/linker
@@ -1142,8 +1141,7 @@ From        To          Syms Read   Shared Object Library
 ...
 0x60b5bbe4  0x60b5d174  Yes         /home/victor/workspace/jni_debug_demo/obj/local/armeabi/libsquared.so
                         No          gralloc.mt6582.so
-(*): Shared library is missing debugging information.
-</code></pre>
+(*): Shared library is missing debugging information.</code></pre>
 </div>
 </div>
 </div>
@@ -1164,10 +1162,10 @@ From        To          Syms Read   Shared Object Library
 <p>From last output you can see that <code>libsquared.so</code> starts at address <strong>0x60b5bbe4</strong>. Let's see what we can find there:</p>
 <p><img alt="jni_debug_demo libsquared" class="img-responsive" src="http://dl.dornea.nu/img/2015/android-solib/b85df1e566b46ed748e315c3d4f043ed.png"/></p>
 <p>Bingo! So <code>Java_com_example_jni_1debug_1demo_SquaredWrapper_squared</code> starts at <strong>0x60b5bc28</strong>. We'll definitely set a <strong>breakpoint</strong> at that address:</p>
-<pre><code class="language-.shell">gef&gt; b Java_com_example_jni_1debug_1demo_SquaredWrapper_squared
-Breakpoint <span class="number">1</span> <span class="keyword">at</span> <span class="number">0x60b5bc40</span>: <span class="type">file</span> jni/square.c, line <span class="number">5.</span>
-gef&gt;
-</code></pre>
+<pre><code>.shell
+gef&gt; b Java_com_example_jni_1debug_1demo_SquaredWrapper_squared
+Breakpoint 1 at 0x60b5bc40: file jni/square.c, line 5.
+gef&gt;</code></pre>
 </div>
 </div>
 </div>
@@ -1187,8 +1185,8 @@ gef&gt;
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>For the targeted function to be executed we'll have to trigger its execution by clicking on the "Calculate" button in the UI. <strong>Before</strong> doing that you should tell <code>gdb</code> to <em>continue</em> execution:</p>
 <pre><code>gef&gt; continue
-Continuing.
-</code></pre><p>After having pressed the button in the UI, you should see sth similar to this:</p>
+Continuing.</code></pre>
+<p>After having pressed the button in the UI, you should see sth similar to this:</p>
 <pre><code>gef&gt; continue
 Continuing.
 --------------------------------------------------------------------------------[regs]
@@ -1225,8 +1223,8 @@ $r12   0x60b5bc28 $sp    0xbed1e290 $lr    0x418a1750 $pc    0x60b5bc40
 Backtrace stopped: previous frame identical to this frame (corrupt stack?)
 
 Breakpoint 1, Java_com_example_jni_1debug_1demo_SquaredWrapper_squared (je=0x4187fe30, jc=0x7a100019, base=8) at jni/square.c:5
-5           return (base*base);
-</code></pre><p>You can see that the execution currently stopped at <strong>0x60b5bc40</strong>. Now you can inspect the <em>registers</em>, set <em>additional</em> breakpoints, <em>step</em> into routines etc. </p>
+5           return (base*base);</code></pre>
+<p>You can see that the execution currently stopped at <strong>0x60b5bc40</strong>. Now you can inspect the <em>registers</em>, set <em>additional</em> breakpoints, <em>step</em> into routines etc.</p>
 <p><img alt="GDB GEF" class="img-responsive" src="http://dl.dornea.nu/img/2015/android-solib/1c34d2da522b2a450b603cf8cd6a965a.png">
 <img alt="GDB GEF" class="img-responsive" src="http://dl.dornea.nu/img/2015/android-solib/18d6146e96dbb21ceed498ae1cdd92f4.png"/></img></p>
 <p>At this point you should now be equipped with enough knowledge to dissect shared libraries and get some reverse engineering job done. Although this was a quite easy one due to the fact that we had debug symbols and were able to compile the library, the same techniques should also work on <em>stripped</em> binaries. In the post I'll some <em>binary analysis</em> on some random Android shared library using <a href="http://www.radare.org/r/">radare</a>.</p>
@@ -1313,7 +1311,7 @@ Breakpoint 1, Java_com_example_jni_1debug_1demo_SquaredWrapper_squared (je=0x418
                     </div>
                     <ul id="niu2-sidebar-toc-list">
                         <li><a href="#content-heading">Debugging Android native shared libraries</a></li>
-                        <li><a href='#5a73c3a04b1cadec1079dd6a320ce367'>Create Eclipse project¶</a></li><li><a href='#3db753280a88ebe0a48885a81095a17d'>Create Android project¶</a></li><li><a href='#8742c5f749ad86585a6730c9a295d83f'>Add JNI functionalities¶</a><ul><li><a href='#60f24e461e47e35a67c1646440b1517d'>C header¶</a></li><li><a href='#befb599f3c079222c08ed59961472c1c'>C source¶</a></li><li><a href='#3167ee0d828bb1864e420e8e255aea2e'>Build the library¶</a></li></ul></li><li><a href='#76919fe41c886cd94adabaf467a6c722'>Call the library¶</a></li><li><a href='#4c061f922fcf6cd1d715b6f8672e4408'>Run the demo application¶</a></li><li><a href='#8a41ffef1d93ae9488256f7a78aa47be'>Debug the application¶</a><ul><li><a href='#c42d5ee5a38a904c5b25b4cf5b5eb955'>Remount /system as rw¶</a></li><li><a href='#eefbac16c9d82bad4406d3d902964a0d'>Copy gdbserver to device¶</a></li><li><a href='#bd344e0d8803fe6797cd0e80cc5639ad'>Copy ARM libraries to your client¶</a></li><li><a href='#c05250ac6ed45919e7c8c882e3669410'>Run the application¶</a></li><li><a href='#97ff27fb42962b1b0f4eef4e46138ab4'>Attach gdb to process¶</a></li><li><a href='#eaae69963118347f34db7ec3d2c2d0d9'>Read debugging information</a></li><li><a href='#cd6f71941cbbe02f9a60b4ff7a043aa4'>Find target function¶</a></li><li><a href='#71b688fd082c180add0772dae6917606'>Trigger and debug function¶</a></li></ul></li><li><a href='#5cd6478416b226b632eb44888361e8d8'>References¶</a></li>
+                        <li><a href='#5a73c3a04b1cadec1079dd6a320ce367'>Create Eclipse project¶</a></li><li><a href='#3db753280a88ebe0a48885a81095a17d'>Create Android project¶</a></li><li><a href='#8742c5f749ad86585a6730c9a295d83f'>Add JNI functionalities¶</a><ul><li><a href='#60f24e461e47e35a67c1646440b1517d'>C header¶</a></li><li><a href='#befb599f3c079222c08ed59961472c1c'>C source¶</a></li><li><a href='#3167ee0d828bb1864e420e8e255aea2e'>Build the library¶</a></li></ul></li><li><a href='#76919fe41c886cd94adabaf467a6c722'>Call the library¶</a></li><li><a href='#4c061f922fcf6cd1d715b6f8672e4408'>Run the demo application¶</a></li><li><a href='#8a41ffef1d93ae9488256f7a78aa47be'>Debug the application¶</a><ul><li><a href='#c42d5ee5a38a904c5b25b4cf5b5eb955'>Remount /system as rw¶</a></li><li><a href='#eefbac16c9d82bad4406d3d902964a0d'>Copy gdbserver to device¶</a></li><li><a href='#bd344e0d8803fe6797cd0e80cc5639ad'>Copy ARM libraries to your client¶</a></li><li><a href='#c05250ac6ed45919e7c8c882e3669410'>Run the application¶</a></li><li><a href='#97ff27fb42962b1b0f4eef4e46138ab4'>Attach gdb to process¶</a></li><li><a href='#e1349582eb1fec3b3c6b7d78d7e4ae5b'>Read debugging information¶</a></li><li><a href='#cd6f71941cbbe02f9a60b4ff7a043aa4'>Find target function¶</a></li><li><a href='#71b688fd082c180add0772dae6917606'>Trigger and debug function¶</a></li></ul></li><li><a href='#5cd6478416b226b632eb44888361e8d8'>References¶</a></li>
                         <li><a href="#content-comments">Comments</a></li>
                     </ul>
                 </div>

@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -121,13 +121,13 @@
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
                     <p>Due to NetBSD’s great packaging system, software gets updated very frequently. It is very important to have a clean and safe system running and no outdated packages on your system. They might be vulnerable to recently discovered bugs and affect your systems’s security and performance. After updating the package tree (see <a href="http://www.netbsd.org/docs/pkgsrc/using.html">documentation</a>), I usually update my whole system by running:</p>
-<div class="highlight"><pre><span class="nv">$ </span>pkg_chk -su
+<div class="highlight"><pre><span></span>$ pkg_chk -su
 </pre></div>
 <p>Actually there is nothing wrong about that. Yet there is one big problem, which caused me to seek for another updating mechanism.</p>
-<div class="highlight"><pre><span class="nv">$ </span>pkg_chk -sun &gt; pkg_chk.log
+<div class="highlight"><pre><span></span>$ pkg_chk -sun &gt; pkg_chk.log
 </pre></div>
 <p>The log file might look like this:</p>
-<div class="highlight"><pre>archivers/gtar-base - gtar-base-1.20 &lt; gtar-base-1.22
+<div class="highlight"><pre><span></span>archivers/gtar-base - gtar-base-1.20 &lt; gtar-base-1.22
 WARNING: No archivers/lzma-utils/Makefile - package moved or obsolete?
 archivers/unrar - unrar-3.8.3 &lt; unrar-3.9.5
 archivers/zip - zip-2.32 &lt; zip-3.0nb1
@@ -164,7 +164,7 @@ devel/autoconf - autoconf-2.63 &lt; autoconf-2.64
 <p>o before updating any package “pkg_chk” will first delete the package AND its dependencies. This will take a lot of time when you’ll have to update big packages, e.g. Firefox. All its dependencies will be first updated and then the main package (in this case Firefox).</p>
 <p>If you want to save time and effort, you should better use another utility called “pkg_rolling-replace”. This will rebuild or update packages using “make replace” in tsorted order. For more information click <a href="http://pkgsrc.se/pkgtools/pkg_rolling-replace">here</a>.</p>
 <p>In order to update all packages on my system and ensure correct shared library dependencies, I run following commando:</p>
-<div class="highlight"><pre><span class="nv">$ </span>pkg_rolling-replace -rsuv
+<div class="highlight"><pre><span></span>$ pkg_rolling-replace -rsuv
 </pre></div>
                 </div>
 <hr/>

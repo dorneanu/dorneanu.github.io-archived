@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -132,7 +132,7 @@
 <li>audio: pcm_s16le</li>
 </ul>
 <p>Since the rendered movie is going to be very large, you can render and compress it to sth like <a href="https://en.wikipedia.org/wiki/H.264/MPEG-4_AVC">h264</a>. This is also the codec recommended by <a href="https://support.google.com/youtube/answer/1722171?hl=en">YouTube</a> for the uploads. So I've used <code>ffmpeg</code> to encode my lossless movie to <em>h264</em>:</p>
-<div class="highlight"><pre>ffmpeg -threads 0 \
+<div class="highlight"><pre><span></span>ffmpeg -threads 0 \
        -i &lt;loessless movie&gt; \
        -crf 18 \
        -bf 2 \ 
@@ -145,10 +145,10 @@
        movie_h264.avi
 </pre></div>
 <p>To play the movie I recommend <code>mplayer</code> or <a href="https://mpv.io">mpv</a>:</p>
-<div class="highlight"><pre>mplayer -cache-min 70 -lavdopts threads=0 -framedrop &lt;file.avi&gt;
+<div class="highlight"><pre><span></span>mplayer -cache-min 70 -lavdopts threads=0 -framedrop &lt;file.avi&gt;
 </pre></div>
 <p>or</p>
-<div class="highlight"><pre>mpv --autosync=30  --vd-lavc-threads=0 &lt;file.avi&gt;
+<div class="highlight"><pre><span></span>mpv --autosync=30  --vd-lavc-threads=0 &lt;file.avi&gt;
 </pre></div>
                 </div>
 <hr/>

@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -121,27 +121,27 @@
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
                     <p>Doing a simple <strong>port forwarding</strong> is actually a simple task:</p>
-<div class="highlight"><pre><span class="nv">$ </span>iptables -A PREROUTING -p tcp --dport <span class="m">80</span> -j REDIRECT --to-ports 8080
+<div class="highlight"><pre><span></span>$ iptables -A PREROUTING -p tcp --dport <span class="m">80</span> -j REDIRECT --to-ports 8080
 </pre></div>
 <p>This would redirect all traffic from <code>80</code> to <code>8080</code>. But if you have some <strong>firewall</strong> activated, you'll have to <strong>allow</strong> both ports:</p>
-<div class="highlight"><pre><span class="nv">$ </span>iptables -A INPUT -p tcp --dport <span class="m">80</span> -j ALLOW
-<span class="nv">$ </span>iptables -A INPUT -p tcp --dport <span class="m">8080</span> -j ALLOW
+<div class="highlight"><pre><span></span>$ iptables -A INPUT -p tcp --dport <span class="m">80</span> -j ALLOW
+$ iptables -A INPUT -p tcp --dport <span class="m">8080</span> -j ALLOW
 </pre></div>
 <p>Otherwise the port forwarding won't work. But this is not the use case you want to achieve. In most cases you want to <strong>redirect</strong> 
 traffic from one port (let's say <code>80</code>) from an external interface to another IP address (let's say <code>10.0.0.1:8080</code>). Using <strong>DNAT</strong> this 
 actually pretty easy to implement:</p>
-<div class="highlight"><pre><span class="nv">$ </span>iptables -t nat -A PREROUTING -p tcp --dport <span class="m">80</span> -j DNAT --to-destination 10.0.0.1:8080
+<div class="highlight"><pre><span></span>$ iptables -t nat -A PREROUTING -p tcp --dport <span class="m">80</span> -j DNAT --to-destination 10.0.0.1:8080
 </pre></div>
 <p>For a full example have a look at <a href="http://stackoverflow.com/questions/14212807/iptables-forward-request-on-different-interfaces-and-port?answertab=votes#tab-top">this stackoverflow</a>.
 However in my case I wanted to do DNAT to the <strong>loopback</strong> interface which didn't work (<a href="http://lists.netfilter.org/pipermail/netfilter/2004-August/055074.html">this answer</a> confirms this). Using <strong>REDIRECT</strong> is also a pretty bad idea since I had to allow access to both ports (which is kind of stupid). </p>
 <p>So... How to solve the problem? Using <a href="https://en.wikipedia.org/wiki/Inetdhttps://en.wikipedia.org/wiki/Inetd">inetd</a>. I've installed <a href="http://www.boutell.com/rinetd/">rinetd</a> and configured the port forwarding:</p>
-<div class="highlight"><pre><span class="nv">$ </span>apt-get install rinetd
-<span class="nv">$ </span>cat /etc/rinetd.conf
+<div class="highlight"><pre><span></span>$ apt-get install rinetd
+$ cat /etc/rinetd.conf
 <span class="o">[</span>...<span class="o">]</span>
-<span class="c"># bindadress    bindport  connectaddress  connectport</span>
+<span class="c1"># bindadress    bindport  connectaddress  connectport</span>
 &lt;external ip&gt;   <span class="m">80</span>          127.0.0.1       8080
 <span class="o">[</span>...<span class="o">]</span>
-<span class="nv">$ </span>service rinetd restart
+$ service rinetd restart
 </pre></div>
 <p>I hope this would prevent others from spending their whole day on doing DNAT to localhost. </p>
                 </div>

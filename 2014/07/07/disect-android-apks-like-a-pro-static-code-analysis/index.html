@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -127,11 +127,10 @@
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I've started writing this <a href="http://ipython.org/notebook.html">IPython notebook</a> in order to make myself more comfortable with Android and its SDK. Due to some personal interests I thought I could also have a look at the available <a href="http://en.wikipedia.org/wiki/Reverse_engineering">RE</a> tools and learn more about their pros &amp; cos. In particular I had a closer look at <a href="https://code.google.com/p/androguard/"><strong>AndroGuard</strong></a> which seems to be good at:</p>
-<blockquote>
-<p>Reverse engineering, Malware and goodware analysis of Android applications ... and more (ninja !)</p>
+<blockquote><p>Reverse engineering, Malware and goodware analysis of Android applications ... and more (ninja !)</p>
 </blockquote>
-<p>I was charmed but its capabilities and the pythonic art of handling with APKs. In the 2nd step I've needed a malware to play it, so I had a look at <a href="http://contagiominidump.blogspot.de/">Contagio Mobile</a>. There I've randomly chosen a malware and got stucked with <a href="http://contagiominidump.blogspot.de/2014/05/android-fake-banker.html">Fake Banker</a>. There are some technical details about the malware itself gained during automated tests which can be read <a href="http://www.apk-analyzer.net/analysis/646/3752/0/html">here</a>. </p>
-<p>This article will only deal with the <strong>static source code analysis</strong> of the malware. A 2nd part dedicated to the <strong>dynamic analysis</strong> is planed as well. </p>
+<p>I was charmed but its capabilities and the pythonic art of handling with APKs. In the 2nd step I've needed a malware to play it, so I had a look at <a href="http://contagiominidump.blogspot.de/">Contagio Mobile</a>. There I've randomly chosen a malware and got stucked with <a href="http://contagiominidump.blogspot.de/2014/05/android-fake-banker.html">Fake Banker</a>. There are some technical details about the malware itself gained during automated tests which can be read <a href="http://www.apk-analyzer.net/analysis/646/3752/0/html">here</a>.</p>
+<p>This article will only deal with the <strong>static source code analysis</strong> of the malware. A 2nd part dedicated to the <strong>dynamic analysis</strong> is planed as well.</p>
 </div>
 </div>
 </div>
@@ -150,37 +149,37 @@
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Stay safe and run the stuff isolated:</p>
-<pre><code class="language-shell"><span class="comment">➜</span>  <span class="comment">~</span>  <span class="comment">virsh</span> <span class="literal">-</span><span class="comment">c</span> <span class="comment">qemu:///system</span>           
+<div class="highlight"><pre><span></span>➜  ~  virsh -c qemu:///system           
 
-<span class="comment">Welcome</span> <span class="comment">to</span> <span class="comment">virsh</span>, <span class="comment">the</span> <span class="comment">virtualization</span> <span class="comment">interactive</span> <span class="comment">terminal</span>.
+Welcome to virsh, the virtualization interactive terminal.
 
-<span class="comment">Type:</span>  <span class="comment">'help'</span> <span class="comment">for</span> <span class="comment">help</span> <span class="comment">with</span> <span class="comment">commands</span>
-       <span class="comment">'quit'</span> <span class="comment">to</span> <span class="comment">quit</span>
+Type:  <span class="s1">'help'</span> <span class="k">for</span> <span class="nb">help</span> with commands
+       <span class="s1">'quit'</span> to quit
 
-<span class="comment">virsh</span> <span class="comment">#</span> 
-<span class="comment">virsh</span> <span class="comment">#</span> <span class="comment">list</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">all</span>
- <span class="comment">Id</span>    <span class="comment">Name</span>                           <span class="comment">State</span>
-<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>
- <span class="comment">2</span>     <span class="comment">Ubuntu</span>.<span class="comment">GitLab</span>                  <span class="comment">running</span>
- <span class="literal">-</span>     <span class="comment">Linux</span>.<span class="comment">Kali</span>                     <span class="comment">shut</span> <span class="comment">off</span>
- <span class="literal">-</span>     <span class="comment">Ubuntu</span>.<span class="comment">Tracks</span>                  <span class="comment">shut</span> <span class="comment">off</span>
- <span class="literal">-</span>     <span class="comment">Windows7</span>                       <span class="comment">shut</span> <span class="comment">off</span>
+virsh <span class="c1"># </span>
+virsh <span class="c1"># list --all</span>
+ Id    Name                           State
+----------------------------------------------------
+ <span class="m">2</span>     Ubuntu.GitLab                  running
+ -     Linux.Kali                     shut off
+ -     Ubuntu.Tracks                  shut off
+ -     Windows7                       shut off
 
-<span class="comment">virsh</span> <span class="comment">#</span> <span class="comment">start</span> <span class="comment">Linux</span>.<span class="comment">Kali</span>
-<span class="comment">Domain</span> <span class="comment">Linux</span>.<span class="comment">Kali</span> <span class="comment">started
-</span></code></pre>
+virsh <span class="c1"># start Linux.Kali</span>
+Domain Linux.Kali started
+</pre></div>
 <p>Now we're ready to login:</p>
-<pre><code class="language-shell">➜  ~  ssh kali.<span class="keyword">local</span>
-victor@kali.<span class="keyword">local</span>'s password: 
-Linux kali <span class="number">3.7</span>-trunk-amd64 <span class="comment">#1 SMP Debian 3.7.2-0+kali8 x86_64</span>
+<div class="highlight"><pre><span></span>➜  ~  ssh kali.local
+victor@kali.local<span class="err">'</span>s password: 
+Linux kali 3.7-trunk-amd64 <span class="c1">#1 SMP Debian 3.7.2-0+kali8 x86_64</span>
 
-The programs included <span class="keyword">with</span> <span class="keyword">the</span> Kali GNU/Linux system are free software;
-<span class="keyword">the</span> exact distribution terms <span class="keyword">for</span> each program are described <span class="keyword">in</span> <span class="keyword">the</span>
-individual files <span class="keyword">in</span> /usr/share/doc/*/copyright.
+The programs included with the Kali GNU/Linux system are free software<span class="p">;</span>
+the exact distribution terms <span class="k">for</span> each program are described in the
+individual files in /usr/share/doc/*/copyright.
 
-Kali GNU/Linux comes <span class="keyword">with</span> ABSOLUTELY NO WARRANTY, <span class="keyword">to</span> <span class="keyword">the</span> extent
-permitted <span class="keyword">by</span> applicable law.
-</code></pre>
+Kali GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+</pre></div>
 </div>
 </div>
 </div>
@@ -198,13 +197,12 @@ permitted <span class="keyword">by</span> applicable law.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<pre><code class="language-shell">(env)root<span class="variable">@kali</span><span class="symbol">:~/work/apk/SDK</span><span class="comment"># wget http://dl.google.com/android/android-sdk_r22.6.2-linux.tgz</span>
-(env)root<span class="variable">@kali</span><span class="symbol">:~/work/apk/SDK</span><span class="comment"># tar -zxf android-sdk_r22.6.2-linux.tgz</span>
-(env)root<span class="variable">@kali</span><span class="symbol">:~/work/apk/SDK</span><span class="comment"># export PATH=$PATH:/root/work/apk/SDK/android-sdk-linux/tools(env)root<span class="yardoctag">@kali</span>:~/work/apk/SDK# which monitor</span>
-/root/work/apk/<span class="constant">SDK</span>/android-sdk-linux/tools/monitor
-</code></pre>
-<blockquote>
-<p>Make sure you have the <strong>ia32-libs</strong> installed.</p>
+<div class="highlight"><pre><span></span><span class="o">(</span>env<span class="o">)</span>root@kali:~/work/apk/SDK# wget http://dl.google.com/android/android-sdk_r22.6.2-linux.tgz
+<span class="o">(</span>env<span class="o">)</span>root@kali:~/work/apk/SDK# tar -zxf android-sdk_r22.6.2-linux.tgz
+<span class="o">(</span>env<span class="o">)</span>root@kali:~/work/apk/SDK# <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/root/work/apk/SDK/android-sdk-linux/tools<span class="o">(</span>env<span class="o">)</span>root@kali:~/work/apk/SDK# which monitor
+/root/work/apk/SDK/android-sdk-linux/tools/monitor
+</pre></div>
+<blockquote><p>Make sure you have the <strong>ia32-libs</strong> installed.</p>
 </blockquote>
 </div>
 </div>
@@ -220,24 +218,24 @@ permitted <span class="keyword">by</span> applicable law.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [102]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">os</span>
+<div class="prompt input_prompt">In [102]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="c"># Adjust PYTHONPATH</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s">'~/work/bin/androguard'</span><span class="p">))</span>
+<span class="c1"># Adjust PYTHONPATH</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">'~/work/bin/androguard'</span><span class="p">))</span>
 
-<span class="c"># Setup new PATH</span>
-<span class="n">old_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">'PATH'</span><span class="p">]</span>
-<span class="n">new_path</span> <span class="o">=</span> <span class="n">old_path</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="s">"/root/work/apk/SDK/android-sdk-linux/tools:/root/work/apk/SDK/android-sdk-linux/platform-tools:/root/work/apk/SDK/android-sdk-linux/build-tools/19.1.0"</span>
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">'PATH'</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_path</span>
+<span class="c1"># Setup new PATH</span>
+<span class="n">old_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">'PATH'</span><span class="p">]</span>
+<span class="n">new_path</span> <span class="o">=</span> <span class="n">old_path</span> <span class="o">+</span> <span class="s2">":"</span> <span class="o">+</span> <span class="s2">"/root/work/apk/SDK/android-sdk-linux/tools:/root/work/apk/SDK/android-sdk-linux/platform-tools:/root/work/apk/SDK/android-sdk-linux/build-tools/19.1.0"</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">'PATH'</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_path</span>
 
-<span class="c"># Change working directory</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s">"/root/work/apk/"</span><span class="p">)</span>
+<span class="c1"># Change working directory</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">"/root/work/apk/"</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -252,27 +250,27 @@ In [102]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [104]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">pylab</span> <span class="n">inline</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">networkx</span> <span class="kn">as</span> <span class="nn">nx</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display_pretty</span><span class="p">,</span> <span class="n">display_html</span><span class="p">,</span> <span class="n">display_jpeg</span><span class="p">,</span> <span class="n">display_png</span><span class="p">,</span> <span class="n">display_json</span><span class="p">,</span> <span class="n">display_latex</span><span class="p">,</span> <span class="n">display_svg</span>
+<div class="prompt input_prompt">In [104]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pylab</span> inline
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">display_pretty</span><span class="p">,</span> <span class="n">display_html</span><span class="p">,</span> <span class="n">display_jpeg</span><span class="p">,</span> <span class="n">display_png</span><span class="p">,</span> <span class="n">display_json</span><span class="p">,</span> <span class="n">display_latex</span><span class="p">,</span> <span class="n">display_svg</span>
 
-<span class="c"># Androguard stuff</span>
-<span class="kn">import</span> <span class="nn">androlyze</span> <span class="kn">as</span> <span class="nn">anz</span>
-<span class="c">#import corae.bytecodes.dvm as dvm</span>
+<span class="c1"># Androguard stuff</span>
+<span class="kn">import</span> <span class="nn">androlyze</span> <span class="k">as</span> <span class="nn">anz</span>
+<span class="c1">#import corae.bytecodes.dvm as dvm</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">Populating the interactive namespace from numpy and matplotlib
 </pre>
 </div>
@@ -295,31 +293,30 @@ In [104]:
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now that you got everything running it's time to get some <strong>malicious</strong> APKs to play with. On <a href="http://contagiominidump.blogspot.de/">contagio mobile</a> you'll get tons of malicious files to look at. I've decided to look at the <a href="http://www.mediafire.com/download/e938k6t3y6ul1yy/FakeBankerAPKs.zip">Fake Banker</a>:</p>
-<pre><code class="language-shell">(env)root<span class="variable">@kali</span><span class="symbol">:~/work/apk/DroidBox/APK</span><span class="comment"># wget http://www.mediafire.com/download/e938k6t3y6ul1yy/FakeBankerAPKs.zip</span>
-</code></pre>
+<div class="highlight"><pre><span></span><span class="o">(</span>env<span class="o">)</span>root@kali:~/work/apk/DroidBox/APK# wget http://www.mediafire.com/download/e938k6t3y6ul1yy/FakeBankerAPKs.zip
+</pre></div>
 <p>Now you'll have to extract the archive. As mentioned on the site you'll have to contact the sites maintainer in order to get the password for the files. Thanks to <a href="https://twitter.com/snowfl0w">@snowfl0w</a> for providing me the password.</p>
-<blockquote>
-<p><strong>NOTE</strong>: The ordinary unzip command will fail to extract the files. You should install <em>p7zip</em>.</p>
+<blockquote><p><strong>NOTE</strong>: The ordinary unzip command will fail to extract the files. You should install <em>p7zip</em>.</p>
 </blockquote>
-<pre><code class="language-shell">(env)root<span class="variable">@kali</span><span class="symbol">:~/work/apk/DroidBox/APK</span><span class="comment"># 7z e FakeBankerAPKs.zip </span>
+<div class="highlight"><pre><span></span><span class="o">(</span>env<span class="o">)</span>root@kali:~/work/apk/DroidBox/APK# 7z e FakeBankerAPKs.zip 
 
-<span class="number">7</span>-<span class="constant">Zip</span> [<span class="number">64</span>] <span class="number">9.20</span>  <span class="constant">Copyright</span> (c) <span class="number">1999</span>-<span class="number">2010</span> <span class="constant">Igor</span> <span class="constant">Pavlov</span>  <span class="number">2010</span>-<span class="number">11</span>-<span class="number">18</span>
-p7zip <span class="constant">Version</span> <span class="number">9.20</span> (locale=en_US.<span class="constant">UTF</span>-<span class="number">8</span>,<span class="constant">Utf16</span>=on,<span class="constant">HugeFiles</span>=on,<span class="number">1</span> <span class="constant">CPU</span>)
+7-Zip <span class="o">[</span>64<span class="o">]</span> 9.20  Copyright <span class="o">(</span>c<span class="o">)</span> 1999-2010 Igor Pavlov  2010-11-18
+p7zip Version 9.20 <span class="o">(</span><span class="nv">locale</span><span class="o">=</span>en_US.UTF-8,Utf16<span class="o">=</span>on,HugeFiles<span class="o">=</span>on,1 CPU<span class="o">)</span>
 
-<span class="constant">Processing</span> <span class="symbol">archive:</span> <span class="constant">FakeBankerAPKs</span>.zip
+Processing archive: FakeBankerAPKs.zip
 
-<span class="constant">Extracting</span>  <span class="number">7276</span>e76298c50d2ee78271cf5114a176
-<span class="constant">Enter</span> password (will <span class="keyword">not</span> be echoed) <span class="symbol">:</span>
+Extracting  7276e76298c50d2ee78271cf5114a176
+Enter password <span class="o">(</span>will not be echoed<span class="o">)</span> :
 
-<span class="constant">Extracting</span>  a15b704743f53d3edb9cdd1182ca78d1
-<span class="constant">Extracting</span>  aac4d15741abe0ee9b4afe78be090599
+Extracting  a15b704743f53d3edb9cdd1182ca78d1
+Extracting  aac4d15741abe0ee9b4afe78be090599
 
-<span class="constant">Everything</span> is <span class="constant">Ok</span>
+Everything is Ok
 
-<span class="constant">Files</span><span class="symbol">:</span> <span class="number">3</span>
-<span class="constant">Size</span><span class="symbol">:</span>       <span class="number">629877</span>
-<span class="constant">Compressed</span><span class="symbol">:</span> <span class="number">622336</span>
-</code></pre>
+Files: 3
+Size:       629877
+Compressed: 622336
+</pre></div>
 </div>
 </div>
 </div>
@@ -349,13 +346,13 @@ p7zip <span class="constant">Version</span> <span class="number">9.20</span> (lo
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [105]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Change CWD</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s">"/root/work/apk/DroidBox/APK"</span><span class="p">)</span>
+<div class="prompt input_prompt">In [105]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Change CWD</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">"/root/work/apk/DroidBox/APK"</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -370,19 +367,19 @@ In [105]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [42]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="o">*</span><span class="p">;</span> <span class="n">do</span> <span class="nb">file</span> <span class="err">$</span><span class="n">i</span><span class="p">;</span> <span class="n">done</span>
+<div class="prompt input_prompt">In [42]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+<span class="k">for</span> i in *<span class="p">;</span> <span class="k">do</span> file <span class="nv">$i</span><span class="p">;</span> <span class="k">done</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">7276e76298c50d2ee78271cf5114a176: Zip archive data, at least v2.0 to extract
 a15b704743f53d3edb9cdd1182ca78d1: Zip archive data, at least v2.0 to extract
 aac4d15741abe0ee9b4afe78be090599: Zip archive data, at least v2.0 to extract
@@ -403,19 +400,19 @@ aac4d15741abe0ee9b4afe78be090599: Zip archive data, at least v2.0 to extract
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [151]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">unzip</span> <span class="o">-</span><span class="n">l</span> <span class="mf">7276e76298</span><span class="n">c50d2ee78271cf5114a176</span>
+<div class="prompt input_prompt">In [151]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+unzip -l 7276e76298c50d2ee78271cf5114a176
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">Archive:  7276e76298c50d2ee78271cf5114a176
 signed by SignApk
   Length      Date    Time    Name
@@ -456,20 +453,20 @@ signed by SignApk
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [159]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">cp</span> <span class="mf">7276e76298</span><span class="n">c50d2ee78271cf5114a176</span> <span class="n">FakeBanker</span><span class="o">.</span><span class="n">apk</span>
-<span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">apktool1</span><span class="o">.</span><span class="mf">5.2</span><span class="o">/</span><span class="n">apktool</span><span class="o">.</span><span class="n">jar</span> <span class="n">d</span> <span class="mf">7276e76298</span><span class="n">c50d2ee78271cf5114a176</span> <span class="n">output</span>
+<div class="prompt input_prompt">In [159]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+cp 7276e76298c50d2ee78271cf5114a176 FakeBanker.apk
+java -jar /root/work/bin/apktool1.5.2/apktool.jar d 7276e76298c50d2ee78271cf5114a176 output
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">Destination directory (/root/work/apk/DroidBox/APK/output) already exists. Use -f switch if you want to overwrite it.
 </pre>
 </div>
@@ -488,19 +485,19 @@ In [159]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [192]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">cat</span> <span class="n">output</span><span class="o">/</span><span class="n">AndroidManifest</span><span class="o">.</span><span class="n">xml</span>
+<div class="prompt input_prompt">In [192]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+cat output/AndroidManifest.xml
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;manifest android:versionCode="1" android:versionName="1.0" package="com.gmail.xpack"
   xmlns:android="http://schemas.android.com/apk/res/android"&gt;
@@ -560,25 +557,27 @@ In [192]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [213]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">media_paths</span> <span class="o">=</span> <span class="err">!</span><span class="n">find</span> <span class="n">output</span> <span class="o">-</span><span class="n">regextype</span> <span class="n">posix</span><span class="o">-</span><span class="n">egrep</span> <span class="o">-</span><span class="n">regex</span> <span class="s">"^.*\.(png|jpg|jpeg|gif|bmp)$"</span>
+<div class="prompt input_prompt">In [213]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">media_paths</span> <span class="o">=</span> <span class="o">!</span>find output -regextype posix-egrep -regex <span class="s2">"^.*\.(png|jpg|jpeg|gif|bmp)</span>$<span class="s2">"</span>
 <span class="n">display</span><span class="p">(</span><span class="n">media_paths</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">media_paths</span><span class="p">:</span>
     <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">p</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<pre class="ipynb">[&amp;apos;output/res/drawable-ldpi/ic_launcher1.png&amp;apos;,
- &amp;apos;output/res/drawable-mdpi/ic_launcher1.png&amp;apos;,
- &amp;apos;output/res/drawable-xhdpi/ic_launcher1.png&amp;apos;,
- &amp;apos;output/res/drawable-hdpi/logo.png&amp;apos;,
- &amp;apos;output/res/drawable-hdpi/ic_launcher1.png&amp;apos;]</pre>
+<div class="output_text output_subarea ">
+<pre class="ipynb">['output/res/drawable-ldpi/ic_launcher1.png',
+ 'output/res/drawable-mdpi/ic_launcher1.png',
+ 'output/res/drawable-xhdpi/ic_launcher1.png',
+ 'output/res/drawable-hdpi/logo.png',
+ 'output/res/drawable-hdpi/ic_launcher1.png']</pre>
+</div>
 </div>
 <div class="output_area"><div class="prompt"></div>
 <div class="output_png output_subarea ">
@@ -1239,20 +1238,20 @@ n2oln6IunvLC7ts9Ire2uUcVpe4kQ4neFrsJ3I5gM2coKySbhuw5Be2f/ls8A+hTNhULh3AO6dSW
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [212]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="c"># Ignore smali directory</span>
-<span class="n">tree</span> <span class="o">-</span><span class="n">f</span> <span class="o">-</span><span class="n">I</span> <span class="s">"smali"</span> <span class="n">output</span><span class="o">/</span>
+<div class="prompt input_prompt">In [212]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+<span class="c1"># Ignore smali directory</span>
+tree -f -I <span class="s2">"smali"</span> output/
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">output
 ├── output/AndroidManifest.xml
 ├── output/apktool.yml
@@ -1303,20 +1302,20 @@ In [212]:
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Having a look at the <em>AndroidManifest.xml</em> file itself you can see that we have a <em>MessageReceiver</em> with a quite high priority:</p>
-<pre><code class="language-xml"> <span class="tag">&lt;<span class="title">receiver</span> <span class="attribute">android:name</span>=<span class="value">"com.gmail.xbroadcast.MessageReceiver"</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">intent-filter</span> <span class="attribute">android:priority</span>=<span class="value">"999"</span>&gt;</span>
-                <span class="tag">&lt;<span class="title">action</span> <span class="attribute">android:name</span>=<span class="value">"android.provider.Telephony.SMS_RECEIVED"</span> /&gt;</span>
-            <span class="tag">&lt;/<span class="title">intent-filter</span>&gt;</span>
- <span class="tag">&lt;/<span class="title">receiver</span>&gt;</span>
-</code></pre>
+<div class="highlight"><pre><span></span><span class="nt">&lt;receiver</span> <span class="na">android:name=</span><span class="s">"com.gmail.xbroadcast.MessageReceiver"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;intent-filter</span> <span class="na">android:priority=</span><span class="s">"999"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">"android.provider.Telephony.SMS_RECEIVED"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/intent-filter&gt;</span>
+ <span class="nt">&lt;/receiver&gt;</span>
+</pre></div>
 <p>That looks very suspicious as well. What about the main <strong>entry point</strong>:</p>
-<pre><code class="language-xml"> <span class="tag">&lt;<span class="title">activity</span> <span class="attribute">android:label</span>=<span class="value">"@string/app_name"</span> <span class="attribute">android:name</span>=<span class="value">"com.gmail.xpack.MainActivity"</span>&gt;</span>
-            <span class="tag">&lt;<span class="title">intent-filter</span>&gt;</span>
-                <span class="tag">&lt;<span class="title">action</span> <span class="attribute">android:name</span>=<span class="value">"android.intent.action.MAIN"</span> /&gt;</span>
-                <span class="tag">&lt;<span class="title">category</span> <span class="attribute">android:name</span>=<span class="value">"android.intent.category.LAUNCHER"</span> /&gt;</span>
-            <span class="tag">&lt;/<span class="title">intent-filter</span>&gt;</span>
- <span class="tag">&lt;/<span class="title">activity</span>&gt;</span>
-</code></pre>
+<div class="highlight"><pre><span></span><span class="nt">&lt;activity</span> <span class="na">android:label=</span><span class="s">"@string/app_name"</span> <span class="na">android:name=</span><span class="s">"com.gmail.xpack.MainActivity"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;intent-filter&gt;</span>
+                <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">"android.intent.action.MAIN"</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;category</span> <span class="na">android:name=</span><span class="s">"android.intent.category.LAUNCHER"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/intent-filter&gt;</span>
+ <span class="nt">&lt;/activity&gt;</span>
+</pre></div>
 <p>So obviously the class <em>com.gmail.xpack.MainActivity</em> contains the main entry point. In the next steps we will have a closer look at the code. Besides that there are 2 files which might be interesting:</p>
 <ul>
 <li><code>output/res/raw/blfs.key</code></li>
@@ -1336,14 +1335,13 @@ In [212]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [5]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Use AndroGuard to static analysis</span>
-<span class="c"># Have a look at https://code.google.com/p/androguard/wiki/RE for some introduction</span>
-<span class="c">#a = anz.APK('KC.apk')</span>
-<span class="n">a</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">dx</span> <span class="o">=</span> <span class="n">anz</span><span class="o">.</span><span class="n">AnalyzeAPK</span><span class="p">(</span><span class="s">'FakeBanker.apk'</span><span class="p">,</span><span class="n">decompiler</span><span class="o">=</span><span class="s">'dex2jar'</span><span class="p">)</span>
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Use AndroGuard to static analysis</span>
+<span class="c1"># Have a look at https://code.google.com/p/androguard/wiki/RE for some introduction</span>
+<span class="c1">#a = anz.APK('KC.apk')</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">dx</span> <span class="o">=</span> <span class="n">anz</span><span class="o">.</span><span class="n">AnalyzeAPK</span><span class="p">(</span><span class="s1">'FakeBanker.apk'</span><span class="p">,</span><span class="n">decompiler</span><span class="o">=</span><span class="s1">'dex2jar'</span><span class="p">)</span>
 <span class="sd">"""</span>
 <span class="sd">d = anz.DalvikVMFormat(a.get_dex())</span>
 <span class="sd">dx = anz.VMAnalysis( d )</span>
@@ -1354,11 +1352,13 @@ In [5]:
 </pre></div>
 </div>
 </div>
+</div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[5]:</div>
-<pre class="ipynb">&amp;apos;\nd = anz.DalvikVMFormat(a.get_dex())\ndx = anz.VMAnalysis( d )\ngx = anz.GVMAnalysis( dx, None )\nd.set_vmanalysis( dx )\nd.set_gvmanalysis( gx )\n&amp;apos;</pre>
+<div class="output_area"><div class="prompt output_prompt">Out[5]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre class="ipynb">'\nd = anz.DalvikVMFormat(a.get_dex())\ndx = anz.VMAnalysis( d )\ngx = anz.GVMAnalysis( dx, None )\nd.set_vmanalysis( dx )\nd.set_gvmanalysis( gx )\n'</pre>
+</div>
 </div>
 </div>
 </div>
@@ -1374,157 +1374,163 @@ In [5]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [133]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">a</span><span class="o">.</span><span class="n">files</span>
+<div class="prompt input_prompt">In [133]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">files</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[133]:</div>
-<pre class="ipynb">{&amp;apos;AndroidManifest.xml&amp;apos;: &amp;apos;Unknown&amp;apos;,
- &amp;apos;META-INF/CERT.RSA&amp;apos;: &amp;apos;Unknown&amp;apos;,
- &amp;apos;META-INF/CERT.SF&amp;apos;: &amp;apos;Unknown&amp;apos;,
- &amp;apos;META-INF/MANIFEST.MF&amp;apos;: &amp;apos;Unknown&amp;apos;,
- &amp;apos;classes.dex&amp;apos;: &amp;apos;Unknown&amp;apos;,
- &amp;apos;res/drawable-hdpi/ic_launcher1.png&amp;apos;: &amp;apos;Unknown&amp;apos;,
- &amp;apos;res/drawable-hdpi/logo.png&amp;apos;: &amp;apos;Unknown&amp;apos;,
- &amp;apos;res/drawable-ldpi/ic_launcher1.png&amp;apos;: &amp;apos;Unknown&amp;apos;,
- &amp;apos;res/drawable-mdpi/ic_launcher1.png&amp;apos;: &amp;apos;Unknown&amp;apos;,
- &amp;apos;res/drawable-xhdpi/ic_launcher1.png&amp;apos;: &amp;apos;Unknown&amp;apos;,
- &amp;apos;res/layout/actup.xml&amp;apos;: &amp;apos;Unknown&amp;apos;,
- &amp;apos;res/layout/main.xml&amp;apos;: &amp;apos;Unknown&amp;apos;,
- &amp;apos;res/layout/main2.xml&amp;apos;: &amp;apos;Unknown&amp;apos;,
- &amp;apos;res/menu/main.xml&amp;apos;: &amp;apos;Unknown&amp;apos;,
- &amp;apos;res/raw/blfs.key&amp;apos;: &amp;apos;Unknown&amp;apos;,
- &amp;apos;res/raw/config.cfg&amp;apos;: &amp;apos;Unknown&amp;apos;,
- &amp;apos;resources.arsc&amp;apos;: &amp;apos;Unknown&amp;apos;}</pre>
+<div class="output_area"><div class="prompt output_prompt">Out[133]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre class="ipynb">{'AndroidManifest.xml': 'Unknown',
+ 'META-INF/CERT.RSA': 'Unknown',
+ 'META-INF/CERT.SF': 'Unknown',
+ 'META-INF/MANIFEST.MF': 'Unknown',
+ 'classes.dex': 'Unknown',
+ 'res/drawable-hdpi/ic_launcher1.png': 'Unknown',
+ 'res/drawable-hdpi/logo.png': 'Unknown',
+ 'res/drawable-ldpi/ic_launcher1.png': 'Unknown',
+ 'res/drawable-mdpi/ic_launcher1.png': 'Unknown',
+ 'res/drawable-xhdpi/ic_launcher1.png': 'Unknown',
+ 'res/layout/actup.xml': 'Unknown',
+ 'res/layout/main.xml': 'Unknown',
+ 'res/layout/main2.xml': 'Unknown',
+ 'res/menu/main.xml': 'Unknown',
+ 'res/raw/blfs.key': 'Unknown',
+ 'res/raw/config.cfg': 'Unknown',
+ 'resources.arsc': 'Unknown'}</pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [8]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">a</span><span class="o">.</span><span class="n">permissions</span>
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">permissions</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[8]:</div>
-<pre class="ipynb">[&amp;apos;android.permission.RECEIVE_BOOT_COMPLETED&amp;apos;,
- &amp;apos;android.permission.READ_SMS&amp;apos;,
- &amp;apos;android.permission.RECEIVE_SMS&amp;apos;,
- &amp;apos;android.permission.INTERNET&amp;apos;,
- &amp;apos;android.permission.READ_PHONE_STATE&amp;apos;,
- &amp;apos;android.permission.ACCESS_COARSE_LOCATION&amp;apos;,
- &amp;apos;android.permission.ACCESS_NETWORK_STATE&amp;apos;]</pre>
+<div class="output_area"><div class="prompt output_prompt">Out[8]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre class="ipynb">['android.permission.RECEIVE_BOOT_COMPLETED',
+ 'android.permission.READ_SMS',
+ 'android.permission.RECEIVE_SMS',
+ 'android.permission.INTERNET',
+ 'android.permission.READ_PHONE_STATE',
+ 'android.permission.ACCESS_COARSE_LOCATION',
+ 'android.permission.ACCESS_NETWORK_STATE']</pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [9]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">a</span><span class="o">.</span><span class="n">get_activities</span><span class="p">()</span>
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">get_activities</span><span class="p">()</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[9]:</div>
-<pre class="ipynb">[&amp;apos;com.gmail.xpack.MainActivity&amp;apos;, &amp;apos;com.gmail.xpack.ActUpdate&amp;apos;]</pre>
+<div class="output_area"><div class="prompt output_prompt">Out[9]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre class="ipynb">['com.gmail.xpack.MainActivity', 'com.gmail.xpack.ActUpdate']</pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [10]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">a</span><span class="o">.</span><span class="n">get_services</span><span class="p">()</span>
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">get_services</span><span class="p">()</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[10]:</div>
-<pre class="ipynb">[&amp;apos;com.gmail.xservices.XService&amp;apos;, &amp;apos;com.gmail.xservices.XSmsIncom&amp;apos;]</pre>
+<div class="output_area"><div class="prompt output_prompt">Out[10]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre class="ipynb">['com.gmail.xservices.XService', 'com.gmail.xservices.XSmsIncom']</pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [18]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">a</span><span class="o">.</span><span class="n">get_receivers</span><span class="p">()</span>
+<div class="prompt input_prompt">In [18]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">get_receivers</span><span class="p">()</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[18]:</div>
-<pre class="ipynb">[&amp;apos;com.gmail.xbroadcast.OnBootReceiver&amp;apos;,
- &amp;apos;com.gmail.xbroadcast.MessageReceiver&amp;apos;,
- &amp;apos;com.gmail.xservices.XRepeat&amp;apos;,
- &amp;apos;com.gmail.xservices.XUpdate&amp;apos;]</pre>
+<div class="output_area"><div class="prompt output_prompt">Out[18]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre class="ipynb">['com.gmail.xbroadcast.OnBootReceiver',
+ 'com.gmail.xbroadcast.MessageReceiver',
+ 'com.gmail.xservices.XRepeat',
+ 'com.gmail.xservices.XUpdate']</pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [19]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">a</span><span class="o">.</span><span class="n">get_main_activity</span><span class="p">()</span>
+<div class="prompt input_prompt">In [19]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">get_main_activity</span><span class="p">()</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[19]:</div>
-<pre class="ipynb">u&amp;apos;com.gmail.xpack.MainActivity&amp;apos;</pre>
+<div class="output_area"><div class="prompt output_prompt">Out[19]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre class="ipynb">u'com.gmail.xpack.MainActivity'</pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [18]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xpack_MainActivity</span><span class="o">.</span><span class="n">METHOD_onCreate</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
+<div class="prompt input_prompt">In [18]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xpack_MainActivity</span><span class="o">.</span><span class="n">METHOD_onCreate</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">
     protected void onCreate(android.os.Bundle p5)
     {
@@ -1553,19 +1559,19 @@ In [18]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [15]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">methods</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xlibs_myFunctions</span><span class="o">.</span><span class="n">get_methods</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">methods</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">get_name</span><span class="p">())</span>
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">methods</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xlibs_myFunctions</span><span class="o">.</span><span class="n">get_methods</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">methods</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">get_name</span><span class="p">())</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">&lt;init&gt;
 IntToStr
 StrToInt
@@ -1607,18 +1613,18 @@ typeInternetConnection
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [198]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xlibs_myFunctions</span><span class="o">.</span><span class="n">METHOD_setK12</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
+<div class="prompt input_prompt">In [198]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xlibs_myFunctions</span><span class="o">.</span><span class="n">METHOD_setK12</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">
     public static String setK12(String p4, android.content.Context p5)
     {
@@ -1664,18 +1670,18 @@ In [198]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [26]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xlibs_Blowfish</span><span class="o">.</span><span class="n">METHOD_init</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
+<div class="prompt input_prompt">In [26]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xlibs_Blowfish</span><span class="o">.</span><span class="n">METHOD_init</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">
     public Blowfish(String p2, String p3, String p4)
     {
@@ -1704,19 +1710,19 @@ In [26]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [143]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">z</span> <span class="o">=</span> <span class="n">dx</span><span class="o">.</span><span class="n">tainted_variables</span><span class="o">.</span><span class="n">get_string</span><span class="p">(</span><span class="s">"BLFSK"</span><span class="p">)</span>
+<div class="prompt input_prompt">In [143]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">dx</span><span class="o">.</span><span class="n">tainted_variables</span><span class="o">.</span><span class="n">get_string</span><span class="p">(</span><span class="s2">"BLFSK"</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">z</span><span class="p">:</span> <span class="n">z</span><span class="o">.</span><span class="n">show_paths</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">R 62 Lcom/gmail/xlibs/myFunctions;-&gt;getFirst (Landroid/content/Context;)V
 R 17c Lcom/gmail/xlibs/myFunctions;-&gt;getFirst (Landroid/content/Context;)V
 R e8 Lcom/gmail/xlibs/myFunctions;-&gt;getSecond (Landroid/content/Context;)V
@@ -1738,19 +1744,19 @@ R 0 Lcom/gmail/xlibs/myFunctions;-&gt;setK12 (Ljava/lang/String; Landroid/conten
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [123]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">find</span> <span class="n">output</span> <span class="o">-</span><span class="n">name</span> <span class="s">"blfs*"</span>
+<div class="prompt input_prompt">In [123]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+find output -name <span class="s2">"blfs*"</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">output/res/raw/blfs.key
 </pre>
 </div>
@@ -1760,19 +1766,19 @@ In [123]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [37]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">cat</span> <span class="n">output</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">raw</span><span class="o">/</span><span class="n">blfs</span><span class="o">.</span><span class="n">key</span>
+<div class="prompt input_prompt">In [37]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+cat output/res/raw/blfs.key
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">NfvnkjlnvkjKCNXKDKLFHSKD:LJmdklsXKLNDS:&lt;XObcniuaebkjxbcz</pre>
 </div>
 </div>
@@ -1790,19 +1796,19 @@ In [37]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [40]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">ls</span> <span class="o">-</span><span class="n">l</span> <span class="n">output</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">raw</span>
+<div class="prompt input_prompt">In [40]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+ls -l output/res/raw
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">total 8
 -rw-r--r-- 1 root root   56 Jun 25 13:26 blfs.key
 -rw-r--r-- 1 root root 1048 Jun 25 13:26 config.cfg
@@ -1814,19 +1820,19 @@ In [40]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [42]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">cat</span> <span class="n">output</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">raw</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">cfg</span>
+<div class="prompt input_prompt">In [42]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+cat output/res/raw/config.cfg
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">HoBbgAt+xT9vXJUlyhYYAVOx5Oy4XSMLyc7JC+ly5a1tbUtWvFMny2yqavP9D9GT0ogg2U4LN5FZE8/0Y2duLgE7dfXLPcaeXKoIuTmJ4LBiUjS0OokxUPMOrJYCTCx2oWGmdHJqohz7QlbqnZPWch9BvjiWG3TeXKDkjrPKohMswoPA/EVQy3is6XBBfqYKoExCDci14mcoHfnbw1V+YAJlwONpjn1dmzVkJLVQ4ZEbg2WPD5LnXwhdGkhVXF4kS/pHk+6h4ZVd4CMcG7kbWpe7f/dbBX3zJ2NXP+E+MxYW/MTYrNRBMQIfZbuhGmsULXjpHb16R19NZvV4qQwi68KrFbc5hZyfSkWUwD50t2O3o9mSQB3/IlqzzA7VE3XxrsUkZQcBYEixFshSTN+lywZwohooyjGiPEhof7k08bo3YgkDh/8vMR1rttvUKs0xTdQtLF8iER8GDCt6ZUtG0+Lf2G+THOw/Azp/ipC3JJ7Rcj0m1uTj3AAjwfK69rcbtCTP6q5qV8pDEtSr3foU7KZvjCXJL/8TVvZozttjoHnJhI3x5KGKLrczoavKsbiR0iI3ncwGTI5CQ7uZwfMkB5Q2Y4M7oDFTurCPT3iRAvhUQN3Ah8TKAyzwACUlCk9nA2A7H9IFfTgI2QvaXQlNxkPeZMh+iOYImUELMSbNQ1HpsaF1Bbymg6vWTgvyViVsAjf+Y22y+n0eFJicsLPzc9GNs6bCgPCIDVRr2iLoiXjP8AE4gQUdxfqCQ1JtvBfWXmB4kAWb1ciuqsE1Zff+aahnT1Qbet1vA6g9DsTLuumqX0tjmCD/E50eL48Bz0etthaS7RbJiIpg3SU9Lio1GmZeYBB9/4FW4CB1M+cH9jjjKmj4sXUwcLrBDgD+JvCEc7VGxdLj/Ori631mkWvRtlKC4sIOLlHQEDwRcXDgvLnAKZYG65Tm4a5gr490Yco1QSKxeMkMKvMitGQS87ObKaqr30nfXZHMwdWLc6Q437aVyOxc9GvxGC7qmtnYU4Pw5alh1XKtXdjY4EGsVhk/MQ==</pre>
 </div>
 </div>
@@ -1844,20 +1850,20 @@ In [42]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [46]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">base64</span> <span class="o">-</span><span class="n">d</span> <span class="n">output</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">raw</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">cfg</span> <span class="o">&gt;</span> <span class="n">output</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">raw</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">cfg</span><span class="o">.</span><span class="n">raw</span>
-<span class="nb">file</span> <span class="n">output</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">raw</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">cfg</span><span class="o">.</span><span class="n">raw</span>
+<div class="prompt input_prompt">In [46]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+base64 -d output/res/raw/config.cfg &gt; output/res/raw/config.cfg.raw
+file output/res/raw/config.cfg.raw
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">output/res/raw/config.cfg.raw: data
 </pre>
 </div>
@@ -1876,18 +1882,18 @@ In [46]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [191]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xlibs_Blowfish</span><span class="o">.</span><span class="n">METHOD_encrypt</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
+<div class="prompt input_prompt">In [191]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xlibs_Blowfish</span><span class="o">.</span><span class="n">METHOD_encrypt</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">
     public String encrypt(String p10)
     {
@@ -1930,18 +1936,18 @@ In [191]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [136]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xlibs_Blowfish</span><span class="o">.</span><span class="n">METHOD_decrypt</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
+<div class="prompt input_prompt">In [136]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xlibs_Blowfish</span><span class="o">.</span><span class="n">METHOD_decrypt</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">
     public String decrypt(String p9)
     {
@@ -1978,24 +1984,24 @@ In [136]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As I've looked into the code I've noticed that a new <code>Blowfish</code> class is initiated in <em>com/xlibs/myFunctions.class</em>. </p>
+<p>As I've looked into the code I've noticed that a new <code>Blowfish</code> class is initiated in <em>com/xlibs/myFunctions.class</em>.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [145]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xlibs_myFunctions</span><span class="o">.</span><span class="n">METHOD_getFirst</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
+<div class="prompt input_prompt">In [145]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xlibs_myFunctions</span><span class="o">.</span><span class="n">METHOD_getFirst</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">
     public static void getFirst(android.content.Context p14)
     {
@@ -2050,11 +2056,11 @@ In [145]:
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Especially this line is very interesting:</p>
-<pre><code class="language-java">com.gmail.xlibs.myFunctions.parseXml(<span class="keyword">new</span> com.gmail.xlibs.Blowfish(v5, <span class="string">"base64"</span>, <span class="string">"12345678"</span>).decrypt(com.gmail.xlibs.myFunctions.getRawData(<span class="number">1.754581157260185e+38</span>, <span class="number">1</span>, p14)), p14);
-</code></pre>
+<div class="highlight"><pre><span></span><span class="n">com</span><span class="o">.</span><span class="na">gmail</span><span class="o">.</span><span class="na">xlibs</span><span class="o">.</span><span class="na">myFunctions</span><span class="o">.</span><span class="na">parseXml</span><span class="o">(</span><span class="k">new</span> <span class="n">com</span><span class="o">.</span><span class="na">gmail</span><span class="o">.</span><span class="na">xlibs</span><span class="o">.</span><span class="na">Blowfish</span><span class="o">(</span><span class="n">v5</span><span class="o">,</span> <span class="s">"base64"</span><span class="o">,</span> <span class="s">"12345678"</span><span class="o">).</span><span class="na">decrypt</span><span class="o">(</span><span class="n">com</span><span class="o">.</span><span class="na">gmail</span><span class="o">.</span><span class="na">xlibs</span><span class="o">.</span><span class="na">myFunctions</span><span class="o">.</span><span class="na">getRawData</span><span class="o">(</span><span class="mf">1.754581157260185e+38</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">p14</span><span class="o">)),</span> <span class="n">p14</span><span class="o">);</span>
+</pre></div>
 <p>Obviously the encrypted file has some XML content which has to be parsed first. The <em>parseXML</em> function requires a String parameter containing the XML code. The XML code has to be first decrypted:</p>
-<pre><code class="language-java"><span class="keyword">new</span> com.gmail.xlibs.Blowfish(v5, <span class="string">"base64"</span>, <span class="string">"12345678"</span>)
-</code></pre>
+<div class="highlight"><pre><span></span><span class="k">new</span> <span class="n">com</span><span class="o">.</span><span class="na">gmail</span><span class="o">.</span><span class="na">xlibs</span><span class="o">.</span><span class="na">Blowfish</span><span class="o">(</span><span class="n">v5</span><span class="o">,</span> <span class="s">"base64"</span><span class="o">,</span> <span class="s">"12345678"</span><span class="o">)</span>
+</pre></div>
 <p>This will create a new <code>Blowfish</code> object where the parameters are set as shown below:</p>
 <ul>
 <li><code>v5</code><ul>
@@ -2076,18 +2082,18 @@ In [145]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [147]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xlibs_myFunctions</span><span class="o">.</span><span class="n">METHOD_getRawData</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
+<div class="prompt input_prompt">In [147]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">CLASS_Lcom_gmail_xlibs_myFunctions</span><span class="o">.</span><span class="n">METHOD_getRawData</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">
     public static String getRawData(int p9, int p10, android.content.Context p11)
     {
@@ -2125,34 +2131,36 @@ In [147]:
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The first argument <code>p9</code> is a shared preference and contains the name of the file the content should be read from. Using another decompiler l I had a look at the <code>getFirst</code> method and found this:</p>
-<pre><code class="language-java">...
-String str1 = getRawData(<span class="number">2130968576</span>, <span class="number">0</span>, paramContext);
-String str2 = getRawData(<span class="number">2130968577</span>, <span class="number">1</span>, paramContext);
-parseXml(<span class="keyword">new</span> Blowfish(str1, <span class="string">"base64"</span>, <span class="string">"12345678"</span>).decrypt(str2), paramContext);
-...
-</code></pre>
-<p>Now what are those numbers: 2130968576 and 2130968577? Those are ressource identifier. If we hex them we'll have: </p>
+<div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="n">String</span> <span class="n">str1</span> <span class="o">=</span> <span class="n">getRawData</span><span class="o">(</span><span class="mi">2130968576</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">paramContext</span><span class="o">);</span>
+<span class="n">String</span> <span class="n">str2</span> <span class="o">=</span> <span class="n">getRawData</span><span class="o">(</span><span class="mi">2130968577</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">paramContext</span><span class="o">);</span>
+<span class="n">parseXml</span><span class="o">(</span><span class="k">new</span> <span class="n">Blowfish</span><span class="o">(</span><span class="n">str1</span><span class="o">,</span> <span class="s">"base64"</span><span class="o">,</span> <span class="s">"12345678"</span><span class="o">).</span><span class="na">decrypt</span><span class="o">(</span><span class="n">str2</span><span class="o">),</span> <span class="n">paramContext</span><span class="o">);</span>
+<span class="o">...</span>
+</pre></div>
+<p>Now what are those numbers: 2130968576 and 2130968577? Those are ressource identifier. If we hex them we'll have:</p>
 <pre><code>hex(2130968576) = 7f040000 and 
 hex(2130968577) = 7f040001
-</code></pre><p>Let's search the files for this pattern:</p>
+
+</code></pre>
+<p>Let's search the files for this pattern:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [153]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">grep</span> <span class="o">-</span><span class="n">r</span> <span class="s">"7f040000"</span> <span class="n">output</span><span class="o">/*</span> <span class="o">&amp;&amp;</span> <span class="n">grep</span> <span class="o">-</span><span class="n">r</span> <span class="s">"7f040001"</span> <span class="n">output</span><span class="o">/*</span>
+<div class="prompt input_prompt">In [153]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+grep -r <span class="s2">"7f040000"</span> output/* <span class="o">&amp;&amp;</span> grep -r <span class="s2">"7f040001"</span> output/*
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">output/res/values/public.xml:    &lt;public type="raw" name="blfs" id="0x7f040000" /&gt;
 output/smali/com/gmail/xpack/R$raw.smali:.field public static final blfs:I = 0x7f040000
 output/res/values/public.xml:    &lt;public type="raw" name="config" id="0x7f040001" /&gt;
@@ -2175,19 +2183,19 @@ output/smali/com/gmail/xpack/R$raw.smali:.field public static final config:I = 0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [7]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">grep</span> <span class="s">"7f04000"</span> <span class="n">output</span><span class="o">/</span><span class="n">smali</span><span class="o">/</span><span class="n">com</span><span class="o">/</span><span class="n">gmail</span><span class="o">/</span><span class="n">xpack</span><span class="o">/</span><span class="n">R</span>\<span class="err">$</span><span class="n">raw</span><span class="o">.</span><span class="n">smali</span>
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+grep <span class="s2">"7f04000"</span> output/smali/com/gmail/xpack/R<span class="se">\$</span>raw.smali
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">.field public static final blfs:I = 0x7f040000
 .field public static final config:I = 0x7f040001
 </pre>
@@ -2204,7 +2212,9 @@ In [7]:
 <p><strong>Bingo</strong>! Now we know that:</p>
 <pre><code>2130968576 -&gt; 7f040000 -&gt; blfs.key
 2130968577 -&gt; 7f040000 -&gt; blfs.cfg
-</code></pre><p>So let's summarize some things:</p>
+
+</code></pre>
+<p>So let's summarize some things:</p>
 <ul>
 <li><strong>getFirst()</strong> calls <strong>getRawData</strong> twice<ol>
 <li><code>getRawData("blfs.key", 0, paramContext);</code></li>
@@ -2213,12 +2223,12 @@ In [7]:
 </li>
 </ul>
 <p>In getRawData() there is no magic happing: Some file stream is created and then the conten is read. <strong>BUT</strong>: There is one catch about it:</p>
-<pre><code class="language-java"><span class="keyword">if</span> (p10 != <span class="number">0</span>) {
-     v6 = v5;
-} <span class="keyword">else</span> {
-    v6 = com.gmail.xlibs.Blowfish.byte2hex(v5.getBytes()).substring(<span class="number">0</span>, <span class="number">50</span>);
-}
-</code></pre>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">(</span><span class="n">p10</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+     <span class="n">v6</span> <span class="o">=</span> <span class="n">v5</span><span class="o">;</span>
+<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+    <span class="n">v6</span> <span class="o">=</span> <span class="n">com</span><span class="o">.</span><span class="na">gmail</span><span class="o">.</span><span class="na">xlibs</span><span class="o">.</span><span class="na">Blowfish</span><span class="o">.</span><span class="na">byte2hex</span><span class="o">(</span><span class="n">v5</span><span class="o">.</span><span class="na">getBytes</span><span class="o">()).</span><span class="na">substring</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">50</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
 <p><code>p10</code> is the 2nd argument given to getRawData. If you pay attention you may notice that if <code>p10</code> == 1 nothing special will happen. Otherwise (content of blfs.key is read out) there are some string manipulations taking place. This took me a while to notice it and was the reason I couldn't decrypt the config.cfg. This is what it does with the content of <code>blfs.key</code>:</p>
 <ul>
 <li>convert string to byte array</li>
@@ -2231,31 +2241,30 @@ In [7]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [39]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">Blowfish</span>
-<span class="kn">from</span> <span class="nn">Crypto</span> <span class="kn">import</span> <span class="n">Random</span>
-<span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="n">pack</span>
-<span class="kn">from</span> <span class="nn">binascii</span> <span class="kn">import</span> <span class="n">hexlify</span><span class="p">,</span> <span class="n">unhexlify</span>
+<div class="prompt input_prompt">In [39]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="k">import</span> <span class="n">Blowfish</span>
+<span class="kn">from</span> <span class="nn">Crypto</span> <span class="k">import</span> <span class="n">Random</span>
+<span class="kn">from</span> <span class="nn">struct</span> <span class="k">import</span> <span class="n">pack</span>
+<span class="kn">from</span> <span class="nn">binascii</span> <span class="k">import</span> <span class="n">hexlify</span><span class="p">,</span> <span class="n">unhexlify</span>
 
-<span class="c"># Read content from files</span>
-<span class="n">blfs_key</span> <span class="o">=</span> <span class="err">!</span><span class="n">cat</span> <span class="n">output</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">raw</span><span class="o">/</span><span class="n">blfs</span><span class="o">.</span><span class="n">key</span>
-<span class="n">ciphertext_base64</span> <span class="o">=</span> <span class="err">!</span><span class="n">cat</span> <span class="n">output</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">raw</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">cfg</span>
-<span class="n">ciphertext_raw</span> <span class="o">=</span> <span class="n">ciphertext_base64</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"base64"</span><span class="p">)</span>
+<span class="c1"># Read content from files</span>
+<span class="n">blfs_key</span> <span class="o">=</span> <span class="o">!</span>cat output/res/raw/blfs.key
+<span class="n">ciphertext_base64</span> <span class="o">=</span> <span class="o">!</span>cat output/res/raw/config.cfg
+<span class="n">ciphertext_raw</span> <span class="o">=</span> <span class="n">ciphertext_base64</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">"base64"</span><span class="p">)</span>
 
-<span class="c"># Some settings</span>
-<span class="n">IV</span> <span class="o">=</span> <span class="s">"12345678"</span>
+<span class="c1"># Some settings</span>
+<span class="n">IV</span> <span class="o">=</span> <span class="s2">"12345678"</span>
 <span class="n">_KEY</span> <span class="o">=</span> <span class="n">blfs_key</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">ciphertext</span> <span class="o">=</span> <span class="n">ciphertext_raw</span>
 
-<span class="c"># As seen in the source code: </span>
-<span class="c">#  * hex-encode the blfs key</span>
-<span class="c">#  * take only the substring[0:50]</span>
+<span class="c1"># As seen in the source code: </span>
+<span class="c1">#  * hex-encode the blfs key</span>
+<span class="c1">#  * take only the substring[0:50]</span>
 <span class="n">KEY</span> <span class="o">=</span> <span class="n">hexlify</span><span class="p">(</span><span class="n">_KEY</span><span class="p">)[:</span><span class="mi">50</span><span class="p">]</span>
 
-<span class="c"># Do the decryption</span>
+<span class="c1"># Do the decryption</span>
 <span class="n">cipher</span> <span class="o">=</span> <span class="n">Blowfish</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">KEY</span><span class="p">,</span> <span class="n">Blowfish</span><span class="o">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">IV</span><span class="p">)</span>
 <span class="n">message</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">)</span>
 
@@ -2263,11 +2272,13 @@ In [39]:
 </pre></div>
 </div>
 </div>
+</div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[39]:</div>
-<pre class="ipynb">&amp;apos;&lt;?xml version="1.0" encoding="utf-8"?&gt;\n          &lt;config&gt;\n            &lt;data rid="25" \n                  shnum10="" shtext10="" shnum5="" shtext5="" shnum3="" shtext3="" shnum1="" shtext1="" \n                  del_dev="0" \n                  url_main="http://best-invest-int.com/gallery/3.php;http://citroen-club.ch/images/3.php" \n                  url_data="http://best-invest-int.com/gallery/1.php;http://citroen-club.ch/images/1.php" \n                  url_sms="http://best-invest-int.com/gallery/2.php;http://citroen-club.ch/images/2.php"\n                  url_log="http://best-invest-int.com/gallery/4.php;http://citroen-club.ch/images/4.php"\n                  download_domain="certificates-security.com"\n                  ready_to_bind="0" /&gt;\n            \n          &lt;/config&gt;\x05\x05\x05\x05\x05&amp;apos;</pre>
+<div class="output_area"><div class="prompt output_prompt">Out[39]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre class="ipynb">'&lt;?xml version="1.0" encoding="utf-8"?&gt;\n          &lt;config&gt;\n            &lt;data rid="25" \n                  shnum10="" shtext10="" shnum5="" shtext5="" shnum3="" shtext3="" shnum1="" shtext1="" \n                  del_dev="0" \n                  url_main="http://best-invest-int.com/gallery/3.php;http://citroen-club.ch/images/3.php" \n                  url_data="http://best-invest-int.com/gallery/1.php;http://citroen-club.ch/images/1.php" \n                  url_sms="http://best-invest-int.com/gallery/2.php;http://citroen-club.ch/images/2.php"\n                  url_log="http://best-invest-int.com/gallery/4.php;http://citroen-club.ch/images/4.php"\n                  download_domain="certificates-security.com"\n                  ready_to_bind="0" /&gt;\n            \n          &lt;/config&gt;\x05\x05\x05\x05\x05'</pre>
+</div>
 </div>
 </div>
 </div>
@@ -2283,39 +2294,38 @@ In [39]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [199]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
-<span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="kn">as</span> <span class="nn">ET</span>
+<div class="prompt input_prompt">In [199]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">lxml</span> <span class="k">import</span> <span class="n">etree</span>
+<span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
 
-<span class="c"># Remove dirty characters</span>
-<span class="n">xml</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"</span><span class="se">\x05</span><span class="s">"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+<span class="c1"># Remove dirty characters</span>
+<span class="n">xml</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">\x05</span><span class="s2">"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
 
-<span class="c"># Create XML tree from string</span>
+<span class="c1"># Create XML tree from string</span>
 <span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XML</span><span class="p">(</span><span class="n">xml</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">"/config//data"</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s2">"/config//data"</span><span class="p">)</span>
 
 <span class="n">frame</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="c"># Get data</span>
+<span class="c1"># Get data</span>
 <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">attr_value</span> <span class="ow">in</span> <span class="n">sample</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">values</span> <span class="o">=</span> <span class="n">attr_value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">";"</span><span class="p">)</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">attr_value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">";"</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
             <span class="n">frame</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">attr_name</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
 
-<span class="c"># Show attributes found in /config/data</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'Attribute'</span><span class="p">,</span> <span class="s">'Value'</span><span class="p">])</span>
+<span class="c1"># Show attributes found in /config/data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'Attribute'</span><span class="p">,</span> <span class="s1">'Value'</span><span class="p">])</span>
 <span class="n">df</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[199]:</div>
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[199]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="table table-hover table-striped dataframe">
 <thead>
@@ -2454,18 +2464,17 @@ In [199]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [197]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">urllib2</span>
+<div class="prompt input_prompt">In [197]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">urllib2</span>
  
-<span class="c"># Get URLs from DataFrame (only the valid ones)</span>
-<span class="n">urls</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'Value'</span><span class="p">][</span><span class="mi">10</span><span class="p">:</span><span class="mi">19</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-<span class="c">#urls = ["http://google.de/", "http://blog.dornea.nu/about"]</span>
+<span class="c1"># Get URLs from DataFrame (only the valid ones)</span>
+<span class="n">urls</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Value'</span><span class="p">][</span><span class="mi">10</span><span class="p">:</span><span class="mi">19</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="c1">#urls = ["http://google.de/", "http://blog.dornea.nu/about"]</span>
 <span class="n">resp</span> <span class="o">=</span> <span class="p">{}</span>
 
-<span class="k">def</span> <span class="nf">get_status_code</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s">"/"</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">get_status_code</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">"/"</span><span class="p">):</span>
     <span class="sd">""" This function retreives the status code of a website by requesting</span>
 <span class="sd">        HEAD data from the host. This means that it only requests the headers.</span>
 <span class="sd">        If the host cannot be reached or something else goes wrong, it returns</span>
@@ -2473,46 +2482,48 @@ In [197]:
 <span class="sd">    """</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">conn</span> <span class="o">=</span> <span class="n">httplib</span><span class="o">.</span><span class="n">HTTPConnection</span><span class="p">(</span><span class="n">host</span><span class="p">)</span>
-        <span class="n">conn</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"HEAD"</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">"HEAD"</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">conn</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span><span class="o">.</span><span class="n">getheaders</span><span class="p">()</span>
-    <span class="k">except</span> <span class="ne">StandardError</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">except</span> <span class="n">StandardError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
 
-<span class="c"># Iterate through URLs</span>
+<span class="c1"># Iterate through URLs</span>
 <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
-    <span class="n">p</span> <span class="o">=</span> <span class="s">'(?:http.*://)?(?P&lt;host&gt;[^:/ ]+).?(?P&lt;port&gt;[0-9]*)/(?P&lt;path&gt;.*)'</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="s1">'(?:http.*://)?(?P&lt;host&gt;[^:/ ]+).?(?P&lt;port&gt;[0-9]*)/(?P&lt;path&gt;.*)'</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
-        <span class="n">status_code</span> <span class="o">=</span> <span class="n">get_status_code</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s">'host'</span><span class="p">),</span> <span class="s">"/"</span> <span class="o">+</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s">'path'</span><span class="p">))</span>
+        <span class="n">status_code</span> <span class="o">=</span> <span class="n">get_status_code</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">'host'</span><span class="p">),</span> <span class="s2">"/"</span> <span class="o">+</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">'path'</span><span class="p">))</span>
         <span class="n">resp</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="n">status_code</span>
 <span class="n">resp</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[197]:</div>
-<pre class="ipynb">{&amp;apos;http://best-invest-int.com/gallery/1.php&amp;apos;: None,
- &amp;apos;http://best-invest-int.com/gallery/2.php&amp;apos;: None,
- &amp;apos;http://best-invest-int.com/gallery/3.php&amp;apos;: None,
- &amp;apos;http://best-invest-int.com/gallery/4.php&amp;apos;: None,
- &amp;apos;http://citroen-club.ch/images/1.php&amp;apos;: [(&amp;apos;date&amp;apos;,
-   &amp;apos;Fri, 04 Jul 2014 08:31:12 GMT&amp;apos;),
-  (&amp;apos;content-type&amp;apos;, &amp;apos;text/html; charset=iso-8859-1&amp;apos;),
-  (&amp;apos;server&amp;apos;, &amp;apos;Apache&amp;apos;)],
- &amp;apos;http://citroen-club.ch/images/2.php&amp;apos;: [(&amp;apos;date&amp;apos;,
-   &amp;apos;Fri, 04 Jul 2014 08:31:12 GMT&amp;apos;),
-  (&amp;apos;content-type&amp;apos;, &amp;apos;text/html; charset=iso-8859-1&amp;apos;),
-  (&amp;apos;server&amp;apos;, &amp;apos;Apache&amp;apos;)],
- &amp;apos;http://citroen-club.ch/images/3.php&amp;apos;: [(&amp;apos;date&amp;apos;,
-   &amp;apos;Fri, 04 Jul 2014 08:31:11 GMT&amp;apos;),
-  (&amp;apos;content-type&amp;apos;, &amp;apos;text/html; charset=iso-8859-1&amp;apos;),
-  (&amp;apos;server&amp;apos;, &amp;apos;Apache&amp;apos;)],
- &amp;apos;http://citroen-club.ch/images/4.php&amp;apos;: [(&amp;apos;date&amp;apos;,
-   &amp;apos;Fri, 04 Jul 2014 08:31:12 GMT&amp;apos;),
-  (&amp;apos;content-type&amp;apos;, &amp;apos;text/html; charset=iso-8859-1&amp;apos;),
-  (&amp;apos;server&amp;apos;, &amp;apos;Apache&amp;apos;)]}</pre>
+<div class="output_area"><div class="prompt output_prompt">Out[197]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre class="ipynb">{'http://best-invest-int.com/gallery/1.php': None,
+ 'http://best-invest-int.com/gallery/2.php': None,
+ 'http://best-invest-int.com/gallery/3.php': None,
+ 'http://best-invest-int.com/gallery/4.php': None,
+ 'http://citroen-club.ch/images/1.php': [('date',
+   'Fri, 04 Jul 2014 08:31:12 GMT'),
+  ('content-type', 'text/html; charset=iso-8859-1'),
+  ('server', 'Apache')],
+ 'http://citroen-club.ch/images/2.php': [('date',
+   'Fri, 04 Jul 2014 08:31:12 GMT'),
+  ('content-type', 'text/html; charset=iso-8859-1'),
+  ('server', 'Apache')],
+ 'http://citroen-club.ch/images/3.php': [('date',
+   'Fri, 04 Jul 2014 08:31:11 GMT'),
+  ('content-type', 'text/html; charset=iso-8859-1'),
+  ('server', 'Apache')],
+ 'http://citroen-club.ch/images/4.php': [('date',
+   'Fri, 04 Jul 2014 08:31:12 GMT'),
+  ('content-type', 'text/html; charset=iso-8859-1'),
+  ('server', 'Apache')]}</pre>
+</div>
 </div>
 </div>
 </div>
@@ -2537,23 +2548,23 @@ In [197]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [224]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">bash</span>
-<span class="n">mkdir</span> <span class="n">DEX</span>
-<span class="n">cp</span> <span class="mf">7276e76298</span><span class="n">c50d2ee78271cf5114a176</span> <span class="n">DEX</span>
-<span class="n">cd</span> <span class="n">DEX</span>
-<span class="n">unzip</span> <span class="mf">7276e76298</span><span class="n">c50d2ee78271cf5114a176</span>
-<span class="n">cd</span> <span class="o">..</span>
+<div class="prompt input_prompt">In [224]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+mkdir DEX
+cp 7276e76298c50d2ee78271cf5114a176 DEX
+<span class="nb">cd</span> DEX
+unzip 7276e76298c50d2ee78271cf5114a176
+<span class="nb">cd</span> ..
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_subarea output_stream output_stdout output_text">
 <pre class="ipynb">Archive:  7276e76298c50d2ee78271cf5114a176
 signed by SignApk
   inflating: META-INF/MANIFEST.MF    
@@ -2581,43 +2592,43 @@ signed by SignApk
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [106]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">hashlib</span>
+<div class="prompt input_prompt">In [106]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">hashlib</span>
 <span class="kn">import</span> <span class="nn">StringIO</span><span class="o">,</span> <span class="nn">pydot</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="kn">from</span> <span class="nn">androguard.core.bytecodes.dvm</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">androguard.core.analysis.analysis</span> <span class="kn">import</span> <span class="n">VMAnalysis</span>
-<span class="kn">from</span> <span class="nn">androguard.core.bytecode</span> <span class="kn">import</span> <span class="n">method2dot</span><span class="p">,</span> <span class="n">method2format</span><span class="p">,</span> <span class="n">method2png</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">androguard.core.bytecodes.dvm</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">androguard.core.analysis.analysis</span> <span class="k">import</span> <span class="n">VMAnalysis</span>
+<span class="kn">from</span> <span class="nn">androguard.core.bytecode</span> <span class="k">import</span> <span class="n">method2dot</span><span class="p">,</span> <span class="n">method2format</span><span class="p">,</span> <span class="n">method2png</span>
 
 
-<span class="n">d</span> <span class="o">=</span> <span class="n">DalvikVMFormat</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s">"DEX/classes.dex"</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">DalvikVMFormat</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">"DEX/classes.dex"</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">VMAnalysis</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
 <span class="n">d</span><span class="o">.</span><span class="n">set_vmanalysis</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
 
-<span class="c"># Utilities</span>
+<span class="c1"># Utilities</span>
 <span class="k">def</span> <span class="nf">create_graph</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
-    <span class="c"># Stolen from androguard/core/bytecode.py</span>
-    <span class="n">buff</span> <span class="o">=</span> <span class="s">"digraph {</span><span class="se">\n</span><span class="s">"</span>
-    <span class="n">buff</span> <span class="o">+=</span> <span class="s">"graph [rankdir=TB]</span><span class="se">\n</span><span class="s">"</span>
-    <span class="n">buff</span> <span class="o">+=</span> <span class="s">"node [shape=plaintext]</span><span class="se">\n</span><span class="s">"</span>
+    <span class="c1"># Stolen from androguard/core/bytecode.py</span>
+    <span class="n">buff</span> <span class="o">=</span> <span class="s2">"digraph {</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="n">buff</span> <span class="o">+=</span> <span class="s2">"graph [rankdir=TB]</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="n">buff</span> <span class="o">+=</span> <span class="s2">"node [shape=plaintext]</span><span class="se">\n</span><span class="s2">"</span>
     
-    <span class="c"># subgraphs cluster</span>
-    <span class="n">buff</span> <span class="o">+=</span> <span class="s">"subgraph cluster_"</span> <span class="o">+</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span> <span class="o">+</span> <span class="s">" {</span><span class="se">\n</span><span class="s">label=</span><span class="se">\"</span><span class="si">%s</span><span class="se">\"\n</span><span class="s">"</span> <span class="o">%</span> <span class="n">data</span><span class="p">[</span><span class="s">'name'</span><span class="p">]</span>
-    <span class="n">buff</span> <span class="o">+=</span> <span class="n">data</span><span class="p">[</span><span class="s">'nodes'</span><span class="p">]</span>
-    <span class="n">buff</span> <span class="o">+=</span> <span class="s">"}</span><span class="se">\n</span><span class="s">"</span>
+    <span class="c1"># subgraphs cluster</span>
+    <span class="n">buff</span> <span class="o">+=</span> <span class="s2">"subgraph cluster_"</span> <span class="o">+</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span> <span class="o">+</span> <span class="s2">" {</span><span class="se">\n</span><span class="s2">label=</span><span class="se">\"</span><span class="si">%s</span><span class="se">\"\n</span><span class="s2">"</span> <span class="o">%</span> <span class="n">data</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span>
+    <span class="n">buff</span> <span class="o">+=</span> <span class="n">data</span><span class="p">[</span><span class="s1">'nodes'</span><span class="p">]</span>
+    <span class="n">buff</span> <span class="o">+=</span> <span class="s2">"}</span><span class="se">\n</span><span class="s2">"</span>
 
-    <span class="c"># subgraphs edges</span>
-    <span class="n">buff</span> <span class="o">+=</span> <span class="n">data</span><span class="p">[</span><span class="s">'edges'</span><span class="p">]</span>
-    <span class="n">buff</span> <span class="o">+=</span> <span class="s">"}</span><span class="se">\n</span><span class="s">"</span>
+    <span class="c1"># subgraphs edges</span>
+    <span class="n">buff</span> <span class="o">+=</span> <span class="n">data</span><span class="p">[</span><span class="s1">'edges'</span><span class="p">]</span>
+    <span class="n">buff</span> <span class="o">+=</span> <span class="s2">"}</span><span class="se">\n</span><span class="s2">"</span>
     
     <span class="n">graph</span> <span class="o">=</span> <span class="n">pydot</span><span class="o">.</span><span class="n">graph_from_dot_data</span><span class="p">(</span><span class="n">buff</span><span class="p">)</span>
     
     <span class="k">return</span> <span class="n">graph</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -2632,31 +2643,30 @@ In [106]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [42]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Definition:  d.get_method_descriptor(self, class_name, method_name, descriptor)</span>
-<span class="c"># </span>
-<span class="c"># Examples for method descriptors:</span>
-<span class="c">#   R 62 Lcom/gmail/xlibs/myFunctions;-&gt;getFirst (Landroid/content/Context;)V</span>
-<span class="c">#   R 17c Lcom/gmail/xlibs/myFunctions;-&gt;getFirst (Landroid/content/Context;)V</span>
-<span class="c">#   R e8 Lcom/gmail/xlibs/myFunctions;-&gt;getSecond (Landroid/content/Context;)V</span>
-<span class="c">#   R 0 Lcom/gmail/xlibs/myFunctions;-&gt;setK12 (Ljava/lang/String; Landroid/content/Context;)Ljava/lang/String;</span>
+<div class="prompt input_prompt">In [42]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Definition:  d.get_method_descriptor(self, class_name, method_name, descriptor)</span>
+<span class="c1"># </span>
+<span class="c1"># Examples for method descriptors:</span>
+<span class="c1">#   R 62 Lcom/gmail/xlibs/myFunctions;-&gt;getFirst (Landroid/content/Context;)V</span>
+<span class="c1">#   R 17c Lcom/gmail/xlibs/myFunctions;-&gt;getFirst (Landroid/content/Context;)V</span>
+<span class="c1">#   R e8 Lcom/gmail/xlibs/myFunctions;-&gt;getSecond (Landroid/content/Context;)V</span>
+<span class="c1">#   R 0 Lcom/gmail/xlibs/myFunctions;-&gt;setK12 (Ljava/lang/String; Landroid/content/Context;)Ljava/lang/String;</span>
 
-<span class="n">m</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get_method_descriptor</span><span class="p">(</span><span class="s">"Lcom/gmail/xlibs/myFunctions;"</span><span class="p">,</span> <span class="s">"getFirst"</span><span class="p">,</span> <span class="s">"(Landroid/content/Context;)V"</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get_method_descriptor</span><span class="p">(</span><span class="s2">"Lcom/gmail/xlibs/myFunctions;"</span><span class="p">,</span> <span class="s2">"getFirst"</span><span class="p">,</span> <span class="s2">"(Landroid/content/Context;)V"</span><span class="p">)</span>
 <span class="n">buff_dot</span> <span class="o">=</span> <span class="n">method2dot</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">get_method</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
 
-<span class="n">graph</span> <span class="o">=</span> <span class="n">create_graph</span><span class="p">(</span><span class="n">buff_dot</span><span class="p">,</span> <span class="s">"png"</span><span class="p">)</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">create_graph</span><span class="p">(</span><span class="n">buff_dot</span><span class="p">,</span> <span class="s2">"png"</span><span class="p">)</span>
 <span class="n">Image</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">create_png</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[42]:</div>
-<div class="output_png output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[42]:</div>
+<div class="output_png output_subarea output_execute_result">
 <img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAACk0AAA4jCAIAAADsBTMUAAAABmJLR0QA/wD/AP+gvaeTAAAgAElE
 QVR4nOzdd3RUZf748c+QTDoQ0mgBggKCgZDdFVdAJViQGlqQpTdFwjkoRAV3dVdxWTchSAlYaAEh
 gCRLMITeAkFCvq6rUhQBQzNSUgmB9OT+/rg/Z2dnJpOZFIbB9+vs2TP3uU/5PM/cmePwyXOvRlEU
@@ -13449,23 +13459,22 @@ AAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [108]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">m</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get_method_descriptor</span><span class="p">(</span><span class="s">"Lcom/gmail/xlibs/myFunctions;"</span><span class="p">,</span> <span class="s">"getSecond"</span><span class="p">,</span> <span class="s">"(Landroid/content/Context;)V"</span><span class="p">)</span>
+<div class="prompt input_prompt">In [108]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get_method_descriptor</span><span class="p">(</span><span class="s2">"Lcom/gmail/xlibs/myFunctions;"</span><span class="p">,</span> <span class="s2">"getSecond"</span><span class="p">,</span> <span class="s2">"(Landroid/content/Context;)V"</span><span class="p">)</span>
 <span class="n">buff_dot</span> <span class="o">=</span> <span class="n">method2dot</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">get_method</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
 
-<span class="n">graph</span> <span class="o">=</span> <span class="n">create_graph</span><span class="p">(</span><span class="n">buff_dot</span><span class="p">,</span> <span class="s">"png"</span><span class="p">)</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">create_graph</span><span class="p">(</span><span class="n">buff_dot</span><span class="p">,</span> <span class="s2">"png"</span><span class="p">)</span>
 <span class="n">Image</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">create_png</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[108]:</div>
-<div class="output_png output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[108]:</div>
+<div class="output_png output_subarea output_execute_result">
 <img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAACwMAAArdCAIAAAB2L4e9AAAABmJLR0QA/wD/AP+gvaeTAAAgAElE
 QVR4nOzdeXwUVbrw8afIvgDZCIGwhGERDMTcURyBAYKOyBq2gMOmLAKG96IQFZ2Lc1EvowlRWQRH
 lgCyaRIFSQTCZiBIkkFnBhhUFoEAQSAbhIQsnaXeP2rsabs7nU5IaGh/3z/4dJ06dc5zTlUln6ae
@@ -21721,46 +21730,47 @@ aEIAAAAAAAAAAKlDEwIAAAAAAAAASB2aEAAAAAAAAABA6tCEAAAAAAAAAABShyYEAAAAAAAAAJA6
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [111]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># We should have a list of PathP objects which represent where a specific method is called:</span>
-<span class="n">paths</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">tainted_packages</span><span class="o">.</span><span class="n">search_methods</span><span class="p">(</span><span class="s">"."</span><span class="p">,</span> <span class="s">"onReceive"</span><span class="p">,</span> <span class="s">"."</span><span class="p">)</span>
+<div class="prompt input_prompt">In [111]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># We should have a list of PathP objects which represent where a specific method is called:</span>
+<span class="n">paths</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">tainted_packages</span><span class="o">.</span><span class="n">search_methods</span><span class="p">(</span><span class="s2">"."</span><span class="p">,</span> <span class="s2">"onReceive"</span><span class="p">,</span> <span class="s2">"."</span><span class="p">)</span>
 <span class="n">paths</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[111]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[111]:</div>
+<div class="output_text output_subarea output_execute_result">
 <pre class="ipynb">[&lt;androguard.core.analysis.analysis.PathP instance at 0x101a5290&gt;]</pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [115]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Get the class manager from the VM</span>
+<div class="prompt input_prompt">In [115]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get the class manager from the VM</span>
 <span class="n">cm</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get_class_manager</span><span class="p">()</span>
 
 <span class="n">src</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">dst</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="c"># Iterate through paths</span>
+<span class="c1"># Iterate through paths</span>
 <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">:</span>
     <span class="n">src</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_src</span><span class="p">(</span><span class="n">cm</span><span class="p">))</span>
     <span class="n">dst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_dst</span><span class="p">(</span><span class="n">cm</span><span class="p">))</span>
 
-<span class="n">df_src</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'From'</span><span class="p">,</span> <span class="s">'Method'</span><span class="p">,</span> <span class="s">'Type'</span><span class="p">])</span>
-<span class="n">df_dst</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'To'</span><span class="p">,</span> <span class="s">'Method'</span><span class="p">,</span> <span class="s">'Type'</span><span class="p">])</span>
+<span class="n">df_src</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'From'</span><span class="p">,</span> <span class="s1">'Method'</span><span class="p">,</span> <span class="s1">'Type'</span><span class="p">])</span>
+<span class="n">df_dst</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'To'</span><span class="p">,</span> <span class="s1">'Method'</span><span class="p">,</span> <span class="s1">'Type'</span><span class="p">])</span>
 <span class="n">display_html</span><span class="p">(</span><span class="n">df_src</span><span class="p">)</span>
 <span class="n">display_html</span><span class="p">(</span><span class="n">df_dst</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="output_wrapper">
@@ -21818,23 +21828,22 @@ In [115]:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [253]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">m</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get_method_descriptor</span><span class="p">(</span><span class="s">"Lcom/gmail/xservices/XRepeat;"</span><span class="p">,</span> <span class="s">"onReceive"</span><span class="p">,</span> <span class="s">"(Landroid/content/Context; Landroid/content/Intent;)V"</span><span class="p">)</span>
+<div class="prompt input_prompt">In [253]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get_method_descriptor</span><span class="p">(</span><span class="s2">"Lcom/gmail/xservices/XRepeat;"</span><span class="p">,</span> <span class="s2">"onReceive"</span><span class="p">,</span> <span class="s2">"(Landroid/content/Context; Landroid/content/Intent;)V"</span><span class="p">)</span>
 
 <span class="n">buff_dot</span> <span class="o">=</span> <span class="n">method2dot</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">get_method</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
-<span class="n">graph</span> <span class="o">=</span> <span class="n">create_graph</span><span class="p">(</span><span class="n">buff_dot</span><span class="p">,</span> <span class="s">"png"</span><span class="p">)</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">create_graph</span><span class="p">(</span><span class="n">buff_dot</span><span class="p">,</span> <span class="s2">"png"</span><span class="p">)</span>
 <span class="n">Image</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">create_png</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">
-    Out[253]:</div>
-<div class="output_png output_subarea output_pyout">
+<div class="output_area"><div class="prompt output_prompt">Out[253]:</div>
+<div class="output_png output_subarea output_execute_result">
 <img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABbUAAALMCAIAAABc1MicAAAABmJLR0QA/wD/AP+gvaeTAAAgAElE
 QVR4nOzde1wUVf8H8O+yd1gvXEQMFSw1fVDkqay0TMwyb+ANM1HT9NGkJ8vslz5lPZWPGRcfb2kX
 UUxFSyi8oOI1FBXIbmJ2URNNUZOrBC7Lsrvz++P0TNtehtllYcH9vP/w5Z6ZOed7zpyZ2T3MnJFw
@@ -23575,20 +23584,21 @@ N+qvAAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I've found cool new ways how to analyze an APK using python tools. <strong>AndroGuard</strong> seems to be a quite good framework to work it. Although I've managed it to get <em>almost</em> everything working, I must say that the project itself (and its components!) aren't well documented. Then I had several errors like this one:</p>
-<pre><code class="language-shell"><span class="comment"># ~/work/bin/androguard/androdd.py -i FakeBanker.apk -f PNG -o neu</span>
-Dump information FakeBanker.apk <span class="keyword">in</span> neu
+<div class="highlight"><pre><span></span><span class="c1"># ~/work/bin/androguard/androdd.py -i FakeBanker.apk -f PNG -o neu</span>
+Dump information FakeBanker.apk in neu
 Clean directory neu
-Analysis <span class="keyword">...</span> End
-Decompilation <span class="keyword">...</span> End
+Analysis ... End
+Decompilation ... End
 ERROR: module pydot not found
-Dump Landroid/support/v4/app/FragmentManager; &lt;init&gt; ()V <span class="keyword">...</span> PNG <span class="keyword">...</span>
-Traceback (most recent call last):
-  File <span class="string">"/root/work/bin/androguard/androdd.py"</span>, line <span class="number">222</span>, <span class="keyword">in</span> &lt;module&gt;
-    main(options, arguments)
-  File <span class="string">"/root/work/bin/androguard/androdd.py"</span>, line <span class="number">207</span>, <span class="keyword">in</span> main~
-</code></pre>
+Dump Landroid/support/v4/app/FragmentManager<span class="p">;</span> &lt;init&gt; <span class="o">()</span>V ... PNG ...
+Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
+  File <span class="s2">"/root/work/bin/androguard/androdd.py"</span>, line 222, in &lt;module&gt;
+    main<span class="o">(</span>options, arguments<span class="o">)</span>
+  File <span class="s2">"/root/work/bin/androguard/androdd.py"</span>, line 207, in main~
+</pre></div>
 <pre><code>export_apps_to_format(options.input, a, options.output, options.limit, options.jar, options.decompiler, options.format)
-</code></pre><p>  File "/root/work/bin/androguard/androdd.py", line 180, in export_apps_to_format
+</code></pre>
+<p>File "/root/work/bin/androguard/androdd.py", line 180, in export_apps_to_format
     method2format(filename + "." + format, format, None, buff)
   File "/root/work/bin/androguard/androguard/core/bytecode.py", line 338, in method2format
     error("module pydot not found")

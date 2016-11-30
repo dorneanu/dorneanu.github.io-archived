@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -184,7 +184,7 @@
 <p>The Burp Extender API is the main component and plays a crucial role in automating burp. There are a lot of extension (Java, Python, Ruby) and you could easily write your <a href="http://blog.portswigger.net/2012/12/writing-your-first-burp-extension.html">own</a> one. As you might have noticed there are 3 main supported languages: Java, Ruby and Python. And because I love the pythonic way of life I had closer look at the Jython Burp API. As stated on the github page you can get a jython console to interact with Burp. That's crazy! And this was one of my main requirements.</p>
 <h1 id="4e2419f34a9754a835ba2515de19d358">Jython Burp API</h1>
 <p>First I've cloned the github repo and copied Burp into the<em> jython-burp-api </em>folder as described in the README.</p>
-<div class="highlight"><pre><span class="nv">$ </span>ls -l
+<div class="highlight"><pre><span></span>$ ls -l
 total 13173
 drwxr-xr-x <span class="m">3</span> vd vd     <span class="m">1024</span> 2013-07-31 14:50 custom-modules
 drwxr-xr-x <span class="m">4</span> vd vd     <span class="m">1024</span> 2013-08-02 11:27 jython-burp-api-master
@@ -192,7 +192,7 @@ lrwxrwxrwx <span class="m">1</span> vd vd       <span class="m">28</span> 2013-0
 -rw-r--r-- <span class="m">1</span> vd vd <span class="m">13432713</span> 2013-07-31 13:49 jython-standalone-2.7-b1.jar
 </pre></div>
 <p>I <em>cd </em>into<em> jython-burp-api-master, </em>copied Burp into it and compiled the Burp Extender files:</p>
-<div class="highlight"><pre><span class="nv">$ </span>ls -l
+<div class="highlight"><pre><span></span>$ ls -l
 total 9068
 -rw-r--r-- <span class="m">1</span> vd vd    <span class="m">2087</span> 2013-05-13 20:27 burp.ini
 -rwxr-x--- <span class="m">1</span> vd vd <span class="m">9225061</span> 2013-07-31 14:07 burpsuite_pro_v1.5.11.jar
@@ -202,10 +202,10 @@ drwxr-xr-x <span class="m">3</span> vd vd    <span class="m">1024</span> 2013-07
 -rw-r--r-- <span class="m">1</span> vd vd    <span class="m">6662</span> 2013-05-13 20:27 README.md
 -rw-r--r-- <span class="m">1</span> vd vd    <span class="m">3592</span> 2013-07-31 15:30 run.py
 
-<span class="nv">$ </span>javac -cp ../jython.jar java/src/*.java java/src/burp/*.java
+$ javac -cp ../jython.jar java/src/*.java java/src/burp/*.java
 </pre></div>
 <p>Afterwards I tried to start Burp (as described in the README) using:</p>
-<div class="highlight"><pre><span class="nv">$ </span>java -Xmx1g -jar ../jython.jar run.py -i -d -B burpsuite_pro_v1.5.11.jar
+<div class="highlight"><pre><span></span>$ java -Xmx1g -jar ../jython.jar run.py -i -d -B burpsuite_pro_v1.5.11.jar
 Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
   File <span class="s2">"run.py"</span>, line 117, in &lt;module&gt;
     start_burp<span class="o">(</span>opt, *args<span class="o">)</span>
@@ -214,7 +214,7 @@ Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
 ImportError: No module named burp_extender
 </pre></div>
 <p>Hmmm.. Strange. I've created this <a href="https://github.com/mwielgoszewski/jython-burp-api/issues/7">issue</a> and informed the developer about the bug. Finally I was able to solve it by myself. The problem was that jython didn't know where to find the module <em>burp_extender. </em>So the class path had to be changed:</p>
-<div class="highlight"><pre><span class="nv">$ </span>java -jar ../jython.jar -Dpython.path<span class="o">=</span>Lib/ run.py -B burpsuite_pro_v1.5.11.jar -i -d -v
+<div class="highlight"><pre><span></span>$ java -jar ../jython.jar -Dpython.path<span class="o">=</span>Lib/ run.py -B burpsuite_pro_v1.5.11.jar -i -d -v
 
 Jython 2.7b1 <span class="o">(</span>default:ac42d59644e9, Feb <span class="m">9</span> 2013, 15:24:52<span class="o">)</span> 
 <span class="o">[</span>OpenJDK 64-Bit Server VM <span class="o">(</span>Sun Microsystems Inc.<span class="o">)]</span> on java1.6.0_20
@@ -228,10 +228,10 @@ Jython 2.7b1 <span class="o">(</span>default:ac42d59644e9, Feb <span class="m">9
 <p>Ahh there we go! Now you should have Burp fired up and a jython console to interact with. Check out <a href="https://github.com/mwielgoszewski/jython-burp-api#examples">examples</a> for some commands.</p>
 <h1 id="caea8340e2d186a540518d08602aa065">Automation</h1>
 <p>Having this done the next step was to automate the scanning process. The jython console is very helpful but I somehow have to automate Burp with one command. Sth like:</p>
-<div class="highlight"><pre><span class="nv">$ </span>java -jar ../jython.jar -Dpython.path<span class="o">=</span>Lib/  run.py -B burpsuite_pro_v1.5.11.jar --send-to-spider http://dornea.nu --add-to-scope http://dornea.nu -i
+<div class="highlight"><pre><span></span>$ java -jar ../jython.jar -Dpython.path<span class="o">=</span>Lib/  run.py -B burpsuite_pro_v1.5.11.jar --send-to-spider http://dornea.nu --add-to-scope http://dornea.nu -i
 </pre></div>
 <p>Well I had some closer look at the <em>run.py </em>and modified it a little bit. This is what came out (own modifications have been highlighted):</p>
-<div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
+<div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="kn">from</span> <span class="nn">java.lang</span> <span class="kn">import</span> <span class="n">System</span>
 
 <span class="kn">from</span> <span class="nn">org.python.util</span> <span class="kn">import</span> <span class="n">JLineConsole</span><span class="p">,</span> <span class="n">PythonInterpreter</span>
@@ -243,47 +243,47 @@ Jython 2.7b1 <span class="o">(</span>default:ac42d59644e9, Feb <span class="m">9
 <span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
 
 <span class="k">class</span> <span class="nc">MyThread</span><span class="p">(</span><span class="n">Thread</span><span class="p">):</span>
-    <span class="c"># Run own thread to get things done</span>
+    <span class="c1"># Run own thread to get things done</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">burp</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
-        <span class="n">Thread</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'jython-console'</span><span class="p">)</span>
+        <span class="n">Thread</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'jython-console'</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">opts</span>   <span class="o">=</span> <span class="n">options</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">burp</span>   <span class="o">=</span> <span class="n">burp</span>
 
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">java.net</span> <span class="kn">import</span> <span class="n">URL</span>
 
-        <span class="c"># Add new scope</span>
+        <span class="c1"># Add new scope</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">opts</span><span class="o">.</span><span class="n">add_to_scope</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">burp</span><span class="o">.</span><span class="n">includeInScope</span><span class="p">(</span><span class="n">URL</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opts</span><span class="o">.</span><span class="n">add_to_scope</span><span class="p">))</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">"[--] Added new scope ..."</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">"[--] Added new scope ..."</span><span class="p">)</span>
 
-        <span class="c"># Send URL to spider</span>
+        <span class="c1"># Send URL to spider</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">opts</span><span class="o">.</span><span class="n">send_to_spider</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">burp</span><span class="o">.</span><span class="n">sendToSpider</span><span class="p">(</span><span class="n">URL</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opts</span><span class="o">.</span><span class="n">send_to_spider</span><span class="p">))</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">"[--] Starting spider ..."</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">"[--] Starting spider ..."</span><span class="p">)</span>
 
-        <span class="c"># Start interactive jython console</span>
+        <span class="c1"># Start interactive jython console</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">opts</span><span class="o">.</span><span class="n">interactive</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">java.util</span> <span class="kn">import</span> <span class="n">Properties</span>
             <span class="n">pre_properties</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="n">getProperties</span><span class="p">()</span>
-            <span class="n">pre_properties</span><span class="p">[</span><span class="s">'python.console'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'org.python.util.ReadlineConsole'</span>
+            <span class="n">pre_properties</span><span class="p">[</span><span class="s1">'python.console'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'org.python.util.ReadlineConsole'</span>
             <span class="n">post_properties</span> <span class="o">=</span> <span class="n">Properties</span><span class="p">()</span>
 
             <span class="n">PythonInterpreter</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">pre_properties</span><span class="p">,</span> <span class="n">post_properties</span><span class="p">,</span> <span class="p">[])</span>
 
-            <span class="c"># Attach threaded console to BurpExtender</span>
+            <span class="c1"># Attach threaded console to BurpExtender</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">burp</span><span class="o">.</span><span class="n">console</span> <span class="o">=</span> <span class="n">console</span> <span class="o">=</span> <span class="n">JLineConsole</span><span class="p">()</span>
-            <span class="n">console</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">'Burp'</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">burp</span><span class="p">)</span>
+            <span class="n">console</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">'Burp'</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">burp</span><span class="p">)</span>
 
             <span class="k">try</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">burp</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">'Launching interactive session...</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">burp</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'Launching interactive session...</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">'Launching interactive session...</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'Launching interactive session...</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
 
             <span class="n">ConsoleThread</span><span class="p">(</span><span class="n">console</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
 <span class="k">def</span> <span class="nf">start_burp</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">'java'</span><span class="p">,</span> <span class="s">'src'</span><span class="p">),</span> <span class="n">options</span><span class="o">.</span><span class="n">burp</span><span class="p">])</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">'java'</span><span class="p">,</span> <span class="s1">'src'</span><span class="p">),</span> <span class="n">options</span><span class="o">.</span><span class="n">burp</span><span class="p">])</span>
 
     <span class="kn">from</span> <span class="nn">burp_extender</span> <span class="kn">import</span> <span class="n">BurpExtender</span> <span class="k">as</span> <span class="n">MyBurpExtender</span><span class="p">,</span> <span class="n">ConsoleThread</span>
     <span class="kn">from</span> <span class="nn">burp</span> <span class="kn">import</span> <span class="n">StartBurp</span>
@@ -294,23 +294,23 @@ Jython 2.7b1 <span class="o">(</span>default:ac42d59644e9, Feb <span class="m">9
 
     <span class="k">if</span> <span class="n">options</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
-            <span class="n">filename</span><span class="o">=</span><span class="s">'jython-burp.log'</span><span class="p">,</span>
-            <span class="n">format</span><span class="o">=</span><span class="s">'</span><span class="si">%(asctime)-15s</span><span class="s"> - </span><span class="si">%(levelname)s</span><span class="s"> - </span><span class="si">%(message)s</span><span class="s">'</span><span class="p">,</span>
+            <span class="n">filename</span><span class="o">=</span><span class="s1">'jython-burp.log'</span><span class="p">,</span>
+            <span class="n">format</span><span class="o">=</span><span class="s1">'</span><span class="si">%(asctime)-15s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">'</span><span class="p">,</span>
             <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 
     <span class="k">elif</span> <span class="n">options</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
-            <span class="n">filename</span><span class="o">=</span><span class="s">'jython-burp.log'</span><span class="p">,</span>
-            <span class="n">format</span><span class="o">=</span><span class="s">'</span><span class="si">%(asctime)-15s</span><span class="s"> - </span><span class="si">%(levelname)s</span><span class="s"> - </span><span class="si">%(message)s</span><span class="s">'</span><span class="p">,</span>
+            <span class="n">filename</span><span class="o">=</span><span class="s1">'jython-burp.log'</span><span class="p">,</span>
+            <span class="n">format</span><span class="o">=</span><span class="s1">'</span><span class="si">%(asctime)-15s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">'</span><span class="p">,</span>
             <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
 
     <span class="k">else</span><span class="p">:</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
-            <span class="n">filename</span><span class="o">=</span><span class="s">'jython-burp.log'</span><span class="p">,</span>
-            <span class="n">format</span><span class="o">=</span><span class="s">'</span><span class="si">%(asctime)-15s</span><span class="s"> - </span><span class="si">%(levelname)s</span><span class="s"> - </span><span class="si">%(message)s</span><span class="s">'</span><span class="p">,</span>
+            <span class="n">filename</span><span class="o">=</span><span class="s1">'jython-burp.log'</span><span class="p">,</span>
+            <span class="n">format</span><span class="o">=</span><span class="s1">'</span><span class="si">%(asctime)-15s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">'</span><span class="p">,</span>
             <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">WARN</span><span class="p">)</span>
 
-    <span class="c"># Set the BurpExtender handler to the Pythonic BurpExtender</span>
+    <span class="c1"># Set the BurpExtender handler to the Pythonic BurpExtender</span>
     <span class="n">Burp</span> <span class="o">=</span> <span class="n">MyBurpExtender</span><span class="p">()</span>
     <span class="n">Burp</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">Configuration</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">config</span><span class="p">))</span>
     <span class="n">Burp</span><span class="o">.</span><span class="n">opt</span> <span class="o">=</span> <span class="n">options</span>
@@ -319,57 +319,57 @@ Jython 2.7b1 <span class="o">(</span>default:ac42d59644e9, Feb <span class="m">9
     <span class="n">BurpExtender</span><span class="o">.</span><span class="n">setHandler</span><span class="p">(</span><span class="n">Burp</span><span class="p">)</span>
     <span class="n">StartBurp</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
 
-    <span class="c"># In latest Burp, callbacks might not get registered immediately</span>
+    <span class="c1"># In latest Burp, callbacks might not get registered immediately</span>
     <span class="k">while</span> <span class="ow">not</span> <span class="n">Burp</span><span class="o">.</span><span class="n">cb</span><span class="p">:</span>
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
 
-    <span class="c"># Disable Burp Proxy Interception on startup</span>
+    <span class="c1"># Disable Burp Proxy Interception on startup</span>
     <span class="n">Burp</span><span class="o">.</span><span class="n">setProxyInterceptionEnabled</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
 
-    <span class="c"># Check for options and start new thread(s)</span>
+    <span class="c1"># Check for options and start new thread(s)</span>
     <span class="n">MyThread</span><span class="p">(</span><span class="n">Burp</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">optparse</span> <span class="kn">import</span> <span class="n">OptionParser</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">OptionParser</span><span class="p">()</span>
 
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">'-B'</span><span class="p">,</span> <span class="s">'--load-burp'</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">'burp'</span><span class="p">,</span>
-                      <span class="n">help</span><span class="o">=</span><span class="s">'Load Burp Jar from PATH'</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s">'PATH'</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">'-B'</span><span class="p">,</span> <span class="s1">'--load-burp'</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">'burp'</span><span class="p">,</span>
+                      <span class="n">help</span><span class="o">=</span><span class="s1">'Load Burp Jar from PATH'</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s1">'PATH'</span><span class="p">)</span>
 
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">'-i'</span><span class="p">,</span> <span class="s">'--interactive'</span><span class="p">,</span>
-                      <span class="n">action</span><span class="o">=</span><span class="s">'store_true'</span><span class="p">,</span>
-                      <span class="n">help</span><span class="o">=</span><span class="s">'Run Burp in interactive mode (Jython Console)'</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">'-i'</span><span class="p">,</span> <span class="s1">'--interactive'</span><span class="p">,</span>
+                      <span class="n">action</span><span class="o">=</span><span class="s1">'store_true'</span><span class="p">,</span>
+                      <span class="n">help</span><span class="o">=</span><span class="s1">'Run Burp in interactive mode (Jython Console)'</span><span class="p">)</span>
 
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">'-f'</span><span class="p">,</span> <span class="s">'--file'</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s">'FILE'</span><span class="p">,</span>
-                      <span class="n">help</span><span class="o">=</span><span class="s">'Restore Burp state from FILE on startup'</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">'-f'</span><span class="p">,</span> <span class="s1">'--file'</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s1">'FILE'</span><span class="p">,</span>
+                      <span class="n">help</span><span class="o">=</span><span class="s1">'Restore Burp state from FILE on startup'</span><span class="p">)</span>
 
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">'-d'</span><span class="p">,</span> <span class="s">'--debug'</span><span class="p">,</span>
-                      <span class="n">action</span><span class="o">=</span><span class="s">'store_true'</span><span class="p">,</span>
-                      <span class="n">help</span><span class="o">=</span><span class="s">'Set log level to DEBUG'</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">'-d'</span><span class="p">,</span> <span class="s1">'--debug'</span><span class="p">,</span>
+                      <span class="n">action</span><span class="o">=</span><span class="s1">'store_true'</span><span class="p">,</span>
+                      <span class="n">help</span><span class="o">=</span><span class="s1">'Set log level to DEBUG'</span><span class="p">)</span>
 
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">'-v'</span><span class="p">,</span> <span class="s">'--verbose'</span><span class="p">,</span>
-                      <span class="n">action</span><span class="o">=</span><span class="s">'store_true'</span><span class="p">,</span>
-                      <span class="n">help</span><span class="o">=</span><span class="s">'Set log level to INFO'</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">'-v'</span><span class="p">,</span> <span class="s1">'--verbose'</span><span class="p">,</span>
+                      <span class="n">action</span><span class="o">=</span><span class="s1">'store_true'</span><span class="p">,</span>
+                      <span class="n">help</span><span class="o">=</span><span class="s1">'Set log level to INFO'</span><span class="p">)</span>
 
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">'-P'</span><span class="p">,</span> <span class="s">'--python-path'</span><span class="p">,</span>
-                      <span class="n">default</span><span class="o">=</span><span class="s">''</span><span class="p">,</span>
-                      <span class="n">help</span><span class="o">=</span><span class="s">'Set PYTHONPATH used by Jython'</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">'-P'</span><span class="p">,</span> <span class="s1">'--python-path'</span><span class="p">,</span>
+                      <span class="n">default</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span>
+                      <span class="n">help</span><span class="o">=</span><span class="s1">'Set PYTHONPATH used by Jython'</span><span class="p">)</span>
 
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">'-C'</span><span class="p">,</span> <span class="s">'--config'</span><span class="p">,</span>
-                      <span class="n">default</span><span class="o">=</span><span class="s">'burp.ini'</span><span class="p">,</span>
-                      <span class="n">help</span><span class="o">=</span><span class="s">'Specify alternate jython-burp config file'</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">'-C'</span><span class="p">,</span> <span class="s1">'--config'</span><span class="p">,</span>
+                      <span class="n">default</span><span class="o">=</span><span class="s1">'burp.ini'</span><span class="p">,</span>
+                      <span class="n">help</span><span class="o">=</span><span class="s1">'Specify alternate jython-burp config file'</span><span class="p">)</span>
 
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">'--disable-reloading'</span><span class="p">,</span>
-                      <span class="n">action</span><span class="o">=</span><span class="s">'store_true'</span><span class="p">,</span>
-                      <span class="n">help</span><span class="o">=</span><span class="s">'Disable hot-reloading when a file is changed'</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">'--disable-reloading'</span><span class="p">,</span>
+                      <span class="n">action</span><span class="o">=</span><span class="s1">'store_true'</span><span class="p">,</span>
+                      <span class="n">help</span><span class="o">=</span><span class="s1">'Disable hot-reloading when a file is changed'</span><span class="p">)</span>
 
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">'--send-to-spider'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">'Send URL to spider'</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">'--add-to-scope'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">'Add URL to scope'</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">'--send-to-spider'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">'Send URL to spider'</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">'--add-to-scope'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">'Add URL to scope'</span><span class="p">)</span>
 
     <span class="n">opt</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">opt</span><span class="o">.</span><span class="n">burp</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">'Load Burp Error: Specify a path to your burp.jar with -B'</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">'Load Burp Error: Specify a path to your burp.jar with -B'</span><span class="p">)</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
@@ -380,7 +380,7 @@ Jython 2.7b1 <span class="o">(</span>default:ac42d59644e9, Feb <span class="m">9
 <li>send some URL to the spider</li>
 <li>add URL to the scope</li>
 </ul>
-<div class="highlight"><pre><span class="nv">$ </span>java -jar ../jython.jar -Dpython.path<span class="o">=</span>Lib/  testing.py -B burpsuite_pro_v1.5.11.jar --send-to-spider http://heise.de --add-to-scope http://heise.de -i 
+<div class="highlight"><pre><span></span>$ java -jar ../jython.jar -Dpython.path<span class="o">=</span>Lib/  testing.py -B burpsuite_pro_v1.5.11.jar --send-to-spider http://heise.de --add-to-scope http://heise.de -i 
 <span class="o">[</span>--<span class="o">]</span> Added new scope ...
 <span class="o">[</span>--<span class="o">]</span> Starting spider ...
 ...

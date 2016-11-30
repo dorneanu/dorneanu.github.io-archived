@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -122,8 +122,8 @@
                 <div id="niu2-main-content">
                     <p>I was recently reading some documentary article about the Mexican drug war near USA's national border. Actually it was rather an interview with some guy who fights against the (corrupt) authorities and the drugs leaders by running some informative blog. Feel free to activate your investigative mind and find out which blog I'm talking about...</p>
 <p>So this guy was clever enough to hide its identity - what would you do in his case ? - by hiding the domains whois information. These days all you have to do is to find some serious registrar, use some CC and there you go: All your sensible information will be kept private against spammers, hax0rs, feds, ...drug leaders.</p>
-<div class="highlight"><pre>Domain Name:     xxx
-<span class="nv">$ </span>whois xxx
+<div class="highlight"><pre><span></span>Domain Name:     xxx
+$ whois xxx
 ...
 Registrar:       Name.com LLC
 
@@ -149,7 +149,7 @@ Phone:         +1.7202492374
 Email Address: xxx_at_protecteddomainservices.com
 </pre></div>
 <p>Ok that's DNS. What about (web) hosting? And here comes the interesting part. I was thinking of some .ru / .pk / .ro (...) hosters to serve the blog content. Far fetched!</p>
-<div class="highlight"><pre><span class="nv">$ </span>dig xxx
+<div class="highlight"><pre><span></span>$ dig xxx
 
 <span class="p">;</span> &lt;&lt;&gt;&gt; DiG 9.7.2-P3 &lt;&lt;&gt;&gt; xxx
 <span class="p">;;</span> global options: +cmd
@@ -165,13 +165,13 @@ xxx.       <span class="m">1782</span>    IN      CNAME   ghs.google.com.
 ghs.google.com.         <span class="m">21506</span>   IN      CNAME   ghs.l.google.com.
 ghs.l.google.com.       <span class="m">95</span>      IN      A       74.125.43.121
 
-<span class="p">;;</span> Query <span class="nb">time</span>: <span class="m">4</span> msec
+<span class="p">;;</span> Query time: <span class="m">4</span> msec
 <span class="p">;;</span> SERVER: xxx
 <span class="p">;;</span> WHEN: Thu Feb <span class="m">10</span> 19:40:05 2011
 <span class="p">;;</span> MSG SIZE  rcvd: 95
 </pre></div>
 <p>Google? Aeehhh? Ok. Let's be sure about that and do some reverse lookup. Therefor I've used my favourite online dns tool DomainTools.com and voila:</p>
-<div class="highlight"><pre>Reverse IP: 1,176,001 other sites hosted on this server.
+<div class="highlight"><pre><span></span>Reverse IP: 1,176,001 other sites hosted on this server.
 </pre></div>
 <p>0_o Now I'm really confused. Let's hang on for a minute, take a deep breath and seek for the facts: Google seems to host this site and other 1.176.001 other sites too. How can this be? (please forgive me for my naive curiosity, but before this I had no clue about the concept behind this whole thing)</p>
 <p>A quick Google search gave me the answer I was looking for: <a href="http://www.google.com/apps/">Google Aps</a>. (I use Google to find out more about Google. Quite ironically, isn't it?) The whole Internet is full of entries related to these Apps. Everybody seems to use these free services - besides me. I've never heard of Google Apps before. Did you? Never mind. Infact I knew <a href="http://www.google.com/sites/overview.html">Google Sites</a> which is - in my own oppinion - the easiest way (forget WordPress!) to create a site adapted to your needs in less than 10 minutes. So this is where the whole story ends at.</p>

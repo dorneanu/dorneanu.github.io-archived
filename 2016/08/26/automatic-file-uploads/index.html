@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -128,10 +128,10 @@
 </ul>
 <p>In Burp you're allowed to copy a certain request as <code>curl</code> command which simplifies things. Given a <code>POST</code> request Burp will convert 
 it to a valid curl command like:</p>
-<div class="highlight"><pre>curl -i -X <span class="s1">'POST'</span> <span class="se">\</span>
+<div class="highlight"><pre><span></span>curl -i -X <span class="s1">'POST'</span> <span class="se">\</span>
     -H &lt;Header 1&gt; <span class="se">\</span>
     -H &lt;Header 2&gt; <span class="se">\</span>
-    --data-binary <span class="nv">$'</span>-----------------------------12271989442246301301198248013<span class="se">\x</span>0d<span class="se">\x</span>0aContent-Disposition: form-data<span class="p">;</span> <span class="nv">name</span><span class="o">=</span><span class="se">\"</span>name<span class="se">\"\x</span>0d<span class="se">\x</span>0a<span class="se">\x</span>0d<span class="se">\x</span>0a&lt;name of file&gt;<span class="se">\x</span>0d<span class="se">\x</span>0a-----------------------------12271989442246301301198248013<span class="se">\x</span>0d<span class="se">\x</span>0aContent-Disposition: form-data<span class="p">;</span> <span class="nv">name</span><span class="o">=</span><span class="se">\"</span>attachment<span class="se">\"</span><span class="p">;</span> <span class="nv">filename</span><span class="o">=</span><span class="se">\"</span>&lt;NAME OF FILE&gt;<span class="se">\"\x</span>0d<span class="se">\x</span>0aContent-Type: image/jpeg<span class="se">\x</span>0d<span class="se">\x</span>0a<span class="se">\x</span>0d<span class="se">\x</span>0a<span class="se">\&lt;</span>CONTENT OF FILE&gt;<span class="se">\x</span>0d<span class="se">\x</span>0a-----------------------------12271989442246301301198248013--<span class="se">\x</span>0d<span class="se">\x</span>0a
+    --data-binary $<span class="err">'</span>-----------------------------12271989442246301301198248013<span class="se">\x</span>0d<span class="se">\x</span>0aContent-Disposition: form-data<span class="p">;</span> <span class="nv">name</span><span class="o">=</span><span class="se">\"</span>name<span class="se">\"\x</span>0d<span class="se">\x</span>0a<span class="se">\x</span>0d<span class="se">\x</span>0a&lt;name of file&gt;<span class="se">\x</span>0d<span class="se">\x</span>0a-----------------------------12271989442246301301198248013<span class="se">\x</span>0d<span class="se">\x</span>0aContent-Disposition: form-data<span class="p">;</span> <span class="nv">name</span><span class="o">=</span><span class="se">\"</span>attachment<span class="se">\"</span><span class="p">;</span> <span class="nv">filename</span><span class="o">=</span><span class="se">\"</span>&lt;NAME OF FILE&gt;<span class="se">\"\x</span>0d<span class="se">\x</span>0aContent-Type: image/jpeg<span class="se">\x</span>0d<span class="se">\x</span>0a<span class="se">\x</span>0d<span class="se">\x</span>0a<span class="se">\&lt;</span>CONTENT OF FILE&gt;<span class="se">\x</span>0d<span class="se">\x</span>0a-----------------------------12271989442246301301198248013--<span class="se">\x</span>0d<span class="se">\x</span>0a
     &lt;target url&gt; 
 </pre></div>
 <p>Having tried this neat Burp feature, I can tell you that the curl commands won't trigger the <strong>same</strong> requests as in Burp. I don't

@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -130,21 +130,21 @@
 the <a href="https://play.google.com/store/apps/details?id=org.dyndns.sven_ola.debian_kit&amp;hl=en">Debian Kit</a> 
 which I've been using for years now. It makes things less complicated. Once you have done that, log in 
 to your Android device and switch to the Debian environment:</p>
-<div class="highlight"><pre>victor@delia:/$ adb shell
+<div class="highlight"><pre><span></span>victor@delia:/$ adb shell
 # deb
 root@debian:/#
 </pre></div>
 <p>Now you can start <code>tcpdump</code> and pipe its output to <code>netcat</code>:</p>
-<div class="highlight"><pre>root@debian:/# tcpdump -i wlan0 -s0 -w - | nc -l -p 11111
+<div class="highlight"><pre><span></span>root@debian:/# tcpdump -i wlan0 -s0 -w - | nc -l -p 11111
 </pre></div>
 <p>Afterwards you want to access port <code>11111</code> on the Android device using port forwarding:</p>
-<div class="highlight"><pre>victor@delia:/$ adb forward tcp:11111 tcp:11111
+<div class="highlight"><pre><span></span>victor@delia:/$ adb forward tcp:11111 tcp:11111
 </pre></div>
 <p>On your laptop/pentest machine you can run <code>tshark</code>:</p>
-<div class="highlight"><pre>victor@delia:/$ nc localhost 11111 | tshark -i -
+<div class="highlight"><pre><span></span>victor@delia:/$ nc localhost 11111 | tshark -i -
 </pre></div>
 <p>Using <code>wireshark</code> that'd be:</p>
-<div class="highlight"><pre>victor@delia:/$ nc localhost 11111 | wireshark -k -S -i -
+<div class="highlight"><pre><span></span>victor@delia:/$ nc localhost 11111 | wireshark -k -S -i -
 </pre></div>
 <p>Happy hacking!</p>
                 </div>

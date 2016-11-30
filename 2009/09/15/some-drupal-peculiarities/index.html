@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -122,7 +122,7 @@
                 <div id="niu2-main-content">
                     <p>Add Lightbox2 functionalities to WYSIWYG editor TinyMCE - who thought this would cost me about 6 hours of work? In fact that was the easiest part: I just followed the instructions on <a href="http://drupal.org/node/252153">http://drupal.org/node/252153</a> and everything worked well! Before being able to do that, some upgrades were necessary. On <a href="http://drupal.org/project/tinymce">http://drupal.org/project/tinymce</a> I was told that the module was deprecated and replaced by the <a href="http://drupal.org/project/wysiwyg">Wysiwyg API</a>. So I had to remove the old TinyMCE module, install the new one and add at least one editor library as described on <a href="http://drupal.org/node/371459">http://drupal.org/node/371459</a>. The installation went <strong>almost</strong> fine. I was able to create a new WYSIWYG profile and adjust settings on <em>admin/settings/wysiwyg/profile</em>. Then I was curios enought to test it using <em>node/add/articles</em>. Nothing happened... No TinyMCE... No WYS*&amp;%SHIT!</p>
 <p>So what went wrong? You won't believe me! The main cause was a missing:</p>
-<div class="highlight"><pre>&lt;?php print <span class="nv">$closure</span><span class="p">;</span> &gt;
+<div class="highlight"><pre><span></span>&lt;?php print <span class="nv">$closure</span><span class="p">;</span> &gt;
 </pre></div>
 <p>in the <strong>page.tpl.php</strong>. What the heck?! Finally the whole voodoo thing developed into a struggle and I was on the verge of a nervous breakdown. After hours of errors seeking I was able to diagnose the 2nd main cause: The whole caching system was kind of messy. I came into Drupals <a href="http://api.drupal.org/api/function/drupal_rebuild_theme_registry/6">drupal_rebuild_theme_registry()</a> function and cleaned up the theme registry. What came next? TinyMCE's JavaScript files were successfully loaded into the page!!! <strong>HAPPY END</strong>!</p>
                 </div>

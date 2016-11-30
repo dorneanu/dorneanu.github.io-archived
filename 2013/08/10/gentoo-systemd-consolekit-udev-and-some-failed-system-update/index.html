@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -146,22 +146,22 @@
 <ul>
 <li>Remove all USE flags related to consolekit: </li>
 </ul>
-<div class="highlight"><pre><span class="c"># euse -D consolekit policykit upower udisks</span>
+<div class="highlight"><pre><span></span><span class="c1"># euse -D consolekit policykit upower udisks</span>
 </pre></div>
 <ul>
 <li>Make sure you have a <code>clean</code> /etc/make.conf. Here is mine:</li>
 </ul>
-<div class="highlight"><pre><span class="c"># These settings were set by the catalyst build script that automatically</span>
-<span class="c"># built this stage.</span>
-<span class="c"># Please consult /usr/share/portage/config/make.conf.example for a more</span>
-<span class="c"># detailed example.</span>
+<div class="highlight"><pre><span></span><span class="c1"># These settings were set by the catalyst build script that automatically</span>
+<span class="c1"># built this stage.</span>
+<span class="c1"># Please consult /usr/share/portage/config/make.conf.example for a more</span>
+<span class="c1"># detailed example.</span>
 <span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">"-O2 -pipe"</span>
 <span class="nv">CXXFLAGS</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">CFLAGS</span><span class="si">}</span><span class="s2">"</span>
-<span class="c"># WARNING: Changing your CHOST is not something that should be done lightly.</span>
-<span class="c"># Please consult http://www.gentoo.org/doc/en/change-chost.xml before changing.</span>
+<span class="c1"># WARNING: Changing your CHOST is not something that should be done lightly.</span>
+<span class="c1"># Please consult http://www.gentoo.org/doc/en/change-chost.xml before changing.</span>
 <span class="nv">CHOST</span><span class="o">=</span><span class="s2">"x86_64-pc-linux-gnu"</span>
-<span class="c"># These are the USE flags that were used in addition to what is provided by the</span>
-<span class="c"># profile used for building.</span>
+<span class="c1"># These are the USE flags that were used in addition to what is provided by the</span>
+<span class="c1"># profile used for building.</span>
 <span class="nv">ACCEPT_LICENSE</span><span class="o">=</span><span class="s2">"*"</span>
 <span class="nv">ACCEPT_KEYWORDS</span><span class="o">=</span><span class="s2">"~amd64"</span>
 <span class="nv">AUTOCLEAN</span><span class="o">=</span><span class="s2">"yes"</span>
@@ -171,20 +171,20 @@
 <span class="s2">     -gnome-shell -consolekit -policykit -upower -udisks"</span>
 <span class="nv">MAKEOPTS</span><span class="o">=</span><span class="s2">"-j2"</span>
 <span class="nv">FEATURES</span><span class="o">=</span><span class="s2">"-userfetch"</span>
-<span class="c">#CCACHE_DIR="/var/tmp/ccache"</span>
-<span class="c">#CCACHE_SIZE="2G"</span>
-<span class="c">#source /var/lib/layman/make.conf</span>
+<span class="c1">#CCACHE_DIR="/var/tmp/ccache"</span>
+<span class="c1">#CCACHE_SIZE="2G"</span>
+<span class="c1">#source /var/lib/layman/make.conf</span>
 
-<span class="c"># Set PORTDIR for backward compatibility with various tools:</span>
-<span class="c">#   gentoo-bashcomp - bug #478444</span>
-<span class="c">#   euse - bug #474574</span>
-<span class="c">#   euses and ufed - bug #478318</span>
+<span class="c1"># Set PORTDIR for backward compatibility with various tools:</span>
+<span class="c1">#   gentoo-bashcomp - bug #478444</span>
+<span class="c1">#   euse - bug #474574</span>
+<span class="c1">#   euses and ufed - bug #478318</span>
 <span class="nv">PORTDIR</span><span class="o">=</span><span class="s2">"/usr/portage"</span>
 </pre></div>
 <ul>
 <li>Make sure you have selected the right profile </li>
 </ul>
-<div class="highlight"><pre><span class="c"># eselect profile list</span>
+<div class="highlight"><pre><span></span><span class="c1"># eselect profile list</span>
 Available profile symlink targets:
   <span class="o">[</span>1<span class="o">]</span>   default/linux/amd64/13.0
   <span class="o">[</span>2<span class="o">]</span>   default/linux/amd64/13.0/selinux
@@ -204,31 +204,31 @@ Available profile symlink targets:
 <ul>
 <li>Adjust profile settings</li>
 </ul>
-<div class="highlight"><pre><span class="c"># cd /etc/portage/profile</span>
-<span class="c"># cat use.force</span>
+<div class="highlight"><pre><span></span><span class="c1"># cd /etc/portage/profile</span>
+<span class="c1"># cat use.force</span>
 -consolekit
-<span class="c"># cat use.mask</span>
+<span class="c1"># cat use.mask</span>
 consolekit
 -systemd
 </pre></div>
 <ul>
 <li>Remove udev, consolekit and polkit</li>
 </ul>
-<div class="highlight"><pre><span class="c"># emerge -aC udev consolekit polkit</span>
+<div class="highlight"><pre><span></span><span class="c1"># emerge -aC udev consolekit polkit</span>
 </pre></div>
 <ul>
 <li>Now you should be able to install systemd</li>
 </ul>
-<div class="highlight"><pre><span class="c"># emerge -pv systemd</span>
+<div class="highlight"><pre><span></span><span class="c1"># emerge -pv systemd</span>
 </pre></div>
 <ul>
 <li>Now update your system</li>
 </ul>
-<div class="highlight"><pre><span class="c"># emerge --keep-going --jobs 4 --update --newuse --ask --deep --with-bdeps=y @world</span>
+<div class="highlight"><pre><span></span><span class="c1"># emerge --keep-going --jobs 4 --update --newuse --ask --deep --with-bdeps=y @world</span>
 </pre></div>
 <p>Additional steps to clean up your system:</p>
-<div class="highlight"><pre><span class="c"># emerge -a --depclean</span>
-<span class="c"># revdep-rebuild -- -q --keep-going</span>
+<div class="highlight"><pre><span></span><span class="c1"># emerge -a --depclean</span>
+<span class="c1"># revdep-rebuild -- -q --keep-going</span>
 </pre></div>
                 </div>
 <hr/>

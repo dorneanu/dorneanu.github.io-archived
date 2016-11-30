@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -123,14 +123,14 @@
                     <p>In probability theory, the birthday problem, or birthday paradox pertains to the probability that in a set of randomly chosen people some pair of them will have the same birthday. In a group of at least 23 randomly chosen people, there is more than 50% probability that some pair of them will have the same birthday. Such a result is counter-intuitive to many.</p>
 <p>For 57 or more people, the probability is more than 99%, and it reaches 100% when, ignoring leap-years, the number of people reaches 366 (by the pigeonhole principle). The mathematics behind this problem led to a well-known cryptographic attack called the birthday attack.` [Source: <a href="http://en.wikipedia.org/wiki/Birthday_problem">wikipedia</a>]</p>
 <p>Well I tried to show that using empirical methods: I randomly generated groups of <code>persons</code> and calculated the probability that 2 people will have the same birthday. Therefor I've been using Python due to its simplicity and clean coding style. Here is my code:</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">birthday_paradox</span><span class="p">():</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">birthday_paradox</span><span class="p">():</span>
 <span class="sd">""" We calculate the probability that 2 persons will have the same</span>
 <span class="sd">birthday.</span>
 <span class="sd">"""</span>
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>
 
-<span class="c"># How many times should the experiment be conducted</span>
+<span class="c1"># How many times should the experiment be conducted</span>
 <span class="n">c</span> <span class="o">=</span> <span class="mi">10000</span>
 
 <span class="k">def</span> <span class="nf">generate_bdays</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
@@ -148,15 +148,15 @@
 <span class="sd">""" Does the list contain any duplication ? """</span>
 <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
 
-<span class="c"># First we create a dictionary:</span>
-<span class="c"># [Birthday] -&gt; [Number of occurences]</span>
-<span class="c">#</span>
-<span class="c"># [Birthday] is in our dictionary key and</span>
-<span class="c"># [Number of occurences] the key value</span>
+<span class="c1"># First we create a dictionary:</span>
+<span class="c1"># [Birthday] -&gt; [Number of occurences]</span>
+<span class="c1">#</span>
+<span class="c1"># [Birthday] is in our dictionary key and</span>
+<span class="c1"># [Number of occurences] the key value</span>
 <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
 <span class="n">d</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 
-<span class="c"># Check if any key/birthday is duplicated</span>
+<span class="c1"># Check if any key/birthday is duplicated</span>
 <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
 <span class="k">if</span> <span class="n">c</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="bp">True</span>
 
@@ -176,15 +176,15 @@
 
 <span class="k">return</span> <span class="n">duplikate</span> <span class="o">/</span> <span class="n">n</span>
 
-<span class="c"># Here we conduct our experiment</span>
+<span class="c1"># Here we conduct our experiment</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
-<span class="k">print</span><span class="p">(</span><span class="s">"Number of persons:"</span><span class="p">,</span><span class="n">i</span><span class="p">,</span> <span class="s">" Probability: "</span><span class="p">,</span><span class="n">experiment</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">i</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"Number of persons:"</span><span class="p">,</span><span class="n">i</span><span class="p">,</span> <span class="s2">" Probability: "</span><span class="p">,</span><span class="n">experiment</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">i</span><span class="p">))</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
 <span class="n">birthday_paradox</span><span class="p">()</span>
 </pre></div>
 <p>Simple run will show:</p>
-<div class="highlight"><pre><span class="nv">$ </span>python3.1 birthday_paradox.py
+<div class="highlight"><pre><span></span>$ python3.1 birthday_paradox.py
 Number of persons: <span class="m">0</span> Probability: 0.0
 Number of persons: <span class="m">1</span> Probability: 0.0
 Number of persons: <span class="m">2</span> Probability: 0.0023

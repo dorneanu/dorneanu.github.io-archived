@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -150,7 +150,7 @@
 <p>The <strong>App binary</strong> is the target to be analyzed. It's compiled for ARM and used the <strong>Mach-O</strong>(mach object) file format. Check out next section for more detailed information.</p>
 <h4 id="faafd30553bf24dcc30686190de47c7c">Installing the App</h4>
 <p>Usually you can manually install apps by using <strong>ipainstaller</strong>:</p>
-<div class="highlight"><pre># ipainstaller &lt;ipa file&gt;
+<div class="highlight"><pre><span></span># ipainstaller &lt;ipa file&gt;
 ...
 </pre></div>
 <p>This will install your app under <code>/var/mobile/Applications</code>. Just do a <code>grep</code> to find out to which folder your app was copied to.</p>
@@ -159,7 +159,7 @@
 <p><img alt="Mach-O Mach-O" class="img-responsive" height="200" src="https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/MachORuntime/art/mach_o_segments.gif" title="Mach-O Mach-O" width="600"/></p>
 <h4 id="bf50d5e661106d0abe925af3c2e6f7e7">Header</h4>
 <p>The <strong>header</strong> contains basic file type information like architecture and several flags. Using <strong>otool</strong> you can have a look a the headers:</p>
-<div class="highlight"><pre># otool -h BINARY
+<div class="highlight"><pre><span></span># otool -h BINARY
 BINARY:
 Mach header
       magic cputype cpusubtype  caps    filetype ncmds sizeofcmds      flags
@@ -167,7 +167,7 @@ Mach header
 </pre></div>
 <p>Sometimes you'll get an application that is built for multiple architectures. These applications then consist of multiple Mach-O files and are called <strong>fat</strong> or <strong>universal</strong> binaries. Mach-O fat binaries not only group completely different CPU architectures (PowerPC, Intel) but also 32- or 64-bit versions of an architecture. Besides that you'll also get different CPU subtypes bundled in one binary. The device running the binary will choose the "part" of the binary it can best support. Also have a look at this great <a href="http://wanderingcoder.net/2010/07/19/ought-arm/">article</a>.</p>
 <p>Here is an example of a fat binary:</p>
-<div class="highlight"><pre># otool -arch all -h PewPew 
+<div class="highlight"><pre><span></span># otool -arch all -h PewPew 
 PewPew (architecture cputype (12) cpusubtype (9)):
 Mach header
       magic cputype cpusubtype  caps    filetype ncmds sizeofcmds      flags
@@ -186,7 +186,7 @@ Mach header
 <p>For my understanding it's pretty much the same as ELFs segments and sections:</p>
 <p><img alt="ELF ELF" class="img-responsive" height="200" src="http://oi59.tinypic.com/3478ltk.jpg" title="ELF ELF" width="600"/></p>
 <p>Load commands also define whether an application is encrypted or not. To have a look at the those run:</p>
-<div class="highlight"><pre># otool -Vl BINARY
+<div class="highlight"><pre><span></span># otool -Vl BINARY
 ...
 </pre></div>
 <h4 id="a7b3addb424db51b3d5bc56ec8ba0d4e">Raw segment data</h4>
@@ -233,7 +233,7 @@ Mach header
 <p>Comparing Android to iOS I must admit you'll have to overcome more (technical) challenges for a successful analysis. iOS uses <strong>binary</strong> files (instead of <em>bytecode</em>). Having that said I'll be using <strong>otool</strong> (which seems to be the equivalent to <strong>readelf</strong>) to inspect the binary.</p>
 <h4 id="2d242bb36ec91b32005f9296ff03a912">Architecture</h4>
 <p>Let's first determine the <em>architecture</em> the binary was compiled for:</p>
-<div class="highlight"><pre># otool -f BINARY                                                                                              
+<div class="highlight"><pre><span></span># otool -f BINARY                                                                                              
 Fat headers
 fat_magic 0xcafebabe
 nfat_arch 2
@@ -253,16 +253,16 @@ architecture 1
     align 2^14 (16384)
 </pre></div>
 <p>Or using old-school <code>file</code>:</p>
-<div class="highlight"><pre># file BINARY
+<div class="highlight"><pre><span></span># file BINARY
 PM: Mach-O fat file with 2 architectures
 </pre></div>
 <p>Also have a look at this cool <a href="http://blakespot.com/ios_device_specifications_grid.html">list</a>.</p>
 <h4 id="d7f2615c71a1567cc13cf3a7f7de0aea">Encryption</h4>
 <p>Usually the <code>ipa</code> file will be decrypted at runtime by the kernel's mach loader. If the binary is encrypted or not is easily found out using:</p>
-<div class="highlight"><pre># otool -l BINARY | grep -A 4 LC_ENCRYPTION_INFO
+<div class="highlight"><pre><span></span># otool -l BINARY | grep -A 4 LC_ENCRYPTION_INFO
 </pre></div>
 <p>In this case the binary file is <strong>not</strong> encrypted. Let me show an example where the binary <strong>is</strong> encrypted:</p>
-<div class="highlight"><pre># otool -l OTHER_BINARY | grep -A 4 LC_ENCRYPTION_INFO                            
+<div class="highlight"><pre><span></span># otool -l OTHER_BINARY | grep -A 4 LC_ENCRYPTION_INFO                            
           cmd LC_ENCRYPTION_INFO
       cmdsize 20
  cryptoff  16384
@@ -277,7 +277,7 @@ PM: Mach-O fat file with 2 architectures
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre># otool -Vh BINARY 
+<div class="highlight"><pre><span></span># otool -Vh BINARY 
 WH Quest:
 Mach header
       magic cputype cpusubtype  caps    filetype ncmds sizeofcmds      flags
@@ -291,7 +291,7 @@ Mach header
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre># otool -v -l BINARY | grep stack
+<div class="highlight"><pre><span></span># otool -v -l BINARY | grep stack
 ...
 </pre></div>
 <ul>
@@ -301,7 +301,7 @@ Mach header
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre># otool -v -I BINARY  | grep release
+<div class="highlight"><pre><span></span># otool -v -I BINARY  | grep release
 0x008b8ce4 241789 _objc_autorelease
 0x008b8cf4 241790 _objc_autoreleasePoolPop
 0x008b8d04 241791 _objc_autoreleasePoolPush
@@ -328,7 +328,7 @@ Mach header
 </pre></div>
 <h4 id="6764c88d76962471b60926135aa05fd1">Dangerous functions</h4>
 <p>Beside the previosly mentioned symbols we can also seek for symbols aimed at (classical) memory management mechanisms like <code>malloc</code> and <code>free</code>. Their presence indicate that the application has its own memory management which is the opposite to <strong>ARC</strong>. While this is not always a bad thing it could easily lead to some memory related vulnerabilities if not handled properly.</p>
-<div class="highlight"><pre># otool -v -I BINARY  | grep malloc
+<div class="highlight"><pre><span></span># otool -v -I BINARY  | grep malloc
 0x008b9f64 241776 _malloc
 0x00a1332c 241776 _malloc
 
@@ -344,7 +344,7 @@ Mach header
 <h2 id="7570f28341d4c4cf739f07458de5faa3">Understand the App</h2>
 <p>Now that we have examined the binary we should proceed and try to "understand" the application. This means we have to look at it from a <em>logical perspective</em> and identify its main components. Afterwards one can go into detail and analyze only certain parts of the application which might be of interest. </p>
 <p>Using <code>class-dump-z</code> we'll dump the class information:</p>
-<div class="highlight"><pre><span class="cp"># class-dump-z BINARY | head -20</span>
+<div class="highlight"><pre><span></span><span class="cp"># class-dump-z BINARY | head -20</span>
 <span class="nl">Warning</span><span class="p">:</span> <span class="n">Part</span> <span class="n">of</span> <span class="n">this</span> <span class="n">binary</span> <span class="n">is</span> <span class="n">encrypted</span><span class="p">.</span> <span class="n">Usually</span><span class="p">,</span> <span class="n">the</span> <span class="n">result</span> <span class="n">will</span> <span class="n">be</span> <span class="n">not</span> <span class="n">meaningful</span><span class="p">.</span> <span class="n">Try</span> <span class="n">to</span> <span class="n">provide</span> <span class="n">an</span> <span class="n">unencrypted</span> <span class="n">version</span> <span class="n">instead</span><span class="p">.</span>
 <span class="cm">/**</span>
 <span class="cm"> * This header is generated by class-dump-z 0.2-0.</span>
@@ -370,7 +370,7 @@ Mach header
 <p>Every class name seems to be encrypted. That's a good hint you should decrypt the binary in case you haven't done so yet. </p>
 <h3 id="55a01a42be73c3019b8a052f066a175c">Decrypt binary</h3>
 <p>Since every application downloaded from the AppStore is encrypted using Apple's FairPlay DRM you'll have to decrypt them before starting your analysis. For this step I'll be using <code>clutch</code> to dump the relevant data from memory to disk.</p>
-<div class="highlight"><pre># Clutch MyAPP
+<div class="highlight"><pre><span></span># Clutch MyAPP
 Cracking MyAPP...
 Creating working directory...
 Performing initial analysis...
@@ -399,11 +399,11 @@ Compressing second stage payload (2/2)...
     /var/root/Documents/Cracked/MyAPP.ipa
 </pre></div>
 <p>Now that you have decrypted to binary and got a fresh new IPA file, you're ready to unpack it:</p>
-<div class="highlight"><pre># unzip -d MyAPP MyAPP.ipa
+<div class="highlight"><pre><span></span># unzip -d MyAPP MyAPP.ipa
 ...
 </pre></div>
 <p>Afterwards you can have a look at the new binary using <code>class-dump-z</code>:</p>
-<div class="highlight"><pre># class-dump-z BINARY  | head -n 20
+<div class="highlight"><pre><span></span># class-dump-z BINARY  | head -n 20
 /**
  * This header is generated by class-dump-z 0.2-0.
  * class-dump-z is Copyright (C) 2009 by KennyTM~, licensed under GPLv3.

@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -122,7 +122,7 @@
                 <div id="niu2-main-content">
                     <p>Having talked about hardening your server using <code>chroot</code> in a <a href="http://blog.dornea.nu/2016/01/15/howto-put-nginx-and-php-to-jail-in-debian-8">previous post</a> I've felt that the whole process was way to complicated. I wanted to have a more <strong>generic</strong> solution regardless of the operating system (and especially the Linux distro). Besides that I wasn't quite happy changing the systems <code>systemd</code> settings and do several modifications to the already <strong>running</strong> system. What I wanted to achieve was a <strong>closed</strong>, <strong>portable</strong> system of running applications inside a <code>chroot</code> environment. </p>
 <p>And then I've remembered using some <a href="https://bitnami.com">bitnami</a> applications in the past. You can either run them in the <em>cloud</em>, in a <em>virtual machine</em> or install them <strong>locally</strong>. The <em>local</em> installation will install a whole software <a href="https://bitnami.com/stacks">stack</a> inside a directory (<em>closed</em> system). You can then start the whole stack using <em>shell scripts</em>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>./ctlscript.sh <span class="nb">help</span>
+<div class="highlight"><pre><span></span>$ ./ctlscript.sh <span class="nb">help</span>
 usage: ./ctlscript.sh <span class="nb">help</span>
        ./ctlscript.sh <span class="o">(</span>start<span class="p">|</span>stop<span class="p">|</span>restart<span class="p">|</span>status<span class="o">)</span>
        ./ctlscript.sh <span class="o">(</span>start<span class="p">|</span>stop<span class="p">|</span>restart<span class="p">|</span>status<span class="o">)</span> mysql
@@ -145,7 +145,7 @@ status     - show the status of the service<span class="o">(</span>s<span class=
 <p>So let's give it a try.</p>
 <h2 id="c7ebd54025970f855871cdb0ca333921">Installing Bitnami Nginx stack</h2>
 <p>Download the <a href="https://bitnami.com/stack/nginx/installer">installer</a> to your machine and run it: </p>
-<div class="highlight"><pre><span class="c"># ./bitnami-nginxstack-1.9.10-0-linux-x64-installer.run </span>
+<div class="highlight"><pre><span></span><span class="c1"># ./bitnami-nginxstack-1.9.10-0-linux-x64-installer.run </span>
 ----------------------------------------------------------------------------
 Welcome to the Bitnami Nginx Stack Setup Wizard.
 
@@ -191,11 +191,11 @@ Setup is now ready to begin installing Bitnami Nginx Stack on your computer.
 Do you want to <span class="k">continue</span>? <span class="o">[</span>Y/n<span class="o">]</span>: Y
 
 ----------------------------------------------------------------------------
-Please <span class="nb">wait </span><span class="k">while</span> Setup installs Bitnami Nginx Stack on your computer.
+Please <span class="nb">wait</span> <span class="k">while</span> Setup installs Bitnami Nginx Stack on your computer.
 
  Installing
  0% ______________ 50% ______________ 100%
- <span class="c">#########################################</span>
+ <span class="c1">#########################################</span>
 
 ----------------------------------------------------------------------------
 Setup has finished installing Bitnami Nginx Stack on your computer.
@@ -210,7 +210,7 @@ Launch Bitnami Nginx Stack <span class="o">[</span>Y/n<span class="o">]</span>: 
 </ul>
 <h2 id="b4f3b9b8a1fe55a4c698836a2ce877af">Setup chroot environment</h2>
 <p>Now that we have installed the <em>nginx stack</em>, we'll setup a <code>chroot</code> environment and copy the <em>nginx stack directory</em> to it. Supposing that the chroot will be located at <code>/home/bitnami/nginxstack-chroot</code>, inside the chroot we'll have following directory structure:</p>
-<div class="highlight"><pre><span class="nv">$ </span>tree -L 3
+<div class="highlight"><pre><span></span>$ tree -L 3
 .
 <span class="p">|</span>-- bin
 <span class="p">|</span>-- dev
@@ -233,21 +233,21 @@ Launch Bitnami Nginx Stack <span class="o">[</span>Y/n<span class="o">]</span>: 
     ...
 </pre></div>
 <p>So the nginx stack directory will be available at <code>/home/bitnami/nginxstack-chroot/home/bitnami/nginxstack</code>. This is <strong>very important</strong> and you should take care having the same structure. Let's setup the chroot using following script:</p>
-<div class="highlight"><pre><span class="c">#!/bin/bash</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 
-<span class="nb">export </span><span class="nv">N2CHROOT</span><span class="o">=</span>/home/bitnami/scripts/n2chroot
-<span class="nb">export </span><span class="nv">JAIL</span><span class="o">=</span>/home/bitnami/nginxstack-chroot
-<span class="nb">export </span><span class="nv">BITNAMI</span><span class="o">=</span>/home/bitnami/nginxstack
-<span class="nb">export </span><span class="nv">BITNAMI_INSTALLDIR</span><span class="o">=</span><span class="nv">$JAIL</span>/<span class="nv">$BITNAMI</span>
+<span class="nb">export</span> <span class="nv">N2CHROOT</span><span class="o">=</span>/home/bitnami/scripts/n2chroot
+<span class="nb">export</span> <span class="nv">JAIL</span><span class="o">=</span>/home/bitnami/nginxstack-chroot
+<span class="nb">export</span> <span class="nv">BITNAMI</span><span class="o">=</span>/home/bitnami/nginxstack
+<span class="nb">export</span> <span class="nv">BITNAMI_INSTALLDIR</span><span class="o">=</span><span class="nv">$JAIL</span>/<span class="nv">$BITNAMI</span>
 
 <span class="k">function</span> create_chroot <span class="o">{</span>
-    <span class="c"># Create devices</span>
+    <span class="c1"># Create devices</span>
     mkdir <span class="nv">$JAIL</span>/dev
     mknod -m <span class="m">0666</span> <span class="nv">$JAIL</span>/dev/null c <span class="m">1</span> 3
     mknod -m <span class="m">0666</span> <span class="nv">$JAIL</span>/dev/random c <span class="m">1</span> 8
     mknod -m <span class="m">0444</span> <span class="nv">$JAIL</span>/dev/urandom c <span class="m">1</span> 9
 
-    <span class="c"># Create directories</span>
+    <span class="c1"># Create directories</span>
     mkdir -p <span class="nv">$JAIL</span>/<span class="o">{</span>etc,bin,usr,var<span class="o">}</span>
     mkdir -p <span class="nv">$JAIL</span>/usr/<span class="o">{</span>lib,sbin,bin<span class="o">}</span>
     mkdir -p <span class="nv">$JAIL</span>/<span class="o">{</span>run,tmp<span class="o">}</span>
@@ -258,7 +258,7 @@ Launch Bitnami Nginx Stack <span class="o">[</span>Y/n<span class="o">]</span>: 
     mkdir -p <span class="nv">$JAIL</span>/<span class="nv">$BITNAMI</span>/common/lib
     mkdir -p <span class="nv">$JAIL</span>/<span class="nv">$BITNAMI</span>/mysql/lib
 
-    <span class="c"># Check if 64-bit system</span>
+    <span class="c1"># Check if 64-bit system</span>
     <span class="k">if</span> <span class="o">[</span> <span class="k">$(</span>uname -m<span class="k">)</span> <span class="o">=</span> <span class="s2">"x86_64"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
         mkdir -p <span class="nv">$JAIL</span>/lib/x86_64-linux-gnu
         <span class="nb">cd</span> <span class="nv">$JAIL</span><span class="p">;</span> ln -s usr/lib lib64
@@ -267,44 +267,44 @@ Launch Bitnami Nginx Stack <span class="o">[</span>Y/n<span class="o">]</span>: 
         <span class="nb">cd</span> <span class="nv">$JAIL</span><span class="p">;</span> ln -s usr/lib lib
     <span class="k">fi</span>
 
-    <span class="c"># Copy important stuff</span>
+    <span class="c1"># Copy important stuff</span>
     cp -rfvL /etc/<span class="o">{</span>services,localtime,nsswitch.conf,nscd.conf,protocols,hosts,ld.so.cache,ld.so.conf,resolv.conf,host.conf<span class="o">}</span> <span class="nv">$JAIL</span>/etc
 
-    <span class="c"># Cp bitnami to the chroot</span>
-    <span class="c"># cp -Rv $BITNAMI $JAIL/home/bitnami/ </span>
+    <span class="c1"># Cp bitnami to the chroot</span>
+    <span class="c1"># cp -Rv $BITNAMI $JAIL/home/bitnami/ </span>
 <span class="o">}</span>
 
 <span class="k">function</span> add_users <span class="o">{</span>
-    <span class="c"># Most instructions from https://wiki.archlinux.org/index.php/nginx#Installation_in_a_chroot</span>
-    <span class="c"># Add users</span>
+    <span class="c1"># Most instructions from https://wiki.archlinux.org/index.php/nginx#Installation_in_a_chroot</span>
+    <span class="c1"># Add users</span>
     <span class="nb">echo</span> <span class="s2">"daemon:x:1:1:daemon:/:/bin/false"</span> &gt;&gt; <span class="nv">$JAIL</span>/etc/passwd
     <span class="nb">echo</span> <span class="s2">"mysql:x:100:101:MySQL Server,,,:/nonexistent:/bin/false"</span> &gt;&gt; <span class="nv">$JAIL</span>/etc/passwd
     <span class="nb">echo</span> <span class="s2">"nobody:x:99:99:nobody:/:/bin/false"</span> &gt;&gt; <span class="nv">$JAIL</span>/etc/passwd
 
 
-    <span class="c"># Add groups</span>
+    <span class="c1"># Add groups</span>
     <span class="nb">echo</span> <span class="s2">"daemon:x:1:"</span> &gt;&gt; <span class="nv">$JAIL</span>/etc/group
     <span class="nb">echo</span> <span class="s2">"mysql:x:101:"</span> &gt;&gt; <span class="nv">$JAIL</span>/etc/group
     <span class="nb">echo</span> <span class="s2">"nobody:x:99:"</span> &gt;&gt; <span class="nv">$JAIL</span>/etc/group
 
-    <span class="c"># Add shadow</span>
+    <span class="c1"># Add shadow</span>
     <span class="nb">echo</span> <span class="s2">"daemon:x:14871::::::"</span> &gt;&gt; <span class="nv">$JAIL</span>/etc/shadow
     <span class="nb">echo</span> <span class="s2">"mysql:!:16755:0:99999:7:::"</span> &gt;&gt; <span class="nv">$JAIL</span>/etc/shadow
     <span class="nb">echo</span> <span class="s2">"nobody:x:14871::::::"</span> &gt;&gt; <span class="nv">$JAIL</span>/etc/shadow
 
-    <span class="c"># Add gshadow</span>
+    <span class="c1"># Add gshadow</span>
     <span class="nb">echo</span> <span class="s2">"daemon:::"</span> &gt;&gt; <span class="nv">$JAIL</span>/etc/gshadow
     <span class="nb">echo</span> <span class="s2">"mysql:!::"</span> &gt;&gt; <span class="nv">$JAIL</span>/etc/gshadow
     <span class="nb">echo</span> <span class="s2">"nobody:::"</span> &gt;&gt; <span class="nv">$JAIL</span>/etc/gshadow
 <span class="o">}</span>
 
 <span class="k">function</span> add_libraries <span class="o">{</span>
-    <span class="c"># Add system stuff</span>
+    <span class="c1"># Add system stuff</span>
     cp /lib/x86_64-linux-gnu/libnsl* <span class="nv">$JAIL</span>/lib/x86_64-linux-gnu/
     cp /lib/x86_64-linux-gnu/libnss* <span class="nv">$JAIL</span>/lib/x86_64-linux-gnu/
 
-    <span class="c"># Add nginx stuff</span>
-    <span class="c"># $N2CHROOT $BITNAMI_INSTALLDIR/nginx/sbin/.nginx.bin</span>
+    <span class="c1"># Add nginx stuff</span>
+    <span class="c1"># $N2CHROOT $BITNAMI_INSTALLDIR/nginx/sbin/.nginx.bin</span>
     cp /lib/x86_64-linux-gnu/libnsl* <span class="nv">$BITNAMI_INSTALLDIR</span>/common/lib/
     cp /lib/x86_64-linux-gnu/libnss* <span class="nv">$BITNAMI_INSTALLDIR</span>/common/lib/
     cp /lib/x86_64-linux-gnu/libpthread* <span class="nv">$BITNAMI_INSTALLDIR</span>/common/lib/
@@ -313,11 +313,11 @@ Launch Bitnami Nginx Stack <span class="o">[</span>Y/n<span class="o">]</span>: 
     cp /lib/x86_64-linux-gnu/libgcc* <span class="nv">$BITNAMI_INSTALLDIR</span>/common/lib/
     cp /lib/x86_64-linux-gnu/libresolv* <span class="nv">$BITNAMI_INSTALLDIR</span>/common/lib/
 
-    <span class="c"># Add php-fpm stuff</span>
+    <span class="c1"># Add php-fpm stuff</span>
     <span class="nb">cd</span> <span class="nv">$BITNAMI_INSTALLDIR</span>/php/lib
     ln -s ../../common/lib/libresolv.so.2 
 
-    <span class="c"># Add mysql stuff</span>
+    <span class="c1"># Add mysql stuff</span>
     <span class="nb">cd</span> <span class="nv">$BITNAMI_INSTALLDIR</span>/mysql/lib
     ln -s ../../common/lib/libdl.so.2
     ln -s ../../common/lib/libgcc_s.so.1 
@@ -325,11 +325,11 @@ Launch Bitnami Nginx Stack <span class="o">[</span>Y/n<span class="o">]</span>: 
 <span class="o">}</span>
 
 <span class="k">function</span> add_binaries <span class="o">{</span>
-    <span class="c"># Add shell</span>
+    <span class="c1"># Add shell</span>
     cp /bin/sh <span class="nv">$JAIL</span>/bin/
     <span class="nv">$N2CHROOT</span> /bin/sh
 
-    <span class="c"># Add nohup (mysqld needs it)</span>
+    <span class="c1"># Add nohup (mysqld needs it)</span>
     cp /usr/bin/nohup <span class="nv">$JAIL</span>/usr/bin
 <span class="o">}</span>
 
@@ -344,7 +344,7 @@ Launch Bitnami Nginx Stack <span class="o">[</span>Y/n<span class="o">]</span>: 
     chown -R daemon:daemon .
 <span class="o">}</span>
 
-<span class="c"># Run functions</span>
+<span class="c1"># Run functions</span>
 create_chroot
 add_users
 add_libraries
@@ -352,13 +352,13 @@ add_binaries
 fix_permissions
 </pre></div>
 <p>The <code>N2CHROOT</code> script can be found <a href="https://gist.github.com/dorneanu/9f940b2ded9c05b5be9f#file-n2chroot">here</a>. Make sure it's located inside <code>/home/bitnami/scripts</code> and also change the <code>BASE</code> variable inside the script to <code>/home/bitnami/nginxstack-chroot</code>.  Now <a href="https://gist.github.com/dorneanu/9f940b2ded9c05b5be9f#file-nginx-chroot-bitnami">download</a> the script and run it:</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">export </span><span class="nv">JAIL</span><span class="o">=</span>/home/bitnami/nginxstack-chroot
-<span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$JAIL</span>
-<span class="nv">$ </span>../scripts/nginx-chroot-bitnami.sh
+<div class="highlight"><pre><span></span>$ <span class="nb">export</span> <span class="nv">JAIL</span><span class="o">=</span>/home/bitnami/nginxstack-chroot
+$ <span class="nb">cd</span> <span class="nv">$JAIL</span>
+$ ../scripts/nginx-chroot-bitnami.sh
 ...
 </pre></div>
 <p>Now you should have following structure:</p>
-<div class="highlight"><pre><span class="nv">$ </span>tree -L 3
+<div class="highlight"><pre><span></span>$ tree -L 3
 .
 <span class="p">|</span>-- bin
 <span class="p">|</span>    -- sh
@@ -404,43 +404,43 @@ fix_permissions
      -- run
 </pre></div>
 <p>Since all config files created by the bitnami installer point to <code>/home/bitnami/nginxstack</code> I will create a new <strong>link</strong> to point to the right directory inside the <code>chroot</code>:</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /home/bitnami
-<span class="nv">$ </span>ln -s nginxstack-chroot/home/bitnami/nginxstack nginxstack
+<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> /home/bitnami
+$ ln -s nginxstack-chroot/home/bitnami/nginxstack nginxstack
 </pre></div>
 <p><strong>This is very important</strong>, since all daemons (nginx, php-fpm, mysqld) will look at <code>/home/bitnami/nginxstack</code> for their config files etc. before entering the <code>chroot</code>. </p>
 <h2 id="04598c1a7eb46602ced8407dd095a30a">Patch scripts</h2>
 <p>Now the <strong>controll scripts</strong> have to be modified to run the binaries in a <code>chroot</code>. </p>
 <h3 id="4e78f1ec70f39d3eb13392352fb29880">Patch setenv.sh</h3>
 <p>At <code>/home/bitnami/nginxstack/scripts/setenv.sh</code> (inside the <code>chroot</code>) there is a script which sets all the environment variables (e.g. <code>LD_LIBRARY_PATH</code>) for the binaries. We'll use this script to set a variable which we'll use a few times in some other scripts. At the beginning of the script set the <code>JAIL</code> variable accordingly:</p>
-<div class="highlight"><pre><span class="c">#!/bin/sh</span>
-<span class="nb">export </span><span class="nv">JAIL</span><span class="o">=</span>/home/bitnami/nginxstack-chroot
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+<span class="nb">export</span> <span class="nv">JAIL</span><span class="o">=</span>/home/bitnami/nginxstack-chroot
 
 <span class="o">[</span>...<span class="o">]</span>
 </pre></div>
 <h3 id="f43cbf498b1b36c12a45c66ceb62800f">Patch nginx control script</h3>
 <p>When calling <code>./ctlscript.sh start nginx</code> the script will then call <code>./nginx/scripts/ctl.sh</code> and finally this will call <code>./nginx/sbin/nginx</code>. The last contains the commands for calling the <code>nginx</code> binary directly. You'll have sth like this:</p>
-<div class="highlight"><pre><span class="c">#!/bin/sh</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
 
 . /home/bitnami/nginxstack/scripts/setenv.sh
 
 <span class="nb">exec</span> /home/bitnami/nginxstack/nginx/sbin/.nginx.bin -p /home/bitnami/nginxstack/nginx/ <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
 </pre></div>
 <p>Now we want the <code>nginx</code> binary to run inside the <code>chroot</code>:</p>
-<div class="highlight"><pre><span class="c">#!/bin/sh</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
 
 . /home/bitnami/nginxstack/scripts/setenv.sh
 
 <span class="nb">exec</span> /usr/sbin/chroot <span class="nv">$JAIL</span> /home/bitnami/nginxstack/nginx/sbin/.nginx.bin -p /home/bitnami/nginxstack/nginx/ <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
 </pre></div>
 <p>Using almost the same command you can if <code>nginx</code> will run properly:</p>
-<div class="highlight"><pre><span class="nv">$ </span>/usr/sbin/chroot <span class="nv">$JAIL</span> sh -c <span class="s1">'LD_LIBRARY_PATH="/home/bitnami/nginxstack/sqlite/lib:/home/bitnami/nginxstack/nginx/lib:/home/bitnami/nginxstack/mysql/lib:/home/bitnami/nginxstack/common/lib" /home/bitnami/nginxstack/nginx/sbin/.nginx.bin -t -p /home/bitnami/nginxstack/nginx'</span>
+<div class="highlight"><pre><span></span>$ /usr/sbin/chroot <span class="nv">$JAIL</span> sh -c <span class="s1">'LD_LIBRARY_PATH="/home/bitnami/nginxstack/sqlite/lib:/home/bitnami/nginxstack/nginx/lib:/home/bitnami/nginxstack/mysql/lib:/home/bitnami/nginxstack/common/lib" /home/bitnami/nginxstack/nginx/sbin/.nginx.bin -t -p /home/bitnami/nginxstack/nginx'</span>
 nginx: the configuration file /home/bitnami/nginxstack/nginx/conf/nginx.conf syntax is ok
-nginx: configuration file /home/bitnami/nginxstack/nginx/conf/nginx.conf <span class="nb">test </span>is successful
+nginx: configuration file /home/bitnami/nginxstack/nginx/conf/nginx.conf <span class="nb">test</span> is successful
 </pre></div>
 <p>I've set the <code>LD_LIBRARY_PATH</code> manually since not all libs are located at <code>/lib/*</code>. </p>
 <h3 id="65021379bf4d571d37c045989e2f5e4b">Patch php-fpm control script</h3>
 <p>Despite some previous approaches this turned out to be a very simple step. All you'll have to do is to add following lines to your <code>php-fpm.conf</code> insde <code>/home/bitnami/nginxstack/php/etc/php-fpm.conf</code>:</p>
-<div class="highlight"><pre><span class="nv">chroot</span> <span class="o">=</span> /home/bitnami/nginxstack-chroot
+<div class="highlight"><pre><span></span><span class="nv">chroot</span> <span class="o">=</span> /home/bitnami/nginxstack-chroot
 <span class="nv">chdir</span> <span class="o">=</span> /
 </pre></div>
 <p>This will put the <code>php-fpm</code> workers into <code>/home/bitnami/nginxstack-chroot</code>. However, you may want to restrict that a little bit more and "jail" <code>php-fpm</code> to <code>/home/bitnami/nginxstack/apps/yourapp</code>. I'll come back to this point in a sec. </p>
@@ -450,7 +450,7 @@ nginx: configuration file /home/bitnami/nginxstack/nginx/conf/nginx.conf <span c
 <p>"Put the mysqld server in a closed environment during startup by using the chroot() system call." (Source: <a href="http://dev.mysql.com/doc/refman/5.7/en/server-options.html">http://dev.mysql.com/doc/refman/5.7/en/server-options.html</a>)</p>
 </blockquote>
 <p>Bingo! At <code>/home/bitnami/nginxstack/mysql/scripts/ctl.sh</code> you'll have sth like this:</p>
-<div class="highlight"><pre><span class="c">#!/bin/sh</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
 
 <span class="nv">MYSQL_PIDFILE</span><span class="o">=</span>/home/bitnami/nginxstack/mysql/data/mysqld.pid
 
@@ -459,7 +459,7 @@ nginx: configuration file /home/bitnami/nginxstack/nginx/conf/nginx.conf <span c
 <span class="o">[</span>...<span class="o">]</span>
 </pre></div>
 <p>And now just add the <code>--chroot</code> option and you're done:</p>
-<div class="highlight"><pre><span class="c">#!/bin/sh</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
 
 <span class="nv">MYSQL_PIDFILE</span><span class="o">=</span>/home/bitnami/nginxstack/mysql/data/mysqld.pid
 
@@ -470,7 +470,7 @@ nginx: configuration file /home/bitnami/nginxstack/nginx/conf/nginx.conf <span c
 <h2 id="9af4e7bfd98eccbb27ee807867dcd444">Check setup</h2>
 <p>Now that we have modified the scripts let's have a dry run.</p>
 <h3 id="ee434023cf89d7dfb21f63d64f0f9d74">nginx</h3>
-<div class="highlight"><pre>root:/home/bitnami/nginxstack-chroot# ./home/bitnami/nginxstack/nginx/scripts/ctl.sh status
+<div class="highlight"><pre><span></span>root:/home/bitnami/nginxstack-chroot# ./home/bitnami/nginxstack/nginx/scripts/ctl.sh status
 Nginx not running
 root:/home/bitnami/nginxstack-chroot# ./home/bitnami/nginxstack/nginx/scripts/ctl.sh start 
 ./home/bitnami/nginxstack/nginx/scripts/ctl.sh : Nginx started
@@ -483,7 +483,7 @@ lrwxrwxrwx <span class="m">1</span> root root <span class="m">0</span> Feb  <spa
 </pre></div>
 <p>So there is a nginx instance (PID = <code>22706</code>) and this is running in a <code>chroot</code> (/home/bitnami/nginxstack-chroot). Alright!</p>
 <h3 id="e7bc70d3c193fcfe3ba18895ef0ad3d8">php-fpm</h3>
-<div class="highlight"><pre>root:/home/bitnami/nginxstack-chroot# ./home/bitnami/nginxstack/php/scripts/ctl.sh start
+<div class="highlight"><pre><span></span>root:/home/bitnami/nginxstack-chroot# ./home/bitnami/nginxstack/php/scripts/ctl.sh start
 ./home/bitnami/nginxstack/php/scripts/ctl.sh : php-fpm started
 root:/home/bitnami/nginxstack-chroot# ps -ax <span class="p">|</span> grep php-fpm
                                          1
@@ -494,7 +494,7 @@ root:/home/bitnami/nginxstack-chroot# ls -l /proc/15134/root
 lrwxrwxrwx <span class="m">1</span> root root <span class="m">0</span> Feb  <span class="m">8</span> 21:07 /proc/15134/root -&gt; /home/bitnami/nginxstack-chroot
 </pre></div>
 <h3 id="81c3b080dad537de7e10e0987a4bf52e">mysql</h3>
-<div class="highlight"><pre>root:/home/bitnami/nginxstack-chroot/home/bitnami/nginxstack# ./mysql/scripts/ctl.sh start
+<div class="highlight"><pre><span></span>root:/home/bitnami/nginxstack-chroot/home/bitnami/nginxstack# ./mysql/scripts/ctl.sh start
 <span class="m">160209</span> 16:36:46 mysqld_safe Logging to <span class="s1">'/home/bitnami/nginxstack/mysql/data/mysqld.log'</span>.
 <span class="m">160209</span> 16:36:47 mysqld_safe Starting mysqld.bin daemon with databases from /home/bitnami/nginxstack/mysql/data
 ./mysql/scripts/ctl.sh : mysql  started at port 3307
@@ -511,7 +511,7 @@ lrwxrwxrwx <span class="m">1</span> root root <span class="m">0</span> Feb  <spa
 </pre></div>
 <h2 id="06f15694cdc44f28c014e6aa084c8bf8">Run the nginx stack</h2>
 <p>Now that everything seems to work fine, let's start all services using Bitnamis <code>ctlscript.sh</code>:</p>
-<div class="highlight"><pre>root:/home/bitnami/nginxstack-chroot/home/bitnami/nginxstack# ./ctlscript.sh start
+<div class="highlight"><pre><span></span>root:/home/bitnami/nginxstack-chroot/home/bitnami/nginxstack# ./ctlscript.sh start
 <span class="m">160209</span> 12:59:50 mysqld_safe Logging to <span class="s1">'/home/bitnami/nginxstack/mysql/data/mysqld.log'</span>.
 <span class="m">160209</span> 12:59:50 mysqld_safe Starting mysqld.bin daemon with databases from /home/bitnami/nginxstack/mysql/data
 /home/bitnami/nginxstack/mysql/scripts/ctl.sh : mysql  started at port 3307
@@ -519,14 +519,14 @@ lrwxrwxrwx <span class="m">1</span> root root <span class="m">0</span> Feb  <spa
 /home/bitnami/nginxstack/nginx/scripts/ctl.sh : Nginx started
 </pre></div>
 <p>Great! Now let's stop the services:</p>
-<div class="highlight"><pre>/home/bitnami/nginxstack/nginx/scripts/ctl.sh : Nginx stopped
+<div class="highlight"><pre><span></span>/home/bitnami/nginxstack/nginx/scripts/ctl.sh : Nginx stopped
 /home/bitnami/nginxstack/php/scripts/ctl.sh : php-fpm stopped
 <span class="m">160209</span> 13:01:21 mysqld_safe mysqld from pid file /home/bitnami/nginxstack/mysql/data/mysqld.pid ended
 /home/bitnami/nginxstack/mysql/scripts/ctl.sh : mysql stopped
 </pre></div>
 <h3 id="a02f15c963bfbdaccc498d8cf59828d1">Check UID and GID</h3>
 <p>To make sure that the previously launched services are dropping privileges (as they are supposed to!) let's have a look at the running processes:</p>
-<div class="highlight"><pre><span class="nv">$ </span>ps -eo uid,gid,args <span class="p">|</span> grep nginx
+<div class="highlight"><pre><span></span>$ ps -eo uid,gid,args <span class="p">|</span> grep nginx
 <span class="m">1337</span>  <span class="m">1337</span> nginx: worker process                              
 <span class="m">1337</span>  <span class="m">1337</span> nginx: worker process                              
 <span class="m">1337</span>  <span class="m">1337</span> nginx: worker process                              
@@ -535,14 +535,14 @@ lrwxrwxrwx <span class="m">1</span> root root <span class="m">0</span> Feb  <spa
 <span class="m">1337</span>  <span class="m">1337</span> nginx: worker process
 </pre></div>
 <p>You can see that there is a <strong>master</strong> process running with <code>0:0</code> (UID:GID) but the <strong>worker processes</strong> are running as <code>1337:1337</code> (daemon:daemon). Let's verify that for <code>php</code> and <code>mysql</code>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>ps -eo uid,gid,args <span class="p">|</span> grep php
+<div class="highlight"><pre><span></span>$ ps -eo uid,gid,args <span class="p">|</span> grep php
 <span class="m">1337</span>  <span class="m">1337</span> php-fpm: pool www                                                     
 <span class="m">1337</span>  <span class="m">1337</span> php-fpm: pool www                                                     
 <span class="m">1337</span>  <span class="m">1337</span> php-fpm: pool www                                                     
 <span class="m">1337</span>  <span class="m">1337</span> php-fpm: pool www 
    <span class="m">0</span>     <span class="m">0</span> php-fpm: master process <span class="o">(</span>/home/bitnami/nginxstack/php/etc/php-fpm.conf<span class="o">)</span>                        
 
-<span class="nv">$ </span>ps -eo uid,gid,args <span class="p">|</span> grep mysql
+$ ps -eo uid,gid,args <span class="p">|</span> grep mysql
  <span class="m">0</span>     <span class="m">0</span> /bin/sh /home/bitnami/nginxstack-chroot//home/bitnami/nginxstack/mysql/bin/mysqld_safe --defaults-file<span class="o">=</span>/home/bitnami/nginxstack/mysql/my.cnf --socket<span class="o">=</span>/home/bitnami/nginxstack/mysql/tmp/mysql.sock --datadir<span class="o">=</span>/home/bitnami/nginxstack/mysql/data --log-error<span class="o">=</span>/home/bitnami/nginxstack/mysql/data/mysqld.log --pid-file<span class="o">=</span>/home/bitnami/nginxstack/mysql/data/mysqld.pid --lower-case-table-names<span class="o">=</span>1
  <span class="m">0</span>     <span class="m">0</span> sh -c <span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/home/bitnami/nginxstack/mysql/lib<span class="se">\:</span>/home/bitnami/nginxstack/sqlite/lib<span class="se">\:</span>/home/bitnami/nginxstack/nginx/lib<span class="se">\:</span>/home/bitnami/nginxstack/mysql/lib<span class="se">\:</span>/home/bitnami/nginxstack/common/lib<span class="se">\:</span> nohup /home/bitnami/nginxstack/mysql/bin/mysqld.bin --defaults-file<span class="o">=</span>/home/bitnami/nginxstack/mysql/my.cnf --basedir<span class="o">=</span>/home/bitnami/nginxstack/mysql --datadir<span class="o">=</span>/home/bitnami/nginxstack/mysql/data --plugin-dir<span class="o">=</span>/home/bitnami/nginxstack/mysql/lib/plugin --user<span class="o">=</span>mysql  --lower-case-table-names<span class="o">=</span><span class="m">1</span> --log-error<span class="o">=</span>/home/bitnami/nginxstack/mysql/data/mysqld.log --pid-file<span class="o">=</span>/home/bitnami/nginxstack/mysql/data/mysqld.pid --socket<span class="o">=</span>/home/bitnami/nginxstack/mysql/tmp/mysql.sock --port<span class="o">=</span>3307
 <span class="m">100</span>   <span class="m">101</span> /home/bitnami/nginxstack/mysql/bin/mysqld.bin --defaults-file<span class="o">=</span>/home/bitnami/nginxstack/mysql/my.cnf --basedir<span class="o">=</span>/home/bitnami/nginxstack/mysql --datadir<span class="o">=</span>/home/bitnami/nginxstack/mysql/data --plugin-dir<span class="o">=</span>/home/bitnami/nginxstack/mysql/lib/plugin --user<span class="o">=</span>mysql --lower-case-table-names<span class="o">=</span><span class="m">1</span> --log-error<span class="o">=</span>/home/bitnami/nginxstack/mysql/data/mysqld.log --pid-file<span class="o">=</span>/home/bitnami/nginxstack/mysql/data/mysqld.pid --socket<span class="o">=</span>/home/bitnami/nginxstack/mysql/tmp/mysql.sock --port<span class="o">=</span>3307
@@ -551,35 +551,35 @@ lrwxrwxrwx <span class="m">1</span> root root <span class="m">0</span> Feb  <spa
 <p>In this section I'll try to sum up some "best practices" I've experienced while setting up the (web) application inside the bitnami nginxstack chrooted environment.</p>
 <h3 id="93a07c3fe523a2c571965afec9a33c65">Check UID/GID</h3>
 <p>Inside the chroot <code>/etc/passwd</code> should have:</p>
-<div class="highlight"><pre>aemon:x:1:1:daemon:/:/bin/false
+<div class="highlight"><pre><span></span>aemon:x:1:1:daemon:/:/bin/false
 mysql:x:100:101:MySQL Server,,,:/nonexistent:/bin/false
 nobody:x:99:99:nobody:/:/bin/false
 </pre></div>
 <p>When setting the user/group ownerships for your directories, make sure that you're using the same UID/GID for that specific user/group also outside the chroot. What I mean is: If you set the ownerships like this:</p>
-<div class="highlight"><pre><span class="nv">$ </span>chown -R daemon.daemon php nginx apps
-<span class="nv">$ </span>chown -R mysql.mysql mysql
+<div class="highlight"><pre><span></span>$ chown -R daemon.daemon php nginx apps
+$ chown -R mysql.mysql mysql
 </pre></div>
 <p>Make sure that the UID/GID for user/group <code>daemon</code> or <code>mysql</code> are the same as in <code>/etc/passwd</code> (outside the chroot). In my case:</p>
-<div class="highlight"><pre><span class="nv">$ </span>cat /etc/passwd  <span class="p">|</span> grep -e mysql -e daemon
+<div class="highlight"><pre><span></span>$ cat /etc/passwd  <span class="p">|</span> grep -e mysql -e daemon
 daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
 mysql:x:100:101:MySQL Server,,,:/nonexistent:/bin/false
 </pre></div>
 <p>If you don't pay attention to this, you might be setting ownserships and permissions to the right user/group, but the UID/GID might differ between the chroot and the operating system. </p>
 <h3 id="4aff72580ce6a69c12e3495a1774d5b2">Applying LD_LIBRARY_PATH globally</h3>
 <p>If some of your web applications are using some extra binaries (<code>/usr/bin/git</code> for example), you may have to install the dependent libraries for this binary like we did before using <code>n2chroot</code>. If <code>git</code> has some dependencies, that are already installed inside the chroot (let's say inside <code>/home/bitnami/nginxstack/common/lib</code>) you can set the <code>LD_LIBRARY_PATH</code> variable globally. Inside the chroot, you'll have <code>/etc/ld.so.conf</code>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>cat /etc/ld.so.conf
+<div class="highlight"><pre><span></span>$ cat /etc/ld.so.conf
 include /etc/ld.so.conf.d/*.conf
 </pre></div>
 <p>Now create an extra directory and a new conf file:</p>
-<div class="highlight"><pre><span class="nv">$ </span>mkdir /etc/ld.so.conf.d
-<span class="nv">$ </span>cat /etc/ld.so.conf.d/local.conf
+<div class="highlight"><pre><span></span>$ mkdir /etc/ld.so.conf.d
+$ cat /etc/ld.so.conf.d/local.conf
 /home/bitnami/nginxstack/common/lib/
 </pre></div>
 <p>Now you'll have to re-create the LD cache by running <code>ldconfig</code> inside the chroot:</p>
-<div class="highlight"><pre><span class="nv">$ </span>cp /sbin/ldconfig <span class="nv">$JAIL</span>/sbin/
-<span class="nv">$ </span>cp /sbin/ldconfig.real <span class="nv">$JAIL</span>/sbin/
-<span class="nv">$ </span>chroot <span class="nv">$JAIL</span> /bin/sh
-<span class="c"># /sbin/ldconfig</span>
+<div class="highlight"><pre><span></span>$ cp /sbin/ldconfig <span class="nv">$JAIL</span>/sbin/
+$ cp /sbin/ldconfig.real <span class="nv">$JAIL</span>/sbin/
+$ chroot <span class="nv">$JAIL</span> /bin/sh
+<span class="c1"># /sbin/ldconfig</span>
 ...
 </pre></div>
 <p>Now you should be running <code>git</code> without any missing dependencies inside your chroot.</p>
@@ -589,7 +589,7 @@ include /etc/ld.so.conf.d/*.conf
 <p>Btw: The <a href="https://wiki.bitnami.com/Infrastructure_Stacks/Bitnami_Nginx_Stack#How_can_I_create_a_custom_PHP_application.3f">bitnami documentation</a> regarding custom PHP applications  is awesome! </p>
 </blockquote>
 <p>Let's say <code>bla.example.com</code> consists of following directory structure:</p>
-<div class="highlight"><pre><span class="nv">$ </span>tree /home/bitnami/nginxstack/apps/bla.example.com
+<div class="highlight"><pre><span></span>$ tree /home/bitnami/nginxstack/apps/bla.example.com
 bla.example.com
 <span class="p">|</span>-- conf
 <span class="p">|</span>   <span class="p">|</span>-- nginx-app.conf
@@ -599,11 +599,11 @@ bla.example.com
     <span class="p">|</span>-- index.php
 </pre></div>
 <p>The <em>app</em> configuration will look like this:</p>
-<div class="highlight"><pre><span class="nv">$ </span>cat /home/bitnami/nginxstack/apps/bla.example.com/conf/nginx-app.conf
+<div class="highlight"><pre><span></span>$ cat /home/bitnami/nginxstack/apps/bla.example.com/conf/nginx-app.conf
     index index.php index.html index.htm<span class="p">;</span>
 
-    location ~ <span class="se">\.</span>php<span class="nv">$ </span><span class="o">{</span>
-        fastcgi_split_path_info ^<span class="o">(</span>.+<span class="se">\.</span>php<span class="o">)(</span>/.+<span class="o">)</span><span class="nv">$;</span>
+    location ~ <span class="se">\.</span>php$ <span class="o">{</span>
+        fastcgi_split_path_info ^<span class="o">(</span>.+<span class="se">\.</span>php<span class="o">)(</span>/.+<span class="o">)</span>$<span class="p">;</span>
         fastcgi_read_timeout 300<span class="p">;</span>
         fastcgi_pass unix:/home/bitnami/nginxstack/php/var/run/www-bla.sock<span class="p">;</span>
         fastcgi_index index.php<span class="p">;</span>
@@ -611,7 +611,7 @@ bla.example.com
         include fastcgi_params<span class="p">;</span>
     <span class="o">}</span>
 
-    location ~* <span class="se">\.</span><span class="o">(</span>js<span class="p">|</span>css<span class="p">|</span>png<span class="p">|</span>jpg<span class="p">|</span>jpeg<span class="p">|</span>gif<span class="p">|</span>ico<span class="o">)</span><span class="nv">$ </span><span class="o">{</span>
+    location ~* <span class="se">\.</span><span class="o">(</span>js<span class="p">|</span>css<span class="p">|</span>png<span class="p">|</span>jpg<span class="p">|</span>jpeg<span class="p">|</span>gif<span class="p">|</span>ico<span class="o">)</span>$ <span class="o">{</span>
         add_header Vary <span class="s2">"Accept-Encoding"</span><span class="p">;</span>
         expires max<span class="p">;</span>
         tcp_nodelay off<span class="p">;</span>
@@ -620,12 +620,12 @@ bla.example.com
 </pre></div>
 <p>The <code>fastcgi_param SCRIPT_FILENAME $fastcgi_script_name;</code> is the most important one. Read <a href="http://serverfault.com/questions/463674/a-complicated-nginx-php-fpm-chroot-setup">here</a> and <a href="http://serverfault.com/questions/356081/chrooting-php-fpm-with-nginx">here</a>.</p>
 <p>Now let's create the <code>php-fpm</code> pool for this specific vhost. Usually each pool conf has be created under <code>./php/etc/fpm.d/*.conf</code>. Make sure you have created this directory before and you have following in your <code>./php/etc/php-fpm.conf</code>:</p>
-<div class="highlight"><pre><span class="o">[</span>...<span class="o">]</span>
+<div class="highlight"><pre><span></span><span class="o">[</span>...<span class="o">]</span>
 <span class="nv">include</span><span class="o">=</span>etc/fpm.d/*.conf
 <span class="o">[</span>...<span class="o">]</span>
 </pre></div>
 <p>Now create a new file (<code>./php/etc/fpm.d/www-bla.conf</code>) and add:</p>
-<div class="highlight"><pre><span class="p">;;;;;;;;;;;;;;;;;;;;</span>
+<div class="highlight"><pre><span></span><span class="p">;;;;;;;;;;;;;;;;;;;;</span>
 <span class="p">;</span> Pool Definitions <span class="p">;</span> 
 <span class="p">;;;;;;;;;;;;;;;;;;;;</span>
 <span class="o">[</span>www-bla<span class="o">]</span>
@@ -643,14 +643,14 @@ pm.max_spare_servers<span class="o">=</span>3
 <span class="nv">chdir</span> <span class="o">=</span> /
 </pre></div>
 <p>You can of course add some more options. But this is the minimum one should have. Now you'll have to <strong>restart</strong> the <code>php-fpm</code> daemon and you should see some <strong>workers</strong> designated for your specific vhost:</p>
-<div class="highlight"><pre><span class="nv">$ </span>./ctlscript.sh restart php-fpm
-<span class="nv">$ </span>ps -ax <span class="p">|</span> grep php-fpm
+<div class="highlight"><pre><span></span>$ ./ctlscript.sh restart php-fpm
+$ ps -ax <span class="p">|</span> grep php-fpm
 <span class="m">2735</span> ?        Ss     0:01 php-fpm: master process <span class="o">(</span>/home/bitnami/nginxstack/php/etc/php-fpm.conf<span class="o">)</span>                                  
  <span class="m">2736</span> ?        S      0:00 php-fpm: pool www-bla                                                               
  <span class="m">2737</span> ?        S      0:00 php-fpm: pool www-bla
 </pre></div>
 <p>Let's check the <code>root</code> directory of the workers:</p>
-<div class="highlight"><pre><span class="nv">$ </span>ls -l /proc/2736/root
+<div class="highlight"><pre><span></span>$ ls -l /proc/2736/root
 lrwxrwxrwx <span class="m">1</span> daemon daemon <span class="m">0</span> Feb <span class="m">12</span> 11:23 /proc/2736/root -&gt; /home/bitnami/nginxstack-chroot/home/bitnami/nginxstack/apps/bla.example.com/htdocs
 </pre></div>
 <p>Voila!</p>

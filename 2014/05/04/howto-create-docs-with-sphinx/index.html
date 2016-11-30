@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (114)</a></li>
+                                      (116)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -143,17 +143,17 @@ needs:</p>
 <h2 id="daf9c900d52f8dc3a51bb68233076798">Quickstart</h2>
 <h3 id="37fc4dff8d6d7a8f80525b3b03724fe1">Install tools</h3>
 <p>First of create a new <a href="http://www.virtualenv.org/en/latest/">virtualenv</a> environment:</p>
-<div class="highlight"><pre><span class="nv">$ </span>mkdir doku
-<span class="nv">$ </span>virtualenv doku
-Using base prefix <span class="p">&amp;</span><span class="c">#039;/usr&amp;#039;</span>
+<div class="highlight"><pre><span></span>$ mkdir doku
+$ virtualenv doku
+Using base prefix <span class="p">&amp;</span><span class="c1">#039;/usr&amp;#039;</span>
 New python executable in doku/bin/python3
 Also creating executable in doku/bin/python
 Installing setuptools, pip...done.
 </pre></div>
 <p>Then activate it:</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">source </span>doku/bin/activate
-â  tmp  <span class="nb">source </span>doku/bin/activate
-<span class="o">(</span>doku<span class="o">)</span>â  tmp  <span class="nb">cd </span>doku
+<div class="highlight"><pre><span></span>$ <span class="nb">source</span> doku/bin/activate
+â  tmp  <span class="nb">source</span> doku/bin/activate
+<span class="o">(</span>doku<span class="o">)</span>â  tmp  <span class="nb">cd</span> doku
 <span class="o">(</span>doku<span class="o">)</span>â  doku  ls -l
 total 12
 drwxr-xr-x <span class="m">2</span> victor users <span class="m">4096</span> May  <span class="m">4</span> 13:37 bin
@@ -161,7 +161,7 @@ drwxr-xr-x <span class="m">2</span> victor users <span class="m">4096</span> May
 drwxr-xr-x <span class="m">3</span> victor users <span class="m">4096</span> May  <span class="m">4</span> 13:37 lib
 </pre></div>
 <p>Now you'll have to install <strong>sphinx</strong> using <strong>pip</strong>:</p>
-<div class="highlight"><pre><span class="o">(</span>doku<span class="o">)</span> pip install sphinx
+<div class="highlight"><pre><span></span><span class="o">(</span>doku<span class="o">)</span> pip install sphinx
 Downloading/unpacking sphinx
   Downloading Sphinx-1.2.2-py33-none-any.whl <span class="o">(</span>1.1MB<span class="o">)</span>: 1.1MB downloaded
 Downloading/unpacking docutils&gt;<span class="o">=</span>0.10 <span class="o">(</span>from sphinx<span class="o">)</span>
@@ -198,7 +198,7 @@ Skipping implicit fixer: buffer
 Skipping implicit fixer: idioms
 Skipping implicit fixer: set_literal
 Skipping implicit fixer: ws_comma
-copy/convert <span class="nb">test </span>suite
+copy/convert <span class="nb">test</span> suite
 changing mode of build/scripts-3.4/rst2html.py from <span class="m">644</span> to 755
 changing mode of build/scripts-3.4/rst2s5.py from <span class="m">644</span> to 755
 changing mode of build/scripts-3.4/rst2latex.py from <span class="m">644</span> to 755
@@ -252,7 +252,7 @@ Cleaning up...
 </pre></div>
 <p>Now you should be ready to go.</p>
 <h3 id="8aa01a4d0b64c92e5e5a2ec325d246d7">Create new documentation dir structure</h3>
-<div class="highlight"><pre><span class="o">(</span>doku<span class="o">)</span>â  doku  mkdir my_documentation
+<div class="highlight"><pre><span></span><span class="o">(</span>doku<span class="o">)</span>â  doku  mkdir my_documentation
 <span class="o">(</span>doku<span class="o">)</span>â  doku  sphinx-quickstart
 Welcome to the Sphinx 1.2.2 quickstart utility.
 
@@ -265,7 +265,7 @@ Enter the root path <span class="k">for</span> documentation.
 You have two options <span class="k">for</span> placing the build directory <span class="k">for</span> Sphinx output.
 Either, you use a directory <span class="s2">"_build"</span> within the root path, or you separate
 <span class="s2">"source"</span> and <span class="s2">"build"</span> directories within the root path.
-&gt; Separate <span class="nb">source </span>and build directories <span class="o">(</span>y/n<span class="o">)</span> <span class="o">[</span>n<span class="o">]</span>: n
+&gt; Separate <span class="nb">source</span> and build directories <span class="o">(</span>y/n<span class="o">)</span> <span class="o">[</span>n<span class="o">]</span>: n
 
 Inside the root directory, two more directories will be created<span class="p">;</span> <span class="s2">"_templates"</span>
 <span class="k">for</span> custom HTML templates and <span class="s2">"_static"</span> <span class="k">for</span> custom stylesheets and other static
@@ -312,7 +312,7 @@ something like 2.5.1 or 3.0a1.  If you don<span class="s1">'t need this dual str
 <span class="s1">only have to run e.g. `make html'</span> instead of invoking sphinx-build
 directly.
 &gt; Create Makefile? <span class="o">(</span>y/n<span class="o">)</span> <span class="o">[</span>y<span class="o">]</span>:
-&gt; Create Windows <span class="nb">command </span>file? <span class="o">(</span>y/n<span class="o">)</span> <span class="o">[</span>y<span class="o">]</span>: n
+&gt; Create Windows <span class="nb">command</span> file? <span class="o">(</span>y/n<span class="o">)</span> <span class="o">[</span>y<span class="o">]</span>: n
 
 Creating file my_documentation/conf.py.
 Creating file my_documentation/index.rst.
@@ -321,24 +321,24 @@ Creating file my_documentation/Makefile.
 Finished: An initial directory structure has been created.
 
 You should now populate your master file my_documentation/index.rst and create other documentation
-<span class="nb">source </span>files. Use the Makefile to build the docs, like so:
+<span class="nb">source</span> files. Use the Makefile to build the docs, like so:
    make builder
 where <span class="s2">"builder"</span> is one of the supported builders, e.g. html, latex or linkcheck.
 </pre></div>
 <h3 id="19f11f4edaf1125fd44e2193ed366fbd">Create some builds</h3>
 <p>Now you can call <strong>make</strong> to build your desired documentation format:</p>
-<div class="highlight"><pre><span class="o">(</span>doku<span class="o">)</span>â  my_documentation  make
+<div class="highlight"><pre><span></span><span class="o">(</span>doku<span class="o">)</span>â  my_documentation  make
 Please use <span class="sb">`</span>make &lt;target&gt;<span class="err">'</span> where &lt;target&gt; is one of
   html       to make standalone HTML files
   dirhtml    to make HTML files named index.html in directories
   singlehtml to make a single large HTML file
   pickle     to make pickle files
   json       to make JSON files
-  htmlhelp   to make HTML files and a HTML <span class="nb">help </span>project
+  htmlhelp   to make HTML files and a HTML <span class="nb">help</span> project
   qthelp     to make HTML files and a qthelp project
   devhelp    to make HTML files and a Devhelp project
   epub       to make an epub
-  latex      to make LaTeX files, you can <span class="nb">set </span><span class="nv">PAPER</span><span class="o">=</span>a4 or <span class="nv">PAPER</span><span class="o">=</span>letter
+  latex      to make LaTeX files, you can <span class="nb">set</span> <span class="nv">PAPER</span><span class="o">=</span>a4 or <span class="nv">PAPER</span><span class="o">=</span>letter
   latexpdf   to make LaTeX files and run them through pdflatex
   latexpdfja to make LaTeX files and run them through platex/dvipdfmx
   text       to make text files
@@ -353,12 +353,12 @@ Please use <span class="sb">`</span>make &lt;target&gt;<span class="err">'</span
   doctest    to run all doctests embedded in the documentation <span class="o">(</span><span class="k">if</span> enabled<span class="o">)</span>
 </pre></div>
 <p>Let's try with <strong>html</strong>:</p>
-<div class="highlight"><pre><span class="o">(</span>doku<span class="o">)</span>â  my_documentation  make html
+<div class="highlight"><pre><span></span><span class="o">(</span>doku<span class="o">)</span>â  my_documentation  make html
 sphinx-build -b html -d _build/doctrees   . _build/html
 Making output directory...
 Running Sphinx v1.2.2
 loading pickled environment... failed: <span class="o">[</span>Errno 2<span class="o">]</span> No such file or directory: <span class="s1">'/home/victor/tmp/doku/my_documentation/_build/doctrees/environment.pickle'</span>
-building <span class="o">[</span>html<span class="o">]</span>: targets <span class="k">for</span> <span class="m">1</span> <span class="nb">source </span>files that are out of date
+building <span class="o">[</span>html<span class="o">]</span>: targets <span class="k">for</span> <span class="m">1</span> <span class="nb">source</span> files that are out of date
 updating environment: <span class="m">1</span> added, <span class="m">0</span> changed, <span class="m">0</span> removed
 reading sources... <span class="o">[</span>100%<span class="o">]</span> index
 looking <span class="k">for</span> now-outdated files... none found
@@ -398,7 +398,7 @@ make<a href="https://readthedocs.org/">1</a>: Entering directory '/home/victor/t
 Transcript written on MyDocumentation.log.
 make<a href="https://readthedocs.org/">1</a>: Leaving directory '/home/victor/tmp/doku/my_documentation/_build/latex'
 pdflatex finished; the PDF files are in _build/latex.</p>
-<div class="highlight"><pre>You can find you **builds** inside the **_build** folder:
+<div class="highlight"><pre><span></span>You can find you **builds** inside the **_build** folder:
 
 ~~~ shell
 (doku)â  my_documentation  tree _build
