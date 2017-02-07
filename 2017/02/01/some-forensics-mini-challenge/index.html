@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="networking, linux, dfir, python">
+        <meta name="description" content="After reading this excellent article I've found this page. If you scroll down you'll find the Apply section. Not that I wanted to apply for some job but I thought, it'd be challenging to find out the mail address: well, the email address is hidden below. Find ...">
+        <title>Some forensics mini-challenge - blog.dornea.nu</title>
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
+        <link rel="stylesheet" href="/css/ipython.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="http://blog.dornea.nu/theme/css/niu2.min.css" type="text/css" />
+        <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+		
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="http://blog.dornea.nu/theme/js/bootstrap.min.js"></script>
+        
+        <link rel="canonical" href="http://blog.dornea.nu/2017/02/01/some-forensics-mini-challenge" />
+        <script type="text/javascript">window.onload=function(){};</script>
+        <!--[if lt IE 9]>
+            <script src="http://blog.dornea.nu/theme/js/html5shiv.js"></script>
+            <script src="http://blog.dornea.nu/theme/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body> 
+        <div id="body-header">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="http://blog.dornea.nu">
+                            <i class="icon-home"></i>blog.dornea.nu
+                        </a>
+                    </div>
+                    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                        <ul class="nav navbar-nav">
+                            <li><a href="http://dornea.nu" title="about">
+                                <i class="icon-user"></i>about</a>
+                            </li>
+                            <li><a href="/archives.html" title="archives">
+                                <i class="icon-archive"></i>archives</a>
+                            </li>
+                            <li><a href="/tags.html" title="tags">
+                                <i class="icon-tag"></i>tags</a>
+                            </li>
+                            <li><a href="/feeds/rss.xml" title="feeds">
+                                <i class="icon-rss"></i>feeds</a>
+                            </li>
+                        <!-- category dropdown list -->
+                        <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-folder-open"></i>category<b class="caret"></b>
+                           </a>
+                           <ul class="dropdown-menu">
+                               <li><a href="http://blog.dornea.nu/category/blog">
+                                      <i class="icon-pencil"></i>blog
+                                      (117)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/low">
+                                   <i class="icon-folder-close"></i>LOW
+                                      (27)</a></li>
+                               <li><a href="http://blog.dornea.nu/category/notes">
+                                      <i class="icon-book"></i>notes
+                                      (21)</a></li>
+                           </ul>
+                        </li>
+                        <!--  self defined dropdown list -->
+                        </ul>
+                        
+                        <!-- right nav bar -->
+                        <ul class="nav navbar-nav navbar-right">
+                        <!-- google custom search -->
+                        <li>
+                        <div id="niu2-cse-wrapper">
+                            <div id="niu2-cse-header-box" class="navbar-form navbar-nav">
+                                <form action="http://google.com/cse">
+                                    <input type="hidden" name="cx" value="008508447409818574933:pxyxuhrgnxi" />
+                                    <input type="hidden" name="ie" value="UTF-8" />
+                                    <div class="form-group">
+                                        <input id="niu2-cse-search-input" class="niu2-cse-header form-control" 
+                                            type="text" name="q" 
+                                            placeholder="Press enter to search ..."/>
+                                    </div>
+                                </form>
+                           </div>
+                           <div id="niu2-cse-ctrl-box" class="navbar-nav">
+                            <i id="niu2-cse-search-image" class="icon-search navbar-nav"></i><span id="niu2-cse-search-text">Search</span>
+                           </div>
+                       </div>
+                       </li>
+                       </ul>
+                    </nav>
+                </div>
+            </div>
+<style>
+    #banner{
+        background-image:url("http://blog.dornea.nu//images/header.jpg");
+    }   
+</style>
+
+<div id="banner">
+    <div class="container">
+        <div class="copy">
+            <h2>blog.dornea.nu</h2>
+                <p class="intro">Hack, code and drink some țuică. Personal blog of Victor Dorneanu.</p>
+        </div>
+    </div>
+</div>
+            <!-- End Banner -->
+        </div>
+
+        <div id="body-content">
+            <div class="col-md-8 col-md-offset-2">
+                <h1 id="content-heading">Some forensics mini-challenge</h1>
+            </div>
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+                <div id="niu2-main-content">
+                    <p>After reading <a href="https://www.elttam.com.au/blog/playing-with-canaries/">this excellent article</a> I've found this <a href="https://www.elttam.com.au/roles/">page</a>. If you scroll down you'll find the <strong>Apply</strong> section. Not that I wanted to apply for some job but I thought, it'd be challenging to find out the mail address:</p>
+<blockquote>
+<p>well, the email address is hidden below. Find the email and send your resume, solution walk-through and desired role.</p>
+</blockquote>
+<p>Let's have a look at the message:</p>
+<div class="highlight"><pre><span></span>2c 54 2d f0 0d 2a 08 00 27 c3 59 62 08 00 45 00
+01 a1 f3 33 40 00 40 06 bd 8d c0 a8 01 20 68 d2
+5d fb 88 90 00 50 c9 c9 77 90 1f e5 d2 bd 50 18
+00 e5 8a 29 00 00 50 4f 53 54 20 2f 63 61 72 65
+65 72 20 48 54 54 50 2f 31 2e 31 0d 0a 48 6f 73
+74 3a 20 77 77 77 2e 65 6c 74 74 61 6d 2e 63 6f
+6d 2e 61 75 0d 0a 55 73 65 72 2d 41 67 65 6e 74
+3a 20 65 6c 74 74 61 6d 20 72 6f 63 6b 73 21 0d
+0a 41 63 63 65 70 74 2d 4c 61 6e 67 75 61 67 65
+3a 20 65 6e 2d 55 53 2c 65 6e 3b 71 3d 30 2e 35
+0d 0a 41 63 63 65 70 74 2d 45 6e 63 6f 64 69 6e
+67 3a 20 67 7a 69 70 2c 20 64 65 66 6c 61 74 65
+0d 0a 43 6f 6f 6b 69 65 3a 20 5a 57 31 68 61 57
+77 39 4d 47 59 77 59 54 42 6a 4d 47 49 79 4e 54
+41 77 4d 44 6b 78 4d 54 45 78 4d 44 51 77 4f 44
+52 69 4d 44 59 77 59 54 41 34 4e 47 49 77 4e 44
+45 77 0d 0a 43 6f 6e 74 65 6e 74 2d 54 79 70 65
+3a 20 61 70 70 6c 69 63 61 74 69 6f 6e 2f 78 2d
+77 77 77 2d 66 6f 72 6d 2d 75 72 6c 65 6e 63 6f
+64 65 64 0d 0a 43 6f 6e 74 65 6e 74 2d 4c 65 6e
+67 74 68 3a 20 38 31 0d 0a 43 6f 6e 6e 65 63 74
+69 6f 6e 3a 20 63 6c 6f 73 65 0d 0a 0d 0a 71 3d
+54 68 65 2b 65 6d 61 69 6c 2b 61 64 64 72 65 73
+73 2b 69 73 2b 68 69 64 64 65 6e 2b 69 6e 2b 74
+68 69 73 2b 72 65 71 75 65 73 74 26 62 6f 6e 75
+73 3d 57 68 61 74 2b 69 73 2b 73 6f 75 72 63 65
+2b 49 50 2b 61 64 64 72 65 73 73 0d 0a 0d 0a 00
+</pre></div>
+<p>Removing all the white spaces leads to:</p>
+<div class="highlight"><pre><span></span>2c542df00d2a080027c359620800450001a1f33340004006bd8dc0a8012068d25dfb88900050c9c977901fe5d2bd501800e58a290000504f5354202f63617265657220485454502f312e310d0a486f73743a207777772e656c7474616d2e636f6d2e61750d0a557365722d4167656e743a20656c7474616d20726f636b73210d0a4163636570742d4c616e67756167653a20656e2d55532c656e3b713d302e350d0a4163636570742d456e636f64696e673a20677a69702c206465666c6174650d0a436f6f6b69653a205a573168615777394d4759775954426a4d4749794e5441774d446b784d5445784d4451774f4452694d445977595441344e4749774e4445770d0a436f6e74656e742d547970653a206170706c69636174696f6e2f782d7777772d666f726d2d75726c656e636f6465640d0a436f6e74656e742d4c656e6774683a2038310d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a713d5468652b656d61696c2b616464726573732b69732b68696464656e2b696e2b746869732b7265717565737426626f6e75733d576861742b69732b736f757263652b49502b616464726573730d0a0d0a00
+</pre></div>
+<h2 id="101bfe7b480c1c656139b3424ca27559">Find out mail address</h2>
+<p>Now let's start <code>ipyton</code>:</p>
+<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">data</span><span class="o">=</span><span class="s2">"2c542df00d2a080027c359620800450001a1f33340004006bd8dc0a8012068d25dfb88900050c9c977901fe5d2bd501800e58a290000504f5354202f63617265657220485454502f312e310d0a486f73743a207777772e656c7474616d2e636f6d2e61750d0a557365722d4167656e743a20656c7474616d20726f636b73210d0a4163636570742d4c616e67756167653a20656e2d55532c656e3b713d302e350d0a4163636570742d456e636f64696e673a20677a69702c206465666c6174650d0a436f6f6b69653a205a573168615777394d4759775954426a4d4749794e5441774d446b784d5445784d4451774f4452694d445977595441344e4749774e4445770d0a436f6e74656e742d547970653a206170706c69636174696f6e2f782d7777772d666f726d2d75726c656e636f6465640d0a436f6e74656e742d4c656e6774683a2038310d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a713d5468652b656d61696c2b616464726573732b69732b68696464656e2b696e2b746869732b7265717565737426626f6e75733d576861742b69732b736f757263652b49502b616464726573730d0a0d0a00"</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">binascii</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="s2">",T-</span><span class="se">\xf0\r</span><span class="s2">*</span><span class="se">\x08\x00</span><span class="s2">'</span><span class="se">\xc3</span><span class="s2">Yb</span><span class="se">\x08\x00</span><span class="s2">E</span><span class="se">\x00\x01\xa1\xf3</span><span class="s2">3@</span><span class="se">\x00</span><span class="s2">@</span><span class="se">\x06\xbd\x8d\xc0\xa8\x01</span><span class="s2"> h</span><span class="se">\xd2</span><span class="s2">]</span><span class="se">\xfb\x88\x90\x00</span><span class="s2">P</span><span class="se">\xc9\xc9</span><span class="s2">w</span><span class="se">\x90\x1f\xe5\xd2\xbd</span><span class="s2">P</span><span class="se">\x18\x00\xe5\x8a</span><span class="s2">)</span><span class="se">\x00\x00</span><span class="s2">POST /career HTTP/1.1</span><span class="se">\r\n</span><span class="s2">Host: www.elttam.com.au</span><span class="se">\r\n</span><span class="s2">User-Agent: elttam rocks!</span><span class="se">\r\n</span><span class="s2">Accept-Language: en-US,en;q=0.5</span><span class="se">\r\n</span><span class="s2">Accept-Encoding: gzip, deflate</span><span class="se">\r\n</span><span class="s2">Cookie: ZW1haWw9MGYwYTBjMGIyNTAwMDkxMTExMDQwODRiMDYwYTA4NGIwNDEw</span><span class="se">\r\n</span><span class="s2">Content-Type: application/x-www-form-urlencoded</span><span class="se">\r\n</span><span class="s2">Content-Length: 81</span><span class="se">\r\n</span><span class="s2">Connection: close</span><span class="se">\r\n\r\n</span><span class="s2">q=The+email+address+is+hidden+in+this+request&amp;bonus=What+is+source+IP+address</span><span class="se">\r\n\r\n\x00</span><span class="s2">"</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">request</span><span class="o">=</span><span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="k">print</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="s1">'�YE</span>
+<span class="err">��</span><span class="mi">3</span><span class="err">@@����</span>
+ <span class="n">h</span><span class="err">�</span><span class="p">]</span><span class="err">���</span><span class="n">P</span><span class="err">��</span><span class="n">w</span><span class="err">��ҽ</span><span class="n">P</span><span class="err">��</span><span class="p">)</span><span class="n">POST</span> <span class="o">/</span><span class="n">career</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="n">Host</span><span class="p">:</span> <span class="n">www</span><span class="o">.</span><span class="n">elttam</span><span class="o">.</span><span class="n">com</span><span class="o">.</span><span class="n">au</span>
+<span class="n">User</span><span class="o">-</span><span class="n">Agent</span><span class="p">:</span> <span class="n">elttam</span> <span class="n">rocks</span><span class="err">!</span>
+<span class="n">Accept</span><span class="o">-</span><span class="n">Language</span><span class="p">:</span> <span class="n">en</span><span class="o">-</span><span class="n">US</span><span class="p">,</span><span class="n">en</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.5</span>
+<span class="n">Accept</span><span class="o">-</span><span class="n">Encoding</span><span class="p">:</span> <span class="n">gzip</span><span class="p">,</span> <span class="n">deflate</span>
+<span class="n">Cookie</span><span class="p">:</span> <span class="n">ZW1haWw9MGYwYTBjMGIyNTAwMDkxMTExMDQwODRiMDYwYTA4NGIwNDEw</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">x</span><span class="o">-</span><span class="n">www</span><span class="o">-</span><span class="n">form</span><span class="o">-</span><span class="n">urlencoded</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Length</span><span class="p">:</span> <span class="mi">81</span>
+<span class="n">Connection</span><span class="p">:</span> <span class="n">close</span>
+
+<span class="n">q</span><span class="o">=</span><span class="n">The</span><span class="o">+</span><span class="n">email</span><span class="o">+</span><span class="n">address</span><span class="o">+</span><span class="ow">is</span><span class="o">+</span><span class="n">hidden</span><span class="o">+</span><span class="ow">in</span><span class="o">+</span><span class="n">this</span><span class="o">+</span><span class="n">request</span><span class="o">&amp;</span><span class="n">bonus</span><span class="o">=</span><span class="n">What</span><span class="o">+</span><span class="ow">is</span><span class="o">+</span><span class="n">source</span><span class="o">+</span><span class="n">IP</span><span class="o">+</span><span class="n">address</span>
+</pre></div>
+<p>Let's have a look at the <strong>cookie</strong>:</p>
+<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="n">cookie</span><span class="o">=</span><span class="s2">"ZW1haWw9MGYwYTBjMGIyNTAwMDkxMTExMDQwODRiMDYwYTA4NGIwNDEw"</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">base64</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="n">base64</span><span class="o">.</span><span class="n">dec</span>
+<span class="n">base64</span><span class="o">.</span><span class="n">decode</span>        <span class="n">base64</span><span class="o">.</span><span class="n">decodestring</span>  
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="n">base64</span><span class="o">.</span><span class="n">decodestring</span><span class="p">(</span><span class="n">cookie</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="s1">'email=0f0a0c0b250009111104084b060a084b0410'</span>
+</pre></div>
+<h2 id="219b717080fc2ffcec0305ccb5c39af5">Extract IP address</h2>
+<p>First I saved the binary data as a file:</p>
+<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">24</span><span class="p">]:</span> <span class="n">f</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="s2">"/tmp/1.pcap"</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">)</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">25</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">26</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+<p><code>file</code> will tell you nothing:</p>
+<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">28</span><span class="p">]:</span> <span class="err">!</span><span class="nb">file</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="mf">1.</span><span class="n">pcap</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="mf">1.</span><span class="n">pcap</span><span class="p">:</span> <span class="n">data</span>
+</pre></div>
+<p>After asking the team for some hint, it then suddenly made sense: The whole request was some <strong>raw bytes</strong>  extract from some network packet. After capturing some <code>GET</code> request with <code>tshark</code> and exporting the raw bytes, I could see some similarities:</p>
+<div class="highlight"><pre><span></span>blackarch :: /tmp » hexdump -C 2.pcap
+<span class="m">00000000</span>  <span class="m">52</span> <span class="m">54</span> <span class="m">00</span> e6 <span class="m">70</span> bf <span class="m">52</span> <span class="m">54</span>  <span class="m">00</span> <span class="m">65</span> 0a b3 <span class="m">08</span> <span class="m">00</span> <span class="m">45</span> <span class="m">00</span>  <span class="p">|</span>RT..p.RT.e....E.<span class="p">|</span>
+<span class="m">00000010</span>  <span class="m">00</span> 7d <span class="m">26</span> <span class="m">89</span> <span class="m">40</span> <span class="m">00</span> <span class="m">40</span> <span class="m">06</span>  5a 9e c0 a8 7a f2 3e d6  <span class="p">|</span>.<span class="o">}</span><span class="p">&amp;</span>.@.@.Z...z.&gt;.<span class="p">|</span>
+<span class="m">00000020</span>  3e e3 a6 6c <span class="m">00</span> <span class="m">50</span> <span class="m">24</span> 4d  <span class="m">56</span> <span class="m">73</span> cc bc 8e e1 <span class="m">80</span> <span class="m">18</span>  <span class="p">|</span>&gt;..l.P<span class="nv">$MVs</span>......<span class="p">|</span>
+<span class="m">00000030</span>  <span class="m">00</span> e5 b9 c3 <span class="m">00</span> <span class="m">00</span> <span class="m">01</span> <span class="m">01</span>  <span class="m">08</span> 0a <span class="m">00</span> <span class="m">05</span> <span class="m">70</span> f6 <span class="m">06</span> <span class="m">48</span>  <span class="p">|</span>............p..H<span class="p">|</span>
+<span class="m">00000040</span>  <span class="m">74</span> <span class="m">42</span> <span class="m">47</span> <span class="m">45</span> <span class="m">54</span> <span class="m">20</span> 2f <span class="m">20</span>  <span class="m">48</span> <span class="m">54</span> <span class="m">54</span> <span class="m">50</span> 2f <span class="m">31</span> 2e <span class="m">31</span>  <span class="p">|</span>tBGET / HTTP/1.1<span class="p">|</span>
+<span class="m">00000050</span>  0d 0a <span class="m">48</span> 6f <span class="m">73</span> <span class="m">74</span> 3a <span class="m">20</span>  <span class="m">67</span> 6f 6f <span class="m">67</span> 6c <span class="m">65</span> 2e <span class="m">64</span>  <span class="p">|</span>..Host: google.d<span class="p">|</span>
+<span class="m">00000060</span>  <span class="m">65</span> 0d 0a <span class="m">55</span> <span class="m">73</span> <span class="m">65</span> <span class="m">72</span> 2d  <span class="m">41</span> <span class="m">67</span> <span class="m">65</span> 6e <span class="m">74</span> 3a <span class="m">20</span> <span class="m">63</span>  <span class="p">|</span>e..User-Agent: c<span class="p">|</span>
+<span class="m">00000070</span>  <span class="m">75</span> <span class="m">72</span> 6c 2f <span class="m">37</span> 2e <span class="m">35</span> <span class="m">32</span>  2e <span class="m">31</span> 0d 0a <span class="m">41</span> <span class="m">63</span> <span class="m">63</span> <span class="m">65</span>  <span class="p">|</span>url/7.52.1..Acce<span class="p">|</span>
+<span class="m">00000080</span>  <span class="m">70</span> <span class="m">74</span> 3a <span class="m">20</span> 2a 2f 2a 0d  0a 0d 0a                 <span class="p">|</span>pt: */*....<span class="p">|</span>
+0000008b
+blackarch :: /tmp » hexdump -C 1.pcap
+<span class="m">00000000</span>  2c <span class="m">54</span> 2d f0 0d 2a <span class="m">08</span> <span class="m">00</span>  <span class="m">27</span> c3 <span class="m">59</span> <span class="m">62</span> <span class="m">08</span> <span class="m">00</span> <span class="m">45</span> <span class="m">00</span>  <span class="p">|</span>,T-..*..<span class="err">'</span>.Yb..E.<span class="p">|</span>
+<span class="m">00000010</span>  <span class="m">01</span> a1 f3 <span class="m">33</span> <span class="m">40</span> <span class="m">00</span> <span class="m">40</span> <span class="m">06</span>  bd 8d c0 a8 <span class="m">01</span> <span class="m">20</span> <span class="m">68</span> d2  <span class="p">|</span>...3@.@...... h.<span class="p">|</span>
+<span class="m">00000020</span>  5d fb <span class="m">88</span> <span class="m">90</span> <span class="m">00</span> <span class="m">50</span> c9 c9  <span class="m">77</span> <span class="m">90</span> 1f e5 d2 bd <span class="m">50</span> <span class="m">18</span>  <span class="p">|</span><span class="o">]</span>....P..w.....P.<span class="p">|</span>
+<span class="m">00000030</span>  <span class="m">00</span> e5 8a <span class="m">29</span> <span class="m">00</span> <span class="m">00</span> <span class="m">50</span> 4f  <span class="m">53</span> <span class="m">54</span> <span class="m">20</span> 2f <span class="m">63</span> <span class="m">61</span> <span class="m">72</span> <span class="m">65</span>  <span class="p">|</span>...<span class="o">)</span>..POST /care<span class="p">|</span>
+<span class="m">00000040</span>  <span class="m">65</span> <span class="m">72</span> <span class="m">20</span> <span class="m">48</span> <span class="m">54</span> <span class="m">54</span> <span class="m">50</span> 2f  <span class="m">31</span> 2e <span class="m">31</span> 0d 0a <span class="m">48</span> 6f <span class="m">73</span>  <span class="p">|</span>er HTTP/1.1..Hos<span class="p">|</span>
+<span class="m">00000050</span>  <span class="m">74</span> 3a <span class="m">20</span> <span class="m">77</span> <span class="m">77</span> <span class="m">77</span> 2e <span class="m">65</span>  6c <span class="m">74</span> <span class="m">74</span> <span class="m">61</span> 6d 2e <span class="m">63</span> 6f  <span class="p">|</span>t: www.elttam.co<span class="p">|</span>
+<span class="m">00000060</span>  6d 2e <span class="m">61</span> <span class="m">75</span> 0d 0a <span class="m">55</span> <span class="m">73</span>  <span class="m">65</span> <span class="m">72</span> 2d <span class="m">41</span> <span class="m">67</span> <span class="m">65</span> 6e <span class="m">74</span>  <span class="p">|</span>m.au..User-Agent<span class="p">|</span>
+<span class="m">00000070</span>  3a <span class="m">20</span> <span class="m">65</span> 6c <span class="m">74</span> <span class="m">74</span> <span class="m">61</span> 6d  <span class="m">20</span> <span class="m">72</span> 6f <span class="m">63</span> 6b <span class="m">73</span> <span class="m">21</span> 0d  <span class="p">|</span>: elttam rocks!.<span class="p">|</span>
+<span class="m">00000080</span>  0a <span class="m">41</span> <span class="m">63</span> <span class="m">63</span> <span class="m">65</span> <span class="m">70</span> <span class="m">74</span> 2d  4c <span class="m">61</span> 6e <span class="m">67</span> <span class="m">75</span> <span class="m">61</span> <span class="m">67</span> <span class="m">65</span>  <span class="p">|</span>.Accept-Language<span class="p">|</span>
+<span class="m">00000090</span>  3a <span class="m">20</span> <span class="m">65</span> 6e 2d <span class="m">55</span> <span class="m">53</span> 2c  <span class="m">65</span> 6e 3b <span class="m">71</span> 3d <span class="m">30</span> 2e <span class="m">35</span>  <span class="p">|</span>: en-US,en<span class="p">;</span><span class="nv">q</span><span class="o">=</span>0.5<span class="p">|</span>
+000000a0  0d 0a <span class="m">41</span> <span class="m">63</span> <span class="m">63</span> <span class="m">65</span> <span class="m">70</span> <span class="m">74</span>  2d <span class="m">45</span> 6e <span class="m">63</span> 6f <span class="m">64</span> <span class="m">69</span> 6e  <span class="p">|</span>..Accept-Encodin<span class="p">|</span>
+000000b0  <span class="m">67</span> 3a <span class="m">20</span> <span class="m">67</span> 7a <span class="m">69</span> <span class="m">70</span> 2c  <span class="m">20</span> <span class="m">64</span> <span class="m">65</span> <span class="m">66</span> 6c <span class="m">61</span> <span class="m">74</span> <span class="m">65</span>  <span class="p">|</span>g: gzip, deflate<span class="p">|</span>
+000000c0  0d 0a <span class="m">43</span> 6f 6f 6b <span class="m">69</span> <span class="m">65</span>  3a <span class="m">20</span> 5a <span class="m">57</span> <span class="m">31</span> <span class="m">68</span> <span class="m">61</span> <span class="m">57</span>  <span class="p">|</span>..Cookie: ZW1haW<span class="p">|</span>
+000000d0  <span class="m">77</span> <span class="m">39</span> 4d <span class="m">47</span> <span class="m">59</span> <span class="m">77</span> <span class="m">59</span> <span class="m">54</span>  <span class="m">42</span> 6a 4d <span class="m">47</span> <span class="m">49</span> <span class="m">79</span> 4e <span class="m">54</span>  <span class="p">|</span>w9MGYwYTBjMGIyNT<span class="p">|</span>
+000000e0  <span class="m">41</span> <span class="m">77</span> 4d <span class="m">44</span> 6b <span class="m">78</span> 4d <span class="m">54</span>  <span class="m">45</span> <span class="m">78</span> 4d <span class="m">44</span> <span class="m">51</span> <span class="m">77</span> 4f <span class="m">44</span>  <span class="p">|</span>AwMDkxMTExMDQwOD<span class="p">|</span>
+000000f0  <span class="m">52</span> <span class="m">69</span> 4d <span class="m">44</span> <span class="m">59</span> <span class="m">77</span> <span class="m">59</span> <span class="m">54</span>  <span class="m">41</span> <span class="m">34</span> 4e <span class="m">47</span> <span class="m">49</span> <span class="m">77</span> 4e <span class="m">44</span>  <span class="p">|</span>RiMDYwYTA4NGIwND<span class="p">|</span>
+<span class="m">00000100</span>  <span class="m">45</span> <span class="m">77</span> 0d 0a <span class="m">43</span> 6f 6e <span class="m">74</span>  <span class="m">65</span> 6e <span class="m">74</span> 2d <span class="m">54</span> <span class="m">79</span> <span class="m">70</span> <span class="m">65</span>  <span class="p">|</span>Ew..Content-Type<span class="p">|</span>
+<span class="m">00000110</span>  3a <span class="m">20</span> <span class="m">61</span> <span class="m">70</span> <span class="m">70</span> 6c <span class="m">69</span> <span class="m">63</span>  <span class="m">61</span> <span class="m">74</span> <span class="m">69</span> 6f 6e 2f <span class="m">78</span> 2d  <span class="p">|</span>: application/x-<span class="p">|</span>
+<span class="m">00000120</span>  <span class="m">77</span> <span class="m">77</span> <span class="m">77</span> 2d <span class="m">66</span> 6f <span class="m">72</span> 6d  2d <span class="m">75</span> <span class="m">72</span> 6c <span class="m">65</span> 6e <span class="m">63</span> 6f  <span class="p">|</span>www-form-urlenco<span class="p">|</span>
+<span class="m">00000130</span>  <span class="m">64</span> <span class="m">65</span> <span class="m">64</span> 0d 0a <span class="m">43</span> 6f 6e  <span class="m">74</span> <span class="m">65</span> 6e <span class="m">74</span> 2d 4c <span class="m">65</span> 6e  <span class="p">|</span>ded..Content-Len<span class="p">|</span>
+<span class="m">00000140</span>  <span class="m">67</span> <span class="m">74</span> <span class="m">68</span> 3a <span class="m">20</span> <span class="m">38</span> <span class="m">31</span> 0d  0a <span class="m">43</span> 6f 6e 6e <span class="m">65</span> <span class="m">63</span> <span class="m">74</span>  <span class="p">|</span>gth: 81..Connect<span class="p">|</span>
+<span class="m">00000150</span>  <span class="m">69</span> 6f 6e 3a <span class="m">20</span> <span class="m">63</span> 6c 6f  <span class="m">73</span> <span class="m">65</span> 0d 0a 0d 0a <span class="m">71</span> 3d  <span class="p">|</span>ion: close....q<span class="o">=</span><span class="p">|</span>
+<span class="m">00000160</span>  <span class="m">54</span> <span class="m">68</span> <span class="m">65</span> 2b <span class="m">65</span> 6d <span class="m">61</span> <span class="m">69</span>  6c 2b <span class="m">61</span> <span class="m">64</span> <span class="m">64</span> <span class="m">72</span> <span class="m">65</span> <span class="m">73</span>  <span class="p">|</span>The+email+addres<span class="p">|</span>
+<span class="m">00000170</span>  <span class="m">73</span> 2b <span class="m">69</span> <span class="m">73</span> 2b <span class="m">68</span> <span class="m">69</span> <span class="m">64</span>  <span class="m">64</span> <span class="m">65</span> 6e 2b <span class="m">69</span> 6e 2b <span class="m">74</span>  <span class="p">|</span>s+is+hidden+in+t<span class="p">|</span>
+</pre></div>
+<p>And then I tried to think of ways how to <strong>build</strong> packets out of raw bytes. And then old-good <a href="http://www.secdev.org/projects/scapy/">scapy</a> came to my mind:</p>
+<div class="highlight"><pre><span></span><span class="o">(</span>env<span class="o">)</span> blackarch :: /tmp » scapy
+INFO: Can<span class="s1">'t import python gnuplot wrapper . Won'</span>t be able to plot.
+INFO: Can<span class="s1">'t import PyX. Won'</span>t be able to use psdump<span class="o">()</span> or pdfdump<span class="o">()</span>.
+WARNING: No route found <span class="k">for</span> IPv6 destination :: <span class="o">(</span>no default route?<span class="o">)</span>
+INFO: Can<span class="s1">'t import python Crypto lib. Won'</span>t be able to decrypt WEP.
+INFO: Can<span class="s1">'t import python Crypto lib. Disabled certificate manipulation tools</span>
+<span class="s1">Welcome to Scapy (2.3.2)</span>
+<span class="s1">&gt;&gt;&gt; data="2c542df00d2a080027c359620800450001a1f33340004006bd8dc0a8012068d25dfb88900050c9c977901fe5d2bd501800e58a290000504f5354202f63617265657220485454502f312e310d0a486f73743a207777772e656c7474616d2e636f6d2e61750d0a557365722d4167656e743a20656c7474616d20726f636b73210d0a4163636570742d4c616e67756167653a20656e2d55532c656e3b713d302e350d0a4163636570742d456e636f64696e673a20677a69702c206465666c6174650d0a436f6f6b69653a205a573168615777394d4759775954426a4d4749794e5441774d446b784d5445784d4451774f4452694d445977595441344e4749774e4445770d0a436f6e74656e742d547970653a206170706c69636174696f6e2f782d7777772d666f726d2d75726c656e636f6465640d0a436f6e74656e742d4c656e6774683a2038310d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a713d5468652b656d61696c2b616464726573732b69732b68696464656e2b696e2b746869732b7265717565737426626f6e75733d576861742b69732b736f757263652b49502b616464726573730d0a0d0a00"</span>
+<span class="s1">&gt;&gt;&gt; import binascii</span>
+<span class="s1">&gt;&gt;&gt; r=binascii.unhexlify(data)</span>
+<span class="s1">&gt;&gt;&gt; Ether(r)</span>
+<span class="s1">&lt;Ether  dst=2c:54:2d:f0:0d:2a src=08:00:27:c3:59:62 type=IPv4 |&lt;IP  version=4L ihl=5L tos=0x0 len=417 id=62259 flags=DF frag=0L ttl=64 proto=tcp chksum=0xbd8d src=192.168.1.32 dst=104.210.93.251 options=[] |&lt;TCP  sport=34960 dport=www seq=3385423760 ack=535155389 dataofs=5L reserved=0L flags=PA window=229 chksum=0x8a29 urgptr=0 options=[] |&lt;Raw  load='</span>POST /career HTTP/1.1<span class="se">\r\n</span>Host: www.elttam.com.au<span class="se">\r\n</span>User-Agent: elttam rocks!<span class="se">\r\n</span>Accept-Language: en-US,en<span class="p">;</span><span class="nv">q</span><span class="o">=</span>0.5<span class="se">\r\n</span>Accept-Encoding: gzip, deflate<span class="se">\r\n</span>Cookie: ZW1haWw9MGYwYTBjMGIyNTAwMDkxMTExMDQwODRiMDYwYTA4NGIwNDEw<span class="se">\r\n</span>Content-Type: application/x-www-form-urlencoded<span class="se">\r\n</span>Content-Length: 81<span class="se">\r\n</span>Connection: close<span class="se">\r\n\r\n</span>q<span class="o">=</span>The+email+address+is+hidden+in+this+request<span class="p">&amp;</span><span class="nv">bonus</span><span class="o">=</span>What+is+source+IP+address<span class="se">\r\n\r\n</span><span class="s1">' |&lt;Padding  load='</span><span class="se">\x</span>00<span class="err">'</span> <span class="p">|</span>&gt;&gt;&gt;&gt;&gt;
+</pre></div>
+                </div>
+<hr/>
+<div style="float:left;">
+	Prev: <a href="http://blog.dornea.nu/2016/11/30/ringzer0-ctf-binaries-heap-allocator" align='left'>
+	 ringzer0 CTF - Binaries - Heap Allocator
+	</a>
+</div>
+</p>
+
+                <!-- Add comments -->
+<div id="content-comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname="dorneanu";
+				var disqus_identifier = 'some-forensics-mini-challenge';
+			var disqus_url = 'http://blog.dornea.nu/2017/02/01/some-forensics-mini-challenge';
+
+		var disqus_config = function () {
+			this.language = "en";
+		};
+ 
+        
+        (function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div> 
+            </div>
+            <div class="niu2-right-container col-md-2">
+                <div id="niu2-sidebar-meta" class="niu2-sidebar">
+                    <div class="niu2-sidebar-label"><i class="icon-calendar"></i>Published:</div>
+                    <div class="niu2-sidebar-value">2017-02-01 00:00</div>
+                    <div class="niu2-sidebar-label"><i class="icon-pencil"></i>category:</div>
+                    <div class="niu2-sidebar-value"><a href="http://blog.dornea.nu/category/blog">blog</a></div>
+                    <div class="niu2-sidebar-label"><i class="icon-tag"></i>Tag:</div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/networking/">networking</a><sup>40</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/linux/">linux</a><sup>23</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/dfir/">dfir</a><sup>4</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/python/">python</a><sup>26</sup></div>
+                </div>
+
+                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                    <div class="niu2-sidebar-label">
+                        <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>Table of contents
+                    </div>
+                    <ul id="niu2-sidebar-toc-list">
+                        <li><a href="#content-heading">Some forensics mini-challenge</a></li>
+                        <li><a href='#101bfe7b480c1c656139b3424ca27559'>Find out mail address</a></li><li><a href='#219b717080fc2ffcec0305ccb5c39af5'>Extract IP address</a></li>
+                        <li><a href="#content-comments">Comments</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="niu2-toolbar">
+                <ul class="list-unstyled">
+                    <li><a id="niu2-toolbar-ctrlsidebar" href="#" title="Hide Sidebar"><i class="icon-3x icon-hide-sidebar"></i></a></li>
+                </ul>
+                <div id="niu2-toolbar-showsidebar" data-title="Show Sidebar"></div>
+                <div id="niu2-toolbar-github" data-repo=""></div>
+                <div id="niu2-toolbar-bitbucket" data-repo=""></div>
+            </div>
+            <div id="niu2-toc" data-style="fixed"></div>
+        </div>
+
+        <div class="niu2-footer">
+            <div id="body-footer" class="col-md-6 col-md-offset-2">
+                <hr/>
+                <p>
+                    Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
+                    <a href="https://github.com/mawenbao/niu-x2-sidebar">theme</a> built with <a href="https://github.com/twbs/bootstrap">Bootstrap3</a>
+                    by <a href="https://blog.mawenbao.com">Ma Wenbao</a>, icons by 
+                    <a href="https://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
+                </p>
+                <p>
+                    © 2008 - 2016
+                    <a class="niu2-footer-link" href="http://blog.dornea.nu">Victor Dorneanu</a>
+                </p>
+                <p class="niu2-icons">
+                    <a class="niu2-footer-icon" href="https://pgp.mit.edu/pks/lookup?op=get&search=0x18F1AD46FB05E1B7" title="my public key">
+                        <i class="icon-key icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="mailto: no-spam ÄATT dornea DOT nu" title="my email address">
+                        <i class="icon-envelope-o icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="http://github.com/dorneanu" title="my github page">
+                        <i class="icon-github-alt icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="/feeds/rss.xml" title="subscribe my blog">
+                        <i class="icon-rss icon-lg"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            var _gaq=_gaq||[];
+            _gaq.push(["_setAccount","UA-7161767-3"]);
+            _gaq.push(["_trackPageview"]);
+            (function(){
+                var b=document.createElement("script");
+                b.type="text/javascript";
+                b.async=true;
+                b.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";
+                var a=document.getElementsByTagName("script")[0];
+                a.parentNode.insertBefore(b,a)
+            })();
+        </script>
+        <div id="niu2-pygments" data-theme="github"></div>
+        <div id="niu2-lazy-load" data-loading-txt="Loading image" data-loading-icon="icon-spin icon-spinner"></div>
+        <div id="niu2-toolbar-load" data-loading-icon="icon-spin icon-4x icon-spinner"></div>
+        <script type="text/javascript" src="/js/custom.js"></script>
+        <script type="text/javascript">
+            onContentLoaded();
+        </script>
+    </body>
+</html>

